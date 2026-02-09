@@ -1,6 +1,6 @@
 [English](README.md) | 简体中文
 
-# Baidu Cloud SDK for Go
+# Baidu Cloud V2.0 SDK for Go
 
 ## 要求
 - 您需要确保本地安装的 go 环境版本不低于 1.11.0.
@@ -15,7 +15,7 @@
 [提交 Issue](https://github.com/baidubce/baiducloud-go-sdk/issues/new)，不符合指南的问题可能会立即关闭。
 
 ## 使用说明
-[使用文档](https://github.com/baidubce/baiducloud-go-sdk/blob/master/docs/Usage-CN.md#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B)
+[使用文档](https://github.com/baidubce/baiducloud-go-sdk/blob/master/docs/Usage-CN.md)
 
 ## 发行说明
 每个版本的详细更改记录在[发行说明](./ChangeLog.md)中。
