@@ -1,6 +1,10 @@
-.svn
-.tmp
-.download
+.idea
+logs
 output
-.*.swp
-.*.swo
+example
+.DS_Store
+go.iml
+src
+.vscode
+services/*/config-online.json
+services/*/config.json
