@@ -1,19 +1,28 @@
-# 项目名称
-简要说明
+English | [简体中文](README-CN.md)
 
-## 快速开始
-如何构建、安装、运行
+# Baidu Cloud V2.0 SDK for Go
 
-## 测试
-如何执行自动化测试
+## Requirements
+- It's necessary for you to make sure your system have installed Go environment which version greater than 1.11.0.
 
-## 如何贡献
-贡献patch流程、质量要求
+## Installation
+If you use `go mod` to manage your dependence, you can use the following command:
 
-## 讨论
-百度 Go 交流群：1450752
+```sh
+$ go get github.com/baidubce/baiducloud-go-sdk
+```
 
-## 链接
-[百度 Go 编码规范](https://ku.baidu-int.com/d/AD4lVjdO8PfAC6)
-[百度 Go 编译环境使用指南](https://ku.baidu-int.com/d/SzGt0sD37hWmmp)
+## Issues
+[Opening an Issue](https://github.com/baidubce/baiducloud-go-sdk/issues/new), Issues not conforming to the guidelines may be closed immediately.
 
+## Usage
+[Usage Document](https://github.com/baidubce/baiducloud-go-sdk/blob/master/docs/Usage-EN.md)
+
+## Changelog
+Detailed changes for each release are documented in the [release notes](./ChangeLog.md).
+
+## References
+* [Latest Release](https://github.com/baidubce/baiducloud-go-sdk/)
+
+## License
+[Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)
