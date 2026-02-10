@@ -25,7 +25,7 @@ go get github.com/baidubce/baiducloud-go-sdk
 ```text
 baiducloud-go-sdk
 |--bce                    //BCE公用基础组件
-|--internal               //BCE的http通信模块
+|--core               //BCE的http通信模块
 |--services               //BCE相关服务目录
 |--sample                 //BCE相关服务示例
 ```
@@ -58,7 +58,7 @@ import (
     "bytes"
     "encoding/json"
     "github.com/baidubce/baiducloud-go-sdk/services/vpc"
-    "github.com/baidubce/baiducloud-go-sdk/internal/util"
+    "github.com/baidubce/baiducloud-go-sdk/core/util"
 
 )
 
@@ -190,7 +190,7 @@ fmt.Println("create vpc success")
 
 ## SDK日志
 
-GO SDK自行实现了支持六个级别、三种输出（标准输出、标准错误、文件）、基本格式设置的日志模块，导入路径为`github.com/baidubce/baiducloud-go-sdk/internal/util/log`。输出为文件时支持设置五种日志滚动方式（不滚动、按天、按小时、按分钟、按大小），此时还需设置输出日志文件的目录。
+GO SDK自行实现了支持六个级别、三种输出（标准输出、标准错误、文件）、基本格式设置的日志模块，导入路径为`github.com/baidubce/baiducloud-go-sdk/core/util/log`。输出为文件时支持设置五种日志滚动方式（不滚动、按天、按小时、按分钟、按大小），此时还需设置输出日志文件的目录。
 
 该日志模块无任何外部依赖，开发者使用GO SDK开发项目，可以直接引用该日志模块自行在项目中使用。可使用GO SDK使用的包级别的日志对象，也可创建新的日志对象，详见如下示例：
 

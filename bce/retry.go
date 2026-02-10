@@ -21,7 +21,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/baidubce/baiducloud-go-sdk/internal/util/log"
+	"github.com/baidubce/baiducloud-go-sdk/core/util/log"
 )
 
 // RetryPolicy defines the two methods to retry for sending request.
@@ -48,7 +48,7 @@ func NewNoRetryPolicy() *NoRetryPolicy {
 
 // BackOffRetryPolicy implements a policy that retries with exponential back-off strategy.
 // This policy will keep retrying until the maximum number of retries is reached. The delay time
-// will be a fixed interval for the first time then 2 * interval for the second, 4 * internal for
+// will be a fixed interval for the first time then 2 * interval for the second, 4 * core for
 // the third, and so on.
 // In general, the delay time will be 2^number_of_retries_attempted*interval. When a maximum of
 // delay time is specified, the delay time will never exceed this limit.
@@ -77,7 +77,7 @@ func (b *BackOffRetryPolicy) ShouldRetry(err BceError, attempts int) bool {
 	if realErr, ok := err.(*BceServiceError); ok {
 		switch realErr.StatusCode {
 		case http.StatusInternalServerError:
-			log.Warn("retry for internal server error(500)")
+			log.Warn("retry for core server error(500)")
 			return true
 		case http.StatusBadGateway:
 			log.Warn("retry for bad gateway(502)")

@@ -21,7 +21,7 @@ import (
 	"reflect"
 	"runtime"
 
-	"github.com/baidubce/baiducloud-go-sdk/internal/auth"
+	"github.com/baidubce/baiducloud-go-sdk/core/auth"
 )
 
 // Constants and default values for the package bce

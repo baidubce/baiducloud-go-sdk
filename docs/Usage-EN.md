@@ -25,7 +25,7 @@ go get github.com/baidubce/baiducloud-go-sdk
 ```text
 baiducloud-go-sdk
 |--bce                    //BCE common base components
-|--internal               //BCE HTTP communication module
+|--core               //BCE HTTP communication module
 |--services               //BCE related service directories
 |--sample                 //BCE related service examples
 ```
@@ -58,7 +58,7 @@ import (
     "bytes"
     "encoding/json"
     "github.com/baidubce/baiducloud-go-sdk/services/vpc"
-    "github.com/baidubce/baiducloud-go-sdk/internal/util"
+    "github.com/baidubce/baiducloud-go-sdk/core/util"
 
 )
 
@@ -190,7 +190,7 @@ When a server exception occurs, the Baidu Cloud server will return corresponding
 
 ## SDK Logging
 
-The GO SDK implements its own logging module that supports six levels, three outputs (standard output, standard error, file), and basic format settings. The import path is `github.com/baidubce/baiducloud-go-sdk/internal/util/log`. When outputting to a file, it supports setting five log rotation methods (no rotation, by day, by hour, by minute, by size), and in this case, you also need to set the output log file directory.
+The GO SDK implements its own logging module that supports six levels, three outputs (standard output, standard error, file), and basic format settings. The import path is `github.com/baidubce/baiducloud-go-sdk/core/util/log`. When outputting to a file, it supports setting five log rotation methods (no rotation, by day, by hour, by minute, by size), and in this case, you also need to set the output log file directory.
 
 This logging module has no external dependencies. Developers using the GO SDK to develop projects can directly reference this logging module for use in their projects. You can use the package-level log object used by the GO SDK, or create a new log object. See the following example for details:
 

@@ -23,8 +23,8 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/baidubce/baiducloud-go-sdk/internal/http"
-	"github.com/baidubce/baiducloud-go-sdk/internal/util"
+	"github.com/baidubce/baiducloud-go-sdk/core/http"
+	"github.com/baidubce/baiducloud-go-sdk/core/util"
 )
 
 // Body defines the data structure used in BCE request.
@@ -198,7 +198,7 @@ func (b *BceRequest) SetClientError(err *BceClientError) { b.clientError = err }
 
 func (b *BceRequest) SetBody(body *Body) { // override SetBody derived from http.Request
 	b.Request.SetBody(body.Stream())
-	b.SetLength(body.Size()) // set field of "net/internal/http.Request.ContentLength"
+	b.SetLength(body.Size()) // set field of "net/core/http.Request.ContentLength"
 	if body.Size() > 0 {
 		b.SetHeader(http.CONTENT_MD5, body.ContentMD5())
 		b.SetHeader(http.CONTENT_LENGTH, fmt.Sprintf("%d", body.Size()))

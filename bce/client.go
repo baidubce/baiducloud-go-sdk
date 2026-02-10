@@ -44,10 +44,10 @@ import (
 	"io/ioutil"
 	"time"
 
-	"github.com/baidubce/baiducloud-go-sdk/internal/auth"
-	"github.com/baidubce/baiducloud-go-sdk/internal/http"
-	"github.com/baidubce/baiducloud-go-sdk/internal/util"
-	"github.com/baidubce/baiducloud-go-sdk/internal/util/log"
+	"github.com/baidubce/baiducloud-go-sdk/core/auth"
+	"github.com/baidubce/baiducloud-go-sdk/core/http"
+	"github.com/baidubce/baiducloud-go-sdk/core/util"
+	"github.com/baidubce/baiducloud-go-sdk/core/util/log"
 )
 
 // Client is the general interface which can perform sending request. Different service
