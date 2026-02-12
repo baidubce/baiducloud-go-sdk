@@ -1,22 +1,17 @@
-
-
 package eip
-
-
-
 
 // EipStatus the model 'EipStatus'
 type EipStatus string
 
 // List of EipStatus
 const (
-	CREATING EipStatus = "creating"
-	AVAILABLE EipStatus = "available"
-	BINDED EipStatus = "binded"
-	BINDING EipStatus = "binding"
-	UNBINDING EipStatus = "unbinding"
-	UPDATING EipStatus = "updating"
-	PAUSED EipStatus = "paused"
+	CREATING    EipStatus = "creating"
+	AVAILABLE   EipStatus = "available"
+	BINDED      EipStatus = "binded"
+	BINDING     EipStatus = "binding"
+	UNBINDING   EipStatus = "unbinding"
+	UPDATING    EipStatus = "updating"
+	PAUSED      EipStatus = "paused"
 	UNAVAILABLE EipStatus = "unavailable"
 )
 
@@ -41,4 +36,3 @@ func (v EipStatus) IsValid() bool {
 	}
 	return false
 }
-

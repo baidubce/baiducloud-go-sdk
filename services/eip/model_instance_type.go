@@ -1,9 +1,4 @@
-
-
 package eip
-
-
-
 
 // InstanceType the model 'InstanceType'
 type InstanceType string
@@ -39,4 +34,3 @@ func (v InstanceType) IsValid() bool {
 	}
 	return false
 }
-

@@ -1,9 +1,4 @@
-
-
 package eip
-
-
-
 
 // EipInstanceType the model 'EipInstanceType'
 type EipInstanceType string
@@ -29,4 +24,3 @@ func (v EipInstanceType) IsValid() bool {
 	}
 	return false
 }
-

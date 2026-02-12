@@ -31,16 +31,10 @@ func QuerySubnetList() {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 }

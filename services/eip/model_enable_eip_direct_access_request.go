@@ -1,8 +1,6 @@
-
-
 package eip
 
 type EnableEipDirectAccessRequest struct {
-    Eip *string `json:"-"`
-    ClientToken *string `json:"-"`
+	Eip         *string `json:"-"`
+	ClientToken *string `json:"-"`
 }

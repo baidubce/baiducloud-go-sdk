@@ -90,18 +90,12 @@ func TestClient_CreateAReservedNetworkSegment(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateSubnet(t *testing.T) {
@@ -123,18 +117,12 @@ func TestClient_CreateSubnet(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateVpc(t *testing.T) {
@@ -152,18 +140,12 @@ func TestClient_CreateVpc(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteReservedNetworkSegment(t *testing.T) {
@@ -208,18 +190,12 @@ func TestClient_QuerySpecifiedSubnet(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QuerySpecifiedVpc(t *testing.T) {
@@ -232,18 +208,12 @@ func TestClient_QuerySpecifiedVpc(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QuerySubnetList(t *testing.T) {
@@ -261,18 +231,12 @@ func TestClient_QuerySubnetList(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QueryTheIpAddressesOccupiedByProductsWithinVpc(t *testing.T) {
@@ -289,18 +253,12 @@ func TestClient_QueryTheIpAddressesOccupiedByProductsWithinVpc(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QueryTheReservedNetworkSegmentList(t *testing.T) {
@@ -315,18 +273,12 @@ func TestClient_QueryTheReservedNetworkSegmentList(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QueryVpcIntranetIp(t *testing.T) {
@@ -341,18 +293,12 @@ func TestClient_QueryVpcIntranetIp(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QueryVpcList(t *testing.T) {
@@ -368,18 +314,12 @@ func TestClient_QueryVpcList(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateSubnet(t *testing.T) {
