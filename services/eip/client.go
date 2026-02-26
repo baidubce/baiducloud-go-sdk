@@ -23,6 +23,8 @@ const (
 
 	CONSTANT_RECYCLE = "recycle"
 
+	CONSTANT_TRANSFER = "transfer"
+
 	CONSTANT_IP_CLEAN = "ipClean"
 
 	CONSTANT_IP_WHITELIST = "ipWhitelist"
@@ -76,8 +78,14 @@ func getBindEipUri(version string, eip string) string {
 func getBindTbspProtectionObjectUri(version string, id string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TBSP + bce.URI_PREFIX + id
 }
+func getCancelEipTransferUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TRANSFER
+}
 func getCloseEipDirectAccessUri(version string, eip string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip
+}
+func getCreateEipTransferUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TRANSFER
 }
 func getCreateTbspUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TBSP
@@ -105,6 +113,9 @@ func getEnableEipDirectAccessUri(version string, eip string) string {
 }
 func getEnableTbspIpCleanUri(version string, id string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TBSP + bce.URI_PREFIX + id + bce.URI_PREFIX + CONSTANT_IP_CLEAN
+}
+func getListEipTransferUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TRANSFER
 }
 func getListTbspUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TBSP
@@ -135,6 +146,12 @@ func getQueryEipListUri(version string) string {
 }
 func getQueryTheListOfEipsInTheRecyclingBinUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + CONSTANT_RECYCLE
+}
+func getReceiveEipTransferUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TRANSFER
+}
+func getRejectEipTransferUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TRANSFER
 }
 func getReleaseEipUri(version string, eip string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip

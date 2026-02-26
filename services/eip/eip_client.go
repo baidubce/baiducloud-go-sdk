@@ -198,6 +198,28 @@ func (c *Client) BindTbspProtectionObject(request *BindTbspProtectionObjectReque
 	return err
 }
 
+// CancelEipTransfer
+//
+// PARAMS:
+//   - request: the arguments to CancelEipTransfer
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CancelEipTransfer(request *CancelEipTransferRequest) error {
+	if len(request.TransferIdList) == 0 {
+		return fmt.Errorf("TransferIdList is required and must be specified")
+	}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getCancelEipTransferUri(VERSION_V1)).
+		WithQueryParam("cancel", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
+}
+
 // CloseEipDirectAccess
 //
 // PARAMS:
@@ -215,6 +237,33 @@ func (c *Client) CloseEipDirectAccess(request *CloseEipDirectAccessRequest) erro
 		WithURL(getCloseEipDirectAccessUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParam("unDirect", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
+}
+
+// CreateEipTransfer
+//
+// PARAMS:
+//   - request: the arguments to CreateEipTransfer
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CreateEipTransfer(request *CreateEipTransferRequest) error {
+	if request.TransferType == nil {
+		return fmt.Errorf("TransferType is required and must be specified")
+	}
+	if len(request.TransferResourceList) == 0 {
+		return fmt.Errorf("TransferResourceList is required and must be specified")
+	}
+	if request.ToUserId == nil {
+		return fmt.Errorf("ToUserId is required and must be specified")
+	}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateEipTransferUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
 		Do()
 	return err
 }
@@ -443,6 +492,33 @@ func (c *Client) EnableTbspIpClean(request *EnableTbspIpCleanRequest) error {
 	return err
 }
 
+// ListEipTransfer
+//
+// PARAMS:
+//   - request: the arguments to ListEipTransfer
+//
+// RETURNS:
+//   - ListEipTransferResponse: The return type of the ListEipTransfer interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListEipTransfer(request *ListEipTransferRequest) (*ListEipTransferResponse, error) {
+	result := &ListEipTransferResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListEipTransferUri(VERSION_V1)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("direction", util.StringValue(request.Direction)).
+		WithQueryParamFilter("transferId", util.StringValue(request.TransferId)).
+		WithQueryParamFilter("status", util.StringValue(request.Status)).
+		WithQueryParamFilter("fuzzyTransferId", util.StringValue(request.FuzzyTransferId)).
+		WithQueryParamFilter("fuzzyInstanceId", util.StringValue(request.FuzzyInstanceId)).
+		WithQueryParamFilter("fuzzyInstanceName", util.StringValue(request.FuzzyInstanceName)).
+		WithQueryParamFilter("fuzzyInstanceIp", util.StringValue(request.FuzzyInstanceIp)).
+		WithResult(result).
+		Do()
+	return result, err
+}
+
 // ListTbsp
 //
 // PARAMS:
@@ -669,6 +745,50 @@ func (c *Client) QueryTheListOfEipsInTheRecyclingBin(request *QueryTheListOfEips
 		WithResult(result).
 		Do()
 	return result, err
+}
+
+// ReceiveEipTransfer
+//
+// PARAMS:
+//   - request: the arguments to ReceiveEipTransfer
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ReceiveEipTransfer(request *ReceiveEipTransferRequest) error {
+	if len(request.TransferIdList) == 0 {
+		return fmt.Errorf("TransferIdList is required and must be specified")
+	}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getReceiveEipTransferUri(VERSION_V1)).
+		WithQueryParam("accept", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
+}
+
+// RejectEipTransfer
+//
+// PARAMS:
+//   - request: the arguments to RejectEipTransfer
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RejectEipTransfer(request *RejectEipTransferRequest) error {
+	if len(request.TransferIdList) == 0 {
+		return fmt.Errorf("TransferIdList is required and must be specified")
+	}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getRejectEipTransferUri(VERSION_V1)).
+		WithQueryParam("reject", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
 }
 
 // ReleaseEip

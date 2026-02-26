@@ -37,10 +37,16 @@ func SharedBandwidthInquiry() {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.MarshalIndent(result, "", "    ")
+	data, err := json.Marshal(result)
 	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
+		fmt.Println("json marshal failed:", err)
 		return
 	}
-	fmt.Println(string(data))
+	var out bytes.Buffer
+	err = json.Indent(&out, data, "", "  ")
+	if err != nil {
+		fmt.Println("json indent failed:", err)
+		return
+	}
+	fmt.Println(out.String())
 }
