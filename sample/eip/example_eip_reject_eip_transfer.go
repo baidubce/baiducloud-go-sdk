@@ -15,7 +15,6 @@ func RejectEipTransfer() {
 		return
 	}
 	rejectEipTransferRequest := &eip.RejectEipTransferRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		TransferIdList: []*string{},
 	}

@@ -17,7 +17,7 @@ func ListEipTransfer() {
 		return
 	}
 	listEipTransferRequest := &eip.ListEipTransferRequest{
-		MaxKeys:           util.PtrString(""),
+		MaxKeys:           util.PtrInt32(int32(0)),
 		Marker:            util.PtrString(""),
 		Direction:         util.PtrString(""),
 		TransferId:        util.PtrString(""),

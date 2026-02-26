@@ -15,7 +15,6 @@ func CancelEipTransfer() {
 		return
 	}
 	cancelEipTransferRequest := &eip.CancelEipTransferRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		TransferIdList: []*string{},
 	}

@@ -1,7 +1,7 @@
 package eip
 
 type ListEipTransferRequest struct {
-	MaxKeys           *string `json:"-"`
+	MaxKeys           *int32  `json:"-"`
 	Marker            *string `json:"-"`
 	Direction         *string `json:"-"`
 	TransferId        *string `json:"-"`

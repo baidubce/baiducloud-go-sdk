@@ -15,7 +15,6 @@ func ReceiveEipTransfer() {
 		return
 	}
 	receiveEipTransferRequest := &eip.ReceiveEipTransferRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		TransferIdList: []*string{},
 	}
