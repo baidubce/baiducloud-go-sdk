@@ -199,7 +199,6 @@ func TestClient_BindTbspProtectionObject(t *testing.T) {
 }
 func TestClient_CancelEipTransfer(t *testing.T) {
 	cancelEipTransferRequest := &CancelEipTransferRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		TransferIdList: []*string{},
 	}
@@ -379,7 +378,7 @@ func TestClient_EnableTbspIpClean(t *testing.T) {
 }
 func TestClient_ListEipTransfer(t *testing.T) {
 	listEipTransferRequest := &ListEipTransferRequest{
-		MaxKeys:           util.PtrString(""),
+		MaxKeys:           util.PtrInt32(int32(0)),
 		Marker:            util.PtrString(""),
 		Direction:         util.PtrString(""),
 		TransferId:        util.PtrString(""),
@@ -633,7 +632,6 @@ func TestClient_QueryTheListOfEipsInTheRecyclingBin(t *testing.T) {
 }
 func TestClient_ReceiveEipTransfer(t *testing.T) {
 	receiveEipTransferRequest := &ReceiveEipTransferRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		TransferIdList: []*string{},
 	}
@@ -642,7 +640,6 @@ func TestClient_ReceiveEipTransfer(t *testing.T) {
 }
 func TestClient_RejectEipTransfer(t *testing.T) {
 	rejectEipTransferRequest := &RejectEipTransferRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		TransferIdList: []*string{},
 	}

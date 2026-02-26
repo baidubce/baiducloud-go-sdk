@@ -7,7 +7,7 @@ type TransferEipVo struct {
 	ToUserId          *string `json:"toUserId,omitempty"`
 	InstanceId        *string `json:"instanceId,omitempty"`
 	InstanceName      *string `json:"instanceName,omitempty"`
-	InstanceIP        *string `json:"instanceIP,omitempty"`
+	InstanceIp        *string `json:"instanceIp,omitempty"`
 	InstanceType      *string `json:"instanceType,omitempty"`
 	InstanceBandwidth *string `json:"instanceBandwidth,omitempty"`
 	Status            *string `json:"status,omitempty"`

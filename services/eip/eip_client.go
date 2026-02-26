@@ -207,16 +207,13 @@ func (c *Client) BindTbspProtectionObject(request *BindTbspProtectionObjectReque
 
 // - error: nil if success otherwise the specific error
 func (c *Client) CancelEipTransfer(request *CancelEipTransferRequest) error {
-	if request.Action == nil {
-		return fmt.Errorf("action is required and must be specified")
-	}
 	if len(request.TransferIdList) == 0 {
 		return fmt.Errorf("TransferIdList is required and must be specified")
 	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getCancelEipTransferUri(VERSION_V1)).
-		WithQueryParam(util.StringValue(request.Action), "").
+		WithQueryParam("cancel", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -508,7 +505,7 @@ func (c *Client) ListEipTransfer(request *ListEipTransferRequest) (*ListEipTrans
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getListEipTransferUri(VERSION_V1)).
-		WithQueryParamFilter("maxKeys", util.StringValue(request.MaxKeys)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("direction", util.StringValue(request.Direction)).
 		WithQueryParamFilter("transferId", util.StringValue(request.TransferId)).
@@ -759,16 +756,13 @@ func (c *Client) QueryTheListOfEipsInTheRecyclingBin(request *QueryTheListOfEips
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ReceiveEipTransfer(request *ReceiveEipTransferRequest) error {
-	if request.Action == nil {
-		return fmt.Errorf("action is required and must be specified")
-	}
 	if len(request.TransferIdList) == 0 {
 		return fmt.Errorf("TransferIdList is required and must be specified")
 	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getReceiveEipTransferUri(VERSION_V1)).
-		WithQueryParam(util.StringValue(request.Action), "").
+		WithQueryParam("accept", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -784,16 +778,13 @@ func (c *Client) ReceiveEipTransfer(request *ReceiveEipTransferRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RejectEipTransfer(request *RejectEipTransferRequest) error {
-	if request.Action == nil {
-		return fmt.Errorf("action is required and must be specified")
-	}
 	if len(request.TransferIdList) == 0 {
 		return fmt.Errorf("TransferIdList is required and must be specified")
 	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getRejectEipTransferUri(VERSION_V1)).
-		WithQueryParam(util.StringValue(request.Action), "").
+		WithQueryParam("reject", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
