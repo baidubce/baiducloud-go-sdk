@@ -21,19 +21,19 @@ const (
 
 	CONSTANT_IP_PROTECT_LEVEL = "ipProtectLevel"
 
-	CONSTANT_RECYCLE = "recycle"
-
 	CONSTANT_TRANSFER = "transfer"
 
 	CONSTANT_IP_CLEAN = "ipClean"
+
+	CONSTANT_RECYCLE = "recycle"
 
 	CONSTANT_IP_WHITELIST = "ipWhitelist"
 
 	CONSTANT_REFUND = "refund"
 
-	CONSTANT_EIPTP = "eiptp"
-
 	CONSTANT_DELETE_PROTECT = "deleteProtect"
+
+	CONSTANT_EIPTP = "eiptp"
 
 	CONSTANT_EIPGROUP = "eipgroup"
 )
@@ -54,9 +54,6 @@ func NewClient(ak, sk, endPoint string) (*Client, error) {
 	return &Client{client}, nil
 }
 
-func getActivateEipAutomaticRenewalUri(version string, eip string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip
-}
 func getAddTbspAreaBlockingUri(version string, id string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TBSP + bce.URI_PREFIX + id + bce.URI_PREFIX + CONSTANT_AREA_BLOCKING
 }
@@ -81,9 +78,6 @@ func getBindTbspProtectionObjectUri(version string, id string) string {
 func getCancelEipTransferUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TRANSFER
 }
-func getCloseEipDirectAccessUri(version string, eip string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip
-}
 func getCreateEipTransferUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TRANSFER
 }
@@ -92,6 +86,9 @@ func getCreateTbspUri(version string) string {
 }
 func getDetailTbspUri(version string, id string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TBSP + bce.URI_PREFIX + id
+}
+func getDirectEipUri(version string, eip string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip
 }
 func getDisableTbspIpCleanUri(version string, id string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TBSP + bce.URI_PREFIX + id + bce.URI_PREFIX + CONSTANT_IP_CLEAN
@@ -108,14 +105,14 @@ func getEipPostpaidToPrepaidUri(version string, eip string) string {
 func getEipRenewalUri(version string, eip string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip
 }
-func getEnableEipDirectAccessUri(version string, eip string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip
-}
 func getEnableTbspIpCleanUri(version string, id string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TBSP + bce.URI_PREFIX + id + bce.URI_PREFIX + CONSTANT_IP_CLEAN
 }
 func getListEipTransferUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TRANSFER
+}
+func getListRecycleEipsUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + CONSTANT_RECYCLE
 }
 func getListTbspUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TBSP
@@ -138,17 +135,17 @@ func getModifyTbspIpCleanThresholdUri(version string, id string) string {
 func getModifyTbspIpProtectLevelUri(version string, id string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TBSP + bce.URI_PREFIX + id + bce.URI_PREFIX + CONSTANT_IP_PROTECT_LEVEL
 }
-func getPrepaidEipUnsubscribeUri(version string, eip string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + CONSTANT_REFUND + bce.URI_PREFIX + eip
+func getOptionalReleaseEipUri(version string, eip string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip
 }
 func getQueryEipListUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP
 }
-func getQueryTheListOfEipsInTheRecyclingBinUri(version string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + CONSTANT_RECYCLE
-}
 func getReceiveEipTransferUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TRANSFER
+}
+func getRefundEipUri(version string, eip string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + CONSTANT_REFUND + bce.URI_PREFIX + eip
 }
 func getRejectEipTransferUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TRANSFER
@@ -156,7 +153,7 @@ func getRejectEipTransferUri(version string) string {
 func getReleaseEipUri(version string, eip string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip
 }
-func getReleaseTheEipFromTheRecyclingBinUri(version string, eip string) string {
+func getReleaseEipFromRecycleUri(version string, eip string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + CONSTANT_RECYCLE + bce.URI_PREFIX + eip
 }
 func getRemoveTbspAreaBlockingUri(version string, id string) string {
@@ -174,11 +171,8 @@ func getRenewTbspUri(version string, id string) string {
 func getResizeTbspUri(version string, id string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TBSP + bce.URI_PREFIX + id
 }
-func getRestoreEipInRecycleBinUri(version string, eip string) string {
+func getRestoreEipFromRecycleUri(version string, eip string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + CONSTANT_RECYCLE + bce.URI_PREFIX + eip
-}
-func getSelectiveReleaseOfEipUri(version string, eip string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip
 }
 func getSharedBandwidthInquiryUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIPGROUP + bce.URI_PREFIX + CONSTANT_PRICE
@@ -186,7 +180,13 @@ func getSharedBandwidthInquiryUri(version string) string {
 func getSharedDataPackageInquiryUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIPTP + bce.URI_PREFIX + CONSTANT_PRICE
 }
-func getTurnOffEipAutomaticRenewalUri(version string, eip string) string {
+func getStartEipAutoRenewUri(version string, eip string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip
+}
+func getStopEipAutoRenewUri(version string, eip string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip
+}
+func getUnDirectEipUri(version string, eip string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip
 }
 func getUnbindEipUri(version string, eip string) string {
@@ -195,6 +195,6 @@ func getUnbindEipUri(version string, eip string) string {
 func getUnbindTbspProtectionObjectUri(version string, id string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_TBSP + bce.URI_PREFIX + id
 }
-func getUpdateEipReleaseProtectionSwitchUri(version string, eip string) string {
+func getUpdateEipDeleteProtectUri(version string, eip string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_EIP + bce.URI_PREFIX + eip + bce.URI_PREFIX + CONSTANT_DELETE_PROTECT
 }

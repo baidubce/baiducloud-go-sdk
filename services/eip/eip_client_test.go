@@ -1,7 +1,6 @@
 package eip
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -68,16 +67,6 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
-func TestClient_ActivateEipAutomaticRenewal(t *testing.T) {
-	activateEipAutomaticRenewalRequest := &ActivateEipAutomaticRenewalRequest{
-		ClientToken:       util.PtrString(""),
-		Eip:               util.PtrString(""),
-		AutoRenewTimeUnit: util.PtrString(""),
-		AutoRenewTime:     util.PtrInt32(int32(0)),
-	}
-	err := EIP_CLIENT.ActivateEipAutomaticRenewal(activateEipAutomaticRenewalRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_AddTbspAreaBlocking(t *testing.T) {
 	addTbspAreaBlockingRequest := &AddTbspAreaBlockingRequest{
 		Id:          util.PtrString(""),
@@ -137,18 +126,12 @@ func TestClient_ApplyForEip(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_BandwidthPackageInquiry(t *testing.T) {
@@ -163,18 +146,12 @@ func TestClient_BandwidthPackageInquiry(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_BindEip(t *testing.T) {
@@ -205,14 +182,6 @@ func TestClient_CancelEipTransfer(t *testing.T) {
 	err := EIP_CLIENT.CancelEipTransfer(cancelEipTransferRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_CloseEipDirectAccess(t *testing.T) {
-	closeEipDirectAccessRequest := &CloseEipDirectAccessRequest{
-		Eip:         util.PtrString(""),
-		ClientToken: util.PtrString(""),
-	}
-	err := EIP_CLIENT.CloseEipDirectAccess(closeEipDirectAccessRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_CreateEipTransfer(t *testing.T) {
 	createEipTransferRequest := &CreateEipTransferRequest{
 		ClientToken:          util.PtrString(""),
@@ -240,18 +209,12 @@ func TestClient_CreateTbsp(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DetailTbsp(t *testing.T) {
@@ -264,18 +227,20 @@ func TestClient_DetailTbsp(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DirectEip(t *testing.T) {
+	directEipRequest := &DirectEipRequest{
+		Eip:         util.PtrString(""),
+		ClientToken: util.PtrString(""),
 	}
-	fmt.Println(out.String())
+	err := EIP_CLIENT.DirectEip(directEipRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DisableTbspIpClean(t *testing.T) {
@@ -318,18 +283,12 @@ func TestClient_EipInquiry(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_EipPostpaidToPrepaid(t *testing.T) {
@@ -359,14 +318,6 @@ func TestClient_EipRenewal(t *testing.T) {
 	err := EIP_CLIENT.EipRenewal(eipRenewalRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_EnableEipDirectAccess(t *testing.T) {
-	enableEipDirectAccessRequest := &EnableEipDirectAccessRequest{
-		Eip:         util.PtrString(""),
-		ClientToken: util.PtrString(""),
-	}
-	err := EIP_CLIENT.EnableEipDirectAccess(enableEipDirectAccessRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_EnableTbspIpClean(t *testing.T) {
 	enableTbspIpCleanRequest := &EnableTbspIpCleanRequest{
 		Id:          util.PtrString(""),
@@ -394,18 +345,33 @@ func TestClient_ListEipTransfer(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListRecycleEips(t *testing.T) {
+	listRecycleEipsRequest := &ListRecycleEipsRequest{
+		Eip:     util.PtrString(""),
+		Name:    util.PtrString(""),
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &ListRecycleEipsResponse{}
+	result, err := EIP_CLIENT.ListRecycleEips(listRecycleEipsRequest)
 	if err != nil {
-		fmt.Println("json indent failed:", err)
+		fmt.Println("request failed:", err)
 		return
 	}
-	fmt.Println(out.String())
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ListTbsp(t *testing.T) {
@@ -422,18 +388,12 @@ func TestClient_ListTbsp(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ListTbspAreaBlocking(t *testing.T) {
@@ -447,18 +407,12 @@ func TestClient_ListTbspAreaBlocking(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ListTbspIpClean(t *testing.T) {
@@ -474,18 +428,12 @@ func TestClient_ListTbspIpClean(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ListTbspIpWhitelist(t *testing.T) {
@@ -502,18 +450,12 @@ func TestClient_ListTbspIpWhitelist(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ListTbspProtocolBlocking(t *testing.T) {
@@ -527,18 +469,12 @@ func TestClient_ListTbspProtocolBlocking(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ModifyTbspIpCleanThreshold(t *testing.T) {
@@ -563,12 +499,13 @@ func TestClient_ModifyTbspIpProtectLevel(t *testing.T) {
 	err := EIP_CLIENT.ModifyTbspIpProtectLevel(modifyTbspIpProtectLevelRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_PrepaidEipUnsubscribe(t *testing.T) {
-	prepaidEipUnsubscribeRequest := &PrepaidEipUnsubscribeRequest{
-		Eip:         util.PtrString(""),
-		ClientToken: util.PtrString(""),
+func TestClient_OptionalReleaseEip(t *testing.T) {
+	optionalReleaseEipRequest := &OptionalReleaseEipRequest{
+		Eip:              util.PtrString(""),
+		ReleaseToRecycle: util.PtrBool(false),
+		ClientToken:      util.PtrString(""),
 	}
-	err := EIP_CLIENT.PrepaidEipUnsubscribe(prepaidEipUnsubscribeRequest)
+	err := EIP_CLIENT.OptionalReleaseEip(optionalReleaseEipRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QueryEipList(t *testing.T) {
@@ -589,45 +526,12 @@ func TestClient_QueryEipList(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheListOfEipsInTheRecyclingBin(t *testing.T) {
-	queryTheListOfEipsInTheRecyclingBinRequest := &QueryTheListOfEipsInTheRecyclingBinRequest{
-		Eip:     util.PtrString(""),
-		Name:    util.PtrString(""),
-		Marker:  util.PtrString(""),
-		MaxKeys: util.PtrInt32(int32(0)),
-	}
-	result := &QueryTheListOfEipsInTheRecyclingBinResponse{}
-	result, err := EIP_CLIENT.QueryTheListOfEipsInTheRecyclingBin(queryTheListOfEipsInTheRecyclingBinRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.Marshal(result)
-	if err != nil {
-		fmt.Println("json marshal failed:", err)
-		return
-	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ReceiveEipTransfer(t *testing.T) {
@@ -636,6 +540,14 @@ func TestClient_ReceiveEipTransfer(t *testing.T) {
 		TransferIdList: []*string{},
 	}
 	err := EIP_CLIENT.ReceiveEipTransfer(receiveEipTransferRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_RefundEip(t *testing.T) {
+	refundEipRequest := &RefundEipRequest{
+		Eip:         util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := EIP_CLIENT.RefundEip(refundEipRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_RejectEipTransfer(t *testing.T) {
@@ -655,12 +567,12 @@ func TestClient_ReleaseEip(t *testing.T) {
 	err := EIP_CLIENT.ReleaseEip(releaseEipRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_ReleaseTheEipFromTheRecyclingBin(t *testing.T) {
-	releaseTheEipFromTheRecyclingBinRequest := &ReleaseTheEipFromTheRecyclingBinRequest{
+func TestClient_ReleaseEipFromRecycle(t *testing.T) {
+	releaseEipFromRecycleRequest := &ReleaseEipFromRecycleRequest{
 		Eip:         util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := EIP_CLIENT.ReleaseTheEipFromTheRecyclingBin(releaseTheEipFromTheRecyclingBinRequest)
+	err := EIP_CLIENT.ReleaseEipFromRecycle(releaseEipFromRecycleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_RemoveTbspAreaBlocking(t *testing.T) {
@@ -711,21 +623,12 @@ func TestClient_ResizeTbsp(t *testing.T) {
 	err := EIP_CLIENT.ResizeTbsp(resizeTbspRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_RestoreEipInRecycleBin(t *testing.T) {
-	restoreEipInRecycleBinRequest := &RestoreEipInRecycleBinRequest{
+func TestClient_RestoreEipFromRecycle(t *testing.T) {
+	restoreEipFromRecycleRequest := &RestoreEipFromRecycleRequest{
 		Eip:         util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := EIP_CLIENT.RestoreEipInRecycleBin(restoreEipInRecycleBinRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_SelectiveReleaseOfEip(t *testing.T) {
-	selectiveReleaseOfEipRequest := &SelectiveReleaseOfEipRequest{
-		Eip:              util.PtrString(""),
-		ReleaseToRecycle: util.PtrBool(false),
-		ClientToken:      util.PtrString(""),
-	}
-	err := EIP_CLIENT.SelectiveReleaseOfEip(selectiveReleaseOfEipRequest)
+	err := EIP_CLIENT.RestoreEipFromRecycle(restoreEipFromRecycleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_SharedBandwidthInquiry(t *testing.T) {
@@ -749,18 +652,12 @@ func TestClient_SharedBandwidthInquiry(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_SharedDataPackageInquiry(t *testing.T) {
@@ -777,26 +674,38 @@ func TestClient_SharedDataPackageInquiry(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_TurnOffEipAutomaticRenewal(t *testing.T) {
-	turnOffEipAutomaticRenewalRequest := &TurnOffEipAutomaticRenewalRequest{
+func TestClient_StartEipAutoRenew(t *testing.T) {
+	startEipAutoRenewRequest := &StartEipAutoRenewRequest{
+		ClientToken:       util.PtrString(""),
+		Eip:               util.PtrString(""),
+		AutoRenewTimeUnit: util.PtrString(""),
+		AutoRenewTime:     util.PtrInt32(int32(0)),
+	}
+	err := EIP_CLIENT.StartEipAutoRenew(startEipAutoRenewRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_StopEipAutoRenew(t *testing.T) {
+	stopEipAutoRenewRequest := &StopEipAutoRenewRequest{
 		ClientToken: util.PtrString(""),
 		Eip:         util.PtrString(""),
 	}
-	err := EIP_CLIENT.TurnOffEipAutomaticRenewal(turnOffEipAutomaticRenewalRequest)
+	err := EIP_CLIENT.StopEipAutoRenew(stopEipAutoRenewRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UnDirectEip(t *testing.T) {
+	unDirectEipRequest := &UnDirectEipRequest{
+		Eip:         util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := EIP_CLIENT.UnDirectEip(unDirectEipRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UnbindEip(t *testing.T) {
@@ -816,12 +725,12 @@ func TestClient_UnbindTbspProtectionObject(t *testing.T) {
 	err := EIP_CLIENT.UnbindTbspProtectionObject(unbindTbspProtectionObjectRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_UpdateEipReleaseProtectionSwitch(t *testing.T) {
-	updateEipReleaseProtectionSwitchRequest := &UpdateEipReleaseProtectionSwitchRequest{
+func TestClient_UpdateEipDeleteProtect(t *testing.T) {
+	updateEipDeleteProtectRequest := &UpdateEipDeleteProtectRequest{
 		Eip:           util.PtrString(""),
 		ClientToken:   util.PtrString(""),
 		DeleteProtect: util.PtrBool(false),
 	}
-	err := EIP_CLIENT.UpdateEipReleaseProtectionSwitch(updateEipReleaseProtectionSwitchRequest)
+	err := EIP_CLIENT.UpdateEipDeleteProtect(updateEipDeleteProtectRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }

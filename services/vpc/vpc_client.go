@@ -32,15 +32,15 @@ func (c *Client) CloseVpcRelay(request *CloseVpcRelayRequest) error {
 	return err
 }
 
-// CreateAReservedNetworkSegment
+// CreateIpReserved
 //
 // PARAMS:
-//   - request: the arguments to CreateAReservedNetworkSegment
+//   - request: the arguments to CreateIpReserved
 //
 // RETURNS:
-//   - CreateAReservedNetworkSegmentResponse: The return type of the CreateAReservedNetworkSegment interface.
+//   - CreateIpReservedResponse: The return type of the CreateIpReserved interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateAReservedNetworkSegment(request *CreateAReservedNetworkSegmentRequest) (*CreateAReservedNetworkSegmentResponse, error) {
+func (c *Client) CreateIpReserved(request *CreateIpReservedRequest) (*CreateIpReservedResponse, error) {
 	if request.SubnetId == nil {
 		return nil, fmt.Errorf("SubnetId is required and must be specified")
 	}
@@ -50,10 +50,10 @@ func (c *Client) CreateAReservedNetworkSegment(request *CreateAReservedNetworkSe
 	if request.IpVersion == nil {
 		return nil, fmt.Errorf("IpVersion is required and must be specified")
 	}
-	result := &CreateAReservedNetworkSegmentResponse{}
+	result := &CreateIpReservedResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getCreateAReservedNetworkSegmentUri(VERSION_V1)).
+		WithURL(getCreateIpReservedUri(VERSION_V1)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -119,21 +119,21 @@ func (c *Client) CreateVpc(request *CreateVpcRequest) (*CreateVpcResponse, error
 	return result, err
 }
 
-// DeleteReservedNetworkSegment
+// DeleteIpReserve
 //
 // PARAMS:
-//   - request: the arguments to DeleteReservedNetworkSegment
+//   - request: the arguments to DeleteIpReserve
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DeleteReservedNetworkSegment(request *DeleteReservedNetworkSegmentRequest) error {
+func (c *Client) DeleteIpReserve(request *DeleteIpReserveRequest) error {
 	if request.IpReserveId == nil {
 		return fmt.Errorf("ipReserveId is required and must be specified")
 	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getDeleteReservedNetworkSegmentUri(VERSION_V1, util.StringValue(request.IpReserveId))).
+		WithURL(getDeleteIpReserveUri(VERSION_V1, util.StringValue(request.IpReserveId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 	return err
@@ -179,21 +179,68 @@ func (c *Client) DeleteVpc(request *DeleteVpcRequest) error {
 	return err
 }
 
-// EnableVpcRelay
+// GetVpcResourceIpInfo
 //
 // PARAMS:
-//   - request: the arguments to EnableVpcRelay
+//   - request: the arguments to GetVpcResourceIpInfo
+//
+// RETURNS:
+//   - GetVpcResourceIpInfoResponse: The return type of the GetVpcResourceIpInfo interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetVpcResourceIpInfo(request *GetVpcResourceIpInfoRequest) (*GetVpcResourceIpInfoResponse, error) {
+	if request.VpcId == nil {
+		return nil, fmt.Errorf("vpcId is required and must be specified")
+	}
+	result := &GetVpcResourceIpInfoResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetVpcResourceIpInfoUri(VERSION_V1)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("subnetId", util.StringValue(request.SubnetId)).
+		WithQueryParamFilter("resourceType", util.StringValue(request.ResourceType)).
+		WithQueryParamFilter("pageNo", util.Int32Value(request.PageNo)).
+		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
+		WithResult(result).
+		Do()
+	return result, err
+}
+
+// ListIpReserve
+//
+// PARAMS:
+//   - request: the arguments to ListIpReserve
+//
+// RETURNS:
+//   - ListIpReserveResponse: The return type of the ListIpReserve interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListIpReserve(request *ListIpReserveRequest) (*ListIpReserveResponse, error) {
+	result := &ListIpReserveResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListIpReserveUri(VERSION_V1)).
+		WithQueryParamFilter("subnetId", util.StringValue(request.SubnetId)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	return result, err
+}
+
+// OpenVpcRelay
+//
+// PARAMS:
+//   - request: the arguments to OpenVpcRelay
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) EnableVpcRelay(request *EnableVpcRelayRequest) error {
+func (c *Client) OpenVpcRelay(request *OpenVpcRelayRequest) error {
 	if request.VpcId == nil {
 		return fmt.Errorf("vpcId is required and must be specified")
 	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getEnableVpcRelayUri(VERSION_V1, util.StringValue(request.VpcId))).
+		WithURL(getOpenVpcRelayUri(VERSION_V1, util.StringValue(request.VpcId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 	return err
@@ -260,53 +307,6 @@ func (c *Client) QuerySubnetList(request *QuerySubnetListRequest) (*QuerySubnetL
 		WithQueryParamFilter("zoneName", util.StringValue(request.ZoneName)).
 		WithQueryParamFilter("subnetType", util.StringValue(request.SubnetType)).
 		WithQueryParamFilter("subnetIds", util.StringValue(request.SubnetIds)).
-		WithResult(result).
-		Do()
-	return result, err
-}
-
-// QueryTheIpAddressesOccupiedByProductsWithinVpc
-//
-// PARAMS:
-//   - request: the arguments to QueryTheIpAddressesOccupiedByProductsWithinVpc
-//
-// RETURNS:
-//   - QueryTheIpAddressesOccupiedByProductsWithinVpcResponse: The return type of the QueryTheIpAddressesOccupiedByProductsWithinVpc interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheIpAddressesOccupiedByProductsWithinVpc(request *QueryTheIpAddressesOccupiedByProductsWithinVpcRequest) (*QueryTheIpAddressesOccupiedByProductsWithinVpcResponse, error) {
-	if request.VpcId == nil {
-		return nil, fmt.Errorf("vpcId is required and must be specified")
-	}
-	result := &QueryTheIpAddressesOccupiedByProductsWithinVpcResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheIpAddressesOccupiedByProductsWithinVpcUri(VERSION_V1)).
-		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
-		WithQueryParamFilter("subnetId", util.StringValue(request.SubnetId)).
-		WithQueryParamFilter("resourceType", util.StringValue(request.ResourceType)).
-		WithQueryParamFilter("pageNo", util.Int32Value(request.PageNo)).
-		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
-		WithResult(result).
-		Do()
-	return result, err
-}
-
-// QueryTheReservedNetworkSegmentList
-//
-// PARAMS:
-//   - request: the arguments to QueryTheReservedNetworkSegmentList
-//
-// RETURNS:
-//   - QueryTheReservedNetworkSegmentListResponse: The return type of the QueryTheReservedNetworkSegmentList interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheReservedNetworkSegmentList(request *QueryTheReservedNetworkSegmentListRequest) (*QueryTheReservedNetworkSegmentListResponse, error) {
-	result := &QueryTheReservedNetworkSegmentListResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheReservedNetworkSegmentListUri(VERSION_V1)).
-		WithQueryParamFilter("subnetId", util.StringValue(request.SubnetId)).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
 		Do()
 	return result, err
