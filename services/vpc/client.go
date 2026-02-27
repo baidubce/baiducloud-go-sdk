@@ -15,11 +15,11 @@ const (
 
 	CONSTANT_SUBNET = "subnet"
 
-	CONSTANT_IPRESERVE = "ipreserve"
-
 	CONSTANT_OPEN_RELAY = "openRelay"
 
 	CONSTANT_PRIVATE_IP_ADDRESS_INFO = "privateIpAddressInfo"
+
+	CONSTANT_IPRESERVE = "ipreserve"
 )
 
 // Client of vpc service is a kind of BceClient, so derived from BceClient
@@ -41,7 +41,7 @@ func NewClient(ak, sk, endPoint string) (*Client, error) {
 func getCloseVpcRelayUri(version string, vpcId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_SHUTDOWN_RELAY + bce.URI_PREFIX + vpcId
 }
-func getCreateAReservedNetworkSegmentUri(version string) string {
+func getCreateIpReservedUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_IPRESERVE
 }
 func getCreateSubnetUri(version string) string {
@@ -50,7 +50,7 @@ func getCreateSubnetUri(version string) string {
 func getCreateVpcUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC
 }
-func getDeleteReservedNetworkSegmentUri(version string, ipReserveId string) string {
+func getDeleteIpReserveUri(version string, ipReserveId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_IPRESERVE + bce.URI_PREFIX + ipReserveId
 }
 func getDeleteSubnetUri(version string, subnetId string) string {
@@ -59,7 +59,13 @@ func getDeleteSubnetUri(version string, subnetId string) string {
 func getDeleteVpcUri(version string, vpcId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + vpcId
 }
-func getEnableVpcRelayUri(version string, vpcId string) string {
+func getGetVpcResourceIpInfoUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_RESOURCE_IP
+}
+func getListIpReserveUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_IPRESERVE
+}
+func getOpenVpcRelayUri(version string, vpcId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_OPEN_RELAY + bce.URI_PREFIX + vpcId
 }
 func getQuerySpecifiedSubnetUri(version string, subnetId string) string {
@@ -70,12 +76,6 @@ func getQuerySpecifiedVpcUri(version string, vpcId string) string {
 }
 func getQuerySubnetListUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET
-}
-func getQueryTheIpAddressesOccupiedByProductsWithinVpcUri(version string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_RESOURCE_IP
-}
-func getQueryTheReservedNetworkSegmentListUri(version string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_IPRESERVE
 }
 func getQueryVpcIntranetIpUri(version string, vpcId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + vpcId + bce.URI_PREFIX + CONSTANT_PRIVATE_IP_ADDRESS_INFO

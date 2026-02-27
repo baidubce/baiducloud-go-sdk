@@ -1,7 +1,6 @@
 package vpcsample
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"github.com/baidubce/baiducloud-go-sdk/core/util"

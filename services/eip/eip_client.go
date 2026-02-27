@@ -12,28 +12,6 @@ const (
 	VERSION_V1 = "v1"
 )
 
-// ActivateEipAutomaticRenewal
-//
-// PARAMS:
-//   - request: the arguments to ActivateEipAutomaticRenewal
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ActivateEipAutomaticRenewal(request *ActivateEipAutomaticRenewalRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getActivateEipAutomaticRenewalUri(VERSION_V1, util.StringValue(request.Eip))).
-		WithQueryParam("startAutoRenew", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-	return err
-}
-
 // AddTbspAreaBlocking
 //
 // PARAMS:
@@ -220,27 +198,6 @@ func (c *Client) CancelEipTransfer(request *CancelEipTransferRequest) error {
 	return err
 }
 
-// CloseEipDirectAccess
-//
-// PARAMS:
-//   - request: the arguments to CloseEipDirectAccess
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) CloseEipDirectAccess(request *CloseEipDirectAccessRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getCloseEipDirectAccessUri(VERSION_V1, util.StringValue(request.Eip))).
-		WithQueryParam("unDirect", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		Do()
-	return err
-}
-
 // CreateEipTransfer
 //
 // PARAMS:
@@ -322,6 +279,27 @@ func (c *Client) DetailTbsp(request *DetailTbspRequest) (*DetailTbspResponse, er
 		WithResult(result).
 		Do()
 	return result, err
+}
+
+// DirectEip
+//
+// PARAMS:
+//   - request: the arguments to DirectEip
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DirectEip(request *DirectEipRequest) error {
+	if request.Eip == nil {
+		return fmt.Errorf("eip is required and must be specified")
+	}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDirectEipUri(VERSION_V1, util.StringValue(request.Eip))).
+		WithQueryParam("direct", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
 }
 
 // DisableTbspIpClean
@@ -449,27 +427,6 @@ func (c *Client) EipRenewal(request *EipRenewalRequest) error {
 	return err
 }
 
-// EnableEipDirectAccess
-//
-// PARAMS:
-//   - request: the arguments to EnableEipDirectAccess
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) EnableEipDirectAccess(request *EnableEipDirectAccessRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getEnableEipDirectAccessUri(VERSION_V1, util.StringValue(request.Eip))).
-		WithQueryParam("direct", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		Do()
-	return err
-}
-
 // EnableTbspIpClean
 //
 // PARAMS:
@@ -514,6 +471,28 @@ func (c *Client) ListEipTransfer(request *ListEipTransferRequest) (*ListEipTrans
 		WithQueryParamFilter("fuzzyInstanceId", util.StringValue(request.FuzzyInstanceId)).
 		WithQueryParamFilter("fuzzyInstanceName", util.StringValue(request.FuzzyInstanceName)).
 		WithQueryParamFilter("fuzzyInstanceIp", util.StringValue(request.FuzzyInstanceIp)).
+		WithResult(result).
+		Do()
+	return result, err
+}
+
+// ListRecycleEips
+//
+// PARAMS:
+//   - request: the arguments to ListRecycleEips
+//
+// RETURNS:
+//   - ListRecycleEipsResponse: The return type of the ListRecycleEips interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListRecycleEips(request *ListRecycleEipsRequest) (*ListRecycleEipsResponse, error) {
+	result := &ListRecycleEipsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListRecycleEipsUri(VERSION_V1)).
+		WithQueryParamFilter("eip", util.StringValue(request.Eip)).
+		WithQueryParamFilter("name", util.StringValue(request.Name)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
 		Do()
 	return result, err
@@ -678,21 +657,22 @@ func (c *Client) ModifyTbspIpProtectLevel(request *ModifyTbspIpProtectLevelReque
 	return err
 }
 
-// PrepaidEipUnsubscribe
+// OptionalReleaseEip
 //
 // PARAMS:
-//   - request: the arguments to PrepaidEipUnsubscribe
+//   - request: the arguments to OptionalReleaseEip
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) PrepaidEipUnsubscribe(request *PrepaidEipUnsubscribeRequest) error {
+func (c *Client) OptionalReleaseEip(request *OptionalReleaseEipRequest) error {
 	if request.Eip == nil {
 		return fmt.Errorf("eip is required and must be specified")
 	}
 	err := bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getPrepaidEipUnsubscribeUri(VERSION_V1, util.StringValue(request.Eip))).
+		WithMethod(http.DELETE).
+		WithURL(getOptionalReleaseEipUri(VERSION_V1, util.StringValue(request.Eip))).
+		WithQueryParamFilter("releaseToRecycle", util.BoolValue(request.ReleaseToRecycle)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 	return err
@@ -725,28 +705,6 @@ func (c *Client) QueryEipList(request *QueryEipListRequest) (*QueryEipListRespon
 	return result, err
 }
 
-// QueryTheListOfEipsInTheRecyclingBin
-//
-// PARAMS:
-//   - request: the arguments to QueryTheListOfEipsInTheRecyclingBin
-//
-// RETURNS:
-//   - QueryTheListOfEipsInTheRecyclingBinResponse: The return type of the QueryTheListOfEipsInTheRecyclingBin interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheListOfEipsInTheRecyclingBin(request *QueryTheListOfEipsInTheRecyclingBinRequest) (*QueryTheListOfEipsInTheRecyclingBinResponse, error) {
-	result := &QueryTheListOfEipsInTheRecyclingBinResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheListOfEipsInTheRecyclingBinUri(VERSION_V1)).
-		WithQueryParamFilter("eip", util.StringValue(request.Eip)).
-		WithQueryParamFilter("name", util.StringValue(request.Name)).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-		WithResult(result).
-		Do()
-	return result, err
-}
-
 // ReceiveEipTransfer
 //
 // PARAMS:
@@ -765,6 +723,26 @@ func (c *Client) ReceiveEipTransfer(request *ReceiveEipTransferRequest) error {
 		WithQueryParam("accept", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
+		Do()
+	return err
+}
+
+// RefundEip
+//
+// PARAMS:
+//   - request: the arguments to RefundEip
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RefundEip(request *RefundEipRequest) error {
+	if request.Eip == nil {
+		return fmt.Errorf("eip is required and must be specified")
+	}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getRefundEipUri(VERSION_V1, util.StringValue(request.Eip))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 	return err
 }
@@ -812,21 +790,21 @@ func (c *Client) ReleaseEip(request *ReleaseEipRequest) error {
 	return err
 }
 
-// ReleaseTheEipFromTheRecyclingBin
+// ReleaseEipFromRecycle
 //
 // PARAMS:
-//   - request: the arguments to ReleaseTheEipFromTheRecyclingBin
+//   - request: the arguments to ReleaseEipFromRecycle
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) ReleaseTheEipFromTheRecyclingBin(request *ReleaseTheEipFromTheRecyclingBinRequest) error {
+func (c *Client) ReleaseEipFromRecycle(request *ReleaseEipFromRecycleRequest) error {
 	if request.Eip == nil {
 		return fmt.Errorf("eip is required and must be specified")
 	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getReleaseTheEipFromTheRecyclingBinUri(VERSION_V1, util.StringValue(request.Eip))).
+		WithURL(getReleaseEipFromRecycleUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 	return err
@@ -950,43 +928,22 @@ func (c *Client) ResizeTbsp(request *ResizeTbspRequest) error {
 	return err
 }
 
-// RestoreEipInRecycleBin
+// RestoreEipFromRecycle
 //
 // PARAMS:
-//   - request: the arguments to RestoreEipInRecycleBin
+//   - request: the arguments to RestoreEipFromRecycle
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) RestoreEipInRecycleBin(request *RestoreEipInRecycleBinRequest) error {
+func (c *Client) RestoreEipFromRecycle(request *RestoreEipFromRecycleRequest) error {
 	if request.Eip == nil {
 		return fmt.Errorf("eip is required and must be specified")
 	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getRestoreEipInRecycleBinUri(VERSION_V1, util.StringValue(request.Eip))).
+		WithURL(getRestoreEipFromRecycleUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParam("restore", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		Do()
-	return err
-}
-
-// SelectiveReleaseOfEip
-//
-// PARAMS:
-//   - request: the arguments to SelectiveReleaseOfEip
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) SelectiveReleaseOfEip(request *SelectiveReleaseOfEipRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.DELETE).
-		WithURL(getSelectiveReleaseOfEipUri(VERSION_V1, util.StringValue(request.Eip))).
-		WithQueryParamFilter("releaseToRecycle", util.BoolValue(request.ReleaseToRecycle)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 	return err
@@ -1046,22 +1003,65 @@ func (c *Client) SharedDataPackageInquiry(request *SharedDataPackageInquiryReque
 	return result, err
 }
 
-// TurnOffEipAutomaticRenewal
+// StartEipAutoRenew
 //
 // PARAMS:
-//   - request: the arguments to TurnOffEipAutomaticRenewal
+//   - request: the arguments to StartEipAutoRenew
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) TurnOffEipAutomaticRenewal(request *TurnOffEipAutomaticRenewalRequest) error {
+func (c *Client) StartEipAutoRenew(request *StartEipAutoRenewRequest) error {
 	if request.Eip == nil {
 		return fmt.Errorf("eip is required and must be specified")
 	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getTurnOffEipAutomaticRenewalUri(VERSION_V1, util.StringValue(request.Eip))).
+		WithURL(getStartEipAutoRenewUri(VERSION_V1, util.StringValue(request.Eip))).
+		WithQueryParam("startAutoRenew", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
+}
+
+// StopEipAutoRenew
+//
+// PARAMS:
+//   - request: the arguments to StopEipAutoRenew
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) StopEipAutoRenew(request *StopEipAutoRenewRequest) error {
+	if request.Eip == nil {
+		return fmt.Errorf("eip is required and must be specified")
+	}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getStopEipAutoRenewUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParam("stopAutoRenew", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
+}
+
+// UnDirectEip
+//
+// PARAMS:
+//   - request: the arguments to UnDirectEip
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnDirectEip(request *UnDirectEipRequest) error {
+	if request.Eip == nil {
+		return fmt.Errorf("eip is required and must be specified")
+	}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnDirectEipUri(VERSION_V1, util.StringValue(request.Eip))).
+		WithQueryParam("unDirect", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 	return err
@@ -1113,15 +1113,15 @@ func (c *Client) UnbindTbspProtectionObject(request *UnbindTbspProtectionObjectR
 	return err
 }
 
-// UpdateEipReleaseProtectionSwitch
+// UpdateEipDeleteProtect
 //
 // PARAMS:
-//   - request: the arguments to UpdateEipReleaseProtectionSwitch
+//   - request: the arguments to UpdateEipDeleteProtect
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) UpdateEipReleaseProtectionSwitch(request *UpdateEipReleaseProtectionSwitchRequest) error {
+func (c *Client) UpdateEipDeleteProtect(request *UpdateEipDeleteProtectRequest) error {
 	if request.Eip == nil {
 		return fmt.Errorf("eip is required and must be specified")
 	}
@@ -1130,7 +1130,7 @@ func (c *Client) UpdateEipReleaseProtectionSwitch(request *UpdateEipReleaseProte
 	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getUpdateEipReleaseProtectionSwitchUri(VERSION_V1, util.StringValue(request.Eip))).
+		WithURL(getUpdateEipDeleteProtectUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()

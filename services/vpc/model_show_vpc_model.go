@@ -11,4 +11,5 @@ type ShowVpcModel struct {
 	Subnets       []*Subnet   `json:"subnets,omitempty"`
 	SecondaryCidr []*string   `json:"secondaryCidr,omitempty"`
 	Tags          []*TagModel `json:"tags,omitempty"`
+	CreatedTime   *string     `json:"createdTime,omitempty"`
 }
