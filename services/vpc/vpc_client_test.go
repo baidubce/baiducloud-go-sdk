@@ -1,7 +1,6 @@
 package vpc
 
 import (
-	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -76,32 +75,26 @@ func TestClient_CloseVpcRelay(t *testing.T) {
 	err := VPC_CLIENT.CloseVpcRelay(closeVpcRelayRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_CreateAReservedNetworkSegment(t *testing.T) {
-	createAReservedNetworkSegmentRequest := &CreateAReservedNetworkSegmentRequest{
+func TestClient_CreateIpReserved(t *testing.T) {
+	createIpReservedRequest := &CreateIpReservedRequest{
 		ClientToken: util.PtrString(""),
 		SubnetId:    util.PtrString(""),
 		IpCidr:      util.PtrString(""),
 		IpVersion:   util.PtrInt32(int32(0)),
 		Description: util.PtrString(""),
 	}
-	result := &CreateAReservedNetworkSegmentResponse{}
-	result, err := VPC_CLIENT.CreateAReservedNetworkSegment(createAReservedNetworkSegmentRequest)
+	result := &CreateIpReservedResponse{}
+	result, err := VPC_CLIENT.CreateIpReserved(createIpReservedRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateSubnet(t *testing.T) {
@@ -123,18 +116,12 @@ func TestClient_CreateSubnet(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateVpc(t *testing.T) {
@@ -152,26 +139,20 @@ func TestClient_CreateVpc(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_DeleteReservedNetworkSegment(t *testing.T) {
-	deleteReservedNetworkSegmentRequest := &DeleteReservedNetworkSegmentRequest{
+func TestClient_DeleteIpReserve(t *testing.T) {
+	deleteIpReserveRequest := &DeleteIpReserveRequest{
 		IpReserveId: util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := VPC_CLIENT.DeleteReservedNetworkSegment(deleteReservedNetworkSegmentRequest)
+	err := VPC_CLIENT.DeleteIpReserve(deleteIpReserveRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteSubnet(t *testing.T) {
@@ -190,12 +171,54 @@ func TestClient_DeleteVpc(t *testing.T) {
 	err := VPC_CLIENT.DeleteVpc(deleteVpcRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_EnableVpcRelay(t *testing.T) {
-	enableVpcRelayRequest := &EnableVpcRelayRequest{
+func TestClient_GetVpcResourceIpInfo(t *testing.T) {
+	getVpcResourceIpInfoRequest := &GetVpcResourceIpInfoRequest{
+		VpcId:        util.PtrString(""),
+		SubnetId:     util.PtrString(""),
+		ResourceType: util.PtrString(""),
+		PageNo:       util.PtrInt32(int32(0)),
+		PageSize:     util.PtrInt32(int32(0)),
+	}
+	result := &GetVpcResourceIpInfoResponse{}
+	result, err := VPC_CLIENT.GetVpcResourceIpInfo(getVpcResourceIpInfoRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListIpReserve(t *testing.T) {
+	listIpReserveRequest := &ListIpReserveRequest{
+		SubnetId: util.PtrString(""),
+		Marker:   util.PtrString(""),
+		MaxKeys:  util.PtrInt32(int32(0)),
+	}
+	result := &ListIpReserveResponse{}
+	result, err := VPC_CLIENT.ListIpReserve(listIpReserveRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_OpenVpcRelay(t *testing.T) {
+	openVpcRelayRequest := &OpenVpcRelayRequest{
 		VpcId:       util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := VPC_CLIENT.EnableVpcRelay(enableVpcRelayRequest)
+	err := VPC_CLIENT.OpenVpcRelay(openVpcRelayRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QuerySpecifiedSubnet(t *testing.T) {
@@ -208,18 +231,12 @@ func TestClient_QuerySpecifiedSubnet(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QuerySpecifiedVpc(t *testing.T) {
@@ -232,18 +249,12 @@ func TestClient_QuerySpecifiedVpc(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QuerySubnetList(t *testing.T) {
@@ -261,72 +272,12 @@ func TestClient_QuerySubnetList(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheIpAddressesOccupiedByProductsWithinVpc(t *testing.T) {
-	queryTheIpAddressesOccupiedByProductsWithinVpcRequest := &QueryTheIpAddressesOccupiedByProductsWithinVpcRequest{
-		VpcId:        util.PtrString(""),
-		SubnetId:     util.PtrString(""),
-		ResourceType: util.PtrString(""),
-		PageNo:       util.PtrInt32(int32(0)),
-		PageSize:     util.PtrInt32(int32(0)),
-	}
-	result := &QueryTheIpAddressesOccupiedByProductsWithinVpcResponse{}
-	result, err := VPC_CLIENT.QueryTheIpAddressesOccupiedByProductsWithinVpc(queryTheIpAddressesOccupiedByProductsWithinVpcRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.Marshal(result)
-	if err != nil {
-		fmt.Println("json marshal failed:", err)
-		return
-	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheReservedNetworkSegmentList(t *testing.T) {
-	queryTheReservedNetworkSegmentListRequest := &QueryTheReservedNetworkSegmentListRequest{
-		SubnetId: util.PtrString(""),
-		Marker:   util.PtrString(""),
-		MaxKeys:  util.PtrInt32(int32(0)),
-	}
-	result := &QueryTheReservedNetworkSegmentListResponse{}
-	result, err := VPC_CLIENT.QueryTheReservedNetworkSegmentList(queryTheReservedNetworkSegmentListRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.Marshal(result)
-	if err != nil {
-		fmt.Println("json marshal failed:", err)
-		return
-	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QueryVpcIntranetIp(t *testing.T) {
@@ -341,18 +292,12 @@ func TestClient_QueryVpcIntranetIp(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QueryVpcList(t *testing.T) {
@@ -368,18 +313,12 @@ func TestClient_QueryVpcList(t *testing.T) {
 		fmt.Println("request failed:", err)
 		return
 	}
-	data, err := json.Marshal(result)
+	data, err := json.MarshalIndent(result, "", "    ")
 	if err != nil {
-		fmt.Println("json marshal failed:", err)
+		fmt.Println("json marshalIndent failed:", err)
 		return
 	}
-	var out bytes.Buffer
-	err = json.Indent(&out, data, "", "  ")
-	if err != nil {
-		fmt.Println("json indent failed:", err)
-		return
-	}
-	fmt.Println(out.String())
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateSubnet(t *testing.T) {

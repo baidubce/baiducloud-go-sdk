@@ -7,7 +7,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/services/vpc"
 )
 
-func CreateSubnet() {
+func GetVpcResourceIpInfo() {
 	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
 	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
 	client, err := vpc.NewClient(ak, sk, endpoint)
@@ -15,20 +15,15 @@ func CreateSubnet() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	createSubnetRequest := &vpc.CreateSubnetRequest{
-		ClientToken:      util.PtrString(""),
-		Name:             util.PtrString(""),
-		EnableIpv6:       util.PtrBool(false),
-		ZoneName:         util.PtrString(""),
-		Cidr:             util.PtrString(""),
-		VpcId:            util.PtrString(""),
-		VpcSecondaryCidr: util.PtrString(""),
-		SubnetType:       util.PtrString(""),
-		Description:      util.PtrString(""),
-		Tags:             []*vpc.TagModel{},
+	getVpcResourceIpInfoRequest := &vpc.GetVpcResourceIpInfoRequest{
+		VpcId:        util.PtrString(""),
+		SubnetId:     util.PtrString(""),
+		ResourceType: util.PtrString(""),
+		PageNo:       util.PtrInt32(int32(0)),
+		PageSize:     util.PtrInt32(int32(0)),
 	}
-	result := &vpc.CreateSubnetResponse{}
-	result, err = client.CreateSubnet(createSubnetRequest)
+	result := &vpc.GetVpcResourceIpInfoResponse{}
+	result, err = client.GetVpcResourceIpInfo(getVpcResourceIpInfoRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)
