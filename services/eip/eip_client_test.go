@@ -189,7 +189,18 @@ func TestClient_CreateEipTransfer(t *testing.T) {
 		TransferResourceList: []*string{},
 		ToUserId:             util.PtrString(""),
 	}
-	err := EIP_CLIENT.CreateEipTransfer(createEipTransferRequest)
+	result := &CreateEipTransferResponse{}
+	result, err := EIP_CLIENT.CreateEipTransfer(createEipTransferRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateTbsp(t *testing.T) {

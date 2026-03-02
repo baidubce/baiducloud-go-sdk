@@ -2,10 +2,11 @@ package eip
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/baidubce/baiducloud-go-sdk/bce"
 	"github.com/baidubce/baiducloud-go-sdk/core/http"
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
-	"strings"
 )
 
 const (
@@ -204,25 +205,27 @@ func (c *Client) CancelEipTransfer(request *CancelEipTransferRequest) error {
 //   - request: the arguments to CreateEipTransfer
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) CreateEipTransfer(request *CreateEipTransferRequest) error {
+//   - CreateEipTransferResponse: The return type of the CreateEipTransfer interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateEipTransfer(request *CreateEipTransferRequest) (*CreateEipTransferResponse, error) {
 	if request.TransferType == nil {
-		return fmt.Errorf("TransferType is required and must be specified")
+		return nil, fmt.Errorf("TransferType is required and must be specified")
 	}
 	if len(request.TransferResourceList) == 0 {
-		return fmt.Errorf("TransferResourceList is required and must be specified")
+		return nil, fmt.Errorf("TransferResourceList is required and must be specified")
 	}
 	if request.ToUserId == nil {
-		return fmt.Errorf("ToUserId is required and must be specified")
+		return nil, fmt.Errorf("ToUserId is required and must be specified")
 	}
+	result := &CreateEipTransferResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateEipTransferUri(VERSION_V1)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
+		WithResult(result).
 		Do()
-	return err
+	return result, err
 }
 
 // CreateTbsp
