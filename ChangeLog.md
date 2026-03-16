@@ -1,3 +1,5 @@
+2026-03-16 Version: v0.0.8
+- 涉及产品:VPN 增加VPN SDK
 2026-03-02 Version: v0.0.7
 - 涉及产品:EIP 创建资源转移返回转移ID&资源ID
 2026-02-26 Version: v0.0.6

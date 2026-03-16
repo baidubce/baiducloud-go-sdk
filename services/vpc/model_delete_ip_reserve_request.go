@@ -1,6 +1,8 @@
+
+
 package vpc
 
 type DeleteIpReserveRequest struct {
-	IpReserveId *string `json:"-"`
-	ClientToken *string `json:"-"`
+    IpReserveId *string `json:"-"`
+    ClientToken *string `json:"-"`
 }
