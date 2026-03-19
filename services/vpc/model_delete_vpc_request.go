@@ -1,6 +1,8 @@
+
+
 package vpc
 
 type DeleteVpcRequest struct {
-	VpcId       *string `json:"-"`
-	ClientToken *string `json:"-"`
+    VpcId *string `json:"-"`
+    ClientToken *string `json:"-"`
 }
