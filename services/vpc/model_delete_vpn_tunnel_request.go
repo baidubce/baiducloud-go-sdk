@@ -1,8 +1,6 @@
-
-
 package vpc
 
 type DeleteVpnTunnelRequest struct {
-    VpnConnId *string `json:"-"`
-    ClientToken *string `json:"-"`
+	VpnConnId   *string `json:"-"`
+	ClientToken *string `json:"-"`
 }

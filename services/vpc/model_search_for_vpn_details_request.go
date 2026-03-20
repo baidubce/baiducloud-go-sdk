@@ -1,7 +1,5 @@
-
-
 package vpc
 
 type SearchForVpnDetailsRequest struct {
-    VpnId *string `json:"-"`
+	VpnId *string `json:"-"`
 }

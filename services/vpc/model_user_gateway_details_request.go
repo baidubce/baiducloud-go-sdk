@@ -1,7 +1,5 @@
-
-
 package vpc
 
 type UserGatewayDetailsRequest struct {
-    CgwId *string `json:"-"`
+	CgwId *string `json:"-"`
 }

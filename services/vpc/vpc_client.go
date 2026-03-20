@@ -1,18 +1,15 @@
 package vpc
 
 import (
-    "strings"
-    "github.com/baidubce/baiducloud-go-sdk/bce"
-    "github.com/baidubce/baiducloud-go-sdk/core/http"
-    "github.com/baidubce/baiducloud-go-sdk/core/util"
+	"github.com/baidubce/baiducloud-go-sdk/bce"
+	"github.com/baidubce/baiducloud-go-sdk/core/http"
+	"github.com/baidubce/baiducloud-go-sdk/core/util"
+	"strings"
 )
 
 const (
-
-        VERSION_V1 = "v1"
+	VERSION_V1 = "v1"
 )
-
-
 
 // BatchCreateSslVpnUsers
 //
@@ -22,18 +19,17 @@ const (
 // RETURNS:
 //   - BatchCreateSslVpnUsersResponse: The return type of the BatchCreateSslVpnUsers interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) BatchCreateSslVpnUsers(request *BatchCreateSslVpnUsersRequest) (*BatchCreateSslVpnUsersResponse, error){
-    result := &BatchCreateSslVpnUsersResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.POST).
-        WithURL(getBatchCreateSslVpnUsersUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) BatchCreateSslVpnUsers(request *BatchCreateSslVpnUsersRequest) (*BatchCreateSslVpnUsersResponse, error) {
+	result := &BatchCreateSslVpnUsersResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getBatchCreateSslVpnUsersUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // BindEip
 //
@@ -42,18 +38,17 @@ func (c *Client) BatchCreateSslVpnUsers(request *BatchCreateSslVpnUsersRequest) 
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) BindEip(request *BindEipRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getBindEipUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithQueryParam("bind", "").
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) BindEip(request *BindEipRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindEipUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithQueryParam("bind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
 }
-
 
 // CloseVpcRelay
 //
@@ -62,16 +57,15 @@ func (c *Client) BindEip(request *BindEipRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) CloseVpcRelay(request *CloseVpcRelayRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getCloseVpcRelayUri(VERSION_V1, util.StringValue(request.VpcId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) CloseVpcRelay(request *CloseVpcRelayRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getCloseVpcRelayUri(VERSION_V1, util.StringValue(request.VpcId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
 }
-
 
 // CreateIpReserved
 //
@@ -81,18 +75,17 @@ func (c *Client) CloseVpcRelay(request *CloseVpcRelayRequest) ( error){
 // RETURNS:
 //   - CreateIpReservedResponse: The return type of the CreateIpReserved interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateIpReserved(request *CreateIpReservedRequest) (*CreateIpReservedResponse, error){
-    result := &CreateIpReservedResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.POST).
-        WithURL(getCreateIpReservedUri(VERSION_V1)).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) CreateIpReserved(request *CreateIpReservedRequest) (*CreateIpReservedResponse, error) {
+	result := &CreateIpReservedResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateIpReservedUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // CreateSslVpnServer
 //
@@ -102,18 +95,17 @@ func (c *Client) CreateIpReserved(request *CreateIpReservedRequest) (*CreateIpRe
 // RETURNS:
 //   - CreateSslVpnServerResponse: The return type of the CreateSslVpnServer interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateSslVpnServer(request *CreateSslVpnServerRequest) (*CreateSslVpnServerResponse, error){
-    result := &CreateSslVpnServerResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.POST).
-        WithURL(getCreateSslVpnServerUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) CreateSslVpnServer(request *CreateSslVpnServerRequest) (*CreateSslVpnServerResponse, error) {
+	result := &CreateSslVpnServerResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateSslVpnServerUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // CreateSubnet
 //
@@ -123,18 +115,17 @@ func (c *Client) CreateSslVpnServer(request *CreateSslVpnServerRequest) (*Create
 // RETURNS:
 //   - CreateSubnetResponse: The return type of the CreateSubnet interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateSubnet(request *CreateSubnetRequest) (*CreateSubnetResponse, error){
-    result := &CreateSubnetResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.POST).
-        WithURL(getCreateSubnetUri(VERSION_V1)).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) CreateSubnet(request *CreateSubnetRequest) (*CreateSubnetResponse, error) {
+	result := &CreateSubnetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateSubnetUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // CreateUserGateway
 //
@@ -144,18 +135,17 @@ func (c *Client) CreateSubnet(request *CreateSubnetRequest) (*CreateSubnetRespon
 // RETURNS:
 //   - CreateUserGatewayResponse: The return type of the CreateUserGateway interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateUserGateway(request *CreateUserGatewayRequest) (*CreateUserGatewayResponse, error){
-    result := &CreateUserGatewayResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.POST).
-        WithURL(getCreateUserGatewayUri(VERSION_V1)).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) CreateUserGateway(request *CreateUserGatewayRequest) (*CreateUserGatewayResponse, error) {
+	result := &CreateUserGatewayResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateUserGatewayUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // CreateVpc
 //
@@ -165,18 +155,17 @@ func (c *Client) CreateUserGateway(request *CreateUserGatewayRequest) (*CreateUs
 // RETURNS:
 //   - CreateVpcResponse: The return type of the CreateVpc interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateVpc(request *CreateVpcRequest) (*CreateVpcResponse, error){
-    result := &CreateVpcResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.POST).
-        WithURL(getCreateVpcUri(VERSION_V1)).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) CreateVpc(request *CreateVpcRequest) (*CreateVpcResponse, error) {
+	result := &CreateVpcResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateVpcUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // CreateVpn
 //
@@ -186,18 +175,17 @@ func (c *Client) CreateVpc(request *CreateVpcRequest) (*CreateVpcResponse, error
 // RETURNS:
 //   - CreateVpnResponse: The return type of the CreateVpn interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateVpn(request *CreateVpnRequest) (*CreateVpnResponse, error){
-    result := &CreateVpnResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.POST).
-        WithURL(getCreateVpnUri(VERSION_V1)).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) CreateVpn(request *CreateVpnRequest) (*CreateVpnResponse, error) {
+	result := &CreateVpnResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateVpnUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // CreateVpnTunnel
 //
@@ -207,18 +195,17 @@ func (c *Client) CreateVpn(request *CreateVpnRequest) (*CreateVpnResponse, error
 // RETURNS:
 //   - CreateVpnTunnelResponse: The return type of the CreateVpnTunnel interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateVpnTunnel(request *CreateVpnTunnelRequest) (*CreateVpnTunnelResponse, error){
-    result := &CreateVpnTunnelResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.POST).
-        WithURL(getCreateVpnTunnelUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) CreateVpnTunnel(request *CreateVpnTunnelRequest) (*CreateVpnTunnelResponse, error) {
+	result := &CreateVpnTunnelResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateVpnTunnelUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // DeleteIpReserve
 //
@@ -227,16 +214,15 @@ func (c *Client) CreateVpnTunnel(request *CreateVpnTunnelRequest) (*CreateVpnTun
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) DeleteIpReserve(request *DeleteIpReserveRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.DELETE).
-        WithURL(getDeleteIpReserveUri(VERSION_V1, util.StringValue(request.IpReserveId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteIpReserve(request *DeleteIpReserveRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteIpReserveUri(VERSION_V1, util.StringValue(request.IpReserveId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
 }
-
 
 // DeleteSslVpnServer
 //
@@ -245,16 +231,15 @@ func (c *Client) DeleteIpReserve(request *DeleteIpReserveRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) DeleteSslVpnServer(request *DeleteSslVpnServerRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.DELETE).
-        WithURL(getDeleteSslVpnServerUri(VERSION_V1, util.StringValue(request.VpnId), util.StringValue(request.SslVpnServerId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteSslVpnServer(request *DeleteSslVpnServerRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteSslVpnServerUri(VERSION_V1, util.StringValue(request.VpnId), util.StringValue(request.SslVpnServerId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
 }
-
 
 // DeleteSslVpnUser
 //
@@ -263,16 +248,15 @@ func (c *Client) DeleteSslVpnServer(request *DeleteSslVpnServerRequest) ( error)
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) DeleteSslVpnUser(request *DeleteSslVpnUserRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.DELETE).
-        WithURL(getDeleteSslVpnUserUri(VERSION_V1, util.StringValue(request.VpnId), util.StringValue(request.UserId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteSslVpnUser(request *DeleteSslVpnUserRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteSslVpnUserUri(VERSION_V1, util.StringValue(request.VpnId), util.StringValue(request.UserId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
 }
-
 
 // DeleteSubnet
 //
@@ -281,16 +265,15 @@ func (c *Client) DeleteSslVpnUser(request *DeleteSslVpnUserRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) DeleteSubnet(request *DeleteSubnetRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.DELETE).
-        WithURL(getDeleteSubnetUri(VERSION_V1, util.StringValue(request.SubnetId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteSubnet(request *DeleteSubnetRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteSubnetUri(VERSION_V1, util.StringValue(request.SubnetId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
 }
-
 
 // DeleteUserGateway
 //
@@ -299,15 +282,14 @@ func (c *Client) DeleteSubnet(request *DeleteSubnetRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) DeleteUserGateway(request *DeleteUserGatewayRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.DELETE).
-        WithURL(getDeleteUserGatewayUri(VERSION_V1, util.StringValue(request.CgwId))).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteUserGateway(request *DeleteUserGatewayRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteUserGatewayUri(VERSION_V1, util.StringValue(request.CgwId))).
+		Do()
+	return err
 }
-
 
 // DeleteVpc
 //
@@ -316,16 +298,15 @@ func (c *Client) DeleteUserGateway(request *DeleteUserGatewayRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) DeleteVpc(request *DeleteVpcRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.DELETE).
-        WithURL(getDeleteVpcUri(VERSION_V1, util.StringValue(request.VpcId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteVpc(request *DeleteVpcRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteVpcUri(VERSION_V1, util.StringValue(request.VpcId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
 }
-
 
 // DeleteVpnTunnel
 //
@@ -334,16 +315,15 @@ func (c *Client) DeleteVpc(request *DeleteVpcRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) DeleteVpnTunnel(request *DeleteVpnTunnelRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.DELETE).
-        WithURL(getDeleteVpnTunnelUri(VERSION_V1, util.StringValue(request.VpnConnId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteVpnTunnel(request *DeleteVpnTunnelRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteVpnTunnelUri(VERSION_V1, util.StringValue(request.VpnConnId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
 }
-
 
 // GetVpcResourceIpInfo
 //
@@ -353,21 +333,20 @@ func (c *Client) DeleteVpnTunnel(request *DeleteVpnTunnelRequest) ( error){
 // RETURNS:
 //   - GetVpcResourceIpInfoResponse: The return type of the GetVpcResourceIpInfo interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) GetVpcResourceIpInfo(request *GetVpcResourceIpInfoRequest) (*GetVpcResourceIpInfoResponse, error){
-    result := &GetVpcResourceIpInfoResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getGetVpcResourceIpInfoUri(VERSION_V1)).
-        WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
-        WithQueryParamFilter("subnetId", util.StringValue(request.SubnetId)).
-        WithQueryParamFilter("resourceType", util.StringValue(request.ResourceType)).
-        WithQueryParamFilter("pageNo", util.Int32Value(request.PageNo)).
-        WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) GetVpcResourceIpInfo(request *GetVpcResourceIpInfoRequest) (*GetVpcResourceIpInfoResponse, error) {
+	result := &GetVpcResourceIpInfoResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetVpcResourceIpInfoUri(VERSION_V1)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("subnetId", util.StringValue(request.SubnetId)).
+		WithQueryParamFilter("resourceType", util.StringValue(request.ResourceType)).
+		WithQueryParamFilter("pageNo", util.Int32Value(request.PageNo)).
+		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // ListIpReserve
 //
@@ -377,19 +356,18 @@ func (c *Client) GetVpcResourceIpInfo(request *GetVpcResourceIpInfoRequest) (*Ge
 // RETURNS:
 //   - ListIpReserveResponse: The return type of the ListIpReserve interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) ListIpReserve(request *ListIpReserveRequest) (*ListIpReserveResponse, error){
-    result := &ListIpReserveResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getListIpReserveUri(VERSION_V1)).
-        WithQueryParamFilter("subnetId", util.StringValue(request.SubnetId)).
-        WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-        WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) ListIpReserve(request *ListIpReserveRequest) (*ListIpReserveResponse, error) {
+	result := &ListIpReserveResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListIpReserveUri(VERSION_V1)).
+		WithQueryParamFilter("subnetId", util.StringValue(request.SubnetId)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // OpenVpcRelay
 //
@@ -398,16 +376,15 @@ func (c *Client) ListIpReserve(request *ListIpReserveRequest) (*ListIpReserveRes
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) OpenVpcRelay(request *OpenVpcRelayRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getOpenVpcRelayUri(VERSION_V1, util.StringValue(request.VpcId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) OpenVpcRelay(request *OpenVpcRelayRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getOpenVpcRelayUri(VERSION_V1, util.StringValue(request.VpcId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
 }
-
 
 // QuerySpecifiedSubnet
 //
@@ -417,16 +394,15 @@ func (c *Client) OpenVpcRelay(request *OpenVpcRelayRequest) ( error){
 // RETURNS:
 //   - QuerySpecifiedSubnetResponse: The return type of the QuerySpecifiedSubnet interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) QuerySpecifiedSubnet(request *QuerySpecifiedSubnetRequest) (*QuerySpecifiedSubnetResponse, error){
-    result := &QuerySpecifiedSubnetResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getQuerySpecifiedSubnetUri(VERSION_V1, util.StringValue(request.SubnetId))).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) QuerySpecifiedSubnet(request *QuerySpecifiedSubnetRequest) (*QuerySpecifiedSubnetResponse, error) {
+	result := &QuerySpecifiedSubnetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQuerySpecifiedSubnetUri(VERSION_V1, util.StringValue(request.SubnetId))).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // QuerySpecifiedVpc
 //
@@ -436,16 +412,15 @@ func (c *Client) QuerySpecifiedSubnet(request *QuerySpecifiedSubnetRequest) (*Qu
 // RETURNS:
 //   - QuerySpecifiedVpcResponse: The return type of the QuerySpecifiedVpc interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) QuerySpecifiedVpc(request *QuerySpecifiedVpcRequest) (*QuerySpecifiedVpcResponse, error){
-    result := &QuerySpecifiedVpcResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getQuerySpecifiedVpcUri(VERSION_V1, util.StringValue(request.VpcId))).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) QuerySpecifiedVpc(request *QuerySpecifiedVpcRequest) (*QuerySpecifiedVpcResponse, error) {
+	result := &QuerySpecifiedVpcResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQuerySpecifiedVpcUri(VERSION_V1, util.StringValue(request.VpcId))).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // QuerySslVpnServer
 //
@@ -455,17 +430,16 @@ func (c *Client) QuerySpecifiedVpc(request *QuerySpecifiedVpcRequest) (*QuerySpe
 // RETURNS:
 //   - QuerySslVpnServerResponse: The return type of the QuerySslVpnServer interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) QuerySslVpnServer(request *QuerySslVpnServerRequest) (*QuerySslVpnServerResponse, error){
-    result := &QuerySslVpnServerResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getQuerySslVpnServerUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) QuerySslVpnServer(request *QuerySslVpnServerRequest) (*QuerySslVpnServerResponse, error) {
+	result := &QuerySslVpnServerResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQuerySslVpnServerUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // QuerySslVpnUsers
 //
@@ -475,19 +449,18 @@ func (c *Client) QuerySslVpnServer(request *QuerySslVpnServerRequest) (*QuerySsl
 // RETURNS:
 //   - QuerySslVpnUsersResponse: The return type of the QuerySslVpnUsers interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) QuerySslVpnUsers(request *QuerySslVpnUsersRequest) (*QuerySslVpnUsersResponse, error){
-    result := &QuerySslVpnUsersResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getQuerySslVpnUsersUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-        WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-        WithQueryParamFilter("userName", util.StringValue(request.UserName)).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) QuerySslVpnUsers(request *QuerySslVpnUsersRequest) (*QuerySslVpnUsersResponse, error) {
+	result := &QuerySslVpnUsersResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQuerySslVpnUsersUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("userName", util.StringValue(request.UserName)).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // QuerySubnetList
 //
@@ -497,22 +470,21 @@ func (c *Client) QuerySslVpnUsers(request *QuerySslVpnUsersRequest) (*QuerySslVp
 // RETURNS:
 //   - QuerySubnetListResponse: The return type of the QuerySubnetList interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) QuerySubnetList(request *QuerySubnetListRequest) (*QuerySubnetListResponse, error){
-    result := &QuerySubnetListResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getQuerySubnetListUri(VERSION_V1)).
-        WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-        WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-        WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
-        WithQueryParamFilter("zoneName", util.StringValue(request.ZoneName)).
-        WithQueryParamFilter("subnetType", util.StringValue(request.SubnetType)).
-        WithQueryParamFilter("subnetIds", util.StringValue(request.SubnetIds)).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) QuerySubnetList(request *QuerySubnetListRequest) (*QuerySubnetListResponse, error) {
+	result := &QuerySubnetListResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQuerySubnetListUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("zoneName", util.StringValue(request.ZoneName)).
+		WithQueryParamFilter("subnetType", util.StringValue(request.SubnetType)).
+		WithQueryParamFilter("subnetIds", util.StringValue(request.SubnetIds)).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // QueryVpcIntranetIp
 //
@@ -522,18 +494,17 @@ func (c *Client) QuerySubnetList(request *QuerySubnetListRequest) (*QuerySubnetL
 // RETURNS:
 //   - QueryVpcIntranetIpResponse: The return type of the QueryVpcIntranetIp interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) QueryVpcIntranetIp(request *QueryVpcIntranetIpRequest) (*QueryVpcIntranetIpResponse, error){
-    result := &QueryVpcIntranetIpResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getQueryVpcIntranetIpUri(VERSION_V1, util.StringValue(request.VpcId))).
-        WithQueryParamFilter("privateIpAddresses", strings.Join(util.PtrSliceToStringSlice(request.PrivateIpAddresses), ",")).
-        WithQueryParamFilter("privateIpRange", util.StringValue(request.PrivateIpRange)).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) QueryVpcIntranetIp(request *QueryVpcIntranetIpRequest) (*QueryVpcIntranetIpResponse, error) {
+	result := &QueryVpcIntranetIpResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryVpcIntranetIpUri(VERSION_V1, util.StringValue(request.VpcId))).
+		WithQueryParamFilter("privateIpAddresses", strings.Join(util.PtrSliceToStringSlice(request.PrivateIpAddresses), ",")).
+		WithQueryParamFilter("privateIpRange", util.StringValue(request.PrivateIpRange)).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // QueryVpcList
 //
@@ -543,20 +514,19 @@ func (c *Client) QueryVpcIntranetIp(request *QueryVpcIntranetIpRequest) (*QueryV
 // RETURNS:
 //   - QueryVpcListResponse: The return type of the QueryVpcList interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) QueryVpcList(request *QueryVpcListRequest) (*QueryVpcListResponse, error){
-    result := &QueryVpcListResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getQueryVpcListUri(VERSION_V1)).
-        WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-        WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-        WithQueryParamFilter("isDefault", util.BoolValue(request.IsDefault)).
-        WithQueryParamFilter("vpcIds", util.StringValue(request.VpcIds)).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) QueryVpcList(request *QueryVpcListRequest) (*QueryVpcListResponse, error) {
+	result := &QueryVpcListResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryVpcListUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("isDefault", util.BoolValue(request.IsDefault)).
+		WithQueryParamFilter("vpcIds", util.StringValue(request.VpcIds)).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // QueryVpnList
 //
@@ -566,21 +536,20 @@ func (c *Client) QueryVpcList(request *QueryVpcListRequest) (*QueryVpcListRespon
 // RETURNS:
 //   - QueryVpnListResponse: The return type of the QueryVpnList interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) QueryVpnList(request *QueryVpnListRequest) (*QueryVpnListResponse, error){
-    result := &QueryVpnListResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getQueryVpnListUri(VERSION_V1)).
-        WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-        WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-        WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
-        WithQueryParamFilter("eip", util.StringValue(request.Eip)).
-        WithQueryParamFilter("type", util.StringValue(request.Type)).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) QueryVpnList(request *QueryVpnListRequest) (*QueryVpnListResponse, error) {
+	result := &QueryVpnListResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryVpnListUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("eip", util.StringValue(request.Eip)).
+		WithQueryParamFilter("type", util.StringValue(request.Type)).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // ReleaseVpn
 //
@@ -589,16 +558,15 @@ func (c *Client) QueryVpnList(request *QueryVpnListRequest) (*QueryVpnListRespon
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) ReleaseVpn(request *ReleaseVpnRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.DELETE).
-        WithURL(getReleaseVpnUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) ReleaseVpn(request *ReleaseVpnRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getReleaseVpnUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
 }
-
 
 // RenewVpn
 //
@@ -607,18 +575,17 @@ func (c *Client) ReleaseVpn(request *ReleaseVpnRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) RenewVpn(request *RenewVpnRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getRenewVpnUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithQueryParam("purchaseReserved", "").
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) RenewVpn(request *RenewVpnRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getRenewVpnUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithQueryParam("purchaseReserved", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
 }
-
 
 // SearchForVpnDetails
 //
@@ -628,16 +595,15 @@ func (c *Client) RenewVpn(request *RenewVpnRequest) ( error){
 // RETURNS:
 //   - SearchForVpnDetailsResponse: The return type of the SearchForVpnDetails interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) SearchForVpnDetails(request *SearchForVpnDetailsRequest) (*SearchForVpnDetailsResponse, error){
-    result := &SearchForVpnDetailsResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getSearchForVpnDetailsUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) SearchForVpnDetails(request *SearchForVpnDetailsRequest) (*SearchForVpnDetailsResponse, error) {
+	result := &SearchForVpnDetailsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getSearchForVpnDetailsUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // SearchVpnTunnel
 //
@@ -647,17 +613,16 @@ func (c *Client) SearchForVpnDetails(request *SearchForVpnDetailsRequest) (*Sear
 // RETURNS:
 //   - SearchVpnTunnelResponse: The return type of the SearchVpnTunnel interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) SearchVpnTunnel(request *SearchVpnTunnelRequest) (*SearchVpnTunnelResponse, error){
-    result := &SearchVpnTunnelResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getSearchVpnTunnelUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) SearchVpnTunnel(request *SearchVpnTunnelRequest) (*SearchVpnTunnelResponse, error) {
+	result := &SearchVpnTunnelResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getSearchVpnTunnelUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // UnbindEip
 //
@@ -666,17 +631,16 @@ func (c *Client) SearchVpnTunnel(request *SearchVpnTunnelRequest) (*SearchVpnTun
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) UnbindEip(request *UnbindEipRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getUnbindEipUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithQueryParam("unbind", "").
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindEip(request *UnbindEipRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindEipUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithQueryParam("unbind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
 }
-
 
 // UpdateSslVpnServer
 //
@@ -685,17 +649,16 @@ func (c *Client) UnbindEip(request *UnbindEipRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) UpdateSslVpnServer(request *UpdateSslVpnServerRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getUpdateSslVpnServerUri(VERSION_V1, util.StringValue(request.VpnId), util.StringValue(request.SslVpnServerId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateSslVpnServer(request *UpdateSslVpnServerRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateSslVpnServerUri(VERSION_V1, util.StringValue(request.VpnId), util.StringValue(request.SslVpnServerId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
 }
-
 
 // UpdateSslVpnUsers
 //
@@ -704,17 +667,16 @@ func (c *Client) UpdateSslVpnServer(request *UpdateSslVpnServerRequest) ( error)
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) UpdateSslVpnUsers(request *UpdateSslVpnUsersRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getUpdateSslVpnUsersUri(VERSION_V1, util.StringValue(request.VpnId), util.StringValue(request.UserId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateSslVpnUsers(request *UpdateSslVpnUsersRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateSslVpnUsersUri(VERSION_V1, util.StringValue(request.VpnId), util.StringValue(request.UserId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
 }
-
 
 // UpdateSubnet
 //
@@ -723,18 +685,17 @@ func (c *Client) UpdateSslVpnUsers(request *UpdateSslVpnUsersRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) UpdateSubnet(request *UpdateSubnetRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getUpdateSubnetUri(VERSION_V1, util.StringValue(request.SubnetId))).
-        WithQueryParam("modifyAttribute", "").
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateSubnet(request *UpdateSubnetRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateSubnetUri(VERSION_V1, util.StringValue(request.SubnetId))).
+		WithQueryParam("modifyAttribute", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
 }
-
 
 // UpdateUserGateway
 //
@@ -743,17 +704,16 @@ func (c *Client) UpdateSubnet(request *UpdateSubnetRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) UpdateUserGateway(request *UpdateUserGatewayRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getUpdateUserGatewayUri(VERSION_V1, util.StringValue(request.CgwId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateUserGateway(request *UpdateUserGatewayRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateUserGatewayUri(VERSION_V1, util.StringValue(request.CgwId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
 }
-
 
 // UpdateVpc
 //
@@ -762,18 +722,17 @@ func (c *Client) UpdateUserGateway(request *UpdateUserGatewayRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) UpdateVpc(request *UpdateVpcRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getUpdateVpcUri(VERSION_V1, util.StringValue(request.VpcId))).
-        WithQueryParam("modifyAttribute", "").
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateVpc(request *UpdateVpcRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateVpcUri(VERSION_V1, util.StringValue(request.VpcId))).
+		WithQueryParam("modifyAttribute", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
 }
-
 
 // UpdateVpn
 //
@@ -782,18 +741,17 @@ func (c *Client) UpdateVpc(request *UpdateVpcRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) UpdateVpn(request *UpdateVpnRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getUpdateVpnUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithQueryParam("modifyAttribute", "").
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateVpn(request *UpdateVpnRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateVpnUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithQueryParam("modifyAttribute", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
 }
-
 
 // UpdateVpnReleaseProtection
 //
@@ -802,17 +760,16 @@ func (c *Client) UpdateVpn(request *UpdateVpnRequest) ( error){
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) UpdateVpnReleaseProtection(request *UpdateVpnReleaseProtectionRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getUpdateVpnReleaseProtectionUri(VERSION_V1, util.StringValue(request.VpnId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateVpnReleaseProtection(request *UpdateVpnReleaseProtectionRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateVpnReleaseProtectionUri(VERSION_V1, util.StringValue(request.VpnId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
 }
-
 
 // UpdateVpnTunnel
 //
@@ -821,17 +778,16 @@ func (c *Client) UpdateVpnReleaseProtection(request *UpdateVpnReleaseProtectionR
 //
 // RETURNS:
 
-//   - error: nil if success otherwise the specific error
-func (c *Client) UpdateVpnTunnel(request *UpdateVpnTunnelRequest) ( error){
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.PUT).
-        WithURL(getUpdateVpnTunnelUri(VERSION_V1, util.StringValue(request.VpnConnId))).
-        WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-        WithBody(request).
-        Do()
-    return err
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateVpnTunnel(request *UpdateVpnTunnelRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateVpnTunnelUri(VERSION_V1, util.StringValue(request.VpnConnId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
 }
-
 
 // UserGatewayDetails
 //
@@ -841,16 +797,15 @@ func (c *Client) UpdateVpnTunnel(request *UpdateVpnTunnelRequest) ( error){
 // RETURNS:
 //   - UserGatewayDetailsResponse: The return type of the UserGatewayDetails interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) UserGatewayDetails(request *UserGatewayDetailsRequest) (*UserGatewayDetailsResponse, error){
-    result := &UserGatewayDetailsResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getUserGatewayDetailsUri(VERSION_V1, util.StringValue(request.CgwId))).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) UserGatewayDetails(request *UserGatewayDetailsRequest) (*UserGatewayDetailsResponse, error) {
+	result := &UserGatewayDetailsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getUserGatewayDetailsUri(VERSION_V1, util.StringValue(request.CgwId))).
+		WithResult(result).
+		Do()
+	return result, err
 }
-
 
 // UserGatewayList
 //
@@ -860,14 +815,14 @@ func (c *Client) UserGatewayDetails(request *UserGatewayDetailsRequest) (*UserGa
 // RETURNS:
 //   - UserGatewayListResponse: The return type of the UserGatewayList interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) UserGatewayList(request *UserGatewayListRequest) (*UserGatewayListResponse, error){
-    result := &UserGatewayListResponse{}
-    err := bce.NewRequestBuilder(c).
-        WithMethod(http.GET).
-        WithURL(getUserGatewayListUri(VERSION_V1)).
-        WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-        WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-        WithResult(result).
-        Do()
-    return result, err
+func (c *Client) UserGatewayList(request *UserGatewayListRequest) (*UserGatewayListResponse, error) {
+	result := &UserGatewayListResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getUserGatewayListUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	return result, err
 }
