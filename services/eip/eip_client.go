@@ -1,12 +1,10 @@
 package eip
 
 import (
-	"fmt"
-	"strings"
-
 	"github.com/baidubce/baiducloud-go-sdk/bce"
 	"github.com/baidubce/baiducloud-go-sdk/core/http"
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
+	"strings"
 )
 
 const (
@@ -22,9 +20,6 @@ const (
 
 // - error: nil if success otherwise the specific error
 func (c *Client) AddTbspAreaBlocking(request *AddTbspAreaBlockingRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getAddTbspAreaBlockingUri(VERSION_V1, util.StringValue(request.Id))).
@@ -43,9 +38,6 @@ func (c *Client) AddTbspAreaBlocking(request *AddTbspAreaBlockingRequest) error 
 
 // - error: nil if success otherwise the specific error
 func (c *Client) AddTbspIpWhitelist(request *AddTbspIpWhitelistRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getAddTbspIpWhitelistUri(VERSION_V1, util.StringValue(request.Id))).
@@ -64,9 +56,6 @@ func (c *Client) AddTbspIpWhitelist(request *AddTbspIpWhitelistRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) AddTbspProtocolBlocking(request *AddTbspProtocolBlockingRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getAddTbspProtocolBlockingUri(VERSION_V1, util.StringValue(request.Id))).
@@ -85,12 +74,6 @@ func (c *Client) AddTbspProtocolBlocking(request *AddTbspProtocolBlockingRequest
 //   - ApplyForEipResponse: The return type of the ApplyForEip interface.
 //   - error: nil if success otherwise the specific error
 func (c *Client) ApplyForEip(request *ApplyForEipRequest) (*ApplyForEipResponse, error) {
-	if request.BandwidthInMbps == nil {
-		return nil, fmt.Errorf("BandwidthInMbps is required and must be specified")
-	}
-	if request.Billing == nil {
-		return nil, fmt.Errorf("Billing is required and must be specified")
-	}
 	result := &ApplyForEipResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
@@ -111,9 +94,6 @@ func (c *Client) ApplyForEip(request *ApplyForEipRequest) (*ApplyForEipResponse,
 //   - BandwidthPackageInquiryResponse: The return type of the BandwidthPackageInquiry interface.
 //   - error: nil if success otherwise the specific error
 func (c *Client) BandwidthPackageInquiry(request *BandwidthPackageInquiryRequest) (*BandwidthPackageInquiryResponse, error) {
-	if request.BandwidthInMbps == nil {
-		return nil, fmt.Errorf("BandwidthInMbps is required and must be specified")
-	}
 	result := &BandwidthPackageInquiryResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
@@ -133,15 +113,6 @@ func (c *Client) BandwidthPackageInquiry(request *BandwidthPackageInquiryRequest
 
 // - error: nil if success otherwise the specific error
 func (c *Client) BindEip(request *BindEipRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
-	if request.InstanceType == nil {
-		return fmt.Errorf("InstanceType is required and must be specified")
-	}
-	if request.InstanceId == nil {
-		return fmt.Errorf("InstanceId is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getBindEipUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -161,12 +132,6 @@ func (c *Client) BindEip(request *BindEipRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) BindTbspProtectionObject(request *BindTbspProtectionObjectRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
-	if len(request.IpList) == 0 {
-		return fmt.Errorf("IpList is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getBindTbspProtectionObjectUri(VERSION_V1, util.StringValue(request.Id))).
@@ -186,9 +151,6 @@ func (c *Client) BindTbspProtectionObject(request *BindTbspProtectionObjectReque
 
 // - error: nil if success otherwise the specific error
 func (c *Client) CancelEipTransfer(request *CancelEipTransferRequest) error {
-	if len(request.TransferIdList) == 0 {
-		return fmt.Errorf("TransferIdList is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getCancelEipTransferUri(VERSION_V1)).
@@ -208,15 +170,6 @@ func (c *Client) CancelEipTransfer(request *CancelEipTransferRequest) error {
 //   - CreateEipTransferResponse: The return type of the CreateEipTransfer interface.
 //   - error: nil if success otherwise the specific error
 func (c *Client) CreateEipTransfer(request *CreateEipTransferRequest) (*CreateEipTransferResponse, error) {
-	if request.TransferType == nil {
-		return nil, fmt.Errorf("TransferType is required and must be specified")
-	}
-	if len(request.TransferResourceList) == 0 {
-		return nil, fmt.Errorf("TransferResourceList is required and must be specified")
-	}
-	if request.ToUserId == nil {
-		return nil, fmt.Errorf("ToUserId is required and must be specified")
-	}
 	result := &CreateEipTransferResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
@@ -237,21 +190,6 @@ func (c *Client) CreateEipTransfer(request *CreateEipTransferRequest) (*CreateEi
 //   - CreateTbspResponse: The return type of the CreateTbsp interface.
 //   - error: nil if success otherwise the specific error
 func (c *Client) CreateTbsp(request *CreateTbspRequest) (*CreateTbspResponse, error) {
-	if request.Name == nil {
-		return nil, fmt.Errorf("Name is required and must be specified")
-	}
-	if request.LineType == nil {
-		return nil, fmt.Errorf("LineType is required and must be specified")
-	}
-	if request.IpCapacity == nil {
-		return nil, fmt.Errorf("IpCapacity is required and must be specified")
-	}
-	if request.ReservationLength == nil {
-		return nil, fmt.Errorf("ReservationLength is required and must be specified")
-	}
-	if request.ReservationTimeUnit == nil {
-		return nil, fmt.Errorf("ReservationTimeUnit is required and must be specified")
-	}
 	result := &CreateTbspResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
@@ -272,9 +210,6 @@ func (c *Client) CreateTbsp(request *CreateTbspRequest) (*CreateTbspResponse, er
 //   - DetailTbspResponse: The return type of the DetailTbsp interface.
 //   - error: nil if success otherwise the specific error
 func (c *Client) DetailTbsp(request *DetailTbspRequest) (*DetailTbspResponse, error) {
-	if request.Id == nil {
-		return nil, fmt.Errorf("id is required and must be specified")
-	}
 	result := &DetailTbspResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
@@ -293,9 +228,6 @@ func (c *Client) DetailTbsp(request *DetailTbspRequest) (*DetailTbspResponse, er
 
 // - error: nil if success otherwise the specific error
 func (c *Client) DirectEip(request *DirectEipRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getDirectEipUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -314,9 +246,6 @@ func (c *Client) DirectEip(request *DirectEipRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) DisableTbspIpClean(request *DisableTbspIpCleanRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getDisableTbspIpCleanUri(VERSION_V1, util.StringValue(request.Id))).
@@ -336,12 +265,6 @@ func (c *Client) DisableTbspIpClean(request *DisableTbspIpCleanRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) EipBandwidthScalingCapacity(request *EipBandwidthScalingCapacityRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
-	if request.NewBandwidthInMbps == nil {
-		return fmt.Errorf("NewBandwidthInMbps is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getEipBandwidthScalingCapacityUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -361,12 +284,6 @@ func (c *Client) EipBandwidthScalingCapacity(request *EipBandwidthScalingCapacit
 //   - EipInquiryResponse: The return type of the EipInquiry interface.
 //   - error: nil if success otherwise the specific error
 func (c *Client) EipInquiry(request *EipInquiryRequest) (*EipInquiryResponse, error) {
-	if request.BandwidthInMbps == nil {
-		return nil, fmt.Errorf("BandwidthInMbps is required and must be specified")
-	}
-	if request.Billing == nil {
-		return nil, fmt.Errorf("Billing is required and must be specified")
-	}
 	result := &EipInquiryResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
@@ -386,15 +303,6 @@ func (c *Client) EipInquiry(request *EipInquiryRequest) (*EipInquiryResponse, er
 
 // - error: nil if success otherwise the specific error
 func (c *Client) EipPostpaidToPrepaid(request *EipPostpaidToPrepaidRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
-	if request.PurchaseLength == nil {
-		return fmt.Errorf("PurchaseLength is required and must be specified")
-	}
-	if request.BandWidth == nil {
-		return fmt.Errorf("BandWidth is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getEipPostpaidToPrepaidUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -414,12 +322,6 @@ func (c *Client) EipPostpaidToPrepaid(request *EipPostpaidToPrepaidRequest) erro
 
 // - error: nil if success otherwise the specific error
 func (c *Client) EipRenewal(request *EipRenewalRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
-	if request.Billing == nil {
-		return fmt.Errorf("Billing is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getEipRenewalUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -439,9 +341,6 @@ func (c *Client) EipRenewal(request *EipRenewalRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) EnableTbspIpClean(request *EnableTbspIpCleanRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getEnableTbspIpCleanUri(VERSION_V1, util.StringValue(request.Id))).
@@ -533,9 +432,6 @@ func (c *Client) ListTbsp(request *ListTbspRequest) (*ListTbspResponse, error) {
 //   - ListTbspAreaBlockingResponse: The return type of the ListTbspAreaBlocking interface.
 //   - error: nil if success otherwise the specific error
 func (c *Client) ListTbspAreaBlocking(request *ListTbspAreaBlockingRequest) (*ListTbspAreaBlockingResponse, error) {
-	if request.Id == nil {
-		return nil, fmt.Errorf("id is required and must be specified")
-	}
 	result := &ListTbspAreaBlockingResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
@@ -555,9 +451,6 @@ func (c *Client) ListTbspAreaBlocking(request *ListTbspAreaBlockingRequest) (*Li
 //   - ListTbspIpCleanResponse: The return type of the ListTbspIpClean interface.
 //   - error: nil if success otherwise the specific error
 func (c *Client) ListTbspIpClean(request *ListTbspIpCleanRequest) (*ListTbspIpCleanResponse, error) {
-	if request.Id == nil {
-		return nil, fmt.Errorf("id is required and must be specified")
-	}
 	result := &ListTbspIpCleanResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
@@ -579,9 +472,6 @@ func (c *Client) ListTbspIpClean(request *ListTbspIpCleanRequest) (*ListTbspIpCl
 //   - ListTbspIpWhitelistResponse: The return type of the ListTbspIpWhitelist interface.
 //   - error: nil if success otherwise the specific error
 func (c *Client) ListTbspIpWhitelist(request *ListTbspIpWhitelistRequest) (*ListTbspIpWhitelistResponse, error) {
-	if request.Id == nil {
-		return nil, fmt.Errorf("id is required and must be specified")
-	}
 	result := &ListTbspIpWhitelistResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
@@ -604,9 +494,6 @@ func (c *Client) ListTbspIpWhitelist(request *ListTbspIpWhitelistRequest) (*List
 //   - ListTbspProtocolBlockingResponse: The return type of the ListTbspProtocolBlocking interface.
 //   - error: nil if success otherwise the specific error
 func (c *Client) ListTbspProtocolBlocking(request *ListTbspProtocolBlockingRequest) (*ListTbspProtocolBlockingResponse, error) {
-	if request.Id == nil {
-		return nil, fmt.Errorf("id is required and must be specified")
-	}
 	result := &ListTbspProtocolBlockingResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
@@ -626,9 +513,6 @@ func (c *Client) ListTbspProtocolBlocking(request *ListTbspProtocolBlockingReque
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ModifyTbspIpCleanThreshold(request *ModifyTbspIpCleanThresholdRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getModifyTbspIpCleanThresholdUri(VERSION_V1, util.StringValue(request.Id))).
@@ -648,9 +532,6 @@ func (c *Client) ModifyTbspIpCleanThreshold(request *ModifyTbspIpCleanThresholdR
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ModifyTbspIpProtectLevel(request *ModifyTbspIpProtectLevelRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getModifyTbspIpProtectLevelUri(VERSION_V1, util.StringValue(request.Id))).
@@ -669,9 +550,6 @@ func (c *Client) ModifyTbspIpProtectLevel(request *ModifyTbspIpProtectLevelReque
 
 // - error: nil if success otherwise the specific error
 func (c *Client) OptionalReleaseEip(request *OptionalReleaseEipRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getOptionalReleaseEipUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -717,9 +595,6 @@ func (c *Client) QueryEipList(request *QueryEipListRequest) (*QueryEipListRespon
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ReceiveEipTransfer(request *ReceiveEipTransferRequest) error {
-	if len(request.TransferIdList) == 0 {
-		return fmt.Errorf("TransferIdList is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getReceiveEipTransferUri(VERSION_V1)).
@@ -739,9 +614,6 @@ func (c *Client) ReceiveEipTransfer(request *ReceiveEipTransferRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RefundEip(request *RefundEipRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getRefundEipUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -759,9 +631,6 @@ func (c *Client) RefundEip(request *RefundEipRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RejectEipTransfer(request *RejectEipTransferRequest) error {
-	if len(request.TransferIdList) == 0 {
-		return fmt.Errorf("TransferIdList is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getRejectEipTransferUri(VERSION_V1)).
@@ -781,9 +650,6 @@ func (c *Client) RejectEipTransfer(request *RejectEipTransferRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ReleaseEip(request *ReleaseEipRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getReleaseEipUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -802,9 +668,6 @@ func (c *Client) ReleaseEip(request *ReleaseEipRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ReleaseEipFromRecycle(request *ReleaseEipFromRecycleRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getReleaseEipFromRecycleUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -822,9 +685,6 @@ func (c *Client) ReleaseEipFromRecycle(request *ReleaseEipFromRecycleRequest) er
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RemoveTbspAreaBlocking(request *RemoveTbspAreaBlockingRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getRemoveTbspAreaBlockingUri(VERSION_V1, util.StringValue(request.Id))).
@@ -844,9 +704,6 @@ func (c *Client) RemoveTbspAreaBlocking(request *RemoveTbspAreaBlockingRequest) 
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RemoveTbspIpWhitelist(request *RemoveTbspIpWhitelistRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getRemoveTbspIpWhitelistUri(VERSION_V1, util.StringValue(request.Id))).
@@ -866,9 +723,6 @@ func (c *Client) RemoveTbspIpWhitelist(request *RemoveTbspIpWhitelistRequest) er
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RemoveTbspProtocolBlocking(request *RemoveTbspProtocolBlockingRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getRemoveTbspProtocolBlockingUri(VERSION_V1, util.StringValue(request.Id))).
@@ -887,15 +741,6 @@ func (c *Client) RemoveTbspProtocolBlocking(request *RemoveTbspProtocolBlockingR
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RenewTbsp(request *RenewTbspRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
-	if request.RenewTime == nil {
-		return fmt.Errorf("RenewTime is required and must be specified")
-	}
-	if request.RenewTimeUnit == nil {
-		return fmt.Errorf("RenewTimeUnit is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getRenewTbspUri(VERSION_V1, util.StringValue(request.Id))).
@@ -915,12 +760,6 @@ func (c *Client) RenewTbsp(request *RenewTbspRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ResizeTbsp(request *ResizeTbspRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
-	if request.IpCapacity == nil {
-		return fmt.Errorf("IpCapacity is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getResizeTbspUri(VERSION_V1, util.StringValue(request.Id))).
@@ -940,9 +779,6 @@ func (c *Client) ResizeTbsp(request *ResizeTbspRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RestoreEipFromRecycle(request *RestoreEipFromRecycleRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getRestoreEipFromRecycleUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -961,15 +797,6 @@ func (c *Client) RestoreEipFromRecycle(request *RestoreEipFromRecycleRequest) er
 //   - SharedBandwidthInquiryResponse: The return type of the SharedBandwidthInquiry interface.
 //   - error: nil if success otherwise the specific error
 func (c *Client) SharedBandwidthInquiry(request *SharedBandwidthInquiryRequest) (*SharedBandwidthInquiryResponse, error) {
-	if request.BandwidthInMbps == nil {
-		return nil, fmt.Errorf("BandwidthInMbps is required and must be specified")
-	}
-	if request.IpNum == nil {
-		return nil, fmt.Errorf("IpNum is required and must be specified")
-	}
-	if request.Billing == nil {
-		return nil, fmt.Errorf("Billing is required and must be specified")
-	}
 	result := &SharedBandwidthInquiryResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
@@ -989,12 +816,6 @@ func (c *Client) SharedBandwidthInquiry(request *SharedBandwidthInquiryRequest) 
 //   - SharedDataPackageInquiryResponse: The return type of the SharedDataPackageInquiry interface.
 //   - error: nil if success otherwise the specific error
 func (c *Client) SharedDataPackageInquiry(request *SharedDataPackageInquiryRequest) (*SharedDataPackageInquiryResponse, error) {
-	if request.ReservationLength == nil {
-		return nil, fmt.Errorf("ReservationLength is required and must be specified")
-	}
-	if request.Capacity == nil {
-		return nil, fmt.Errorf("Capacity is required and must be specified")
-	}
 	result := &SharedDataPackageInquiryResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
@@ -1015,9 +836,6 @@ func (c *Client) SharedDataPackageInquiry(request *SharedDataPackageInquiryReque
 
 // - error: nil if success otherwise the specific error
 func (c *Client) StartEipAutoRenew(request *StartEipAutoRenewRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getStartEipAutoRenewUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -1037,9 +855,6 @@ func (c *Client) StartEipAutoRenew(request *StartEipAutoRenewRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) StopEipAutoRenew(request *StopEipAutoRenewRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getStopEipAutoRenewUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -1058,9 +873,6 @@ func (c *Client) StopEipAutoRenew(request *StopEipAutoRenewRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) UnDirectEip(request *UnDirectEipRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUnDirectEipUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -1079,9 +891,6 @@ func (c *Client) UnDirectEip(request *UnDirectEipRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) UnbindEip(request *UnbindEipRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUnbindEipUri(VERSION_V1, util.StringValue(request.Eip))).
@@ -1100,12 +909,6 @@ func (c *Client) UnbindEip(request *UnbindEipRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) UnbindTbspProtectionObject(request *UnbindTbspProtectionObjectRequest) error {
-	if request.Id == nil {
-		return fmt.Errorf("id is required and must be specified")
-	}
-	if len(request.IpList) == 0 {
-		return fmt.Errorf("IpList is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUnbindTbspProtectionObjectUri(VERSION_V1, util.StringValue(request.Id))).
@@ -1125,12 +928,6 @@ func (c *Client) UnbindTbspProtectionObject(request *UnbindTbspProtectionObjectR
 
 // - error: nil if success otherwise the specific error
 func (c *Client) UpdateEipDeleteProtect(request *UpdateEipDeleteProtectRequest) error {
-	if request.Eip == nil {
-		return fmt.Errorf("eip is required and must be specified")
-	}
-	if request.DeleteProtect == nil {
-		return fmt.Errorf("DeleteProtect is required and must be specified")
-	}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateEipDeleteProtectUri(VERSION_V1, util.StringValue(request.Eip))).
