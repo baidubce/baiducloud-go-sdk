@@ -1,7 +1,5 @@
-
-
 package vpc
 
 type DeleteUserGatewayRequest struct {
-    CgwId *string `json:"-"`
+	CgwId *string `json:"-"`
 }

@@ -1,3 +1,5 @@
+2026-03-20 Version: v0.0.9
+- 涉及产品:BLB 增加BLB SDK
 2026-03-16 Version: v0.0.8
 - 涉及产品:VPN 增加VPN SDK
 2026-03-02 Version: v0.0.7
