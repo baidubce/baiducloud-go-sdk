@@ -76,17 +76,15 @@ func (c *Client) BillingChangePreToPostBlb(request *BillingChangePreToPostBlbReq
 //   - request: the arguments to BlbInquiry
 //
 // RETURNS:
-//   - BlbInquiryResponse: The return type of the BlbInquiry interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) BlbInquiry(request *BlbInquiryRequest) (*BlbInquiryResponse, error) {
-	result := &BlbInquiryResponse{}
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BlbInquiry(request *BlbInquiryRequest) error {
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getBlbInquiryUri(VERSION_V1)).
 		WithBody(request).
-		WithResult(result).
 		Do()
-	return result, err
+	return err
 }
 
 // RefundBlb

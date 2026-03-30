@@ -21,6 +21,10 @@ const (
 
 	CONSTANT_CGW = "cgw"
 
+	CONSTANT_GATEWAY = "gateway"
+
+	CONSTANT_LIMITRULE = "limitrule"
+
 	CONSTANT_SSL_VPN_USER = "sslVpnUser"
 
 	CONSTANT_SUBNET = "subnet"
@@ -59,6 +63,9 @@ func getBindEipUri(version string, vpnId string) string {
 func getCloseVpcRelayUri(version string, vpcId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_SHUTDOWN_RELAY + bce.URI_PREFIX + vpcId
 }
+func getCreateGatewayLimitRulesUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE
+}
 func getCreateIpReservedUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_IPRESERVE
 }
@@ -79,6 +86,9 @@ func getCreateVpnUri(version string) string {
 }
 func getCreateVpnTunnelUri(version string, vpnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId + bce.URI_PREFIX + CONSTANT_VPNCONN
+}
+func getDeleteGatewayLimitRuleUri(version string, glrId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE + bce.URI_PREFIX + glrId
 }
 func getDeleteIpReserveUri(version string, ipReserveId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_IPRESERVE + bce.URI_PREFIX + ipReserveId
@@ -106,6 +116,9 @@ func getGetVpcResourceIpInfoUri(version string) string {
 }
 func getListIpReserveUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_IPRESERVE
+}
+func getModifyGatewayLimitRulesUri(version string, glrId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE + bce.URI_PREFIX + glrId
 }
 func getOpenVpcRelayUri(version string, vpcId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_OPEN_RELAY + bce.URI_PREFIX + vpcId
@@ -178,4 +191,7 @@ func getUserGatewayDetailsUri(version string, cgwId string) string {
 }
 func getUserGatewayListUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_CGW
+}
+func getViewGatewayLimitRulesUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE
 }

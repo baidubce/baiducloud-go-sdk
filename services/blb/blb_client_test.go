@@ -121,29 +121,19 @@ func TestClient_BillingChangePreToPostBlb(t *testing.T) {
 }
 func TestClient_BlbInquiry(t *testing.T) {
 	Billing := &Billing{
-		PaymentTiming: util.PtrString("Prepaid"),
+		PaymentTiming: util.PtrString(""),
+		BillingMethod: util.PtrString(""),
 		Reservation: &Reservation{
-			ReservationLength: util.PtrInt32(int32(1)),
+			ReservationLength: util.PtrInt32(int32(0)),
 		},
 	}
 	blbInquiryRequest := &BlbInquiryRequest{
-		BlbType:          util.PtrString("ipv6Application"),
-		PerformanceLevel: util.PtrString("small1"),
-		Count:            util.PtrInt32(int32(1)),
+		BlbType:          util.PtrString(""),
+		PerformanceLevel: util.PtrString(""),
+		Count:            util.PtrInt32(int32(0)),
 		Billing:          Billing,
 	}
-	result := &BlbInquiryResponse{}
-	result, err := BLB_CLIENT.BlbInquiry(blbInquiryRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
+	err := BLB_CLIENT.BlbInquiry(blbInquiryRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_RefundBlb(t *testing.T) {

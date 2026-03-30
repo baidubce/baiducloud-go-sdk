@@ -67,6 +67,26 @@ func (c *Client) CloseVpcRelay(request *CloseVpcRelayRequest) error {
 	return err
 }
 
+// CreateGatewayLimitRules
+//
+// PARAMS:
+//   - request: the arguments to CreateGatewayLimitRules
+//
+// RETURNS:
+//   - CreateGatewayLimitRulesResponse: The return type of the CreateGatewayLimitRules interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateGatewayLimitRules(request *CreateGatewayLimitRulesRequest) (*CreateGatewayLimitRulesResponse, error) {
+	result := &CreateGatewayLimitRulesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateGatewayLimitRulesUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	return result, err
+}
+
 // CreateIpReserved
 //
 // PARAMS:
@@ -205,6 +225,23 @@ func (c *Client) CreateVpnTunnel(request *CreateVpnTunnelRequest) (*CreateVpnTun
 		WithResult(result).
 		Do()
 	return result, err
+}
+
+// DeleteGatewayLimitRule
+//
+// PARAMS:
+//   - request: the arguments to DeleteGatewayLimitRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteGatewayLimitRule(request *DeleteGatewayLimitRuleRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteGatewayLimitRuleUri(VERSION_V1, util.StringValue(request.GlrId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+	return err
 }
 
 // DeleteIpReserve
@@ -367,6 +404,24 @@ func (c *Client) ListIpReserve(request *ListIpReserveRequest) (*ListIpReserveRes
 		WithResult(result).
 		Do()
 	return result, err
+}
+
+// ModifyGatewayLimitRules
+//
+// PARAMS:
+//   - request: the arguments to ModifyGatewayLimitRules
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ModifyGatewayLimitRules(request *ModifyGatewayLimitRulesRequest) error {
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getModifyGatewayLimitRulesUri(VERSION_V1, util.StringValue(request.GlrId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+	return err
 }
 
 // OpenVpcRelay
@@ -822,6 +877,30 @@ func (c *Client) UserGatewayList(request *UserGatewayListRequest) (*UserGatewayL
 		WithURL(getUserGatewayListUri(VERSION_V1)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	return result, err
+}
+
+// ViewGatewayLimitRules
+//
+// PARAMS:
+//   - request: the arguments to ViewGatewayLimitRules
+//
+// RETURNS:
+//   - ViewGatewayLimitRulesResponse: The return type of the ViewGatewayLimitRules interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ViewGatewayLimitRules(request *ViewGatewayLimitRulesRequest) (*ViewGatewayLimitRulesResponse, error) {
+	result := &ViewGatewayLimitRulesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getViewGatewayLimitRulesUri(VERSION_V1)).
+		WithQueryParamFilter("serviceType", util.StringValue(request.ServiceType)).
+		WithQueryParamFilter("name", util.StringValue(request.Name)).
+		WithQueryParamFilter("glrId", util.StringValue(request.GlrId)).
+		WithQueryParamFilter("resourceId", util.StringValue(request.ResourceId)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.StringValue(request.MaxKeys)).
 		WithResult(result).
 		Do()
 	return result, err
