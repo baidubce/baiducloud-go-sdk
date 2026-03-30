@@ -104,6 +104,34 @@ func TestClient_CloseVpcRelay(t *testing.T) {
 	err := VPC_CLIENT.CloseVpcRelay(closeVpcRelayRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateGatewayLimitRules(t *testing.T) {
+	createGatewayLimitRulesRequest := &CreateGatewayLimitRulesRequest{
+		ClientToken:    util.PtrString(""),
+		IpVersion:      util.PtrString(""),
+		Name:           util.PtrString(""),
+		Description:    util.PtrString(""),
+		ServiceType:    util.PtrString(""),
+		SubServiceType: util.PtrString(""),
+		PeerRegion:     util.PtrString(""),
+		ResourceId:     util.PtrString(""),
+		Direction:      util.PtrString(""),
+		Cidr:           util.PtrString(""),
+		Bandwidth:      util.PtrInt32(int32(0)),
+	}
+	result := &CreateGatewayLimitRulesResponse{}
+	result, err := VPC_CLIENT.CreateGatewayLimitRules(createGatewayLimitRulesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateIpReserved(t *testing.T) {
 	createIpReservedRequest := &CreateIpReservedRequest{
 		ClientToken: util.PtrString(""),
@@ -298,6 +326,14 @@ func TestClient_CreateVpnTunnel(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteGatewayLimitRule(t *testing.T) {
+	deleteGatewayLimitRuleRequest := &DeleteGatewayLimitRuleRequest{
+		GlrId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := VPC_CLIENT.DeleteGatewayLimitRule(deleteGatewayLimitRuleRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteIpReserve(t *testing.T) {
 	deleteIpReserveRequest := &DeleteIpReserveRequest{
 		IpReserveId: util.PtrString(""),
@@ -395,6 +431,17 @@ func TestClient_ListIpReserve(t *testing.T) {
 		return
 	}
 	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ModifyGatewayLimitRules(t *testing.T) {
+	modifyGatewayLimitRulesRequest := &ModifyGatewayLimitRulesRequest{
+		GlrId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
+		Bandwidth:   util.PtrInt32(int32(0)),
+	}
+	err := VPC_CLIENT.ModifyGatewayLimitRules(modifyGatewayLimitRulesRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_OpenVpcRelay(t *testing.T) {
@@ -769,6 +816,29 @@ func TestClient_UserGatewayList(t *testing.T) {
 	}
 	result := &UserGatewayListResponse{}
 	result, err := VPC_CLIENT.UserGatewayList(userGatewayListRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ViewGatewayLimitRules(t *testing.T) {
+	viewGatewayLimitRulesRequest := &ViewGatewayLimitRulesRequest{
+		ServiceType: util.PtrString(""),
+		Name:        util.PtrString(""),
+		GlrId:       util.PtrString(""),
+		ResourceId:  util.PtrString(""),
+		Marker:      util.PtrString(""),
+		MaxKeys:     util.PtrString(""),
+	}
+	result := &ViewGatewayLimitRulesResponse{}
+	result, err := VPC_CLIENT.ViewGatewayLimitRules(viewGatewayLimitRulesRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
