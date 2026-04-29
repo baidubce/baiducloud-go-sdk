@@ -1,3 +1,9 @@
+2026-04-29 Version: v0.0.12
+- 涉及产品: PRIVATEZONE，支持PrivateZone管理功能
+- 涉及产品: PRIVATEZONE，支持解析记录的增删改查操作
+- 涉及产品: PRIVATEZONE，支持VPC关联与解关联功能
+- 涉及产品: PRIVATEZONE，支持解析记录状态设置
+
 2026-04-02 Version: v0.0.11
 - 涉及产品: VPC，更新接口定义
 2026-03-30 Version: v0.0.10
