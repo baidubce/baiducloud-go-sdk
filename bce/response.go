@@ -21,6 +21,7 @@ import (
 	"encoding/json"
 	"io"
 	"io/ioutil"
+	"strconv"
 	"strings"
 	"time"
 
@@ -127,10 +128,45 @@ func (r *BceResponse) ParseJsonBody(result interface{}) error {
 	return jsonDecoder.Decode(result)
 }
 
+// BaseResponse defines the base response structure for BCE services.
 type BaseResponse struct {
 	Metadata map[string]string `json:"metadata,omitempty"`
 }
 
 func (b *BaseResponse) SetMetaData(metadata map[string]string) {
 	b.Metadata = metadata
+}
+
+// StreamResponse represents a response containing a file stream.
+// The caller is responsible for closing the Body after use.
+type StreamResponse struct {
+	Body          io.ReadCloser
+	ContentType   string
+	ContentLength int64
+	Metadata      map[string]string
+}
+
+// Close closes the underlying body stream.
+func (s *StreamResponse) Close() error {
+	if s.Body != nil {
+		return s.Body.Close()
+	}
+	return nil
+}
+
+// ParseStreamBody extracts the stream response without parsing the body.
+// The caller is responsible for closing the returned StreamResponse.
+func (r *BceResponse) ParseStreamBody() *StreamResponse {
+	contentLength := int64(-1)
+	if cl := r.Header(http.CONTENT_LENGTH); cl != "" {
+		if n, err := strconv.ParseInt(cl, 10, 64); err == nil {
+			contentLength = n
+		}
+	}
+	return &StreamResponse{
+		Body:          r.Body(),
+		ContentType:   r.Header(http.CONTENT_TYPE),
+		ContentLength: contentLength,
+		Metadata:      r.Headers(),
+	}
 }
