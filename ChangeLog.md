@@ -1,3 +1,6 @@
+2026-05-12 Version: v0.0.13
+- 涉及产品: Core工具包，支持文件流
+
 2026-04-29 Version: v0.0.12
 - 涉及产品: PRIVATEZONE，支持PrivateZone管理功能
 - 涉及产品: PRIVATEZONE，支持解析记录的增删改查操作
