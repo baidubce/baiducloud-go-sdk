@@ -128,7 +128,6 @@ func (r *BceResponse) ParseJsonBody(result interface{}) error {
 	return jsonDecoder.Decode(result)
 }
 
-// BaseResponse defines the base response structure for BCE services.
 type BaseResponse struct {
 	Metadata map[string]string `json:"metadata,omitempty"`
 }
@@ -154,7 +153,7 @@ func (s *StreamResponse) Close() error {
 	return nil
 }
 
-// ParseStreamBody extracts the stream response without parsing the body.
+// ParseStreamBody extracts the stream response without consuming the body.
 // The caller is responsible for closing the returned StreamResponse.
 func (r *BceResponse) ParseStreamBody() *StreamResponse {
 	contentLength := int64(-1)

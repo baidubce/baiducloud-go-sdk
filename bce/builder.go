@@ -45,6 +45,7 @@ type RequestBuilder struct {
 	useRequestBodyUtils bool              // optional: use RequestBodyUtils for encoding
 	isStreamResponse    bool              // optional: true for stream response
 	endpoint            string            // optional: 请求级别的 endpoint 覆盖（并发安全）
+	err                 error             // deferred error from WithStreamField
 }
 
 // create RequestBuilder with the client.
@@ -223,6 +224,30 @@ func (b *RequestBuilder) WithBodyReader(reader io.Reader) *RequestBuilder {
 	return b
 }
 
+// WithStreamField sets the request body from an io.ReadCloser stream field.
+// A nil field is a no-op. Stream setup errors are deferred to Do().
+func (b *RequestBuilder) WithStreamField(field io.ReadCloser) *RequestBuilder {
+	if field == nil {
+		return b
+	}
+	if err := util.FillRequestAsStream(b, field); err != nil {
+		b.err = err
+	}
+	return b
+}
+
+// WithStreamFieldAndContentType sets the request body from an io.ReadCloser stream field with an explicit Content-Type.
+// A nil field is a no-op. Stream setup errors are deferred to Do().
+func (b *RequestBuilder) WithStreamFieldAndContentType(field io.ReadCloser, contentType string) *RequestBuilder {
+	if field == nil {
+		return b
+	}
+	if err := util.FillRequestAsStreamWithContentType(b, field, contentType); err != nil {
+		b.err = err
+	}
+	return b
+}
+
 // SetBody implements util.RequestFiller interface
 // 使得 RequestBuilder 可以直接被 util.FillRequestAsStream 等方法使用
 func (b *RequestBuilder) SetBody(body io.Reader, contentType string, contentLength int64) {
@@ -243,6 +268,9 @@ func (b *RequestBuilder) SetHeader(key, value string) {
 
 // Do will send request to bce and get result with the builder's parameters.
 func (b *RequestBuilder) Do() error {
+	if b.err != nil {
+		return b.err
+	}
 	if err := b.validate(); err != nil {
 		return err
 	}
