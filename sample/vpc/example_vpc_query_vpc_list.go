@@ -21,8 +21,7 @@ func QueryVpcList() {
 		IsDefault: util.PtrBool(false),
 		VpcIds:    util.PtrString(""),
 	}
-	result := &vpc.QueryVpcListResponse{}
-	result, err = client.QueryVpcList(queryVpcListRequest)
+	result, err := client.QueryVpcList(queryVpcListRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

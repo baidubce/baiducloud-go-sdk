@@ -21,8 +21,7 @@ func QuerySslVpnUsers() {
 		MaxKeys:  util.PtrInt32(int32(0)),
 		UserName: util.PtrString(""),
 	}
-	result := &vpc.QuerySslVpnUsersResponse{}
-	result, err = client.QuerySslVpnUsers(querySslVpnUsersRequest)
+	result, err := client.QuerySslVpnUsers(querySslVpnUsersRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

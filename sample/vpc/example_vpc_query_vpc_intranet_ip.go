@@ -20,8 +20,7 @@ func QueryVpcIntranetIp() {
 		PrivateIpAddresses: []*string{},
 		PrivateIpRange:     util.PtrString(""),
 	}
-	result := &vpc.QueryVpcIntranetIpResponse{}
-	result, err = client.QueryVpcIntranetIp(queryVpcIntranetIpRequest)
+	result, err := client.QueryVpcIntranetIp(queryVpcIntranetIpRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

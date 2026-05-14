@@ -19,8 +19,7 @@ func UserGatewayList() {
 		Marker:  util.PtrString(""),
 		MaxKeys: util.PtrInt32(int32(0)),
 	}
-	result := &vpc.UserGatewayListResponse{}
-	result, err = client.UserGatewayList(userGatewayListRequest)
+	result, err := client.UserGatewayList(userGatewayListRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

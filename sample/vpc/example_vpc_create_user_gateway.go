@@ -21,8 +21,7 @@ func CreateUserGateway() {
 		Ip:          util.PtrString(""),
 		Description: util.PtrString(""),
 	}
-	result := &vpc.CreateUserGatewayResponse{}
-	result, err = client.CreateUserGateway(createUserGatewayRequest)
+	result, err := client.CreateUserGateway(createUserGatewayRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

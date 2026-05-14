@@ -11,25 +11,27 @@ const (
 
 	CONSTANT_VPN = "vpn"
 
-	CONSTANT_VPNCONN = "vpnconn"
-
 	CONSTANT_SSL_VPN_SERVER = "sslVpnServer"
 
 	CONSTANT_SHUTDOWN_RELAY = "shutdownRelay"
+
+	CONSTANT_VPNCONN = "vpnconn"
 
 	CONSTANT_RESOURCE_IP = "resourceIp"
 
 	CONSTANT_CGW = "cgw"
 
-	CONSTANT_GATEWAY = "gateway"
+	CONSTANT_PEERCONN = "peerconn"
 
-	CONSTANT_LIMITRULE = "limitrule"
+	CONSTANT_PRIVATE_IP_ADDRESS_INFO = "privateIpAddressInfo"
 
 	CONSTANT_SSL_VPN_USER = "sslVpnUser"
 
 	CONSTANT_SUBNET = "subnet"
 
-	CONSTANT_PRIVATE_IP_ADDRESS_INFO = "privateIpAddressInfo"
+	CONSTANT_GATEWAY = "gateway"
+
+	CONSTANT_LIMITRULE = "limitrule"
 
 	CONSTANT_IPRESERVE = "ipreserve"
 
@@ -54,14 +56,23 @@ func NewClient(ak, sk, endPoint string) (*Client, error) {
 	return &Client{client}, nil
 }
 
-func getBatchCreateSslVpnUsersUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_USER
+func getAcceptPeerToPeerConnectionApplicationsUri(version string, PeerConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
 }
-func getBindEipUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId
+func getBatchCreateSslVpnUsersUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_USER
 }
-func getCloseVpcRelayUri(version string, vpcId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_SHUTDOWN_RELAY + bce.URI_PREFIX + vpcId
+func getBindEipUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId
+}
+func getClosePeerToPeerConnectionToSynchronizeDnsUri(version string, PeerConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
+}
+func getCloseVpcRelayUri(version string, VpcId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_SHUTDOWN_RELAY + bce.URI_PREFIX + VpcId
+}
+func getCreateAPeerToPeerConnectionUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN
 }
 func getCreateGatewayLimitRulesUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE
@@ -69,8 +80,8 @@ func getCreateGatewayLimitRulesUri(version string) string {
 func getCreateIpReservedUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_IPRESERVE
 }
-func getCreateSslVpnServerUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_SERVER
+func getCreateSslVpnServerUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_SERVER
 }
 func getCreateSubnetUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET
@@ -84,32 +95,35 @@ func getCreateVpcUri(version string) string {
 func getCreateVpnUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN
 }
-func getCreateVpnTunnelUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId + bce.URI_PREFIX + CONSTANT_VPNCONN
+func getCreateVpnTunnelUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId + bce.URI_PREFIX + CONSTANT_VPNCONN
 }
-func getDeleteGatewayLimitRuleUri(version string, glrId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE + bce.URI_PREFIX + glrId
+func getDeleteGatewayLimitRuleUri(version string, GlrId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE + bce.URI_PREFIX + GlrId
 }
-func getDeleteIpReserveUri(version string, ipReserveId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_IPRESERVE + bce.URI_PREFIX + ipReserveId
+func getDeleteIpReserveUri(version string, IpReserveId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_IPRESERVE + bce.URI_PREFIX + IpReserveId
 }
-func getDeleteSslVpnServerUri(version string, vpnId string, sslVpnServerId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_SERVER + bce.URI_PREFIX + sslVpnServerId
+func getDeleteSslVpnServerUri(version string, VpnId string, SslVpnServerId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_SERVER + bce.URI_PREFIX + SslVpnServerId
 }
-func getDeleteSslVpnUserUri(version string, vpnId string, userId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_USER + bce.URI_PREFIX + userId
+func getDeleteSslVpnUserUri(version string, VpnId string, UserId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_USER + bce.URI_PREFIX + UserId
 }
-func getDeleteSubnetUri(version string, subnetId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + subnetId
+func getDeleteSubnetUri(version string, SubnetId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + SubnetId
 }
-func getDeleteUserGatewayUri(version string, cgwId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_CGW + bce.URI_PREFIX + cgwId
+func getDeleteUserGatewayUri(version string, CgwId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_CGW + bce.URI_PREFIX + CgwId
 }
-func getDeleteVpcUri(version string, vpcId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + vpcId
+func getDeleteVpcUri(version string, VpcId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + VpcId
 }
-func getDeleteVpnTunnelUri(version string, vpnConnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_VPNCONN + bce.URI_PREFIX + vpnConnId
+func getDeleteVpnTunnelUri(version string, VpnConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_VPNCONN + bce.URI_PREFIX + VpnConnId
+}
+func getEnablePeerToPeerConnectionToSynchronizeDnsUri(version string, PeerConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
 }
 func getGetVpcResourceIpInfoUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_RESOURCE_IP
@@ -117,29 +131,41 @@ func getGetVpcResourceIpInfoUri(version string) string {
 func getListIpReserveUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_IPRESERVE
 }
-func getModifyGatewayLimitRulesUri(version string, glrId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE + bce.URI_PREFIX + glrId
+func getModifyGatewayLimitRulesUri(version string, GlrId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE + bce.URI_PREFIX + GlrId
 }
-func getOpenVpcRelayUri(version string, vpcId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_OPEN_RELAY + bce.URI_PREFIX + vpcId
+func getOpenVpcRelayUri(version string, VpcId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_OPEN_RELAY + bce.URI_PREFIX + VpcId
 }
-func getQuerySpecifiedSubnetUri(version string, subnetId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + subnetId
+func getPeerToPeerConnectionBandwidthUpgradeAndDowngradeUri(version string, PeerConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
 }
-func getQuerySpecifiedVpcUri(version string, vpcId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + vpcId
+func getPeerToPeerConnectionRenewalUri(version string, PeerConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
 }
-func getQuerySslVpnServerUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_SERVER
+func getPrepaidPeerToPeerConnectionUnsubscribeUri(version string, PeerConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
 }
-func getQuerySslVpnUsersUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_USER
+func getQuerySpecifiedSubnetUri(version string, SubnetId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + SubnetId
+}
+func getQuerySpecifiedVpcUri(version string, VpcId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + VpcId
+}
+func getQuerySslVpnServerUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_SERVER
+}
+func getQuerySslVpnUsersUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_USER
 }
 func getQuerySubnetListUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET
 }
-func getQueryVpcIntranetIpUri(version string, vpcId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + vpcId + bce.URI_PREFIX + CONSTANT_PRIVATE_IP_ADDRESS_INFO
+func getQueryTheListOfPeerConnectionsUri(version string, VpcId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN
+}
+func getQueryVpcIntranetIpUri(version string, VpcId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + VpcId + bce.URI_PREFIX + CONSTANT_PRIVATE_IP_ADDRESS_INFO
 }
 func getQueryVpcListUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC
@@ -147,51 +173,66 @@ func getQueryVpcListUri(version string) string {
 func getQueryVpnListUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN
 }
-func getReleaseVpnUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId
+func getRejectPeerToPeerConnectionRequestUri(version string, PeerConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
 }
-func getRenewVpnUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId
+func getReleasePeerToPeerConnectionUri(version string, PeerConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
 }
-func getSearchForVpnDetailsUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId
+func getReleaseVpnUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId
 }
-func getSearchVpnTunnelUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_VPNCONN + bce.URI_PREFIX + vpnId
+func getRenewVpnUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId
 }
-func getUnbindEipUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId
+func getSearchForVpnDetailsUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId
 }
-func getUpdateSslVpnServerUri(version string, vpnId string, sslVpnServerId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_SERVER + bce.URI_PREFIX + sslVpnServerId
+func getSearchVpnTunnelUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_VPNCONN + bce.URI_PREFIX + VpnId
 }
-func getUpdateSslVpnUsersUri(version string, vpnId string, userId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_USER + bce.URI_PREFIX + userId
+func getUnbindEipUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId
 }
-func getUpdateSubnetUri(version string, subnetId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + subnetId
+func getUpdatePeerToPeerConnectionReleaseProtectionSwitchUri(version string, PeerConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId + bce.URI_PREFIX + CONSTANT_DELETE_PROTECT
 }
-func getUpdateUserGatewayUri(version string, cgwId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_CGW + bce.URI_PREFIX + cgwId
+func getUpdateSslVpnServerUri(version string, VpnId string, SslVpnServerId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_SERVER + bce.URI_PREFIX + SslVpnServerId
 }
-func getUpdateVpcUri(version string, vpcId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + vpcId
+func getUpdateSslVpnUsersUri(version string, VpnId string, UserId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_USER + bce.URI_PREFIX + UserId
 }
-func getUpdateVpnUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId
+func getUpdateSubnetUri(version string, SubnetId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + SubnetId
 }
-func getUpdateVpnReleaseProtectionUri(version string, vpnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + vpnId + bce.URI_PREFIX + CONSTANT_DELETE_PROTECT
+func getUpdateTheNameAndCommentsOfTheLocalInterfaceForPeerToPeerConnectionsUri(version string, PeerConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
 }
-func getUpdateVpnTunnelUri(version string, vpnConnId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_VPNCONN + bce.URI_PREFIX + vpnConnId
+func getUpdateUserGatewayUri(version string, CgwId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_CGW + bce.URI_PREFIX + CgwId
 }
-func getUserGatewayDetailsUri(version string, cgwId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_CGW + bce.URI_PREFIX + cgwId
+func getUpdateVpcUri(version string, VpcId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + VpcId
+}
+func getUpdateVpnUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId
+}
+func getUpdateVpnReleaseProtectionUri(version string, VpnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId + bce.URI_PREFIX + CONSTANT_DELETE_PROTECT
+}
+func getUpdateVpnTunnelUri(version string, VpnConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_VPNCONN + bce.URI_PREFIX + VpnConnId
+}
+func getUserGatewayDetailsUri(version string, CgwId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_CGW + bce.URI_PREFIX + CgwId
 }
 func getUserGatewayListUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + CONSTANT_CGW
 }
 func getViewGatewayLimitRulesUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE
+}
+func getViewPeerToPeerConnectionDetailsUri(version string, PeerConnId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
 }

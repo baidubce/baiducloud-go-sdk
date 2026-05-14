@@ -18,8 +18,7 @@ func SearchForVpnDetails() {
 	searchForVpnDetailsRequest := &vpc.SearchForVpnDetailsRequest{
 		VpnId: util.PtrString(""),
 	}
-	result := &vpc.SearchForVpnDetailsResponse{}
-	result, err = client.SearchForVpnDetails(searchForVpnDetailsRequest)
+	result, err := client.SearchForVpnDetails(searchForVpnDetailsRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

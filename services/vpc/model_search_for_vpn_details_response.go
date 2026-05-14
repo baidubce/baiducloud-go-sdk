@@ -8,7 +8,7 @@ type SearchForVpnDetailsResponse struct {
 	VpnName         *string       `json:"vpnName,omitempty"`
 	CreateTime      *string       `json:"createTime,omitempty"`
 	Description     *string       `json:"description,omitempty"`
-	Type            *string       `json:"type,omitempty"`
+	VpcType         *string       `json:"type,omitempty"`
 	Status          *string       `json:"status,omitempty"`
 	ExpiredTime     *string       `json:"expiredTime,omitempty"`
 	PaymentTiming   *string       `json:"paymentTiming,omitempty"`

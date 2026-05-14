@@ -27,7 +27,7 @@ func CreateVpn() {
 		VpcId:           util.PtrString(""),
 		SubnetId:        util.PtrString(""),
 		VpnName:         util.PtrString(""),
-		Type:            util.PtrString(""),
+		VpcType:         util.PtrString(""),
 		Description:     util.PtrString(""),
 		Eip:             util.PtrString(""),
 		Tags:            []*vpc.TagModel{},
@@ -36,8 +36,7 @@ func CreateVpn() {
 		MaxConnection:   util.PtrInt32(int32(0)),
 		DeleteProtect:   util.PtrBool(false),
 	}
-	result := &vpc.CreateVpnResponse{}
-	result, err = client.CreateVpn(createVpnRequest)
+	result, err := client.CreateVpn(createVpnRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

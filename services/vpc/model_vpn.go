@@ -3,7 +3,7 @@ package vpc
 type Vpn struct {
 	VpnId           *string       `json:"vpnId,omitempty"`
 	VpnName         *string       `json:"vpnName,omitempty"`
-	Type            *string       `json:"type,omitempty"`
+	VpcType         *string       `json:"type,omitempty"`
 	Description     *string       `json:"description,omitempty"`
 	Status          *string       `json:"status,omitempty"`
 	ExpiredTime     *string       `json:"expiredTime,omitempty"`
