@@ -3,7 +3,6 @@ package snicsample
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/baidubce/baiducloud-go-sdk/core/util"
 	"github.com/baidubce/baiducloud-go-sdk/services/snic"
 )
 
