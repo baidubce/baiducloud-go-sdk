@@ -11,6 +11,24 @@ const (
 	VERSION_V1 = "v1"
 )
 
+// AddEipGroupCount
+//
+// PARAMS:
+//   - request: the arguments to AddEipGroupCount
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AddEipGroupCount(request *AddEipGroupCountRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getAddEipGroupCountUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParam("resize", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // AddTbspAreaBlocking
 //
 // PARAMS:
@@ -20,13 +38,12 @@ const (
 
 // - error: nil if success otherwise the specific error
 func (c *Client) AddTbspAreaBlocking(request *AddTbspAreaBlockingRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getAddTbspAreaBlockingUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // AddTbspIpWhitelist
@@ -38,13 +55,12 @@ func (c *Client) AddTbspAreaBlocking(request *AddTbspAreaBlockingRequest) error 
 
 // - error: nil if success otherwise the specific error
 func (c *Client) AddTbspIpWhitelist(request *AddTbspIpWhitelistRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getAddTbspIpWhitelistUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // AddTbspProtocolBlocking
@@ -56,13 +72,12 @@ func (c *Client) AddTbspIpWhitelist(request *AddTbspIpWhitelistRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) AddTbspProtocolBlocking(request *AddTbspProtocolBlockingRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getAddTbspProtocolBlockingUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // ApplyForEip
@@ -82,7 +97,10 @@ func (c *Client) ApplyForEip(request *ApplyForEipRequest) (*ApplyForEipResponse,
 		WithBody(request).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // BandwidthPackageInquiry
@@ -101,7 +119,10 @@ func (c *Client) BandwidthPackageInquiry(request *BandwidthPackageInquiryRequest
 		WithBody(request).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // BindEip
@@ -113,14 +134,13 @@ func (c *Client) BandwidthPackageInquiry(request *BandwidthPackageInquiryRequest
 
 // - error: nil if success otherwise the specific error
 func (c *Client) BindEip(request *BindEipRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getBindEipUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParam("bind", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // BindTbspProtectionObject
@@ -132,14 +152,13 @@ func (c *Client) BindEip(request *BindEipRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) BindTbspProtectionObject(request *BindTbspProtectionObjectRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getBindTbspProtectionObjectUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParam("bind", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // CancelEipTransfer
@@ -151,14 +170,82 @@ func (c *Client) BindTbspProtectionObject(request *BindTbspProtectionObjectReque
 
 // - error: nil if success otherwise the specific error
 func (c *Client) CancelEipTransfer(request *CancelEipTransferRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getCancelEipTransferUri(VERSION_V1)).
 		WithQueryParam("cancel", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
+}
+
+// CreateASharedTrafficPackage
+//
+// PARAMS:
+//   - request: the arguments to CreateASharedTrafficPackage
+//
+// RETURNS:
+//   - CreateASharedTrafficPackageResponse: The return type of the CreateASharedTrafficPackage interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateASharedTrafficPackage(request *CreateASharedTrafficPackageRequest) (*CreateASharedTrafficPackageResponse, error) {
+	result := &CreateASharedTrafficPackageResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateASharedTrafficPackageUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateEipBp
+//
+// PARAMS:
+//   - request: the arguments to CreateEipBp
+//
+// RETURNS:
+//   - CreateEipBpResponse: The return type of the CreateEipBp interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateEipBp(request *CreateEipBpRequest) (*CreateEipBpResponse, error) {
+	result := &CreateEipBpResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateEipBpUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateEipGroup
+//
+// PARAMS:
+//   - request: the arguments to CreateEipGroup
+//
+// RETURNS:
+//   - CreateEipGroupResponse: The return type of the CreateEipGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateEipGroup(request *CreateEipGroupRequest) (*CreateEipGroupResponse, error) {
+	result := &CreateEipGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateEipGroupUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateEipTransfer
@@ -178,7 +265,10 @@ func (c *Client) CreateEipTransfer(request *CreateEipTransferRequest) (*CreateEi
 		WithBody(request).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateTbsp
@@ -198,7 +288,10 @@ func (c *Client) CreateTbsp(request *CreateTbspRequest) (*CreateTbspResponse, er
 		WithBody(request).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // DetailTbsp
@@ -216,7 +309,10 @@ func (c *Client) DetailTbsp(request *DetailTbspRequest) (*DetailTbspResponse, er
 		WithURL(getDetailTbspUri(VERSION_V1, util.StringValue(request.Id))).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // DirectEip
@@ -228,13 +324,12 @@ func (c *Client) DetailTbsp(request *DetailTbspRequest) (*DetailTbspResponse, er
 
 // - error: nil if success otherwise the specific error
 func (c *Client) DirectEip(request *DirectEipRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getDirectEipUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParam("direct", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-	return err
 }
 
 // DisableTbspIpClean
@@ -246,14 +341,13 @@ func (c *Client) DirectEip(request *DirectEipRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) DisableTbspIpClean(request *DisableTbspIpCleanRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getDisableTbspIpCleanUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParam("turnOffClean", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // EipBandwidthScalingCapacity
@@ -265,14 +359,13 @@ func (c *Client) DisableTbspIpClean(request *DisableTbspIpCleanRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) EipBandwidthScalingCapacity(request *EipBandwidthScalingCapacityRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getEipBandwidthScalingCapacityUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParam("resize", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // EipInquiry
@@ -291,7 +384,10 @@ func (c *Client) EipInquiry(request *EipInquiryRequest) (*EipInquiryResponse, er
 		WithBody(request).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // EipPostpaidToPrepaid
@@ -303,14 +399,13 @@ func (c *Client) EipInquiry(request *EipInquiryRequest) (*EipInquiryResponse, er
 
 // - error: nil if success otherwise the specific error
 func (c *Client) EipPostpaidToPrepaid(request *EipPostpaidToPrepaidRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getEipPostpaidToPrepaidUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParamFilter("action", "TO_PREPAY").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // EipRenewal
@@ -322,14 +417,13 @@ func (c *Client) EipPostpaidToPrepaid(request *EipPostpaidToPrepaidRequest) erro
 
 // - error: nil if success otherwise the specific error
 func (c *Client) EipRenewal(request *EipRenewalRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getEipRenewalUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParam("purchaseReserved", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // EnableTbspIpClean
@@ -341,14 +435,158 @@ func (c *Client) EipRenewal(request *EipRenewalRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) EnableTbspIpClean(request *EnableTbspIpCleanRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getEnableTbspIpCleanUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParam("turnOnClean", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("ip", util.StringValue(request.Ip)).
 		Do()
-	return err
+}
+
+// GetEipBp
+//
+// PARAMS:
+//   - request: the arguments to GetEipBp
+//
+// RETURNS:
+//   - GetEipBpResponse: The return type of the GetEipBp interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetEipBp(request *GetEipBpRequest) (*GetEipBpResponse, error) {
+	result := &GetEipBpResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetEipBpUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetEipGroup
+//
+// PARAMS:
+//   - request: the arguments to GetEipGroup
+//
+// RETURNS:
+//   - GetEipGroupResponse: The return type of the GetEipGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetEipGroup(request *GetEipGroupRequest) (*GetEipGroupResponse, error) {
+	result := &GetEipGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetEipGroupUri(VERSION_V1, util.StringValue(request.Id))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListBaseDdos
+//
+// PARAMS:
+//   - request: the arguments to ListBaseDdos
+//
+// RETURNS:
+//   - ListBaseDdosResponse: The return type of the ListBaseDdos interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListBaseDdos(request *ListBaseDdosRequest) (*ListBaseDdosResponse, error) {
+	result := &ListBaseDdosResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListBaseDdosUri(VERSION_V1)).
+		WithQueryParamFilter("ips", util.StringValue(request.Ips)).
+		WithQueryParamFilter("type", util.StringValue(request.Type)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListBaseDdosAttackRecord
+//
+// PARAMS:
+//   - request: the arguments to ListBaseDdosAttackRecord
+//
+// RETURNS:
+//   - ListBaseDdosAttackRecordResponse: The return type of the ListBaseDdosAttackRecord interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListBaseDdosAttackRecord(request *ListBaseDdosAttackRecordRequest) (*ListBaseDdosAttackRecordResponse, error) {
+	result := &ListBaseDdosAttackRecordResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListBaseDdosAttackRecordUri(VERSION_V1, util.StringValue(request.Ip))).
+		WithQueryParamFilter("startTime", util.StringValue(request.StartTime)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListEipBp
+//
+// PARAMS:
+//   - request: the arguments to ListEipBp
+//
+// RETURNS:
+//   - ListEipBpResponse: The return type of the ListEipBp interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListEipBp(request *ListEipBpRequest) (*ListEipBpResponse, error) {
+	result := &ListEipBpResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListEipBpUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("id", util.StringValue(request.Id)).
+		WithQueryParamFilter("name", util.StringValue(request.Name)).
+		WithQueryParamFilter("bindType", util.StringValue(request.BindType)).
+		WithQueryParamFilter("type", util.StringValue(request.Type)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListEipGroup
+//
+// PARAMS:
+//   - request: the arguments to ListEipGroup
+//
+// RETURNS:
+//   - ListEipGroupResponse: The return type of the ListEipGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListEipGroup(request *ListEipGroupRequest) (*ListEipGroupResponse, error) {
+	result := &ListEipGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListEipGroupUri(VERSION_V1)).
+		WithQueryParamFilter("id", util.StringValue(request.Id)).
+		WithQueryParamFilter("name", util.StringValue(request.Name)).
+		WithQueryParamFilter("status", util.StringValue(request.Status)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ListEipTransfer
@@ -375,7 +613,10 @@ func (c *Client) ListEipTransfer(request *ListEipTransferRequest) (*ListEipTrans
 		WithQueryParamFilter("fuzzyInstanceIp", util.StringValue(request.FuzzyInstanceIp)).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ListRecycleEips
@@ -397,7 +638,10 @@ func (c *Client) ListRecycleEips(request *ListRecycleEipsRequest) (*ListRecycleE
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ListTbsp
@@ -420,7 +664,10 @@ func (c *Client) ListTbsp(request *ListTbspRequest) (*ListTbspResponse, error) {
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ListTbspAreaBlocking
@@ -439,7 +686,10 @@ func (c *Client) ListTbspAreaBlocking(request *ListTbspAreaBlockingRequest) (*Li
 		WithQueryParamFilter("ip", util.StringValue(request.Ip)).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ListTbspIpClean
@@ -460,7 +710,10 @@ func (c *Client) ListTbspIpClean(request *ListTbspIpCleanRequest) (*ListTbspIpCl
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ListTbspIpWhitelist
@@ -482,7 +735,10 @@ func (c *Client) ListTbspIpWhitelist(request *ListTbspIpWhitelistRequest) (*List
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ListTbspProtocolBlocking
@@ -501,7 +757,34 @@ func (c *Client) ListTbspProtocolBlocking(request *ListTbspProtocolBlockingReque
 		WithQueryParamFilter("ip", util.StringValue(request.Ip)).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListUnban
+//
+// PARAMS:
+//   - request: the arguments to ListUnban
+//
+// RETURNS:
+//   - ListUnbanResponse: The return type of the ListUnban interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListUnban(request *ListUnbanRequest) (*ListUnbanResponse, error) {
+	result := &ListUnbanResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListUnbanUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("ip", util.StringValue(request.Ip)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ModifyTbspIpCleanThreshold
@@ -513,14 +796,13 @@ func (c *Client) ListTbspProtocolBlocking(request *ListTbspProtocolBlockingReque
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ModifyTbspIpCleanThreshold(request *ModifyTbspIpCleanThresholdRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getModifyTbspIpCleanThresholdUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParam("modifyThreshold", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // ModifyTbspIpProtectLevel
@@ -532,13 +814,48 @@ func (c *Client) ModifyTbspIpCleanThreshold(request *ModifyTbspIpCleanThresholdR
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ModifyTbspIpProtectLevel(request *ModifyTbspIpProtectLevelRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getModifyTbspIpProtectLevelUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
+}
+
+// MoveInEips
+//
+// PARAMS:
+//   - request: the arguments to MoveInEips
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) MoveInEips(request *MoveInEipsRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getMoveInEipsUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParam("move_in", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// MoveOutEips
+//
+// PARAMS:
+//   - request: the arguments to MoveOutEips
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) MoveOutEips(request *MoveOutEipsRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getMoveOutEipsUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParam("move_out", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
 }
 
 // OptionalReleaseEip
@@ -550,13 +867,30 @@ func (c *Client) ModifyTbspIpProtectLevel(request *ModifyTbspIpProtectLevelReque
 
 // - error: nil if success otherwise the specific error
 func (c *Client) OptionalReleaseEip(request *OptionalReleaseEipRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getOptionalReleaseEipUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParamFilter("releaseToRecycle", util.BoolValue(request.ReleaseToRecycle)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-	return err
+}
+
+// PurchaseReservedEipGroup
+//
+// PARAMS:
+//   - request: the arguments to PurchaseReservedEipGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) PurchaseReservedEipGroup(request *PurchaseReservedEipGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getPurchaseReservedEipGroupUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParam("purchaseReserved", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
 }
 
 // QueryEipList
@@ -583,7 +917,58 @@ func (c *Client) QueryEipList(request *QueryEipListRequest) (*QueryEipListRespon
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// QueryTheDetailsOfSharedTrafficPackages
+//
+// PARAMS:
+//   - request: the arguments to QueryTheDetailsOfSharedTrafficPackages
+//
+// RETURNS:
+//   - QueryTheDetailsOfSharedTrafficPackagesResponse: The return type of the QueryTheDetailsOfSharedTrafficPackages interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryTheDetailsOfSharedTrafficPackages(request *QueryTheDetailsOfSharedTrafficPackagesRequest) (*QueryTheDetailsOfSharedTrafficPackagesResponse, error) {
+	result := &QueryTheDetailsOfSharedTrafficPackagesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryTheDetailsOfSharedTrafficPackagesUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// QueryTheListOfSharedTrafficPackages
+//
+// PARAMS:
+//   - request: the arguments to QueryTheListOfSharedTrafficPackages
+//
+// RETURNS:
+//   - QueryTheListOfSharedTrafficPackagesResponse: The return type of the QueryTheListOfSharedTrafficPackages interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryTheListOfSharedTrafficPackages(request *QueryTheListOfSharedTrafficPackagesRequest) (*QueryTheListOfSharedTrafficPackagesResponse, error) {
+	result := &QueryTheListOfSharedTrafficPackagesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryTheListOfSharedTrafficPackagesUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("id", util.StringValue(request.Id)).
+		WithQueryParamFilter("status", util.StringValue(request.Status)).
+		WithQueryParamFilter("deductPolicy", util.StringValue(request.DeductPolicy)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ReceiveEipTransfer
@@ -595,14 +980,13 @@ func (c *Client) QueryEipList(request *QueryEipListRequest) (*QueryEipListRespon
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ReceiveEipTransfer(request *ReceiveEipTransferRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getReceiveEipTransferUri(VERSION_V1)).
 		WithQueryParam("accept", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // RefundEip
@@ -614,12 +998,27 @@ func (c *Client) ReceiveEipTransfer(request *ReceiveEipTransferRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RefundEip(request *RefundEipRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getRefundEipUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-	return err
+}
+
+// RefundEipGroup
+//
+// PARAMS:
+//   - request: the arguments to RefundEipGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RefundEipGroup(request *RefundEipGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getRefundEipGroupUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
 }
 
 // RejectEipTransfer
@@ -631,14 +1030,13 @@ func (c *Client) RefundEip(request *RefundEipRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RejectEipTransfer(request *RejectEipTransferRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getRejectEipTransferUri(VERSION_V1)).
 		WithQueryParam("reject", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // ReleaseEip
@@ -650,13 +1048,28 @@ func (c *Client) RejectEipTransfer(request *RejectEipTransferRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ReleaseEip(request *ReleaseEipRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getReleaseEipUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParamFilter("releaseToRecycle", util.BoolValue(request.ReleaseToRecycle)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-	return err
+}
+
+// ReleaseEipBp
+//
+// PARAMS:
+//   - request: the arguments to ReleaseEipBp
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ReleaseEipBp(request *ReleaseEipBpRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getReleaseEipBpUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
 }
 
 // ReleaseEipFromRecycle
@@ -668,12 +1081,27 @@ func (c *Client) ReleaseEip(request *ReleaseEipRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ReleaseEipFromRecycle(request *ReleaseEipFromRecycleRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getReleaseEipFromRecycleUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-	return err
+}
+
+// ReleaseEipGroup
+//
+// PARAMS:
+//   - request: the arguments to ReleaseEipGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ReleaseEipGroup(request *ReleaseEipGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getReleaseEipGroupUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
 }
 
 // RemoveTbspAreaBlocking
@@ -685,14 +1113,13 @@ func (c *Client) ReleaseEipFromRecycle(request *ReleaseEipFromRecycleRequest) er
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RemoveTbspAreaBlocking(request *RemoveTbspAreaBlockingRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getRemoveTbspAreaBlockingUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParamFilter("ip", util.StringValue(request.Ip)).
 		WithQueryParamFilter("blockType", util.StringValue(request.BlockType)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-	return err
 }
 
 // RemoveTbspIpWhitelist
@@ -704,14 +1131,13 @@ func (c *Client) RemoveTbspAreaBlocking(request *RemoveTbspAreaBlockingRequest) 
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RemoveTbspIpWhitelist(request *RemoveTbspIpWhitelistRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getRemoveTbspIpWhitelistUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("ip", util.StringValue(request.Ip)).
 		WithQueryParamFilter("whitelistId", util.StringValue(request.WhitelistId)).
 		Do()
-	return err
 }
 
 // RemoveTbspProtocolBlocking
@@ -723,13 +1149,12 @@ func (c *Client) RemoveTbspIpWhitelist(request *RemoveTbspIpWhitelistRequest) er
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RemoveTbspProtocolBlocking(request *RemoveTbspProtocolBlockingRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getRemoveTbspProtocolBlockingUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParamFilter("ip", util.StringValue(request.Ip)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-	return err
 }
 
 // RenewTbsp
@@ -741,14 +1166,49 @@ func (c *Client) RemoveTbspProtocolBlocking(request *RemoveTbspProtocolBlockingR
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RenewTbsp(request *RenewTbspRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getRenewTbspUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParam("purchaseReserved", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
+}
+
+// ResizeEipBpBandwidth
+//
+// PARAMS:
+//   - request: the arguments to ResizeEipBpBandwidth
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ResizeEipBpBandwidth(request *ResizeEipBpBandwidthRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getResizeEipBpBandwidthUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParam("resize", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// ResizeEipGroupBandwidth
+//
+// PARAMS:
+//   - request: the arguments to ResizeEipGroupBandwidth
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ResizeEipGroupBandwidth(request *ResizeEipGroupBandwidthRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getResizeEipGroupBandwidthUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParam("resize", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
 }
 
 // ResizeTbsp
@@ -760,14 +1220,13 @@ func (c *Client) RenewTbsp(request *RenewTbspRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) ResizeTbsp(request *ResizeTbspRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getResizeTbspUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParam("resize", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // RestoreEipFromRecycle
@@ -779,13 +1238,12 @@ func (c *Client) ResizeTbsp(request *ResizeTbspRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) RestoreEipFromRecycle(request *RestoreEipFromRecycleRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getRestoreEipFromRecycleUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParam("restore", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-	return err
 }
 
 // SharedBandwidthInquiry
@@ -804,7 +1262,10 @@ func (c *Client) SharedBandwidthInquiry(request *SharedBandwidthInquiryRequest) 
 		WithBody(request).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // SharedDataPackageInquiry
@@ -824,7 +1285,10 @@ func (c *Client) SharedDataPackageInquiry(request *SharedDataPackageInquiryReque
 		WithBody(request).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // StartEipAutoRenew
@@ -836,14 +1300,13 @@ func (c *Client) SharedDataPackageInquiry(request *SharedDataPackageInquiryReque
 
 // - error: nil if success otherwise the specific error
 func (c *Client) StartEipAutoRenew(request *StartEipAutoRenewRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getStartEipAutoRenewUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParam("startAutoRenew", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
 // StopEipAutoRenew
@@ -855,13 +1318,12 @@ func (c *Client) StartEipAutoRenew(request *StartEipAutoRenewRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) StopEipAutoRenew(request *StopEipAutoRenewRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getStopEipAutoRenewUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParam("stopAutoRenew", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-	return err
 }
 
 // UnDirectEip
@@ -873,13 +1335,12 @@ func (c *Client) StopEipAutoRenew(request *StopEipAutoRenewRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) UnDirectEip(request *UnDirectEipRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUnDirectEipUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParam("unDirect", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-	return err
 }
 
 // UnbindEip
@@ -891,13 +1352,12 @@ func (c *Client) UnDirectEip(request *UnDirectEipRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) UnbindEip(request *UnbindEipRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUnbindEipUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParam("unbind", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-	return err
 }
 
 // UnbindTbspProtectionObject
@@ -909,14 +1369,67 @@ func (c *Client) UnbindEip(request *UnbindEipRequest) error {
 
 // - error: nil if success otherwise the specific error
 func (c *Client) UnbindTbspProtectionObject(request *UnbindTbspProtectionObjectRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUnbindTbspProtectionObjectUri(VERSION_V1, util.StringValue(request.Id))).
 		WithQueryParam("unbind", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
+}
+
+// UpdateBaseDdosThreshold
+//
+// PARAMS:
+//   - request: the arguments to UpdateBaseDdosThreshold
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateBaseDdosThreshold(request *UpdateBaseDdosThresholdRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateBaseDdosThresholdUri(VERSION_V1, util.StringValue(request.Ip))).
+		WithQueryParam("modifyThreshold", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateEipBpAutoReleaseTime
+//
+// PARAMS:
+//   - request: the arguments to UpdateEipBpAutoReleaseTime
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateEipBpAutoReleaseTime(request *UpdateEipBpAutoReleaseTimeRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateEipBpAutoReleaseTimeUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParam("retime", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateEipBpName
+//
+// PARAMS:
+//   - request: the arguments to UpdateEipBpName
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateEipBpName(request *UpdateEipBpNameRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateEipBpNameUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParam("rename", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
 }
 
 // UpdateEipDeleteProtect
@@ -928,11 +1441,28 @@ func (c *Client) UnbindTbspProtectionObject(request *UnbindTbspProtectionObjectR
 
 // - error: nil if success otherwise the specific error
 func (c *Client) UpdateEipDeleteProtect(request *UpdateEipDeleteProtectRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateEipDeleteProtectUri(VERSION_V1, util.StringValue(request.Eip))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
+}
+
+// UpdateEipGroup
+//
+// PARAMS:
+//   - request: the arguments to UpdateEipGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateEipGroup(request *UpdateEipGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateEipGroupUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParam("update", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
 }

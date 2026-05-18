@@ -26,8 +26,7 @@ func ListEipTransfer() {
 		FuzzyInstanceName: util.PtrString(""),
 		FuzzyInstanceIp:   util.PtrString(""),
 	}
-	result := &eip.ListEipTransferResponse{}
-	result, err = client.ListEipTransfer(listEipTransferRequest)
+	result, err := client.ListEipTransfer(listEipTransferRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

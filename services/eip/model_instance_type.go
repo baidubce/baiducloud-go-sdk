@@ -5,13 +5,13 @@ type InstanceType string
 
 // List of InstanceType
 const (
-	BCC InstanceType = "BCC"
-	BBC InstanceType = "BBC"
-	DCC InstanceType = "DCC"
-	ENI InstanceType = "ENI"
-	BLB InstanceType = "BLB"
-	VPN InstanceType = "VPN"
-	NAT InstanceType = "NAT"
+	InstanceTypeBcc InstanceType = "BCC"
+	InstanceTypeBbc InstanceType = "BBC"
+	InstanceTypeDcc InstanceType = "DCC"
+	InstanceTypeEni InstanceType = "ENI"
+	InstanceTypeBlb InstanceType = "BLB"
+	InstanceTypeVpn InstanceType = "VPN"
+	InstanceTypeNat InstanceType = "NAT"
 )
 
 // All allowed values of InstanceType enum

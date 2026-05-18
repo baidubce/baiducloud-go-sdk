@@ -5,8 +5,8 @@ type EipInstanceType string
 
 // List of EipInstanceType
 const (
-	NORMAL EipInstanceType = "normal"
-	SHARED EipInstanceType = "shared"
+	EipInstanceTypeNormal EipInstanceType = "normal"
+	EipInstanceTypeShared EipInstanceType = "shared"
 )
 
 // All allowed values of EipInstanceType enum

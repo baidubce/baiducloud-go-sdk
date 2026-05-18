@@ -67,6 +67,16 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
+func TestClient_AddEipGroupCount(t *testing.T) {
+	addEipGroupCountRequest := &AddEipGroupCountRequest{
+		Id:            util.PtrString(""),
+		ClientToken:   util.PtrString(""),
+		EipAddCount:   util.PtrInt32(int32(0)),
+		Eipv6AddCount: util.PtrInt32(int32(0)),
+	}
+	err := EIP_CLIENT.AddEipGroupCount(addEipGroupCountRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_AddTbspAreaBlocking(t *testing.T) {
 	addTbspAreaBlockingRequest := &AddTbspAreaBlockingRequest{
 		Id:          util.PtrString(""),
@@ -138,7 +148,7 @@ func TestClient_BandwidthPackageInquiry(t *testing.T) {
 	bandwidthPackageInquiryRequest := &BandwidthPackageInquiryRequest{
 		BandwidthInMbps: util.PtrInt32(int32(0)),
 		Count:           util.PtrInt32(int32(0)),
-		Type:            util.PtrString(""),
+		EipType:         util.PtrString(""),
 	}
 	result := &BandwidthPackageInquiryResponse{}
 	result, err := EIP_CLIENT.BandwidthPackageInquiry(bandwidthPackageInquiryRequest)
@@ -180,6 +190,88 @@ func TestClient_CancelEipTransfer(t *testing.T) {
 		TransferIdList: []*string{},
 	}
 	err := EIP_CLIENT.CancelEipTransfer(cancelEipTransferRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateASharedTrafficPackage(t *testing.T) {
+	createASharedTrafficPackageRequest := &CreateASharedTrafficPackageRequest{
+		ClientToken:       util.PtrString(""),
+		ReservationLength: util.PtrInt32(int32(0)),
+		Capacity:          util.PtrString(""),
+		DeductPolicy:      util.PtrString(""),
+		PackageType:       util.PtrString(""),
+	}
+	result := &CreateASharedTrafficPackageResponse{}
+	result, err := EIP_CLIENT.CreateASharedTrafficPackage(createASharedTrafficPackageRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateEipBp(t *testing.T) {
+	createEipBpRequest := &CreateEipBpRequest{
+		ClientToken:     util.PtrString(""),
+		Name:            util.PtrString(""),
+		Eip:             util.PtrString(""),
+		EipGroupId:      util.PtrString(""),
+		BandwidthInMbps: util.PtrInt32(int32(0)),
+		EipType:         util.PtrString(""),
+		AutoReleaseTime: util.PtrString(""),
+		Tags:            []*TagModel{},
+		ResourceGroupId: util.PtrString(""),
+	}
+	result := &CreateEipBpResponse{}
+	result, err := EIP_CLIENT.CreateEipBp(createEipBpRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateEipGroup(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		BillingMethod: util.PtrString(""),
+		Reservation: &Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
+	}
+	createEipGroupRequest := &CreateEipGroupRequest{
+		ClientToken:     util.PtrString(""),
+		RouteType:       util.PtrString(""),
+		EipCount:        util.PtrInt32(int32(0)),
+		Eipv6Count:      util.PtrInt32(int32(0)),
+		BandwidthInMbps: util.PtrInt32(int32(0)),
+		Billing:         Billing,
+		Name:            util.PtrString(""),
+		Tags:            []*TagModel{},
+		ResourceGroupId: util.PtrString(""),
+	}
+	result := &CreateEipGroupResponse{}
+	result, err := EIP_CLIENT.CreateEipGroup(createEipGroupRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateEipTransfer(t *testing.T) {
@@ -338,6 +430,130 @@ func TestClient_EnableTbspIpClean(t *testing.T) {
 	err := EIP_CLIENT.EnableTbspIpClean(enableTbspIpCleanRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_GetEipBp(t *testing.T) {
+	getEipBpRequest := &GetEipBpRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	result := &GetEipBpResponse{}
+	result, err := EIP_CLIENT.GetEipBp(getEipBpRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetEipGroup(t *testing.T) {
+	getEipGroupRequest := &GetEipGroupRequest{
+		Id: util.PtrString(""),
+	}
+	result := &GetEipGroupResponse{}
+	result, err := EIP_CLIENT.GetEipGroup(getEipGroupRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListBaseDdos(t *testing.T) {
+	listBaseDdosRequest := &ListBaseDdosRequest{
+		Ips:     util.PtrString(""),
+		Type:    util.PtrString(""),
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &ListBaseDdosResponse{}
+	result, err := EIP_CLIENT.ListBaseDdos(listBaseDdosRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListBaseDdosAttackRecord(t *testing.T) {
+	listBaseDdosAttackRecordRequest := &ListBaseDdosAttackRecordRequest{
+		Ip:        util.PtrString(""),
+		StartTime: util.PtrString(""),
+		Marker:    util.PtrString(""),
+		MaxKeys:   util.PtrInt32(int32(0)),
+	}
+	result := &ListBaseDdosAttackRecordResponse{}
+	result, err := EIP_CLIENT.ListBaseDdosAttackRecord(listBaseDdosAttackRecordRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListEipBp(t *testing.T) {
+	listEipBpRequest := &ListEipBpRequest{
+		Marker:   util.PtrString(""),
+		MaxKeys:  util.PtrInt32(int32(0)),
+		Id:       util.PtrString(""),
+		Name:     util.PtrString(""),
+		BindType: util.PtrString(""),
+		Type:     util.PtrString(""),
+	}
+	result := &ListEipBpResponse{}
+	result, err := EIP_CLIENT.ListEipBp(listEipBpRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListEipGroup(t *testing.T) {
+	listEipGroupRequest := &ListEipGroupRequest{
+		Id:      util.PtrString(""),
+		Name:    util.PtrString(""),
+		Status:  util.PtrString(""),
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &ListEipGroupResponse{}
+	result, err := EIP_CLIENT.ListEipGroup(listEipGroupRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ListEipTransfer(t *testing.T) {
 	listEipTransferRequest := &ListEipTransferRequest{
 		MaxKeys:           util.PtrInt32(int32(0)),
@@ -488,6 +704,26 @@ func TestClient_ListTbspProtocolBlocking(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ListUnban(t *testing.T) {
+	listUnbanRequest := &ListUnbanRequest{
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+		Ip:      util.PtrString(""),
+	}
+	result := &ListUnbanResponse{}
+	result, err := EIP_CLIENT.ListUnban(listUnbanRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ModifyTbspIpCleanThreshold(t *testing.T) {
 	modifyTbspIpCleanThresholdRequest := &ModifyTbspIpCleanThresholdRequest{
 		Id:            util.PtrString(""),
@@ -510,6 +746,24 @@ func TestClient_ModifyTbspIpProtectLevel(t *testing.T) {
 	err := EIP_CLIENT.ModifyTbspIpProtectLevel(modifyTbspIpProtectLevelRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_MoveInEips(t *testing.T) {
+	moveInEipsRequest := &MoveInEipsRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Eips:        []*string{},
+	}
+	err := EIP_CLIENT.MoveInEips(moveInEipsRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_MoveOutEips(t *testing.T) {
+	moveOutEipsRequest := &MoveOutEipsRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		MoveOutEips: []*EipMoveOutModel{},
+	}
+	err := EIP_CLIENT.MoveOutEips(moveOutEipsRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_OptionalReleaseEip(t *testing.T) {
 	optionalReleaseEipRequest := &OptionalReleaseEipRequest{
 		Eip:              util.PtrString(""),
@@ -517,6 +771,23 @@ func TestClient_OptionalReleaseEip(t *testing.T) {
 		ClientToken:      util.PtrString(""),
 	}
 	err := EIP_CLIENT.OptionalReleaseEip(optionalReleaseEipRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_PurchaseReservedEipGroup(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		BillingMethod: util.PtrString(""),
+		Reservation: &Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
+	}
+	purchaseReservedEipGroupRequest := &PurchaseReservedEipGroupRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Billing:     Billing,
+	}
+	err := EIP_CLIENT.PurchaseReservedEipGroup(purchaseReservedEipGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QueryEipList(t *testing.T) {
@@ -545,6 +816,47 @@ func TestClient_QueryEipList(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_QueryTheDetailsOfSharedTrafficPackages(t *testing.T) {
+	queryTheDetailsOfSharedTrafficPackagesRequest := &QueryTheDetailsOfSharedTrafficPackagesRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	result := &QueryTheDetailsOfSharedTrafficPackagesResponse{}
+	result, err := EIP_CLIENT.QueryTheDetailsOfSharedTrafficPackages(queryTheDetailsOfSharedTrafficPackagesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QueryTheListOfSharedTrafficPackages(t *testing.T) {
+	queryTheListOfSharedTrafficPackagesRequest := &QueryTheListOfSharedTrafficPackagesRequest{
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
+		Id:           util.PtrString(""),
+		Status:       util.PtrString(""),
+		DeductPolicy: util.PtrString(""),
+	}
+	result := &QueryTheListOfSharedTrafficPackagesResponse{}
+	result, err := EIP_CLIENT.QueryTheListOfSharedTrafficPackages(queryTheListOfSharedTrafficPackagesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ReceiveEipTransfer(t *testing.T) {
 	receiveEipTransferRequest := &ReceiveEipTransferRequest{
 		ClientToken:    util.PtrString(""),
@@ -559,6 +871,14 @@ func TestClient_RefundEip(t *testing.T) {
 		ClientToken: util.PtrString(""),
 	}
 	err := EIP_CLIENT.RefundEip(refundEipRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_RefundEipGroup(t *testing.T) {
+	refundEipGroupRequest := &RefundEipGroupRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := EIP_CLIENT.RefundEipGroup(refundEipGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_RejectEipTransfer(t *testing.T) {
@@ -578,12 +898,28 @@ func TestClient_ReleaseEip(t *testing.T) {
 	err := EIP_CLIENT.ReleaseEip(releaseEipRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ReleaseEipBp(t *testing.T) {
+	releaseEipBpRequest := &ReleaseEipBpRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := EIP_CLIENT.ReleaseEipBp(releaseEipBpRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ReleaseEipFromRecycle(t *testing.T) {
 	releaseEipFromRecycleRequest := &ReleaseEipFromRecycleRequest{
 		Eip:         util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
 	err := EIP_CLIENT.ReleaseEipFromRecycle(releaseEipFromRecycleRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ReleaseEipGroup(t *testing.T) {
+	releaseEipGroupRequest := &ReleaseEipGroupRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := EIP_CLIENT.ReleaseEipGroup(releaseEipGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_RemoveTbspAreaBlocking(t *testing.T) {
@@ -623,6 +959,24 @@ func TestClient_RenewTbsp(t *testing.T) {
 		RenewTimeUnit: util.PtrString(""),
 	}
 	err := EIP_CLIENT.RenewTbsp(renewTbspRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ResizeEipBpBandwidth(t *testing.T) {
+	resizeEipBpBandwidthRequest := &ResizeEipBpBandwidthRequest{
+		Id:              util.PtrString(""),
+		ClientToken:     util.PtrString(""),
+		BandwidthInMbps: util.PtrInt32(int32(0)),
+	}
+	err := EIP_CLIENT.ResizeEipBpBandwidth(resizeEipBpBandwidthRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ResizeEipGroupBandwidth(t *testing.T) {
+	resizeEipGroupBandwidthRequest := &ResizeEipGroupBandwidthRequest{
+		Id:              util.PtrString(""),
+		ClientToken:     util.PtrString(""),
+		BandwidthInMbps: util.PtrInt32(int32(0)),
+	}
+	err := EIP_CLIENT.ResizeEipGroupBandwidth(resizeEipGroupBandwidthRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ResizeTbsp(t *testing.T) {
@@ -736,6 +1090,35 @@ func TestClient_UnbindTbspProtectionObject(t *testing.T) {
 	err := EIP_CLIENT.UnbindTbspProtectionObject(unbindTbspProtectionObjectRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_UpdateBaseDdosThreshold(t *testing.T) {
+	updateBaseDdosThresholdRequest := &UpdateBaseDdosThresholdRequest{
+		Ip:            util.PtrString(""),
+		ClientToken:   util.PtrString(""),
+		ThresholdType: util.PtrString(""),
+		IpCleanMbps:   util.PtrInt64(int64(0)),
+		IpCleanPps:    util.PtrInt64(int64(0)),
+	}
+	err := EIP_CLIENT.UpdateBaseDdosThreshold(updateBaseDdosThresholdRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateEipBpAutoReleaseTime(t *testing.T) {
+	updateEipBpAutoReleaseTimeRequest := &UpdateEipBpAutoReleaseTimeRequest{
+		Id:              util.PtrString(""),
+		ClientToken:     util.PtrString(""),
+		AutoReleaseTime: util.PtrString(""),
+	}
+	err := EIP_CLIENT.UpdateEipBpAutoReleaseTime(updateEipBpAutoReleaseTimeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateEipBpName(t *testing.T) {
+	updateEipBpNameRequest := &UpdateEipBpNameRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+	}
+	err := EIP_CLIENT.UpdateEipBpName(updateEipBpNameRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_UpdateEipDeleteProtect(t *testing.T) {
 	updateEipDeleteProtectRequest := &UpdateEipDeleteProtectRequest{
 		Eip:           util.PtrString(""),
@@ -743,5 +1126,14 @@ func TestClient_UpdateEipDeleteProtect(t *testing.T) {
 		DeleteProtect: util.PtrBool(false),
 	}
 	err := EIP_CLIENT.UpdateEipDeleteProtect(updateEipDeleteProtectRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateEipGroup(t *testing.T) {
+	updateEipGroupRequest := &UpdateEipGroupRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+	}
+	err := EIP_CLIENT.UpdateEipGroup(updateEipGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }

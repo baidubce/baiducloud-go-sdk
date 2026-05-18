@@ -5,14 +5,14 @@ type EipStatus string
 
 // List of EipStatus
 const (
-	CREATING    EipStatus = "creating"
-	AVAILABLE   EipStatus = "available"
-	BINDED      EipStatus = "binded"
-	BINDING     EipStatus = "binding"
-	UNBINDING   EipStatus = "unbinding"
-	UPDATING    EipStatus = "updating"
-	PAUSED      EipStatus = "paused"
-	UNAVAILABLE EipStatus = "unavailable"
+	EipStatusCreating    EipStatus = "creating"
+	EipStatusAvailable   EipStatus = "available"
+	EipStatusBinded      EipStatus = "binded"
+	EipStatusBinding     EipStatus = "binding"
+	EipStatusUnbinding   EipStatus = "unbinding"
+	EipStatusUpdating    EipStatus = "updating"
+	EipStatusPaused      EipStatus = "paused"
+	EipStatusUnavailable EipStatus = "unavailable"
 )
 
 // All allowed values of EipStatus enum

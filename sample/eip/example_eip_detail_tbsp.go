@@ -18,8 +18,7 @@ func DetailTbsp() {
 	detailTbspRequest := &eip.DetailTbspRequest{
 		Id: util.PtrString(""),
 	}
-	result := &eip.DetailTbspResponse{}
-	result, err = client.DetailTbsp(detailTbspRequest)
+	result, err := client.DetailTbsp(detailTbspRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)
