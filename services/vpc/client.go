@@ -25,6 +25,10 @@ const (
 
 	CONSTANT_PRIVATE_IP_ADDRESS_INFO = "privateIpAddressInfo"
 
+	CONSTANT_ET_GATEWAY = "etGateway"
+
+	CONSTANT_HEALTH_CHECK = "healthCheck"
+
 	CONSTANT_SSL_VPN_USER = "sslVpnUser"
 
 	CONSTANT_SUBNET = "subnet"
@@ -65,6 +69,9 @@ func getBatchCreateSslVpnUsersUri(version string, VpnId string) string {
 func getBindEipUri(version string, VpnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId
 }
+func getBindPhysicalDedicatedLineUri(version string, EtGatewayId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET_GATEWAY + bce.URI_PREFIX + EtGatewayId
+}
 func getClosePeerToPeerConnectionToSynchronizeDnsUri(version string, PeerConnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
 }
@@ -73,6 +80,12 @@ func getCloseVpcRelayUri(version string, VpcId string) string {
 }
 func getCreateAPeerToPeerConnectionUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN
+}
+func getCreateDedicatedGatewayUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET_GATEWAY
+}
+func getCreateDedicatedGatewayHealthCheckUri(version string, EtGatewayId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET_GATEWAY + bce.URI_PREFIX + EtGatewayId + bce.URI_PREFIX + CONSTANT_HEALTH_CHECK
 }
 func getCreateGatewayLimitRulesUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE
@@ -161,6 +174,12 @@ func getQuerySslVpnUsersUri(version string, VpnId string) string {
 func getQuerySubnetListUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET
 }
+func getQueryTheDetailsOfTheDedicatedGatewayUri(version string, EtGatewayId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET_GATEWAY + bce.URI_PREFIX + EtGatewayId
+}
+func getQueryTheListOfDedicatedLineGatewaysUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET_GATEWAY
+}
 func getQueryTheListOfPeerConnectionsUri(version string, VpcId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN
 }
@@ -175,6 +194,9 @@ func getQueryVpnListUri(version string) string {
 }
 func getRejectPeerToPeerConnectionRequestUri(version string, PeerConnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
+}
+func getReleaseDedicatedGatewayUri(version string, EtGatewayId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET_GATEWAY + bce.URI_PREFIX + EtGatewayId
 }
 func getReleasePeerToPeerConnectionUri(version string, PeerConnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
@@ -193,6 +215,12 @@ func getSearchVpnTunnelUri(version string, VpnId string) string {
 }
 func getUnbindEipUri(version string, VpnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId
+}
+func getUnbindPhysicalDedicatedLineUri(version string, EtGatewayId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET_GATEWAY + bce.URI_PREFIX + EtGatewayId
+}
+func getUpdateDedicatedGatewayUri(version string, EtGatewayId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET_GATEWAY + bce.URI_PREFIX + EtGatewayId
 }
 func getUpdatePeerToPeerConnectionReleaseProtectionSwitchUri(version string, PeerConnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId + bce.URI_PREFIX + CONSTANT_DELETE_PROTECT

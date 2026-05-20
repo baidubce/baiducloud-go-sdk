@@ -69,6 +69,24 @@ func (c *Client) BindEip(request *BindEipRequest) error {
 		Do()
 }
 
+// BindPhysicalDedicatedLine
+//
+// PARAMS:
+//   - request: the arguments to BindPhysicalDedicatedLine
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BindPhysicalDedicatedLine(request *BindPhysicalDedicatedLineRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindPhysicalDedicatedLineUri(VERSION_V1, util.StringValue(request.EtGatewayId))).
+		WithQueryParam("bind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // ClosePeerToPeerConnectionToSynchronizeDns
 //
 // PARAMS:
@@ -124,6 +142,46 @@ func (c *Client) CreateAPeerToPeerConnection(request *CreateAPeerToPeerConnectio
 		return nil, err
 	}
 	return result, nil
+}
+
+// CreateDedicatedGateway
+//
+// PARAMS:
+//   - request: the arguments to CreateDedicatedGateway
+//
+// RETURNS:
+//   - CreateDedicatedGatewayResponse: The return type of the CreateDedicatedGateway interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateDedicatedGateway(request *CreateDedicatedGatewayRequest) (*CreateDedicatedGatewayResponse, error) {
+	result := &CreateDedicatedGatewayResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateDedicatedGatewayUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateDedicatedGatewayHealthCheck
+//
+// PARAMS:
+//   - request: the arguments to CreateDedicatedGatewayHealthCheck
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CreateDedicatedGatewayHealthCheck(request *CreateDedicatedGatewayHealthCheckRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateDedicatedGatewayHealthCheckUri(VERSION_V1, util.StringValue(request.EtGatewayId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
 }
 
 // CreateGatewayLimitRules
@@ -706,6 +764,54 @@ func (c *Client) QuerySubnetList(request *QuerySubnetListRequest) (*QuerySubnetL
 	return result, nil
 }
 
+// QueryTheDetailsOfTheDedicatedGateway
+//
+// PARAMS:
+//   - request: the arguments to QueryTheDetailsOfTheDedicatedGateway
+//
+// RETURNS:
+//   - QueryTheDetailsOfTheDedicatedGatewayResponse: The return type of the QueryTheDetailsOfTheDedicatedGateway interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryTheDetailsOfTheDedicatedGateway(request *QueryTheDetailsOfTheDedicatedGatewayRequest) (*QueryTheDetailsOfTheDedicatedGatewayResponse, error) {
+	result := &QueryTheDetailsOfTheDedicatedGatewayResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryTheDetailsOfTheDedicatedGatewayUri(VERSION_V1, util.StringValue(request.EtGatewayId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// QueryTheListOfDedicatedLineGateways
+//
+// PARAMS:
+//   - request: the arguments to QueryTheListOfDedicatedLineGateways
+//
+// RETURNS:
+//   - QueryTheListOfDedicatedLineGatewaysResponse: The return type of the QueryTheListOfDedicatedLineGateways interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryTheListOfDedicatedLineGateways(request *QueryTheListOfDedicatedLineGatewaysRequest) (*QueryTheListOfDedicatedLineGatewaysResponse, error) {
+	result := &QueryTheListOfDedicatedLineGatewaysResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryTheListOfDedicatedLineGatewaysUri(VERSION_V1)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("etGatewayId", util.StringValue(request.EtGatewayId)).
+		WithQueryParamFilter("name", util.StringValue(request.Name)).
+		WithQueryParamFilter("status", util.StringValue(request.Status)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // QueryTheListOfPeerConnections
 //
 // PARAMS:
@@ -820,6 +926,22 @@ func (c *Client) RejectPeerToPeerConnectionRequest(request *RejectPeerToPeerConn
 		Do()
 }
 
+// ReleaseDedicatedGateway
+//
+// PARAMS:
+//   - request: the arguments to ReleaseDedicatedGateway
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ReleaseDedicatedGateway(request *ReleaseDedicatedGatewayRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getReleaseDedicatedGatewayUri(VERSION_V1, util.StringValue(request.EtGatewayId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
 // ReleasePeerToPeerConnection
 //
 // PARAMS:
@@ -927,6 +1049,40 @@ func (c *Client) UnbindEip(request *UnbindEipRequest) error {
 		WithURL(getUnbindEipUri(VERSION_V1, util.StringValue(request.VpnId))).
 		WithQueryParam("unbind", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// UnbindPhysicalDedicatedLine
+//
+// PARAMS:
+//   - request: the arguments to UnbindPhysicalDedicatedLine
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindPhysicalDedicatedLine(request *UnbindPhysicalDedicatedLineRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindPhysicalDedicatedLineUri(VERSION_V1, util.StringValue(request.EtGatewayId))).
+		WithQueryParam("unbind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// UpdateDedicatedGateway
+//
+// PARAMS:
+//   - request: the arguments to UpdateDedicatedGateway
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateDedicatedGateway(request *UpdateDedicatedGatewayRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateDedicatedGatewayUri(VERSION_V1, util.StringValue(request.EtGatewayId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
 		Do()
 }
 

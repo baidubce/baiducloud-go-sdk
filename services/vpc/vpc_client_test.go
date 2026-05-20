@@ -104,6 +104,17 @@ func TestClient_BindEip(t *testing.T) {
 	err := VPC_CLIENT.BindEip(bindEipRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_BindPhysicalDedicatedLine(t *testing.T) {
+	bindPhysicalDedicatedLineRequest := &BindPhysicalDedicatedLineRequest{
+		EtGatewayId: util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		EtId:        util.PtrString(""),
+		ChannelId:   util.PtrString(""),
+		LocalCidrs:  []*string{},
+	}
+	err := VPC_CLIENT.BindPhysicalDedicatedLine(bindPhysicalDedicatedLineRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ClosePeerToPeerConnectionToSynchronizeDns(t *testing.T) {
 	closePeerToPeerConnectionToSynchronizeDnsRequest := &ClosePeerToPeerConnectionToSynchronizeDnsRequest{
 		PeerConnId:  util.PtrString(""),
@@ -156,6 +167,48 @@ func TestClient_CreateAPeerToPeerConnection(t *testing.T) {
 		return
 	}
 	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateDedicatedGateway(t *testing.T) {
+	createDedicatedGatewayRequest := &CreateDedicatedGatewayRequest{
+		ClientToken:     util.PtrString(""),
+		Name:            util.PtrString(""),
+		VpcId:           util.PtrString(""),
+		Speed:           util.PtrInt32(int32(0)),
+		Description:     util.PtrString(""),
+		EtId:            util.PtrString(""),
+		ChannelId:       util.PtrString(""),
+		LocalCidrs:      []*string{},
+		Tags:            []*TagModel{},
+		ResourceGroupId: util.PtrString(""),
+	}
+	result := &CreateDedicatedGatewayResponse{}
+	result, err := VPC_CLIENT.CreateDedicatedGateway(createDedicatedGatewayRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateDedicatedGatewayHealthCheck(t *testing.T) {
+	createDedicatedGatewayHealthCheckRequest := &CreateDedicatedGatewayHealthCheckRequest{
+		EtGatewayId:           util.PtrString(""),
+		ClientToken:           util.PtrString(""),
+		HealthCheckSourceIp:   util.PtrString(""),
+		HealthCheckType:       util.PtrString(""),
+		HealthCheckPort:       util.PtrInt32(int32(0)),
+		HealthCheckInterval:   util.PtrInt32(int32(0)),
+		HealthThreshold:       util.PtrInt32(int32(0)),
+		UnhealthThreshold:     util.PtrInt32(int32(0)),
+		AutoGenerateRouteRule: util.PtrBool(false),
+	}
+	err := VPC_CLIENT.CreateDedicatedGatewayHealthCheck(createDedicatedGatewayHealthCheckRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateGatewayLimitRules(t *testing.T) {
@@ -647,6 +700,47 @@ func TestClient_QuerySubnetList(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_QueryTheDetailsOfTheDedicatedGateway(t *testing.T) {
+	queryTheDetailsOfTheDedicatedGatewayRequest := &QueryTheDetailsOfTheDedicatedGatewayRequest{
+		EtGatewayId: util.PtrString(""),
+	}
+	result := &QueryTheDetailsOfTheDedicatedGatewayResponse{}
+	result, err := VPC_CLIENT.QueryTheDetailsOfTheDedicatedGateway(queryTheDetailsOfTheDedicatedGatewayRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QueryTheListOfDedicatedLineGateways(t *testing.T) {
+	queryTheListOfDedicatedLineGatewaysRequest := &QueryTheListOfDedicatedLineGatewaysRequest{
+		VpcId:       util.PtrString(""),
+		EtGatewayId: util.PtrString(""),
+		Name:        util.PtrString(""),
+		Status:      util.PtrString(""),
+		Marker:      util.PtrString(""),
+		MaxKeys:     util.PtrInt32(int32(0)),
+	}
+	result := &QueryTheListOfDedicatedLineGatewaysResponse{}
+	result, err := VPC_CLIENT.QueryTheListOfDedicatedLineGateways(queryTheListOfDedicatedLineGatewaysRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_QueryTheListOfPeerConnections(t *testing.T) {
 	queryTheListOfPeerConnectionsRequest := &QueryTheListOfPeerConnectionsRequest{
 		VpcId:   util.PtrString(""),
@@ -738,6 +832,14 @@ func TestClient_RejectPeerToPeerConnectionRequest(t *testing.T) {
 	err := VPC_CLIENT.RejectPeerToPeerConnectionRequest(rejectPeerToPeerConnectionRequestRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ReleaseDedicatedGateway(t *testing.T) {
+	releaseDedicatedGatewayRequest := &ReleaseDedicatedGatewayRequest{
+		EtGatewayId: util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := VPC_CLIENT.ReleaseDedicatedGateway(releaseDedicatedGatewayRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ReleasePeerToPeerConnection(t *testing.T) {
 	releasePeerToPeerConnectionRequest := &ReleasePeerToPeerConnectionRequest{
 		PeerConnId:  util.PtrString(""),
@@ -813,6 +915,28 @@ func TestClient_UnbindEip(t *testing.T) {
 		ClientToken: util.PtrString(""),
 	}
 	err := VPC_CLIENT.UnbindEip(unbindEipRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UnbindPhysicalDedicatedLine(t *testing.T) {
+	unbindPhysicalDedicatedLineRequest := &UnbindPhysicalDedicatedLineRequest{
+		EtGatewayId: util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := VPC_CLIENT.UnbindPhysicalDedicatedLine(unbindPhysicalDedicatedLineRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateDedicatedGateway(t *testing.T) {
+	updateDedicatedGatewayRequest := &UpdateDedicatedGatewayRequest{
+		EtGatewayId:    util.PtrString(""),
+		ClientToken:    util.PtrString(""),
+		Name:           util.PtrString(""),
+		Speed:          util.PtrInt32(int32(0)),
+		Description:    util.PtrString(""),
+		LocalCidrs:     []*string{},
+		EnableIpv6:     util.PtrInt32(int32(0)),
+		Ipv6LocalCidrs: []*string{},
+	}
+	err := VPC_CLIENT.UpdateDedicatedGateway(updateDedicatedGatewayRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdatePeerToPeerConnectionReleaseProtectionSwitch(t *testing.T) {
