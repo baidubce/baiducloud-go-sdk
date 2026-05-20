@@ -1,0 +1,13 @@
+package dns
+
+type ModifyParsingRecordsRequest struct {
+	ZoneName    *string `json:"-"`
+	RecordId    *string `json:"-"`
+	ClientToken *string `json:"-"`
+	Rr          *string `json:"rr,omitempty"`
+	DnsType     *string `json:"type,omitempty"`
+	Value       *string `json:"value,omitempty"`
+	Ttl         *int32  `json:"ttl,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Priority    *int32  `json:"priority,omitempty"`
+}
