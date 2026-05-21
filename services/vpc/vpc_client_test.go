@@ -75,6 +75,14 @@ func TestClient_AcceptPeerToPeerConnectionApplications(t *testing.T) {
 	err := VPC_CLIENT.AcceptPeerToPeerConnectionApplications(acceptPeerToPeerConnectionApplicationsRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ActiveStandbySwitchover(t *testing.T) {
+	activeStandbySwitchoverRequest := &ActiveStandbySwitchoverRequest{
+		RouteRuleId: util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := VPC_CLIENT.ActiveStandbySwitchover(activeStandbySwitchoverRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_BatchCreateSslVpnUsers(t *testing.T) {
 	batchCreateSslVpnUsersRequest := &BatchCreateSslVpnUsersRequest{
 		VpnId:       util.PtrString(""),
@@ -249,6 +257,31 @@ func TestClient_CreateIpReserved(t *testing.T) {
 	}
 	result := &CreateIpReservedResponse{}
 	result, err := VPC_CLIENT.CreateIpReserved(createIpReservedRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateRoutingRules(t *testing.T) {
+	createRoutingRulesRequest := &CreateRoutingRulesRequest{
+		ClientToken:        util.PtrString(""),
+		RouteTableId:       util.PtrString(""),
+		SourceAddress:      util.PtrString(""),
+		DestinationAddress: util.PtrString(""),
+		NexthopId:          util.PtrString(""),
+		NexthopType:        util.PtrString(""),
+		NextHopList:        []*NextHop{},
+		Description:        util.PtrString(""),
+	}
+	result := &CreateRoutingRulesResponse{}
+	result, err := VPC_CLIENT.CreateRoutingRules(createRoutingRulesRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -449,6 +482,14 @@ func TestClient_DeleteIpReserve(t *testing.T) {
 	err := VPC_CLIENT.DeleteIpReserve(deleteIpReserveRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteRoutingRules(t *testing.T) {
+	deleteRoutingRulesRequest := &DeleteRoutingRulesRequest{
+		RouteRuleId: util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := VPC_CLIENT.DeleteRoutingRules(deleteRoutingRulesRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteSslVpnServer(t *testing.T) {
 	deleteSslVpnServerRequest := &DeleteSslVpnServerRequest{
 		VpnId:          util.PtrString(""),
@@ -599,6 +640,46 @@ func TestClient_PrepaidPeerToPeerConnectionUnsubscribe(t *testing.T) {
 		ClientToken: util.PtrString(""),
 	}
 	err := VPC_CLIENT.PrepaidPeerToPeerConnectionUnsubscribe(prepaidPeerToPeerConnectionUnsubscribeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QueryRoutingRules(t *testing.T) {
+	queryRoutingRulesRequest := &QueryRoutingRulesRequest{
+		RouteTableId: util.PtrString(""),
+		VpcId:        util.PtrString(""),
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
+	}
+	result := &QueryRoutingRulesResponse{}
+	result, err := VPC_CLIENT.QueryRoutingRules(queryRoutingRulesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QueryRoutingTable(t *testing.T) {
+	queryRoutingTableRequest := &QueryRoutingTableRequest{
+		RouteTableId: util.PtrString(""),
+		VpcId:        util.PtrString(""),
+	}
+	result := &QueryRoutingTableResponse{}
+	result, err := VPC_CLIENT.QueryRoutingTable(queryRoutingTableRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QuerySpecifiedSubnet(t *testing.T) {
@@ -945,6 +1026,18 @@ func TestClient_UpdatePeerToPeerConnectionReleaseProtectionSwitch(t *testing.T) 
 		DeleteProtect: util.PtrBool(false),
 	}
 	err := VPC_CLIENT.UpdatePeerToPeerConnectionReleaseProtectionSwitch(updatePeerToPeerConnectionReleaseProtectionSwitchRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateRoutingRules(t *testing.T) {
+	updateRoutingRulesRequest := &UpdateRoutingRulesRequest{
+		RouteRuleId:        util.PtrString(""),
+		ClientToken:        util.PtrString(""),
+		SourceAddress:      util.PtrString(""),
+		DestinationAddress: util.PtrString(""),
+		NexthopId:          util.PtrString(""),
+		Description:        util.PtrString(""),
+	}
+	err := VPC_CLIENT.UpdateRoutingRules(updateRoutingRulesRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateSslVpnServer(t *testing.T) {

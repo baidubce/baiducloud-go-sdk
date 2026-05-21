@@ -28,6 +28,23 @@ func (c *Client) AcceptPeerToPeerConnectionApplications(request *AcceptPeerToPee
 		Do()
 }
 
+// ActiveStandbySwitchover
+//
+// PARAMS:
+//   - request: the arguments to ActiveStandbySwitchover
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ActiveStandbySwitchover(request *ActiveStandbySwitchoverRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getActiveStandbySwitchoverUri(VERSION_V1, util.StringValue(request.RouteRuleId))).
+		WithQueryParam("switchRouteHA", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
 // BatchCreateSslVpnUsers
 //
 // PARAMS:
@@ -230,6 +247,29 @@ func (c *Client) CreateIpReserved(request *CreateIpReservedRequest) (*CreateIpRe
 	return result, nil
 }
 
+// CreateRoutingRules
+//
+// PARAMS:
+//   - request: the arguments to CreateRoutingRules
+//
+// RETURNS:
+//   - CreateRoutingRulesResponse: The return type of the CreateRoutingRules interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateRoutingRules(request *CreateRoutingRulesRequest) (*CreateRoutingRulesResponse, error) {
+	result := &CreateRoutingRulesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateRoutingRulesUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateSslVpnServer
 //
 // PARAMS:
@@ -396,6 +436,22 @@ func (c *Client) DeleteIpReserve(request *DeleteIpReserveRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getDeleteIpReserveUri(VERSION_V1, util.StringValue(request.IpReserveId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// DeleteRoutingRules
+//
+// PARAMS:
+//   - request: the arguments to DeleteRoutingRules
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteRoutingRules(request *DeleteRoutingRulesRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteRoutingRulesUri(VERSION_V1, util.StringValue(request.RouteRuleId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
@@ -647,6 +703,54 @@ func (c *Client) PrepaidPeerToPeerConnectionUnsubscribe(request *PrepaidPeerToPe
 		WithQueryParam("refund", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
+}
+
+// QueryRoutingRules
+//
+// PARAMS:
+//   - request: the arguments to QueryRoutingRules
+//
+// RETURNS:
+//   - QueryRoutingRulesResponse: The return type of the QueryRoutingRules interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryRoutingRules(request *QueryRoutingRulesRequest) (*QueryRoutingRulesResponse, error) {
+	result := &QueryRoutingRulesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryRoutingRulesUri(VERSION_V1)).
+		WithQueryParamFilter("routeTableId", util.StringValue(request.RouteTableId)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// QueryRoutingTable
+//
+// PARAMS:
+//   - request: the arguments to QueryRoutingTable
+//
+// RETURNS:
+//   - QueryRoutingTableResponse: The return type of the QueryRoutingTable interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryRoutingTable(request *QueryRoutingTableRequest) (*QueryRoutingTableResponse, error) {
+	result := &QueryRoutingTableResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryRoutingTableUri(VERSION_V1)).
+		WithQueryParamFilter("routeTableId", util.StringValue(request.RouteTableId)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // QuerySpecifiedSubnet
@@ -1098,6 +1202,23 @@ func (c *Client) UpdatePeerToPeerConnectionReleaseProtectionSwitch(request *Upda
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdatePeerToPeerConnectionReleaseProtectionSwitchUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithBody(request).
+		Do()
+}
+
+// UpdateRoutingRules
+//
+// PARAMS:
+//   - request: the arguments to UpdateRoutingRules
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateRoutingRules(request *UpdateRoutingRulesRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateRoutingRulesUri(VERSION_V1, util.StringValue(request.RouteRuleId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
