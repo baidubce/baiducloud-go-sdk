@@ -15,8 +15,8 @@ func DeleteParsingRecords() {
 		return
 	}
 	deleteParsingRecordsRequest := &dns.DeleteParsingRecordsRequest{
-		ZoneName:    util.PtrString(""),
-		RecordId:    util.PtrString(""),
+		ZoneName:    util.PtrString("go.com"),
+		RecordId:    util.PtrString("463560"),
 		ClientToken: util.PtrString(""),
 	}
 	err = client.DeleteParsingRecords(deleteParsingRecordsRequest)

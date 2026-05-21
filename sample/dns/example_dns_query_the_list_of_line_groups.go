@@ -17,7 +17,7 @@ func QueryTheListOfLineGroups() {
 	}
 	queryTheListOfLineGroupsRequest := &dns.QueryTheListOfLineGroupsRequest{
 		Marker:  util.PtrString(""),
-		MaxKeys: util.PtrInt32(int32(0)),
+		MaxKeys: util.PtrInt32(int32(10)),
 	}
 	result, err := client.QueryTheListOfLineGroups(queryTheListOfLineGroupsRequest)
 	if err != nil {

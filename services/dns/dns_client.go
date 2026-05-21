@@ -105,7 +105,7 @@ func (c *Client) DomainNameRenewal(request *DomainNameRenewalRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getDomainNameRenewalUri(VERSION_V1, util.StringValue(request.Name))).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithQueryParam(util.StringValue(request.Action), "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -140,7 +140,7 @@ func (c *Client) ModifyTheParsingRecordStatus(request *ModifyTheParsingRecordSta
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getModifyTheParsingRecordStatusUri(VERSION_V1, util.StringValue(request.ZoneName), util.StringValue(request.RecordId))).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithQueryParam(util.StringValue(request.Action), "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
@@ -279,7 +279,7 @@ func (c *Client) UpgradeTheFreeDomainNameToTheUniversalVersion(request *UpgradeT
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpgradeTheFreeDomainNameToTheUniversalVersionUri(VERSION_V1)).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithQueryParam(util.StringValue(request.Action), "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()

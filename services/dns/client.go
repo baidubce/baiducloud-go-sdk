@@ -73,7 +73,7 @@ func getQueryTheListOfLineGroupsUri(version string) string {
 func getRemoveDomainNameUri(version string, ZoneName string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_DNS + bce.URI_PREFIX + CONSTANT_ZONE + bce.URI_PREFIX + ZoneName
 }
-func getUpdateLineGroupUri(version string, LineId int32) string {
+func getUpdateLineGroupUri(version string, LineId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_DNS + bce.URI_PREFIX + CONSTANT_CUSTOMLINE + bce.URI_PREFIX + LineId
 }
 func getUpgradeTheFreeDomainNameToTheUniversalVersionUri(version string) string {

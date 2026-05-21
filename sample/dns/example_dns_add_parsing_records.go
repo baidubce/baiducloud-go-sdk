@@ -15,12 +15,12 @@ func AddParsingRecords() {
 		return
 	}
 	addParsingRecordsRequest := &dns.AddParsingRecordsRequest{
-		ZoneName:    util.PtrString(""),
+		ZoneName:    util.PtrString("go.com"),
 		ClientToken: util.PtrString(""),
-		Rr:          util.PtrString(""),
-		DnsType:     util.PtrString(""),
-		Value:       util.PtrString(""),
-		Ttl:         util.PtrInt32(int32(0)),
+		Rr:          util.PtrString("test"),
+		DnsType:     util.PtrString("A"),
+		Value:       util.PtrString("1.2.3.4"),
+		Ttl:         util.PtrInt32(int32(300)),
 		Line:        util.PtrString(""),
 		Description: util.PtrString(""),
 		Priority:    util.PtrInt32(int32(0)),

@@ -15,10 +15,16 @@ func UpgradeTheFreeDomainNameToTheUniversalVersion() {
 		return
 	}
 	upgradeTheFreeDomainNameToTheUniversalVersionRequest := &dns.UpgradeTheFreeDomainNameToTheUniversalVersionRequest{
-		Action:      util.PtrString(""),
+		Action:      util.PtrString("upgradeToDiscount"),
 		ClientToken: util.PtrString(""),
-		Names:       []*string{},
-		Billing:     []*dns.Billing{},
+		Names:       []*string{
+		                 util.PtrString("")},
+		Billing: &dns.Billing{
+			PaymentTiming: util.PtrString("Prepaid"),
+			Reservation: &dns.Reservation{
+				ReservationLength: util.PtrInt32(1),
+			},
+		},
 	}
 	err = client.UpgradeTheFreeDomainNameToTheUniversalVersion(upgradeTheFreeDomainNameToTheUniversalVersionRequest)
 	if err != nil {

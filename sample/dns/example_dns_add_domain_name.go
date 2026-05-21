@@ -16,7 +16,7 @@ func AddDomainName() {
 	}
 	addDomainNameRequest := &dns.AddDomainNameRequest{
 		ClientToken: util.PtrString(""),
-		Name:        util.PtrString(""),
+		Name:        util.PtrString("go.com"),
 	}
 	err = client.AddDomainName(addDomainNameRequest)
 	if err != nil {

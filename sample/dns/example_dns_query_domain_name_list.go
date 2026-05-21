@@ -18,7 +18,7 @@ func QueryDomainNameList() {
 	queryDomainNameListRequest := &dns.QueryDomainNameListRequest{
 		Name:    util.PtrString(""),
 		Marker:  util.PtrString(""),
-		MaxKeys: util.PtrInt32(int32(0)),
+		MaxKeys: util.PtrInt32(int32(10)),
 	}
 	result, err := client.QueryDomainNameList(queryDomainNameListRequest)
 	if err != nil {

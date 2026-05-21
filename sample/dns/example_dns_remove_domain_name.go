@@ -15,7 +15,7 @@ func RemoveDomainName() {
 		return
 	}
 	removeDomainNameRequest := &dns.RemoveDomainNameRequest{
-		ZoneName:    util.PtrString(""),
+		ZoneName:    util.PtrString("javasdk.com"),
 		ClientToken: util.PtrString(""),
 	}
 	err = client.RemoveDomainName(removeDomainNameRequest)

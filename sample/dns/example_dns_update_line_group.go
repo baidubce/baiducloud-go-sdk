@@ -15,10 +15,12 @@ func UpdateLineGroup() {
 		return
 	}
 	updateLineGroupRequest := &dns.UpdateLineGroupRequest{
-		LineId:      util.PtrInt32(int32(0)),
+		LineId:      util.PtrInt32(int32(6334)),
 		ClientToken: util.PtrString(""),
 		Name:        util.PtrString(""),
-		Lines:       []*string{},
+		Lines:       []*string{util.PtrString("yunnan.ct"),
+                               util.PtrString("guizhou.ct"),
+                                 },
 	}
 	err = client.UpdateLineGroup(updateLineGroupRequest)
 	if err != nil {

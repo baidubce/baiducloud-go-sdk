@@ -16,9 +16,15 @@ func PurchaseAPaidDomainName() {
 	}
 	purchaseAPaidDomainNameRequest := &dns.PurchaseAPaidDomainNameRequest{
 		ClientToken:    util.PtrString(""),
-		Names:          []*string{},
-		ProductVersion: util.PtrString(""),
-		Billing:        []*dns.Billing{},
+		Names:          []*string{
+		            util.PtrString("")},
+		ProductVersion: util.PtrString("discount"),
+		Billing: &dns.Billing{
+			PaymentTiming: util.PtrString("Prepaid"),
+			Reservation: &dns.Reservation{
+				ReservationLength: util.PtrInt32(1),
+			},
+		},
 	}
 	err = client.PurchaseAPaidDomainName(purchaseAPaidDomainNameRequest)
 	if err != nil {

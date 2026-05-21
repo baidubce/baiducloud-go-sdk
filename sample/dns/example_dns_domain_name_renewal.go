@@ -16,9 +16,13 @@ func DomainNameRenewal() {
 	}
 	domainNameRenewalRequest := &dns.DomainNameRenewalRequest{
 		Name:        util.PtrString(""),
-		Action:      util.PtrString(""),
+		Action:      util.PtrString("purchaseReserved"),
 		ClientToken: util.PtrString(""),
-		Billing:     []*dns.BillingForRenew{},
+		Billing: &dns.BillingForRenew{
+			Reservation: &dns.Reservation{
+				ReservationLength: util.PtrInt32(1),
+			},
+		},
 	}
 	err = client.DomainNameRenewal(domainNameRenewalRequest)
 	if err != nil {

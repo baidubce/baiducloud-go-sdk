@@ -121,7 +121,7 @@ func TestClient_DomainNameRenewal(t *testing.T) {
 		Name:        util.PtrString(""),
 		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
-		Billing:     []*BillingForRenew{},
+		Billing:     &BillingForRenew{},
 	}
 	err := DNS_CLIENT.DomainNameRenewal(domainNameRenewalRequest)
 	ExpectEqual(t.Errorf, nil, err)
@@ -156,7 +156,7 @@ func TestClient_PurchaseAPaidDomainName(t *testing.T) {
 		ClientToken:    util.PtrString(""),
 		Names:          []*string{},
 		ProductVersion: util.PtrString(""),
-		Billing:        []*Billing{},
+		Billing:        &Billing{},
 	}
 	err := DNS_CLIENT.PurchaseAPaidDomainName(purchaseAPaidDomainNameRequest)
 	ExpectEqual(t.Errorf, nil, err)
@@ -245,7 +245,7 @@ func TestClient_UpgradeTheFreeDomainNameToTheUniversalVersion(t *testing.T) {
 		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Names:       []*string{},
-		Billing:     []*Billing{},
+		Billing:     &Billing{},
 	}
 	err := DNS_CLIENT.UpgradeTheFreeDomainNameToTheUniversalVersion(upgradeTheFreeDomainNameToTheUniversalVersionRequest)
 	ExpectEqual(t.Errorf, nil, err)

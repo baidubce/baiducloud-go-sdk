@@ -15,7 +15,7 @@ func DeleteLineGroup() {
 		return
 	}
 	deleteLineGroupRequest := &dns.DeleteLineGroupRequest{
-		LineId:      util.PtrString(""),
+		LineId:      util.PtrString("6069"),
 		ClientToken: util.PtrString(""),
 	}
 	err = client.DeleteLineGroup(deleteLineGroupRequest)
