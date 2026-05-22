@@ -293,6 +293,48 @@ func TestClient_CreateAppBlbUdpListener(t *testing.T) {
 	err := BLB_CLIENT.CreateAppBlbUdpListener(createAppBlbUdpListenerRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateBlb(t *testing.T) {
+	Billing := &BillingForCreate{
+		PaymentTiming: util.PtrString(""),
+		BillingMethod: util.PtrString(""),
+		Reservation: &ReservationForCreate{
+			ReservationLength: util.PtrInt32(int32(0)),
+		},
+	}
+	createBlbRequest := &CreateBlbRequest{
+		ClientToken:                  util.PtrString(""),
+		Name:                         util.PtrString(""),
+		Desc:                         util.PtrString(""),
+		VpcId:                        util.PtrString(""),
+		SubnetId:                     util.PtrString(""),
+		Address:                      util.PtrString(""),
+		BlbType:                      util.PtrString(""),
+		Eip:                          util.PtrString(""),
+		Tags:                         []*TagModel{},
+		Billing:                      Billing,
+		PerformanceLevel:             util.PtrString(""),
+		AutoRenewLength:              util.PtrInt32(int32(0)),
+		AutoRenewTimeUnit:            util.PtrString(""),
+		ResourceGroupId:              util.PtrString(""),
+		AllowDelete:                  util.PtrBool(false),
+		AllowModify:                  util.PtrBool(false),
+		ModificationProtectionReason: util.PtrString(""),
+		AllocateIpv6:                 util.PtrBool(false),
+	}
+	result := &CreateBlbResponse{}
+	result, err := BLB_CLIENT.CreateBlb(createBlbRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteAppBlbListener(t *testing.T) {
 	deleteAppBlbListenerRequest := &DeleteAppBlbListenerRequest{
 		BlbId:        util.PtrString(""),
@@ -504,6 +546,50 @@ func TestClient_DescribeAppBlbs(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeBlb(t *testing.T) {
+	describeBlbRequest := &DescribeBlbRequest{
+		BlbId: util.PtrString(""),
+		Type:  util.PtrString(""),
+	}
+	result := &DescribeBlbResponse{}
+	result, err := BLB_CLIENT.DescribeBlb(describeBlbRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeBlbs(t *testing.T) {
+	describeBlbsRequest := &DescribeBlbsRequest{
+		Address:      util.PtrString(""),
+		Name:         util.PtrString(""),
+		BlbId:        util.PtrString(""),
+		BccId:        util.PtrString(""),
+		ExactlyMatch: util.PtrBool(false),
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
+		Type:         util.PtrString(""),
+	}
+	result := &DescribeBlbsResponse{}
+	result, err := BLB_CLIENT.DescribeBlbs(describeBlbsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_RefundBlb(t *testing.T) {
 	refundBlbRequest := &RefundBlbRequest{
 		BlbId:       util.PtrString(""),
@@ -517,6 +603,14 @@ func TestClient_ReleaseAppBlb(t *testing.T) {
 		BlbId: util.PtrString(""),
 	}
 	err := BLB_CLIENT.ReleaseAppBlb(releaseAppBlbRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ReleaseBlb(t *testing.T) {
+	releaseBlbRequest := &ReleaseBlbRequest{
+		BlbId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := BLB_CLIENT.ReleaseBlb(releaseBlbRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ResizeBlb(t *testing.T) {
@@ -649,5 +743,35 @@ func TestClient_UpdateAppBlbUdpListener(t *testing.T) {
 		Description:       util.PtrString(""),
 	}
 	err := BLB_CLIENT.UpdateAppBlbUdpListener(updateAppBlbUdpListenerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateBlb(t *testing.T) {
+	updateBlbRequest := &UpdateBlbRequest{
+		BlbId:        util.PtrString(""),
+		Name:         util.PtrString(""),
+		Desc:         util.PtrString(""),
+		AllowDelete:  util.PtrBool(false),
+		AllocateIpv6: util.PtrBool(false),
+	}
+	err := BLB_CLIENT.UpdateBlb(updateBlbRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateBlbAcl(t *testing.T) {
+	updateBlbAclRequest := &UpdateBlbAclRequest{
+		BlbId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		SupportAcl:  util.PtrBool(false),
+	}
+	err := BLB_CLIENT.UpdateBlbAcl(updateBlbAclRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateBlbModifyProtection(t *testing.T) {
+	updateBlbModifyProtectionRequest := &UpdateBlbModifyProtectionRequest{
+		BlbId:                        util.PtrString(""),
+		ClientToken:                  util.PtrString(""),
+		AllowModify:                  util.PtrBool(false),
+		ModificationProtectionReason: util.PtrString(""),
+	}
+	err := BLB_CLIENT.UpdateBlbModifyProtection(updateBlbModifyProtectionRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }

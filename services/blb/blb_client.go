@@ -222,6 +222,29 @@ func (c *Client) CreateAppBlbUdpListener(request *CreateAppBlbUdpListenerRequest
 		Do()
 }
 
+// CreateBlb
+//
+// PARAMS:
+//   - request: the arguments to CreateBlb
+//
+// RETURNS:
+//   - CreateBlbResponse: The return type of the CreateBlb interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateBlb(request *CreateBlbRequest) (*CreateBlbResponse, error) {
+	result := &CreateBlbResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateBlbUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DeleteAppBlbListener
 //
 // PARAMS:
@@ -476,6 +499,57 @@ func (c *Client) DescribeAppBlbs(request *DescribeAppBlbsRequest) (*DescribeAppB
 	return result, nil
 }
 
+// DescribeBlb
+//
+// PARAMS:
+//   - request: the arguments to DescribeBlb
+//
+// RETURNS:
+//   - DescribeBlbResponse: The return type of the DescribeBlb interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeBlb(request *DescribeBlbRequest) (*DescribeBlbResponse, error) {
+	result := &DescribeBlbResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeBlbUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("type", util.StringValue(request.Type)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeBlbs
+//
+// PARAMS:
+//   - request: the arguments to DescribeBlbs
+//
+// RETURNS:
+//   - DescribeBlbsResponse: The return type of the DescribeBlbs interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeBlbs(request *DescribeBlbsRequest) (*DescribeBlbsResponse, error) {
+	result := &DescribeBlbsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeBlbsUri(VERSION_V1)).
+		WithQueryParamFilter("address", util.StringValue(request.Address)).
+		WithQueryParamFilter("name", util.StringValue(request.Name)).
+		WithQueryParamFilter("blbId", util.StringValue(request.BlbId)).
+		WithQueryParamFilter("bccId", util.StringValue(request.BccId)).
+		WithQueryParamFilter("exactlyMatch", util.BoolValue(request.ExactlyMatch)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("type", util.StringValue(request.Type)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // RefundBlb
 //
 // PARAMS:
@@ -504,6 +578,22 @@ func (c *Client) ReleaseAppBlb(request *ReleaseAppBlbRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getReleaseAppBlbUri(VERSION_V1, util.StringValue(request.BlbId))).
+		Do()
+}
+
+// ReleaseBlb
+//
+// PARAMS:
+//   - request: the arguments to ReleaseBlb
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ReleaseBlb(request *ReleaseBlbRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getReleaseBlbUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
 
@@ -652,6 +742,56 @@ func (c *Client) UpdateAppBlbUdpListener(request *UpdateAppBlbUdpListenerRequest
 		WithURL(getUpdateAppBlbUdpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateBlb
+//
+// PARAMS:
+//   - request: the arguments to UpdateBlb
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateBlb(request *UpdateBlbRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateBlbUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithBody(request).
+		Do()
+}
+
+// UpdateBlbAcl
+//
+// PARAMS:
+//   - request: the arguments to UpdateBlbAcl
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateBlbAcl(request *UpdateBlbAclRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateBlbAclUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateBlbModifyProtection
+//
+// PARAMS:
+//   - request: the arguments to UpdateBlbModifyProtection
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateBlbModifyProtection(request *UpdateBlbModifyProtectionRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateBlbModifyProtectionUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
