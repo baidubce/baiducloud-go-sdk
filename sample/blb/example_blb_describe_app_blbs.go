@@ -7,7 +7,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/services/blb"
 )
 
-func BillingChangePostToPreBlb() {
+func DescribeAppBlbs() {
 	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
 	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
 	client, err := blb.NewClient(ak, sk, endpoint)
@@ -15,14 +15,16 @@ func BillingChangePostToPreBlb() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	billingChangePostToPreBlbRequest := &blb.BillingChangePostToPreBlbRequest{
-		BlbId:             util.PtrString(""),
-		ClientToken:       util.PtrString(""),
-		BillingMethod:     util.PtrString(""),
-		PerformanceLevel:  util.PtrString(""),
-		ReservationLength: util.PtrInt32(int32(0)),
+	describeAppBlbsRequest := &blb.DescribeAppBlbsRequest{
+		Address:      util.PtrString(""),
+		Name:         util.PtrString(""),
+		BlbId:        util.PtrString(""),
+		BccId:        util.PtrString(""),
+		ExactlyMatch: util.PtrBool(false),
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
 	}
-	result, err := client.BillingChangePostToPreBlb(billingChangePostToPreBlbRequest)
+	result, err := client.DescribeAppBlbs(describeAppBlbsRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

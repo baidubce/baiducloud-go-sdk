@@ -1,13 +1,12 @@
 package blbsample
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
 	"github.com/baidubce/baiducloud-go-sdk/services/blb"
 )
 
-func BillingChangePostToPreBlb() {
+func CreateAppBlbUdpListener() {
 	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
 	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
 	client, err := blb.NewClient(ak, sk, endpoint)
@@ -15,23 +14,17 @@ func BillingChangePostToPreBlb() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	billingChangePostToPreBlbRequest := &blb.BillingChangePostToPreBlbRequest{
+	createAppBlbUdpListenerRequest := &blb.CreateAppBlbUdpListenerRequest{
 		BlbId:             util.PtrString(""),
 		ClientToken:       util.PtrString(""),
-		BillingMethod:     util.PtrString(""),
-		PerformanceLevel:  util.PtrString(""),
-		ReservationLength: util.PtrInt32(int32(0)),
+		ListenerPort:      util.PtrInt32(int32(0)),
+		Scheduler:         util.PtrString(""),
+		UdpSessionTimeout: util.PtrInt32(int32(0)),
+		Description:       util.PtrString(""),
 	}
-	result, err := client.BillingChangePostToPreBlb(billingChangePostToPreBlbRequest)
+	err = client.CreateAppBlbUdpListener(createAppBlbUdpListenerRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)
-		return
 	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
 }
