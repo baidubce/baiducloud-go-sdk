@@ -9,6 +9,8 @@ const (
 
 	CONSTANT_VPC = "vpc"
 
+	CONSTANT_SECURITY_GROUP = "securityGroup"
+
 	CONSTANT_VPN = "vpn"
 
 	CONSTANT_SSL_VPN_SERVER = "sslVpnServer"
@@ -16,6 +18,8 @@ const (
 	CONSTANT_SHUTDOWN_RELAY = "shutdownRelay"
 
 	CONSTANT_VPNCONN = "vpnconn"
+
+	CONSTANT_RULE = "rule"
 
 	CONSTANT_RESOURCE_IP = "resourceIp"
 
@@ -25,13 +29,15 @@ const (
 
 	CONSTANT_ROUTE = "route"
 
-	CONSTANT_RULE = "rule"
-
 	CONSTANT_PRIVATE_IP_ADDRESS_INFO = "privateIpAddressInfo"
 
 	CONSTANT_ET_GATEWAY = "etGateway"
 
 	CONSTANT_HEALTH_CHECK = "healthCheck"
+
+	CONSTANT_ENTERPRISE = "enterprise"
+
+	CONSTANT_SECURITY = "security"
 
 	CONSTANT_SSL_VPN_USER = "sslVpnUser"
 
@@ -40,6 +46,8 @@ const (
 	CONSTANT_GATEWAY = "gateway"
 
 	CONSTANT_LIMITRULE = "limitrule"
+
+	CONSTANT_UPDATE = "update"
 
 	CONSTANT_IPRESERVE = "ipreserve"
 
@@ -70,6 +78,12 @@ func getAcceptPeerToPeerConnectionApplicationsUri(version string, PeerConnId str
 func getActiveStandbySwitchoverUri(version string, RouteRuleId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ROUTE + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + RouteRuleId
 }
+func getAuthorizeRegularSecurityGroupRulesV2Uri(version string, SecurityGroupId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP + bce.URI_PREFIX + SecurityGroupId
+}
+func getAuthorizedEnterpriseSecurityGroupRulesUri(version string, EnterpriseSecurityGroupId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ENTERPRISE + bce.URI_PREFIX + CONSTANT_SECURITY + bce.URI_PREFIX + EnterpriseSecurityGroupId
+}
 func getBatchCreateSslVpnUsersUri(version string, VpnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId + bce.URI_PREFIX + CONSTANT_SSL_VPN_USER
 }
@@ -88,11 +102,17 @@ func getCloseVpcRelayUri(version string, VpcId string) string {
 func getCreateAPeerToPeerConnectionUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN
 }
+func getCreateARegularSecurityGroupV2Uri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP
+}
 func getCreateDedicatedGatewayUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET_GATEWAY
 }
 func getCreateDedicatedGatewayHealthCheckUri(version string, EtGatewayId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET_GATEWAY + bce.URI_PREFIX + EtGatewayId + bce.URI_PREFIX + CONSTANT_HEALTH_CHECK
+}
+func getCreateEnterpriseSecurityGroupUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ENTERPRISE + bce.URI_PREFIX + CONSTANT_SECURITY
 }
 func getCreateGatewayLimitRulesUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE
@@ -121,11 +141,23 @@ func getCreateVpnUri(version string) string {
 func getCreateVpnTunnelUri(version string, VpnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId + bce.URI_PREFIX + CONSTANT_VPNCONN
 }
+func getDeleteEnterpriseSecurityGroupUri(version string, EnterpriseSecurityGroupId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ENTERPRISE + bce.URI_PREFIX + CONSTANT_SECURITY + bce.URI_PREFIX + EnterpriseSecurityGroupId
+}
+func getDeleteEnterpriseSecurityGroupRulesUri(version string, EnterpriseSecurityGroupRuleId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ENTERPRISE + bce.URI_PREFIX + CONSTANT_SECURITY + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + EnterpriseSecurityGroupRuleId
+}
 func getDeleteGatewayLimitRuleUri(version string, GlrId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_GATEWAY + bce.URI_PREFIX + CONSTANT_LIMITRULE + bce.URI_PREFIX + GlrId
 }
 func getDeleteIpReserveUri(version string, IpReserveId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_IPRESERVE + bce.URI_PREFIX + IpReserveId
+}
+func getDeleteRegularSecurityGroupRulesV2Uri(version string, SecurityGroupRuleId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + SecurityGroupRuleId
+}
+func getDeleteRegularSecurityGroupV2Uri(version string, SecurityGroupId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP + bce.URI_PREFIX + SecurityGroupId
 }
 func getDeleteRoutingRulesUri(version string, RouteRuleId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ROUTE + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + RouteRuleId
@@ -199,8 +231,14 @@ func getQueryTheDetailsOfTheDedicatedGatewayUri(version string, EtGatewayId stri
 func getQueryTheListOfDedicatedLineGatewaysUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET_GATEWAY
 }
+func getQueryTheListOfEnterpriseSecurityGroupsUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ENTERPRISE + bce.URI_PREFIX + CONSTANT_SECURITY
+}
 func getQueryTheListOfPeerConnectionsUri(version string, VpcId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN
+}
+func getQueryTheListOfRegularSecurityGroupsV2Uri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP
 }
 func getQueryVpcIntranetIpUri(version string, VpcId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + VpcId + bce.URI_PREFIX + CONSTANT_PRIVATE_IP_ADDRESS_INFO
@@ -226,6 +264,9 @@ func getReleaseVpnUri(version string, VpnId string) string {
 func getRenewVpnUri(version string, VpnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId
 }
+func getRevokeRegularSecurityGroupRulesV2Uri(version string, SecurityGroupId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP + bce.URI_PREFIX + SecurityGroupId
+}
 func getSearchForVpnDetailsUri(version string, VpnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPN + bce.URI_PREFIX + VpnId
 }
@@ -241,8 +282,14 @@ func getUnbindPhysicalDedicatedLineUri(version string, EtGatewayId string) strin
 func getUpdateDedicatedGatewayUri(version string, EtGatewayId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET_GATEWAY + bce.URI_PREFIX + EtGatewayId
 }
+func getUpdateEnterpriseSecurityGroupRulesUri(version string, EnterpriseSecurityGroupRuleId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ENTERPRISE + bce.URI_PREFIX + CONSTANT_SECURITY + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + EnterpriseSecurityGroupRuleId
+}
 func getUpdatePeerToPeerConnectionReleaseProtectionSwitchUri(version string, PeerConnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId + bce.URI_PREFIX + CONSTANT_DELETE_PROTECT
+}
+func getUpdateRegularSecurityGroupRulesV2Uri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + CONSTANT_UPDATE
 }
 func getUpdateRoutingRulesUri(version string, RouteRuleId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ROUTE + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + RouteRuleId
@@ -285,4 +332,7 @@ func getViewGatewayLimitRulesUri(version string) string {
 }
 func getViewPeerToPeerConnectionDetailsUri(version string, PeerConnId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PEERCONN + bce.URI_PREFIX + PeerConnId
+}
+func getViewSecurityGroupDetailsV2Uri(version string, SecurityGroupId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP + bce.URI_PREFIX + SecurityGroupId
 }

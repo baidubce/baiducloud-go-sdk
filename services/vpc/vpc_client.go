@@ -9,6 +9,8 @@ import (
 
 const (
 	VERSION_V1 = "v1"
+
+	VERSION_V2 = "v2"
 )
 
 // AcceptPeerToPeerConnectionApplications
@@ -42,6 +44,43 @@ func (c *Client) ActiveStandbySwitchover(request *ActiveStandbySwitchoverRequest
 		WithURL(getActiveStandbySwitchoverUri(VERSION_V1, util.StringValue(request.RouteRuleId))).
 		WithQueryParam("switchRouteHA", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// AuthorizeRegularSecurityGroupRulesV2
+//
+// PARAMS:
+//   - request: the arguments to AuthorizeRegularSecurityGroupRulesV2
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AuthorizeRegularSecurityGroupRulesV2(request *AuthorizeRegularSecurityGroupRulesV2Request) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getAuthorizeRegularSecurityGroupRulesV2Uri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
+		WithQueryParam("authorizeRule", "").
+		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// AuthorizedEnterpriseSecurityGroupRules
+//
+// PARAMS:
+//   - request: the arguments to AuthorizedEnterpriseSecurityGroupRules
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AuthorizedEnterpriseSecurityGroupRules(request *AuthorizedEnterpriseSecurityGroupRulesRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getAuthorizedEnterpriseSecurityGroupRulesUri(VERSION_V1, util.StringValue(request.EnterpriseSecurityGroupId))).
+		WithQueryParam("authorizeRule", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
 		Do()
 }
 
@@ -161,6 +200,29 @@ func (c *Client) CreateAPeerToPeerConnection(request *CreateAPeerToPeerConnectio
 	return result, nil
 }
 
+// CreateARegularSecurityGroupV2
+//
+// PARAMS:
+//   - request: the arguments to CreateARegularSecurityGroupV2
+//
+// RETURNS:
+//   - CreateARegularSecurityGroupV2Response: The return type of the CreateARegularSecurityGroupV2 interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateARegularSecurityGroupV2(request *CreateARegularSecurityGroupV2Request) (*CreateARegularSecurityGroupV2Response, error) {
+	result := &CreateARegularSecurityGroupV2Response{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateARegularSecurityGroupV2Uri(VERSION_V2)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateDedicatedGateway
 //
 // PARAMS:
@@ -199,6 +261,29 @@ func (c *Client) CreateDedicatedGatewayHealthCheck(request *CreateDedicatedGatew
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
+}
+
+// CreateEnterpriseSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to CreateEnterpriseSecurityGroup
+//
+// RETURNS:
+//   - CreateEnterpriseSecurityGroupResponse: The return type of the CreateEnterpriseSecurityGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateEnterpriseSecurityGroup(request *CreateEnterpriseSecurityGroupRequest) (*CreateEnterpriseSecurityGroupResponse, error) {
+	result := &CreateEnterpriseSecurityGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateEnterpriseSecurityGroupUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateGatewayLimitRules
@@ -408,6 +493,38 @@ func (c *Client) CreateVpnTunnel(request *CreateVpnTunnelRequest) (*CreateVpnTun
 	return result, nil
 }
 
+// DeleteEnterpriseSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to DeleteEnterpriseSecurityGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteEnterpriseSecurityGroup(request *DeleteEnterpriseSecurityGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteEnterpriseSecurityGroupUri(VERSION_V1, util.StringValue(request.EnterpriseSecurityGroupId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// DeleteEnterpriseSecurityGroupRules
+//
+// PARAMS:
+//   - request: the arguments to DeleteEnterpriseSecurityGroupRules
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteEnterpriseSecurityGroupRules(request *DeleteEnterpriseSecurityGroupRulesRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteEnterpriseSecurityGroupRulesUri(VERSION_V1, util.StringValue(request.EnterpriseSecurityGroupRuleId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
 // DeleteGatewayLimitRule
 //
 // PARAMS:
@@ -436,6 +553,39 @@ func (c *Client) DeleteIpReserve(request *DeleteIpReserveRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getDeleteIpReserveUri(VERSION_V1, util.StringValue(request.IpReserveId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// DeleteRegularSecurityGroupRulesV2
+//
+// PARAMS:
+//   - request: the arguments to DeleteRegularSecurityGroupRulesV2
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteRegularSecurityGroupRulesV2(request *DeleteRegularSecurityGroupRulesV2Request) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteRegularSecurityGroupRulesV2Uri(VERSION_V2, util.StringValue(request.SecurityGroupRuleId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
+		Do()
+}
+
+// DeleteRegularSecurityGroupV2
+//
+// PARAMS:
+//   - request: the arguments to DeleteRegularSecurityGroupV2
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteRegularSecurityGroupV2(request *DeleteRegularSecurityGroupV2Request) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteRegularSecurityGroupV2Uri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
@@ -916,6 +1066,30 @@ func (c *Client) QueryTheListOfDedicatedLineGateways(request *QueryTheListOfDedi
 	return result, nil
 }
 
+// QueryTheListOfEnterpriseSecurityGroups
+//
+// PARAMS:
+//   - request: the arguments to QueryTheListOfEnterpriseSecurityGroups
+//
+// RETURNS:
+//   - QueryTheListOfEnterpriseSecurityGroupsResponse: The return type of the QueryTheListOfEnterpriseSecurityGroups interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryTheListOfEnterpriseSecurityGroups(request *QueryTheListOfEnterpriseSecurityGroupsRequest) (*QueryTheListOfEnterpriseSecurityGroupsResponse, error) {
+	result := &QueryTheListOfEnterpriseSecurityGroupsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryTheListOfEnterpriseSecurityGroupsUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // QueryTheListOfPeerConnections
 //
 // PARAMS:
@@ -931,6 +1105,33 @@ func (c *Client) QueryTheListOfPeerConnections(request *QueryTheListOfPeerConnec
 		WithURL(getQueryTheListOfPeerConnectionsUri(VERSION_V1, util.StringValue(request.VpcId))).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// QueryTheListOfRegularSecurityGroupsV2
+//
+// PARAMS:
+//   - request: the arguments to QueryTheListOfRegularSecurityGroupsV2
+//
+// RETURNS:
+//   - QueryTheListOfRegularSecurityGroupsV2Response: The return type of the QueryTheListOfRegularSecurityGroupsV2 interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryTheListOfRegularSecurityGroupsV2(request *QueryTheListOfRegularSecurityGroupsV2Request) (*QueryTheListOfRegularSecurityGroupsV2Response, error) {
+	result := &QueryTheListOfRegularSecurityGroupsV2Response{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryTheListOfRegularSecurityGroupsV2Uri(VERSION_V2)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("securityGroupId", util.StringValue(request.SecurityGroupId)).
+		WithQueryParamFilter("securityGroupIds", util.StringValue(request.SecurityGroupIds)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -1096,6 +1297,25 @@ func (c *Client) RenewVpn(request *RenewVpnRequest) error {
 		Do()
 }
 
+// RevokeRegularSecurityGroupRulesV2
+//
+// PARAMS:
+//   - request: the arguments to RevokeRegularSecurityGroupRulesV2
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RevokeRegularSecurityGroupRulesV2(request *RevokeRegularSecurityGroupRulesV2Request) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getRevokeRegularSecurityGroupRulesV2Uri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
+		WithQueryParam("revokeRule", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
+		WithBody(request).
+		Do()
+}
+
 // SearchForVpnDetails
 //
 // PARAMS:
@@ -1190,6 +1410,23 @@ func (c *Client) UpdateDedicatedGateway(request *UpdateDedicatedGatewayRequest) 
 		Do()
 }
 
+// UpdateEnterpriseSecurityGroupRules
+//
+// PARAMS:
+//   - request: the arguments to UpdateEnterpriseSecurityGroupRules
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateEnterpriseSecurityGroupRules(request *UpdateEnterpriseSecurityGroupRulesRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateEnterpriseSecurityGroupRulesUri(VERSION_V1, util.StringValue(request.EnterpriseSecurityGroupRuleId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // UpdatePeerToPeerConnectionReleaseProtectionSwitch
 //
 // PARAMS:
@@ -1202,6 +1439,24 @@ func (c *Client) UpdatePeerToPeerConnectionReleaseProtectionSwitch(request *Upda
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdatePeerToPeerConnectionReleaseProtectionSwitchUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithBody(request).
+		Do()
+}
+
+// UpdateRegularSecurityGroupRulesV2
+//
+// PARAMS:
+//   - request: the arguments to UpdateRegularSecurityGroupRulesV2
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateRegularSecurityGroupRulesV2(request *UpdateRegularSecurityGroupRulesV2Request) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateRegularSecurityGroupRulesV2Uri(VERSION_V2)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
 		WithBody(request).
 		Do()
 }
@@ -1463,6 +1718,27 @@ func (c *Client) ViewPeerToPeerConnectionDetails(request *ViewPeerToPeerConnecti
 		WithMethod(http.GET).
 		WithURL(getViewPeerToPeerConnectionDetailsUri(VERSION_V1, util.StringValue(request.PeerConnId))).
 		WithQueryParamFilter("role", util.StringValue(request.Role)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ViewSecurityGroupDetailsV2
+//
+// PARAMS:
+//   - request: the arguments to ViewSecurityGroupDetailsV2
+//
+// RETURNS:
+//   - ViewSecurityGroupDetailsV2Response: The return type of the ViewSecurityGroupDetailsV2 interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ViewSecurityGroupDetailsV2(request *ViewSecurityGroupDetailsV2Request) (*ViewSecurityGroupDetailsV2Response, error) {
+	result := &ViewSecurityGroupDetailsV2Response{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getViewSecurityGroupDetailsV2Uri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
 		WithResult(result).
 		Do()
 	if err != nil {

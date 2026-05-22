@@ -83,6 +83,40 @@ func TestClient_ActiveStandbySwitchover(t *testing.T) {
 	err := VPC_CLIENT.ActiveStandbySwitchover(activeStandbySwitchoverRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_AuthorizeRegularSecurityGroupRulesV2(t *testing.T) {
+	Rule := &SecurityGroupRuleModel{
+		Remark:              util.PtrString(""),
+		Direction:           util.PtrString(""),
+		Ethertype:           util.PtrString(""),
+		PortRange:           util.PtrString(""),
+		Protocol:            util.PtrString(""),
+		SourceGroupId:       util.PtrString(""),
+		SourceIp:            util.PtrString(""),
+		DestGroupId:         util.PtrString(""),
+		DestIp:              util.PtrString(""),
+		SecurityGroupId:     util.PtrString(""),
+		SecurityGroupRuleId: util.PtrString(""),
+		CreatedTime:         util.PtrString(""),
+		UpdatedTime:         util.PtrString(""),
+	}
+	authorizeRegularSecurityGroupRulesV2Request := &AuthorizeRegularSecurityGroupRulesV2Request{
+		SecurityGroupId: util.PtrString(""),
+		SgVersion:       util.PtrInt64(int64(0)),
+		ClientToken:     util.PtrString(""),
+		Rule:            Rule,
+	}
+	err := VPC_CLIENT.AuthorizeRegularSecurityGroupRulesV2(authorizeRegularSecurityGroupRulesV2Request)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_AuthorizedEnterpriseSecurityGroupRules(t *testing.T) {
+	authorizedEnterpriseSecurityGroupRulesRequest := &AuthorizedEnterpriseSecurityGroupRulesRequest{
+		EnterpriseSecurityGroupId: util.PtrString(""),
+		ClientToken:               util.PtrString(""),
+		Rules:                     []*EnterpriseSecurityGroupRuleModel{},
+	}
+	err := VPC_CLIENT.AuthorizedEnterpriseSecurityGroupRules(authorizedEnterpriseSecurityGroupRulesRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_BatchCreateSslVpnUsers(t *testing.T) {
 	batchCreateSslVpnUsersRequest := &BatchCreateSslVpnUsersRequest{
 		VpnId:       util.PtrString(""),
@@ -177,6 +211,29 @@ func TestClient_CreateAPeerToPeerConnection(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateARegularSecurityGroupV2(t *testing.T) {
+	createARegularSecurityGroupV2Request := &CreateARegularSecurityGroupV2Request{
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		VpcId:       util.PtrString(""),
+		Desc:        util.PtrString(""),
+		Rules:       []*SecurityGroupRuleModel{},
+		Tags:        []*TagModel{},
+	}
+	result := &CreateARegularSecurityGroupV2Response{}
+	result, err := VPC_CLIENT.CreateARegularSecurityGroupV2(createARegularSecurityGroupV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateDedicatedGateway(t *testing.T) {
 	createDedicatedGatewayRequest := &CreateDedicatedGatewayRequest{
 		ClientToken:     util.PtrString(""),
@@ -217,6 +274,28 @@ func TestClient_CreateDedicatedGatewayHealthCheck(t *testing.T) {
 		AutoGenerateRouteRule: util.PtrBool(false),
 	}
 	err := VPC_CLIENT.CreateDedicatedGatewayHealthCheck(createDedicatedGatewayHealthCheckRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateEnterpriseSecurityGroup(t *testing.T) {
+	createEnterpriseSecurityGroupRequest := &CreateEnterpriseSecurityGroupRequest{
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		Desc:        util.PtrString(""),
+		Rules:       []*EnterpriseSecurityGroupRuleModel{},
+		Tags:        []*TagModel{},
+	}
+	result := &CreateEnterpriseSecurityGroupResponse{}
+	result, err := VPC_CLIENT.CreateEnterpriseSecurityGroup(createEnterpriseSecurityGroupRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateGatewayLimitRules(t *testing.T) {
@@ -466,6 +545,22 @@ func TestClient_CreateVpnTunnel(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteEnterpriseSecurityGroup(t *testing.T) {
+	deleteEnterpriseSecurityGroupRequest := &DeleteEnterpriseSecurityGroupRequest{
+		EnterpriseSecurityGroupId: util.PtrString(""),
+		ClientToken:               util.PtrString(""),
+	}
+	err := VPC_CLIENT.DeleteEnterpriseSecurityGroup(deleteEnterpriseSecurityGroupRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteEnterpriseSecurityGroupRules(t *testing.T) {
+	deleteEnterpriseSecurityGroupRulesRequest := &DeleteEnterpriseSecurityGroupRulesRequest{
+		EnterpriseSecurityGroupRuleId: util.PtrString(""),
+		ClientToken:                   util.PtrString(""),
+	}
+	err := VPC_CLIENT.DeleteEnterpriseSecurityGroupRules(deleteEnterpriseSecurityGroupRulesRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteGatewayLimitRule(t *testing.T) {
 	deleteGatewayLimitRuleRequest := &DeleteGatewayLimitRuleRequest{
 		GlrId:       util.PtrString(""),
@@ -480,6 +575,23 @@ func TestClient_DeleteIpReserve(t *testing.T) {
 		ClientToken: util.PtrString(""),
 	}
 	err := VPC_CLIENT.DeleteIpReserve(deleteIpReserveRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteRegularSecurityGroupRulesV2(t *testing.T) {
+	deleteRegularSecurityGroupRulesV2Request := &DeleteRegularSecurityGroupRulesV2Request{
+		SecurityGroupRuleId: util.PtrString(""),
+		ClientToken:         util.PtrString(""),
+		SgVersion:           util.PtrInt64(int64(0)),
+	}
+	err := VPC_CLIENT.DeleteRegularSecurityGroupRulesV2(deleteRegularSecurityGroupRulesV2Request)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteRegularSecurityGroupV2(t *testing.T) {
+	deleteRegularSecurityGroupV2Request := &DeleteRegularSecurityGroupV2Request{
+		SecurityGroupId: util.PtrString(""),
+		ClientToken:     util.PtrString(""),
+	}
+	err := VPC_CLIENT.DeleteRegularSecurityGroupV2(deleteRegularSecurityGroupV2Request)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteRoutingRules(t *testing.T) {
@@ -822,6 +934,26 @@ func TestClient_QueryTheListOfDedicatedLineGateways(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_QueryTheListOfEnterpriseSecurityGroups(t *testing.T) {
+	queryTheListOfEnterpriseSecurityGroupsRequest := &QueryTheListOfEnterpriseSecurityGroupsRequest{
+		Marker:     util.PtrString(""),
+		MaxKeys:    util.PtrInt32(int32(0)),
+		InstanceId: util.PtrString(""),
+	}
+	result := &QueryTheListOfEnterpriseSecurityGroupsResponse{}
+	result, err := VPC_CLIENT.QueryTheListOfEnterpriseSecurityGroups(queryTheListOfEnterpriseSecurityGroupsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_QueryTheListOfPeerConnections(t *testing.T) {
 	queryTheListOfPeerConnectionsRequest := &QueryTheListOfPeerConnectionsRequest{
 		VpcId:   util.PtrString(""),
@@ -830,6 +962,29 @@ func TestClient_QueryTheListOfPeerConnections(t *testing.T) {
 	}
 	result := &QueryTheListOfPeerConnectionsResponse{}
 	result, err := VPC_CLIENT.QueryTheListOfPeerConnections(queryTheListOfPeerConnectionsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QueryTheListOfRegularSecurityGroupsV2(t *testing.T) {
+	queryTheListOfRegularSecurityGroupsV2Request := &QueryTheListOfRegularSecurityGroupsV2Request{
+		Marker:           util.PtrString(""),
+		MaxKeys:          util.PtrInt32(int32(0)),
+		InstanceId:       util.PtrString(""),
+		VpcId:            util.PtrString(""),
+		SecurityGroupId:  util.PtrString(""),
+		SecurityGroupIds: util.PtrString(""),
+	}
+	result := &QueryTheListOfRegularSecurityGroupsV2Response{}
+	result, err := VPC_CLIENT.QueryTheListOfRegularSecurityGroupsV2(queryTheListOfRegularSecurityGroupsV2Request)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -953,6 +1108,31 @@ func TestClient_RenewVpn(t *testing.T) {
 	err := VPC_CLIENT.RenewVpn(renewVpnRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_RevokeRegularSecurityGroupRulesV2(t *testing.T) {
+	Rule := &SecurityGroupRuleModel{
+		Remark:              util.PtrString(""),
+		Direction:           util.PtrString(""),
+		Ethertype:           util.PtrString(""),
+		PortRange:           util.PtrString(""),
+		Protocol:            util.PtrString(""),
+		SourceGroupId:       util.PtrString(""),
+		SourceIp:            util.PtrString(""),
+		DestGroupId:         util.PtrString(""),
+		DestIp:              util.PtrString(""),
+		SecurityGroupId:     util.PtrString(""),
+		SecurityGroupRuleId: util.PtrString(""),
+		CreatedTime:         util.PtrString(""),
+		UpdatedTime:         util.PtrString(""),
+	}
+	revokeRegularSecurityGroupRulesV2Request := &RevokeRegularSecurityGroupRulesV2Request{
+		SecurityGroupId: util.PtrString(""),
+		ClientToken:     util.PtrString(""),
+		SgVersion:       util.PtrInt64(int64(0)),
+		Rule:            Rule,
+	}
+	err := VPC_CLIENT.RevokeRegularSecurityGroupRulesV2(revokeRegularSecurityGroupRulesV2Request)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_SearchForVpnDetails(t *testing.T) {
 	searchForVpnDetailsRequest := &SearchForVpnDetailsRequest{
 		VpnId: util.PtrString(""),
@@ -1020,12 +1200,47 @@ func TestClient_UpdateDedicatedGateway(t *testing.T) {
 	err := VPC_CLIENT.UpdateDedicatedGateway(updateDedicatedGatewayRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_UpdateEnterpriseSecurityGroupRules(t *testing.T) {
+	updateEnterpriseSecurityGroupRulesRequest := &UpdateEnterpriseSecurityGroupRulesRequest{
+		EnterpriseSecurityGroupRuleId: util.PtrString(""),
+		ClientToken:                   util.PtrString(""),
+		Remark:                        util.PtrString(""),
+		PortRange:                     util.PtrString(""),
+		SourcePortRange:               util.PtrString(""),
+		SourceIp:                      util.PtrString(""),
+		DestIp:                        util.PtrString(""),
+		LocalIp:                       util.PtrString(""),
+		RemoteIpSet:                   util.PtrString(""),
+		RemoteIpGroup:                 util.PtrString(""),
+		Action:                        util.PtrString(""),
+		Priority:                      util.PtrInt32(int32(0)),
+		Protocol:                      util.PtrString(""),
+	}
+	err := VPC_CLIENT.UpdateEnterpriseSecurityGroupRules(updateEnterpriseSecurityGroupRulesRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_UpdatePeerToPeerConnectionReleaseProtectionSwitch(t *testing.T) {
 	updatePeerToPeerConnectionReleaseProtectionSwitchRequest := &UpdatePeerToPeerConnectionReleaseProtectionSwitchRequest{
 		PeerConnId:    util.PtrString(""),
 		DeleteProtect: util.PtrBool(false),
 	}
 	err := VPC_CLIENT.UpdatePeerToPeerConnectionReleaseProtectionSwitch(updatePeerToPeerConnectionReleaseProtectionSwitchRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateRegularSecurityGroupRulesV2(t *testing.T) {
+	updateRegularSecurityGroupRulesV2Request := &UpdateRegularSecurityGroupRulesV2Request{
+		ClientToken:         util.PtrString(""),
+		SgVersion:           util.PtrInt64(int64(0)),
+		SecurityGroupRuleId: util.PtrString(""),
+		Remark:              util.PtrString(""),
+		PortRange:           util.PtrString(""),
+		SourceIp:            util.PtrString(""),
+		SourceGroupId:       util.PtrString(""),
+		DestIp:              util.PtrString(""),
+		DestGroupId:         util.PtrString(""),
+		Protocol:            util.PtrString(""),
+	}
+	err := VPC_CLIENT.UpdateRegularSecurityGroupRulesV2(updateRegularSecurityGroupRulesV2Request)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateRoutingRules(t *testing.T) {
@@ -1225,6 +1440,24 @@ func TestClient_ViewPeerToPeerConnectionDetails(t *testing.T) {
 	}
 	result := &ViewPeerToPeerConnectionDetailsResponse{}
 	result, err := VPC_CLIENT.ViewPeerToPeerConnectionDetails(viewPeerToPeerConnectionDetailsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ViewSecurityGroupDetailsV2(t *testing.T) {
+	viewSecurityGroupDetailsV2Request := &ViewSecurityGroupDetailsV2Request{
+		SecurityGroupId: util.PtrString(""),
+	}
+	result := &ViewSecurityGroupDetailsV2Response{}
+	result, err := VPC_CLIENT.ViewSecurityGroupDetailsV2(viewSecurityGroupDetailsV2Request)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
