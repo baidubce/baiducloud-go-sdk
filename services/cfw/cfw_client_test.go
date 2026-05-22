@@ -67,13 +67,25 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
-func TestClient_QueryCfwList(t *testing.T) {
-	queryCfwListRequest := &QueryCfwListRequest{
-		Marker:  util.PtrString(""),
-		MaxKeys: util.PtrInt32(int32(0)),
+func TestClient_BindCfw(t *testing.T) {
+	bindCfwRequest := &BindCfwRequest{
+		CfwId:        util.PtrString(""),
+		InstanceType: util.PtrString(""),
+		Instances:    []*CfwBind{},
 	}
-	result := &QueryCfwListResponse{}
-	result, err := CFW_CLIENT.QueryCfwList(queryCfwListRequest)
+	err := CFW_CLIENT.BindCfw(bindCfwRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateCfw(t *testing.T) {
+	createCfwRequest := &CreateCfwRequest{
+		Name:        util.PtrString(""),
+		CfwType:     util.PtrInt32(int32(0)),
+		Border:      util.PtrInt32(int32(0)),
+		Description: util.PtrString(""),
+		CfwRules:    []*CreateRule{},
+	}
+	result := &CreateCfwResponse{}
+	result, err := CFW_CLIENT.CreateCfw(createCfwRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -84,5 +96,143 @@ func TestClient_QueryCfwList(t *testing.T) {
 		return
 	}
 	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateCfwRule(t *testing.T) {
+	createCfwRuleRequest := &CreateCfwRuleRequest{
+		CfwId:    util.PtrString(""),
+		CfwRules: []*CreateRule{},
+	}
+	err := CFW_CLIENT.CreateCfwRule(createCfwRuleRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteCfw(t *testing.T) {
+	deleteCfwRequest := &DeleteCfwRequest{
+		CfwId: util.PtrString(""),
+	}
+	err := CFW_CLIENT.DeleteCfw(deleteCfwRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteCfwRule(t *testing.T) {
+	deleteCfwRuleRequest := &DeleteCfwRuleRequest{
+		CfwId:      util.PtrString(""),
+		CfwRuleIds: []*string{},
+	}
+	err := CFW_CLIENT.DeleteCfwRule(deleteCfwRuleRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DisableCfwProtect(t *testing.T) {
+	disableCfwProtectRequest := &DisableCfwProtectRequest{
+		CfwId:      util.PtrString(""),
+		InstanceId: util.PtrString(""),
+		Role:       util.PtrString(""),
+		MemberId:   util.PtrString(""),
+	}
+	err := CFW_CLIENT.DisableCfwProtect(disableCfwProtectRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_EnableCfwProtect(t *testing.T) {
+	enableCfwProtectRequest := &EnableCfwProtectRequest{
+		CfwId:      util.PtrString(""),
+		InstanceId: util.PtrString(""),
+		Role:       util.PtrString(""),
+		MemberId:   util.PtrString(""),
+	}
+	err := CFW_CLIENT.EnableCfwProtect(enableCfwProtectRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetCfw(t *testing.T) {
+	getCfwRequest := &GetCfwRequest{
+		CfwId: util.PtrString(""),
+	}
+	result := &GetCfwResponse{}
+	result, err := CFW_CLIENT.GetCfw(getCfwRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListCfw(t *testing.T) {
+	listCfwRequest := &ListCfwRequest{
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &ListCfwResponse{}
+	result, err := CFW_CLIENT.ListCfw(listCfwRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListProtectInstances(t *testing.T) {
+	listProtectInstancesRequest := &ListProtectInstancesRequest{
+		InstanceType: util.PtrString(""),
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
+		Status:       util.PtrString(""),
+		Region:       util.PtrString(""),
+	}
+	result := &ListProtectInstancesResponse{}
+	result, err := CFW_CLIENT.ListProtectInstances(listProtectInstancesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UnbindCfw(t *testing.T) {
+	unbindCfwRequest := &UnbindCfwRequest{
+		CfwId:        util.PtrString(""),
+		InstanceType: util.PtrString(""),
+		Instances:    []*CfwBind{},
+	}
+	err := CFW_CLIENT.UnbindCfw(unbindCfwRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateCfw(t *testing.T) {
+	updateCfwRequest := &UpdateCfwRequest{
+		CfwId:       util.PtrString(""),
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
+	}
+	err := CFW_CLIENT.UpdateCfw(updateCfwRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateCfwRule(t *testing.T) {
+	updateCfwRuleRequest := &UpdateCfwRuleRequest{
+		CfwId:         util.PtrString(""),
+		CfwRuleId:     util.PtrString(""),
+		IpVersion:     util.PtrInt32(int32(0)),
+		Priority:      util.PtrInt32(int32(0)),
+		Protocol:      util.PtrString(""),
+		Direction:     util.PtrString(""),
+		SourceAddress: util.PtrString(""),
+		DestAddress:   util.PtrString(""),
+		SourcePort:    util.PtrString(""),
+		DestPort:      util.PtrString(""),
+		Action:        util.PtrString(""),
+		Description:   util.PtrString(""),
+	}
+	err := CFW_CLIENT.UpdateCfwRule(updateCfwRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
