@@ -9,7 +9,7 @@ type AclRule struct {
 	DestinationIpAddress *string `json:"destinationIpAddress,omitempty"`
 	SourcePort           *string `json:"sourcePort,omitempty"`
 	DestinationPort      *string `json:"destinationPort,omitempty"`
-	Position             *string `json:"position,omitempty"`
+	Position             *int32  `json:"position,omitempty"`
 	Direction            *string `json:"direction,omitempty"`
 	IpVersion            *int32  `json:"ipVersion,omitempty"`
 	Action               *string `json:"action,omitempty"`

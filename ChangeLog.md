@@ -1,3 +1,6 @@
+2026-05-25 Version: v0.0.28
+- 涉及产品: VPC，queryAcl和queryAclRules的position字段类型从string修改为integer
+
 2026-05-25 Version: v0.0.27
 - 涉及产品: VPC，新增NAT网关创建、查询、更新、释放、续费、变配接口
 - 涉及产品: VPC，新增SNAT规则创建、更新、查询、批量创建、删除接口
