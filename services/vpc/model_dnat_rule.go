@@ -6,8 +6,8 @@ type DnatRule struct {
 	PublicIpAddress  *string `json:"publicIpAddress,omitempty"`
 	PrivateIpAddress *string `json:"privateIpAddress,omitempty"`
 	Protocol         *string `json:"protocol,omitempty"`
-	PublicPort       *string `json:"publicPort,omitempty"`
-	PrivatePort      *string `json:"privatePort,omitempty"`
+	PublicPort       *int32  `json:"publicPort,omitempty"`
+	PrivatePort      *int32  `json:"privatePort,omitempty"`
 	Status           *string `json:"status,omitempty"`
 	PrivatePortRange *string `json:"privatePortRange,omitempty"`
 	PublicPortRange  *string `json:"publicPortRange,omitempty"`
