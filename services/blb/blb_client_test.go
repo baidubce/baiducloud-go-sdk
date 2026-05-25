@@ -748,6 +748,7 @@ func TestClient_UpdateAppBlbUdpListener(t *testing.T) {
 func TestClient_UpdateBlb(t *testing.T) {
 	updateBlbRequest := &UpdateBlbRequest{
 		BlbId:        util.PtrString(""),
+		ClientToken:  util.PtrString(""),
 		Name:         util.PtrString(""),
 		Desc:         util.PtrString(""),
 		AllowDelete:  util.PtrBool(false),

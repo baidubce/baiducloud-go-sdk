@@ -16,6 +16,7 @@ func UpdateBlb() {
 	}
 	updateBlbRequest := &blb.UpdateBlbRequest{
 		BlbId:        util.PtrString(""),
+		ClientToken:  util.PtrString(""),
 		Name:         util.PtrString(""),
 		Desc:         util.PtrString(""),
 		AllowDelete:  util.PtrBool(false),

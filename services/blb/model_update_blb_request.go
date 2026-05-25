@@ -2,6 +2,7 @@ package blb
 
 type UpdateBlbRequest struct {
 	BlbId        *string `json:"-"`
+	ClientToken  *string `json:"-"`
 	Name         *string `json:"name,omitempty"`
 	Desc         *string `json:"desc,omitempty"`
 	AllowDelete  *bool   `json:"allowDelete,omitempty"`
