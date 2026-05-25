@@ -184,6 +184,46 @@ func TestClient_AuthorizedEnterpriseSecurityGroupRules(t *testing.T) {
 	err := VPC_CLIENT.AuthorizedEnterpriseSecurityGroupRules(authorizedEnterpriseSecurityGroupRulesRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_BatchAddDnatRules(t *testing.T) {
+	batchAddDnatRulesRequest := &BatchAddDnatRulesRequest{
+		ClientToken: util.PtrString(""),
+		NatId:       util.PtrString(""),
+		Rules:       []*DnatRuleRequest{},
+	}
+	result := &BatchAddDnatRulesResponse{}
+	result, err := VPC_CLIENT.BatchAddDnatRules(batchAddDnatRulesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_BatchAddSnatRules(t *testing.T) {
+	batchAddSnatRulesRequest := &BatchAddSnatRulesRequest{
+		ClientToken: util.PtrString(""),
+		NatId:       util.PtrString(""),
+		SnatRules:   []*SnatRuleRequest{},
+	}
+	result := &BatchAddSnatRulesResponse{}
+	result, err := VPC_CLIENT.BatchAddSnatRules(batchAddSnatRulesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_BatchCreateSslVpnUsers(t *testing.T) {
 	batchCreateSslVpnUsersRequest := &BatchCreateSslVpnUsersRequest{
 		VpnId:       util.PtrString(""),
@@ -428,6 +468,33 @@ func TestClient_CreateDedicatedGatewayHealthCheck(t *testing.T) {
 	err := VPC_CLIENT.CreateDedicatedGatewayHealthCheck(createDedicatedGatewayHealthCheckRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateDnatRule(t *testing.T) {
+	createDnatRuleRequest := &CreateDnatRuleRequest{
+		ClientToken:      util.PtrString(""),
+		NatId:            util.PtrString(""),
+		RuleName:         util.PtrString(""),
+		PublicIpAddress:  util.PtrString(""),
+		PrivateIpAddress: util.PtrString(""),
+		Protocol:         util.PtrString(""),
+		PublicPort:       util.PtrInt32(int32(0)),
+		PrivatePort:      util.PtrInt32(int32(0)),
+		PublicPortRange:  util.PtrString(""),
+		PrivatePortRange: util.PtrString(""),
+	}
+	result := &CreateDnatRuleResponse{}
+	result, err := VPC_CLIENT.CreateDnatRule(createDnatRuleRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateElasticNetworkCard(t *testing.T) {
 	createElasticNetworkCardRequest := &CreateElasticNetworkCardRequest{
 		ClientToken:                 util.PtrString(""),
@@ -592,6 +659,40 @@ func TestClient_CreateIpv6GatewaySpeedLimitPolicy(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateNat(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		Reservation: &Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
+	}
+	createNatRequest := &CreateNatRequest{
+		ClientToken:     util.PtrString(""),
+		Name:            util.PtrString(""),
+		VpcId:           util.PtrString(""),
+		CuNum:           util.PtrInt32(int32(0)),
+		IpVersion:       util.PtrString(""),
+		BindEips:        []*string{},
+		Billing:         Billing,
+		Tags:            []*TagModel{},
+		ResourceGroupId: util.PtrString(""),
+		DeleteProtect:   util.PtrBool(false),
+	}
+	result := &CreateNatResponse{}
+	result, err := VPC_CLIENT.CreateNat(createNatRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateNetworkDetection(t *testing.T) {
 	createNetworkDetectionRequest := &CreateNetworkDetectionRequest{
 		ClientToken: util.PtrString(""),
@@ -634,6 +735,28 @@ func TestClient_CreateRoutingRules(t *testing.T) {
 	}
 	result := &CreateRoutingRulesResponse{}
 	result, err := VPC_CLIENT.CreateRoutingRules(createRoutingRulesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateSnatRule(t *testing.T) {
+	createSnatRuleRequest := &CreateSnatRuleRequest{
+		ClientToken:      util.PtrString(""),
+		NatId:            util.PtrString(""),
+		RuleName:         util.PtrString(""),
+		PublicIpsAddress: []*string{},
+		SourceCIDR:       util.PtrString(""),
+	}
+	result := &CreateSnatRuleResponse{}
+	result, err := VPC_CLIENT.CreateSnatRule(createSnatRuleRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -826,6 +949,15 @@ func TestClient_DeleteAclRule(t *testing.T) {
 	err := VPC_CLIENT.DeleteAclRule(deleteAclRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteDnatRule(t *testing.T) {
+	deleteDnatRuleRequest := &DeleteDnatRuleRequest{
+		ClientToken: util.PtrString(""),
+		NatId:       util.PtrString(""),
+		RuleId:      util.PtrString(""),
+	}
+	err := VPC_CLIENT.DeleteDnatRule(deleteDnatRuleRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteElasticNetworkCardAuxiliaryIp(t *testing.T) {
 	deleteElasticNetworkCardAuxiliaryIpRequest := &DeleteElasticNetworkCardAuxiliaryIpRequest{
 		EniId:            util.PtrString(""),
@@ -959,6 +1091,15 @@ func TestClient_DeleteRoutingRules(t *testing.T) {
 	err := VPC_CLIENT.DeleteRoutingRules(deleteRoutingRulesRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteSnatRule(t *testing.T) {
+	deleteSnatRuleRequest := &DeleteSnatRuleRequest{
+		ClientToken: util.PtrString(""),
+		NatId:       util.PtrString(""),
+		RuleId:      util.PtrString(""),
+	}
+	err := VPC_CLIENT.DeleteSnatRule(deleteSnatRuleRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteSslVpnServer(t *testing.T) {
 	deleteSslVpnServerRequest := &DeleteSslVpnServerRequest{
 		VpnId:          util.PtrString(""),
@@ -1073,6 +1214,24 @@ func TestClient_EnablePeerToPeerConnectionToSynchronizeDns(t *testing.T) {
 	err := VPC_CLIENT.EnablePeerToPeerConnectionToSynchronizeDns(enablePeerToPeerConnectionToSynchronizeDnsRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_GetNat(t *testing.T) {
+	getNatRequest := &GetNatRequest{
+		NatId: util.PtrString(""),
+	}
+	result := &GetNatResponse{}
+	result, err := VPC_CLIENT.GetNat(getNatRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_GetVpcResourceIpInfo(t *testing.T) {
 	getVpcResourceIpInfoRequest := &GetVpcResourceIpInfoRequest{
 		VpcId:        util.PtrString(""),
@@ -1141,6 +1300,26 @@ func TestClient_Ipv6GatewayBandwidthUpgradeAndDowngrade(t *testing.T) {
 	err := VPC_CLIENT.Ipv6GatewayBandwidthUpgradeAndDowngrade(ipv6GatewayBandwidthUpgradeAndDowngradeRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ListDnatRule(t *testing.T) {
+	listDnatRuleRequest := &ListDnatRuleRequest{
+		NatId:   util.PtrString(""),
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &ListDnatRuleResponse{}
+	result, err := VPC_CLIENT.ListDnatRule(listDnatRuleRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ListIpReserve(t *testing.T) {
 	listIpReserveRequest := &ListIpReserveRequest{
 		SubnetId: util.PtrString(""),
@@ -1149,6 +1328,49 @@ func TestClient_ListIpReserve(t *testing.T) {
 	}
 	result := &ListIpReserveResponse{}
 	result, err := VPC_CLIENT.ListIpReserve(listIpReserveRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListNat(t *testing.T) {
+	listNatRequest := &ListNatRequest{
+		VpcId:   util.PtrString(""),
+		NatId:   util.PtrString(""),
+		Name:    util.PtrString(""),
+		Ip:      util.PtrString(""),
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &ListNatResponse{}
+	result, err := VPC_CLIENT.ListNat(listNatRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListSnatRule(t *testing.T) {
+	listSnatRuleRequest := &ListSnatRuleRequest{
+		NatId:   util.PtrString(""),
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &ListSnatRuleResponse{}
+	result, err := VPC_CLIENT.ListSnatRule(listSnatRuleRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -1170,6 +1392,33 @@ func TestClient_ModifyGatewayLimitRules(t *testing.T) {
 		Bandwidth:   util.PtrInt32(int32(0)),
 	}
 	err := VPC_CLIENT.ModifyGatewayLimitRules(modifyGatewayLimitRulesRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ModifyNat(t *testing.T) {
+	modifyNatRequest := &ModifyNatRequest{
+		NatId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+	}
+	err := VPC_CLIENT.ModifyNat(modifyNatRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_NatBindEip(t *testing.T) {
+	natBindEipRequest := &NatBindEipRequest{
+		NatId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		BindEips:    []*string{},
+	}
+	err := VPC_CLIENT.NatBindEip(natBindEipRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_NatUnBindEip(t *testing.T) {
+	natUnBindEipRequest := &NatUnBindEipRequest{
+		NatId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		BindEips:    []*string{},
+	}
+	err := VPC_CLIENT.NatUnBindEip(natUnBindEipRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_OpenVpcRelay(t *testing.T) {
@@ -1211,6 +1460,22 @@ func TestClient_PrepaidPeerToPeerConnectionUnsubscribe(t *testing.T) {
 		ClientToken: util.PtrString(""),
 	}
 	err := VPC_CLIENT.PrepaidPeerToPeerConnectionUnsubscribe(prepaidPeerToPeerConnectionUnsubscribeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_PurchaseReservedNat(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		Reservation: &Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
+	}
+	purchaseReservedNatRequest := &PurchaseReservedNatRequest{
+		NatId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Billing:     Billing,
+	}
+	err := VPC_CLIENT.PurchaseReservedNat(purchaseReservedNatRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QueryAcl(t *testing.T) {
@@ -1841,6 +2106,14 @@ func TestClient_ReleaseDedicatedGateway(t *testing.T) {
 	err := VPC_CLIENT.ReleaseDedicatedGateway(releaseDedicatedGatewayRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ReleaseNat(t *testing.T) {
+	releaseNatRequest := &ReleaseNatRequest{
+		NatId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := VPC_CLIENT.ReleaseNat(releaseNatRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ReleasePeerToPeerConnection(t *testing.T) {
 	releasePeerToPeerConnectionRequest := &ReleasePeerToPeerConnectionRequest{
 		PeerConnId:  util.PtrString(""),
@@ -1888,6 +2161,15 @@ func TestClient_RenewVpn(t *testing.T) {
 		Billing:     Billing,
 	}
 	err := VPC_CLIENT.RenewVpn(renewVpnRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ResizeNat(t *testing.T) {
+	resizeNatRequest := &ResizeNatRequest{
+		ClientToken: util.PtrString(""),
+		NatId:       util.PtrString(""),
+		CuNum:       util.PtrInt32(int32(0)),
+	}
+	err := VPC_CLIENT.ResizeNat(resizeNatRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_RevokeRegularSecurityGroupRulesV2(t *testing.T) {
@@ -1998,6 +2280,23 @@ func TestClient_UpdateDedicatedGateway(t *testing.T) {
 	err := VPC_CLIENT.UpdateDedicatedGateway(updateDedicatedGatewayRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_UpdateDnatRule(t *testing.T) {
+	updateDnatRuleRequest := &UpdateDnatRuleRequest{
+		NatId:            util.PtrString(""),
+		RuleId:           util.PtrString(""),
+		ClientToken:      util.PtrString(""),
+		RuleName:         util.PtrString(""),
+		Protocol:         util.PtrString(""),
+		PublicPort:       util.PtrInt32(int32(0)),
+		PrivatePort:      util.PtrInt32(int32(0)),
+		PublicPortRange:  util.PtrString(""),
+		PrivatePortRange: util.PtrString(""),
+		PrivateIpAddress: util.PtrString(""),
+		PublicIpAddress:  util.PtrString(""),
+	}
+	err := VPC_CLIENT.UpdateDnatRule(updateDnatRuleRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_UpdateElasticNetworkCard(t *testing.T) {
 	updateElasticNetworkCardRequest := &UpdateElasticNetworkCardRequest{
 		EniId:       util.PtrString(""),
@@ -2077,6 +2376,15 @@ func TestClient_UpdateIpv6GatewaySpeedLimitPolicy(t *testing.T) {
 	err := VPC_CLIENT.UpdateIpv6GatewaySpeedLimitPolicy(updateIpv6GatewaySpeedLimitPolicyRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_UpdateNatReleaseProtectionSwitch(t *testing.T) {
+	updateNatReleaseProtectionSwitchRequest := &UpdateNatReleaseProtectionSwitchRequest{
+		NatId:         util.PtrString(""),
+		ClientToken:   util.PtrString(""),
+		DeleteProtect: util.PtrBool(false),
+	}
+	err := VPC_CLIENT.UpdateNatReleaseProtectionSwitch(updateNatReleaseProtectionSwitchRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_UpdateNetworkDetection(t *testing.T) {
 	updateNetworkDetectionRequest := &UpdateNetworkDetectionRequest{
 		ProbeId:     util.PtrString(""),
@@ -2123,6 +2431,18 @@ func TestClient_UpdateRoutingRules(t *testing.T) {
 		Description:        util.PtrString(""),
 	}
 	err := VPC_CLIENT.UpdateRoutingRules(updateRoutingRulesRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateSnatRule(t *testing.T) {
+	updateSnatRuleRequest := &UpdateSnatRuleRequest{
+		NatId:            util.PtrString(""),
+		RuleId:           util.PtrString(""),
+		ClientToken:      util.PtrString(""),
+		RuleName:         util.PtrString(""),
+		SourceCIDR:       util.PtrString(""),
+		PublicIpsAddress: []*string{},
+	}
+	err := VPC_CLIENT.UpdateSnatRule(updateSnatRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateSslVpnServer(t *testing.T) {

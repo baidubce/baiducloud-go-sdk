@@ -181,6 +181,52 @@ func (c *Client) AuthorizedEnterpriseSecurityGroupRules(request *AuthorizedEnter
 		Do()
 }
 
+// BatchAddDnatRules
+//
+// PARAMS:
+//   - request: the arguments to BatchAddDnatRules
+//
+// RETURNS:
+//   - BatchAddDnatRulesResponse: The return type of the BatchAddDnatRules interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) BatchAddDnatRules(request *BatchAddDnatRulesRequest) (*BatchAddDnatRulesResponse, error) {
+	result := &BatchAddDnatRulesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getBatchAddDnatRulesUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// BatchAddSnatRules
+//
+// PARAMS:
+//   - request: the arguments to BatchAddSnatRules
+//
+// RETURNS:
+//   - BatchAddSnatRulesResponse: The return type of the BatchAddSnatRules interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) BatchAddSnatRules(request *BatchAddSnatRulesRequest) (*BatchAddSnatRulesResponse, error) {
+	result := &BatchAddSnatRulesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getBatchAddSnatRulesUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // BatchCreateSslVpnUsers
 //
 // PARAMS:
@@ -446,6 +492,29 @@ func (c *Client) CreateDedicatedGatewayHealthCheck(request *CreateDedicatedGatew
 		Do()
 }
 
+// CreateDnatRule
+//
+// PARAMS:
+//   - request: the arguments to CreateDnatRule
+//
+// RETURNS:
+//   - CreateDnatRuleResponse: The return type of the CreateDnatRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateDnatRule(request *CreateDnatRuleRequest) (*CreateDnatRuleResponse, error) {
+	result := &CreateDnatRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateDnatRuleUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateElasticNetworkCard
 //
 // PARAMS:
@@ -607,6 +676,29 @@ func (c *Client) CreateIpv6GatewaySpeedLimitPolicy(request *CreateIpv6GatewaySpe
 	return result, nil
 }
 
+// CreateNat
+//
+// PARAMS:
+//   - request: the arguments to CreateNat
+//
+// RETURNS:
+//   - CreateNatResponse: The return type of the CreateNat interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateNat(request *CreateNatRequest) (*CreateNatResponse, error) {
+	result := &CreateNatResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateNatUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateNetworkDetection
 //
 // PARAMS:
@@ -643,6 +735,29 @@ func (c *Client) CreateRoutingRules(request *CreateRoutingRulesRequest) (*Create
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateRoutingRulesUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateSnatRule
+//
+// PARAMS:
+//   - request: the arguments to CreateSnatRule
+//
+// RETURNS:
+//   - CreateSnatRuleResponse: The return type of the CreateSnatRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateSnatRule(request *CreateSnatRuleRequest) (*CreateSnatRuleResponse, error) {
+	result := &CreateSnatRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateSnatRuleUri(VERSION_V1, util.StringValue(request.NatId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -803,6 +918,22 @@ func (c *Client) DeleteAclRule(request *DeleteAclRuleRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getDeleteAclRuleUri(VERSION_V1, util.StringValue(request.AclRuleId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// DeleteDnatRule
+//
+// PARAMS:
+//   - request: the arguments to DeleteDnatRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteDnatRule(request *DeleteDnatRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteDnatRuleUri(VERSION_V1, util.StringValue(request.NatId), util.StringValue(request.RuleId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
@@ -1065,6 +1196,22 @@ func (c *Client) DeleteRoutingRules(request *DeleteRoutingRulesRequest) error {
 		Do()
 }
 
+// DeleteSnatRule
+//
+// PARAMS:
+//   - request: the arguments to DeleteSnatRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteSnatRule(request *DeleteSnatRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteSnatRuleUri(VERSION_V1, util.StringValue(request.NatId), util.StringValue(request.RuleId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
 // DeleteSslVpnServer
 //
 // PARAMS:
@@ -1286,6 +1433,27 @@ func (c *Client) EnablePeerToPeerConnectionToSynchronizeDns(request *EnablePeerT
 		Do()
 }
 
+// GetNat
+//
+// PARAMS:
+//   - request: the arguments to GetNat
+//
+// RETURNS:
+//   - GetNatResponse: The return type of the GetNat interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetNat(request *GetNatRequest) (*GetNatResponse, error) {
+	result := &GetNatResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetNatUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // GetVpcResourceIpInfo
 //
 // PARAMS:
@@ -1401,6 +1569,29 @@ func (c *Client) Ipv6GatewayBandwidthUpgradeAndDowngrade(request *Ipv6GatewayBan
 		Do()
 }
 
+// ListDnatRule
+//
+// PARAMS:
+//   - request: the arguments to ListDnatRule
+//
+// RETURNS:
+//   - ListDnatRuleResponse: The return type of the ListDnatRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListDnatRule(request *ListDnatRuleRequest) (*ListDnatRuleResponse, error) {
+	result := &ListDnatRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListDnatRuleUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ListIpReserve
 //
 // PARAMS:
@@ -1425,6 +1616,56 @@ func (c *Client) ListIpReserve(request *ListIpReserveRequest) (*ListIpReserveRes
 	return result, nil
 }
 
+// ListNat
+//
+// PARAMS:
+//   - request: the arguments to ListNat
+//
+// RETURNS:
+//   - ListNatResponse: The return type of the ListNat interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListNat(request *ListNatRequest) (*ListNatResponse, error) {
+	result := &ListNatResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListNatUri(VERSION_V1)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("natId", util.StringValue(request.NatId)).
+		WithQueryParamFilter("name", util.StringValue(request.Name)).
+		WithQueryParamFilter("ip", util.StringValue(request.Ip)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListSnatRule
+//
+// PARAMS:
+//   - request: the arguments to ListSnatRule
+//
+// RETURNS:
+//   - ListSnatRuleResponse: The return type of the ListSnatRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListSnatRule(request *ListSnatRuleRequest) (*ListSnatRuleResponse, error) {
+	result := &ListSnatRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListSnatRuleUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ModifyGatewayLimitRules
 //
 // PARAMS:
@@ -1437,6 +1678,59 @@ func (c *Client) ModifyGatewayLimitRules(request *ModifyGatewayLimitRulesRequest
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getModifyGatewayLimitRulesUri(VERSION_V1, util.StringValue(request.GlrId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// ModifyNat
+//
+// PARAMS:
+//   - request: the arguments to ModifyNat
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ModifyNat(request *ModifyNatRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getModifyNatUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// NatBindEip
+//
+// PARAMS:
+//   - request: the arguments to NatBindEip
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) NatBindEip(request *NatBindEipRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getNatBindEipUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParam("bind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// NatUnBindEip
+//
+// PARAMS:
+//   - request: the arguments to NatUnBindEip
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) NatUnBindEip(request *NatUnBindEipRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getNatUnBindEipUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParam("unbind", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -1508,6 +1802,24 @@ func (c *Client) PrepaidPeerToPeerConnectionUnsubscribe(request *PrepaidPeerToPe
 		WithURL(getPrepaidPeerToPeerConnectionUnsubscribeUri(VERSION_V1, util.StringValue(request.PeerConnId))).
 		WithQueryParam("refund", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// PurchaseReservedNat
+//
+// PARAMS:
+//   - request: the arguments to PurchaseReservedNat
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) PurchaseReservedNat(request *PurchaseReservedNatRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getPurchaseReservedNatUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParam("purchaseReserved", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
 		Do()
 }
 
@@ -2265,6 +2577,22 @@ func (c *Client) ReleaseDedicatedGateway(request *ReleaseDedicatedGatewayRequest
 		Do()
 }
 
+// ReleaseNat
+//
+// PARAMS:
+//   - request: the arguments to ReleaseNat
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ReleaseNat(request *ReleaseNatRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getReleaseNatUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
 // ReleasePeerToPeerConnection
 //
 // PARAMS:
@@ -2343,6 +2671,24 @@ func (c *Client) RenewVpn(request *RenewVpnRequest) error {
 		WithMethod(http.PUT).
 		WithURL(getRenewVpnUri(VERSION_V1, util.StringValue(request.VpnId))).
 		WithQueryParam("purchaseReserved", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// ResizeNat
+//
+// PARAMS:
+//   - request: the arguments to ResizeNat
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ResizeNat(request *ResizeNatRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getResizeNatUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParam("resize", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -2478,6 +2824,23 @@ func (c *Client) UpdateDedicatedGateway(request *UpdateDedicatedGatewayRequest) 
 		Do()
 }
 
+// UpdateDnatRule
+//
+// PARAMS:
+//   - request: the arguments to UpdateDnatRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateDnatRule(request *UpdateDnatRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateDnatRuleUri(VERSION_V1, util.StringValue(request.NatId), util.StringValue(request.RuleId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // UpdateElasticNetworkCard
 //
 // PARAMS:
@@ -2601,6 +2964,23 @@ func (c *Client) UpdateIpv6GatewaySpeedLimitPolicy(request *UpdateIpv6GatewaySpe
 		Do()
 }
 
+// UpdateNatReleaseProtectionSwitch
+//
+// PARAMS:
+//   - request: the arguments to UpdateNatReleaseProtectionSwitch
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateNatReleaseProtectionSwitch(request *UpdateNatReleaseProtectionSwitchRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateNatReleaseProtectionSwitchUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // UpdateNetworkDetection
 //
 // PARAMS:
@@ -2664,6 +3044,23 @@ func (c *Client) UpdateRoutingRules(request *UpdateRoutingRulesRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateRoutingRulesUri(VERSION_V1, util.StringValue(request.RouteRuleId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateSnatRule
+//
+// PARAMS:
+//   - request: the arguments to UpdateSnatRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateSnatRule(request *UpdateSnatRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateSnatRuleUri(VERSION_V1, util.StringValue(request.NatId), util.StringValue(request.RuleId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
