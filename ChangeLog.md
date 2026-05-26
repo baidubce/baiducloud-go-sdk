@@ -1,3 +1,13 @@
+2026-05-26 Version: v0.0.35
+- 涉及产品: VPC，addAclRule新增ipVersion字段并删除原ipversion字段
+- 涉及产品: VPC，queryNetworkDetectionList的destPort类型由integer改为string
+- 涉及产品: VPC，queryNetworkDetectionDetails的destPort类型由integer改为string
+
+2026-05-26 Version: v0.0.34
+- 涉及产品: VPC，updatePeerConn及updatePeerConnDeleteProtect新增clientToken字段
+- 涉及产品: VPC，listPeerConn的vpcId由路径参数改为查询参数
+- 涉及产品: VPC，listPeerConn和getPeerConn删除多个连接状态枚举字段
+
 2026-05-26 Version: v0.0.33
 - 涉及产品: VPC，createNat新增预留时长及单位字段支持
 
