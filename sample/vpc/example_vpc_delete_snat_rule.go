@@ -15,9 +15,9 @@ func DeleteSnatRule() {
 		return
 	}
 	deleteSnatRuleRequest := &vpc.DeleteSnatRuleRequest{
-		ClientToken: util.PtrString(""),
 		NatId:       util.PtrString(""),
 		RuleId:      util.PtrString(""),
+		ClientToken: util.PtrString(""),
 	}
 	err = client.DeleteSnatRule(deleteSnatRuleRequest)
 	if err != nil {

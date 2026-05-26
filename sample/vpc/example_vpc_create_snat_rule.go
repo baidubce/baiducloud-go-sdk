@@ -16,8 +16,8 @@ func CreateSnatRule() {
 		return
 	}
 	createSnatRuleRequest := &vpc.CreateSnatRuleRequest{
-		ClientToken:      util.PtrString(""),
 		NatId:            util.PtrString(""),
+		ClientToken:      util.PtrString(""),
 		RuleName:         util.PtrString(""),
 		PublicIpsAddress: []*string{},
 		SourceCIDR:       util.PtrString(""),

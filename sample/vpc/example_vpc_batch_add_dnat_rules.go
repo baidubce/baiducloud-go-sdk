@@ -16,8 +16,8 @@ func BatchAddDnatRules() {
 		return
 	}
 	batchAddDnatRulesRequest := &vpc.BatchAddDnatRulesRequest{
-		ClientToken: util.PtrString(""),
 		NatId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
 		Rules:       []*vpc.DnatRuleRequest{},
 	}
 	result, err := client.BatchAddDnatRules(batchAddDnatRulesRequest)

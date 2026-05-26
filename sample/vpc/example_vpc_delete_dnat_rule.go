@@ -15,9 +15,9 @@ func DeleteDnatRule() {
 		return
 	}
 	deleteDnatRuleRequest := &vpc.DeleteDnatRuleRequest{
-		ClientToken: util.PtrString(""),
 		NatId:       util.PtrString(""),
 		RuleId:      util.PtrString(""),
+		ClientToken: util.PtrString(""),
 	}
 	err = client.DeleteDnatRule(deleteDnatRuleRequest)
 	if err != nil {

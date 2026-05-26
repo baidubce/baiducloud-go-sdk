@@ -186,8 +186,8 @@ func TestClient_AuthorizedEnterpriseSecurityGroupRules(t *testing.T) {
 }
 func TestClient_BatchAddDnatRules(t *testing.T) {
 	batchAddDnatRulesRequest := &BatchAddDnatRulesRequest{
-		ClientToken: util.PtrString(""),
 		NatId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
 		Rules:       []*DnatRuleRequest{},
 	}
 	result := &BatchAddDnatRulesResponse{}
@@ -433,8 +433,8 @@ func TestClient_CreateDedicatedGatewayHealthCheck(t *testing.T) {
 }
 func TestClient_CreateDnatRule(t *testing.T) {
 	createDnatRuleRequest := &CreateDnatRuleRequest{
-		ClientToken:      util.PtrString(""),
 		NatId:            util.PtrString(""),
+		ClientToken:      util.PtrString(""),
 		RuleName:         util.PtrString(""),
 		PublicIpAddress:  util.PtrString(""),
 		PrivateIpAddress: util.PtrString(""),
@@ -755,8 +755,8 @@ func TestClient_CreateRoutingRules(t *testing.T) {
 }
 func TestClient_CreateSnatRule(t *testing.T) {
 	createSnatRuleRequest := &CreateSnatRuleRequest{
-		ClientToken:      util.PtrString(""),
 		NatId:            util.PtrString(""),
+		ClientToken:      util.PtrString(""),
 		RuleName:         util.PtrString(""),
 		PublicIpsAddress: []*string{},
 		SourceCIDR:       util.PtrString(""),
@@ -957,9 +957,9 @@ func TestClient_DeleteAclRule(t *testing.T) {
 }
 func TestClient_DeleteDnatRule(t *testing.T) {
 	deleteDnatRuleRequest := &DeleteDnatRuleRequest{
-		ClientToken: util.PtrString(""),
 		NatId:       util.PtrString(""),
 		RuleId:      util.PtrString(""),
+		ClientToken: util.PtrString(""),
 	}
 	err := VPC_CLIENT.DeleteDnatRule(deleteDnatRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
@@ -1099,9 +1099,9 @@ func TestClient_DeleteRoutingRules(t *testing.T) {
 }
 func TestClient_DeleteSnatRule(t *testing.T) {
 	deleteSnatRuleRequest := &DeleteSnatRuleRequest{
-		ClientToken: util.PtrString(""),
 		NatId:       util.PtrString(""),
 		RuleId:      util.PtrString(""),
+		ClientToken: util.PtrString(""),
 	}
 	err := VPC_CLIENT.DeleteSnatRule(deleteSnatRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
@@ -2181,8 +2181,8 @@ func TestClient_RenewVpn(t *testing.T) {
 }
 func TestClient_ResizeNat(t *testing.T) {
 	resizeNatRequest := &ResizeNatRequest{
-		ClientToken: util.PtrString(""),
 		NatId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
 		CuNum:       util.PtrInt32(int32(0)),
 	}
 	err := VPC_CLIENT.ResizeNat(resizeNatRequest)

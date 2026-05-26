@@ -16,8 +16,8 @@ func CreateDnatRule() {
 		return
 	}
 	createDnatRuleRequest := &vpc.CreateDnatRuleRequest{
-		ClientToken:      util.PtrString(""),
 		NatId:            util.PtrString(""),
+		ClientToken:      util.PtrString(""),
 		RuleName:         util.PtrString(""),
 		PublicIpAddress:  util.PtrString(""),
 		PrivateIpAddress: util.PtrString(""),

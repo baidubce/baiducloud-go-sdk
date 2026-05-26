@@ -15,8 +15,8 @@ func ResizeNat() {
 		return
 	}
 	resizeNatRequest := &vpc.ResizeNatRequest{
-		ClientToken: util.PtrString(""),
 		NatId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
 		CuNum:       util.PtrInt32(int32(0)),
 	}
 	err = client.ResizeNat(resizeNatRequest)
