@@ -1,3 +1,6 @@
+2026-05-26 Version: v0.0.33
+- 涉及产品: VPC，createNat新增预留时长及单位字段支持
+
 2026-05-26 Version: v0.0.32
 - 涉及产品: VPC，getNat新增sessionConfig及TCP/UDP/ICMP超时字段
 
