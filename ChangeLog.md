@@ -1,3 +1,6 @@
+2026-05-26 Version: v0.0.30
+- 涉及产品: VPC，SDK版本更新
+
 2026-05-25 Version: v0.0.29
 - 涉及产品: VPC，listDnatRule接口publicPort和privatePort字段类型由string改为integer
 
