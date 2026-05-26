@@ -22,6 +22,11 @@ func CreateNat() {
 			ReservationTimeUnit: util.PtrString(""),
 		},
 	}
+	SessionConfig := &vpc.SessionConfig{
+		TcpTimeout:  util.PtrInt32(int32(0)),
+		UdpTimeout:  util.PtrInt32(int32(0)),
+		IcmpTimeout: util.PtrInt32(int32(0)),
+	}
 	createNatRequest := &vpc.CreateNatRequest{
 		ClientToken:     util.PtrString(""),
 		Name:            util.PtrString(""),
@@ -30,6 +35,7 @@ func CreateNat() {
 		IpVersion:       util.PtrString(""),
 		BindEips:        []*string{},
 		Billing:         Billing,
+		SessionConfig:   SessionConfig,
 		Tags:            []*vpc.TagModel{},
 		ResourceGroupId: util.PtrString(""),
 		DeleteProtect:   util.PtrBool(false),

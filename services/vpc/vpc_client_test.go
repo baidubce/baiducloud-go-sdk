@@ -667,6 +667,11 @@ func TestClient_CreateNat(t *testing.T) {
 			ReservationTimeUnit: util.PtrString(""),
 		},
 	}
+	SessionConfig := &SessionConfig{
+		TcpTimeout:  util.PtrInt32(int32(0)),
+		UdpTimeout:  util.PtrInt32(int32(0)),
+		IcmpTimeout: util.PtrInt32(int32(0)),
+	}
 	createNatRequest := &CreateNatRequest{
 		ClientToken:     util.PtrString(""),
 		Name:            util.PtrString(""),
@@ -675,6 +680,7 @@ func TestClient_CreateNat(t *testing.T) {
 		IpVersion:       util.PtrString(""),
 		BindEips:        []*string{},
 		Billing:         Billing,
+		SessionConfig:   SessionConfig,
 		Tags:            []*TagModel{},
 		ResourceGroupId: util.PtrString(""),
 		DeleteProtect:   util.PtrBool(false),

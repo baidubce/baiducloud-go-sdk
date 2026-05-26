@@ -1,3 +1,6 @@
+2026-05-26 Version: v0.0.31
+- 涉及产品: VPC，createNat新增sessionConfig会话配置及TCP/UDP/ICMP超时参数
+
 2026-05-26 Version: v0.0.30
 - 涉及产品: VPC，SDK版本更新
 
