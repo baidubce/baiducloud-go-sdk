@@ -67,12 +67,12 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
-func TestClient_AcceptPeerToPeerConnectionApplications(t *testing.T) {
-	acceptPeerToPeerConnectionApplicationsRequest := &AcceptPeerToPeerConnectionApplicationsRequest{
+func TestClient_AcceptPeerConn(t *testing.T) {
+	acceptPeerConnRequest := &AcceptPeerConnRequest{
 		PeerConnId:  util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := VPC_CLIENT.AcceptPeerToPeerConnectionApplications(acceptPeerToPeerConnectionApplicationsRequest)
+	err := VPC_CLIENT.AcceptPeerConn(acceptPeerConnRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ActiveStandbySwitchover(t *testing.T) {
@@ -295,13 +295,13 @@ func TestClient_BindPhysicalDedicatedLine(t *testing.T) {
 	err := VPC_CLIENT.BindPhysicalDedicatedLine(bindPhysicalDedicatedLineRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_ClosePeerToPeerConnectionToSynchronizeDns(t *testing.T) {
-	closePeerToPeerConnectionToSynchronizeDnsRequest := &ClosePeerToPeerConnectionToSynchronizeDnsRequest{
+func TestClient_ClosePeerConnSyncDns(t *testing.T) {
+	closePeerConnSyncDnsRequest := &ClosePeerConnSyncDnsRequest{
 		PeerConnId:  util.PtrString(""),
 		Role:        util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := VPC_CLIENT.ClosePeerToPeerConnectionToSynchronizeDns(closePeerToPeerConnectionToSynchronizeDnsRequest)
+	err := VPC_CLIENT.ClosePeerConnSyncDns(closePeerConnSyncDnsRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CloseVpcRelay(t *testing.T) {
@@ -322,43 +322,6 @@ func TestClient_CreateAHighlyAvailableVirtualIp(t *testing.T) {
 	}
 	result := &CreateAHighlyAvailableVirtualIpResponse{}
 	result, err := VPC_CLIENT.CreateAHighlyAvailableVirtualIp(createAHighlyAvailableVirtualIpRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_CreateAPeerToPeerConnection(t *testing.T) {
-	Billing := &Billing{
-		PaymentTiming: util.PtrString(""),
-		Reservation: &Reservation{
-			ReservationLength:   util.PtrInt32(int32(0)),
-			ReservationTimeUnit: util.PtrString(""),
-		},
-	}
-	createAPeerToPeerConnectionRequest := &CreateAPeerToPeerConnectionRequest{
-		ClientToken:     util.PtrString(""),
-		BandwidthInMbps: util.PtrInt32(int32(0)),
-		Description:     util.PtrString(""),
-		LocalIfName:     util.PtrString(""),
-		LocalVpcId:      util.PtrString(""),
-		PeerAccountId:   util.PtrString(""),
-		PeerVpcId:       util.PtrString(""),
-		PeerRegion:      util.PtrString(""),
-		PeerIfName:      util.PtrString(""),
-		Billing:         Billing,
-		Tags:            []*TagModel{},
-		ResourceGroupId: util.PtrString(""),
-		DeleteProtect:   util.PtrBool(false),
-	}
-	result := &CreateAPeerToPeerConnectionResponse{}
-	result, err := VPC_CLIENT.CreateAPeerToPeerConnection(createAPeerToPeerConnectionRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -716,6 +679,43 @@ func TestClient_CreateNetworkDetection(t *testing.T) {
 	}
 	result := &CreateNetworkDetectionResponse{}
 	result, err := VPC_CLIENT.CreateNetworkDetection(createNetworkDetectionRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreatePeerConn(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		Reservation: &Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
+	}
+	createPeerConnRequest := &CreatePeerConnRequest{
+		ClientToken:     util.PtrString(""),
+		BandwidthInMbps: util.PtrInt32(int32(0)),
+		Description:     util.PtrString(""),
+		LocalIfName:     util.PtrString(""),
+		LocalVpcId:      util.PtrString(""),
+		PeerAccountId:   util.PtrString(""),
+		PeerVpcId:       util.PtrString(""),
+		PeerRegion:      util.PtrString(""),
+		PeerIfName:      util.PtrString(""),
+		Billing:         Billing,
+		Tags:            []*TagModel{},
+		ResourceGroupId: util.PtrString(""),
+		DeleteProtect:   util.PtrBool(false),
+	}
+	result := &CreatePeerConnResponse{}
+	result, err := VPC_CLIENT.CreatePeerConn(createPeerConnRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -1211,21 +1211,31 @@ func TestClient_ElasticNetworkCardUpdatesRegularSecurityGroup(t *testing.T) {
 	err := VPC_CLIENT.ElasticNetworkCardUpdatesRegularSecurityGroup(elasticNetworkCardUpdatesRegularSecurityGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_EnablePeerToPeerConnectionToSynchronizeDns(t *testing.T) {
-	enablePeerToPeerConnectionToSynchronizeDnsRequest := &EnablePeerToPeerConnectionToSynchronizeDnsRequest{
-		PeerConnId:  util.PtrString(""),
-		Role:        util.PtrString(""),
-		ClientToken: util.PtrString(""),
-	}
-	err := VPC_CLIENT.EnablePeerToPeerConnectionToSynchronizeDns(enablePeerToPeerConnectionToSynchronizeDnsRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_GetNat(t *testing.T) {
 	getNatRequest := &GetNatRequest{
 		NatId: util.PtrString(""),
 	}
 	result := &GetNatResponse{}
 	result, err := VPC_CLIENT.GetNat(getNatRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetPeerConn(t *testing.T) {
+	getPeerConnRequest := &GetPeerConnRequest{
+		PeerConnId: util.PtrString(""),
+		Role:       util.PtrString(""),
+	}
+	result := &GetPeerConnResponse{}
+	result, err := VPC_CLIENT.GetPeerConn(getPeerConnRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -1369,6 +1379,26 @@ func TestClient_ListNat(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ListPeerConn(t *testing.T) {
+	listPeerConnRequest := &ListPeerConnRequest{
+		VpcId:   util.PtrString(""),
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &ListPeerConnResponse{}
+	result, err := VPC_CLIENT.ListPeerConn(listPeerConnRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ListSnatRule(t *testing.T) {
 	listSnatRuleRequest := &ListSnatRuleRequest{
 		NatId:   util.PtrString(""),
@@ -1427,45 +1457,21 @@ func TestClient_NatUnBindEip(t *testing.T) {
 	err := VPC_CLIENT.NatUnBindEip(natUnBindEipRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_OpenPeerConnSyncDns(t *testing.T) {
+	openPeerConnSyncDnsRequest := &OpenPeerConnSyncDnsRequest{
+		PeerConnId:  util.PtrString(""),
+		Role:        util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := VPC_CLIENT.OpenPeerConnSyncDns(openPeerConnSyncDnsRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_OpenVpcRelay(t *testing.T) {
 	openVpcRelayRequest := &OpenVpcRelayRequest{
 		VpcId:       util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
 	err := VPC_CLIENT.OpenVpcRelay(openVpcRelayRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_PeerToPeerConnectionBandwidthUpgradeAndDowngrade(t *testing.T) {
-	peerToPeerConnectionBandwidthUpgradeAndDowngradeRequest := &PeerToPeerConnectionBandwidthUpgradeAndDowngradeRequest{
-		PeerConnId:         util.PtrString(""),
-		ClientToken:        util.PtrString(""),
-		NewBandwidthInMbps: util.PtrInt32(int32(0)),
-	}
-	err := VPC_CLIENT.PeerToPeerConnectionBandwidthUpgradeAndDowngrade(peerToPeerConnectionBandwidthUpgradeAndDowngradeRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_PeerToPeerConnectionRenewal(t *testing.T) {
-	Billing := &Billing{
-		PaymentTiming: util.PtrString(""),
-		Reservation: &Reservation{
-			ReservationLength:   util.PtrInt32(int32(0)),
-			ReservationTimeUnit: util.PtrString(""),
-		},
-	}
-	peerToPeerConnectionRenewalRequest := &PeerToPeerConnectionRenewalRequest{
-		PeerConnId:  util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		Billing:     Billing,
-	}
-	err := VPC_CLIENT.PeerToPeerConnectionRenewal(peerToPeerConnectionRenewalRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_PrepaidPeerToPeerConnectionUnsubscribe(t *testing.T) {
-	prepaidPeerToPeerConnectionUnsubscribeRequest := &PrepaidPeerToPeerConnectionUnsubscribeRequest{
-		PeerConnId:  util.PtrString(""),
-		ClientToken: util.PtrString(""),
-	}
-	err := VPC_CLIENT.PrepaidPeerToPeerConnectionUnsubscribe(prepaidPeerToPeerConnectionUnsubscribeRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_PurchaseReservedNat(t *testing.T) {
@@ -1860,26 +1866,6 @@ func TestClient_QueryTheListOfIpAddressGroups(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_QueryTheListOfPeerConnections(t *testing.T) {
-	queryTheListOfPeerConnectionsRequest := &QueryTheListOfPeerConnectionsRequest{
-		VpcId:   util.PtrString(""),
-		Marker:  util.PtrString(""),
-		MaxKeys: util.PtrInt32(int32(0)),
-	}
-	result := &QueryTheListOfPeerConnectionsResponse{}
-	result, err := VPC_CLIENT.QueryTheListOfPeerConnections(queryTheListOfPeerConnectionsRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_QueryTheListOfRegularSecurityGroupsV2(t *testing.T) {
 	queryTheListOfRegularSecurityGroupsV2Request := &QueryTheListOfRegularSecurityGroupsV2Request{
 		Marker:           util.PtrString(""),
@@ -2096,12 +2082,20 @@ func TestClient_QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusion(t *testing
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_RejectPeerToPeerConnectionRequest(t *testing.T) {
-	rejectPeerToPeerConnectionRequestRequest := &RejectPeerToPeerConnectionRequestRequest{
+func TestClient_RefundPeerConn(t *testing.T) {
+	refundPeerConnRequest := &RefundPeerConnRequest{
 		PeerConnId:  util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := VPC_CLIENT.RejectPeerToPeerConnectionRequest(rejectPeerToPeerConnectionRequestRequest)
+	err := VPC_CLIENT.RefundPeerConn(refundPeerConnRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_RejectPeerConn(t *testing.T) {
+	rejectPeerConnRequest := &RejectPeerConnRequest{
+		PeerConnId:  util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := VPC_CLIENT.RejectPeerConn(rejectPeerConnRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ReleaseDedicatedGateway(t *testing.T) {
@@ -2120,12 +2114,12 @@ func TestClient_ReleaseNat(t *testing.T) {
 	err := VPC_CLIENT.ReleaseNat(releaseNatRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_ReleasePeerToPeerConnection(t *testing.T) {
-	releasePeerToPeerConnectionRequest := &ReleasePeerToPeerConnectionRequest{
+func TestClient_ReleasePeerConn(t *testing.T) {
+	releasePeerConnRequest := &ReleasePeerConnRequest{
 		PeerConnId:  util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := VPC_CLIENT.ReleasePeerToPeerConnection(releasePeerToPeerConnectionRequest)
+	err := VPC_CLIENT.ReleasePeerConn(releasePeerConnRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ReleaseVpn(t *testing.T) {
@@ -2151,6 +2145,22 @@ func TestClient_RemoveIpAddressGroupFromIpAddressFamily(t *testing.T) {
 		IpSetIds:    []*string{},
 	}
 	err := VPC_CLIENT.RemoveIpAddressGroupFromIpAddressFamily(removeIpAddressGroupFromIpAddressFamilyRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_RenewPeerConn(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		Reservation: &Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
+	}
+	renewPeerConnRequest := &RenewPeerConnRequest{
+		PeerConnId:  util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Billing:     Billing,
+	}
+	err := VPC_CLIENT.RenewPeerConn(renewPeerConnRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_RenewVpn(t *testing.T) {
@@ -2403,12 +2413,33 @@ func TestClient_UpdateNetworkDetection(t *testing.T) {
 	err := VPC_CLIENT.UpdateNetworkDetection(updateNetworkDetectionRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_UpdatePeerToPeerConnectionReleaseProtectionSwitch(t *testing.T) {
-	updatePeerToPeerConnectionReleaseProtectionSwitchRequest := &UpdatePeerToPeerConnectionReleaseProtectionSwitchRequest{
+func TestClient_UpdatePeerConn(t *testing.T) {
+	updatePeerConnRequest := &UpdatePeerConnRequest{
+		PeerConnId:  util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		LocalIfId:   util.PtrString(""),
+		Description: util.PtrString(""),
+		LocalIfName: util.PtrString(""),
+	}
+	err := VPC_CLIENT.UpdatePeerConn(updatePeerConnRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdatePeerConnBandwidth(t *testing.T) {
+	updatePeerConnBandwidthRequest := &UpdatePeerConnBandwidthRequest{
+		PeerConnId:         util.PtrString(""),
+		ClientToken:        util.PtrString(""),
+		NewBandwidthInMbps: util.PtrInt32(int32(0)),
+	}
+	err := VPC_CLIENT.UpdatePeerConnBandwidth(updatePeerConnBandwidthRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdatePeerConnDeleteProtect(t *testing.T) {
+	updatePeerConnDeleteProtectRequest := &UpdatePeerConnDeleteProtectRequest{
 		PeerConnId:    util.PtrString(""),
+		ClientToken:   util.PtrString(""),
 		DeleteProtect: util.PtrBool(false),
 	}
-	err := VPC_CLIENT.UpdatePeerToPeerConnectionReleaseProtectionSwitch(updatePeerToPeerConnectionReleaseProtectionSwitchRequest)
+	err := VPC_CLIENT.UpdatePeerConnDeleteProtect(updatePeerConnDeleteProtectRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateRegularSecurityGroupRulesV2(t *testing.T) {
@@ -2485,16 +2516,6 @@ func TestClient_UpdateSubnet(t *testing.T) {
 		EnableIpv6:  util.PtrBool(false),
 	}
 	err := VPC_CLIENT.UpdateSubnet(updateSubnetRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_UpdateTheNameAndCommentsOfTheLocalInterfaceForPeerToPeerConnections(t *testing.T) {
-	updateTheNameAndCommentsOfTheLocalInterfaceForPeerToPeerConnectionsRequest := &UpdateTheNameAndCommentsOfTheLocalInterfaceForPeerToPeerConnectionsRequest{
-		PeerConnId:  util.PtrString(""),
-		LocalIfId:   util.PtrString(""),
-		Description: util.PtrString(""),
-		LocalIfName: util.PtrString(""),
-	}
-	err := VPC_CLIENT.UpdateTheNameAndCommentsOfTheLocalInterfaceForPeerToPeerConnections(updateTheNameAndCommentsOfTheLocalInterfaceForPeerToPeerConnectionsRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateUserGateway(t *testing.T) {
@@ -2617,25 +2638,6 @@ func TestClient_ViewGatewayLimitRules(t *testing.T) {
 	}
 	result := &ViewGatewayLimitRulesResponse{}
 	result, err := VPC_CLIENT.ViewGatewayLimitRules(viewGatewayLimitRulesRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_ViewPeerToPeerConnectionDetails(t *testing.T) {
-	viewPeerToPeerConnectionDetailsRequest := &ViewPeerToPeerConnectionDetailsRequest{
-		PeerConnId: util.PtrString(""),
-		Role:       util.PtrString(""),
-	}
-	result := &ViewPeerToPeerConnectionDetailsResponse{}
-	result, err := VPC_CLIENT.ViewPeerToPeerConnectionDetails(viewPeerToPeerConnectionDetailsRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return

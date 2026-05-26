@@ -1,9 +1,32 @@
 package vpc
 
-type DnsStatus struct {
-	Close   *string `json:"close,omitempty"`
-	Wait    *string `json:"wait,omitempty"`
-	Syncing *string `json:"syncing,omitempty"`
-	Open    *string `json:"open,omitempty"`
-	Closing *string `json:"closing,omitempty"`
+// DnsStatus the model 'DnsStatus'
+type DnsStatus string
+
+// List of DnsStatus
+const (
+	DnsStatusClose   DnsStatus = "close"
+	DnsStatusWait    DnsStatus = "wait"
+	DnsStatusSyncing DnsStatus = "syncing"
+	DnsStatusOpen    DnsStatus = "open"
+	DnsStatusClosing DnsStatus = "closing"
+)
+
+// All allowed values of DnsStatus enum
+var AllowedDnsStatusEnumValues = []DnsStatus{
+	"close",
+	"wait",
+	"syncing",
+	"open",
+	"closing",
+}
+
+// IsValid return true if the value is valid for the enum, false otherwise
+func (v DnsStatus) IsValid() bool {
+	for _, existing := range AllowedDnsStatusEnumValues {
+		if existing == v {
+			return true
+		}
+	}
+	return false
 }
