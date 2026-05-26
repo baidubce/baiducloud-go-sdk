@@ -4,7 +4,7 @@ type Probe struct {
 	ProbeId     *string   `json:"probeId,omitempty"`
 	Description *string   `json:"description,omitempty"`
 	DestIp      *string   `json:"destIp,omitempty"`
-	DestPort    *int32    `json:"destPort,omitempty"`
+	DestPort    *string   `json:"destPort,omitempty"`
 	Frequency   *int32    `json:"frequency,omitempty"`
 	Name        *string   `json:"name,omitempty"`
 	Payload     *string   `json:"payload,omitempty"`

@@ -1,6 +1,6 @@
 package vpc
 
-type QueryTheListOfPeerConnectionsRequest struct {
+type ListPeerConnRequest struct {
 	VpcId   *string `json:"-"`
 	Marker  *string `json:"-"`
 	MaxKeys *int32  `json:"-"`

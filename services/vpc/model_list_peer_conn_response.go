@@ -2,7 +2,7 @@ package vpc
 
 import "github.com/baidubce/baiducloud-go-sdk/bce"
 
-type QueryTheListOfPeerConnectionsResponse struct {
+type ListPeerConnResponse struct {
 	bce.BaseResponse
 	PeerConns   []*PeerConn `json:"peerConns,omitempty"`
 	Marker      *string     `json:"marker,omitempty"`

@@ -1,6 +1,6 @@
 package vpc
 
-type ViewPeerToPeerConnectionDetailsRequest struct {
+type GetPeerConnRequest struct {
 	PeerConnId *string `json:"-"`
 	Role       *string `json:"-"`
 }

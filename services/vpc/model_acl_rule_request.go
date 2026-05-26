@@ -10,6 +10,6 @@ type AclRuleRequest struct {
 	DestinationPort      *string `json:"destinationPort,omitempty"`
 	Position             *int32  `json:"position,omitempty"`
 	Direction            *string `json:"direction,omitempty"`
-	Ipversion            *int32  `json:"ipversion,omitempty"`
+	IpVersion            *int32  `json:"ipVersion,omitempty"`
 	Action               *string `json:"action,omitempty"`
 }

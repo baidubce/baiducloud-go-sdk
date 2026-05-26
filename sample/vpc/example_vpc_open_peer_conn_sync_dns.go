@@ -6,7 +6,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/services/vpc"
 )
 
-func PeerToPeerConnectionRenewal() {
+func OpenPeerConnSyncDns() {
 	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
 	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
 	client, err := vpc.NewClient(ak, sk, endpoint)
@@ -14,19 +14,12 @@ func PeerToPeerConnectionRenewal() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	Billing := &vpc.Billing{
-		PaymentTiming: util.PtrString(""),
-		Reservation: &vpc.Reservation{
-			ReservationLength:   util.PtrInt32(int32(0)),
-			ReservationTimeUnit: util.PtrString(""),
-		},
-	}
-	peerToPeerConnectionRenewalRequest := &vpc.PeerToPeerConnectionRenewalRequest{
+	openPeerConnSyncDnsRequest := &vpc.OpenPeerConnSyncDnsRequest{
 		PeerConnId:  util.PtrString(""),
+		Role:        util.PtrString(""),
 		ClientToken: util.PtrString(""),
-		Billing:     Billing,
 	}
-	err = client.PeerToPeerConnectionRenewal(peerToPeerConnectionRenewalRequest)
+	err = client.OpenPeerConnSyncDns(openPeerConnSyncDnsRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

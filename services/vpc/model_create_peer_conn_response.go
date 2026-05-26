@@ -2,7 +2,7 @@ package vpc
 
 import "github.com/baidubce/baiducloud-go-sdk/bce"
 
-type CreateAPeerToPeerConnectionResponse struct {
+type CreatePeerConnResponse struct {
 	bce.BaseResponse
 	PeerConnId *string `json:"peerConnId,omitempty"`
 }

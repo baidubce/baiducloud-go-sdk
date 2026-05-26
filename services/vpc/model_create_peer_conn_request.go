@@ -1,6 +1,6 @@
 package vpc
 
-type CreateAPeerToPeerConnectionRequest struct {
+type CreatePeerConnRequest struct {
 	ClientToken     *string     `json:"-"`
 	BandwidthInMbps *int32      `json:"bandwidthInMbps,omitempty"`
 	Description     *string     `json:"description,omitempty"`

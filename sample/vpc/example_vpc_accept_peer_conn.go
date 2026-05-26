@@ -6,7 +6,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/services/vpc"
 )
 
-func EnablePeerToPeerConnectionToSynchronizeDns() {
+func AcceptPeerConn() {
 	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
 	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
 	client, err := vpc.NewClient(ak, sk, endpoint)
@@ -14,12 +14,11 @@ func EnablePeerToPeerConnectionToSynchronizeDns() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	enablePeerToPeerConnectionToSynchronizeDnsRequest := &vpc.EnablePeerToPeerConnectionToSynchronizeDnsRequest{
+	acceptPeerConnRequest := &vpc.AcceptPeerConnRequest{
 		PeerConnId:  util.PtrString(""),
-		Role:        util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err = client.EnablePeerToPeerConnectionToSynchronizeDns(enablePeerToPeerConnectionToSynchronizeDnsRequest)
+	err = client.AcceptPeerConn(acceptPeerConnRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

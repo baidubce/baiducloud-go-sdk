@@ -13,18 +13,18 @@ const (
 	VERSION_V2 = "v2"
 )
 
-// AcceptPeerToPeerConnectionApplications
+// AcceptPeerConn
 //
 // PARAMS:
-//   - request: the arguments to AcceptPeerToPeerConnectionApplications
+//   - request: the arguments to AcceptPeerConn
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) AcceptPeerToPeerConnectionApplications(request *AcceptPeerToPeerConnectionApplicationsRequest) error {
+func (c *Client) AcceptPeerConn(request *AcceptPeerConnRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getAcceptPeerToPeerConnectionApplicationsUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithURL(getAcceptPeerConnUri(VERSION_V1, util.StringValue(request.PeerConnId))).
 		WithQueryParam("accept", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
@@ -326,18 +326,18 @@ func (c *Client) BindPhysicalDedicatedLine(request *BindPhysicalDedicatedLineReq
 		Do()
 }
 
-// ClosePeerToPeerConnectionToSynchronizeDns
+// ClosePeerConnSyncDns
 //
 // PARAMS:
-//   - request: the arguments to ClosePeerToPeerConnectionToSynchronizeDns
+//   - request: the arguments to ClosePeerConnSyncDns
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) ClosePeerToPeerConnectionToSynchronizeDns(request *ClosePeerToPeerConnectionToSynchronizeDnsRequest) error {
+func (c *Client) ClosePeerConnSyncDns(request *ClosePeerConnSyncDnsRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getClosePeerToPeerConnectionToSynchronizeDnsUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithURL(getClosePeerConnSyncDnsUri(VERSION_V1, util.StringValue(request.PeerConnId))).
 		WithQueryParam("close", "").
 		WithQueryParamFilter("role", util.StringValue(request.Role)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
@@ -373,29 +373,6 @@ func (c *Client) CreateAHighlyAvailableVirtualIp(request *CreateAHighlyAvailable
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateAHighlyAvailableVirtualIpUri(VERSION_V1)).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// CreateAPeerToPeerConnection
-//
-// PARAMS:
-//   - request: the arguments to CreateAPeerToPeerConnection
-//
-// RETURNS:
-//   - CreateAPeerToPeerConnectionResponse: The return type of the CreateAPeerToPeerConnection interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) CreateAPeerToPeerConnection(request *CreateAPeerToPeerConnectionRequest) (*CreateAPeerToPeerConnectionResponse, error) {
-	result := &CreateAPeerToPeerConnectionResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getCreateAPeerToPeerConnectionUri(VERSION_V1)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -712,6 +689,29 @@ func (c *Client) CreateNetworkDetection(request *CreateNetworkDetectionRequest) 
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateNetworkDetectionUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreatePeerConn
+//
+// PARAMS:
+//   - request: the arguments to CreatePeerConn
+//
+// RETURNS:
+//   - CreatePeerConnResponse: The return type of the CreatePeerConn interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreatePeerConn(request *CreatePeerConnRequest) (*CreatePeerConnResponse, error) {
+	result := &CreatePeerConnResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreatePeerConnUri(VERSION_V1)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -1415,24 +1415,6 @@ func (c *Client) ElasticNetworkCardUpdatesRegularSecurityGroup(request *ElasticN
 		Do()
 }
 
-// EnablePeerToPeerConnectionToSynchronizeDns
-//
-// PARAMS:
-//   - request: the arguments to EnablePeerToPeerConnectionToSynchronizeDns
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) EnablePeerToPeerConnectionToSynchronizeDns(request *EnablePeerToPeerConnectionToSynchronizeDnsRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getEnablePeerToPeerConnectionToSynchronizeDnsUri(VERSION_V1, util.StringValue(request.PeerConnId))).
-		WithQueryParam("open", "").
-		WithQueryParamFilter("role", util.StringValue(request.Role)).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		Do()
-}
-
 // GetNat
 //
 // PARAMS:
@@ -1446,6 +1428,28 @@ func (c *Client) GetNat(request *GetNatRequest) (*GetNatResponse, error) {
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getGetNatUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetPeerConn
+//
+// PARAMS:
+//   - request: the arguments to GetPeerConn
+//
+// RETURNS:
+//   - GetPeerConnResponse: The return type of the GetPeerConn interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetPeerConn(request *GetPeerConnRequest) (*GetPeerConnResponse, error) {
+	result := &GetPeerConnResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetPeerConnUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithQueryParamFilter("role", util.StringValue(request.Role)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -1643,6 +1647,30 @@ func (c *Client) ListNat(request *ListNatRequest) (*ListNatResponse, error) {
 	return result, nil
 }
 
+// ListPeerConn
+//
+// PARAMS:
+//   - request: the arguments to ListPeerConn
+//
+// RETURNS:
+//   - ListPeerConnResponse: The return type of the ListPeerConn interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListPeerConn(request *ListPeerConnRequest) (*ListPeerConnResponse, error) {
+	result := &ListPeerConnResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListPeerConnUri(VERSION_V1)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ListSnatRule
 //
 // PARAMS:
@@ -1736,6 +1764,24 @@ func (c *Client) NatUnBindEip(request *NatUnBindEipRequest) error {
 		Do()
 }
 
+// OpenPeerConnSyncDns
+//
+// PARAMS:
+//   - request: the arguments to OpenPeerConnSyncDns
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) OpenPeerConnSyncDns(request *OpenPeerConnSyncDnsRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getOpenPeerConnSyncDnsUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithQueryParam("open", "").
+		WithQueryParamFilter("role", util.StringValue(request.Role)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
 // OpenVpcRelay
 //
 // PARAMS:
@@ -1748,59 +1794,6 @@ func (c *Client) OpenVpcRelay(request *OpenVpcRelayRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getOpenVpcRelayUri(VERSION_V1, util.StringValue(request.VpcId))).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		Do()
-}
-
-// PeerToPeerConnectionBandwidthUpgradeAndDowngrade
-//
-// PARAMS:
-//   - request: the arguments to PeerToPeerConnectionBandwidthUpgradeAndDowngrade
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) PeerToPeerConnectionBandwidthUpgradeAndDowngrade(request *PeerToPeerConnectionBandwidthUpgradeAndDowngradeRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getPeerToPeerConnectionBandwidthUpgradeAndDowngradeUri(VERSION_V1, util.StringValue(request.PeerConnId))).
-		WithQueryParam("resize", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// PeerToPeerConnectionRenewal
-//
-// PARAMS:
-//   - request: the arguments to PeerToPeerConnectionRenewal
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) PeerToPeerConnectionRenewal(request *PeerToPeerConnectionRenewalRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getPeerToPeerConnectionRenewalUri(VERSION_V1, util.StringValue(request.PeerConnId))).
-		WithQueryParam("purchaseReserved", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// PrepaidPeerToPeerConnectionUnsubscribe
-//
-// PARAMS:
-//   - request: the arguments to PrepaidPeerToPeerConnectionUnsubscribe
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) PrepaidPeerToPeerConnectionUnsubscribe(request *PrepaidPeerToPeerConnectionUnsubscribeRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getPrepaidPeerToPeerConnectionUnsubscribeUri(VERSION_V1, util.StringValue(request.PeerConnId))).
-		WithQueryParam("refund", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
@@ -2269,29 +2262,6 @@ func (c *Client) QueryTheListOfIpAddressGroups(request *QueryTheListOfIpAddressG
 	return result, nil
 }
 
-// QueryTheListOfPeerConnections
-//
-// PARAMS:
-//   - request: the arguments to QueryTheListOfPeerConnections
-//
-// RETURNS:
-//   - QueryTheListOfPeerConnectionsResponse: The return type of the QueryTheListOfPeerConnections interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheListOfPeerConnections(request *QueryTheListOfPeerConnectionsRequest) (*QueryTheListOfPeerConnectionsResponse, error) {
-	result := &QueryTheListOfPeerConnectionsResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheListOfPeerConnectionsUri(VERSION_V1, util.StringValue(request.VpcId))).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
 // QueryTheListOfRegularSecurityGroupsV2
 //
 // PARAMS:
@@ -2544,18 +2514,35 @@ func (c *Client) QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusion(request *
 	return result, nil
 }
 
-// RejectPeerToPeerConnectionRequest
+// RefundPeerConn
 //
 // PARAMS:
-//   - request: the arguments to RejectPeerToPeerConnectionRequest
+//   - request: the arguments to RefundPeerConn
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) RejectPeerToPeerConnectionRequest(request *RejectPeerToPeerConnectionRequestRequest) error {
+func (c *Client) RefundPeerConn(request *RefundPeerConnRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getRejectPeerToPeerConnectionRequestUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithURL(getRefundPeerConnUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithQueryParam("refund", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// RejectPeerConn
+//
+// PARAMS:
+//   - request: the arguments to RejectPeerConn
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RejectPeerConn(request *RejectPeerConnRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getRejectPeerConnUri(VERSION_V1, util.StringValue(request.PeerConnId))).
 		WithQueryParam("reject", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
@@ -2593,18 +2580,18 @@ func (c *Client) ReleaseNat(request *ReleaseNatRequest) error {
 		Do()
 }
 
-// ReleasePeerToPeerConnection
+// ReleasePeerConn
 //
 // PARAMS:
-//   - request: the arguments to ReleasePeerToPeerConnection
+//   - request: the arguments to ReleasePeerConn
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) ReleasePeerToPeerConnection(request *ReleasePeerToPeerConnectionRequest) error {
+func (c *Client) ReleasePeerConn(request *ReleasePeerConnRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getReleasePeerToPeerConnectionUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithURL(getReleasePeerConnUri(VERSION_V1, util.StringValue(request.PeerConnId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
@@ -2653,6 +2640,24 @@ func (c *Client) RemoveIpAddressGroupFromIpAddressFamily(request *RemoveIpAddres
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getRemoveIpAddressGroupFromIpAddressFamilyUri(VERSION_V1, util.StringValue(request.IpGroupId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// RenewPeerConn
+//
+// PARAMS:
+//   - request: the arguments to RenewPeerConn
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RenewPeerConn(request *RenewPeerConnRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getRenewPeerConnUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithQueryParam("purchaseReserved", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -2998,18 +3003,54 @@ func (c *Client) UpdateNetworkDetection(request *UpdateNetworkDetectionRequest) 
 		Do()
 }
 
-// UpdatePeerToPeerConnectionReleaseProtectionSwitch
+// UpdatePeerConn
 //
 // PARAMS:
-//   - request: the arguments to UpdatePeerToPeerConnectionReleaseProtectionSwitch
+//   - request: the arguments to UpdatePeerConn
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) UpdatePeerToPeerConnectionReleaseProtectionSwitch(request *UpdatePeerToPeerConnectionReleaseProtectionSwitchRequest) error {
+func (c *Client) UpdatePeerConn(request *UpdatePeerConnRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getUpdatePeerToPeerConnectionReleaseProtectionSwitchUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithURL(getUpdatePeerConnUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdatePeerConnBandwidth
+//
+// PARAMS:
+//   - request: the arguments to UpdatePeerConnBandwidth
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdatePeerConnBandwidth(request *UpdatePeerConnBandwidthRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdatePeerConnBandwidthUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithQueryParam("resize", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdatePeerConnDeleteProtect
+//
+// PARAMS:
+//   - request: the arguments to UpdatePeerConnDeleteProtect
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdatePeerConnDeleteProtect(request *UpdatePeerConnDeleteProtectRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdatePeerConnDeleteProtectUri(VERSION_V1, util.StringValue(request.PeerConnId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
@@ -3114,22 +3155,6 @@ func (c *Client) UpdateSubnet(request *UpdateSubnetRequest) error {
 		WithURL(getUpdateSubnetUri(VERSION_V1, util.StringValue(request.SubnetId))).
 		WithQueryParam("modifyAttribute", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// UpdateTheNameAndCommentsOfTheLocalInterfaceForPeerToPeerConnections
-//
-// PARAMS:
-//   - request: the arguments to UpdateTheNameAndCommentsOfTheLocalInterfaceForPeerToPeerConnections
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateTheNameAndCommentsOfTheLocalInterfaceForPeerToPeerConnections(request *UpdateTheNameAndCommentsOfTheLocalInterfaceForPeerToPeerConnectionsRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getUpdateTheNameAndCommentsOfTheLocalInterfaceForPeerToPeerConnectionsUri(VERSION_V1, util.StringValue(request.PeerConnId))).
 		WithBody(request).
 		Do()
 }
@@ -3284,28 +3309,6 @@ func (c *Client) ViewGatewayLimitRules(request *ViewGatewayLimitRulesRequest) (*
 		WithQueryParamFilter("resourceId", util.StringValue(request.ResourceId)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.StringValue(request.MaxKeys)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// ViewPeerToPeerConnectionDetails
-//
-// PARAMS:
-//   - request: the arguments to ViewPeerToPeerConnectionDetails
-//
-// RETURNS:
-//   - ViewPeerToPeerConnectionDetailsResponse: The return type of the ViewPeerToPeerConnectionDetails interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) ViewPeerToPeerConnectionDetails(request *ViewPeerToPeerConnectionDetailsRequest) (*ViewPeerToPeerConnectionDetailsResponse, error) {
-	result := &ViewPeerToPeerConnectionDetailsResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getViewPeerToPeerConnectionDetailsUri(VERSION_V1, util.StringValue(request.PeerConnId))).
-		WithQueryParamFilter("role", util.StringValue(request.Role)).
 		WithResult(result).
 		Do()
 	if err != nil {

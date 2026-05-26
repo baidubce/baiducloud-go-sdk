@@ -1,6 +1,6 @@
 package vpc
 
-type AcceptPeerToPeerConnectionApplicationsRequest struct {
+type ReleasePeerConnRequest struct {
 	PeerConnId  *string `json:"-"`
 	ClientToken *string `json:"-"`
 }

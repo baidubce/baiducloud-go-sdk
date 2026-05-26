@@ -1,6 +1,7 @@
 package vpc
 
-type PrepaidPeerToPeerConnectionUnsubscribeRequest struct {
+type OpenPeerConnSyncDnsRequest struct {
 	PeerConnId  *string `json:"-"`
+	Role        *string `json:"-"`
 	ClientToken *string `json:"-"`
 }
