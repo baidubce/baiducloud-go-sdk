@@ -9,8 +9,6 @@ import (
 
 const (
 	VERSION_V1 = "v1"
-
-	VERSION_V2 = "v2"
 )
 
 // AcceptPeerConn
@@ -64,19 +62,19 @@ func (c *Client) AddAclRule(request *AddAclRuleRequest) error {
 		Do()
 }
 
-// AddElasticNetworkCardAuxiliaryIp
+// AddEniIp
 //
 // PARAMS:
-//   - request: the arguments to AddElasticNetworkCardAuxiliaryIp
+//   - request: the arguments to AddEniIp
 //
 // RETURNS:
-//   - AddElasticNetworkCardAuxiliaryIpResponse: The return type of the AddElasticNetworkCardAuxiliaryIp interface.
+//   - AddEniIpResponse: The return type of the AddEniIp interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) AddElasticNetworkCardAuxiliaryIp(request *AddElasticNetworkCardAuxiliaryIpRequest) (*AddElasticNetworkCardAuxiliaryIpResponse, error) {
-	result := &AddElasticNetworkCardAuxiliaryIpResponse{}
+func (c *Client) AddEniIp(request *AddEniIpRequest) (*AddEniIpResponse, error) {
+	result := &AddEniIpResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getAddElasticNetworkCardAuxiliaryIpUri(VERSION_V1, util.StringValue(request.EniId))).
+		WithURL(getAddEniIpUri(VERSION_V1, util.StringValue(request.EniId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -87,95 +85,90 @@ func (c *Client) AddElasticNetworkCardAuxiliaryIp(request *AddElasticNetworkCard
 	return result, nil
 }
 
-// AddIpAddressGroupToIpAddressFamily
+// AddIpAddressToIpGroup
 //
 // PARAMS:
-//   - request: the arguments to AddIpAddressGroupToIpAddressFamily
+//   - request: the arguments to AddIpAddressToIpGroup
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) AddIpAddressGroupToIpAddressFamily(request *AddIpAddressGroupToIpAddressFamilyRequest) error {
+func (c *Client) AddIpAddressToIpGroup(request *AddIpAddressToIpGroupRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getAddIpAddressGroupToIpAddressFamilyUri(VERSION_V1, util.StringValue(request.IpGroupId))).
+		WithURL(getAddIpAddressToIpGroupUri(VERSION_V1, util.StringValue(request.IpSetId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
 
-// AddIpAddressesToTheIpAddressGroup
+// AddIpGroupToIpSet
 //
 // PARAMS:
-//   - request: the arguments to AddIpAddressesToTheIpAddressGroup
+//   - request: the arguments to AddIpGroupToIpSet
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) AddIpAddressesToTheIpAddressGroup(request *AddIpAddressesToTheIpAddressGroupRequest) error {
+func (c *Client) AddIpGroupToIpSet(request *AddIpGroupToIpSetRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getAddIpAddressesToTheIpAddressGroupUri(VERSION_V1, util.StringValue(request.IpSetId))).
+		WithURL(getAddIpGroupToIpSetUri(VERSION_V1, util.StringValue(request.IpGroupId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
 
-// AddIpv6OnlyOutboundAndNoInboundPolicy
+// AttachEniInstance
 //
 // PARAMS:
-//   - request: the arguments to AddIpv6OnlyOutboundAndNoInboundPolicy
-//
-// RETURNS:
-//   - AddIpv6OnlyOutboundAndNoInboundPolicyResponse: The return type of the AddIpv6OnlyOutboundAndNoInboundPolicy interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) AddIpv6OnlyOutboundAndNoInboundPolicy(request *AddIpv6OnlyOutboundAndNoInboundPolicyRequest) (*AddIpv6OnlyOutboundAndNoInboundPolicyResponse, error) {
-	result := &AddIpv6OnlyOutboundAndNoInboundPolicyResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getAddIpv6OnlyOutboundAndNoInboundPolicyUri(VERSION_V1, util.StringValue(request.GatewayId))).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// AuthorizeRegularSecurityGroupRulesV2
-//
-// PARAMS:
-//   - request: the arguments to AuthorizeRegularSecurityGroupRulesV2
+//   - request: the arguments to AttachEniInstance
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) AuthorizeRegularSecurityGroupRulesV2(request *AuthorizeRegularSecurityGroupRulesV2Request) error {
+func (c *Client) AttachEniInstance(request *AttachEniInstanceRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getAuthorizeRegularSecurityGroupRulesV2Uri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
+		WithURL(getAttachEniInstanceUri(VERSION_V1, util.StringValue(request.EniId))).
+		WithQueryParam("attach", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// AuthorizeEnterpriseSecurityGroupRules
+//
+// PARAMS:
+//   - request: the arguments to AuthorizeEnterpriseSecurityGroupRules
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AuthorizeEnterpriseSecurityGroupRules(request *AuthorizeEnterpriseSecurityGroupRulesRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getAuthorizeEnterpriseSecurityGroupRulesUri(VERSION_V1, util.StringValue(request.EnterpriseSecurityGroupId))).
+		WithQueryParam("authorizeRule", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// AuthorizeSecurityGroupRules
+//
+// PARAMS:
+//   - request: the arguments to AuthorizeSecurityGroupRules
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AuthorizeSecurityGroupRules(request *AuthorizeSecurityGroupRulesRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getAuthorizeSecurityGroupRulesUri(VERSION_V1, util.StringValue(request.SecurityGroupId))).
 		WithQueryParam("authorizeRule", "").
 		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// AuthorizedEnterpriseSecurityGroupRules
-//
-// PARAMS:
-//   - request: the arguments to AuthorizedEnterpriseSecurityGroupRules
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) AuthorizedEnterpriseSecurityGroupRules(request *AuthorizedEnterpriseSecurityGroupRulesRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getAuthorizedEnterpriseSecurityGroupRulesUri(VERSION_V1, util.StringValue(request.EnterpriseSecurityGroupId))).
-		WithQueryParam("authorizeRule", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -194,6 +187,29 @@ func (c *Client) BatchAddDnatRules(request *BatchAddDnatRulesRequest) (*BatchAdd
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getBatchAddDnatRulesUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// BatchAddEniIp
+//
+// PARAMS:
+//   - request: the arguments to BatchAddEniIp
+//
+// RETURNS:
+//   - BatchAddEniIpResponse: The return type of the BatchAddEniIp interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) BatchAddEniIp(request *BatchAddEniIpRequest) (*BatchAddEniIpResponse, error) {
+	result := &BatchAddEniIpResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getBatchAddEniIpUri(VERSION_V1, util.StringValue(request.EniId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -250,44 +266,21 @@ func (c *Client) BatchCreateSslVpnUsers(request *BatchCreateSslVpnUsersRequest) 
 	return result, nil
 }
 
-// BatchDeleteElasticNetworkCardIntranetIp
+// BatchDeleteEniIp
 //
 // PARAMS:
-//   - request: the arguments to BatchDeleteElasticNetworkCardIntranetIp
+//   - request: the arguments to BatchDeleteEniIp
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) BatchDeleteElasticNetworkCardIntranetIp(request *BatchDeleteElasticNetworkCardIntranetIpRequest) error {
+func (c *Client) BatchDeleteEniIp(request *BatchDeleteEniIpRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getBatchDeleteElasticNetworkCardIntranetIpUri(VERSION_V1, util.StringValue(request.EniId))).
+		WithURL(getBatchDeleteEniIpUri(VERSION_V1, util.StringValue(request.EniId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-}
-
-// BatchIncreaseElasticNetworkCardIntranetIp
-//
-// PARAMS:
-//   - request: the arguments to BatchIncreaseElasticNetworkCardIntranetIp
-//
-// RETURNS:
-//   - BatchIncreaseElasticNetworkCardIntranetIpResponse: The return type of the BatchIncreaseElasticNetworkCardIntranetIp interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) BatchIncreaseElasticNetworkCardIntranetIp(request *BatchIncreaseElasticNetworkCardIntranetIpRequest) (*BatchIncreaseElasticNetworkCardIntranetIpResponse, error) {
-	result := &BatchIncreaseElasticNetworkCardIntranetIpResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getBatchIncreaseElasticNetworkCardIntranetIpUri(VERSION_V1, util.StringValue(request.EniId))).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
 }
 
 // BindEip
@@ -303,6 +296,60 @@ func (c *Client) BindEip(request *BindEipRequest) error {
 		WithMethod(http.PUT).
 		WithURL(getBindEipUri(VERSION_V1, util.StringValue(request.VpnId))).
 		WithQueryParam("bind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// BindEniEip
+//
+// PARAMS:
+//   - request: the arguments to BindEniEip
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BindEniEip(request *BindEniEipRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindEniEipUri(VERSION_V1, util.StringValue(request.EniId))).
+		WithQueryParam("bind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// BindHaVipEip
+//
+// PARAMS:
+//   - request: the arguments to BindHaVipEip
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BindHaVipEip(request *BindHaVipEipRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindHaVipEipUri(VERSION_V1, util.StringValue(request.HaVipId))).
+		WithQueryParam("bindPublicIp", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// BindHaVipInstance
+//
+// PARAMS:
+//   - request: the arguments to BindHaVipInstance
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BindHaVipInstance(request *BindHaVipInstanceRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindHaVipInstanceUri(VERSION_V1, util.StringValue(request.HaVipId))).
+		WithQueryParam("attach", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -358,75 +405,6 @@ func (c *Client) CloseVpcRelay(request *CloseVpcRelayRequest) error {
 		WithURL(getCloseVpcRelayUri(VERSION_V1, util.StringValue(request.VpcId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-}
-
-// CreateAHighlyAvailableVirtualIp
-//
-// PARAMS:
-//   - request: the arguments to CreateAHighlyAvailableVirtualIp
-//
-// RETURNS:
-//   - CreateAHighlyAvailableVirtualIpResponse: The return type of the CreateAHighlyAvailableVirtualIp interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) CreateAHighlyAvailableVirtualIp(request *CreateAHighlyAvailableVirtualIpRequest) (*CreateAHighlyAvailableVirtualIpResponse, error) {
-	result := &CreateAHighlyAvailableVirtualIpResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getCreateAHighlyAvailableVirtualIpUri(VERSION_V1)).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// CreateARegularSecurityGroupV2
-//
-// PARAMS:
-//   - request: the arguments to CreateARegularSecurityGroupV2
-//
-// RETURNS:
-//   - CreateARegularSecurityGroupV2Response: The return type of the CreateARegularSecurityGroupV2 interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) CreateARegularSecurityGroupV2(request *CreateARegularSecurityGroupV2Request) (*CreateARegularSecurityGroupV2Response, error) {
-	result := &CreateARegularSecurityGroupV2Response{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getCreateARegularSecurityGroupV2Uri(VERSION_V2)).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// CreateAnIpv6Gateway
-//
-// PARAMS:
-//   - request: the arguments to CreateAnIpv6Gateway
-//
-// RETURNS:
-//   - CreateAnIpv6GatewayResponse: The return type of the CreateAnIpv6Gateway interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) CreateAnIpv6Gateway(request *CreateAnIpv6GatewayRequest) (*CreateAnIpv6GatewayResponse, error) {
-	result := &CreateAnIpv6GatewayResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getCreateAnIpv6GatewayUri(VERSION_V1)).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
 }
 
 // CreateDedicatedGateway
@@ -492,19 +470,42 @@ func (c *Client) CreateDnatRule(request *CreateDnatRuleRequest) (*CreateDnatRule
 	return result, nil
 }
 
-// CreateElasticNetworkCard
+// CreateEgressOnlyRule
 //
 // PARAMS:
-//   - request: the arguments to CreateElasticNetworkCard
+//   - request: the arguments to CreateEgressOnlyRule
 //
 // RETURNS:
-//   - CreateElasticNetworkCardResponse: The return type of the CreateElasticNetworkCard interface.
+//   - CreateEgressOnlyRuleResponse: The return type of the CreateEgressOnlyRule interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateElasticNetworkCard(request *CreateElasticNetworkCardRequest) (*CreateElasticNetworkCardResponse, error) {
-	result := &CreateElasticNetworkCardResponse{}
+func (c *Client) CreateEgressOnlyRule(request *CreateEgressOnlyRuleRequest) (*CreateEgressOnlyRuleResponse, error) {
+	result := &CreateEgressOnlyRuleResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getCreateElasticNetworkCardUri(VERSION_V1)).
+		WithURL(getCreateEgressOnlyRuleUri(VERSION_V1, util.StringValue(request.GatewayId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateEni
+//
+// PARAMS:
+//   - request: the arguments to CreateEni
+//
+// RETURNS:
+//   - CreateEniResponse: The return type of the CreateEni interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateEni(request *CreateEniRequest) (*CreateEniResponse, error) {
+	result := &CreateEniResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateEniUri(VERSION_V1)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -561,19 +562,19 @@ func (c *Client) CreateGatewayLimitRules(request *CreateGatewayLimitRulesRequest
 	return result, nil
 }
 
-// CreateIpAddressFamily
+// CreateHaVip
 //
 // PARAMS:
-//   - request: the arguments to CreateIpAddressFamily
+//   - request: the arguments to CreateHaVip
 //
 // RETURNS:
-//   - CreateIpAddressFamilyResponse: The return type of the CreateIpAddressFamily interface.
+//   - CreateHaVipResponse: The return type of the CreateHaVip interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateIpAddressFamily(request *CreateIpAddressFamilyRequest) (*CreateIpAddressFamilyResponse, error) {
-	result := &CreateIpAddressFamilyResponse{}
+func (c *Client) CreateHaVip(request *CreateHaVipRequest) (*CreateHaVipResponse, error) {
+	result := &CreateHaVipResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getCreateIpAddressFamilyUri(VERSION_V1)).
+		WithURL(getCreateHaVipUri(VERSION_V1)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -584,19 +585,19 @@ func (c *Client) CreateIpAddressFamily(request *CreateIpAddressFamilyRequest) (*
 	return result, nil
 }
 
-// CreateIpAddressGroup
+// CreateIpGroup
 //
 // PARAMS:
-//   - request: the arguments to CreateIpAddressGroup
+//   - request: the arguments to CreateIpGroup
 //
 // RETURNS:
-//   - CreateIpAddressGroupResponse: The return type of the CreateIpAddressGroup interface.
+//   - CreateIpGroupResponse: The return type of the CreateIpGroup interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateIpAddressGroup(request *CreateIpAddressGroupRequest) (*CreateIpAddressGroupResponse, error) {
-	result := &CreateIpAddressGroupResponse{}
+func (c *Client) CreateIpGroup(request *CreateIpGroupRequest) (*CreateIpGroupResponse, error) {
+	result := &CreateIpGroupResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getCreateIpAddressGroupUri(VERSION_V1)).
+		WithURL(getCreateIpGroupUri(VERSION_V1)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -630,19 +631,42 @@ func (c *Client) CreateIpReserved(request *CreateIpReservedRequest) (*CreateIpRe
 	return result, nil
 }
 
-// CreateIpv6GatewaySpeedLimitPolicy
+// CreateIpSet
 //
 // PARAMS:
-//   - request: the arguments to CreateIpv6GatewaySpeedLimitPolicy
+//   - request: the arguments to CreateIpSet
 //
 // RETURNS:
-//   - CreateIpv6GatewaySpeedLimitPolicyResponse: The return type of the CreateIpv6GatewaySpeedLimitPolicy interface.
+//   - CreateIpSetResponse: The return type of the CreateIpSet interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateIpv6GatewaySpeedLimitPolicy(request *CreateIpv6GatewaySpeedLimitPolicyRequest) (*CreateIpv6GatewaySpeedLimitPolicyResponse, error) {
-	result := &CreateIpv6GatewaySpeedLimitPolicyResponse{}
+func (c *Client) CreateIpSet(request *CreateIpSetRequest) (*CreateIpSetResponse, error) {
+	result := &CreateIpSetResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getCreateIpv6GatewaySpeedLimitPolicyUri(VERSION_V1, util.StringValue(request.GatewayId))).
+		WithURL(getCreateIpSetUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateIpv6Gateway
+//
+// PARAMS:
+//   - request: the arguments to CreateIpv6Gateway
+//
+// RETURNS:
+//   - CreateIpv6GatewayResponse: The return type of the CreateIpv6Gateway interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateIpv6Gateway(request *CreateIpv6GatewayRequest) (*CreateIpv6GatewayResponse, error) {
+	result := &CreateIpv6GatewayResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateIpv6GatewayUri(VERSION_V1)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -676,29 +700,6 @@ func (c *Client) CreateNat(request *CreateNatRequest) (*CreateNatResponse, error
 	return result, nil
 }
 
-// CreateNetworkDetection
-//
-// PARAMS:
-//   - request: the arguments to CreateNetworkDetection
-//
-// RETURNS:
-//   - CreateNetworkDetectionResponse: The return type of the CreateNetworkDetection interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) CreateNetworkDetection(request *CreateNetworkDetectionRequest) (*CreateNetworkDetectionResponse, error) {
-	result := &CreateNetworkDetectionResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getCreateNetworkDetectionUri(VERSION_V1)).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
 // CreatePeerConn
 //
 // PARAMS:
@@ -722,6 +723,52 @@ func (c *Client) CreatePeerConn(request *CreatePeerConnRequest) (*CreatePeerConn
 	return result, nil
 }
 
+// CreateProbe
+//
+// PARAMS:
+//   - request: the arguments to CreateProbe
+//
+// RETURNS:
+//   - CreateProbeResponse: The return type of the CreateProbe interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateProbe(request *CreateProbeRequest) (*CreateProbeResponse, error) {
+	result := &CreateProbeResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateProbeUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateRateLimitRule
+//
+// PARAMS:
+//   - request: the arguments to CreateRateLimitRule
+//
+// RETURNS:
+//   - CreateRateLimitRuleResponse: The return type of the CreateRateLimitRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateRateLimitRule(request *CreateRateLimitRuleRequest) (*CreateRateLimitRuleResponse, error) {
+	result := &CreateRateLimitRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateRateLimitRuleUri(VERSION_V1, util.StringValue(request.GatewayId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateRoutingRules
 //
 // PARAMS:
@@ -735,6 +782,29 @@ func (c *Client) CreateRoutingRules(request *CreateRoutingRulesRequest) (*Create
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateRoutingRulesUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to CreateSecurityGroup
+//
+// RETURNS:
+//   - CreateSecurityGroupResponse: The return type of the CreateSecurityGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateSecurityGroup(request *CreateSecurityGroupRequest) (*CreateSecurityGroupResponse, error) {
+	result := &CreateSecurityGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateSecurityGroupUri(VERSION_V1)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -938,18 +1008,18 @@ func (c *Client) DeleteDnatRule(request *DeleteDnatRuleRequest) error {
 		Do()
 }
 
-// DeleteElasticNetworkCardAuxiliaryIp
+// DeleteEniIp
 //
 // PARAMS:
-//   - request: the arguments to DeleteElasticNetworkCardAuxiliaryIp
+//   - request: the arguments to DeleteEniIp
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DeleteElasticNetworkCardAuxiliaryIp(request *DeleteElasticNetworkCardAuxiliaryIpRequest) error {
+func (c *Client) DeleteEniIp(request *DeleteEniIpRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getDeleteElasticNetworkCardAuxiliaryIpUri(VERSION_V1, util.StringValue(request.EniId), util.StringValue(request.PrivateIpAddress))).
+		WithURL(getDeleteEniIpUri(VERSION_V1, util.StringValue(request.EniId), util.StringValue(request.PrivateIpAddress))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
@@ -1002,67 +1072,34 @@ func (c *Client) DeleteGatewayLimitRule(request *DeleteGatewayLimitRuleRequest) 
 		Do()
 }
 
-// DeleteHighlyAvailableVirtualIp
+// DeleteHaVip
 //
 // PARAMS:
-//   - request: the arguments to DeleteHighlyAvailableVirtualIp
+//   - request: the arguments to DeleteHaVip
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DeleteHighlyAvailableVirtualIp(request *DeleteHighlyAvailableVirtualIpRequest) error {
+func (c *Client) DeleteHaVip(request *DeleteHaVipRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getDeleteHighlyAvailableVirtualIpUri(VERSION_V1, util.StringValue(request.HaVipId))).
+		WithURL(getDeleteHaVipUri(VERSION_V1, util.StringValue(request.HaVipId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
 
-// DeleteIpAddressFamily
+// DeleteIpGroup
 //
 // PARAMS:
-//   - request: the arguments to DeleteIpAddressFamily
+//   - request: the arguments to DeleteIpGroup
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DeleteIpAddressFamily(request *DeleteIpAddressFamilyRequest) error {
+func (c *Client) DeleteIpGroup(request *DeleteIpGroupRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getDeleteIpAddressFamilyUri(VERSION_V1, util.StringValue(request.IpGroupId))).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		Do()
-}
-
-// DeleteIpAddressFromIpAddressGroup
-//
-// PARAMS:
-//   - request: the arguments to DeleteIpAddressFromIpAddressGroup
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) DeleteIpAddressFromIpAddressGroup(request *DeleteIpAddressFromIpAddressGroupRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getDeleteIpAddressFromIpAddressGroupUri(VERSION_V1, util.StringValue(request.IpSetId))).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// DeleteIpAddressGroup
-//
-// PARAMS:
-//   - request: the arguments to DeleteIpAddressGroup
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) DeleteIpAddressGroup(request *DeleteIpAddressGroupRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.DELETE).
-		WithURL(getDeleteIpAddressGroupUri(VERSION_V1, util.StringValue(request.IpSetId))).
+		WithURL(getDeleteIpGroupUri(VERSION_V1, util.StringValue(request.IpSetId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
@@ -1083,6 +1120,22 @@ func (c *Client) DeleteIpReserve(request *DeleteIpReserveRequest) error {
 		Do()
 }
 
+// DeleteIpSet
+//
+// PARAMS:
+//   - request: the arguments to DeleteIpSet
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteIpSet(request *DeleteIpSetRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteIpSetUri(VERSION_V1, util.StringValue(request.IpGroupId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
 // DeleteIpv6Gateway
 //
 // PARAMS:
@@ -1099,83 +1152,50 @@ func (c *Client) DeleteIpv6Gateway(request *DeleteIpv6GatewayRequest) error {
 		Do()
 }
 
-// DeleteIpv6GatewaySpeedLimitPolicy
+// DeleteIpv6GatewayEgressOnlyRule
 //
 // PARAMS:
-//   - request: the arguments to DeleteIpv6GatewaySpeedLimitPolicy
+//   - request: the arguments to DeleteIpv6GatewayEgressOnlyRule
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DeleteIpv6GatewaySpeedLimitPolicy(request *DeleteIpv6GatewaySpeedLimitPolicyRequest) error {
+func (c *Client) DeleteIpv6GatewayEgressOnlyRule(request *DeleteIpv6GatewayEgressOnlyRuleRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getDeleteIpv6GatewaySpeedLimitPolicyUri(VERSION_V1, util.StringValue(request.GatewayId), util.StringValue(request.RateLimitRuleId))).
+		WithURL(getDeleteIpv6GatewayEgressOnlyRuleUri(VERSION_V1, util.StringValue(request.GatewayId), util.StringValue(request.EgressOnlyRuleId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
 
-// DeleteIpv6OnlyAccessPolicy
+// DeleteIpv6GatewayRateLimitRule
 //
 // PARAMS:
-//   - request: the arguments to DeleteIpv6OnlyAccessPolicy
+//   - request: the arguments to DeleteIpv6GatewayRateLimitRule
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DeleteIpv6OnlyAccessPolicy(request *DeleteIpv6OnlyAccessPolicyRequest) error {
+func (c *Client) DeleteIpv6GatewayRateLimitRule(request *DeleteIpv6GatewayRateLimitRuleRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getDeleteIpv6OnlyAccessPolicyUri(VERSION_V1, util.StringValue(request.GatewayId), util.StringValue(request.EgressOnlyRuleId))).
+		WithURL(getDeleteIpv6GatewayRateLimitRuleUri(VERSION_V1, util.StringValue(request.GatewayId), util.StringValue(request.RateLimitRuleId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
 
-// DeleteNetworkDetection
+// DeleteProbe
 //
 // PARAMS:
-//   - request: the arguments to DeleteNetworkDetection
+//   - request: the arguments to DeleteProbe
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DeleteNetworkDetection(request *DeleteNetworkDetectionRequest) error {
+func (c *Client) DeleteProbe(request *DeleteProbeRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getDeleteNetworkDetectionUri(VERSION_V1, util.StringValue(request.ProbeId))).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		Do()
-}
-
-// DeleteRegularSecurityGroupRulesV2
-//
-// PARAMS:
-//   - request: the arguments to DeleteRegularSecurityGroupRulesV2
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) DeleteRegularSecurityGroupRulesV2(request *DeleteRegularSecurityGroupRulesV2Request) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.DELETE).
-		WithURL(getDeleteRegularSecurityGroupRulesV2Uri(VERSION_V2, util.StringValue(request.SecurityGroupRuleId))).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
-		Do()
-}
-
-// DeleteRegularSecurityGroupV2
-//
-// PARAMS:
-//   - request: the arguments to DeleteRegularSecurityGroupV2
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) DeleteRegularSecurityGroupV2(request *DeleteRegularSecurityGroupV2Request) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.DELETE).
-		WithURL(getDeleteRegularSecurityGroupV2Uri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
+		WithURL(getDeleteProbeUri(VERSION_V1, util.StringValue(request.ProbeId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
@@ -1193,6 +1213,39 @@ func (c *Client) DeleteRoutingRules(request *DeleteRoutingRulesRequest) error {
 		WithMethod(http.DELETE).
 		WithURL(getDeleteRoutingRulesUri(VERSION_V1, util.StringValue(request.RouteRuleId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// DeleteSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to DeleteSecurityGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteSecurityGroup(request *DeleteSecurityGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteSecurityGroupUri(VERSION_V1, util.StringValue(request.SecurityGroupId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// DeleteSecurityGroupRules
+//
+// PARAMS:
+//   - request: the arguments to DeleteSecurityGroupRules
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteSecurityGroupRules(request *DeleteSecurityGroupRulesRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteSecurityGroupRulesUri(VERSION_V1, util.StringValue(request.SecurityGroupRuleId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
 		Do()
 }
 
@@ -1307,112 +1360,85 @@ func (c *Client) DeleteVpnTunnel(request *DeleteVpnTunnelRequest) error {
 		Do()
 }
 
-// ElasticNetworkCardBindingEip
+// DetachEniInstance
 //
 // PARAMS:
-//   - request: the arguments to ElasticNetworkCardBindingEip
+//   - request: the arguments to DetachEniInstance
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) ElasticNetworkCardBindingEip(request *ElasticNetworkCardBindingEipRequest) error {
+func (c *Client) DetachEniInstance(request *DetachEniInstanceRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getElasticNetworkCardBindingEipUri(VERSION_V1, util.StringValue(request.EniId))).
-		WithQueryParam("bind", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// ElasticNetworkCardMountedCloudProductInstance
-//
-// PARAMS:
-//   - request: the arguments to ElasticNetworkCardMountedCloudProductInstance
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ElasticNetworkCardMountedCloudProductInstance(request *ElasticNetworkCardMountedCloudProductInstanceRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getElasticNetworkCardMountedCloudProductInstanceUri(VERSION_V1, util.StringValue(request.EniId))).
-		WithQueryParam("attach", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// ElasticNetworkCardUnbindingEip
-//
-// PARAMS:
-//   - request: the arguments to ElasticNetworkCardUnbindingEip
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ElasticNetworkCardUnbindingEip(request *ElasticNetworkCardUnbindingEipRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getElasticNetworkCardUnbindingEipUri(VERSION_V1, util.StringValue(request.EniId))).
-		WithQueryParam("unBind", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// ElasticNetworkCardUninstallationCloudProductInstance
-//
-// PARAMS:
-//   - request: the arguments to ElasticNetworkCardUninstallationCloudProductInstance
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ElasticNetworkCardUninstallationCloudProductInstance(request *ElasticNetworkCardUninstallationCloudProductInstanceRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getElasticNetworkCardUninstallationCloudProductInstanceUri(VERSION_V1, util.StringValue(request.EniId))).
+		WithURL(getDetachEniInstanceUri(VERSION_V1, util.StringValue(request.EniId))).
 		WithQueryParam("detach", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
 
-// ElasticNetworkCardUpdateEnterpriseSecurityGroup
+// GetEniDetail
 //
 // PARAMS:
-//   - request: the arguments to ElasticNetworkCardUpdateEnterpriseSecurityGroup
+//   - request: the arguments to GetEniDetail
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ElasticNetworkCardUpdateEnterpriseSecurityGroup(request *ElasticNetworkCardUpdateEnterpriseSecurityGroupRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getElasticNetworkCardUpdateEnterpriseSecurityGroupUri(VERSION_V1, util.StringValue(request.EniId))).
-		WithQueryParam("bindEsg", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
+//   - GetEniDetailResponse: The return type of the GetEniDetail interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetEniDetail(request *GetEniDetailRequest) (*GetEniDetailResponse, error) {
+	result := &GetEniDetailResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetEniDetailUri(VERSION_V1, util.StringValue(request.EniId))).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
-// ElasticNetworkCardUpdatesRegularSecurityGroup
+// GetEniStatus
 //
 // PARAMS:
-//   - request: the arguments to ElasticNetworkCardUpdatesRegularSecurityGroup
+//   - request: the arguments to GetEniStatus
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ElasticNetworkCardUpdatesRegularSecurityGroup(request *ElasticNetworkCardUpdatesRegularSecurityGroupRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getElasticNetworkCardUpdatesRegularSecurityGroupUri(VERSION_V1, util.StringValue(request.EniId))).
-		WithQueryParam("bindSg", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
+//   - GetEniStatusResponse: The return type of the GetEniStatus interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetEniStatus(request *GetEniStatusRequest) (*GetEniStatusResponse, error) {
+	result := &GetEniStatusResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetEniStatusUri(VERSION_V1, util.StringValue(request.EniId))).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetHaVipDetail
+//
+// PARAMS:
+//   - request: the arguments to GetHaVipDetail
+//
+// RETURNS:
+//   - GetHaVipDetailResponse: The return type of the GetHaVipDetail interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetHaVipDetail(request *GetHaVipDetailRequest) (*GetHaVipDetailResponse, error) {
+	result := &GetHaVipDetailResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetHaVipDetailUri(VERSION_V1, util.StringValue(request.HaVipId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetNat
@@ -1458,6 +1484,48 @@ func (c *Client) GetPeerConn(request *GetPeerConnRequest) (*GetPeerConnResponse,
 	return result, nil
 }
 
+// GetProbeDetail
+//
+// PARAMS:
+//   - request: the arguments to GetProbeDetail
+//
+// RETURNS:
+//   - GetProbeDetailResponse: The return type of the GetProbeDetail interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetProbeDetail(request *GetProbeDetailRequest) (*GetProbeDetailResponse, error) {
+	result := &GetProbeDetailResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetProbeDetailUri(VERSION_V1, util.StringValue(request.ProbeId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetSecurityGroupDetails
+//
+// PARAMS:
+//   - request: the arguments to GetSecurityGroupDetails
+//
+// RETURNS:
+//   - GetSecurityGroupDetailsResponse: The return type of the GetSecurityGroupDetails interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetSecurityGroupDetails(request *GetSecurityGroupDetailsRequest) (*GetSecurityGroupDetailsResponse, error) {
+	result := &GetSecurityGroupDetailsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetSecurityGroupDetailsUri(VERSION_V1, util.StringValue(request.SecurityGroupId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // GetVpcResourceIpInfo
 //
 // PARAMS:
@@ -1484,95 +1552,6 @@ func (c *Client) GetVpcResourceIpInfo(request *GetVpcResourceIpInfoRequest) (*Ge
 	return result, nil
 }
 
-// HighAvailabilityVirtualIpUnbindingEip
-//
-// PARAMS:
-//   - request: the arguments to HighAvailabilityVirtualIpUnbindingEip
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) HighAvailabilityVirtualIpUnbindingEip(request *HighAvailabilityVirtualIpUnbindingEipRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getHighAvailabilityVirtualIpUnbindingEipUri(VERSION_V1, util.StringValue(request.HaVipId))).
-		WithQueryParam("unbindPublicIp", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		Do()
-}
-
-// HighAvailabilityVirtualIpUnbindingInstance
-//
-// PARAMS:
-//   - request: the arguments to HighAvailabilityVirtualIpUnbindingInstance
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) HighAvailabilityVirtualIpUnbindingInstance(request *HighAvailabilityVirtualIpUnbindingInstanceRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getHighAvailabilityVirtualIpUnbindingInstanceUri(VERSION_V1, util.StringValue(request.HaVipId))).
-		WithQueryParam("detach", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// HighlyAvailableVirtualIpBindingEip
-//
-// PARAMS:
-//   - request: the arguments to HighlyAvailableVirtualIpBindingEip
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) HighlyAvailableVirtualIpBindingEip(request *HighlyAvailableVirtualIpBindingEipRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getHighlyAvailableVirtualIpBindingEipUri(VERSION_V1, util.StringValue(request.HaVipId))).
-		WithQueryParam("bindPublicIp", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// HighlyAvailableVirtualIpBindingInstance
-//
-// PARAMS:
-//   - request: the arguments to HighlyAvailableVirtualIpBindingInstance
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) HighlyAvailableVirtualIpBindingInstance(request *HighlyAvailableVirtualIpBindingInstanceRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getHighlyAvailableVirtualIpBindingInstanceUri(VERSION_V1, util.StringValue(request.HaVipId))).
-		WithQueryParam("attach", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// Ipv6GatewayBandwidthUpgradeAndDowngrade
-//
-// PARAMS:
-//   - request: the arguments to Ipv6GatewayBandwidthUpgradeAndDowngrade
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) Ipv6GatewayBandwidthUpgradeAndDowngrade(request *Ipv6GatewayBandwidthUpgradeAndDowngradeRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getIpv6GatewayBandwidthUpgradeAndDowngradeUri(VERSION_V1, util.StringValue(request.GatewayId))).
-		WithQueryParam("resize", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
 // ListDnatRule
 //
 // PARAMS:
@@ -1586,6 +1565,80 @@ func (c *Client) ListDnatRule(request *ListDnatRuleRequest) (*ListDnatRuleRespon
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getListDnatRuleUri(VERSION_V1, util.StringValue(request.NatId))).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListEgressOnlyRule
+//
+// PARAMS:
+//   - request: the arguments to ListEgressOnlyRule
+//
+// RETURNS:
+//   - ListEgressOnlyRuleResponse: The return type of the ListEgressOnlyRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListEgressOnlyRule(request *ListEgressOnlyRuleRequest) (*ListEgressOnlyRuleResponse, error) {
+	result := &ListEgressOnlyRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListEgressOnlyRuleUri(VERSION_V1, util.StringValue(request.GatewayId))).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListEni
+//
+// PARAMS:
+//   - request: the arguments to ListEni
+//
+// RETURNS:
+//   - ListEniResponse: The return type of the ListEni interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListEni(request *ListEniRequest) (*ListEniResponse, error) {
+	result := &ListEniResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListEniUri(VERSION_V1)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
+		WithQueryParamFilter("name", util.StringValue(request.Name)).
+		WithQueryParamFilter("privateIpAddress", strings.Join(util.PtrSliceToStringSlice(request.PrivateIpAddress), ",")).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListHaVip
+//
+// PARAMS:
+//   - request: the arguments to ListHaVip
+//
+// RETURNS:
+//   - ListHaVipResponse: The return type of the ListHaVip interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListHaVip(request *ListHaVipRequest) (*ListHaVipResponse, error) {
+	result := &ListHaVipResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListHaVipUri(VERSION_V1)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
@@ -1661,6 +1714,52 @@ func (c *Client) ListPeerConn(request *ListPeerConnRequest) (*ListPeerConnRespon
 		WithMethod(http.GET).
 		WithURL(getListPeerConnUri(VERSION_V1)).
 		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListProbes
+//
+// PARAMS:
+//   - request: the arguments to ListProbes
+//
+// RETURNS:
+//   - ListProbesResponse: The return type of the ListProbes interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListProbes(request *ListProbesRequest) (*ListProbesResponse, error) {
+	result := &ListProbesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListProbesUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListRateLimitRule
+//
+// PARAMS:
+//   - request: the arguments to ListRateLimitRule
+//
+// RETURNS:
+//   - ListRateLimitRuleResponse: The return type of the ListRateLimitRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListRateLimitRule(request *ListRateLimitRuleRequest) (*ListRateLimitRuleResponse, error) {
+	result := &ListRateLimitRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListRateLimitRuleUri(VERSION_V1, util.StringValue(request.GatewayId))).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
@@ -1862,19 +1961,109 @@ func (c *Client) QueryAclRules(request *QueryAclRulesRequest) (*QueryAclRulesRes
 	return result, nil
 }
 
-// QueryIpAddressFamilyList
+// QueryEnterpriseSecurityGroupList
 //
 // PARAMS:
-//   - request: the arguments to QueryIpAddressFamilyList
+//   - request: the arguments to QueryEnterpriseSecurityGroupList
 //
 // RETURNS:
-//   - QueryIpAddressFamilyListResponse: The return type of the QueryIpAddressFamilyList interface.
+//   - QueryEnterpriseSecurityGroupListResponse: The return type of the QueryEnterpriseSecurityGroupList interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) QueryIpAddressFamilyList(request *QueryIpAddressFamilyListRequest) (*QueryIpAddressFamilyListResponse, error) {
-	result := &QueryIpAddressFamilyListResponse{}
+func (c *Client) QueryEnterpriseSecurityGroupList(request *QueryEnterpriseSecurityGroupListRequest) (*QueryEnterpriseSecurityGroupListResponse, error) {
+	result := &QueryEnterpriseSecurityGroupListResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getQueryIpAddressFamilyListUri(VERSION_V1)).
+		WithURL(getQueryEnterpriseSecurityGroupListUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// QueryIpGroupDetail
+//
+// PARAMS:
+//   - request: the arguments to QueryIpGroupDetail
+//
+// RETURNS:
+//   - QueryIpGroupDetailResponse: The return type of the QueryIpGroupDetail interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryIpGroupDetail(request *QueryIpGroupDetailRequest) (*QueryIpGroupDetailResponse, error) {
+	result := &QueryIpGroupDetailResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryIpGroupDetailUri(VERSION_V1, util.StringValue(request.IpSetId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// QueryIpGroupList
+//
+// PARAMS:
+//   - request: the arguments to QueryIpGroupList
+//
+// RETURNS:
+//   - QueryIpGroupListResponse: The return type of the QueryIpGroupList interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryIpGroupList(request *QueryIpGroupListRequest) (*QueryIpGroupListResponse, error) {
+	result := &QueryIpGroupListResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryIpGroupListUri(VERSION_V1)).
+		WithQueryParamFilter("ipVersion", util.StringValue(request.IpVersion)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// QueryIpSetDetail
+//
+// PARAMS:
+//   - request: the arguments to QueryIpSetDetail
+//
+// RETURNS:
+//   - QueryIpSetDetailResponse: The return type of the QueryIpSetDetail interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryIpSetDetail(request *QueryIpSetDetailRequest) (*QueryIpSetDetailResponse, error) {
+	result := &QueryIpSetDetailResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryIpSetDetailUri(VERSION_V1, util.StringValue(request.IpGroupId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// QueryIpSetList
+//
+// PARAMS:
+//   - request: the arguments to QueryIpSetList
+//
+// RETURNS:
+//   - QueryIpSetListResponse: The return type of the QueryIpSetList interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryIpSetList(request *QueryIpSetListRequest) (*QueryIpSetListResponse, error) {
+	result := &QueryIpSetListResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryIpSetListUri(VERSION_V1)).
 		WithQueryParamFilter("ipVersion", util.StringValue(request.IpVersion)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
@@ -1900,50 +2089,6 @@ func (c *Client) QueryIpv6Gateway(request *QueryIpv6GatewayRequest) (*QueryIpv6G
 		WithMethod(http.GET).
 		WithURL(getQueryIpv6GatewayUri(VERSION_V1)).
 		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryNetworkDetectionDetails
-//
-// PARAMS:
-//   - request: the arguments to QueryNetworkDetectionDetails
-//
-// RETURNS:
-//   - QueryNetworkDetectionDetailsResponse: The return type of the QueryNetworkDetectionDetails interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryNetworkDetectionDetails(request *QueryNetworkDetectionDetailsRequest) (*QueryNetworkDetectionDetailsResponse, error) {
-	result := &QueryNetworkDetectionDetailsResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryNetworkDetectionDetailsUri(VERSION_V1, util.StringValue(request.ProbeId))).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryNetworkDetectionList
-//
-// PARAMS:
-//   - request: the arguments to QueryNetworkDetectionList
-//
-// RETURNS:
-//   - QueryNetworkDetectionListResponse: The return type of the QueryNetworkDetectionList interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryNetworkDetectionList(request *QueryNetworkDetectionListRequest) (*QueryNetworkDetectionListResponse, error) {
-	result := &QueryNetworkDetectionListResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryNetworkDetectionListUri(VERSION_V1)).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -1992,6 +2137,33 @@ func (c *Client) QueryRoutingTable(request *QueryRoutingTableRequest) (*QueryRou
 		WithURL(getQueryRoutingTableUri(VERSION_V1)).
 		WithQueryParamFilter("routeTableId", util.StringValue(request.RouteTableId)).
 		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// QuerySecurityGroupsList
+//
+// PARAMS:
+//   - request: the arguments to QuerySecurityGroupsList
+//
+// RETURNS:
+//   - QuerySecurityGroupsListResponse: The return type of the QuerySecurityGroupsList interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QuerySecurityGroupsList(request *QuerySecurityGroupsListRequest) (*QuerySecurityGroupsListResponse, error) {
+	result := &QuerySecurityGroupsListResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQuerySecurityGroupsListUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("securityGroupId", util.StringValue(request.SecurityGroupId)).
+		WithQueryParamFilter("securityGroupIds", util.StringValue(request.SecurityGroupIds)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -2163,260 +2335,6 @@ func (c *Client) QueryTheListOfDedicatedLineGateways(request *QueryTheListOfDedi
 	return result, nil
 }
 
-// QueryTheListOfElasticNetworkCards
-//
-// PARAMS:
-//   - request: the arguments to QueryTheListOfElasticNetworkCards
-//
-// RETURNS:
-//   - QueryTheListOfElasticNetworkCardsResponse: The return type of the QueryTheListOfElasticNetworkCards interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheListOfElasticNetworkCards(request *QueryTheListOfElasticNetworkCardsRequest) (*QueryTheListOfElasticNetworkCardsResponse, error) {
-	result := &QueryTheListOfElasticNetworkCardsResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheListOfElasticNetworkCardsUri(VERSION_V1)).
-		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
-		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
-		WithQueryParamFilter("name", util.StringValue(request.Name)).
-		WithQueryParamFilter("privateIpAddress", strings.Join(util.PtrSliceToStringSlice(request.PrivateIpAddress), ",")).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryTheListOfEnterpriseSecurityGroups
-//
-// PARAMS:
-//   - request: the arguments to QueryTheListOfEnterpriseSecurityGroups
-//
-// RETURNS:
-//   - QueryTheListOfEnterpriseSecurityGroupsResponse: The return type of the QueryTheListOfEnterpriseSecurityGroups interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheListOfEnterpriseSecurityGroups(request *QueryTheListOfEnterpriseSecurityGroupsRequest) (*QueryTheListOfEnterpriseSecurityGroupsResponse, error) {
-	result := &QueryTheListOfEnterpriseSecurityGroupsResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheListOfEnterpriseSecurityGroupsUri(VERSION_V1)).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryTheListOfHighlyAvailableVirtualIps
-//
-// PARAMS:
-//   - request: the arguments to QueryTheListOfHighlyAvailableVirtualIps
-//
-// RETURNS:
-//   - QueryTheListOfHighlyAvailableVirtualIpsResponse: The return type of the QueryTheListOfHighlyAvailableVirtualIps interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheListOfHighlyAvailableVirtualIps(request *QueryTheListOfHighlyAvailableVirtualIpsRequest) (*QueryTheListOfHighlyAvailableVirtualIpsResponse, error) {
-	result := &QueryTheListOfHighlyAvailableVirtualIpsResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheListOfHighlyAvailableVirtualIpsUri(VERSION_V1)).
-		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryTheListOfIpAddressGroups
-//
-// PARAMS:
-//   - request: the arguments to QueryTheListOfIpAddressGroups
-//
-// RETURNS:
-//   - QueryTheListOfIpAddressGroupsResponse: The return type of the QueryTheListOfIpAddressGroups interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheListOfIpAddressGroups(request *QueryTheListOfIpAddressGroupsRequest) (*QueryTheListOfIpAddressGroupsResponse, error) {
-	result := &QueryTheListOfIpAddressGroupsResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheListOfIpAddressGroupsUri(VERSION_V1)).
-		WithQueryParamFilter("ipVersion", util.StringValue(request.IpVersion)).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryTheListOfRegularSecurityGroupsV2
-//
-// PARAMS:
-//   - request: the arguments to QueryTheListOfRegularSecurityGroupsV2
-//
-// RETURNS:
-//   - QueryTheListOfRegularSecurityGroupsV2Response: The return type of the QueryTheListOfRegularSecurityGroupsV2 interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheListOfRegularSecurityGroupsV2(request *QueryTheListOfRegularSecurityGroupsV2Request) (*QueryTheListOfRegularSecurityGroupsV2Response, error) {
-	result := &QueryTheListOfRegularSecurityGroupsV2Response{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheListOfRegularSecurityGroupsV2Uri(VERSION_V2)).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
-		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
-		WithQueryParamFilter("securityGroupId", util.StringValue(request.SecurityGroupId)).
-		WithQueryParamFilter("securityGroupIds", util.StringValue(request.SecurityGroupIds)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryTheListOfSpeedLimitPoliciesForIpv6Gateway
-//
-// PARAMS:
-//   - request: the arguments to QueryTheListOfSpeedLimitPoliciesForIpv6Gateway
-//
-// RETURNS:
-//   - QueryTheListOfSpeedLimitPoliciesForIpv6GatewayResponse: The return type of the QueryTheListOfSpeedLimitPoliciesForIpv6Gateway interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheListOfSpeedLimitPoliciesForIpv6Gateway(request *QueryTheListOfSpeedLimitPoliciesForIpv6GatewayRequest) (*QueryTheListOfSpeedLimitPoliciesForIpv6GatewayResponse, error) {
-	result := &QueryTheListOfSpeedLimitPoliciesForIpv6GatewayResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheListOfSpeedLimitPoliciesForIpv6GatewayUri(VERSION_V1, util.StringValue(request.GatewayId))).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryTheSpecifiedElasticNetworkCard
-//
-// PARAMS:
-//   - request: the arguments to QueryTheSpecifiedElasticNetworkCard
-//
-// RETURNS:
-//   - QueryTheSpecifiedElasticNetworkCardResponse: The return type of the QueryTheSpecifiedElasticNetworkCard interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheSpecifiedElasticNetworkCard(request *QueryTheSpecifiedElasticNetworkCardRequest) (*QueryTheSpecifiedElasticNetworkCardResponse, error) {
-	result := &QueryTheSpecifiedElasticNetworkCardResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheSpecifiedElasticNetworkCardUri(VERSION_V1, util.StringValue(request.EniId))).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryTheSpecifiedHighlyAvailableVirtualIp
-//
-// PARAMS:
-//   - request: the arguments to QueryTheSpecifiedHighlyAvailableVirtualIp
-//
-// RETURNS:
-//   - QueryTheSpecifiedHighlyAvailableVirtualIpResponse: The return type of the QueryTheSpecifiedHighlyAvailableVirtualIp interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheSpecifiedHighlyAvailableVirtualIp(request *QueryTheSpecifiedHighlyAvailableVirtualIpRequest) (*QueryTheSpecifiedHighlyAvailableVirtualIpResponse, error) {
-	result := &QueryTheSpecifiedHighlyAvailableVirtualIpResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheSpecifiedHighlyAvailableVirtualIpUri(VERSION_V1, util.StringValue(request.HaVipId))).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryTheSpecifiedIpAddressFamily
-//
-// PARAMS:
-//   - request: the arguments to QueryTheSpecifiedIpAddressFamily
-//
-// RETURNS:
-//   - QueryTheSpecifiedIpAddressFamilyResponse: The return type of the QueryTheSpecifiedIpAddressFamily interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheSpecifiedIpAddressFamily(request *QueryTheSpecifiedIpAddressFamilyRequest) (*QueryTheSpecifiedIpAddressFamilyResponse, error) {
-	result := &QueryTheSpecifiedIpAddressFamilyResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheSpecifiedIpAddressFamilyUri(VERSION_V1, util.StringValue(request.IpGroupId))).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryTheSpecifiedIpAddressGroup
-//
-// PARAMS:
-//   - request: the arguments to QueryTheSpecifiedIpAddressGroup
-//
-// RETURNS:
-//   - QueryTheSpecifiedIpAddressGroupResponse: The return type of the QueryTheSpecifiedIpAddressGroup interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheSpecifiedIpAddressGroup(request *QueryTheSpecifiedIpAddressGroupRequest) (*QueryTheSpecifiedIpAddressGroupResponse, error) {
-	result := &QueryTheSpecifiedIpAddressGroupResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheSpecifiedIpAddressGroupUri(VERSION_V1, util.StringValue(request.IpSetId))).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryTheStatusOfTheElasticNetworkCard
-//
-// PARAMS:
-//   - request: the arguments to QueryTheStatusOfTheElasticNetworkCard
-//
-// RETURNS:
-//   - QueryTheStatusOfTheElasticNetworkCardResponse: The return type of the QueryTheStatusOfTheElasticNetworkCard interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheStatusOfTheElasticNetworkCard(request *QueryTheStatusOfTheElasticNetworkCardRequest) (*QueryTheStatusOfTheElasticNetworkCardResponse, error) {
-	result := &QueryTheStatusOfTheElasticNetworkCardResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheStatusOfTheElasticNetworkCardUri(VERSION_V1, util.StringValue(request.EniId))).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
 // QueryVpcIntranetIp
 //
 // PARAMS:
@@ -2483,29 +2401,6 @@ func (c *Client) QueryVpnList(request *QueryVpnListRequest) (*QueryVpnListRespon
 		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
 		WithQueryParamFilter("eip", util.StringValue(request.Eip)).
 		WithQueryParamFilter("type", util.StringValue(request.Type)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusion
-//
-// PARAMS:
-//   - request: the arguments to QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusion
-//
-// RETURNS:
-//   - QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusionResponse: The return type of the QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusion interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusion(request *QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusionRequest) (*QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusionResponse, error) {
-	result := &QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusionResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusionUri(VERSION_V1, util.StringValue(request.GatewayId))).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -2612,34 +2507,51 @@ func (c *Client) ReleaseVpn(request *ReleaseVpnRequest) error {
 		Do()
 }
 
-// RemoveElasticNetworkCard
+// RemoveEni
 //
 // PARAMS:
-//   - request: the arguments to RemoveElasticNetworkCard
+//   - request: the arguments to RemoveEni
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) RemoveElasticNetworkCard(request *RemoveElasticNetworkCardRequest) error {
+func (c *Client) RemoveEni(request *RemoveEniRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getRemoveElasticNetworkCardUri(VERSION_V1, util.StringValue(request.EniId))).
+		WithURL(getRemoveEniUri(VERSION_V1, util.StringValue(request.EniId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
 
-// RemoveIpAddressGroupFromIpAddressFamily
+// RemoveIpAddressFromIpGroup
 //
 // PARAMS:
-//   - request: the arguments to RemoveIpAddressGroupFromIpAddressFamily
+//   - request: the arguments to RemoveIpAddressFromIpGroup
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) RemoveIpAddressGroupFromIpAddressFamily(request *RemoveIpAddressGroupFromIpAddressFamilyRequest) error {
+func (c *Client) RemoveIpAddressFromIpGroup(request *RemoveIpAddressFromIpGroupRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getRemoveIpAddressGroupFromIpAddressFamilyUri(VERSION_V1, util.StringValue(request.IpGroupId))).
+		WithURL(getRemoveIpAddressFromIpGroupUri(VERSION_V1, util.StringValue(request.IpSetId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// RemoveIpGroupFromIpSet
+//
+// PARAMS:
+//   - request: the arguments to RemoveIpGroupFromIpSet
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RemoveIpGroupFromIpSet(request *RemoveIpGroupFromIpSetRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getRemoveIpGroupFromIpSetUri(VERSION_V1, util.StringValue(request.IpGroupId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -2681,6 +2593,24 @@ func (c *Client) RenewVpn(request *RenewVpnRequest) error {
 		Do()
 }
 
+// ResizeIpv6Gateway
+//
+// PARAMS:
+//   - request: the arguments to ResizeIpv6Gateway
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ResizeIpv6Gateway(request *ResizeIpv6GatewayRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getResizeIpv6GatewayUri(VERSION_V1, util.StringValue(request.GatewayId))).
+		WithQueryParam("resize", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // ResizeNat
 //
 // PARAMS:
@@ -2699,18 +2629,18 @@ func (c *Client) ResizeNat(request *ResizeNatRequest) error {
 		Do()
 }
 
-// RevokeRegularSecurityGroupRulesV2
+// RevokeSecurityGroupRules
 //
 // PARAMS:
-//   - request: the arguments to RevokeRegularSecurityGroupRulesV2
+//   - request: the arguments to RevokeSecurityGroupRules
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) RevokeRegularSecurityGroupRulesV2(request *RevokeRegularSecurityGroupRulesV2Request) error {
+func (c *Client) RevokeSecurityGroupRules(request *RevokeSecurityGroupRulesRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getRevokeRegularSecurityGroupRulesV2Uri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
+		WithURL(getRevokeSecurityGroupRulesUri(VERSION_V1, util.StringValue(request.SecurityGroupId))).
 		WithQueryParam("revokeRule", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
@@ -2778,6 +2708,59 @@ func (c *Client) UnbindEip(request *UnbindEipRequest) error {
 		Do()
 }
 
+// UnbindEniEip
+//
+// PARAMS:
+//   - request: the arguments to UnbindEniEip
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindEniEip(request *UnbindEniEipRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindEniEipUri(VERSION_V1, util.StringValue(request.EniId))).
+		WithQueryParam("unBind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UnbindHaVipEip
+//
+// PARAMS:
+//   - request: the arguments to UnbindHaVipEip
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindHaVipEip(request *UnbindHaVipEipRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindHaVipEipUri(VERSION_V1, util.StringValue(request.HaVipId))).
+		WithQueryParam("unbindPublicIp", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// UnbindHaVipInstance
+//
+// PARAMS:
+//   - request: the arguments to UnbindHaVipInstance
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindHaVipInstance(request *UnbindHaVipInstanceRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindHaVipInstanceUri(VERSION_V1, util.StringValue(request.HaVipId))).
+		WithQueryParam("detach", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // UnbindPhysicalDedicatedLine
 //
 // PARAMS:
@@ -2829,6 +2812,23 @@ func (c *Client) UpdateDedicatedGateway(request *UpdateDedicatedGatewayRequest) 
 		Do()
 }
 
+// UpdateDeleteProtect
+//
+// PARAMS:
+//   - request: the arguments to UpdateDeleteProtect
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateDeleteProtect(request *UpdateDeleteProtectRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateDeleteProtectUri(VERSION_V1, util.StringValue(request.GatewayId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // UpdateDnatRule
 //
 // PARAMS:
@@ -2846,19 +2846,55 @@ func (c *Client) UpdateDnatRule(request *UpdateDnatRuleRequest) error {
 		Do()
 }
 
-// UpdateElasticNetworkCard
+// UpdateEni
 //
 // PARAMS:
-//   - request: the arguments to UpdateElasticNetworkCard
+//   - request: the arguments to UpdateEni
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) UpdateElasticNetworkCard(request *UpdateElasticNetworkCardRequest) error {
+func (c *Client) UpdateEni(request *UpdateEniRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getUpdateElasticNetworkCardUri(VERSION_V1, util.StringValue(request.EniId))).
+		WithURL(getUpdateEniUri(VERSION_V1, util.StringValue(request.EniId))).
 		WithQueryParam("modifyAttribute", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateEniEnterpriseSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to UpdateEniEnterpriseSecurityGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateEniEnterpriseSecurityGroup(request *UpdateEniEnterpriseSecurityGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateEniEnterpriseSecurityGroupUri(VERSION_V1, util.StringValue(request.EniId))).
+		WithQueryParam("bindEsg", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateEniSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to UpdateEniSecurityGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateEniSecurityGroup(request *UpdateEniSecurityGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateEniSecurityGroupUri(VERSION_V1, util.StringValue(request.EniId))).
+		WithQueryParam("bindSg", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -2881,89 +2917,55 @@ func (c *Client) UpdateEnterpriseSecurityGroupRules(request *UpdateEnterpriseSec
 		Do()
 }
 
-// UpdateHighlyAvailableVirtualIp
+// UpdateHaVip
 //
 // PARAMS:
-//   - request: the arguments to UpdateHighlyAvailableVirtualIp
+//   - request: the arguments to UpdateHaVip
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) UpdateHighlyAvailableVirtualIp(request *UpdateHighlyAvailableVirtualIpRequest) error {
+func (c *Client) UpdateHaVip(request *UpdateHaVipRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getUpdateHighlyAvailableVirtualIpUri(VERSION_V1, util.StringValue(request.HaVipId))).
+		WithURL(getUpdateHaVipUri(VERSION_V1, util.StringValue(request.HaVipId))).
 		WithQueryParam("modifyAttribute", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
 
-// UpdateIpAddressFamily
+// UpdateIpGroup
 //
 // PARAMS:
-//   - request: the arguments to UpdateIpAddressFamily
+//   - request: the arguments to UpdateIpGroup
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) UpdateIpAddressFamily(request *UpdateIpAddressFamilyRequest) error {
+func (c *Client) UpdateIpGroup(request *UpdateIpGroupRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getUpdateIpAddressFamilyUri(VERSION_V1, util.StringValue(request.IpGroupId))).
+		WithURL(getUpdateIpGroupUri(VERSION_V1, util.StringValue(request.IpSetId))).
 		WithQueryParam("modifyAttribute", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
 
-// UpdateIpAddressGroup
+// UpdateIpSet
 //
 // PARAMS:
-//   - request: the arguments to UpdateIpAddressGroup
+//   - request: the arguments to UpdateIpSet
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) UpdateIpAddressGroup(request *UpdateIpAddressGroupRequest) error {
+func (c *Client) UpdateIpSet(request *UpdateIpSetRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getUpdateIpAddressGroupUri(VERSION_V1, util.StringValue(request.IpSetId))).
+		WithURL(getUpdateIpSetUri(VERSION_V1, util.StringValue(request.IpGroupId))).
 		WithQueryParam("modifyAttribute", "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// UpdateIpv6GatewayReleaseProtectionSwitch
-//
-// PARAMS:
-//   - request: the arguments to UpdateIpv6GatewayReleaseProtectionSwitch
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateIpv6GatewayReleaseProtectionSwitch(request *UpdateIpv6GatewayReleaseProtectionSwitchRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getUpdateIpv6GatewayReleaseProtectionSwitchUri(VERSION_V1, util.StringValue(request.GatewayId))).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// UpdateIpv6GatewaySpeedLimitPolicy
-//
-// PARAMS:
-//   - request: the arguments to UpdateIpv6GatewaySpeedLimitPolicy
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateIpv6GatewaySpeedLimitPolicy(request *UpdateIpv6GatewaySpeedLimitPolicyRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getUpdateIpv6GatewaySpeedLimitPolicyUri(VERSION_V1, util.StringValue(request.GatewayId), util.StringValue(request.RateLimitRuleId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -2981,23 +2983,6 @@ func (c *Client) UpdateNatReleaseProtectionSwitch(request *UpdateNatReleaseProte
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateNatReleaseProtectionSwitchUri(VERSION_V1, util.StringValue(request.NatId))).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// UpdateNetworkDetection
-//
-// PARAMS:
-//   - request: the arguments to UpdateNetworkDetection
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateNetworkDetection(request *UpdateNetworkDetectionRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getUpdateNetworkDetectionUri(VERSION_V1, util.StringValue(request.ProbeId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -3055,20 +3040,36 @@ func (c *Client) UpdatePeerConnDeleteProtect(request *UpdatePeerConnDeleteProtec
 		Do()
 }
 
-// UpdateRegularSecurityGroupRulesV2
+// UpdateProbe
 //
 // PARAMS:
-//   - request: the arguments to UpdateRegularSecurityGroupRulesV2
+//   - request: the arguments to UpdateProbe
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) UpdateRegularSecurityGroupRulesV2(request *UpdateRegularSecurityGroupRulesV2Request) error {
+func (c *Client) UpdateProbe(request *UpdateProbeRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getUpdateRegularSecurityGroupRulesV2Uri(VERSION_V2)).
+		WithURL(getUpdateProbeUri(VERSION_V1, util.StringValue(request.ProbeId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateRateLimitRule
+//
+// PARAMS:
+//   - request: the arguments to UpdateRateLimitRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateRateLimitRule(request *UpdateRateLimitRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateRateLimitRuleUri(VERSION_V1, util.StringValue(request.GatewayId), util.StringValue(request.RateLimitRuleId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
@@ -3086,6 +3087,24 @@ func (c *Client) UpdateRoutingRules(request *UpdateRoutingRulesRequest) error {
 		WithMethod(http.PUT).
 		WithURL(getUpdateRoutingRulesUri(VERSION_V1, util.StringValue(request.RouteRuleId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateSecurityGroupRules
+//
+// PARAMS:
+//   - request: the arguments to UpdateSecurityGroupRules
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateSecurityGroupRules(request *UpdateSecurityGroupRulesRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateSecurityGroupRulesUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
 		WithBody(request).
 		Do()
 }
@@ -3309,27 +3328,6 @@ func (c *Client) ViewGatewayLimitRules(request *ViewGatewayLimitRulesRequest) (*
 		WithQueryParamFilter("resourceId", util.StringValue(request.ResourceId)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.StringValue(request.MaxKeys)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// ViewSecurityGroupDetailsV2
-//
-// PARAMS:
-//   - request: the arguments to ViewSecurityGroupDetailsV2
-//
-// RETURNS:
-//   - ViewSecurityGroupDetailsV2Response: The return type of the ViewSecurityGroupDetailsV2 interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) ViewSecurityGroupDetailsV2(request *ViewSecurityGroupDetailsV2Request) (*ViewSecurityGroupDetailsV2Response, error) {
-	result := &ViewSecurityGroupDetailsV2Response{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getViewSecurityGroupDetailsV2Uri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
 		WithResult(result).
 		Do()
 	if err != nil {

@@ -91,15 +91,15 @@ func TestClient_AddAclRule(t *testing.T) {
 	err := VPC_CLIENT.AddAclRule(addAclRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_AddElasticNetworkCardAuxiliaryIp(t *testing.T) {
-	addElasticNetworkCardAuxiliaryIpRequest := &AddElasticNetworkCardAuxiliaryIpRequest{
+func TestClient_AddEniIp(t *testing.T) {
+	addEniIpRequest := &AddEniIpRequest{
 		EniId:            util.PtrString(""),
 		ClientToken:      util.PtrString(""),
 		IsIpv6:           util.PtrBool(false),
 		PrivateIpAddress: util.PtrString(""),
 	}
-	result := &AddElasticNetworkCardAuxiliaryIpResponse{}
-	result, err := VPC_CLIENT.AddElasticNetworkCardAuxiliaryIp(addElasticNetworkCardAuxiliaryIpRequest)
+	result := &AddEniIpResponse{}
+	result, err := VPC_CLIENT.AddEniIp(addEniIpRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -112,45 +112,44 @@ func TestClient_AddElasticNetworkCardAuxiliaryIp(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_AddIpAddressGroupToIpAddressFamily(t *testing.T) {
-	addIpAddressGroupToIpAddressFamilyRequest := &AddIpAddressGroupToIpAddressFamilyRequest{
-		IpGroupId:   util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		IpSetIds:    []*string{},
-	}
-	err := VPC_CLIENT.AddIpAddressGroupToIpAddressFamily(addIpAddressGroupToIpAddressFamilyRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_AddIpAddressesToTheIpAddressGroup(t *testing.T) {
-	addIpAddressesToTheIpAddressGroupRequest := &AddIpAddressesToTheIpAddressGroupRequest{
+func TestClient_AddIpAddressToIpGroup(t *testing.T) {
+	addIpAddressToIpGroupRequest := &AddIpAddressToIpGroupRequest{
 		IpSetId:       util.PtrString(""),
 		ClientToken:   util.PtrString(""),
 		IpAddressInfo: []*TemplateIpAddressInfo{},
 	}
-	err := VPC_CLIENT.AddIpAddressesToTheIpAddressGroup(addIpAddressesToTheIpAddressGroupRequest)
+	err := VPC_CLIENT.AddIpAddressToIpGroup(addIpAddressToIpGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_AddIpv6OnlyOutboundAndNoInboundPolicy(t *testing.T) {
-	addIpv6OnlyOutboundAndNoInboundPolicyRequest := &AddIpv6OnlyOutboundAndNoInboundPolicyRequest{
-		GatewayId:   util.PtrString(""),
+func TestClient_AddIpGroupToIpSet(t *testing.T) {
+	addIpGroupToIpSetRequest := &AddIpGroupToIpSetRequest{
+		IpGroupId:   util.PtrString(""),
 		ClientToken: util.PtrString(""),
-		Cidr:        util.PtrString(""),
+		IpSetIds:    []*string{},
 	}
-	result := &AddIpv6OnlyOutboundAndNoInboundPolicyResponse{}
-	result, err := VPC_CLIENT.AddIpv6OnlyOutboundAndNoInboundPolicy(addIpv6OnlyOutboundAndNoInboundPolicyRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
+	err := VPC_CLIENT.AddIpGroupToIpSet(addIpGroupToIpSetRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_AuthorizeRegularSecurityGroupRulesV2(t *testing.T) {
+func TestClient_AttachEniInstance(t *testing.T) {
+	attachEniInstanceRequest := &AttachEniInstanceRequest{
+		EniId:        util.PtrString(""),
+		ClientToken:  util.PtrString(""),
+		InstanceId:   util.PtrString(""),
+		InstanceType: util.PtrString(""),
+	}
+	err := VPC_CLIENT.AttachEniInstance(attachEniInstanceRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_AuthorizeEnterpriseSecurityGroupRules(t *testing.T) {
+	authorizeEnterpriseSecurityGroupRulesRequest := &AuthorizeEnterpriseSecurityGroupRulesRequest{
+		EnterpriseSecurityGroupId: util.PtrString(""),
+		ClientToken:               util.PtrString(""),
+		Rules:                     []*EnterpriseSecurityGroupRuleModel{},
+	}
+	err := VPC_CLIENT.AuthorizeEnterpriseSecurityGroupRules(authorizeEnterpriseSecurityGroupRulesRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_AuthorizeSecurityGroupRules(t *testing.T) {
 	Rule := &SecurityGroupRuleModel{
 		Remark:              util.PtrString(""),
 		Direction:           util.PtrString(""),
@@ -166,22 +165,13 @@ func TestClient_AuthorizeRegularSecurityGroupRulesV2(t *testing.T) {
 		CreatedTime:         util.PtrString(""),
 		UpdatedTime:         util.PtrString(""),
 	}
-	authorizeRegularSecurityGroupRulesV2Request := &AuthorizeRegularSecurityGroupRulesV2Request{
+	authorizeSecurityGroupRulesRequest := &AuthorizeSecurityGroupRulesRequest{
 		SecurityGroupId: util.PtrString(""),
 		SgVersion:       util.PtrInt64(int64(0)),
 		ClientToken:     util.PtrString(""),
 		Rule:            Rule,
 	}
-	err := VPC_CLIENT.AuthorizeRegularSecurityGroupRulesV2(authorizeRegularSecurityGroupRulesV2Request)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_AuthorizedEnterpriseSecurityGroupRules(t *testing.T) {
-	authorizedEnterpriseSecurityGroupRulesRequest := &AuthorizedEnterpriseSecurityGroupRulesRequest{
-		EnterpriseSecurityGroupId: util.PtrString(""),
-		ClientToken:               util.PtrString(""),
-		Rules:                     []*EnterpriseSecurityGroupRuleModel{},
-	}
-	err := VPC_CLIENT.AuthorizedEnterpriseSecurityGroupRules(authorizedEnterpriseSecurityGroupRulesRequest)
+	err := VPC_CLIENT.AuthorizeSecurityGroupRules(authorizeSecurityGroupRulesRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_BatchAddDnatRules(t *testing.T) {
@@ -192,6 +182,28 @@ func TestClient_BatchAddDnatRules(t *testing.T) {
 	}
 	result := &BatchAddDnatRulesResponse{}
 	result, err := VPC_CLIENT.BatchAddDnatRules(batchAddDnatRulesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_BatchAddEniIp(t *testing.T) {
+	batchAddEniIpRequest := &BatchAddEniIpRequest{
+		EniId:                 util.PtrString(""),
+		ClientToken:           util.PtrString(""),
+		IsIpv6:                util.PtrBool(false),
+		PrivateIpAddresses:    []*string{},
+		PrivateIpAddressCount: util.PtrInt32(int32(0)),
+	}
+	result := &BatchAddEniIpResponse{}
+	result, err := VPC_CLIENT.BatchAddEniIp(batchAddEniIpRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -244,35 +256,13 @@ func TestClient_BatchCreateSslVpnUsers(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_BatchDeleteElasticNetworkCardIntranetIp(t *testing.T) {
-	batchDeleteElasticNetworkCardIntranetIpRequest := &BatchDeleteElasticNetworkCardIntranetIpRequest{
+func TestClient_BatchDeleteEniIp(t *testing.T) {
+	batchDeleteEniIpRequest := &BatchDeleteEniIpRequest{
 		EniId:              util.PtrString(""),
 		ClientToken:        util.PtrString(""),
 		PrivateIpAddresses: []*string{},
 	}
-	err := VPC_CLIENT.BatchDeleteElasticNetworkCardIntranetIp(batchDeleteElasticNetworkCardIntranetIpRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_BatchIncreaseElasticNetworkCardIntranetIp(t *testing.T) {
-	batchIncreaseElasticNetworkCardIntranetIpRequest := &BatchIncreaseElasticNetworkCardIntranetIpRequest{
-		EniId:                 util.PtrString(""),
-		ClientToken:           util.PtrString(""),
-		IsIpv6:                util.PtrBool(false),
-		PrivateIpAddresses:    []*string{},
-		PrivateIpAddressCount: util.PtrInt32(int32(0)),
-	}
-	result := &BatchIncreaseElasticNetworkCardIntranetIpResponse{}
-	result, err := VPC_CLIENT.BatchIncreaseElasticNetworkCardIntranetIp(batchIncreaseElasticNetworkCardIntranetIpRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
+	err := VPC_CLIENT.BatchDeleteEniIp(batchDeleteEniIpRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_BindEip(t *testing.T) {
@@ -282,6 +272,35 @@ func TestClient_BindEip(t *testing.T) {
 		Eip:         util.PtrString(""),
 	}
 	err := VPC_CLIENT.BindEip(bindEipRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_BindEniEip(t *testing.T) {
+	bindEniEipRequest := &BindEniEipRequest{
+		EniId:            util.PtrString(""),
+		ClientToken:      util.PtrString(""),
+		PrivateIpAddress: util.PtrString(""),
+		PublicIpAddress:  util.PtrString(""),
+	}
+	err := VPC_CLIENT.BindEniEip(bindEniEipRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_BindHaVipEip(t *testing.T) {
+	bindHaVipEipRequest := &BindHaVipEipRequest{
+		HaVipId:         util.PtrString(""),
+		ClientToken:     util.PtrString(""),
+		PublicIpAddress: util.PtrString(""),
+	}
+	err := VPC_CLIENT.BindHaVipEip(bindHaVipEipRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_BindHaVipInstance(t *testing.T) {
+	bindHaVipInstanceRequest := &BindHaVipInstanceRequest{
+		HaVipId:      util.PtrString(""),
+		ClientToken:  util.PtrString(""),
+		InstanceIds:  []*string{},
+		InstanceType: util.PtrString(""),
+	}
+	err := VPC_CLIENT.BindHaVipInstance(bindHaVipInstanceRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_BindPhysicalDedicatedLine(t *testing.T) {
@@ -310,83 +329,6 @@ func TestClient_CloseVpcRelay(t *testing.T) {
 		ClientToken: util.PtrString(""),
 	}
 	err := VPC_CLIENT.CloseVpcRelay(closeVpcRelayRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_CreateAHighlyAvailableVirtualIp(t *testing.T) {
-	createAHighlyAvailableVirtualIpRequest := &CreateAHighlyAvailableVirtualIpRequest{
-		ClientToken:      util.PtrString(""),
-		Name:             util.PtrString(""),
-		SubnetId:         util.PtrString(""),
-		PrivateIpAddress: util.PtrString(""),
-		Description:      util.PtrString(""),
-	}
-	result := &CreateAHighlyAvailableVirtualIpResponse{}
-	result, err := VPC_CLIENT.CreateAHighlyAvailableVirtualIp(createAHighlyAvailableVirtualIpRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_CreateARegularSecurityGroupV2(t *testing.T) {
-	createARegularSecurityGroupV2Request := &CreateARegularSecurityGroupV2Request{
-		ClientToken: util.PtrString(""),
-		Name:        util.PtrString(""),
-		VpcId:       util.PtrString(""),
-		Desc:        util.PtrString(""),
-		Rules:       []*SecurityGroupRuleModel{},
-		Tags:        []*TagModel{},
-	}
-	result := &CreateARegularSecurityGroupV2Response{}
-	result, err := VPC_CLIENT.CreateARegularSecurityGroupV2(createARegularSecurityGroupV2Request)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_CreateAnIpv6Gateway(t *testing.T) {
-	Billing := &Billing{
-		PaymentTiming: util.PtrString(""),
-		Reservation: &Reservation{
-			ReservationLength:   util.PtrInt32(int32(0)),
-			ReservationTimeUnit: util.PtrString(""),
-		},
-	}
-	createAnIpv6GatewayRequest := &CreateAnIpv6GatewayRequest{
-		ClientToken:     util.PtrString(""),
-		VpcId:           util.PtrString(""),
-		Name:            util.PtrString(""),
-		BandwidthInMbps: util.PtrInt32(int32(0)),
-		Billing:         Billing,
-		Tags:            []*TagModel{},
-		ResourceGroupId: util.PtrString(""),
-		DeleteProtect:   util.PtrBool(false),
-	}
-	result := &CreateAnIpv6GatewayResponse{}
-	result, err := VPC_CLIENT.CreateAnIpv6Gateway(createAnIpv6GatewayRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateDedicatedGateway(t *testing.T) {
@@ -458,8 +400,28 @@ func TestClient_CreateDnatRule(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_CreateElasticNetworkCard(t *testing.T) {
-	createElasticNetworkCardRequest := &CreateElasticNetworkCardRequest{
+func TestClient_CreateEgressOnlyRule(t *testing.T) {
+	createEgressOnlyRuleRequest := &CreateEgressOnlyRuleRequest{
+		GatewayId:   util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Cidr:        util.PtrString(""),
+	}
+	result := &CreateEgressOnlyRuleResponse{}
+	result, err := VPC_CLIENT.CreateEgressOnlyRule(createEgressOnlyRuleRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateEni(t *testing.T) {
+	createEniRequest := &CreateEniRequest{
 		ClientToken:                 util.PtrString(""),
 		Name:                        util.PtrString(""),
 		SubnetId:                    util.PtrString(""),
@@ -470,8 +432,8 @@ func TestClient_CreateElasticNetworkCard(t *testing.T) {
 		Description:                 util.PtrString(""),
 		NetworkInterfaceTrafficMode: util.PtrString(""),
 	}
-	result := &CreateElasticNetworkCardResponse{}
-	result, err := VPC_CLIENT.CreateElasticNetworkCard(createElasticNetworkCardRequest)
+	result := &CreateEniResponse{}
+	result, err := VPC_CLIENT.CreateEni(createEniRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -534,16 +496,16 @@ func TestClient_CreateGatewayLimitRules(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_CreateIpAddressFamily(t *testing.T) {
-	createIpAddressFamilyRequest := &CreateIpAddressFamilyRequest{
-		ClientToken: util.PtrString(""),
-		Name:        util.PtrString(""),
-		IpVersion:   util.PtrString(""),
-		IpSetIds:    []*string{},
-		Description: util.PtrString(""),
+func TestClient_CreateHaVip(t *testing.T) {
+	createHaVipRequest := &CreateHaVipRequest{
+		ClientToken:      util.PtrString(""),
+		Name:             util.PtrString(""),
+		SubnetId:         util.PtrString(""),
+		PrivateIpAddress: util.PtrString(""),
+		Description:      util.PtrString(""),
 	}
-	result := &CreateIpAddressFamilyResponse{}
-	result, err := VPC_CLIENT.CreateIpAddressFamily(createIpAddressFamilyRequest)
+	result := &CreateHaVipResponse{}
+	result, err := VPC_CLIENT.CreateHaVip(createHaVipRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -556,16 +518,16 @@ func TestClient_CreateIpAddressFamily(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_CreateIpAddressGroup(t *testing.T) {
-	createIpAddressGroupRequest := &CreateIpAddressGroupRequest{
+func TestClient_CreateIpGroup(t *testing.T) {
+	createIpGroupRequest := &CreateIpGroupRequest{
 		ClientToken:   util.PtrString(""),
 		Name:          util.PtrString(""),
 		IpVersion:     util.PtrString(""),
 		IpAddressInfo: []*TemplateIpAddressInfo{},
 		Description:   util.PtrString(""),
 	}
-	result := &CreateIpAddressGroupResponse{}
-	result, err := VPC_CLIENT.CreateIpAddressGroup(createIpAddressGroupRequest)
+	result := &CreateIpGroupResponse{}
+	result, err := VPC_CLIENT.CreateIpGroup(createIpGroupRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -600,16 +562,48 @@ func TestClient_CreateIpReserved(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_CreateIpv6GatewaySpeedLimitPolicy(t *testing.T) {
-	createIpv6GatewaySpeedLimitPolicyRequest := &CreateIpv6GatewaySpeedLimitPolicyRequest{
-		GatewayId:              util.PtrString(""),
-		ClientToken:            util.PtrString(""),
-		Ipv6Address:            util.PtrString(""),
-		IngressBandwidthInMbps: util.PtrInt32(int32(0)),
-		EgressBandwidthInMbps:  util.PtrInt32(int32(0)),
+func TestClient_CreateIpSet(t *testing.T) {
+	createIpSetRequest := &CreateIpSetRequest{
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		IpVersion:   util.PtrString(""),
+		IpSetIds:    []*string{},
+		Description: util.PtrString(""),
 	}
-	result := &CreateIpv6GatewaySpeedLimitPolicyResponse{}
-	result, err := VPC_CLIENT.CreateIpv6GatewaySpeedLimitPolicy(createIpv6GatewaySpeedLimitPolicyRequest)
+	result := &CreateIpSetResponse{}
+	result, err := VPC_CLIENT.CreateIpSet(createIpSetRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateIpv6Gateway(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		Reservation: &Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
+	}
+	createIpv6GatewayRequest := &CreateIpv6GatewayRequest{
+		ClientToken:     util.PtrString(""),
+		VpcId:           util.PtrString(""),
+		Name:            util.PtrString(""),
+		BandwidthInMbps: util.PtrInt32(int32(0)),
+		Billing:         Billing,
+		Tags:            []*TagModel{},
+		ResourceGroupId: util.PtrString(""),
+		DeleteProtect:   util.PtrBool(false),
+	}
+	result := &CreateIpv6GatewayResponse{}
+	result, err := VPC_CLIENT.CreateIpv6Gateway(createIpv6GatewayRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -662,35 +656,6 @@ func TestClient_CreateNat(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_CreateNetworkDetection(t *testing.T) {
-	createNetworkDetectionRequest := &CreateNetworkDetectionRequest{
-		ClientToken: util.PtrString(""),
-		Name:        util.PtrString(""),
-		Description: util.PtrString(""),
-		VpcId:       util.PtrString(""),
-		SubnetId:    util.PtrString(""),
-		Protocol:    util.PtrString(""),
-		Frequency:   util.PtrInt32(int32(0)),
-		SourceIps:   []*string{},
-		SourceIpNum: util.PtrInt32(int32(0)),
-		DestIp:      util.PtrString(""),
-		DestPort:    util.PtrInt32(int32(0)),
-		Payload:     util.PtrString(""),
-	}
-	result := &CreateNetworkDetectionResponse{}
-	result, err := VPC_CLIENT.CreateNetworkDetection(createNetworkDetectionRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_CreatePeerConn(t *testing.T) {
 	Billing := &Billing{
 		PaymentTiming: util.PtrString(""),
@@ -728,6 +693,57 @@ func TestClient_CreatePeerConn(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateProbe(t *testing.T) {
+	createProbeRequest := &CreateProbeRequest{
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
+		VpcId:       util.PtrString(""),
+		SubnetId:    util.PtrString(""),
+		Protocol:    util.PtrString(""),
+		Frequency:   util.PtrInt32(int32(0)),
+		SourceIps:   []*string{},
+		SourceIpNum: util.PtrInt32(int32(0)),
+		DestIp:      util.PtrString(""),
+		DestPort:    util.PtrInt32(int32(0)),
+		Payload:     util.PtrString(""),
+	}
+	result := &CreateProbeResponse{}
+	result, err := VPC_CLIENT.CreateProbe(createProbeRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateRateLimitRule(t *testing.T) {
+	createRateLimitRuleRequest := &CreateRateLimitRuleRequest{
+		GatewayId:              util.PtrString(""),
+		ClientToken:            util.PtrString(""),
+		Ipv6Address:            util.PtrString(""),
+		IngressBandwidthInMbps: util.PtrInt32(int32(0)),
+		EgressBandwidthInMbps:  util.PtrInt32(int32(0)),
+	}
+	result := &CreateRateLimitRuleResponse{}
+	result, err := VPC_CLIENT.CreateRateLimitRule(createRateLimitRuleRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateRoutingRules(t *testing.T) {
 	createRoutingRulesRequest := &CreateRoutingRulesRequest{
 		ClientToken:        util.PtrString(""),
@@ -741,6 +757,29 @@ func TestClient_CreateRoutingRules(t *testing.T) {
 	}
 	result := &CreateRoutingRulesResponse{}
 	result, err := VPC_CLIENT.CreateRoutingRules(createRoutingRulesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateSecurityGroup(t *testing.T) {
+	createSecurityGroupRequest := &CreateSecurityGroupRequest{
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		VpcId:       util.PtrString(""),
+		Desc:        util.PtrString(""),
+		Rules:       []*SecurityGroupRuleModel{},
+		Tags:        []*TagModel{},
+	}
+	result := &CreateSecurityGroupResponse{}
+	result, err := VPC_CLIENT.CreateSecurityGroup(createSecurityGroupRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -964,13 +1003,13 @@ func TestClient_DeleteDnatRule(t *testing.T) {
 	err := VPC_CLIENT.DeleteDnatRule(deleteDnatRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_DeleteElasticNetworkCardAuxiliaryIp(t *testing.T) {
-	deleteElasticNetworkCardAuxiliaryIpRequest := &DeleteElasticNetworkCardAuxiliaryIpRequest{
+func TestClient_DeleteEniIp(t *testing.T) {
+	deleteEniIpRequest := &DeleteEniIpRequest{
 		EniId:            util.PtrString(""),
 		PrivateIpAddress: util.PtrString(""),
 		ClientToken:      util.PtrString(""),
 	}
-	err := VPC_CLIENT.DeleteElasticNetworkCardAuxiliaryIp(deleteElasticNetworkCardAuxiliaryIpRequest)
+	err := VPC_CLIENT.DeleteEniIp(deleteEniIpRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteEnterpriseSecurityGroup(t *testing.T) {
@@ -997,37 +1036,20 @@ func TestClient_DeleteGatewayLimitRule(t *testing.T) {
 	err := VPC_CLIENT.DeleteGatewayLimitRule(deleteGatewayLimitRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_DeleteHighlyAvailableVirtualIp(t *testing.T) {
-	deleteHighlyAvailableVirtualIpRequest := &DeleteHighlyAvailableVirtualIpRequest{
+func TestClient_DeleteHaVip(t *testing.T) {
+	deleteHaVipRequest := &DeleteHaVipRequest{
 		HaVipId:     util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := VPC_CLIENT.DeleteHighlyAvailableVirtualIp(deleteHighlyAvailableVirtualIpRequest)
+	err := VPC_CLIENT.DeleteHaVip(deleteHaVipRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_DeleteIpAddressFamily(t *testing.T) {
-	deleteIpAddressFamilyRequest := &DeleteIpAddressFamilyRequest{
-		IpGroupId:   util.PtrString(""),
-		ClientToken: util.PtrString(""),
-	}
-	err := VPC_CLIENT.DeleteIpAddressFamily(deleteIpAddressFamilyRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_DeleteIpAddressFromIpAddressGroup(t *testing.T) {
-	deleteIpAddressFromIpAddressGroupRequest := &DeleteIpAddressFromIpAddressGroupRequest{
-		IpSetId:       util.PtrString(""),
-		ClientToken:   util.PtrString(""),
-		IpAddressInfo: []*string{},
-	}
-	err := VPC_CLIENT.DeleteIpAddressFromIpAddressGroup(deleteIpAddressFromIpAddressGroupRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_DeleteIpAddressGroup(t *testing.T) {
-	deleteIpAddressGroupRequest := &DeleteIpAddressGroupRequest{
+func TestClient_DeleteIpGroup(t *testing.T) {
+	deleteIpGroupRequest := &DeleteIpGroupRequest{
 		IpSetId:     util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := VPC_CLIENT.DeleteIpAddressGroup(deleteIpAddressGroupRequest)
+	err := VPC_CLIENT.DeleteIpGroup(deleteIpGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteIpReserve(t *testing.T) {
@@ -1038,6 +1060,14 @@ func TestClient_DeleteIpReserve(t *testing.T) {
 	err := VPC_CLIENT.DeleteIpReserve(deleteIpReserveRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteIpSet(t *testing.T) {
+	deleteIpSetRequest := &DeleteIpSetRequest{
+		IpGroupId:   util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := VPC_CLIENT.DeleteIpSet(deleteIpSetRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteIpv6Gateway(t *testing.T) {
 	deleteIpv6GatewayRequest := &DeleteIpv6GatewayRequest{
 		GatewayId:   util.PtrString(""),
@@ -1046,47 +1076,30 @@ func TestClient_DeleteIpv6Gateway(t *testing.T) {
 	err := VPC_CLIENT.DeleteIpv6Gateway(deleteIpv6GatewayRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_DeleteIpv6GatewaySpeedLimitPolicy(t *testing.T) {
-	deleteIpv6GatewaySpeedLimitPolicyRequest := &DeleteIpv6GatewaySpeedLimitPolicyRequest{
-		GatewayId:       util.PtrString(""),
-		RateLimitRuleId: util.PtrString(""),
-		ClientToken:     util.PtrString(""),
-	}
-	err := VPC_CLIENT.DeleteIpv6GatewaySpeedLimitPolicy(deleteIpv6GatewaySpeedLimitPolicyRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_DeleteIpv6OnlyAccessPolicy(t *testing.T) {
-	deleteIpv6OnlyAccessPolicyRequest := &DeleteIpv6OnlyAccessPolicyRequest{
+func TestClient_DeleteIpv6GatewayEgressOnlyRule(t *testing.T) {
+	deleteIpv6GatewayEgressOnlyRuleRequest := &DeleteIpv6GatewayEgressOnlyRuleRequest{
 		GatewayId:        util.PtrString(""),
 		EgressOnlyRuleId: util.PtrString(""),
 		ClientToken:      util.PtrString(""),
 	}
-	err := VPC_CLIENT.DeleteIpv6OnlyAccessPolicy(deleteIpv6OnlyAccessPolicyRequest)
+	err := VPC_CLIENT.DeleteIpv6GatewayEgressOnlyRule(deleteIpv6GatewayEgressOnlyRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_DeleteNetworkDetection(t *testing.T) {
-	deleteNetworkDetectionRequest := &DeleteNetworkDetectionRequest{
+func TestClient_DeleteIpv6GatewayRateLimitRule(t *testing.T) {
+	deleteIpv6GatewayRateLimitRuleRequest := &DeleteIpv6GatewayRateLimitRuleRequest{
+		GatewayId:       util.PtrString(""),
+		RateLimitRuleId: util.PtrString(""),
+		ClientToken:     util.PtrString(""),
+	}
+	err := VPC_CLIENT.DeleteIpv6GatewayRateLimitRule(deleteIpv6GatewayRateLimitRuleRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteProbe(t *testing.T) {
+	deleteProbeRequest := &DeleteProbeRequest{
 		ProbeId:     util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := VPC_CLIENT.DeleteNetworkDetection(deleteNetworkDetectionRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_DeleteRegularSecurityGroupRulesV2(t *testing.T) {
-	deleteRegularSecurityGroupRulesV2Request := &DeleteRegularSecurityGroupRulesV2Request{
-		SecurityGroupRuleId: util.PtrString(""),
-		ClientToken:         util.PtrString(""),
-		SgVersion:           util.PtrInt64(int64(0)),
-	}
-	err := VPC_CLIENT.DeleteRegularSecurityGroupRulesV2(deleteRegularSecurityGroupRulesV2Request)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_DeleteRegularSecurityGroupV2(t *testing.T) {
-	deleteRegularSecurityGroupV2Request := &DeleteRegularSecurityGroupV2Request{
-		SecurityGroupId: util.PtrString(""),
-		ClientToken:     util.PtrString(""),
-	}
-	err := VPC_CLIENT.DeleteRegularSecurityGroupV2(deleteRegularSecurityGroupV2Request)
+	err := VPC_CLIENT.DeleteProbe(deleteProbeRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteRoutingRules(t *testing.T) {
@@ -1095,6 +1108,23 @@ func TestClient_DeleteRoutingRules(t *testing.T) {
 		ClientToken: util.PtrString(""),
 	}
 	err := VPC_CLIENT.DeleteRoutingRules(deleteRoutingRulesRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteSecurityGroup(t *testing.T) {
+	deleteSecurityGroupRequest := &DeleteSecurityGroupRequest{
+		SecurityGroupId: util.PtrString(""),
+		ClientToken:     util.PtrString(""),
+	}
+	err := VPC_CLIENT.DeleteSecurityGroup(deleteSecurityGroupRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteSecurityGroupRules(t *testing.T) {
+	deleteSecurityGroupRulesRequest := &DeleteSecurityGroupRulesRequest{
+		SecurityGroupRuleId: util.PtrString(""),
+		ClientToken:         util.PtrString(""),
+		SgVersion:           util.PtrInt64(int64(0)),
+	}
+	err := VPC_CLIENT.DeleteSecurityGroupRules(deleteSecurityGroupRulesRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteSnatRule(t *testing.T) {
@@ -1155,60 +1185,67 @@ func TestClient_DeleteVpnTunnel(t *testing.T) {
 	err := VPC_CLIENT.DeleteVpnTunnel(deleteVpnTunnelRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_ElasticNetworkCardBindingEip(t *testing.T) {
-	elasticNetworkCardBindingEipRequest := &ElasticNetworkCardBindingEipRequest{
-		EniId:            util.PtrString(""),
-		ClientToken:      util.PtrString(""),
-		PrivateIpAddress: util.PtrString(""),
-		PublicIpAddress:  util.PtrString(""),
-	}
-	err := VPC_CLIENT.ElasticNetworkCardBindingEip(elasticNetworkCardBindingEipRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_ElasticNetworkCardMountedCloudProductInstance(t *testing.T) {
-	elasticNetworkCardMountedCloudProductInstanceRequest := &ElasticNetworkCardMountedCloudProductInstanceRequest{
-		EniId:        util.PtrString(""),
-		ClientToken:  util.PtrString(""),
-		InstanceId:   util.PtrString(""),
-		InstanceType: util.PtrString(""),
-	}
-	err := VPC_CLIENT.ElasticNetworkCardMountedCloudProductInstance(elasticNetworkCardMountedCloudProductInstanceRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_ElasticNetworkCardUnbindingEip(t *testing.T) {
-	elasticNetworkCardUnbindingEipRequest := &ElasticNetworkCardUnbindingEipRequest{
-		EniId:           util.PtrString(""),
-		ClientToken:     util.PtrString(""),
-		PublicIpAddress: util.PtrString(""),
-	}
-	err := VPC_CLIENT.ElasticNetworkCardUnbindingEip(elasticNetworkCardUnbindingEipRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_ElasticNetworkCardUninstallationCloudProductInstance(t *testing.T) {
-	elasticNetworkCardUninstallationCloudProductInstanceRequest := &ElasticNetworkCardUninstallationCloudProductInstanceRequest{
+func TestClient_DetachEniInstance(t *testing.T) {
+	detachEniInstanceRequest := &DetachEniInstanceRequest{
 		EniId:       util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 	}
-	err := VPC_CLIENT.ElasticNetworkCardUninstallationCloudProductInstance(elasticNetworkCardUninstallationCloudProductInstanceRequest)
+	err := VPC_CLIENT.DetachEniInstance(detachEniInstanceRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_ElasticNetworkCardUpdateEnterpriseSecurityGroup(t *testing.T) {
-	elasticNetworkCardUpdateEnterpriseSecurityGroupRequest := &ElasticNetworkCardUpdateEnterpriseSecurityGroupRequest{
-		EniId:                      util.PtrString(""),
-		ClientToken:                util.PtrString(""),
-		EnterpriseSecurityGroupIds: []*string{},
+func TestClient_GetEniDetail(t *testing.T) {
+	getEniDetailRequest := &GetEniDetailRequest{
+		EniId: util.PtrString(""),
 	}
-	err := VPC_CLIENT.ElasticNetworkCardUpdateEnterpriseSecurityGroup(elasticNetworkCardUpdateEnterpriseSecurityGroupRequest)
+	result := &GetEniDetailResponse{}
+	result, err := VPC_CLIENT.GetEniDetail(getEniDetailRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_ElasticNetworkCardUpdatesRegularSecurityGroup(t *testing.T) {
-	elasticNetworkCardUpdatesRegularSecurityGroupRequest := &ElasticNetworkCardUpdatesRegularSecurityGroupRequest{
-		EniId:            util.PtrString(""),
-		ClientToken:      util.PtrString(""),
-		SecurityGroupIds: []*string{},
+func TestClient_GetEniStatus(t *testing.T) {
+	getEniStatusRequest := &GetEniStatusRequest{
+		EniId: util.PtrString(""),
 	}
-	err := VPC_CLIENT.ElasticNetworkCardUpdatesRegularSecurityGroup(elasticNetworkCardUpdatesRegularSecurityGroupRequest)
+	result := &GetEniStatusResponse{}
+	result, err := VPC_CLIENT.GetEniStatus(getEniStatusRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetHaVipDetail(t *testing.T) {
+	getHaVipDetailRequest := &GetHaVipDetailRequest{
+		HaVipId: util.PtrString(""),
+	}
+	result := &GetHaVipDetailResponse{}
+	result, err := VPC_CLIENT.GetHaVipDetail(getHaVipDetailRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetNat(t *testing.T) {
@@ -1248,6 +1285,42 @@ func TestClient_GetPeerConn(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_GetProbeDetail(t *testing.T) {
+	getProbeDetailRequest := &GetProbeDetailRequest{
+		ProbeId: util.PtrString(""),
+	}
+	result := &GetProbeDetailResponse{}
+	result, err := VPC_CLIENT.GetProbeDetail(getProbeDetailRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetSecurityGroupDetails(t *testing.T) {
+	getSecurityGroupDetailsRequest := &GetSecurityGroupDetailsRequest{
+		SecurityGroupId: util.PtrString(""),
+	}
+	result := &GetSecurityGroupDetailsResponse{}
+	result, err := VPC_CLIENT.GetSecurityGroupDetails(getSecurityGroupDetailsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_GetVpcResourceIpInfo(t *testing.T) {
 	getVpcResourceIpInfoRequest := &GetVpcResourceIpInfoRequest{
 		VpcId:        util.PtrString(""),
@@ -1270,52 +1343,6 @@ func TestClient_GetVpcResourceIpInfo(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_HighAvailabilityVirtualIpUnbindingEip(t *testing.T) {
-	highAvailabilityVirtualIpUnbindingEipRequest := &HighAvailabilityVirtualIpUnbindingEipRequest{
-		HaVipId:     util.PtrString(""),
-		ClientToken: util.PtrString(""),
-	}
-	err := VPC_CLIENT.HighAvailabilityVirtualIpUnbindingEip(highAvailabilityVirtualIpUnbindingEipRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_HighAvailabilityVirtualIpUnbindingInstance(t *testing.T) {
-	highAvailabilityVirtualIpUnbindingInstanceRequest := &HighAvailabilityVirtualIpUnbindingInstanceRequest{
-		HaVipId:      util.PtrString(""),
-		ClientToken:  util.PtrString(""),
-		InstanceIds:  []*string{},
-		InstanceType: util.PtrString(""),
-	}
-	err := VPC_CLIENT.HighAvailabilityVirtualIpUnbindingInstance(highAvailabilityVirtualIpUnbindingInstanceRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_HighlyAvailableVirtualIpBindingEip(t *testing.T) {
-	highlyAvailableVirtualIpBindingEipRequest := &HighlyAvailableVirtualIpBindingEipRequest{
-		HaVipId:         util.PtrString(""),
-		ClientToken:     util.PtrString(""),
-		PublicIpAddress: util.PtrString(""),
-	}
-	err := VPC_CLIENT.HighlyAvailableVirtualIpBindingEip(highlyAvailableVirtualIpBindingEipRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_HighlyAvailableVirtualIpBindingInstance(t *testing.T) {
-	highlyAvailableVirtualIpBindingInstanceRequest := &HighlyAvailableVirtualIpBindingInstanceRequest{
-		HaVipId:      util.PtrString(""),
-		ClientToken:  util.PtrString(""),
-		InstanceIds:  []*string{},
-		InstanceType: util.PtrString(""),
-	}
-	err := VPC_CLIENT.HighlyAvailableVirtualIpBindingInstance(highlyAvailableVirtualIpBindingInstanceRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_Ipv6GatewayBandwidthUpgradeAndDowngrade(t *testing.T) {
-	ipv6GatewayBandwidthUpgradeAndDowngradeRequest := &Ipv6GatewayBandwidthUpgradeAndDowngradeRequest{
-		GatewayId:       util.PtrString(""),
-		ClientToken:     util.PtrString(""),
-		BandwidthInMbps: util.PtrInt32(int32(0)),
-	}
-	err := VPC_CLIENT.Ipv6GatewayBandwidthUpgradeAndDowngrade(ipv6GatewayBandwidthUpgradeAndDowngradeRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_ListDnatRule(t *testing.T) {
 	listDnatRuleRequest := &ListDnatRuleRequest{
 		NatId:   util.PtrString(""),
@@ -1324,6 +1351,69 @@ func TestClient_ListDnatRule(t *testing.T) {
 	}
 	result := &ListDnatRuleResponse{}
 	result, err := VPC_CLIENT.ListDnatRule(listDnatRuleRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListEgressOnlyRule(t *testing.T) {
+	listEgressOnlyRuleRequest := &ListEgressOnlyRuleRequest{
+		GatewayId: util.PtrString(""),
+		Marker:    util.PtrString(""),
+		MaxKeys:   util.PtrInt32(int32(0)),
+	}
+	result := &ListEgressOnlyRuleResponse{}
+	result, err := VPC_CLIENT.ListEgressOnlyRule(listEgressOnlyRuleRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListEni(t *testing.T) {
+	listEniRequest := &ListEniRequest{
+		VpcId:            util.PtrString(""),
+		InstanceId:       util.PtrString(""),
+		Name:             util.PtrString(""),
+		PrivateIpAddress: []*string{},
+		Marker:           util.PtrString(""),
+		MaxKeys:          util.PtrInt32(int32(0)),
+	}
+	result := &ListEniResponse{}
+	result, err := VPC_CLIENT.ListEni(listEniRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListHaVip(t *testing.T) {
+	listHaVipRequest := &ListHaVipRequest{
+		VpcId:   util.PtrString(""),
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &ListHaVipResponse{}
+	result, err := VPC_CLIENT.ListHaVip(listHaVipRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -1387,6 +1477,45 @@ func TestClient_ListPeerConn(t *testing.T) {
 	}
 	result := &ListPeerConnResponse{}
 	result, err := VPC_CLIENT.ListPeerConn(listPeerConnRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListProbes(t *testing.T) {
+	listProbesRequest := &ListProbesRequest{
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &ListProbesResponse{}
+	result, err := VPC_CLIENT.ListProbes(listProbesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListRateLimitRule(t *testing.T) {
+	listRateLimitRuleRequest := &ListRateLimitRuleRequest{
+		GatewayId: util.PtrString(""),
+		Marker:    util.PtrString(""),
+		MaxKeys:   util.PtrInt32(int32(0)),
+	}
+	result := &ListRateLimitRuleResponse{}
+	result, err := VPC_CLIENT.ListRateLimitRule(listRateLimitRuleRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -1528,14 +1657,90 @@ func TestClient_QueryAclRules(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_QueryIpAddressFamilyList(t *testing.T) {
-	queryIpAddressFamilyListRequest := &QueryIpAddressFamilyListRequest{
+func TestClient_QueryEnterpriseSecurityGroupList(t *testing.T) {
+	queryEnterpriseSecurityGroupListRequest := &QueryEnterpriseSecurityGroupListRequest{
+		Marker:     util.PtrString(""),
+		MaxKeys:    util.PtrInt32(int32(0)),
+		InstanceId: util.PtrString(""),
+	}
+	result := &QueryEnterpriseSecurityGroupListResponse{}
+	result, err := VPC_CLIENT.QueryEnterpriseSecurityGroupList(queryEnterpriseSecurityGroupListRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QueryIpGroupDetail(t *testing.T) {
+	queryIpGroupDetailRequest := &QueryIpGroupDetailRequest{
+		IpSetId: util.PtrString(""),
+	}
+	result := &QueryIpGroupDetailResponse{}
+	result, err := VPC_CLIENT.QueryIpGroupDetail(queryIpGroupDetailRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QueryIpGroupList(t *testing.T) {
+	queryIpGroupListRequest := &QueryIpGroupListRequest{
 		IpVersion: util.PtrString(""),
 		Marker:    util.PtrString(""),
 		MaxKeys:   util.PtrInt32(int32(0)),
 	}
-	result := &QueryIpAddressFamilyListResponse{}
-	result, err := VPC_CLIENT.QueryIpAddressFamilyList(queryIpAddressFamilyListRequest)
+	result := &QueryIpGroupListResponse{}
+	result, err := VPC_CLIENT.QueryIpGroupList(queryIpGroupListRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QueryIpSetDetail(t *testing.T) {
+	queryIpSetDetailRequest := &QueryIpSetDetailRequest{
+		IpGroupId: util.PtrString(""),
+	}
+	result := &QueryIpSetDetailResponse{}
+	result, err := VPC_CLIENT.QueryIpSetDetail(queryIpSetDetailRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QueryIpSetList(t *testing.T) {
+	queryIpSetListRequest := &QueryIpSetListRequest{
+		IpVersion: util.PtrString(""),
+		Marker:    util.PtrString(""),
+		MaxKeys:   util.PtrInt32(int32(0)),
+	}
+	result := &QueryIpSetListResponse{}
+	result, err := VPC_CLIENT.QueryIpSetList(queryIpSetListRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -1554,43 +1759,6 @@ func TestClient_QueryIpv6Gateway(t *testing.T) {
 	}
 	result := &QueryIpv6GatewayResponse{}
 	result, err := VPC_CLIENT.QueryIpv6Gateway(queryIpv6GatewayRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryNetworkDetectionDetails(t *testing.T) {
-	queryNetworkDetectionDetailsRequest := &QueryNetworkDetectionDetailsRequest{
-		ProbeId: util.PtrString(""),
-	}
-	result := &QueryNetworkDetectionDetailsResponse{}
-	result, err := VPC_CLIENT.QueryNetworkDetectionDetails(queryNetworkDetectionDetailsRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryNetworkDetectionList(t *testing.T) {
-	queryNetworkDetectionListRequest := &QueryNetworkDetectionListRequest{
-		Marker:  util.PtrString(""),
-		MaxKeys: util.PtrInt32(int32(0)),
-	}
-	result := &QueryNetworkDetectionListResponse{}
-	result, err := VPC_CLIENT.QueryNetworkDetectionList(queryNetworkDetectionListRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -1631,6 +1799,29 @@ func TestClient_QueryRoutingTable(t *testing.T) {
 	}
 	result := &QueryRoutingTableResponse{}
 	result, err := VPC_CLIENT.QueryRoutingTable(queryRoutingTableRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QuerySecurityGroupsList(t *testing.T) {
+	querySecurityGroupsListRequest := &QuerySecurityGroupsListRequest{
+		Marker:           util.PtrString(""),
+		MaxKeys:          util.PtrInt32(int32(0)),
+		InstanceId:       util.PtrString(""),
+		VpcId:            util.PtrString(""),
+		SecurityGroupId:  util.PtrString(""),
+		SecurityGroupIds: util.PtrString(""),
+	}
+	result := &QuerySecurityGroupsListResponse{}
+	result, err := VPC_CLIENT.QuerySecurityGroupsList(querySecurityGroupsListRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -1783,222 +1974,6 @@ func TestClient_QueryTheListOfDedicatedLineGateways(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_QueryTheListOfElasticNetworkCards(t *testing.T) {
-	queryTheListOfElasticNetworkCardsRequest := &QueryTheListOfElasticNetworkCardsRequest{
-		VpcId:            util.PtrString(""),
-		InstanceId:       util.PtrString(""),
-		Name:             util.PtrString(""),
-		PrivateIpAddress: []*string{},
-		Marker:           util.PtrString(""),
-		MaxKeys:          util.PtrInt32(int32(0)),
-	}
-	result := &QueryTheListOfElasticNetworkCardsResponse{}
-	result, err := VPC_CLIENT.QueryTheListOfElasticNetworkCards(queryTheListOfElasticNetworkCardsRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheListOfEnterpriseSecurityGroups(t *testing.T) {
-	queryTheListOfEnterpriseSecurityGroupsRequest := &QueryTheListOfEnterpriseSecurityGroupsRequest{
-		Marker:     util.PtrString(""),
-		MaxKeys:    util.PtrInt32(int32(0)),
-		InstanceId: util.PtrString(""),
-	}
-	result := &QueryTheListOfEnterpriseSecurityGroupsResponse{}
-	result, err := VPC_CLIENT.QueryTheListOfEnterpriseSecurityGroups(queryTheListOfEnterpriseSecurityGroupsRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheListOfHighlyAvailableVirtualIps(t *testing.T) {
-	queryTheListOfHighlyAvailableVirtualIpsRequest := &QueryTheListOfHighlyAvailableVirtualIpsRequest{
-		VpcId:   util.PtrString(""),
-		Marker:  util.PtrString(""),
-		MaxKeys: util.PtrInt32(int32(0)),
-	}
-	result := &QueryTheListOfHighlyAvailableVirtualIpsResponse{}
-	result, err := VPC_CLIENT.QueryTheListOfHighlyAvailableVirtualIps(queryTheListOfHighlyAvailableVirtualIpsRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheListOfIpAddressGroups(t *testing.T) {
-	queryTheListOfIpAddressGroupsRequest := &QueryTheListOfIpAddressGroupsRequest{
-		IpVersion: util.PtrString(""),
-		Marker:    util.PtrString(""),
-		MaxKeys:   util.PtrInt32(int32(0)),
-	}
-	result := &QueryTheListOfIpAddressGroupsResponse{}
-	result, err := VPC_CLIENT.QueryTheListOfIpAddressGroups(queryTheListOfIpAddressGroupsRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheListOfRegularSecurityGroupsV2(t *testing.T) {
-	queryTheListOfRegularSecurityGroupsV2Request := &QueryTheListOfRegularSecurityGroupsV2Request{
-		Marker:           util.PtrString(""),
-		MaxKeys:          util.PtrInt32(int32(0)),
-		InstanceId:       util.PtrString(""),
-		VpcId:            util.PtrString(""),
-		SecurityGroupId:  util.PtrString(""),
-		SecurityGroupIds: util.PtrString(""),
-	}
-	result := &QueryTheListOfRegularSecurityGroupsV2Response{}
-	result, err := VPC_CLIENT.QueryTheListOfRegularSecurityGroupsV2(queryTheListOfRegularSecurityGroupsV2Request)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheListOfSpeedLimitPoliciesForIpv6Gateway(t *testing.T) {
-	queryTheListOfSpeedLimitPoliciesForIpv6GatewayRequest := &QueryTheListOfSpeedLimitPoliciesForIpv6GatewayRequest{
-		GatewayId: util.PtrString(""),
-		Marker:    util.PtrString(""),
-		MaxKeys:   util.PtrInt32(int32(0)),
-	}
-	result := &QueryTheListOfSpeedLimitPoliciesForIpv6GatewayResponse{}
-	result, err := VPC_CLIENT.QueryTheListOfSpeedLimitPoliciesForIpv6Gateway(queryTheListOfSpeedLimitPoliciesForIpv6GatewayRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheSpecifiedElasticNetworkCard(t *testing.T) {
-	queryTheSpecifiedElasticNetworkCardRequest := &QueryTheSpecifiedElasticNetworkCardRequest{
-		EniId: util.PtrString(""),
-	}
-	result := &QueryTheSpecifiedElasticNetworkCardResponse{}
-	result, err := VPC_CLIENT.QueryTheSpecifiedElasticNetworkCard(queryTheSpecifiedElasticNetworkCardRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheSpecifiedHighlyAvailableVirtualIp(t *testing.T) {
-	queryTheSpecifiedHighlyAvailableVirtualIpRequest := &QueryTheSpecifiedHighlyAvailableVirtualIpRequest{
-		HaVipId: util.PtrString(""),
-	}
-	result := &QueryTheSpecifiedHighlyAvailableVirtualIpResponse{}
-	result, err := VPC_CLIENT.QueryTheSpecifiedHighlyAvailableVirtualIp(queryTheSpecifiedHighlyAvailableVirtualIpRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheSpecifiedIpAddressFamily(t *testing.T) {
-	queryTheSpecifiedIpAddressFamilyRequest := &QueryTheSpecifiedIpAddressFamilyRequest{
-		IpGroupId: util.PtrString(""),
-	}
-	result := &QueryTheSpecifiedIpAddressFamilyResponse{}
-	result, err := VPC_CLIENT.QueryTheSpecifiedIpAddressFamily(queryTheSpecifiedIpAddressFamilyRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheSpecifiedIpAddressGroup(t *testing.T) {
-	queryTheSpecifiedIpAddressGroupRequest := &QueryTheSpecifiedIpAddressGroupRequest{
-		IpSetId: util.PtrString(""),
-	}
-	result := &QueryTheSpecifiedIpAddressGroupResponse{}
-	result, err := VPC_CLIENT.QueryTheSpecifiedIpAddressGroup(queryTheSpecifiedIpAddressGroupRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_QueryTheStatusOfTheElasticNetworkCard(t *testing.T) {
-	queryTheStatusOfTheElasticNetworkCardRequest := &QueryTheStatusOfTheElasticNetworkCardRequest{
-		EniId: util.PtrString(""),
-	}
-	result := &QueryTheStatusOfTheElasticNetworkCardResponse{}
-	result, err := VPC_CLIENT.QueryTheStatusOfTheElasticNetworkCard(queryTheStatusOfTheElasticNetworkCardRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_QueryVpcIntranetIp(t *testing.T) {
 	queryVpcIntranetIpRequest := &QueryVpcIntranetIpRequest{
 		VpcId:              util.PtrString(""),
@@ -2062,26 +2037,6 @@ func TestClient_QueryVpnList(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusion(t *testing.T) {
-	queryingTheIpv6PolicyListWithOnlyOutputAndNoInclusionRequest := &QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusionRequest{
-		GatewayId: util.PtrString(""),
-		Marker:    util.PtrString(""),
-		MaxKeys:   util.PtrInt32(int32(0)),
-	}
-	result := &QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusionResponse{}
-	result, err := VPC_CLIENT.QueryingTheIpv6PolicyListWithOnlyOutputAndNoInclusion(queryingTheIpv6PolicyListWithOnlyOutputAndNoInclusionRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_RefundPeerConn(t *testing.T) {
 	refundPeerConnRequest := &RefundPeerConnRequest{
 		PeerConnId:  util.PtrString(""),
@@ -2130,21 +2085,30 @@ func TestClient_ReleaseVpn(t *testing.T) {
 	err := VPC_CLIENT.ReleaseVpn(releaseVpnRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_RemoveElasticNetworkCard(t *testing.T) {
-	removeElasticNetworkCardRequest := &RemoveElasticNetworkCardRequest{
+func TestClient_RemoveEni(t *testing.T) {
+	removeEniRequest := &RemoveEniRequest{
 		EniId:       util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := VPC_CLIENT.RemoveElasticNetworkCard(removeElasticNetworkCardRequest)
+	err := VPC_CLIENT.RemoveEni(removeEniRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_RemoveIpAddressGroupFromIpAddressFamily(t *testing.T) {
-	removeIpAddressGroupFromIpAddressFamilyRequest := &RemoveIpAddressGroupFromIpAddressFamilyRequest{
+func TestClient_RemoveIpAddressFromIpGroup(t *testing.T) {
+	removeIpAddressFromIpGroupRequest := &RemoveIpAddressFromIpGroupRequest{
+		IpSetId:       util.PtrString(""),
+		ClientToken:   util.PtrString(""),
+		IpAddressInfo: []*string{},
+	}
+	err := VPC_CLIENT.RemoveIpAddressFromIpGroup(removeIpAddressFromIpGroupRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_RemoveIpGroupFromIpSet(t *testing.T) {
+	removeIpGroupFromIpSetRequest := &RemoveIpGroupFromIpSetRequest{
 		IpGroupId:   util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		IpSetIds:    []*string{},
 	}
-	err := VPC_CLIENT.RemoveIpAddressGroupFromIpAddressFamily(removeIpAddressGroupFromIpAddressFamilyRequest)
+	err := VPC_CLIENT.RemoveIpGroupFromIpSet(removeIpGroupFromIpSetRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_RenewPeerConn(t *testing.T) {
@@ -2179,6 +2143,15 @@ func TestClient_RenewVpn(t *testing.T) {
 	err := VPC_CLIENT.RenewVpn(renewVpnRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ResizeIpv6Gateway(t *testing.T) {
+	resizeIpv6GatewayRequest := &ResizeIpv6GatewayRequest{
+		GatewayId:       util.PtrString(""),
+		ClientToken:     util.PtrString(""),
+		BandwidthInMbps: util.PtrInt32(int32(0)),
+	}
+	err := VPC_CLIENT.ResizeIpv6Gateway(resizeIpv6GatewayRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ResizeNat(t *testing.T) {
 	resizeNatRequest := &ResizeNatRequest{
 		NatId:       util.PtrString(""),
@@ -2188,7 +2161,7 @@ func TestClient_ResizeNat(t *testing.T) {
 	err := VPC_CLIENT.ResizeNat(resizeNatRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_RevokeRegularSecurityGroupRulesV2(t *testing.T) {
+func TestClient_RevokeSecurityGroupRules(t *testing.T) {
 	Rule := &SecurityGroupRuleModel{
 		Remark:              util.PtrString(""),
 		Direction:           util.PtrString(""),
@@ -2204,13 +2177,13 @@ func TestClient_RevokeRegularSecurityGroupRulesV2(t *testing.T) {
 		CreatedTime:         util.PtrString(""),
 		UpdatedTime:         util.PtrString(""),
 	}
-	revokeRegularSecurityGroupRulesV2Request := &RevokeRegularSecurityGroupRulesV2Request{
+	revokeSecurityGroupRulesRequest := &RevokeSecurityGroupRulesRequest{
 		SecurityGroupId: util.PtrString(""),
 		ClientToken:     util.PtrString(""),
 		SgVersion:       util.PtrInt64(int64(0)),
 		Rule:            Rule,
 	}
-	err := VPC_CLIENT.RevokeRegularSecurityGroupRulesV2(revokeRegularSecurityGroupRulesV2Request)
+	err := VPC_CLIENT.RevokeSecurityGroupRules(revokeSecurityGroupRulesRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_SearchForVpnDetails(t *testing.T) {
@@ -2258,6 +2231,33 @@ func TestClient_UnbindEip(t *testing.T) {
 	err := VPC_CLIENT.UnbindEip(unbindEipRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_UnbindEniEip(t *testing.T) {
+	unbindEniEipRequest := &UnbindEniEipRequest{
+		EniId:           util.PtrString(""),
+		ClientToken:     util.PtrString(""),
+		PublicIpAddress: util.PtrString(""),
+	}
+	err := VPC_CLIENT.UnbindEniEip(unbindEniEipRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UnbindHaVipEip(t *testing.T) {
+	unbindHaVipEipRequest := &UnbindHaVipEipRequest{
+		HaVipId:     util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := VPC_CLIENT.UnbindHaVipEip(unbindHaVipEipRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UnbindHaVipInstance(t *testing.T) {
+	unbindHaVipInstanceRequest := &UnbindHaVipInstanceRequest{
+		HaVipId:      util.PtrString(""),
+		ClientToken:  util.PtrString(""),
+		InstanceIds:  []*string{},
+		InstanceType: util.PtrString(""),
+	}
+	err := VPC_CLIENT.UnbindHaVipInstance(unbindHaVipInstanceRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_UnbindPhysicalDedicatedLine(t *testing.T) {
 	unbindPhysicalDedicatedLineRequest := &UnbindPhysicalDedicatedLineRequest{
 		EtGatewayId: util.PtrString(""),
@@ -2296,6 +2296,15 @@ func TestClient_UpdateDedicatedGateway(t *testing.T) {
 	err := VPC_CLIENT.UpdateDedicatedGateway(updateDedicatedGatewayRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_UpdateDeleteProtect(t *testing.T) {
+	updateDeleteProtectRequest := &UpdateDeleteProtectRequest{
+		GatewayId:     util.PtrString(""),
+		ClientToken:   util.PtrString(""),
+		DeleteProtect: util.PtrInt32(int32(0)),
+	}
+	err := VPC_CLIENT.UpdateDeleteProtect(updateDeleteProtectRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_UpdateDnatRule(t *testing.T) {
 	updateDnatRuleRequest := &UpdateDnatRuleRequest{
 		NatId:            util.PtrString(""),
@@ -2313,14 +2322,32 @@ func TestClient_UpdateDnatRule(t *testing.T) {
 	err := VPC_CLIENT.UpdateDnatRule(updateDnatRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_UpdateElasticNetworkCard(t *testing.T) {
-	updateElasticNetworkCardRequest := &UpdateElasticNetworkCardRequest{
+func TestClient_UpdateEni(t *testing.T) {
+	updateEniRequest := &UpdateEniRequest{
 		EniId:       util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Name:        util.PtrString(""),
 		Description: util.PtrString(""),
 	}
-	err := VPC_CLIENT.UpdateElasticNetworkCard(updateElasticNetworkCardRequest)
+	err := VPC_CLIENT.UpdateEni(updateEniRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateEniEnterpriseSecurityGroup(t *testing.T) {
+	updateEniEnterpriseSecurityGroupRequest := &UpdateEniEnterpriseSecurityGroupRequest{
+		EniId:                      util.PtrString(""),
+		ClientToken:                util.PtrString(""),
+		EnterpriseSecurityGroupIds: []*string{},
+	}
+	err := VPC_CLIENT.UpdateEniEnterpriseSecurityGroup(updateEniEnterpriseSecurityGroupRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateEniSecurityGroup(t *testing.T) {
+	updateEniSecurityGroupRequest := &UpdateEniSecurityGroupRequest{
+		EniId:            util.PtrString(""),
+		ClientToken:      util.PtrString(""),
+		SecurityGroupIds: []*string{},
+	}
+	err := VPC_CLIENT.UpdateEniSecurityGroup(updateEniSecurityGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateEnterpriseSecurityGroupRules(t *testing.T) {
@@ -2342,54 +2369,34 @@ func TestClient_UpdateEnterpriseSecurityGroupRules(t *testing.T) {
 	err := VPC_CLIENT.UpdateEnterpriseSecurityGroupRules(updateEnterpriseSecurityGroupRulesRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_UpdateHighlyAvailableVirtualIp(t *testing.T) {
-	updateHighlyAvailableVirtualIpRequest := &UpdateHighlyAvailableVirtualIpRequest{
+func TestClient_UpdateHaVip(t *testing.T) {
+	updateHaVipRequest := &UpdateHaVipRequest{
 		HaVipId:     util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Name:        util.PtrString(""),
 		Description: util.PtrString(""),
 	}
-	err := VPC_CLIENT.UpdateHighlyAvailableVirtualIp(updateHighlyAvailableVirtualIpRequest)
+	err := VPC_CLIENT.UpdateHaVip(updateHaVipRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_UpdateIpAddressFamily(t *testing.T) {
-	updateIpAddressFamilyRequest := &UpdateIpAddressFamilyRequest{
-		IpGroupId:   util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		Name:        util.PtrString(""),
-		Description: util.PtrString(""),
-	}
-	err := VPC_CLIENT.UpdateIpAddressFamily(updateIpAddressFamilyRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_UpdateIpAddressGroup(t *testing.T) {
-	updateIpAddressGroupRequest := &UpdateIpAddressGroupRequest{
+func TestClient_UpdateIpGroup(t *testing.T) {
+	updateIpGroupRequest := &UpdateIpGroupRequest{
 		IpSetId:     util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Name:        util.PtrString(""),
 		Description: util.PtrString(""),
 	}
-	err := VPC_CLIENT.UpdateIpAddressGroup(updateIpAddressGroupRequest)
+	err := VPC_CLIENT.UpdateIpGroup(updateIpGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_UpdateIpv6GatewayReleaseProtectionSwitch(t *testing.T) {
-	updateIpv6GatewayReleaseProtectionSwitchRequest := &UpdateIpv6GatewayReleaseProtectionSwitchRequest{
-		GatewayId:     util.PtrString(""),
-		ClientToken:   util.PtrString(""),
-		DeleteProtect: util.PtrInt32(int32(0)),
+func TestClient_UpdateIpSet(t *testing.T) {
+	updateIpSetRequest := &UpdateIpSetRequest{
+		IpGroupId:   util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
 	}
-	err := VPC_CLIENT.UpdateIpv6GatewayReleaseProtectionSwitch(updateIpv6GatewayReleaseProtectionSwitchRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_UpdateIpv6GatewaySpeedLimitPolicy(t *testing.T) {
-	updateIpv6GatewaySpeedLimitPolicyRequest := &UpdateIpv6GatewaySpeedLimitPolicyRequest{
-		GatewayId:              util.PtrString(""),
-		RateLimitRuleId:        util.PtrString(""),
-		ClientToken:            util.PtrString(""),
-		IngressBandwidthInMbps: util.PtrInt32(int32(0)),
-		EgressBandwidthInMbps:  util.PtrInt32(int32(0)),
-	}
-	err := VPC_CLIENT.UpdateIpv6GatewaySpeedLimitPolicy(updateIpv6GatewaySpeedLimitPolicyRequest)
+	err := VPC_CLIENT.UpdateIpSet(updateIpSetRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateNatReleaseProtectionSwitch(t *testing.T) {
@@ -2399,18 +2406,6 @@ func TestClient_UpdateNatReleaseProtectionSwitch(t *testing.T) {
 		DeleteProtect: util.PtrBool(false),
 	}
 	err := VPC_CLIENT.UpdateNatReleaseProtectionSwitch(updateNatReleaseProtectionSwitchRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_UpdateNetworkDetection(t *testing.T) {
-	updateNetworkDetectionRequest := &UpdateNetworkDetectionRequest{
-		ProbeId:     util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		Name:        util.PtrString(""),
-		Description: util.PtrString(""),
-		DestIp:      util.PtrString(""),
-		DestPort:    util.PtrInt32(int32(0)),
-	}
-	err := VPC_CLIENT.UpdateNetworkDetection(updateNetworkDetectionRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdatePeerConn(t *testing.T) {
@@ -2442,20 +2437,27 @@ func TestClient_UpdatePeerConnDeleteProtect(t *testing.T) {
 	err := VPC_CLIENT.UpdatePeerConnDeleteProtect(updatePeerConnDeleteProtectRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_UpdateRegularSecurityGroupRulesV2(t *testing.T) {
-	updateRegularSecurityGroupRulesV2Request := &UpdateRegularSecurityGroupRulesV2Request{
-		ClientToken:         util.PtrString(""),
-		SgVersion:           util.PtrInt64(int64(0)),
-		SecurityGroupRuleId: util.PtrString(""),
-		Remark:              util.PtrString(""),
-		PortRange:           util.PtrString(""),
-		SourceIp:            util.PtrString(""),
-		SourceGroupId:       util.PtrString(""),
-		DestIp:              util.PtrString(""),
-		DestGroupId:         util.PtrString(""),
-		Protocol:            util.PtrString(""),
+func TestClient_UpdateProbe(t *testing.T) {
+	updateProbeRequest := &UpdateProbeRequest{
+		ProbeId:     util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
+		DestIp:      util.PtrString(""),
+		DestPort:    util.PtrInt32(int32(0)),
 	}
-	err := VPC_CLIENT.UpdateRegularSecurityGroupRulesV2(updateRegularSecurityGroupRulesV2Request)
+	err := VPC_CLIENT.UpdateProbe(updateProbeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateRateLimitRule(t *testing.T) {
+	updateRateLimitRuleRequest := &UpdateRateLimitRuleRequest{
+		GatewayId:              util.PtrString(""),
+		RateLimitRuleId:        util.PtrString(""),
+		ClientToken:            util.PtrString(""),
+		IngressBandwidthInMbps: util.PtrInt32(int32(0)),
+		EgressBandwidthInMbps:  util.PtrInt32(int32(0)),
+	}
+	err := VPC_CLIENT.UpdateRateLimitRule(updateRateLimitRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateRoutingRules(t *testing.T) {
@@ -2468,6 +2470,22 @@ func TestClient_UpdateRoutingRules(t *testing.T) {
 		Description:        util.PtrString(""),
 	}
 	err := VPC_CLIENT.UpdateRoutingRules(updateRoutingRulesRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateSecurityGroupRules(t *testing.T) {
+	updateSecurityGroupRulesRequest := &UpdateSecurityGroupRulesRequest{
+		ClientToken:         util.PtrString(""),
+		SgVersion:           util.PtrInt64(int64(0)),
+		SecurityGroupRuleId: util.PtrString(""),
+		Remark:              util.PtrString(""),
+		PortRange:           util.PtrString(""),
+		SourceIp:            util.PtrString(""),
+		SourceGroupId:       util.PtrString(""),
+		DestIp:              util.PtrString(""),
+		DestGroupId:         util.PtrString(""),
+		Protocol:            util.PtrString(""),
+	}
+	err := VPC_CLIENT.UpdateSecurityGroupRules(updateSecurityGroupRulesRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateSnatRule(t *testing.T) {
@@ -2638,24 +2656,6 @@ func TestClient_ViewGatewayLimitRules(t *testing.T) {
 	}
 	result := &ViewGatewayLimitRulesResponse{}
 	result, err := VPC_CLIENT.ViewGatewayLimitRules(viewGatewayLimitRulesRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_ViewSecurityGroupDetailsV2(t *testing.T) {
-	viewSecurityGroupDetailsV2Request := &ViewSecurityGroupDetailsV2Request{
-		SecurityGroupId: util.PtrString(""),
-	}
-	result := &ViewSecurityGroupDetailsV2Response{}
-	result, err := VPC_CLIENT.ViewSecurityGroupDetailsV2(viewSecurityGroupDetailsV2Request)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
