@@ -2,7 +2,7 @@ package privatezone
 
 import "github.com/baidubce/baiducloud-go-sdk/bce"
 
-type QueryAndParseRecordListResponse struct {
+type ListRecordResponse struct {
 	bce.BaseResponse
 	Marker      *string          `json:"marker,omitempty"`
 	IsTruncated *bool            `json:"isTruncated,omitempty"`

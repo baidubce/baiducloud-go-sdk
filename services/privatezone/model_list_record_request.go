@@ -1,6 +1,6 @@
 package privatezone
 
-type QueryAndParseRecordListRequest struct {
+type ListRecordRequest struct {
 	ZoneId     *string `json:"-"`
 	Marker     *string `json:"-"`
 	MaxKeys    *int32  `json:"-"`

@@ -1,5 +1,5 @@
 package privatezone
 
-type SearchForDetailsOfPrivatzoneRequest struct {
+type GetPrivateZoneRequest struct {
 	ZoneId *string `json:"-"`
 }

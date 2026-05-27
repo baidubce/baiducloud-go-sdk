@@ -1,6 +1,6 @@
 package privatezone
 
-type QueryTheListOfPrivateZonesRequest struct {
+type ListPrivateZoneRequest struct {
 	Marker  *string `json:"-"`
 	MaxKeys *int32  `json:"-"`
 }

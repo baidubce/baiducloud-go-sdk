@@ -67,19 +67,19 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
-func TestClient_AddParsingRecords(t *testing.T) {
-	addParsingRecordsRequest := &AddParsingRecordsRequest{
-		ZoneId:      util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		Rr:          util.PtrString(""),
-		Value:       util.PtrString(""),
-		Type:        util.PtrString(""),
-		Priority:    util.PtrInt32(int32(0)),
-		Ttl:         util.PtrInt32(int32(0)),
-		Description: util.PtrString(""),
+func TestClient_AddRecord(t *testing.T) {
+	addRecordRequest := &AddRecordRequest{
+		ZoneId:          util.PtrString(""),
+		ClientToken:     util.PtrString(""),
+		Rr:              util.PtrString(""),
+		Value:           util.PtrString(""),
+		PrivatezoneType: util.PtrString(""),
+		Priority:        util.PtrInt32(int32(0)),
+		Ttl:             util.PtrInt32(int32(0)),
+		Description:     util.PtrString(""),
 	}
-	result := &AddParsingRecordsResponse{}
-	result, err := PRIVATEZONE_CLIENT.AddParsingRecords(addParsingRecordsRequest)
+	result := &AddRecordResponse{}
+	result, err := PRIVATEZONE_CLIENT.AddRecord(addRecordRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -92,24 +92,24 @@ func TestClient_AddParsingRecords(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_AssociateVpc(t *testing.T) {
-	associateVpcRequest := &AssociateVpcRequest{
+func TestClient_BindVpc(t *testing.T) {
+	bindVpcRequest := &BindVpcRequest{
 		ZoneId:      util.PtrString(""),
 		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Region:      util.PtrString(""),
 		VpcIds:      []*string{},
 	}
-	err := PRIVATEZONE_CLIENT.AssociateVpc(associateVpcRequest)
+	err := PRIVATEZONE_CLIENT.BindVpc(bindVpcRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_CreateAPrivateZone(t *testing.T) {
-	createAPrivateZoneRequest := &CreateAPrivateZoneRequest{
+func TestClient_CreatePrivateZone(t *testing.T) {
+	createPrivateZoneRequest := &CreatePrivateZoneRequest{
 		ClientToken: util.PtrString(""),
 		ZoneName:    util.PtrString(""),
 	}
-	result := &CreateAPrivateZoneResponse{}
-	result, err := PRIVATEZONE_CLIENT.CreateAPrivateZone(createAPrivateZoneRequest)
+	result := &CreatePrivateZoneResponse{}
+	result, err := PRIVATEZONE_CLIENT.CreatePrivateZone(createPrivateZoneRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -120,14 +120,6 @@ func TestClient_CreateAPrivateZone(t *testing.T) {
 		return
 	}
 	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_DeleteParsingRecords(t *testing.T) {
-	deleteParsingRecordsRequest := &DeleteParsingRecordsRequest{
-		RecordId:    util.PtrString(""),
-		ClientToken: util.PtrString(""),
-	}
-	err := PRIVATEZONE_CLIENT.DeleteParsingRecords(deleteParsingRecordsRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeletePrivateZone(t *testing.T) {
@@ -138,33 +130,93 @@ func TestClient_DeletePrivateZone(t *testing.T) {
 	err := PRIVATEZONE_CLIENT.DeletePrivateZone(deletePrivateZoneRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_DisassociateVpc(t *testing.T) {
-	disassociateVpcRequest := &DisassociateVpcRequest{
-		ZoneId:      util.PtrString(""),
-		Action:      util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		Region:      util.PtrString(""),
-		VpcIds:      []*string{},
-	}
-	err := PRIVATEZONE_CLIENT.DisassociateVpc(disassociateVpcRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_ModifyParsingRecords(t *testing.T) {
-	modifyParsingRecordsRequest := &ModifyParsingRecordsRequest{
+func TestClient_DeleteRecord(t *testing.T) {
+	deleteRecordRequest := &DeleteRecordRequest{
 		RecordId:    util.PtrString(""),
 		ClientToken: util.PtrString(""),
-		Rr:          util.PtrString(""),
-		Value:       util.PtrString(""),
-		Type:        util.PtrString(""),
-		Ttl:         util.PtrInt32(int32(0)),
-		Priority:    util.PtrInt32(int32(0)),
-		Description: util.PtrString(""),
 	}
-	err := PRIVATEZONE_CLIENT.ModifyParsingRecords(modifyParsingRecordsRequest)
+	err := PRIVATEZONE_CLIENT.DeleteRecord(deleteRecordRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_QueryAndParseRecordList(t *testing.T) {
-	queryAndParseRecordListRequest := &QueryAndParseRecordListRequest{
+func TestClient_DisableRecord(t *testing.T) {
+	disableRecordRequest := &DisableRecordRequest{
+		RecordId:    util.PtrString(""),
+		Action:      util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	result := &map[string]interface{}{}
+	result, err := PRIVATEZONE_CLIENT.DisableRecord(disableRecordRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_EnableRecord(t *testing.T) {
+	enableRecordRequest := &EnableRecordRequest{
+		RecordId:    util.PtrString(""),
+		Action:      util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	result := &map[string]interface{}{}
+	result, err := PRIVATEZONE_CLIENT.EnableRecord(enableRecordRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetPrivateZone(t *testing.T) {
+	getPrivateZoneRequest := &GetPrivateZoneRequest{
+		ZoneId: util.PtrString(""),
+	}
+	result := &GetPrivateZoneResponse{}
+	result, err := PRIVATEZONE_CLIENT.GetPrivateZone(getPrivateZoneRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListPrivateZone(t *testing.T) {
+	listPrivateZoneRequest := &ListPrivateZoneRequest{
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &ListPrivateZoneResponse{}
+	result, err := PRIVATEZONE_CLIENT.ListPrivateZone(listPrivateZoneRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListRecord(t *testing.T) {
+	listRecordRequest := &ListRecordRequest{
 		ZoneId:     util.PtrString(""),
 		Marker:     util.PtrString(""),
 		MaxKeys:    util.PtrInt32(int32(0)),
@@ -173,8 +225,8 @@ func TestClient_QueryAndParseRecordList(t *testing.T) {
 		Type:       util.PtrString(""),
 		Value:      util.PtrString(""),
 	}
-	result := &QueryAndParseRecordListResponse{}
-	result, err := PRIVATEZONE_CLIENT.QueryAndParseRecordList(queryAndParseRecordListRequest)
+	result := &ListRecordResponse{}
+	result, err := PRIVATEZONE_CLIENT.ListRecord(listRecordRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -187,49 +239,28 @@ func TestClient_QueryAndParseRecordList(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_QueryTheListOfPrivateZones(t *testing.T) {
-	queryTheListOfPrivateZonesRequest := &QueryTheListOfPrivateZonesRequest{
-		Marker:  util.PtrString(""),
-		MaxKeys: util.PtrInt32(int32(0)),
-	}
-	result := &QueryTheListOfPrivateZonesResponse{}
-	result, err := PRIVATEZONE_CLIENT.QueryTheListOfPrivateZones(queryTheListOfPrivateZonesRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_SearchForDetailsOfPrivatzone(t *testing.T) {
-	searchForDetailsOfPrivatzoneRequest := &SearchForDetailsOfPrivatzoneRequest{
-		ZoneId: util.PtrString(""),
-	}
-	result := &SearchForDetailsOfPrivatzoneResponse{}
-	result, err := PRIVATEZONE_CLIENT.SearchForDetailsOfPrivatzone(searchForDetailsOfPrivatzoneRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_SetParsingRecordStatus(t *testing.T) {
-	setParsingRecordStatusRequest := &SetParsingRecordStatusRequest{
-		RecordId:    util.PtrString(""),
+func TestClient_UnbindVpc(t *testing.T) {
+	unbindVpcRequest := &UnbindVpcRequest{
+		ZoneId:      util.PtrString(""),
 		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
+		Region:      util.PtrString(""),
+		VpcIds:      []*string{},
 	}
-	err := PRIVATEZONE_CLIENT.SetParsingRecordStatus(setParsingRecordStatusRequest)
+	err := PRIVATEZONE_CLIENT.UnbindVpc(unbindVpcRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateRecord(t *testing.T) {
+	updateRecordRequest := &UpdateRecordRequest{
+		RecordId:        util.PtrString(""),
+		ClientToken:     util.PtrString(""),
+		Rr:              util.PtrString(""),
+		Value:           util.PtrString(""),
+		PrivatezoneType: util.PtrString(""),
+		Ttl:             util.PtrInt32(int32(0)),
+		Priority:        util.PtrInt32(int32(0)),
+		Description:     util.PtrString(""),
+	}
+	err := PRIVATEZONE_CLIENT.UpdateRecord(updateRecordRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }

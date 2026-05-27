@@ -28,36 +28,39 @@ func NewClient(ak, sk, endPoint string) (*Client, error) {
 	return &Client{client}, nil
 }
 
-func getAddParsingRecordsUri(version string, zoneId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + zoneId + bce.URI_PREFIX + CONSTANT_RECORD
+func getAddRecordUri(version string, ZoneId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + ZoneId + bce.URI_PREFIX + CONSTANT_RECORD
 }
-func getAssociateVpcUri(version string, zoneId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + zoneId
+func getBindVpcUri(version string, ZoneId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + ZoneId
 }
-func getCreateAPrivateZoneUri(version string) string {
+func getCreatePrivateZoneUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE
 }
-func getDeleteParsingRecordsUri(version string, recordId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + CONSTANT_RECORD + bce.URI_PREFIX + recordId
+func getDeletePrivateZoneUri(version string, ZoneId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + ZoneId
 }
-func getDeletePrivateZoneUri(version string, zoneId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + zoneId
+func getDeleteRecordUri(version string, RecordId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + CONSTANT_RECORD + bce.URI_PREFIX + RecordId
 }
-func getDisassociateVpcUri(version string, zoneId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + zoneId
+func getDisableRecordUri(version string, RecordId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + CONSTANT_RECORD + bce.URI_PREFIX + RecordId
 }
-func getModifyParsingRecordsUri(version string, recordId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + CONSTANT_RECORD + bce.URI_PREFIX + recordId
+func getEnableRecordUri(version string, RecordId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + CONSTANT_RECORD + bce.URI_PREFIX + RecordId
 }
-func getQueryAndParseRecordListUri(version string, zoneId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + zoneId + bce.URI_PREFIX + CONSTANT_RECORD
+func getGetPrivateZoneUri(version string, ZoneId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + ZoneId
 }
-func getQueryTheListOfPrivateZonesUri(version string) string {
+func getListPrivateZoneUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE
 }
-func getSearchForDetailsOfPrivatzoneUri(version string, zoneId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + zoneId
+func getListRecordUri(version string, ZoneId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + ZoneId + bce.URI_PREFIX + CONSTANT_RECORD
 }
-func getSetParsingRecordStatusUri(version string, recordId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + CONSTANT_RECORD + bce.URI_PREFIX + recordId
+func getUnbindVpcUri(version string, ZoneId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + ZoneId
+}
+func getUpdateRecordUri(version string, RecordId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + CONSTANT_RECORD + bce.URI_PREFIX + RecordId
 }

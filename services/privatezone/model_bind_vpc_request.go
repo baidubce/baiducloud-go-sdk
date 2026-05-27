@@ -1,6 +1,6 @@
 package privatezone
 
-type AssociateVpcRequest struct {
+type BindVpcRequest struct {
 	ZoneId      *string   `json:"-"`
 	Action      *string   `json:"-"`
 	ClientToken *string   `json:"-"`

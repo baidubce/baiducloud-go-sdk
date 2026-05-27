@@ -1,6 +1,7 @@
 package privatezone
 
-type DeleteParsingRecordsRequest struct {
+type DisableRecordRequest struct {
 	RecordId    *string `json:"-"`
 	ClientToken *string `json:"-"`
+	Action      *string `json:"-"`
 }

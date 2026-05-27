@@ -1,6 +1,6 @@
 package privatezone
 
-type DisassociateVpcRequest struct {
+type UnbindVpcRequest struct {
 	ZoneId      *string   `json:"-"`
 	Action      *string   `json:"-"`
 	ClientToken *string   `json:"-"`

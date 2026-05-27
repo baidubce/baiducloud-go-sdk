@@ -10,80 +10,68 @@ const (
 	VERSION_V1 = "v1"
 )
 
-// AddParsingRecords
+// AddRecord
 //
 // PARAMS:
-//   - request: the arguments to AddParsingRecords
+//   - request: the arguments to AddRecord
 //
 // RETURNS:
-//   - AddParsingRecordsResponse: The return type of the AddParsingRecords interface.
+//   - AddRecordResponse: The return type of the AddRecord interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) AddParsingRecords(request *AddParsingRecordsRequest) (*AddParsingRecordsResponse, error) {
-	result := &AddParsingRecordsResponse{}
+func (c *Client) AddRecord(request *AddRecordRequest) (*AddRecordResponse, error) {
+	result := &AddRecordResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getAddParsingRecordsUri(VERSION_V1, util.StringValue(request.ZoneId))).
+		WithURL(getAddRecordUri(VERSION_V1, util.StringValue(request.ZoneId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
-// AssociateVpc
+// BindVpc
 //
 // PARAMS:
-//   - request: the arguments to AssociateVpc
+//   - request: the arguments to BindVpc
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) AssociateVpc(request *AssociateVpcRequest) error {
-	err := bce.NewRequestBuilder(c).
+func (c *Client) BindVpc(request *BindVpcRequest) error {
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getAssociateVpcUri(VERSION_V1, util.StringValue(request.ZoneId))).
-		WithQueryParam(util.StringValue(request.Action), "").
+		WithURL(getBindVpcUri(VERSION_V1, util.StringValue(request.ZoneId))).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
-	return err
 }
 
-// CreateAPrivateZone
+// CreatePrivateZone
 //
 // PARAMS:
-//   - request: the arguments to CreateAPrivateZone
+//   - request: the arguments to CreatePrivateZone
 //
 // RETURNS:
-//   - CreateAPrivateZoneResponse: The return type of the CreateAPrivateZone interface.
+//   - CreatePrivateZoneResponse: The return type of the CreatePrivateZone interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateAPrivateZone(request *CreateAPrivateZoneRequest) (*CreateAPrivateZoneResponse, error) {
-	result := &CreateAPrivateZoneResponse{}
+func (c *Client) CreatePrivateZone(request *CreatePrivateZoneRequest) (*CreatePrivateZoneResponse, error) {
+	result := &CreatePrivateZoneResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getCreateAPrivateZoneUri(VERSION_V1)).
+		WithURL(getCreatePrivateZoneUri(VERSION_V1)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
 		Do()
-	return result, err
-}
-
-// DeleteParsingRecords
-//
-// PARAMS:
-//   - request: the arguments to DeleteParsingRecords
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) DeleteParsingRecords(request *DeleteParsingRecordsRequest) error {
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.DELETE).
-		WithURL(getDeleteParsingRecordsUri(VERSION_V1, util.StringValue(request.RecordId))).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		Do()
-	return err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // DeletePrivateZone
@@ -95,64 +83,134 @@ func (c *Client) DeleteParsingRecords(request *DeleteParsingRecordsRequest) erro
 
 // - error: nil if success otherwise the specific error
 func (c *Client) DeletePrivateZone(request *DeletePrivateZoneRequest) error {
-	err := bce.NewRequestBuilder(c).
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getDeletePrivateZoneUri(VERSION_V1, util.StringValue(request.ZoneId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
-	return err
 }
 
-// DisassociateVpc
+// DeleteRecord
 //
 // PARAMS:
-//   - request: the arguments to DisassociateVpc
+//   - request: the arguments to DeleteRecord
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DisassociateVpc(request *DisassociateVpcRequest) error {
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getDisassociateVpcUri(VERSION_V1, util.StringValue(request.ZoneId))).
-		WithQueryParam(util.StringValue(request.Action), "").
+func (c *Client) DeleteRecord(request *DeleteRecordRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteRecordUri(VERSION_V1, util.StringValue(request.RecordId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
 		Do()
-	return err
 }
 
-// ModifyParsingRecords
+// DisableRecord
 //
 // PARAMS:
-//   - request: the arguments to ModifyParsingRecords
+//   - request: the arguments to DisableRecord
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ModifyParsingRecords(request *ModifyParsingRecordsRequest) error {
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getModifyParsingRecordsUri(VERSION_V1, util.StringValue(request.RecordId))).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-	return err
-}
-
-// QueryAndParseRecordList
-//
-// PARAMS:
-//   - request: the arguments to QueryAndParseRecordList
-//
-// RETURNS:
-//   - QueryAndParseRecordListResponse: The return type of the QueryAndParseRecordList interface.
+//   - map[string]interface{}: The return type of the DisableRecord interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) QueryAndParseRecordList(request *QueryAndParseRecordListRequest) (*QueryAndParseRecordListResponse, error) {
-	result := &QueryAndParseRecordListResponse{}
+func (c *Client) DisableRecord(request *DisableRecordRequest) (map[string]interface{}, error) {
+	result := &map[string]interface{}{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDisableRecordUri(VERSION_V1, util.StringValue(request.RecordId))).
+		WithQueryParam("disable", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// EnableRecord
+//
+// PARAMS:
+//   - request: the arguments to EnableRecord
+//
+// RETURNS:
+//   - map[string]interface{}: The return type of the EnableRecord interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) EnableRecord(request *EnableRecordRequest) (map[string]interface{}, error) {
+	result := &map[string]interface{}{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getEnableRecordUri(VERSION_V1, util.StringValue(request.RecordId))).
+		WithQueryParam("enable", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetPrivateZone
+//
+// PARAMS:
+//   - request: the arguments to GetPrivateZone
+//
+// RETURNS:
+//   - GetPrivateZoneResponse: The return type of the GetPrivateZone interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetPrivateZone(request *GetPrivateZoneRequest) (*GetPrivateZoneResponse, error) {
+	result := &GetPrivateZoneResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getQueryAndParseRecordListUri(VERSION_V1, util.StringValue(request.ZoneId))).
+		WithURL(getGetPrivateZoneUri(VERSION_V1, util.StringValue(request.ZoneId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListPrivateZone
+//
+// PARAMS:
+//   - request: the arguments to ListPrivateZone
+//
+// RETURNS:
+//   - ListPrivateZoneResponse: The return type of the ListPrivateZone interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListPrivateZone(request *ListPrivateZoneRequest) (*ListPrivateZoneResponse, error) {
+	result := &ListPrivateZoneResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListPrivateZoneUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListRecord
+//
+// PARAMS:
+//   - request: the arguments to ListRecord
+//
+// RETURNS:
+//   - ListRecordResponse: The return type of the ListRecord interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListRecord(request *ListRecordRequest) (*ListRecordResponse, error) {
+	result := &ListRecordResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListRecordUri(VERSION_V1, util.StringValue(request.ZoneId))).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithQueryParamFilter("rr", util.StringValue(request.Rr)).
@@ -161,61 +219,43 @@ func (c *Client) QueryAndParseRecordList(request *QueryAndParseRecordListRequest
 		WithQueryParamFilter("value", util.StringValue(request.Value)).
 		WithResult(result).
 		Do()
-	return result, err
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
-// QueryTheListOfPrivateZones
+// UnbindVpc
 //
 // PARAMS:
-//   - request: the arguments to QueryTheListOfPrivateZones
-//
-// RETURNS:
-//   - QueryTheListOfPrivateZonesResponse: The return type of the QueryTheListOfPrivateZones interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheListOfPrivateZones(request *QueryTheListOfPrivateZonesRequest) (*QueryTheListOfPrivateZonesResponse, error) {
-	result := &QueryTheListOfPrivateZonesResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheListOfPrivateZonesUri(VERSION_V1)).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-		WithResult(result).
-		Do()
-	return result, err
-}
-
-// SearchForDetailsOfPrivatzone
-//
-// PARAMS:
-//   - request: the arguments to SearchForDetailsOfPrivatzone
-//
-// RETURNS:
-//   - SearchForDetailsOfPrivatzoneResponse: The return type of the SearchForDetailsOfPrivatzone interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) SearchForDetailsOfPrivatzone(request *SearchForDetailsOfPrivatzoneRequest) (*SearchForDetailsOfPrivatzoneResponse, error) {
-	result := &SearchForDetailsOfPrivatzoneResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getSearchForDetailsOfPrivatzoneUri(VERSION_V1, util.StringValue(request.ZoneId))).
-		WithResult(result).
-		Do()
-	return result, err
-}
-
-// SetParsingRecordStatus
-//
-// PARAMS:
-//   - request: the arguments to SetParsingRecordStatus
+//   - request: the arguments to UnbindVpc
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) SetParsingRecordStatus(request *SetParsingRecordStatusRequest) error {
-	err := bce.NewRequestBuilder(c).
+func (c *Client) UnbindVpc(request *UnbindVpcRequest) error {
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getSetParsingRecordStatusUri(VERSION_V1, util.StringValue(request.RecordId))).
+		WithURL(getUnbindVpcUri(VERSION_V1, util.StringValue(request.ZoneId))).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithQueryParam(util.StringValue(request.Action), "").
+		WithBody(request).
 		Do()
-	return err
+}
+
+// UpdateRecord
+//
+// PARAMS:
+//   - request: the arguments to UpdateRecord
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateRecord(request *UpdateRecordRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateRecordUri(VERSION_V1, util.StringValue(request.RecordId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
 }

@@ -2,7 +2,7 @@ package privatezone
 
 import "github.com/baidubce/baiducloud-go-sdk/bce"
 
-type CreateAPrivateZoneResponse struct {
+type AddRecordResponse struct {
 	bce.BaseResponse
-	ZoneId *string `json:"zoneId,omitempty"`
+	RecordId *string `json:"recordId,omitempty"`
 }

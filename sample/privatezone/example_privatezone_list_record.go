@@ -7,7 +7,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/services/privatezone"
 )
 
-func QueryAndParseRecordList() {
+func ListRecord() {
 	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
 	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
 	client, err := privatezone.NewClient(ak, sk, endpoint)
@@ -15,7 +15,7 @@ func QueryAndParseRecordList() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	queryAndParseRecordListRequest := &privatezone.QueryAndParseRecordListRequest{
+	listRecordRequest := &privatezone.ListRecordRequest{
 		ZoneId:     util.PtrString(""),
 		Marker:     util.PtrString(""),
 		MaxKeys:    util.PtrInt32(int32(0)),
@@ -24,8 +24,7 @@ func QueryAndParseRecordList() {
 		Type:       util.PtrString(""),
 		Value:      util.PtrString(""),
 	}
-	result := &privatezone.QueryAndParseRecordListResponse{}
-	result, err = client.QueryAndParseRecordList(queryAndParseRecordListRequest)
+	result, err := client.ListRecord(listRecordRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

@@ -2,7 +2,7 @@ package privatezone
 
 import "github.com/baidubce/baiducloud-go-sdk/bce"
 
-type SearchForDetailsOfPrivatzoneResponse struct {
+type GetPrivateZoneResponse struct {
 	bce.BaseResponse
 	ZoneId      *string `json:"zoneId,omitempty"`
 	ZoneName    *string `json:"zoneName,omitempty"`
