@@ -17,7 +17,7 @@ func CreatePrivateZone() {
 	}
 	createPrivateZoneRequest := &privatezone.CreatePrivateZoneRequest{
 		ClientToken: util.PtrString(""),
-		ZoneName:    util.PtrString(""),
+		ZoneName:    util.PtrString("test3.com"),
 	}
 	result, err := client.CreatePrivateZone(createPrivateZoneRequest)
 	if err != nil {

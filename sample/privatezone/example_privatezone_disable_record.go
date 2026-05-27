@@ -16,8 +16,8 @@ func DisableRecord() {
 		return
 	}
 	disableRecordRequest := &privatezone.DisableRecordRequest{
-		RecordId:    util.PtrString(""),
-		Action:      util.PtrString(""),
+		RecordId:    util.PtrString("rc-sz1ubq7e795u"),
+        		Action:      util.PtrString("disable"),
 		ClientToken: util.PtrString(""),
 	}
 	result, err := client.DisableRecord(disableRecordRequest)

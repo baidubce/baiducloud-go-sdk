@@ -144,7 +144,6 @@ func TestClient_DisableRecord(t *testing.T) {
 		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	result := &map[string]interface{}{}
 	result, err := PRIVATEZONE_CLIENT.DisableRecord(disableRecordRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
@@ -164,7 +163,6 @@ func TestClient_EnableRecord(t *testing.T) {
 		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	result := &map[string]interface{}{}
 	result, err := PRIVATEZONE_CLIENT.EnableRecord(enableRecordRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)

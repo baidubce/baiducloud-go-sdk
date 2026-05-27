@@ -45,7 +45,7 @@ func (c *Client) BindVpc(request *BindVpcRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getBindVpcUri(VERSION_V1, util.StringValue(request.ZoneId))).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithQueryParam("bind", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -127,7 +127,7 @@ func (c *Client) DisableRecord(request *DisableRecordRequest) (map[string]interf
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return *result, nil
 }
 
 // EnableRecord
@@ -151,7 +151,7 @@ func (c *Client) EnableRecord(request *EnableRecordRequest) (map[string]interfac
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return *result, nil
 }
 
 // GetPrivateZone
@@ -237,7 +237,7 @@ func (c *Client) UnbindVpc(request *UnbindVpcRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUnbindVpcUri(VERSION_V1, util.StringValue(request.ZoneId))).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithQueryParam("unbind", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()

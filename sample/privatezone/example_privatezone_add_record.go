@@ -16,13 +16,13 @@ func AddRecord() {
 		return
 	}
 	addRecordRequest := &privatezone.AddRecordRequest{
-		ZoneId:          util.PtrString(""),
+		ZoneId:          util.PtrString("zone-b9t035ipvvb6"),
 		ClientToken:     util.PtrString(""),
 		Rr:              util.PtrString(""),
 		Value:           util.PtrString(""),
 		PrivatezoneType: util.PtrString(""),
 		Priority:        util.PtrInt32(int32(0)),
-		Ttl:             util.PtrInt32(int32(0)),
+		Ttl:             util.PtrInt32(int32(300)),
 		Description:     util.PtrString(""),
 	}
 	result, err := client.AddRecord(addRecordRequest)

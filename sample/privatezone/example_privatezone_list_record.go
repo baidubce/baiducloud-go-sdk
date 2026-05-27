@@ -18,7 +18,7 @@ func ListRecord() {
 	listRecordRequest := &privatezone.ListRecordRequest{
 		ZoneId:     util.PtrString(""),
 		Marker:     util.PtrString(""),
-		MaxKeys:    util.PtrInt32(int32(0)),
+		MaxKeys:    util.PtrInt32(int32(10)),
 		Rr:         util.PtrString(""),
 		SearchMode: util.PtrString(""),
 		Type:       util.PtrString(""),
