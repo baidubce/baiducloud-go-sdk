@@ -10,6 +10,23 @@ const (
 	VERSION_V1 = "v1"
 )
 
+// AddAppBlbServerGroupRs
+//
+// PARAMS:
+//   - request: the arguments to AddAppBlbServerGroupRs
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AddAppBlbServerGroupRs(request *AddAppBlbServerGroupRsRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getAddAppBlbServerGroupRsUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // BillingChangeCancelToPostBlb
 //
 // PARAMS:
@@ -171,6 +188,52 @@ func (c *Client) CreateAppBlbPolicy(request *CreateAppBlbPolicyRequest) error {
 		Do()
 }
 
+// CreateAppBlbServerGroup
+//
+// PARAMS:
+//   - request: the arguments to CreateAppBlbServerGroup
+//
+// RETURNS:
+//   - CreateAppBlbServerGroupResponse: The return type of the CreateAppBlbServerGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateAppBlbServerGroup(request *CreateAppBlbServerGroupRequest) (*CreateAppBlbServerGroupResponse, error) {
+	result := &CreateAppBlbServerGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateAppBlbServerGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateAppBlbServerGroupPort
+//
+// PARAMS:
+//   - request: the arguments to CreateAppBlbServerGroupPort
+//
+// RETURNS:
+//   - CreateAppBlbServerGroupPortResponse: The return type of the CreateAppBlbServerGroupPort interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateAppBlbServerGroupPort(request *CreateAppBlbServerGroupPortRequest) (*CreateAppBlbServerGroupPortResponse, error) {
+	result := &CreateAppBlbServerGroupPortResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateAppBlbServerGroupPortUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateAppBlbSslListener
 //
 // PARAMS:
@@ -275,6 +338,60 @@ func (c *Client) DeleteAppBlbPolicy(request *DeleteAppBlbPolicyRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getDeleteAppBlbPolicyUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("batchdelete", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// DeleteAppBlbServerGroup
+//
+// PARAMS:
+//   - request: the arguments to DeleteAppBlbServerGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteAppBlbServerGroup(request *DeleteAppBlbServerGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDeleteAppBlbServerGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("delete", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// DeleteAppBlbServerGroupPort
+//
+// PARAMS:
+//   - request: the arguments to DeleteAppBlbServerGroupPort
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteAppBlbServerGroupPort(request *DeleteAppBlbServerGroupPortRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDeleteAppBlbServerGroupPortUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("batchdelete", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// DeleteAppBlbServerGroupRs
+//
+// PARAMS:
+//   - request: the arguments to DeleteAppBlbServerGroupRs
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteAppBlbServerGroupRs(request *DeleteAppBlbServerGroupRsRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDeleteAppBlbServerGroupRsUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParam("batchdelete", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
@@ -391,6 +508,99 @@ func (c *Client) DescribeAppBlbPolicy(request *DescribeAppBlbPolicyRequest) (*De
 		WithQueryParamFilter("type", util.StringValue(request.Type)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeAppBlbServerGroup
+//
+// PARAMS:
+//   - request: the arguments to DescribeAppBlbServerGroup
+//
+// RETURNS:
+//   - DescribeAppBlbServerGroupResponse: The return type of the DescribeAppBlbServerGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAppBlbServerGroup(request *DescribeAppBlbServerGroupRequest) (*DescribeAppBlbServerGroupResponse, error) {
+	result := &DescribeAppBlbServerGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeAppBlbServerGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("name", util.StringValue(request.Name)).
+		WithQueryParamFilter("exactlyMatch", util.BoolValue(request.ExactlyMatch)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeAppBlbServerGroupMountRs
+//
+// PARAMS:
+//   - request: the arguments to DescribeAppBlbServerGroupMountRs
+//
+// RETURNS:
+//   - DescribeAppBlbServerGroupMountRsResponse: The return type of the DescribeAppBlbServerGroupMountRs interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAppBlbServerGroupMountRs(request *DescribeAppBlbServerGroupMountRsRequest) (*DescribeAppBlbServerGroupMountRsResponse, error) {
+	result := &DescribeAppBlbServerGroupMountRsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeAppBlbServerGroupMountRsUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("sgId", util.StringValue(request.SgId)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeAppBlbServerGroupRs
+//
+// PARAMS:
+//   - request: the arguments to DescribeAppBlbServerGroupRs
+//
+// RETURNS:
+//   - DescribeAppBlbServerGroupRsResponse: The return type of the DescribeAppBlbServerGroupRs interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAppBlbServerGroupRs(request *DescribeAppBlbServerGroupRsRequest) (*DescribeAppBlbServerGroupRsResponse, error) {
+	result := &DescribeAppBlbServerGroupRsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeAppBlbServerGroupRsUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("sgId", util.StringValue(request.SgId)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeAppBlbServerGroupUnmountRs
+//
+// PARAMS:
+//   - request: the arguments to DescribeAppBlbServerGroupUnmountRs
+//
+// RETURNS:
+//   - DescribeAppBlbServerGroupUnmountRsResponse: The return type of the DescribeAppBlbServerGroupUnmountRs interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAppBlbServerGroupUnmountRs(request *DescribeAppBlbServerGroupUnmountRsRequest) (*DescribeAppBlbServerGroupUnmountRsResponse, error) {
+	result := &DescribeAppBlbServerGroupUnmountRsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeAppBlbServerGroupUnmountRsUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("sgId", util.StringValue(request.SgId)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -687,6 +897,57 @@ func (c *Client) UpdateAppBlbPolicy(request *UpdateAppBlbPolicyRequest) error {
 		WithMethod(http.PUT).
 		WithURL(getUpdateAppBlbPolicyUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParam("batchupdate", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateAppBlbServerGroup
+//
+// PARAMS:
+//   - request: the arguments to UpdateAppBlbServerGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateAppBlbServerGroup(request *UpdateAppBlbServerGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateAppBlbServerGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateAppBlbServerGroupPort
+//
+// PARAMS:
+//   - request: the arguments to UpdateAppBlbServerGroupPort
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateAppBlbServerGroupPort(request *UpdateAppBlbServerGroupPortRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateAppBlbServerGroupPortUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateAppBlbServerGroupRs
+//
+// PARAMS:
+//   - request: the arguments to UpdateAppBlbServerGroupRs
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateAppBlbServerGroupRs(request *UpdateAppBlbServerGroupRsRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateAppBlbServerGroupRsUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()

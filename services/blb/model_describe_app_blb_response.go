@@ -5,11 +5,13 @@ import "github.com/baidubce/baiducloud-go-sdk/bce"
 type DescribeAppBlbResponse struct {
 	bce.BaseResponse
 	BlbId                        *string          `json:"blbId,omitempty"`
+	Name                         *string          `json:"name,omitempty"`
 	Status                       *string          `json:"status,omitempty"`
 	Desc                         *string          `json:"desc,omitempty"`
 	Address                      *string          `json:"address,omitempty"`
 	PublicIp                     *string          `json:"publicIp,omitempty"`
 	Cidr                         *string          `json:"cidr,omitempty"`
+	VpcId                        *string          `json:"vpcId,omitempty"`
 	VpcName                      *string          `json:"vpcName,omitempty"`
 	SubnetCider                  *string          `json:"subnetCider,omitempty"`
 	SubnetName                   *string          `json:"subnetName,omitempty"`
@@ -27,4 +29,6 @@ type DescribeAppBlbResponse struct {
 	EipRouteType                 *string          `json:"eipRouteType,omitempty"`
 	PublicIpv6                   *string          `json:"publicIpv6,omitempty"`
 	EipV6RouteType               *string          `json:"eipV6RouteType,omitempty"`
+	Ipv6                         *string          `json:"ipv6,omitempty"`
+	SupportAcl                   *bool            `json:"supportAcl,omitempty"`
 }
