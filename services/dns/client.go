@@ -67,7 +67,7 @@ func getListZoneUri(version string) string {
 func getRenewZoneUri(version string, Name string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_DNS + bce.URI_PREFIX + CONSTANT_ZONE + bce.URI_PREFIX + CONSTANT_ORDER + bce.URI_PREFIX + Name
 }
-func getUpdateLineGroupUri(version string, LineId int32) string {
+func getUpdateLineGroupUri(version string, LineId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_DNS + bce.URI_PREFIX + CONSTANT_CUSTOMLINE + bce.URI_PREFIX + LineId
 }
 func getUpdateRecordUri(version string, ZoneName string, RecordId string) string {
