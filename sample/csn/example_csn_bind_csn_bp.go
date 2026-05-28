@@ -16,7 +16,6 @@ func BindCsnBp() {
 	}
 	bindCsnBpRequest := &csn.BindCsnBpRequest{
 		CsnBpId:     util.PtrString(""),
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		CsnId:       util.PtrString(""),
 	}

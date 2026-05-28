@@ -39,8 +39,8 @@ func (c *Client) AttachCsnInstance(request *AttachCsnInstanceRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getAttachCsnInstanceUri(VERSION_V1, util.StringValue(request.CsnId))).
+		WithQueryParam("attach", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		Do()
 }
@@ -57,8 +57,8 @@ func (c *Client) BindCsnBp(request *BindCsnBpRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getBindCsnBpUri(VERSION_V1, util.StringValue(request.CsnBpId))).
+		WithQueryParam("bind", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		Do()
 }
@@ -269,8 +269,8 @@ func (c *Client) DetachCsnInstance(request *DetachCsnInstanceRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getDetachCsnInstanceUri(VERSION_V1, util.StringValue(request.CsnId))).
+		WithQueryParam("detach", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		Do()
 }
@@ -596,8 +596,8 @@ func (c *Client) ResizeCsnBp(request *ResizeCsnBpRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getResizeCsnBpUri(VERSION_V1, util.StringValue(request.CsnBpId))).
+		WithQueryParam("resize", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		Do()
 }
@@ -614,8 +614,8 @@ func (c *Client) UnbindCsnBp(request *UnbindCsnBpRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUnbindCsnBpUri(VERSION_V1, util.StringValue(request.CsnBpId))).
+		WithQueryParam("unbind", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		Do()
 }

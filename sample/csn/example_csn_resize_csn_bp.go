@@ -16,7 +16,6 @@ func ResizeCsnBp() {
 	}
 	resizeCsnBpRequest := &csn.ResizeCsnBpRequest{
 		CsnBpId:     util.PtrString(""),
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Bandwidth:   util.PtrInt32(int32(0)),
 	}

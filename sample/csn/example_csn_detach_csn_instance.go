@@ -16,7 +16,6 @@ func DetachCsnInstance() {
 	}
 	detachCsnInstanceRequest := &csn.DetachCsnInstanceRequest{
 		CsnId:             util.PtrString(""),
-		Action:            util.PtrString(""),
 		ClientToken:       util.PtrString(""),
 		InstanceType:      util.PtrString(""),
 		InstanceId:        util.PtrString(""),

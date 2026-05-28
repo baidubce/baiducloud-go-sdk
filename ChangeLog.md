@@ -1,3 +1,6 @@
+2026-05-28 Version: v0.0.43
+- 涉及产品: CSN，attachCsnInstance/detachCsnInstance/resizeCsnBp/unbindCsnBp/bindCsnBp删除query.action字段
+
 2026-05-28 Version: v0.0.42
 - 涉及产品: PRIVATEZONE，disableRecord接口删除query.action字段
 - 涉及产品: PRIVATEZONE，bindVpc接口删除query.action字段

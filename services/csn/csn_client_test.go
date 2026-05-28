@@ -81,7 +81,6 @@ func TestClient_AddRouteRule(t *testing.T) {
 func TestClient_AttachCsnInstance(t *testing.T) {
 	attachCsnInstanceRequest := &AttachCsnInstanceRequest{
 		CsnId:             util.PtrString(""),
-		Action:            util.PtrString(""),
 		ClientToken:       util.PtrString(""),
 		InstanceType:      util.PtrString(""),
 		InstanceId:        util.PtrString(""),
@@ -94,7 +93,6 @@ func TestClient_AttachCsnInstance(t *testing.T) {
 func TestClient_BindCsnBp(t *testing.T) {
 	bindCsnBpRequest := &BindCsnBpRequest{
 		CsnBpId:     util.PtrString(""),
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		CsnId:       util.PtrString(""),
 	}
@@ -242,7 +240,6 @@ func TestClient_DeleteStudyRelation(t *testing.T) {
 func TestClient_DetachCsnInstance(t *testing.T) {
 	detachCsnInstanceRequest := &DetachCsnInstanceRequest{
 		CsnId:             util.PtrString(""),
-		Action:            util.PtrString(""),
 		ClientToken:       util.PtrString(""),
 		InstanceType:      util.PtrString(""),
 		InstanceId:        util.PtrString(""),
@@ -532,7 +529,6 @@ func TestClient_QueryTgwRoute(t *testing.T) {
 func TestClient_ResizeCsnBp(t *testing.T) {
 	resizeCsnBpRequest := &ResizeCsnBpRequest{
 		CsnBpId:     util.PtrString(""),
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Bandwidth:   util.PtrInt32(int32(0)),
 	}
@@ -542,7 +538,6 @@ func TestClient_ResizeCsnBp(t *testing.T) {
 func TestClient_UnbindCsnBp(t *testing.T) {
 	unbindCsnBpRequest := &UnbindCsnBpRequest{
 		CsnBpId:     util.PtrString(""),
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		CsnId:       util.PtrString(""),
 	}
