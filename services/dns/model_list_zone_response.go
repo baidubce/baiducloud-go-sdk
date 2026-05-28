@@ -2,7 +2,7 @@ package dns
 
 import "github.com/baidubce/baiducloud-go-sdk/bce"
 
-type QueryDomainNameListResponse struct {
+type ListZoneResponse struct {
 	bce.BaseResponse
 	Marker      *string       `json:"marker,omitempty"`
 	IsTruncated *bool         `json:"isTruncated,omitempty"`

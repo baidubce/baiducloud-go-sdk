@@ -1,6 +1,6 @@
 package dns
 
-type QueryDomainNameListRequest struct {
+type ListZoneRequest struct {
 	Name    *string `json:"-"`
 	Marker  *string `json:"-"`
 	MaxKeys *int32  `json:"-"`

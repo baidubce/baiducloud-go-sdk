@@ -1,8 +1,7 @@
 package dns
 
-type ModifyTheParsingRecordStatusRequest struct {
+type UpdateRecordDisableRequest struct {
 	ZoneName    *string `json:"-"`
 	RecordId    *string `json:"-"`
-	Action      *string `json:"-"`
 	ClientToken *string `json:"-"`
 }

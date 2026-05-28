@@ -1,12 +1,13 @@
 package dnssample
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
 	"github.com/baidubce/baiducloud-go-sdk/services/dns"
 )
 
-func ModifyParsingRecords() {
+func ListRecord() {
 	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
 	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
 	client, err := dns.NewClient(ak, sk, endpoint)
@@ -14,20 +15,23 @@ func ModifyParsingRecords() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	modifyParsingRecordsRequest := &dns.ModifyParsingRecordsRequest{
-		ZoneName:    util.PtrString(""),
-		RecordId:    util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		Rr:          util.PtrString(""),
-		DnsType:     util.PtrString(""),
-		Value:       util.PtrString(""),
-		Ttl:         util.PtrInt32(int32(0)),
-		Description: util.PtrString(""),
-		Priority:    util.PtrInt32(int32(0)),
+	listRecordRequest := &dns.ListRecordRequest{
+		ZoneName: util.PtrString(""),
+		Rr:       util.PtrString(""),
+		Id:       util.PtrString(""),
+		Marker:   util.PtrString(""),
+		MaxKeys:  util.PtrInt32(int32(0)),
 	}
-	err = client.ModifyParsingRecords(modifyParsingRecordsRequest)
+	result, err := client.ListRecord(listRecordRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)
+		return
 	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 }

@@ -67,14 +67,6 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
-func TestClient_AddDomainName(t *testing.T) {
-	addDomainNameRequest := &AddDomainNameRequest{
-		ClientToken: util.PtrString(""),
-		Name:        util.PtrString(""),
-	}
-	err := DNS_CLIENT.AddDomainName(addDomainNameRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_AddLineGroup(t *testing.T) {
 	addLineGroupRequest := &AddLineGroupRequest{
 		ClientToken: util.PtrString(""),
@@ -84,8 +76,24 @@ func TestClient_AddLineGroup(t *testing.T) {
 	err := DNS_CLIENT.AddLineGroup(addLineGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_AddParsingRecords(t *testing.T) {
-	addParsingRecordsRequest := &AddParsingRecordsRequest{
+func TestClient_CreatePaidZone(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		Reservation: &Reservation{
+			ReservationLength: util.PtrInt32(int32(0)),
+		},
+	}
+	createPaidZoneRequest := &CreatePaidZoneRequest{
+		ClientToken:    util.PtrString(""),
+		Names:          []*string{},
+		ProductVersion: util.PtrString(""),
+		Billing:        Billing,
+	}
+	err := DNS_CLIENT.CreatePaidZone(createPaidZoneRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateRecord(t *testing.T) {
+	createRecordRequest := &CreateRecordRequest{
 		ZoneName:    util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Rr:          util.PtrString(""),
@@ -96,7 +104,15 @@ func TestClient_AddParsingRecords(t *testing.T) {
 		Description: util.PtrString(""),
 		Priority:    util.PtrInt32(int32(0)),
 	}
-	err := DNS_CLIENT.AddParsingRecords(addParsingRecordsRequest)
+	err := DNS_CLIENT.CreateRecord(createRecordRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateZone(t *testing.T) {
+	createZoneRequest := &CreateZoneRequest{
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+	}
+	err := DNS_CLIENT.CreateZone(createZoneRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteLineGroup(t *testing.T) {
@@ -107,70 +123,52 @@ func TestClient_DeleteLineGroup(t *testing.T) {
 	err := DNS_CLIENT.DeleteLineGroup(deleteLineGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_DeleteParsingRecords(t *testing.T) {
-	deleteParsingRecordsRequest := &DeleteParsingRecordsRequest{
+func TestClient_DeleteRecord(t *testing.T) {
+	deleteRecordRequest := &DeleteRecordRequest{
 		ZoneName:    util.PtrString(""),
 		RecordId:    util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := DNS_CLIENT.DeleteParsingRecords(deleteParsingRecordsRequest)
+	err := DNS_CLIENT.DeleteRecord(deleteRecordRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_DomainNameRenewal(t *testing.T) {
-	domainNameRenewalRequest := &DomainNameRenewalRequest{
-		Name:        util.PtrString(""),
-		Action:      util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		Billing:     &BillingForRenew{},
-	}
-	err := DNS_CLIENT.DomainNameRenewal(domainNameRenewalRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_ModifyParsingRecords(t *testing.T) {
-	modifyParsingRecordsRequest := &ModifyParsingRecordsRequest{
+func TestClient_DeleteZone(t *testing.T) {
+	deleteZoneRequest := &DeleteZoneRequest{
 		ZoneName:    util.PtrString(""),
-		RecordId:    util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		Rr:          util.PtrString(""),
-		DnsType:     util.PtrString(""),
-		Value:       util.PtrString(""),
-		Ttl:         util.PtrInt32(int32(0)),
-		Description: util.PtrString(""),
-		Priority:    util.PtrInt32(int32(0)),
-	}
-	err := DNS_CLIENT.ModifyParsingRecords(modifyParsingRecordsRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_ModifyTheParsingRecordStatus(t *testing.T) {
-	modifyTheParsingRecordStatusRequest := &ModifyTheParsingRecordStatusRequest{
-		ZoneName:    util.PtrString(""),
-		RecordId:    util.PtrString(""),
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	err := DNS_CLIENT.ModifyTheParsingRecordStatus(modifyTheParsingRecordStatusRequest)
+	err := DNS_CLIENT.DeleteZone(deleteZoneRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_PurchaseAPaidDomainName(t *testing.T) {
-	purchaseAPaidDomainNameRequest := &PurchaseAPaidDomainNameRequest{
-		ClientToken:    util.PtrString(""),
-		Names:          []*string{},
-		ProductVersion: util.PtrString(""),
-		Billing:        &Billing{},
+func TestClient_ListLineGroup(t *testing.T) {
+	listLineGroupRequest := &ListLineGroupRequest{
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
 	}
-	err := DNS_CLIENT.PurchaseAPaidDomainName(purchaseAPaidDomainNameRequest)
+	result := &ListLineGroupResponse{}
+	result, err := DNS_CLIENT.ListLineGroup(listLineGroupRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_QueryAndParseRecordList(t *testing.T) {
-	queryAndParseRecordListRequest := &QueryAndParseRecordListRequest{
+func TestClient_ListRecord(t *testing.T) {
+	listRecordRequest := &ListRecordRequest{
 		ZoneName: util.PtrString(""),
 		Rr:       util.PtrString(""),
 		Id:       util.PtrString(""),
 		Marker:   util.PtrString(""),
 		MaxKeys:  util.PtrInt32(int32(0)),
 	}
-	result := &QueryAndParseRecordListResponse{}
-	result, err := DNS_CLIENT.QueryAndParseRecordList(queryAndParseRecordListRequest)
+	result := &ListRecordResponse{}
+	result, err := DNS_CLIENT.ListRecord(listRecordRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -183,14 +181,14 @@ func TestClient_QueryAndParseRecordList(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_QueryDomainNameList(t *testing.T) {
-	queryDomainNameListRequest := &QueryDomainNameListRequest{
+func TestClient_ListZone(t *testing.T) {
+	listZoneRequest := &ListZoneRequest{
 		Name:    util.PtrString(""),
 		Marker:  util.PtrString(""),
 		MaxKeys: util.PtrInt32(int32(0)),
 	}
-	result := &QueryDomainNameListResponse{}
-	result, err := DNS_CLIENT.QueryDomainNameList(queryDomainNameListRequest)
+	result := &ListZoneResponse{}
+	result, err := DNS_CLIENT.ListZone(listZoneRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -203,31 +201,19 @@ func TestClient_QueryDomainNameList(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_QueryTheListOfLineGroups(t *testing.T) {
-	queryTheListOfLineGroupsRequest := &QueryTheListOfLineGroupsRequest{
-		Marker:  util.PtrString(""),
-		MaxKeys: util.PtrInt32(int32(0)),
+func TestClient_RenewZone(t *testing.T) {
+	Billing := &BillingForRenew{
+		Reservation: &Reservation{
+			ReservationLength: util.PtrInt32(int32(0)),
+		},
 	}
-	result := &QueryTheListOfLineGroupsResponse{}
-	result, err := DNS_CLIENT.QueryTheListOfLineGroups(queryTheListOfLineGroupsRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_RemoveDomainName(t *testing.T) {
-	removeDomainNameRequest := &RemoveDomainNameRequest{
-		ZoneName:    util.PtrString(""),
+	renewZoneRequest := &RenewZoneRequest{
+		Name:        util.PtrString(""),
+		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
+		Billing:     Billing,
 	}
-	err := DNS_CLIENT.RemoveDomainName(removeDomainNameRequest)
+	err := DNS_CLIENT.RenewZone(renewZoneRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateLineGroup(t *testing.T) {
@@ -240,13 +226,52 @@ func TestClient_UpdateLineGroup(t *testing.T) {
 	err := DNS_CLIENT.UpdateLineGroup(updateLineGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_UpgradeTheFreeDomainNameToTheUniversalVersion(t *testing.T) {
-	upgradeTheFreeDomainNameToTheUniversalVersionRequest := &UpgradeTheFreeDomainNameToTheUniversalVersionRequest{
+func TestClient_UpdateRecord(t *testing.T) {
+	updateRecordRequest := &UpdateRecordRequest{
+		ZoneName:    util.PtrString(""),
+		RecordId:    util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Rr:          util.PtrString(""),
+		DnsType:     util.PtrString(""),
+		Value:       util.PtrString(""),
+		Ttl:         util.PtrInt32(int32(0)),
+		Description: util.PtrString(""),
+		Priority:    util.PtrInt32(int32(0)),
+	}
+	err := DNS_CLIENT.UpdateRecord(updateRecordRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateRecordDisable(t *testing.T) {
+	updateRecordDisableRequest := &UpdateRecordDisableRequest{
+		ZoneName:    util.PtrString(""),
+		RecordId:    util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := DNS_CLIENT.UpdateRecordDisable(updateRecordDisableRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateRecordEnable(t *testing.T) {
+	updateRecordEnableRequest := &UpdateRecordEnableRequest{
+		ZoneName:    util.PtrString(""),
+		RecordId:    util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := DNS_CLIENT.UpdateRecordEnable(updateRecordEnableRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpgradeZone(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		Reservation: &Reservation{
+			ReservationLength: util.PtrInt32(int32(0)),
+		},
+	}
+	upgradeZoneRequest := &UpgradeZoneRequest{
 		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Names:       []*string{},
-		Billing:     &Billing{},
+		Billing:     Billing,
 	}
-	err := DNS_CLIENT.UpgradeTheFreeDomainNameToTheUniversalVersion(upgradeTheFreeDomainNameToTheUniversalVersionRequest)
+	err := DNS_CLIENT.UpgradeZone(upgradeZoneRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }

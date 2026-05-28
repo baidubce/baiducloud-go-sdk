@@ -2,7 +2,7 @@ package dns
 
 import "github.com/baidubce/baiducloud-go-sdk/bce"
 
-type QueryTheListOfLineGroupsResponse struct {
+type ListLineGroupResponse struct {
 	bce.BaseResponse
 	Marker      *string `json:"marker,omitempty"`
 	IsTruncated *bool   `json:"isTruncated,omitempty"`

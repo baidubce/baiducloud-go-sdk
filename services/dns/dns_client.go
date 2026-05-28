@@ -10,23 +10,6 @@ const (
 	VERSION_V1 = "v1"
 )
 
-// AddDomainName
-//
-// PARAMS:
-//   - request: the arguments to AddDomainName
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) AddDomainName(request *AddDomainNameRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getAddDomainNameUri(VERSION_V1)).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
 // AddLineGroup
 //
 // PARAMS:
@@ -44,18 +27,52 @@ func (c *Client) AddLineGroup(request *AddLineGroupRequest) error {
 		Do()
 }
 
-// AddParsingRecords
+// CreatePaidZone
 //
 // PARAMS:
-//   - request: the arguments to AddParsingRecords
+//   - request: the arguments to CreatePaidZone
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) AddParsingRecords(request *AddParsingRecordsRequest) error {
+func (c *Client) CreatePaidZone(request *CreatePaidZoneRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getAddParsingRecordsUri(VERSION_V1, util.StringValue(request.ZoneName))).
+		WithURL(getCreatePaidZoneUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// CreateRecord
+//
+// PARAMS:
+//   - request: the arguments to CreateRecord
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CreateRecord(request *CreateRecordRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateRecordUri(VERSION_V1, util.StringValue(request.ZoneName))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// CreateZone
+//
+// PARAMS:
+//   - request: the arguments to CreateZone
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CreateZone(request *CreateZoneRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateZoneUri(VERSION_V1)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -77,104 +94,74 @@ func (c *Client) DeleteLineGroup(request *DeleteLineGroupRequest) error {
 		Do()
 }
 
-// DeleteParsingRecords
+// DeleteRecord
 //
 // PARAMS:
-//   - request: the arguments to DeleteParsingRecords
+//   - request: the arguments to DeleteRecord
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DeleteParsingRecords(request *DeleteParsingRecordsRequest) error {
+func (c *Client) DeleteRecord(request *DeleteRecordRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getDeleteParsingRecordsUri(VERSION_V1, util.StringValue(request.ZoneName), util.StringValue(request.RecordId))).
+		WithURL(getDeleteRecordUri(VERSION_V1, util.StringValue(request.ZoneName), util.StringValue(request.RecordId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
 
-// DomainNameRenewal
+// DeleteZone
 //
 // PARAMS:
-//   - request: the arguments to DomainNameRenewal
+//   - request: the arguments to DeleteZone
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DomainNameRenewal(request *DomainNameRenewalRequest) error {
+func (c *Client) DeleteZone(request *DeleteZoneRequest) error {
 	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getDomainNameRenewalUri(VERSION_V1, util.StringValue(request.Name))).
-		WithQueryParam(util.StringValue(request.Action), "").
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// ModifyParsingRecords
-//
-// PARAMS:
-//   - request: the arguments to ModifyParsingRecords
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ModifyParsingRecords(request *ModifyParsingRecordsRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getModifyParsingRecordsUri(VERSION_V1, util.StringValue(request.ZoneName), util.StringValue(request.RecordId))).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// ModifyTheParsingRecordStatus
-//
-// PARAMS:
-//   - request: the arguments to ModifyTheParsingRecordStatus
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ModifyTheParsingRecordStatus(request *ModifyTheParsingRecordStatusRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getModifyTheParsingRecordStatusUri(VERSION_V1, util.StringValue(request.ZoneName), util.StringValue(request.RecordId))).
-		WithQueryParam(util.StringValue(request.Action), "").
+		WithMethod(http.DELETE).
+		WithURL(getDeleteZoneUri(VERSION_V1, util.StringValue(request.ZoneName))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
 
-// PurchaseAPaidDomainName
+// ListLineGroup
 //
 // PARAMS:
-//   - request: the arguments to PurchaseAPaidDomainName
+//   - request: the arguments to ListLineGroup
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) PurchaseAPaidDomainName(request *PurchaseAPaidDomainNameRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getPurchaseAPaidDomainNameUri(VERSION_V1)).
-		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithBody(request).
-		Do()
-}
-
-// QueryAndParseRecordList
-//
-// PARAMS:
-//   - request: the arguments to QueryAndParseRecordList
-//
-// RETURNS:
-//   - QueryAndParseRecordListResponse: The return type of the QueryAndParseRecordList interface.
+//   - ListLineGroupResponse: The return type of the ListLineGroup interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) QueryAndParseRecordList(request *QueryAndParseRecordListRequest) (*QueryAndParseRecordListResponse, error) {
-	result := &QueryAndParseRecordListResponse{}
+func (c *Client) ListLineGroup(request *ListLineGroupRequest) (*ListLineGroupResponse, error) {
+	result := &ListLineGroupResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getQueryAndParseRecordListUri(VERSION_V1, util.StringValue(request.ZoneName))).
+		WithURL(getListLineGroupUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListRecord
+//
+// PARAMS:
+//   - request: the arguments to ListRecord
+//
+// RETURNS:
+//   - ListRecordResponse: The return type of the ListRecord interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListRecord(request *ListRecordRequest) (*ListRecordResponse, error) {
+	result := &ListRecordResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListRecordUri(VERSION_V1, util.StringValue(request.ZoneName))).
 		WithQueryParamFilter("rr", util.StringValue(request.Rr)).
 		WithQueryParamFilter("id", util.StringValue(request.Id)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
@@ -187,19 +174,19 @@ func (c *Client) QueryAndParseRecordList(request *QueryAndParseRecordListRequest
 	return result, nil
 }
 
-// QueryDomainNameList
+// ListZone
 //
 // PARAMS:
-//   - request: the arguments to QueryDomainNameList
+//   - request: the arguments to ListZone
 //
 // RETURNS:
-//   - QueryDomainNameListResponse: The return type of the QueryDomainNameList interface.
+//   - ListZoneResponse: The return type of the ListZone interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) QueryDomainNameList(request *QueryDomainNameListRequest) (*QueryDomainNameListResponse, error) {
-	result := &QueryDomainNameListResponse{}
+func (c *Client) ListZone(request *ListZoneRequest) (*ListZoneResponse, error) {
+	result := &ListZoneResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getQueryDomainNameListUri(VERSION_V1)).
+		WithURL(getListZoneUri(VERSION_V1)).
 		WithQueryParamFilter("name", util.StringValue(request.Name)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
@@ -211,42 +198,22 @@ func (c *Client) QueryDomainNameList(request *QueryDomainNameListRequest) (*Quer
 	return result, nil
 }
 
-// QueryTheListOfLineGroups
+// RenewZone
 //
 // PARAMS:
-//   - request: the arguments to QueryTheListOfLineGroups
-//
-// RETURNS:
-//   - QueryTheListOfLineGroupsResponse: The return type of the QueryTheListOfLineGroups interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheListOfLineGroups(request *QueryTheListOfLineGroupsRequest) (*QueryTheListOfLineGroupsResponse, error) {
-	result := &QueryTheListOfLineGroupsResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheListOfLineGroupsUri(VERSION_V1)).
-		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
-		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// RemoveDomainName
-//
-// PARAMS:
-//   - request: the arguments to RemoveDomainName
+//   - request: the arguments to RenewZone
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) RemoveDomainName(request *RemoveDomainNameRequest) error {
+func (c *Client) RenewZone(request *RenewZoneRequest) error {
 	return bce.NewRequestBuilder(c).
-		WithMethod(http.DELETE).
-		WithURL(getRemoveDomainNameUri(VERSION_V1, util.StringValue(request.ZoneName))).
+		WithMethod(http.PUT).
+		WithURL(getRenewZoneUri(VERSION_V1, util.StringValue(request.Name))).
+		WithQueryParam("purchaseReserved", "").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
 		Do()
 }
 
@@ -267,19 +234,71 @@ func (c *Client) UpdateLineGroup(request *UpdateLineGroupRequest) error {
 		Do()
 }
 
-// UpgradeTheFreeDomainNameToTheUniversalVersion
+// UpdateRecord
 //
 // PARAMS:
-//   - request: the arguments to UpgradeTheFreeDomainNameToTheUniversalVersion
+//   - request: the arguments to UpdateRecord
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) UpgradeTheFreeDomainNameToTheUniversalVersion(request *UpgradeTheFreeDomainNameToTheUniversalVersionRequest) error {
+func (c *Client) UpdateRecord(request *UpdateRecordRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getUpgradeTheFreeDomainNameToTheUniversalVersionUri(VERSION_V1)).
-		WithQueryParam(util.StringValue(request.Action), "").
+		WithURL(getUpdateRecordUri(VERSION_V1, util.StringValue(request.ZoneName), util.StringValue(request.RecordId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateRecordDisable
+//
+// PARAMS:
+//   - request: the arguments to UpdateRecordDisable
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateRecordDisable(request *UpdateRecordDisableRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateRecordDisableUri(VERSION_V1, util.StringValue(request.ZoneName), util.StringValue(request.RecordId))).
+		WithQueryParam("disable", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// UpdateRecordEnable
+//
+// PARAMS:
+//   - request: the arguments to UpdateRecordEnable
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateRecordEnable(request *UpdateRecordEnableRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateRecordEnableUri(VERSION_V1, util.StringValue(request.ZoneName), util.StringValue(request.RecordId))).
+		WithQueryParam("enable", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// UpgradeZone
+//
+// PARAMS:
+//   - request: the arguments to UpgradeZone
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpgradeZone(request *UpgradeZoneRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpgradeZoneUri(VERSION_V1)).
+		WithQueryParam("upgradeToDiscount", "").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()

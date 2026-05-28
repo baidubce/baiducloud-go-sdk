@@ -1,6 +1,6 @@
 package dns
 
-type QueryTheListOfLineGroupsRequest struct {
+type ListLineGroupRequest struct {
 	Marker  *string `json:"-"`
 	MaxKeys *int32  `json:"-"`
 }

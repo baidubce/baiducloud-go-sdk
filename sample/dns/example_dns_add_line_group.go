@@ -16,10 +16,8 @@ func AddLineGroup() {
 	}
 	addLineGroupRequest := &dns.AddLineGroupRequest{
 		ClientToken: util.PtrString(""),
-		Name:        util.PtrString("gotest"),
-		Lines:       []*string{util.PtrString("yunnan.ct"),
-                                   util.PtrString("guizhou.ct"),
-                                   util.PtrString("sichuan.ct")},
+		Name:        util.PtrString(""),
+		Lines:       []*string{},
 	}
 	err = client.AddLineGroup(addLineGroupRequest)
 	if err != nil {

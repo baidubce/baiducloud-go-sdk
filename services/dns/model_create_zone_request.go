@@ -1,6 +1,6 @@
 package dns
 
-type AddDomainNameRequest struct {
+type CreateZoneRequest struct {
 	ClientToken *string `json:"-"`
 	Name        *string `json:"name,omitempty"`
 }

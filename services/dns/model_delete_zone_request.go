@@ -1,6 +1,6 @@
 package dns
 
-type RemoveDomainNameRequest struct {
+type DeleteZoneRequest struct {
 	ZoneName    *string `json:"-"`
 	ClientToken *string `json:"-"`
 }

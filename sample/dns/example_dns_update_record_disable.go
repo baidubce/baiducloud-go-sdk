@@ -6,7 +6,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/services/dns"
 )
 
-func PurchaseAPaidDomainName() {
+func UpdateRecordDisable() {
 	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
 	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
 	client, err := dns.NewClient(ak, sk, endpoint)
@@ -14,19 +14,12 @@ func PurchaseAPaidDomainName() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	purchaseAPaidDomainNameRequest := &dns.PurchaseAPaidDomainNameRequest{
-		ClientToken:    util.PtrString(""),
-		Names:          []*string{
-		            util.PtrString("")},
-		ProductVersion: util.PtrString("discount"),
-		Billing: &dns.Billing{
-			PaymentTiming: util.PtrString("Prepaid"),
-			Reservation: &dns.Reservation{
-				ReservationLength: util.PtrInt32(1),
-			},
-		},
+	updateRecordDisableRequest := &dns.UpdateRecordDisableRequest{
+		ZoneName:    util.PtrString(""),
+		RecordId:    util.PtrString(""),
+		ClientToken: util.PtrString(""),
 	}
-	err = client.PurchaseAPaidDomainName(purchaseAPaidDomainNameRequest)
+	err = client.UpdateRecordDisable(updateRecordDisableRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

@@ -1,6 +1,6 @@
 package dns
 
-type PurchaseAPaidDomainNameRequest struct {
+type CreatePaidZoneRequest struct {
 	ClientToken    *string   `json:"-"`
 	Names          []*string `json:"names,omitempty"`
 	ProductVersion *string   `json:"productVersion,omitempty"`

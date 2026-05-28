@@ -1,6 +1,6 @@
 package dns
 
-type UpgradeTheFreeDomainNameToTheUniversalVersionRequest struct {
+type UpgradeZoneRequest struct {
 	Action      *string   `json:"-"`
 	ClientToken *string   `json:"-"`
 	Names       []*string `json:"names,omitempty"`

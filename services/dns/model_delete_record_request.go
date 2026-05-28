@@ -1,6 +1,6 @@
 package dns
 
-type DeleteParsingRecordsRequest struct {
+type DeleteRecordRequest struct {
 	ZoneName    *string `json:"-"`
 	RecordId    *string `json:"-"`
 	ClientToken *string `json:"-"`

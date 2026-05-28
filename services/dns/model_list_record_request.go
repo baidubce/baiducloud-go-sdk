@@ -1,6 +1,6 @@
 package dns
 
-type QueryAndParseRecordListRequest struct {
+type ListRecordRequest struct {
 	ZoneName *string `json:"-"`
 	Rr       *string `json:"-"`
 	Id       *string `json:"-"`

@@ -6,7 +6,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/services/dns"
 )
 
-func DomainNameRenewal() {
+func UpdateRecordEnable() {
 	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
 	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
 	client, err := dns.NewClient(ak, sk, endpoint)
@@ -14,17 +14,12 @@ func DomainNameRenewal() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	domainNameRenewalRequest := &dns.DomainNameRenewalRequest{
-		Name:        util.PtrString(""),
-		Action:      util.PtrString("purchaseReserved"),
+	updateRecordEnableRequest := &dns.UpdateRecordEnableRequest{
+		ZoneName:    util.PtrString(""),
+		RecordId:    util.PtrString(""),
 		ClientToken: util.PtrString(""),
-		Billing: &dns.BillingForRenew{
-			Reservation: &dns.Reservation{
-				ReservationLength: util.PtrInt32(1),
-			},
-		},
 	}
-	err = client.DomainNameRenewal(domainNameRenewalRequest)
+	err = client.UpdateRecordEnable(updateRecordEnableRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)
