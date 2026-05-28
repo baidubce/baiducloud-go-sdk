@@ -109,6 +109,42 @@ func (c *Client) BillingChangePreToPostBlb(request *BillingChangePreToPostBlbReq
 	return result, nil
 }
 
+// BindBlbEnterpriseSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to BindBlbEnterpriseSecurityGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BindBlbEnterpriseSecurityGroup(request *BindBlbEnterpriseSecurityGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindBlbEnterpriseSecurityGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("bind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// BindBlbSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to BindBlbSecurityGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BindBlbSecurityGroup(request *BindBlbSecurityGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindBlbSecurityGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("bind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // BlbInquiry
 //
 // PARAMS:
@@ -866,6 +902,27 @@ func (c *Client) DescribeBlb(request *DescribeBlbRequest) (*DescribeBlbResponse,
 	return result, nil
 }
 
+// DescribeBlbEnterpriseSecurityGroups
+//
+// PARAMS:
+//   - request: the arguments to DescribeBlbEnterpriseSecurityGroups
+//
+// RETURNS:
+//   - DescribeBlbEnterpriseSecurityGroupsResponse: The return type of the DescribeBlbEnterpriseSecurityGroups interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeBlbEnterpriseSecurityGroups(request *DescribeBlbEnterpriseSecurityGroupsRequest) (*DescribeBlbEnterpriseSecurityGroupsResponse, error) {
+	result := &DescribeBlbEnterpriseSecurityGroupsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeBlbEnterpriseSecurityGroupsUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DescribeBlbHttpListener
 //
 // PARAMS:
@@ -930,6 +987,27 @@ func (c *Client) DescribeBlbListener(request *DescribeBlbListenerRequest) (*Desc
 		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeBlbSecurityGroups
+//
+// PARAMS:
+//   - request: the arguments to DescribeBlbSecurityGroups
+//
+// RETURNS:
+//   - DescribeBlbSecurityGroupsResponse: The return type of the DescribeBlbSecurityGroups interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeBlbSecurityGroups(request *DescribeBlbSecurityGroupsRequest) (*DescribeBlbSecurityGroupsResponse, error) {
+	result := &DescribeBlbSecurityGroupsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeBlbSecurityGroupsUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -1155,6 +1233,42 @@ func (c *Client) ResizeBlb(request *ResizeBlbRequest) (*ResizeBlbResponse, error
 		return nil, err
 	}
 	return result, nil
+}
+
+// UnbindBlbEnterpriseSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to UnbindBlbEnterpriseSecurityGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindBlbEnterpriseSecurityGroup(request *UnbindBlbEnterpriseSecurityGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindBlbEnterpriseSecurityGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("unbind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UnbindBlbSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to UnbindBlbSecurityGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindBlbSecurityGroup(request *UnbindBlbSecurityGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindBlbSecurityGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("unbind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
 }
 
 // UpdateAppBlb

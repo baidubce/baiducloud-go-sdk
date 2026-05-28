@@ -138,6 +138,24 @@ func TestClient_BillingChangePreToPostBlb(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_BindBlbEnterpriseSecurityGroup(t *testing.T) {
+	bindBlbEnterpriseSecurityGroupRequest := &BindBlbEnterpriseSecurityGroupRequest{
+		BlbId:                      util.PtrString(""),
+		ClientToken:                util.PtrString(""),
+		EnterpriseSecurityGroupIds: []*string{},
+	}
+	err := BLB_CLIENT.BindBlbEnterpriseSecurityGroup(bindBlbEnterpriseSecurityGroupRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_BindBlbSecurityGroup(t *testing.T) {
+	bindBlbSecurityGroupRequest := &BindBlbSecurityGroupRequest{
+		BlbId:            util.PtrString(""),
+		ClientToken:      util.PtrString(""),
+		SecurityGroupIds: []*string{},
+	}
+	err := BLB_CLIENT.BindBlbSecurityGroup(bindBlbSecurityGroupRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_BlbInquiry(t *testing.T) {
 	Billing := &Billing{
 		PaymentTiming: util.PtrString(""),
@@ -895,6 +913,24 @@ func TestClient_DescribeBlb(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeBlbEnterpriseSecurityGroups(t *testing.T) {
+	describeBlbEnterpriseSecurityGroupsRequest := &DescribeBlbEnterpriseSecurityGroupsRequest{
+		BlbId: util.PtrString(""),
+	}
+	result := &DescribeBlbEnterpriseSecurityGroupsResponse{}
+	result, err := BLB_CLIENT.DescribeBlbEnterpriseSecurityGroups(describeBlbEnterpriseSecurityGroupsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DescribeBlbHttpListener(t *testing.T) {
 	describeBlbHttpListenerRequest := &DescribeBlbHttpListenerRequest{
 		BlbId:        util.PtrString(""),
@@ -946,6 +982,24 @@ func TestClient_DescribeBlbListener(t *testing.T) {
 	}
 	result := &DescribeBlbListenerResponse{}
 	result, err := BLB_CLIENT.DescribeBlbListener(describeBlbListenerRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeBlbSecurityGroups(t *testing.T) {
+	describeBlbSecurityGroupsRequest := &DescribeBlbSecurityGroupsRequest{
+		BlbId: util.PtrString(""),
+	}
+	result := &DescribeBlbSecurityGroupsResponse{}
+	result, err := BLB_CLIENT.DescribeBlbSecurityGroups(describeBlbSecurityGroupsRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -1128,6 +1182,24 @@ func TestClient_ResizeBlb(t *testing.T) {
 		return
 	}
 	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UnbindBlbEnterpriseSecurityGroup(t *testing.T) {
+	unbindBlbEnterpriseSecurityGroupRequest := &UnbindBlbEnterpriseSecurityGroupRequest{
+		BlbId:                      util.PtrString(""),
+		ClientToken:                util.PtrString(""),
+		EnterpriseSecurityGroupIds: []*string{},
+	}
+	err := BLB_CLIENT.UnbindBlbEnterpriseSecurityGroup(unbindBlbEnterpriseSecurityGroupRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UnbindBlbSecurityGroup(t *testing.T) {
+	unbindBlbSecurityGroupRequest := &UnbindBlbSecurityGroupRequest{
+		BlbId:            util.PtrString(""),
+		ClientToken:      util.PtrString(""),
+		SecurityGroupIds: []*string{},
+	}
+	err := BLB_CLIENT.UnbindBlbSecurityGroup(unbindBlbSecurityGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateAppBlb(t *testing.T) {
