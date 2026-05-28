@@ -77,6 +77,15 @@ func TestClient_AddAppBlbServerGroupRs(t *testing.T) {
 	err := BLB_CLIENT.AddAppBlbServerGroupRs(addAppBlbServerGroupRsRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_AddBlbServer(t *testing.T) {
+	addBlbServerRequest := &AddBlbServerRequest{
+		BlbId:             util.PtrString(""),
+		ClientToken:       util.PtrString(""),
+		BackendServerList: []*BackendServerModel{},
+	}
+	err := BLB_CLIENT.AddBlbServer(addBlbServerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_BillingChangeCancelToPostBlb(t *testing.T) {
 	billingChangeCancelToPostBlbRequest := &BillingChangeCancelToPostBlbRequest{
 		BlbId:       util.PtrString(""),
@@ -587,6 +596,15 @@ func TestClient_DeleteBlbListener(t *testing.T) {
 	err := BLB_CLIENT.DeleteBlbListener(deleteBlbListenerRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteBlbServer(t *testing.T) {
+	deleteBlbServerRequest := &DeleteBlbServerRequest{
+		BlbId:             util.PtrString(""),
+		ClientToken:       util.PtrString(""),
+		BackendServerList: []*string{},
+	}
+	err := BLB_CLIENT.DeleteBlbServer(deleteBlbServerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DescribeAppBlb(t *testing.T) {
 	describeAppBlbRequest := &DescribeAppBlbRequest{
 		BlbId: util.PtrString(""),
@@ -928,6 +946,47 @@ func TestClient_DescribeBlbListener(t *testing.T) {
 	}
 	result := &DescribeBlbListenerResponse{}
 	result, err := BLB_CLIENT.DescribeBlbListener(describeBlbListenerRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeBlbServerHealth(t *testing.T) {
+	describeBlbServerHealthRequest := &DescribeBlbServerHealthRequest{
+		BlbId:        util.PtrString(""),
+		ListenerPort: util.PtrInt32(int32(0)),
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
+	}
+	result := &DescribeBlbServerHealthResponse{}
+	result, err := BLB_CLIENT.DescribeBlbServerHealth(describeBlbServerHealthRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeBlbServers(t *testing.T) {
+	describeBlbServersRequest := &DescribeBlbServersRequest{
+		BlbId:   util.PtrString(""),
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &DescribeBlbServersResponse{}
+	result, err := BLB_CLIENT.DescribeBlbServers(describeBlbServersRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -1320,6 +1379,15 @@ func TestClient_UpdateBlbModifyProtection(t *testing.T) {
 		ModificationProtectionReason: util.PtrString(""),
 	}
 	err := BLB_CLIENT.UpdateBlbModifyProtection(updateBlbModifyProtectionRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateBlbServer(t *testing.T) {
+	updateBlbServerRequest := &UpdateBlbServerRequest{
+		BlbId:             util.PtrString(""),
+		ClientToken:       util.PtrString(""),
+		BackendServerList: []*BackendServerModel{},
+	}
+	err := BLB_CLIENT.UpdateBlbServer(updateBlbServerRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateBlbSslListener(t *testing.T) {

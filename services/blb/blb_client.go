@@ -27,6 +27,23 @@ func (c *Client) AddAppBlbServerGroupRs(request *AddAppBlbServerGroupRsRequest) 
 		Do()
 }
 
+// AddBlbServer
+//
+// PARAMS:
+//   - request: the arguments to AddBlbServer
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AddBlbServer(request *AddBlbServerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getAddBlbServerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // BillingChangeCancelToPostBlb
 //
 // PARAMS:
@@ -499,6 +516,23 @@ func (c *Client) DeleteBlbListener(request *DeleteBlbListenerRequest) error {
 		Do()
 }
 
+// DeleteBlbServer
+//
+// PARAMS:
+//   - request: the arguments to DeleteBlbServer
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteBlbServer(request *DeleteBlbServerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDeleteBlbServerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // DescribeAppBlb
 //
 // PARAMS:
@@ -894,6 +928,53 @@ func (c *Client) DescribeBlbListener(request *DescribeBlbListenerRequest) (*Desc
 		WithMethod(http.GET).
 		WithURL(getDescribeBlbListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeBlbServerHealth
+//
+// PARAMS:
+//   - request: the arguments to DescribeBlbServerHealth
+//
+// RETURNS:
+//   - DescribeBlbServerHealthResponse: The return type of the DescribeBlbServerHealth interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeBlbServerHealth(request *DescribeBlbServerHealthRequest) (*DescribeBlbServerHealthResponse, error) {
+	result := &DescribeBlbServerHealthResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeBlbServerHealthUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeBlbServers
+//
+// PARAMS:
+//   - request: the arguments to DescribeBlbServers
+//
+// RETURNS:
+//   - DescribeBlbServersResponse: The return type of the DescribeBlbServers interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeBlbServers(request *DescribeBlbServersRequest) (*DescribeBlbServersResponse, error) {
+	result := &DescribeBlbServersResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeBlbServersUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
@@ -1332,6 +1413,24 @@ func (c *Client) UpdateBlbModifyProtection(request *UpdateBlbModifyProtectionReq
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateBlbModifyProtectionUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateBlbServer
+//
+// PARAMS:
+//   - request: the arguments to UpdateBlbServer
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateBlbServer(request *UpdateBlbServerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateBlbServerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("update", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()

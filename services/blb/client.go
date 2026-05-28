@@ -19,6 +19,8 @@ const (
 
 	CONSTANT_H_T_T_PLISTENER = "HTTPlistener"
 
+	CONSTANT_BACKENDSERVER = "backendserver"
+
 	CONSTANT_CHARGE = "charge"
 
 	CONSTANT_T_C_PLISTENER = "TCPlistener"
@@ -64,6 +66,9 @@ func NewClient(ak, sk, endPoint string) (*Client, error) {
 
 func getAddAppBlbServerGroupRsUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_BLBRS
+}
+func getAddBlbServerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_BACKENDSERVER
 }
 func getBillingChangeCancelToPostBlbUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_CHARGE
@@ -140,6 +145,9 @@ func getDeleteAppBlbServerGroupRsUri(version string, BlbId string) string {
 func getDeleteBlbListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_LISTENER
 }
+func getDeleteBlbServerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_BACKENDSERVER
+}
 func getDescribeAppBlbUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId
 }
@@ -190,6 +198,12 @@ func getDescribeBlbHttpsListenerUri(version string, BlbId string) string {
 }
 func getDescribeBlbListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_LISTENER
+}
+func getDescribeBlbServerHealthUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_BACKENDSERVER
+}
+func getDescribeBlbServersUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_BACKENDSERVER
 }
 func getDescribeBlbSslListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_S_S_LLISTENER
@@ -259,6 +273,9 @@ func getUpdateBlbHttpsListenerUri(version string, BlbId string) string {
 }
 func getUpdateBlbModifyProtectionUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + CONSTANT_MODIFICATION_PROTECTION + bce.URI_PREFIX + BlbId
+}
+func getUpdateBlbServerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_BACKENDSERVER
 }
 func getUpdateBlbSslListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_S_S_LLISTENER
