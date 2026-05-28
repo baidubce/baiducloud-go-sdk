@@ -308,6 +308,89 @@ func (c *Client) CreateBlb(request *CreateBlbRequest) (*CreateBlbResponse, error
 	return result, nil
 }
 
+// CreateBlbHttpListener
+//
+// PARAMS:
+//   - request: the arguments to CreateBlbHttpListener
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CreateBlbHttpListener(request *CreateBlbHttpListenerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateBlbHttpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithBody(request).
+		Do()
+}
+
+// CreateBlbHttpsListener
+//
+// PARAMS:
+//   - request: the arguments to CreateBlbHttpsListener
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CreateBlbHttpsListener(request *CreateBlbHttpsListenerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateBlbHttpsListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// CreateBlbSslListener
+//
+// PARAMS:
+//   - request: the arguments to CreateBlbSslListener
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CreateBlbSslListener(request *CreateBlbSslListenerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateBlbSslListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// CreateBlbTcpListener
+//
+// PARAMS:
+//   - request: the arguments to CreateBlbTcpListener
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CreateBlbTcpListener(request *CreateBlbTcpListenerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateBlbTcpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithBody(request).
+		Do()
+}
+
+// CreateBlbUdpListener
+//
+// PARAMS:
+//   - request: the arguments to CreateBlbUdpListener
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CreateBlbUdpListener(request *CreateBlbUdpListenerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateBlbUdpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // DeleteAppBlbListener
 //
 // PARAMS:
@@ -392,6 +475,24 @@ func (c *Client) DeleteAppBlbServerGroupRs(request *DeleteAppBlbServerGroupRsReq
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getDeleteAppBlbServerGroupRsUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("batchdelete", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// DeleteBlbListener
+//
+// PARAMS:
+//   - request: the arguments to DeleteBlbListener
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteBlbListener(request *DeleteBlbListenerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDeleteBlbListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParam("batchdelete", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
@@ -731,6 +832,150 @@ func (c *Client) DescribeBlb(request *DescribeBlbRequest) (*DescribeBlbResponse,
 	return result, nil
 }
 
+// DescribeBlbHttpListener
+//
+// PARAMS:
+//   - request: the arguments to DescribeBlbHttpListener
+//
+// RETURNS:
+//   - DescribeBlbHttpListenerResponse: The return type of the DescribeBlbHttpListener interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeBlbHttpListener(request *DescribeBlbHttpListenerRequest) (*DescribeBlbHttpListenerResponse, error) {
+	result := &DescribeBlbHttpListenerResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeBlbHttpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeBlbHttpsListener
+//
+// PARAMS:
+//   - request: the arguments to DescribeBlbHttpsListener
+//
+// RETURNS:
+//   - DescribeBlbHttpsListenerResponse: The return type of the DescribeBlbHttpsListener interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeBlbHttpsListener(request *DescribeBlbHttpsListenerRequest) (*DescribeBlbHttpsListenerResponse, error) {
+	result := &DescribeBlbHttpsListenerResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeBlbHttpsListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeBlbListener
+//
+// PARAMS:
+//   - request: the arguments to DescribeBlbListener
+//
+// RETURNS:
+//   - DescribeBlbListenerResponse: The return type of the DescribeBlbListener interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeBlbListener(request *DescribeBlbListenerRequest) (*DescribeBlbListenerResponse, error) {
+	result := &DescribeBlbListenerResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeBlbListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeBlbSslListener
+//
+// PARAMS:
+//   - request: the arguments to DescribeBlbSslListener
+//
+// RETURNS:
+//   - DescribeBlbSslListenerResponse: The return type of the DescribeBlbSslListener interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeBlbSslListener(request *DescribeBlbSslListenerRequest) (*DescribeBlbSslListenerResponse, error) {
+	result := &DescribeBlbSslListenerResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeBlbSslListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeBlbTcpListener
+//
+// PARAMS:
+//   - request: the arguments to DescribeBlbTcpListener
+//
+// RETURNS:
+//   - DescribeBlbTcpListenerResponse: The return type of the DescribeBlbTcpListener interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeBlbTcpListener(request *DescribeBlbTcpListenerRequest) (*DescribeBlbTcpListenerResponse, error) {
+	result := &DescribeBlbTcpListenerResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeBlbTcpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeBlbUdpListener
+//
+// PARAMS:
+//   - request: the arguments to DescribeBlbUdpListener
+//
+// RETURNS:
+//   - DescribeBlbUdpListenerResponse: The return type of the DescribeBlbUdpListener interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeBlbUdpListener(request *DescribeBlbUdpListenerRequest) (*DescribeBlbUdpListenerResponse, error) {
+	result := &DescribeBlbUdpListenerResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeBlbUdpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DescribeBlbs
 //
 // PARAMS:
@@ -1041,6 +1286,40 @@ func (c *Client) UpdateBlbAcl(request *UpdateBlbAclRequest) error {
 		Do()
 }
 
+// UpdateBlbHttpListener
+//
+// PARAMS:
+//   - request: the arguments to UpdateBlbHttpListener
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateBlbHttpListener(request *UpdateBlbHttpListenerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateBlbHttpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateBlbHttpsListener
+//
+// PARAMS:
+//   - request: the arguments to UpdateBlbHttpsListener
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateBlbHttpsListener(request *UpdateBlbHttpsListenerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateBlbHttpsListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithBody(request).
+		Do()
+}
+
 // UpdateBlbModifyProtection
 //
 // PARAMS:
@@ -1054,6 +1333,57 @@ func (c *Client) UpdateBlbModifyProtection(request *UpdateBlbModifyProtectionReq
 		WithMethod(http.PUT).
 		WithURL(getUpdateBlbModifyProtectionUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateBlbSslListener
+//
+// PARAMS:
+//   - request: the arguments to UpdateBlbSslListener
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateBlbSslListener(request *UpdateBlbSslListenerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateBlbSslListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateBlbTcpListener
+//
+// PARAMS:
+//   - request: the arguments to UpdateBlbTcpListener
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateBlbTcpListener(request *UpdateBlbTcpListenerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateBlbTcpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateBlbUdpListener
+//
+// PARAMS:
+//   - request: the arguments to UpdateBlbUdpListener
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateBlbUdpListener(request *UpdateBlbUdpListenerRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateBlbUdpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
 		WithBody(request).
 		Do()
 }

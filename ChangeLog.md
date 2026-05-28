@@ -1,3 +1,9 @@
+2026-05-28 Version: v0.0.44
+- 涉及产品: BLB，支持创建TCP/UDP/HTTP/HTTPS/SSL监听器
+- 涉及产品: BLB，支持查询各协议类型监听器及全量监听列表
+- 涉及产品: BLB，支持更新TCP/UDP/HTTP/HTTPS/SSL监听器配置
+- 涉及产品: BLB，支持释放监听器资源
+
 2026-05-28 Version: v0.0.43
 - 涉及产品: CSN，attachCsnInstance/detachCsnInstance/resizeCsnBp/unbindCsnBp/bindCsnBp删除query.action字段
 

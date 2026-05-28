@@ -7,11 +7,17 @@ import (
 const (
 	DEFAULT_ENDPOINT = "blb." + bce.DEFAULT_REGION + ".baidubce.com"
 
+	CONSTANT_BLB = "blb"
+
+	CONSTANT_S_S_LLISTENER = "SSLlistener"
+
 	CONSTANT_APPBLB = "appblb"
 
 	CONSTANT_APPSERVERGROUP = "appservergroup"
 
-	CONSTANT_BLB = "blb"
+	CONSTANT_H_T_T_P_SLISTENER = "HTTPSlistener"
+
+	CONSTANT_H_T_T_PLISTENER = "HTTPlistener"
 
 	CONSTANT_CHARGE = "charge"
 
@@ -21,19 +27,13 @@ const (
 
 	CONSTANT_BLBRS = "blbrs"
 
-	CONSTANT_H_T_T_PLISTENER = "HTTPlistener"
-
-	CONSTANT_S_S_LLISTENER = "SSLlistener"
-
-	CONSTANT_H_T_T_P_SLISTENER = "HTTPSlistener"
+	CONSTANT_U_D_PLISTENER = "UDPlistener"
 
 	CONSTANT_APPSERVERGROUPPORT = "appservergroupport"
 
 	CONSTANT_REFUND = "refund"
 
 	CONSTANT_PRICE = "price"
-
-	CONSTANT_U_D_PLISTENER = "UDPlistener"
 
 	CONSTANT_MODIFICATION_PROTECTION = "modification_protection"
 
@@ -107,6 +107,21 @@ func getCreateAppBlbUdpListenerUri(version string, BlbId string) string {
 func getCreateBlbUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB
 }
+func getCreateBlbHttpListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_H_T_T_PLISTENER
+}
+func getCreateBlbHttpsListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_H_T_T_P_SLISTENER
+}
+func getCreateBlbSslListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_S_S_LLISTENER
+}
+func getCreateBlbTcpListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_T_C_PLISTENER
+}
+func getCreateBlbUdpListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_U_D_PLISTENER
+}
 func getDeleteAppBlbListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_LISTENER
 }
@@ -121,6 +136,9 @@ func getDeleteAppBlbServerGroupPortUri(version string, BlbId string) string {
 }
 func getDeleteAppBlbServerGroupRsUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_BLBRS
+}
+func getDeleteBlbListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_LISTENER
 }
 func getDescribeAppBlbUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId
@@ -163,6 +181,24 @@ func getDescribeAppBlbsUri(version string) string {
 }
 func getDescribeBlbUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId
+}
+func getDescribeBlbHttpListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_H_T_T_PLISTENER
+}
+func getDescribeBlbHttpsListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_H_T_T_P_SLISTENER
+}
+func getDescribeBlbListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_LISTENER
+}
+func getDescribeBlbSslListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_S_S_LLISTENER
+}
+func getDescribeBlbTcpListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_T_C_PLISTENER
+}
+func getDescribeBlbUdpListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_U_D_PLISTENER
 }
 func getDescribeBlbsUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB
@@ -215,6 +251,21 @@ func getUpdateBlbUri(version string, BlbId string) string {
 func getUpdateBlbAclUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + CONSTANT_ACL + bce.URI_PREFIX + BlbId
 }
+func getUpdateBlbHttpListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_H_T_T_PLISTENER
+}
+func getUpdateBlbHttpsListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_H_T_T_P_SLISTENER
+}
 func getUpdateBlbModifyProtectionUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + CONSTANT_MODIFICATION_PROTECTION + bce.URI_PREFIX + BlbId
+}
+func getUpdateBlbSslListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_S_S_LLISTENER
+}
+func getUpdateBlbTcpListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_T_C_PLISTENER
+}
+func getUpdateBlbUdpListenerUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_U_D_PLISTENER
 }

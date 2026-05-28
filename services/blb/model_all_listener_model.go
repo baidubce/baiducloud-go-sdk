@@ -1,0 +1,34 @@
+package blb
+
+type AllListenerModel struct {
+	ListenerPort               *int32    `json:"listenerPort,omitempty"`
+	ListenerType               *string   `json:"listenerType,omitempty"`
+	BackendPort                *int32    `json:"backendPort,omitempty"`
+	Scheduler                  *string   `json:"scheduler,omitempty"`
+	HealthCheckTimeoutInSecond *int32    `json:"healthCheckTimeoutInSecond,omitempty"`
+	HealthCheckInterval        *int32    `json:"healthCheckInterval,omitempty"`
+	HealthyThreshold           *int32    `json:"healthyThreshold,omitempty"`
+	UnhealthyThreshold         *int32    `json:"unhealthyThreshold,omitempty"`
+	GetBlbIp                   *bool     `json:"getBlbIp,omitempty"`
+	TcpSessionTimeout          *int32    `json:"tcpSessionTimeout,omitempty"`
+	UdpSessionTimeout          *int32    `json:"udpSessionTimeout,omitempty"`
+	HealthCheckString          *string   `json:"healthCheckString,omitempty"`
+	KeepSession                *bool     `json:"keepSession,omitempty"`
+	KeepSessionType            *string   `json:"keepSessionType,omitempty"`
+	KeepSessionDuration        *int32    `json:"keepSessionDuration,omitempty"`
+	KeepSessionCookieName      *string   `json:"keepSessionCookieName,omitempty"`
+	XForwardFor                *bool     `json:"xForwardFor,omitempty"`
+	HealthCheckType            *string   `json:"healthCheckType,omitempty"`
+	HealthCheckPort            *int32    `json:"healthCheckPort,omitempty"`
+	HealthCheckURI             *string   `json:"healthCheckURI,omitempty"`
+	HealthCheckNormalStatus    *string   `json:"healthCheckNormalStatus,omitempty"`
+	HealthCheckHost            *string   `json:"healthCheckHost,omitempty"`
+	ServerTimeout              *int32    `json:"serverTimeout,omitempty"`
+	RedirectPort               *int32    `json:"redirectPort,omitempty"`
+	CertIds                    []*string `json:"certIds,omitempty"`
+	DualAuth                   *bool     `json:"dualAuth,omitempty"`
+	ClientCertIds              []*string `json:"clientCertIds,omitempty"`
+	EncryptionType             *string   `json:"encryptionType,omitempty"`
+	EncryptionProtocols        []*string `json:"encryptionProtocols,omitempty"`
+	AppliedCiphers             *string   `json:"appliedCiphers,omitempty"`
+}

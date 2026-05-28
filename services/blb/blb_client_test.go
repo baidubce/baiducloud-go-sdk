@@ -400,6 +400,133 @@ func TestClient_CreateBlb(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateBlbHttpListener(t *testing.T) {
+	AdditionalAttributes := &AdditionalAttributesModel{
+		GzipJson: util.PtrString(""),
+	}
+	createBlbHttpListenerRequest := &CreateBlbHttpListenerRequest{
+		BlbId:                      util.PtrString(""),
+		ListenerPort:               util.PtrInt32(int32(0)),
+		BackendPort:                util.PtrInt32(int32(0)),
+		Scheduler:                  util.PtrString(""),
+		KeepSession:                util.PtrBool(false),
+		KeepSessionType:            util.PtrString(""),
+		KeepSessionDuration:        util.PtrInt32(int32(0)),
+		KeepSessionCookieName:      util.PtrString(""),
+		XForwardFor:                util.PtrBool(false),
+		XForwardedProto:            util.PtrBool(false),
+		AdditionalAttributes:       AdditionalAttributes,
+		HealthCheckType:            util.PtrString(""),
+		HealthCheckPort:            util.PtrInt32(int32(0)),
+		HealthCheckURI:             util.PtrString(""),
+		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
+		HealthCheckInterval:        util.PtrInt32(int32(0)),
+		UnhealthyThreshold:         util.PtrInt32(int32(0)),
+		HealthyThreshold:           util.PtrInt32(int32(0)),
+		HealthCheckNormalStatus:    util.PtrString(""),
+		HealthCheckHost:            util.PtrString(""),
+		ServerTimeout:              util.PtrInt32(int32(0)),
+		RedirectPort:               util.PtrInt32(int32(0)),
+	}
+	err := BLB_CLIENT.CreateBlbHttpListener(createBlbHttpListenerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateBlbHttpsListener(t *testing.T) {
+	AdditionalAttributes := &AdditionalAttributesModel{
+		GzipJson: util.PtrString(""),
+	}
+	createBlbHttpsListenerRequest := &CreateBlbHttpsListenerRequest{
+		BlbId:                      util.PtrString(""),
+		ClientToken:                util.PtrString(""),
+		ListenerPort:               util.PtrInt32(int32(0)),
+		BackendPort:                util.PtrInt32(int32(0)),
+		Scheduler:                  util.PtrString(""),
+		KeepSession:                util.PtrBool(false),
+		KeepSessionType:            util.PtrString(""),
+		KeepSessionDuration:        util.PtrInt32(int32(0)),
+		KeepSessionCookieName:      util.PtrInt32(int32(0)),
+		XForwardFor:                util.PtrBool(false),
+		XForwardedProto:            util.PtrBool(false),
+		AdditionalAttributes:       AdditionalAttributes,
+		HealthCheckType:            util.PtrString(""),
+		HealthCheckPort:            util.PtrInt32(int32(0)),
+		HealthCheckURI:             util.PtrString(""),
+		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
+		HealthCheckInterval:        util.PtrInt32(int32(0)),
+		UnhealthyThreshold:         util.PtrInt32(int32(0)),
+		HealthyThreshold:           util.PtrInt32(int32(0)),
+		HealthCheckNormalStatus:    util.PtrString(""),
+		HealthCheckHost:            util.PtrString(""),
+		ServerTimeout:              util.PtrInt32(int32(0)),
+		CertIds:                    []*string{},
+		EncryptionType:             util.PtrString(""),
+		EncryptionProtocols:        []*string{},
+		AppliedCiphers:             util.PtrString(""),
+		DualAuth:                   util.PtrBool(false),
+		ClientCertIds:              []*string{},
+		AdditionalCertDomains:      []*AdditionalCertDomain{},
+	}
+	err := BLB_CLIENT.CreateBlbHttpsListener(createBlbHttpsListenerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateBlbSslListener(t *testing.T) {
+	createBlbSslListenerRequest := &CreateBlbSslListenerRequest{
+		BlbId:                      util.PtrString(""),
+		ClientToken:                util.PtrString(""),
+		ListenerPort:               util.PtrInt32(int32(0)),
+		BackendPort:                util.PtrInt32(int32(0)),
+		Scheduler:                  util.PtrString(""),
+		HealthCheckType:            util.PtrString(""),
+		ServerTimeout:              util.PtrInt32(int32(0)),
+		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
+		HealthCheckInterval:        util.PtrInt32(int32(0)),
+		UnhealthyThreshold:         util.PtrInt32(int32(0)),
+		HealthyThreshold:           util.PtrInt32(int32(0)),
+		CertIds:                    []*string{},
+		EncryptionType:             util.PtrString(""),
+		EncryptionProtocols:        []*string{},
+		AppliedCiphers:             util.PtrString(""),
+		DualAuth:                   util.PtrBool(false),
+		ClientCertIds:              []*string{},
+	}
+	err := BLB_CLIENT.CreateBlbSslListener(createBlbSslListenerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateBlbTcpListener(t *testing.T) {
+	createBlbTcpListenerRequest := &CreateBlbTcpListenerRequest{
+		BlbId:                      util.PtrString(""),
+		ListenerPort:               util.PtrInt32(int32(0)),
+		BackendPort:                util.PtrInt32(int32(0)),
+		Scheduler:                  util.PtrString(""),
+		TcpSessionTimeout:          util.PtrInt32(int32(0)),
+		HealthCheckType:            util.PtrString(""),
+		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
+		HealthCheckInterval:        util.PtrInt32(int32(0)),
+		UnhealthyThreshold:         util.PtrInt32(int32(0)),
+		HealthyThreshold:           util.PtrInt32(int32(0)),
+	}
+	err := BLB_CLIENT.CreateBlbTcpListener(createBlbTcpListenerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateBlbUdpListener(t *testing.T) {
+	createBlbUdpListenerRequest := &CreateBlbUdpListenerRequest{
+		BlbId:                      util.PtrString(""),
+		ClientToken:                util.PtrString(""),
+		ListenerPort:               util.PtrInt32(int32(0)),
+		BackendPort:                util.PtrInt32(int32(0)),
+		Scheduler:                  util.PtrString(""),
+		HealthCheckType:            util.PtrString(""),
+		HealthCheckPort:            util.PtrInt32(int32(0)),
+		HealthCheckString:          util.PtrString(""),
+		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
+		HealthCheckInterval:        util.PtrInt32(int32(0)),
+		UnhealthyThreshold:         util.PtrInt32(int32(0)),
+		HealthyThreshold:           util.PtrInt32(int32(0)),
+		UdpSessionTimeout:          util.PtrInt32(int32(0)),
+	}
+	err := BLB_CLIENT.CreateBlbUdpListener(createBlbUdpListenerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteAppBlbListener(t *testing.T) {
 	deleteAppBlbListenerRequest := &DeleteAppBlbListenerRequest{
 		BlbId:        util.PtrString(""),
@@ -448,6 +575,16 @@ func TestClient_DeleteAppBlbServerGroupRs(t *testing.T) {
 		BackendServerIdList: []*string{},
 	}
 	err := BLB_CLIENT.DeleteAppBlbServerGroupRs(deleteAppBlbServerGroupRsRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteBlbListener(t *testing.T) {
+	deleteBlbListenerRequest := &DeleteBlbListenerRequest{
+		BlbId:        util.PtrString(""),
+		ClientToken:  util.PtrString(""),
+		PortList:     []*int32{},
+		PortTypeList: []*PortTypeModel{},
+	}
+	err := BLB_CLIENT.DeleteBlbListener(deleteBlbListenerRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DescribeAppBlb(t *testing.T) {
@@ -740,6 +877,132 @@ func TestClient_DescribeBlb(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeBlbHttpListener(t *testing.T) {
+	describeBlbHttpListenerRequest := &DescribeBlbHttpListenerRequest{
+		BlbId:        util.PtrString(""),
+		ListenerPort: util.PtrInt32(int32(0)),
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
+	}
+	result := &DescribeBlbHttpListenerResponse{}
+	result, err := BLB_CLIENT.DescribeBlbHttpListener(describeBlbHttpListenerRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeBlbHttpsListener(t *testing.T) {
+	describeBlbHttpsListenerRequest := &DescribeBlbHttpsListenerRequest{
+		BlbId:        util.PtrString(""),
+		ListenerPort: util.PtrInt32(int32(0)),
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
+	}
+	result := &DescribeBlbHttpsListenerResponse{}
+	result, err := BLB_CLIENT.DescribeBlbHttpsListener(describeBlbHttpsListenerRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeBlbListener(t *testing.T) {
+	describeBlbListenerRequest := &DescribeBlbListenerRequest{
+		BlbId:        util.PtrString(""),
+		ListenerPort: util.PtrInt32(int32(0)),
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
+	}
+	result := &DescribeBlbListenerResponse{}
+	result, err := BLB_CLIENT.DescribeBlbListener(describeBlbListenerRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeBlbSslListener(t *testing.T) {
+	describeBlbSslListenerRequest := &DescribeBlbSslListenerRequest{
+		BlbId:        util.PtrString(""),
+		ListenerPort: util.PtrInt32(int32(0)),
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
+	}
+	result := &DescribeBlbSslListenerResponse{}
+	result, err := BLB_CLIENT.DescribeBlbSslListener(describeBlbSslListenerRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeBlbTcpListener(t *testing.T) {
+	describeBlbTcpListenerRequest := &DescribeBlbTcpListenerRequest{
+		BlbId:        util.PtrString(""),
+		ListenerPort: util.PtrInt32(int32(0)),
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
+	}
+	result := &DescribeBlbTcpListenerResponse{}
+	result, err := BLB_CLIENT.DescribeBlbTcpListener(describeBlbTcpListenerRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeBlbUdpListener(t *testing.T) {
+	describeBlbUdpListenerRequest := &DescribeBlbUdpListenerRequest{
+		BlbId:        util.PtrString(""),
+		ListenerPort: util.PtrInt32(int32(0)),
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
+	}
+	result := &DescribeBlbUdpListenerResponse{}
+	result, err := BLB_CLIENT.DescribeBlbUdpListener(describeBlbUdpListenerRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DescribeBlbs(t *testing.T) {
 	describeBlbsRequest := &DescribeBlbsRequest{
 		Address:      util.PtrString(""),
@@ -983,6 +1246,72 @@ func TestClient_UpdateBlbAcl(t *testing.T) {
 	err := BLB_CLIENT.UpdateBlbAcl(updateBlbAclRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_UpdateBlbHttpListener(t *testing.T) {
+	AdditionalAttributes := &AdditionalAttributesModel{
+		GzipJson: util.PtrString(""),
+	}
+	updateBlbHttpListenerRequest := &UpdateBlbHttpListenerRequest{
+		BlbId:                      util.PtrString(""),
+		ListenerPort:               util.PtrInt32(int32(0)),
+		BackendPort:                util.PtrInt32(int32(0)),
+		Scheduler:                  util.PtrString(""),
+		KeepSession:                util.PtrBool(false),
+		KeepSessionType:            util.PtrString(""),
+		KeepSessionDuration:        util.PtrInt32(int32(0)),
+		KeepSessionCookieName:      util.PtrString(""),
+		XForwardFor:                util.PtrBool(false),
+		XForwardedProto:            util.PtrBool(false),
+		AdditionalAttributes:       AdditionalAttributes,
+		HealthCheckType:            util.PtrString(""),
+		HealthCheckPort:            util.PtrInt32(int32(0)),
+		HealthCheckURI:             util.PtrString(""),
+		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
+		HealthCheckInterval:        util.PtrInt32(int32(0)),
+		UnhealthyThreshold:         util.PtrInt32(int32(0)),
+		HealthyThreshold:           util.PtrInt32(int32(0)),
+		HealthCheckNormalStatus:    util.PtrString(""),
+		HealthCheckHost:            util.PtrString(""),
+		ServerTimeout:              util.PtrInt32(int32(0)),
+		RedirectPort:               util.PtrInt32(int32(0)),
+	}
+	err := BLB_CLIENT.UpdateBlbHttpListener(updateBlbHttpListenerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateBlbHttpsListener(t *testing.T) {
+	AdditionalAttributes := &AdditionalAttributesModel{
+		GzipJson: util.PtrString(""),
+	}
+	updateBlbHttpsListenerRequest := &UpdateBlbHttpsListenerRequest{
+		BlbId:                      util.PtrString(""),
+		ListenerPort:               util.PtrInt32(int32(0)),
+		BackendPort:                util.PtrInt32(int32(0)),
+		Scheduler:                  util.PtrString(""),
+		KeepSession:                util.PtrBool(false),
+		KeepSessionType:            util.PtrString(""),
+		KeepSessionDuration:        util.PtrInt32(int32(0)),
+		KeepSessionCookieName:      util.PtrString(""),
+		XForwardFor:                util.PtrBool(false),
+		XForwardedProto:            util.PtrBool(false),
+		AdditionalAttributes:       AdditionalAttributes,
+		HealthCheckType:            util.PtrString(""),
+		HealthCheckPort:            util.PtrInt32(int32(0)),
+		HealthCheckURI:             util.PtrString(""),
+		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
+		HealthCheckInterval:        util.PtrInt32(int32(0)),
+		UnhealthyThreshold:         util.PtrInt32(int32(0)),
+		HealthyThreshold:           util.PtrInt32(int32(0)),
+		HealthCheckNormalStatus:    util.PtrString(""),
+		HealthCheckHost:            util.PtrString(""),
+		ServerTimeout:              util.PtrInt32(int32(0)),
+		CertIds:                    []*string{},
+		AdditionalCertDomains:      []*AdditionalCertDomain{},
+		EncryptionType:             util.PtrString(""),
+		EncryptionProtocols:        []*string{},
+		AppliedCiphers:             util.PtrString(""),
+	}
+	err := BLB_CLIENT.UpdateBlbHttpsListener(updateBlbHttpsListenerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_UpdateBlbModifyProtection(t *testing.T) {
 	updateBlbModifyProtectionRequest := &UpdateBlbModifyProtectionRequest{
 		BlbId:                        util.PtrString(""),
@@ -991,5 +1320,59 @@ func TestClient_UpdateBlbModifyProtection(t *testing.T) {
 		ModificationProtectionReason: util.PtrString(""),
 	}
 	err := BLB_CLIENT.UpdateBlbModifyProtection(updateBlbModifyProtectionRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateBlbSslListener(t *testing.T) {
+	updateBlbSslListenerRequest := &UpdateBlbSslListenerRequest{
+		BlbId:                      util.PtrString(""),
+		ListenerPort:               util.PtrInt32(int32(0)),
+		BackendPort:                util.PtrInt32(int32(0)),
+		Scheduler:                  util.PtrString(""),
+		HealthCheckType:            util.PtrString(""),
+		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
+		HealthCheckInterval:        util.PtrInt32(int32(0)),
+		UnhealthyThreshold:         util.PtrInt32(int32(0)),
+		HealthyThreshold:           util.PtrInt32(int32(0)),
+		CertIds:                    []*string{},
+		EncryptionType:             util.PtrString(""),
+		EncryptionProtocols:        []*string{},
+		AppliedCiphers:             util.PtrString(""),
+		DualAuth:                   util.PtrBool(false),
+		ClientCertIds:              []*string{},
+	}
+	err := BLB_CLIENT.UpdateBlbSslListener(updateBlbSslListenerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateBlbTcpListener(t *testing.T) {
+	updateBlbTcpListenerRequest := &UpdateBlbTcpListenerRequest{
+		BlbId:                      util.PtrString(""),
+		ListenerPort:               util.PtrInt32(int32(0)),
+		BackendPort:                util.PtrInt32(int32(0)),
+		Scheduler:                  util.PtrString(""),
+		HealthCheckType:            util.PtrString(""),
+		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
+		HealthCheckInterval:        util.PtrInt32(int32(0)),
+		UnhealthyThreshold:         util.PtrInt32(int32(0)),
+		HealthyThreshold:           util.PtrInt32(int32(0)),
+	}
+	err := BLB_CLIENT.UpdateBlbTcpListener(updateBlbTcpListenerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateBlbUdpListener(t *testing.T) {
+	updateBlbUdpListenerRequest := &UpdateBlbUdpListenerRequest{
+		BlbId:                      util.PtrString(""),
+		ListenerPort:               util.PtrInt32(int32(0)),
+		BackendPort:                util.PtrInt32(int32(0)),
+		Scheduler:                  util.PtrString(""),
+		HealthCheckType:            util.PtrString(""),
+		HealthCheckPort:            util.PtrInt32(int32(0)),
+		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
+		HealthCheckInterval:        util.PtrInt32(int32(0)),
+		UnhealthyThreshold:         util.PtrInt32(int32(0)),
+		HealthyThreshold:           util.PtrInt32(int32(0)),
+		HealthCheckString:          util.PtrString(""),
+		UdpSessionTimeout:          util.PtrInt32(int32(0)),
+	}
+	err := BLB_CLIENT.UpdateBlbUdpListener(updateBlbUdpListenerRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
