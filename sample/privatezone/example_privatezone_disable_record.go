@@ -1,7 +1,6 @@
 package privatezonesample
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
 	"github.com/baidubce/baiducloud-go-sdk/services/privatezone"
@@ -16,20 +15,12 @@ func DisableRecord() {
 		return
 	}
 	disableRecordRequest := &privatezone.DisableRecordRequest{
-		RecordId:    util.PtrString("rc-sz1ubq7e795u"),
-        		Action:      util.PtrString("disable"),
+		RecordId:    util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	result, err := client.DisableRecord(disableRecordRequest)
+	err = client.DisableRecord(disableRecordRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)
-		return
 	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
 }

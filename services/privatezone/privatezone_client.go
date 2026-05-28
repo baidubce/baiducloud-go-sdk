@@ -112,22 +112,15 @@ func (c *Client) DeleteRecord(request *DeleteRecordRequest) error {
 //   - request: the arguments to DisableRecord
 //
 // RETURNS:
-//   - map[string]interface{}: The return type of the DisableRecord interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) DisableRecord(request *DisableRecordRequest) (map[string]interface{}, error) {
-	result := &map[string]interface{}{}
-	err := bce.NewRequestBuilder(c).
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DisableRecord(request *DisableRecordRequest) error {
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getDisableRecordUri(VERSION_V1, util.StringValue(request.RecordId))).
 		WithQueryParam("disable", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
-		WithResult(result).
 		Do()
-	if err != nil {
-		return nil, err
-	}
-	return *result, nil
 }
 
 // EnableRecord
@@ -136,22 +129,16 @@ func (c *Client) DisableRecord(request *DisableRecordRequest) (map[string]interf
 //   - request: the arguments to EnableRecord
 //
 // RETURNS:
-//   - map[string]interface{}: The return type of the EnableRecord interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) EnableRecord(request *EnableRecordRequest) (map[string]interface{}, error) {
-	result := &map[string]interface{}{}
-	err := bce.NewRequestBuilder(c).
+
+// - error: nil if success otherwise the specific error
+func (c *Client) EnableRecord(request *EnableRecordRequest) error {
+	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getEnableRecordUri(VERSION_V1, util.StringValue(request.RecordId))).
 		WithQueryParam("enable", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("action", util.StringValue(request.Action)).
-		WithResult(result).
 		Do()
-	if err != nil {
-		return nil, err
-	}
-	return *result, nil
 }
 
 // GetPrivateZone
@@ -237,7 +224,7 @@ func (c *Client) UnbindVpc(request *UnbindVpcRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUnbindVpcUri(VERSION_V1, util.StringValue(request.ZoneId))).
-		WithQueryParam("unbind", "").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()

@@ -95,7 +95,6 @@ func TestClient_AddRecord(t *testing.T) {
 func TestClient_BindVpc(t *testing.T) {
 	bindVpcRequest := &BindVpcRequest{
 		ZoneId:      util.PtrString(""),
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Region:      util.PtrString(""),
 		VpcIds:      []*string{},
@@ -141,20 +140,9 @@ func TestClient_DeleteRecord(t *testing.T) {
 func TestClient_DisableRecord(t *testing.T) {
 	disableRecordRequest := &DisableRecordRequest{
 		RecordId:    util.PtrString(""),
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	result, err := PRIVATEZONE_CLIENT.DisableRecord(disableRecordRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
+	err := PRIVATEZONE_CLIENT.DisableRecord(disableRecordRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_EnableRecord(t *testing.T) {
@@ -163,17 +151,7 @@ func TestClient_EnableRecord(t *testing.T) {
 		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
-	result, err := PRIVATEZONE_CLIENT.EnableRecord(enableRecordRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
+	err := PRIVATEZONE_CLIENT.EnableRecord(enableRecordRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetPrivateZone(t *testing.T) {

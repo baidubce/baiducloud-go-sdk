@@ -2,7 +2,6 @@ package privatezonesample
 
 import (
 	"fmt"
-	"github.com/baidubce/baiducloud-go-sdk/bce"
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
 	"github.com/baidubce/baiducloud-go-sdk/services/privatezone"
 )
@@ -28,13 +27,6 @@ func UpdateRecord() {
 	err = client.UpdateRecord(updateRecordRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
-		if serviceErr, ok := err.(*bce.BceServiceError); ok {
-			fmt.Printf("request failed, RequestId: %s, Code: %s, Message: %s\n",
-				serviceErr.RequestId, serviceErr.Code, serviceErr.Message)
-		} else {
-			fmt.Println("request failed:", err)
-		}
-		return
+		fmt.Println("request failed:", err)
 	}
-	fmt.Println("UpdateRecord success")
 }

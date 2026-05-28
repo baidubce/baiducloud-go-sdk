@@ -1,3 +1,7 @@
+2026-05-28 Version: v0.0.42
+- 涉及产品: PRIVATEZONE，disableRecord接口删除query.action字段
+- 涉及产品: PRIVATEZONE，bindVpc接口删除query.action字段
+
 2026-05-27 Version: v0.0.41
 - 涉及产品: CSN，新增云智能网创建、查询、更新、删除及实例挂载接口
 - 涉及产品: CSN，新增带宽包创建、查询、更新、删除及绑定解绑接口
