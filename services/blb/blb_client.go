@@ -224,6 +224,63 @@ func (c *Client) CreateAppBlbHttpsListener(request *CreateAppBlbHttpsListenerReq
 		Do()
 }
 
+// CreateAppBlbIpGroup
+//
+// PARAMS:
+//   - request: the arguments to CreateAppBlbIpGroup
+//
+// RETURNS:
+//   - CreateAppBlbIpGroupResponse: The return type of the CreateAppBlbIpGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateAppBlbIpGroup(request *CreateAppBlbIpGroupRequest) (*CreateAppBlbIpGroupResponse, error) {
+	result := &CreateAppBlbIpGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateAppBlbIpGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateAppBlbIpGroupMember
+//
+// PARAMS:
+//   - request: the arguments to CreateAppBlbIpGroupMember
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CreateAppBlbIpGroupMember(request *CreateAppBlbIpGroupMemberRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateAppBlbIpGroupMemberUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// CreateAppBlbIpGroupProtocol
+//
+// PARAMS:
+//   - request: the arguments to CreateAppBlbIpGroupProtocol
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CreateAppBlbIpGroupProtocol(request *CreateAppBlbIpGroupProtocolRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateAppBlbIpGroupProtocolUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // CreateAppBlbPolicy
 //
 // PARAMS:
@@ -444,6 +501,60 @@ func (c *Client) CreateBlbUdpListener(request *CreateBlbUdpListenerRequest) erro
 		Do()
 }
 
+// DeleteAppBlbIpGroup
+//
+// PARAMS:
+//   - request: the arguments to DeleteAppBlbIpGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteAppBlbIpGroup(request *DeleteAppBlbIpGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDeleteAppBlbIpGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("delete", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// DeleteAppBlbIpGroupMember
+//
+// PARAMS:
+//   - request: the arguments to DeleteAppBlbIpGroupMember
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteAppBlbIpGroupMember(request *DeleteAppBlbIpGroupMemberRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDeleteAppBlbIpGroupMemberUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("delete", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// DeleteAppBlbIpGroupProtocol
+//
+// PARAMS:
+//   - request: the arguments to DeleteAppBlbIpGroupProtocol
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteAppBlbIpGroupProtocol(request *DeleteAppBlbIpGroupProtocolRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDeleteAppBlbIpGroupProtocolUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("delete", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // DeleteAppBlbListener
 //
 // PARAMS:
@@ -628,6 +739,55 @@ func (c *Client) DescribeAppBlbHttpsListener(request *DescribeAppBlbHttpsListene
 		WithMethod(http.GET).
 		WithURL(getDescribeAppBlbHttpsListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeAppBlbIpGroup
+//
+// PARAMS:
+//   - request: the arguments to DescribeAppBlbIpGroup
+//
+// RETURNS:
+//   - DescribeAppBlbIpGroupResponse: The return type of the DescribeAppBlbIpGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAppBlbIpGroup(request *DescribeAppBlbIpGroupRequest) (*DescribeAppBlbIpGroupResponse, error) {
+	result := &DescribeAppBlbIpGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeAppBlbIpGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("name", util.StringValue(request.Name)).
+		WithQueryParamFilter("exactlyMatch", util.BoolValue(request.ExactlyMatch)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeAppBlbIpGroupMember
+//
+// PARAMS:
+//   - request: the arguments to DescribeAppBlbIpGroupMember
+//
+// RETURNS:
+//   - DescribeAppBlbIpGroupMemberResponse: The return type of the DescribeAppBlbIpGroupMember interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAppBlbIpGroupMember(request *DescribeAppBlbIpGroupMemberRequest) (*DescribeAppBlbIpGroupMemberResponse, error) {
+	result := &DescribeAppBlbIpGroupMemberResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeAppBlbIpGroupMemberUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("ipGroupId", util.StringValue(request.IpGroupId)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
@@ -1320,6 +1480,57 @@ func (c *Client) UpdateAppBlbHttpsListener(request *UpdateAppBlbHttpsListenerReq
 		WithURL(getUpdateAppBlbHttpsListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateAppBlbIpGroup
+//
+// PARAMS:
+//   - request: the arguments to UpdateAppBlbIpGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateAppBlbIpGroup(request *UpdateAppBlbIpGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateAppBlbIpGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateAppBlbIpGroupMember
+//
+// PARAMS:
+//   - request: the arguments to UpdateAppBlbIpGroupMember
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateAppBlbIpGroupMember(request *UpdateAppBlbIpGroupMemberRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateAppBlbIpGroupMemberUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateAppBlbIpGroupProtocol
+//
+// PARAMS:
+//   - request: the arguments to UpdateAppBlbIpGroupProtocol
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateAppBlbIpGroupProtocol(request *UpdateAppBlbIpGroupProtocolRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateAppBlbIpGroupProtocolUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }

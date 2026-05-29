@@ -13,9 +13,11 @@ const (
 
 	CONSTANT_ENTERPRISE = "enterprise"
 
-	CONSTANT_S_S_LLISTENER = "SSLlistener"
-
 	CONSTANT_APPBLB = "appblb"
+
+	CONSTANT_IPGROUP = "ipgroup"
+
+	CONSTANT_S_S_LLISTENER = "SSLlistener"
 
 	CONSTANT_APPSERVERGROUP = "appservergroup"
 
@@ -24,6 +26,8 @@ const (
 	CONSTANT_H_T_T_PLISTENER = "HTTPlistener"
 
 	CONSTANT_BACKENDSERVER = "backendserver"
+
+	CONSTANT_MEMBER = "member"
 
 	CONSTANT_CHARGE = "charge"
 
@@ -34,6 +38,8 @@ const (
 	CONSTANT_BLBRS = "blbrs"
 
 	CONSTANT_U_D_PLISTENER = "UDPlistener"
+
+	CONSTANT_BACKENDPOLICY = "backendpolicy"
 
 	CONSTANT_APPSERVERGROUPPORT = "appservergroupport"
 
@@ -101,6 +107,15 @@ func getCreateAppBlbHttpListenerUri(version string, BlbId string) string {
 func getCreateAppBlbHttpsListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_H_T_T_P_SLISTENER
 }
+func getCreateAppBlbIpGroupUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_IPGROUP
+}
+func getCreateAppBlbIpGroupMemberUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_IPGROUP + bce.URI_PREFIX + CONSTANT_MEMBER
+}
+func getCreateAppBlbIpGroupProtocolUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_IPGROUP + bce.URI_PREFIX + CONSTANT_BACKENDPOLICY
+}
 func getCreateAppBlbPolicyUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_POLICYS
 }
@@ -137,6 +152,15 @@ func getCreateBlbTcpListenerUri(version string, BlbId string) string {
 func getCreateBlbUdpListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_U_D_PLISTENER
 }
+func getDeleteAppBlbIpGroupUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_IPGROUP
+}
+func getDeleteAppBlbIpGroupMemberUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_IPGROUP + bce.URI_PREFIX + CONSTANT_MEMBER
+}
+func getDeleteAppBlbIpGroupProtocolUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_IPGROUP + bce.URI_PREFIX + CONSTANT_BACKENDPOLICY
+}
 func getDeleteAppBlbListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_LISTENER
 }
@@ -166,6 +190,12 @@ func getDescribeAppBlbHttpListenerUri(version string, BlbId string) string {
 }
 func getDescribeAppBlbHttpsListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_H_T_T_P_SLISTENER
+}
+func getDescribeAppBlbIpGroupUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_IPGROUP
+}
+func getDescribeAppBlbIpGroupMemberUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_IPGROUP + bce.URI_PREFIX + CONSTANT_MEMBER
 }
 func getDescribeAppBlbListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_LISTENER
@@ -259,6 +289,15 @@ func getUpdateAppBlbHttpListenerUri(version string, BlbId string) string {
 }
 func getUpdateAppBlbHttpsListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_H_T_T_P_SLISTENER
+}
+func getUpdateAppBlbIpGroupUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_IPGROUP
+}
+func getUpdateAppBlbIpGroupMemberUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_IPGROUP + bce.URI_PREFIX + CONSTANT_MEMBER
+}
+func getUpdateAppBlbIpGroupProtocolUri(version string, BlbId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_IPGROUP + bce.URI_PREFIX + CONSTANT_BACKENDPOLICY
 }
 func getUpdateAppBlbPolicyUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_APPBLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_POLICYS

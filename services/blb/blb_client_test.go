@@ -278,6 +278,58 @@ func TestClient_CreateAppBlbHttpsListener(t *testing.T) {
 	err := BLB_CLIENT.CreateAppBlbHttpsListener(createAppBlbHttpsListenerRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateAppBlbIpGroup(t *testing.T) {
+	createAppBlbIpGroupRequest := &CreateAppBlbIpGroupRequest{
+		BlbId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		Desc:        util.PtrString(""),
+		MemberList:  []*AppIpGroupMember{},
+	}
+	result := &CreateAppBlbIpGroupResponse{}
+	result, err := BLB_CLIENT.CreateAppBlbIpGroup(createAppBlbIpGroupRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateAppBlbIpGroupMember(t *testing.T) {
+	createAppBlbIpGroupMemberRequest := &CreateAppBlbIpGroupMemberRequest{
+		BlbId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		IpGroupId:   util.PtrString(""),
+		MemberList:  []*AppIpGroupMember{},
+	}
+	err := BLB_CLIENT.CreateAppBlbIpGroupMember(createAppBlbIpGroupMemberRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateAppBlbIpGroupProtocol(t *testing.T) {
+	createAppBlbIpGroupProtocolRequest := &CreateAppBlbIpGroupProtocolRequest{
+		BlbId:                       util.PtrString(""),
+		ClientToken:                 util.PtrString(""),
+		IpGroupId:                   util.PtrString(""),
+		BlbType:                     util.PtrString(""),
+		HealthCheck:                 util.PtrString(""),
+		HealthCheckPort:             util.PtrInt32(int32(0)),
+		HealthCheckUrlPath:          util.PtrString(""),
+		HealthCheckTimeoutInSecond:  util.PtrInt32(int32(0)),
+		HealthCheckIntervalInSecond: util.PtrInt32(int32(0)),
+		HealthCheckDownRetry:        util.PtrInt32(int32(0)),
+		HealthCheckUpRetry:          util.PtrInt32(int32(0)),
+		HealthCheckNormalStatus:     util.PtrString(""),
+		HealthCheckHost:             util.PtrString(""),
+		UdpHealthCheckString:        util.PtrString(""),
+	}
+	err := BLB_CLIENT.CreateAppBlbIpGroupProtocol(createAppBlbIpGroupProtocolRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateAppBlbPolicy(t *testing.T) {
 	createAppBlbPolicyRequest := &CreateAppBlbPolicyRequest{
 		BlbId:        util.PtrString(""),
@@ -554,6 +606,35 @@ func TestClient_CreateBlbUdpListener(t *testing.T) {
 	err := BLB_CLIENT.CreateBlbUdpListener(createBlbUdpListenerRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteAppBlbIpGroup(t *testing.T) {
+	deleteAppBlbIpGroupRequest := &DeleteAppBlbIpGroupRequest{
+		BlbId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		IpGroupId:   util.PtrString(""),
+	}
+	err := BLB_CLIENT.DeleteAppBlbIpGroup(deleteAppBlbIpGroupRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteAppBlbIpGroupMember(t *testing.T) {
+	deleteAppBlbIpGroupMemberRequest := &DeleteAppBlbIpGroupMemberRequest{
+		BlbId:        util.PtrString(""),
+		ClientToken:  util.PtrString(""),
+		IpGroupId:    util.PtrString(""),
+		MemberIdList: []*string{},
+	}
+	err := BLB_CLIENT.DeleteAppBlbIpGroupMember(deleteAppBlbIpGroupMemberRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteAppBlbIpGroupProtocol(t *testing.T) {
+	deleteAppBlbIpGroupProtocolRequest := &DeleteAppBlbIpGroupProtocolRequest{
+		BlbId:               util.PtrString(""),
+		ClientToken:         util.PtrString(""),
+		IpGroupId:           util.PtrString(""),
+		BackendPolicyIdList: []*string{},
+	}
+	err := BLB_CLIENT.DeleteAppBlbIpGroupProtocol(deleteAppBlbIpGroupProtocolRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteAppBlbListener(t *testing.T) {
 	deleteAppBlbListenerRequest := &DeleteAppBlbListenerRequest{
 		BlbId:        util.PtrString(""),
@@ -671,6 +752,49 @@ func TestClient_DescribeAppBlbHttpsListener(t *testing.T) {
 	}
 	result := &DescribeAppBlbHttpsListenerResponse{}
 	result, err := BLB_CLIENT.DescribeAppBlbHttpsListener(describeAppBlbHttpsListenerRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeAppBlbIpGroup(t *testing.T) {
+	describeAppBlbIpGroupRequest := &DescribeAppBlbIpGroupRequest{
+		BlbId:        util.PtrString(""),
+		Name:         util.PtrString(""),
+		ExactlyMatch: util.PtrBool(false),
+		Marker:       util.PtrString(""),
+		MaxKeys:      util.PtrInt32(int32(0)),
+	}
+	result := &DescribeAppBlbIpGroupResponse{}
+	result, err := BLB_CLIENT.DescribeAppBlbIpGroup(describeAppBlbIpGroupRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeAppBlbIpGroupMember(t *testing.T) {
+	describeAppBlbIpGroupMemberRequest := &DescribeAppBlbIpGroupMemberRequest{
+		BlbId:     util.PtrString(""),
+		IpGroupId: util.PtrString(""),
+		Marker:    util.PtrString(""),
+		MaxKeys:   util.PtrInt32(int32(0)),
+	}
+	result := &DescribeAppBlbIpGroupMemberResponse{}
+	result, err := BLB_CLIENT.DescribeAppBlbIpGroupMember(describeAppBlbIpGroupMemberRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -1260,6 +1384,47 @@ func TestClient_UpdateAppBlbHttpsListener(t *testing.T) {
 		Description:           util.PtrString(""),
 	}
 	err := BLB_CLIENT.UpdateAppBlbHttpsListener(updateAppBlbHttpsListenerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateAppBlbIpGroup(t *testing.T) {
+	updateAppBlbIpGroupRequest := &UpdateAppBlbIpGroupRequest{
+		BlbId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		IpGroupId:   util.PtrString(""),
+		Name:        util.PtrString(""),
+		Desc:        util.PtrString(""),
+	}
+	err := BLB_CLIENT.UpdateAppBlbIpGroup(updateAppBlbIpGroupRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateAppBlbIpGroupMember(t *testing.T) {
+	updateAppBlbIpGroupMemberRequest := &UpdateAppBlbIpGroupMemberRequest{
+		BlbId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		IpGroupId:   util.PtrString(""),
+		MemberList:  []*AppIpGroupMember{},
+	}
+	err := BLB_CLIENT.UpdateAppBlbIpGroupMember(updateAppBlbIpGroupMemberRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateAppBlbIpGroupProtocol(t *testing.T) {
+	updateAppBlbIpGroupProtocolRequest := &UpdateAppBlbIpGroupProtocolRequest{
+		BlbId:                       util.PtrString(""),
+		ClientToken:                 util.PtrString(""),
+		IpGroupId:                   util.PtrString(""),
+		Id:                          util.PtrString(""),
+		HealthCheck:                 util.PtrString(""),
+		HealthCheckPort:             util.PtrInt32(int32(0)),
+		HealthCheckUrlPath:          util.PtrString(""),
+		HealthCheckTimeoutInSecond:  util.PtrInt32(int32(0)),
+		HealthCheckIntervalInSecond: util.PtrInt32(int32(0)),
+		HealthCheckDownRetry:        util.PtrInt32(int32(0)),
+		HealthCheckUpRetry:          util.PtrInt32(int32(0)),
+		HealthCheckNormalStatus:     util.PtrString(""),
+		HealthCheckHost:             util.PtrString(""),
+		UdpHealthCheckString:        util.PtrString(""),
+	}
+	err := BLB_CLIENT.UpdateAppBlbIpGroupProtocol(updateAppBlbIpGroupProtocolRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateAppBlbPolicy(t *testing.T) {
