@@ -2,7 +2,6 @@ package cfssample
 
 import (
 	"fmt"
-	"github.com/baidubce/baiducloud-go-sdk/core/util"
 	"github.com/baidubce/baiducloud-go-sdk/services/cfs"
 )
 
@@ -15,7 +14,6 @@ func UpdateFileSystemLabels() {
 		return
 	}
 	updateFileSystemLabelsRequest := &cfs.UpdateFileSystemLabelsRequest{
-		Tag:  util.PtrString(""),
 		FsId: []*string{},
 		Tags: []*cfs.Tag{},
 	}

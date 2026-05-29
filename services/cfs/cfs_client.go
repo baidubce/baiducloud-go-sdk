@@ -342,7 +342,6 @@ func (c *Client) UpdateFileSystemLabels(request *UpdateFileSystemLabelsRequest) 
 		WithMethod(http.POST).
 		WithURL(getUpdateFileSystemLabelsUri(VERSION_V1)).
 		WithQueryParam("tag", "").
-		WithQueryParamFilter("tag", util.StringValue(request.Tag)).
 		WithBody(request).
 		Do()
 }

@@ -1,3 +1,6 @@
+2026-05-29 Version: v0.0.52
+- 涉及产品: CFS，updateFileSystemLabels接口删除query.tag字段
+
 2026-05-29 Version: v0.0.51
 - 涉及产品: CFS，新增文件系统创建、更新、查询、释放接口
 - 涉及产品: CFS，新增权限组及权限组规则的增删改查接口

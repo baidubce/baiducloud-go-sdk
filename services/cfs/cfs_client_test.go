@@ -316,7 +316,6 @@ func TestClient_UpdateFileSystem(t *testing.T) {
 }
 func TestClient_UpdateFileSystemLabels(t *testing.T) {
 	updateFileSystemLabelsRequest := &UpdateFileSystemLabelsRequest{
-		Tag:  util.PtrString(""),
 		FsId: []*string{},
 		Tags: []*Tag{},
 	}
