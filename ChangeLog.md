@@ -1,3 +1,6 @@
+2026-05-30 Version: v0.0.53
+- 涉及产品: PFS，支持创建、删除、查询实例及标签更新和列表获取
+
 2026-05-29 Version: v0.0.52
 - 涉及产品: CFS，updateFileSystemLabels接口删除query.tag字段
 
