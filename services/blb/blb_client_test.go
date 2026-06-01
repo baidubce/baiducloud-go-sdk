@@ -86,6 +86,15 @@ func TestClient_AddBlbServer(t *testing.T) {
 	err := BLB_CLIENT.AddBlbServer(addBlbServerRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_AddServiceAuth(t *testing.T) {
+	addServiceAuthRequest := &AddServiceAuthRequest{
+		Service:     util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		AuthList:    []*Auth{},
+	}
+	err := BLB_CLIENT.AddServiceAuth(addServiceAuthRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_BillingChangeCancelToPostBlb(t *testing.T) {
 	billingChangeCancelToPostBlbRequest := &BillingChangeCancelToPostBlbRequest{
 		BlbId:       util.PtrString(""),
@@ -154,6 +163,15 @@ func TestClient_BindBlbSecurityGroup(t *testing.T) {
 		SecurityGroupIds: []*string{},
 	}
 	err := BLB_CLIENT.BindBlbSecurityGroup(bindBlbSecurityGroupRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_BindInstanceToService(t *testing.T) {
+	bindInstanceToServiceRequest := &BindInstanceToServiceRequest{
+		Service:     util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		InstanceId:  util.PtrString(""),
+	}
+	err := BLB_CLIENT.BindInstanceToService(bindInstanceToServiceRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_BlbInquiry(t *testing.T) {
@@ -606,6 +624,29 @@ func TestClient_CreateBlbUdpListener(t *testing.T) {
 	err := BLB_CLIENT.CreateBlbUdpListener(createBlbUdpListenerRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateService(t *testing.T) {
+	createServiceRequest := &CreateServiceRequest{
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
+		ServiceName: util.PtrString(""),
+		InstanceId:  util.PtrString(""),
+		AuthList:    []*Auth{},
+	}
+	result := &CreateServiceResponse{}
+	result, err := BLB_CLIENT.CreateService(createServiceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteAppBlbIpGroup(t *testing.T) {
 	deleteAppBlbIpGroupRequest := &DeleteAppBlbIpGroupRequest{
 		BlbId:       util.PtrString(""),
@@ -702,6 +743,24 @@ func TestClient_DeleteBlbServer(t *testing.T) {
 		BackendServerList: []*string{},
 	}
 	err := BLB_CLIENT.DeleteBlbServer(deleteBlbServerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteService(t *testing.T) {
+	deleteServiceRequest := &DeleteServiceRequest{
+		Service:     util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := BLB_CLIENT.DeleteService(deleteServiceRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteServiceAuth(t *testing.T) {
+	deleteServiceAuthRequest := &DeleteServiceAuthRequest{
+		Service:     util.PtrString(""),
+		Action:      util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		UidList:     []*string{},
+	}
+	err := BLB_CLIENT.DeleteServiceAuth(deleteServiceAuthRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DescribeAppBlb(t *testing.T) {
@@ -1265,6 +1324,43 @@ func TestClient_DescribeBlbs(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeService(t *testing.T) {
+	describeServiceRequest := &DescribeServiceRequest{
+		Service: util.PtrString(""),
+	}
+	result := &DescribeServiceResponse{}
+	result, err := BLB_CLIENT.DescribeService(describeServiceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeServices(t *testing.T) {
+	describeServicesRequest := &DescribeServicesRequest{
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &DescribeServicesResponse{}
+	result, err := BLB_CLIENT.DescribeServices(describeServicesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_RefundBlb(t *testing.T) {
 	refundBlbRequest := &RefundBlbRequest{
 		BlbId:       util.PtrString(""),
@@ -1324,6 +1420,14 @@ func TestClient_UnbindBlbSecurityGroup(t *testing.T) {
 		SecurityGroupIds: []*string{},
 	}
 	err := BLB_CLIENT.UnbindBlbSecurityGroup(unbindBlbSecurityGroupRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UnbindInstanceFromService(t *testing.T) {
+	unbindInstanceFromServiceRequest := &UnbindInstanceFromServiceRequest{
+		Service:     util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := BLB_CLIENT.UnbindInstanceFromService(unbindInstanceFromServiceRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateAppBlb(t *testing.T) {
@@ -1679,5 +1783,24 @@ func TestClient_UpdateBlbUdpListener(t *testing.T) {
 		UdpSessionTimeout:          util.PtrInt32(int32(0)),
 	}
 	err := BLB_CLIENT.UpdateBlbUdpListener(updateBlbUdpListenerRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateService(t *testing.T) {
+	updateServiceRequest := &UpdateServiceRequest{
+		Service:     util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
+	}
+	err := BLB_CLIENT.UpdateService(updateServiceRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateServiceAuth(t *testing.T) {
+	updateServiceAuthRequest := &UpdateServiceAuthRequest{
+		Service:     util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		AuthList:    []*Auth{},
+	}
+	err := BLB_CLIENT.UpdateServiceAuth(updateServiceAuthRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }

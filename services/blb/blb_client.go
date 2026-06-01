@@ -44,6 +44,24 @@ func (c *Client) AddBlbServer(request *AddBlbServerRequest) error {
 		Do()
 }
 
+// AddServiceAuth
+//
+// PARAMS:
+//   - request: the arguments to AddServiceAuth
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AddServiceAuth(request *AddServiceAuthRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getAddServiceAuthUri(VERSION_V1, util.StringValue(request.Service))).
+		WithQueryParam("addAuth", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // BillingChangeCancelToPostBlb
 //
 // PARAMS:
@@ -139,6 +157,24 @@ func (c *Client) BindBlbSecurityGroup(request *BindBlbSecurityGroupRequest) erro
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getBindBlbSecurityGroupUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParam("bind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// BindInstanceToService
+//
+// PARAMS:
+//   - request: the arguments to BindInstanceToService
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BindInstanceToService(request *BindInstanceToServiceRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindInstanceToServiceUri(VERSION_V1, util.StringValue(request.Service))).
 		WithQueryParam("bind", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
@@ -501,6 +537,29 @@ func (c *Client) CreateBlbUdpListener(request *CreateBlbUdpListenerRequest) erro
 		Do()
 }
 
+// CreateService
+//
+// PARAMS:
+//   - request: the arguments to CreateService
+//
+// RETURNS:
+//   - CreateServiceResponse: The return type of the CreateService interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateService(request *CreateServiceRequest) (*CreateServiceResponse, error) {
+	result := &CreateServiceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateServiceUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DeleteAppBlbIpGroup
 //
 // PARAMS:
@@ -676,6 +735,41 @@ func (c *Client) DeleteBlbServer(request *DeleteBlbServerRequest) error {
 		WithMethod(http.PUT).
 		WithURL(getDeleteBlbServerUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// DeleteService
+//
+// PARAMS:
+//   - request: the arguments to DeleteService
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteService(request *DeleteServiceRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteServiceUri(VERSION_V1, util.StringValue(request.Service))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// DeleteServiceAuth
+//
+// PARAMS:
+//   - request: the arguments to DeleteServiceAuth
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteServiceAuth(request *DeleteServiceAuthRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDeleteServiceAuthUri(VERSION_V1, util.StringValue(request.Service))).
+		WithQueryParam("removeAuth", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		Do()
 }
@@ -1324,6 +1418,51 @@ func (c *Client) DescribeBlbs(request *DescribeBlbsRequest) (*DescribeBlbsRespon
 	return result, nil
 }
 
+// DescribeService
+//
+// PARAMS:
+//   - request: the arguments to DescribeService
+//
+// RETURNS:
+//   - DescribeServiceResponse: The return type of the DescribeService interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeService(request *DescribeServiceRequest) (*DescribeServiceResponse, error) {
+	result := &DescribeServiceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeServiceUri(VERSION_V1, util.StringValue(request.Service))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeServices
+//
+// PARAMS:
+//   - request: the arguments to DescribeServices
+//
+// RETURNS:
+//   - DescribeServicesResponse: The return type of the DescribeServices interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeServices(request *DescribeServicesRequest) (*DescribeServicesResponse, error) {
+	result := &DescribeServicesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeServicesUri(VERSION_V1)).
+		WithQueryParamFilter("maxKeys", "1").
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // RefundBlb
 //
 // PARAMS:
@@ -1428,6 +1567,23 @@ func (c *Client) UnbindBlbSecurityGroup(request *UnbindBlbSecurityGroupRequest) 
 		WithQueryParam("unbind", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
+		Do()
+}
+
+// UnbindInstanceFromService
+//
+// PARAMS:
+//   - request: the arguments to UnbindInstanceFromService
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindInstanceFromService(request *UnbindInstanceFromServiceRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindInstanceFromServiceUri(VERSION_V1, util.StringValue(request.Service))).
+		WithQueryParam("unbind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
 
@@ -1808,6 +1964,42 @@ func (c *Client) UpdateBlbUdpListener(request *UpdateBlbUdpListenerRequest) erro
 		WithMethod(http.PUT).
 		WithURL(getUpdateBlbUdpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateService
+//
+// PARAMS:
+//   - request: the arguments to UpdateService
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateService(request *UpdateServiceRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateServiceUri(VERSION_V1, util.StringValue(request.Service))).
+		WithQueryParam("modifyAttribute", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateServiceAuth
+//
+// PARAMS:
+//   - request: the arguments to UpdateServiceAuth
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateServiceAuth(request *UpdateServiceAuthRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateServiceAuthUri(VERSION_V1, util.StringValue(request.Service))).
+		WithQueryParam("editAuth", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
