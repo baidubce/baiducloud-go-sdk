@@ -624,6 +624,41 @@ func TestClient_CreateBlbUdpListener(t *testing.T) {
 	err := BLB_CLIENT.CreateBlbUdpListener(createBlbUdpListenerRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateLbdc(t *testing.T) {
+	Billing := &BillingForCreate{
+		PaymentTiming: util.PtrString(""),
+		BillingMethod: util.PtrString(""),
+		Reservation: &ReservationForCreate{
+			ReservationLength: util.PtrInt32(int32(0)),
+		},
+	}
+	RenewReservation := &ReservationForCreate{
+		ReservationLength: util.PtrInt32(int32(0)),
+	}
+	createLbdcRequest := &CreateLbdcRequest{
+		ClientToken:      util.PtrString(""),
+		Name:             util.PtrString(""),
+		BlbType:          util.PtrString(""),
+		CcuCount:         util.PtrInt32(int32(0)),
+		Desc:             util.PtrString(""),
+		Billing:          Billing,
+		RenewReservation: RenewReservation,
+		Tags:             []*TagModel{},
+	}
+	result := &CreateLbdcResponse{}
+	result, err := BLB_CLIENT.CreateLbdc(createLbdcRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateService(t *testing.T) {
 	createServiceRequest := &CreateServiceRequest{
 		ClientToken: util.PtrString(""),
@@ -1324,6 +1359,61 @@ func TestClient_DescribeBlbs(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeLbdc(t *testing.T) {
+	describeLbdcRequest := &DescribeLbdcRequest{
+		Id: util.PtrString(""),
+	}
+	result := &DescribeLbdcResponse{}
+	result, err := BLB_CLIENT.DescribeLbdc(describeLbdcRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeLbdcBlb(t *testing.T) {
+	describeLbdcBlbRequest := &DescribeLbdcBlbRequest{
+		Id: util.PtrString(""),
+	}
+	result := &DescribeLbdcBlbResponse{}
+	result, err := BLB_CLIENT.DescribeLbdcBlb(describeLbdcBlbRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeLbdcs(t *testing.T) {
+	describeLbdcsRequest := &DescribeLbdcsRequest{
+		Id:   util.PtrString(""),
+		Name: util.PtrString(""),
+	}
+	result := &DescribeLbdcsResponse{}
+	result, err := BLB_CLIENT.DescribeLbdcs(describeLbdcsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DescribeService(t *testing.T) {
 	describeServiceRequest := &DescribeServiceRequest{
 		Service: util.PtrString(""),
@@ -1382,6 +1472,20 @@ func TestClient_ReleaseBlb(t *testing.T) {
 		ClientToken: util.PtrString(""),
 	}
 	err := BLB_CLIENT.ReleaseBlb(releaseBlbRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_RenewLbdc(t *testing.T) {
+	Billing := &BillingForRenew{
+		Reservation: &ReservationForCreate{
+			ReservationLength: util.PtrInt32(int32(0)),
+		},
+	}
+	renewLbdcRequest := &RenewLbdcRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Billing:     Billing,
+	}
+	err := BLB_CLIENT.RenewLbdc(renewLbdcRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ResizeBlb(t *testing.T) {
@@ -1785,6 +1889,16 @@ func TestClient_UpdateBlbUdpListener(t *testing.T) {
 	err := BLB_CLIENT.UpdateBlbUdpListener(updateBlbUdpListenerRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_UpdateLbdc(t *testing.T) {
+	updateLbdcRequest := &UpdateLbdcRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		Desc:        util.PtrString(""),
+	}
+	err := BLB_CLIENT.UpdateLbdc(updateLbdcRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_UpdateService(t *testing.T) {
 	updateServiceRequest := &UpdateServiceRequest{
 		Service:     util.PtrString(""),
@@ -1802,5 +1916,14 @@ func TestClient_UpdateServiceAuth(t *testing.T) {
 		AuthList:    []*Auth{},
 	}
 	err := BLB_CLIENT.UpdateServiceAuth(updateServiceAuthRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpgradeLbdc(t *testing.T) {
+	upgradeLbdcRequest := &UpgradeLbdcRequest{
+		Id:          util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		CcuCount:    util.PtrInt32(int32(0)),
+	}
+	err := BLB_CLIENT.UpgradeLbdc(upgradeLbdcRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }

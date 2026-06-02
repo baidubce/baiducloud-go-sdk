@@ -17,6 +17,8 @@ const (
 
 	CONSTANT_APPSERVERGROUP = "appservergroup"
 
+	CONSTANT_LBDC = "lbdc"
+
 	CONSTANT_SERVICE = "service"
 
 	CONSTANT_H_T_T_P_SLISTENER = "HTTPSlistener"
@@ -160,6 +162,9 @@ func getCreateBlbTcpListenerUri(version string, BlbId string) string {
 func getCreateBlbUdpListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_U_D_PLISTENER
 }
+func getCreateLbdcUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_LBDC
+}
 func getCreateServiceUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SERVICE
 }
@@ -280,6 +285,15 @@ func getDescribeBlbUdpListenerUri(version string, BlbId string) string {
 func getDescribeBlbsUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB
 }
+func getDescribeLbdcUri(version string, Id string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_LBDC + bce.URI_PREFIX + Id
+}
+func getDescribeLbdcBlbUri(version string, Id string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_LBDC + bce.URI_PREFIX + Id + bce.URI_PREFIX + CONSTANT_BLB
+}
+func getDescribeLbdcsUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_LBDC
+}
 func getDescribeServiceUri(version string, Service string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SERVICE + bce.URI_PREFIX + Service
 }
@@ -294,6 +308,9 @@ func getReleaseAppBlbUri(version string, BlbId string) string {
 }
 func getReleaseBlbUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId
+}
+func getRenewLbdcUri(version string, Id string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_LBDC + bce.URI_PREFIX + Id
 }
 func getResizeBlbUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId
@@ -373,9 +390,15 @@ func getUpdateBlbTcpListenerUri(version string, BlbId string) string {
 func getUpdateBlbUdpListenerUri(version string, BlbId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_BLB + bce.URI_PREFIX + BlbId + bce.URI_PREFIX + CONSTANT_U_D_PLISTENER
 }
+func getUpdateLbdcUri(version string, Id string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_LBDC + bce.URI_PREFIX + Id
+}
 func getUpdateServiceUri(version string, Service string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SERVICE + bce.URI_PREFIX + Service
 }
 func getUpdateServiceAuthUri(version string, Service string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SERVICE + bce.URI_PREFIX + Service
+}
+func getUpgradeLbdcUri(version string, Id string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_LBDC + bce.URI_PREFIX + Id
 }

@@ -537,6 +537,29 @@ func (c *Client) CreateBlbUdpListener(request *CreateBlbUdpListenerRequest) erro
 		Do()
 }
 
+// CreateLbdc
+//
+// PARAMS:
+//   - request: the arguments to CreateLbdc
+//
+// RETURNS:
+//   - CreateLbdcResponse: The return type of the CreateLbdc interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateLbdc(request *CreateLbdcRequest) (*CreateLbdcResponse, error) {
+	result := &CreateLbdcResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateLbdcUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateService
 //
 // PARAMS:
@@ -1418,6 +1441,71 @@ func (c *Client) DescribeBlbs(request *DescribeBlbsRequest) (*DescribeBlbsRespon
 	return result, nil
 }
 
+// DescribeLbdc
+//
+// PARAMS:
+//   - request: the arguments to DescribeLbdc
+//
+// RETURNS:
+//   - DescribeLbdcResponse: The return type of the DescribeLbdc interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeLbdc(request *DescribeLbdcRequest) (*DescribeLbdcResponse, error) {
+	result := &DescribeLbdcResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeLbdcUri(VERSION_V1, util.StringValue(request.Id))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeLbdcBlb
+//
+// PARAMS:
+//   - request: the arguments to DescribeLbdcBlb
+//
+// RETURNS:
+//   - DescribeLbdcBlbResponse: The return type of the DescribeLbdcBlb interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeLbdcBlb(request *DescribeLbdcBlbRequest) (*DescribeLbdcBlbResponse, error) {
+	result := &DescribeLbdcBlbResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeLbdcBlbUri(VERSION_V1, util.StringValue(request.Id))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeLbdcs
+//
+// PARAMS:
+//   - request: the arguments to DescribeLbdcs
+//
+// RETURNS:
+//   - DescribeLbdcsResponse: The return type of the DescribeLbdcs interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeLbdcs(request *DescribeLbdcsRequest) (*DescribeLbdcsResponse, error) {
+	result := &DescribeLbdcsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeLbdcsUri(VERSION_V1)).
+		WithQueryParamFilter("id", util.StringValue(request.Id)).
+		WithQueryParamFilter("name", util.StringValue(request.Name)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DescribeService
 //
 // PARAMS:
@@ -1507,6 +1595,24 @@ func (c *Client) ReleaseBlb(request *ReleaseBlbRequest) error {
 		WithMethod(http.DELETE).
 		WithURL(getReleaseBlbUri(VERSION_V1, util.StringValue(request.BlbId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// RenewLbdc
+//
+// PARAMS:
+//   - request: the arguments to RenewLbdc
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RenewLbdc(request *RenewLbdcRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getRenewLbdcUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParam("purchaseReserved", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
 		Do()
 }
 
@@ -1968,6 +2074,23 @@ func (c *Client) UpdateBlbUdpListener(request *UpdateBlbUdpListenerRequest) erro
 		Do()
 }
 
+// UpdateLbdc
+//
+// PARAMS:
+//   - request: the arguments to UpdateLbdc
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateLbdc(request *UpdateLbdcRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateLbdcUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
 // UpdateService
 //
 // PARAMS:
@@ -1999,6 +2122,24 @@ func (c *Client) UpdateServiceAuth(request *UpdateServiceAuthRequest) error {
 		WithMethod(http.PUT).
 		WithURL(getUpdateServiceAuthUri(VERSION_V1, util.StringValue(request.Service))).
 		WithQueryParam("editAuth", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpgradeLbdc
+//
+// PARAMS:
+//   - request: the arguments to UpgradeLbdc
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpgradeLbdc(request *UpgradeLbdcRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpgradeLbdcUri(VERSION_V1, util.StringValue(request.Id))).
+		WithQueryParam("resize", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
