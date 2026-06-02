@@ -41,8 +41,14 @@ func getDeletePfsUri() string {
 func getDescPfsUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_PFS + bce.URI_PREFIX + CONSTANT_INSTANCE
 }
+func getInstanceListClientsUri() string {
+	return bce.URI_PREFIX
+}
 func getListPfsUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_PFS + bce.URI_PREFIX + CONSTANT_INSTANCE
+}
+func getMountTargetListClientsUri() string {
+	return bce.URI_PREFIX
 }
 func getUpdatePFSTagUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_PFS + bce.URI_PREFIX + CONSTANT_TAG

@@ -6,9 +6,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
 )
 
-const (
-	VERSION_V1 = "v1"
-)
+const ()
 
 // CreatePfs
 //
@@ -70,6 +68,31 @@ func (c *Client) DescPfs(request *DescPfsRequest) (*DescPfsResponse, error) {
 	return result, nil
 }
 
+// InstanceListClients
+//
+// PARAMS:
+//   - request: the arguments to InstanceListClients
+//
+// RETURNS:
+//   - InstanceListClientsResponse: The return type of the InstanceListClients interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) InstanceListClients(request *InstanceListClientsRequest) (*InstanceListClientsResponse, error) {
+	result := &InstanceListClientsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getInstanceListClientsUri()).
+		WithQueryParamFilter("action", "InstanceListClients").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ListPfs
 //
 // PARAMS:
@@ -88,6 +111,31 @@ func (c *Client) ListPfs(request *ListPfsRequest) (*ListPfsResponse, error) {
 		WithQueryParamFilter("manner", util.StringValue(request.Manner)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("filterTag", util.StringValue(request.FilterTag)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// MountTargetListClients
+//
+// PARAMS:
+//   - request: the arguments to MountTargetListClients
+//
+// RETURNS:
+//   - MountTargetListClientsResponse: The return type of the MountTargetListClients interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) MountTargetListClients(request *MountTargetListClientsRequest) (*MountTargetListClientsResponse, error) {
+	result := &MountTargetListClientsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getMountTargetListClientsUri()).
+		WithQueryParamFilter("action", "MountTargetListClients").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
 		WithResult(result).
 		Do()
 	if err != nil {

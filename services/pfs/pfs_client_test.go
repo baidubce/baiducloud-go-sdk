@@ -115,6 +115,28 @@ func TestClient_DescPfs(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_InstanceListClients(t *testing.T) {
+	instanceListClientsRequest := &InstanceListClientsRequest{
+		Action:     util.PtrString(""),
+		InstanceId: util.PtrString(""),
+		MaxKeys:    util.PtrInt32(int32(0)),
+		Manner:     util.PtrString(""),
+		Marker:     util.PtrString(""),
+	}
+	result := &InstanceListClientsResponse{}
+	result, err := PFS_CLIENT.InstanceListClients(instanceListClientsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ListPfs(t *testing.T) {
 	listPfsRequest := &ListPfsRequest{
 		Manner:    util.PtrString(""),
@@ -124,6 +146,28 @@ func TestClient_ListPfs(t *testing.T) {
 	}
 	result := &ListPfsResponse{}
 	result, err := PFS_CLIENT.ListPfs(listPfsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_MountTargetListClients(t *testing.T) {
+	mountTargetListClientsRequest := &MountTargetListClientsRequest{
+		Action:        util.PtrString(""),
+		MountTargetId: util.PtrString(""),
+		MaxKeys:       util.PtrInt32(int32(0)),
+		Manner:        util.PtrString(""),
+		Marker:        util.PtrString(""),
+	}
+	result := &MountTargetListClientsResponse{}
+	result, err := PFS_CLIENT.MountTargetListClients(mountTargetListClientsRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
