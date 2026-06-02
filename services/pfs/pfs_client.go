@@ -8,6 +8,31 @@ import (
 
 const ()
 
+// CreateFileset
+//
+// PARAMS:
+//   - request: the arguments to CreateFileset
+//
+// RETURNS:
+//   - CreateFilesetResponse: The return type of the CreateFileset interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateFileset(request *CreateFilesetRequest) (*CreateFilesetResponse, error) {
+	result := &CreateFilesetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateFilesetUri()).
+		WithQueryParamFilter("action", "CreateFileset").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreatePfs
 //
 // PARAMS:
@@ -21,6 +46,31 @@ func (c *Client) CreatePfs(request *CreatePfsRequest) (*CreatePfsResponse, error
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreatePfsUri()).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DeleteFileset
+//
+// PARAMS:
+//   - request: the arguments to DeleteFileset
+//
+// RETURNS:
+//   - DeleteFilesetResponse: The return type of the DeleteFileset interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteFileset(request *DeleteFilesetRequest) (*DeleteFilesetResponse, error) {
+	result := &DeleteFilesetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDeleteFilesetUri()).
+		WithQueryParamFilter("action", "DeleteFileset").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -44,6 +94,31 @@ func (c *Client) DeletePfs(request *DeletePfsRequest) error {
 		WithURL(getDeletePfsUri()).
 		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
 		Do()
+}
+
+// DescFileset
+//
+// PARAMS:
+//   - request: the arguments to DescFileset
+//
+// RETURNS:
+//   - DescFilesetResponse: The return type of the DescFileset interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescFileset(request *DescFilesetRequest) (*DescFilesetResponse, error) {
+	result := &DescFilesetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescFilesetUri()).
+		WithQueryParamFilter("action", "DescribeFileset").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // DescPfs
@@ -82,6 +157,31 @@ func (c *Client) InstanceListClients(request *InstanceListClientsRequest) (*Inst
 		WithMethod(http.POST).
 		WithURL(getInstanceListClientsUri()).
 		WithQueryParamFilter("action", "InstanceListClients").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListFileset
+//
+// PARAMS:
+//   - request: the arguments to ListFileset
+//
+// RETURNS:
+//   - ListFilesetResponse: The return type of the ListFileset interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListFileset(request *ListFilesetRequest) (*ListFilesetResponse, error) {
+	result := &ListFilesetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getListFilesetUri()).
+		WithQueryParamFilter("action", "ListFileset").
 		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithHeader("Version", "v2").
 		WithBody(request).
@@ -133,6 +233,31 @@ func (c *Client) MountTargetListClients(request *MountTargetListClientsRequest) 
 		WithMethod(http.POST).
 		WithURL(getMountTargetListClientsUri()).
 		WithQueryParamFilter("action", "MountTargetListClients").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// UpdateFileset
+//
+// PARAMS:
+//   - request: the arguments to UpdateFileset
+//
+// RETURNS:
+//   - UpdateFilesetResponse: The return type of the UpdateFileset interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateFileset(request *UpdateFilesetRequest) (*UpdateFilesetResponse, error) {
+	result := &UpdateFilesetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUpdateFilesetUri()).
+		WithQueryParamFilter("action", "UpdateFileset").
 		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithHeader("Version", "v2").
 		WithBody(request).

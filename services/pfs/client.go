@@ -32,11 +32,20 @@ func NewClient(ak, sk, endPoint string) (*Client, error) {
 	return &Client{client}, nil
 }
 
+func getCreateFilesetUri() string {
+	return bce.URI_PREFIX
+}
 func getCreatePfsUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_PFS + bce.URI_PREFIX + CONSTANT_INSTANCE
 }
+func getDeleteFilesetUri() string {
+	return bce.URI_PREFIX
+}
 func getDeletePfsUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_PFS + bce.URI_PREFIX + CONSTANT_INSTANCE
+}
+func getDescFilesetUri() string {
+	return bce.URI_PREFIX
 }
 func getDescPfsUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_PFS + bce.URI_PREFIX + CONSTANT_INSTANCE
@@ -44,10 +53,16 @@ func getDescPfsUri() string {
 func getInstanceListClientsUri() string {
 	return bce.URI_PREFIX
 }
+func getListFilesetUri() string {
+	return bce.URI_PREFIX
+}
 func getListPfsUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_PFS + bce.URI_PREFIX + CONSTANT_INSTANCE
 }
 func getMountTargetListClientsUri() string {
+	return bce.URI_PREFIX
+}
+func getUpdateFilesetUri() string {
 	return bce.URI_PREFIX
 }
 func getUpdatePFSTagUri() string {

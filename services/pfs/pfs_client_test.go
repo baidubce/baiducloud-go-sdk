@@ -67,6 +67,31 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
+func TestClient_CreateFileset(t *testing.T) {
+	createFilesetRequest := &CreateFilesetRequest{
+		Action:           util.PtrString(""),
+		InstanceId:       util.PtrString(""),
+		FilesetName:      util.PtrString(""),
+		FilesetPath:      util.PtrString(""),
+		BlockQuota:       util.PtrInt32(int32(0)),
+		FilesQuota:       util.PtrInt64(int64(0)),
+		QpsLimit:         util.PtrInt32(int32(0)),
+		BandwidthLimitMb: util.PtrInt32(int32(0)),
+	}
+	result := &CreateFilesetResponse{}
+	result, err := PFS_CLIENT.CreateFileset(createFilesetRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreatePfs(t *testing.T) {
 	createPfsRequest := &CreatePfsRequest{
 		Name:         util.PtrString(""),
@@ -90,11 +115,51 @@ func TestClient_CreatePfs(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteFileset(t *testing.T) {
+	deleteFilesetRequest := &DeleteFilesetRequest{
+		Action:     util.PtrString(""),
+		InstanceId: util.PtrString(""),
+		FilesetId:  util.PtrString(""),
+	}
+	result := &DeleteFilesetResponse{}
+	result, err := PFS_CLIENT.DeleteFileset(deleteFilesetRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeletePfs(t *testing.T) {
 	deletePfsRequest := &DeletePfsRequest{
 		InstanceId: util.PtrString(""),
 	}
 	err := PFS_CLIENT.DeletePfs(deletePfsRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescFileset(t *testing.T) {
+	descFilesetRequest := &DescFilesetRequest{
+		Action:     util.PtrString(""),
+		InstanceId: util.PtrString(""),
+		FilesetId:  util.PtrString(""),
+	}
+	result := &DescFilesetResponse{}
+	result, err := PFS_CLIENT.DescFileset(descFilesetRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DescPfs(t *testing.T) {
@@ -125,6 +190,32 @@ func TestClient_InstanceListClients(t *testing.T) {
 	}
 	result := &InstanceListClientsResponse{}
 	result, err := PFS_CLIENT.InstanceListClients(instanceListClientsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListFileset(t *testing.T) {
+	listFilesetRequest := &ListFilesetRequest{
+		Action:      util.PtrString(""),
+		InstanceId:  util.PtrString(""),
+		FilesetId:   util.PtrString(""),
+		FilesetName: util.PtrString(""),
+		Manner:      util.PtrString(""),
+		Order:       util.PtrString(""),
+		OrderBy:     util.PtrString(""),
+		PageNo:      util.PtrInt32(int32(0)),
+		PageSize:    util.PtrInt32(int32(0)),
+	}
+	result := &ListFilesetResponse{}
+	result, err := PFS_CLIENT.ListFileset(listFilesetRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -168,6 +259,31 @@ func TestClient_MountTargetListClients(t *testing.T) {
 	}
 	result := &MountTargetListClientsResponse{}
 	result, err := PFS_CLIENT.MountTargetListClients(mountTargetListClientsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateFileset(t *testing.T) {
+	updateFilesetRequest := &UpdateFilesetRequest{
+		Action:           util.PtrString(""),
+		InstanceId:       util.PtrString(""),
+		FilesetId:        util.PtrString(""),
+		FilesetName:      util.PtrString(""),
+		BlockQuota:       util.PtrInt32(int32(0)),
+		FilesQuota:       util.PtrInt64(int64(0)),
+		QpsLimit:         util.PtrInt32(int32(0)),
+		BandwidthLimitMb: util.PtrInt32(int32(0)),
+	}
+	result := &UpdateFilesetResponse{}
+	result, err := PFS_CLIENT.UpdateFileset(updateFilesetRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
