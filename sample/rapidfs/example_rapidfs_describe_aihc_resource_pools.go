@@ -16,7 +16,6 @@ func DescribeAihcResourcePools() {
 		return
 	}
 	describeAihcResourcePoolsRequest := &rapidfs.DescribeAihcResourcePoolsRequest{
-		Action:  util.PtrString(""),
 		VpcId:   util.PtrString(""),
 		MaxKeys: util.PtrInt32(int32(0)),
 		Marker:  util.PtrString(""),

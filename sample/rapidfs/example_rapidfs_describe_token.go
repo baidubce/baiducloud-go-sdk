@@ -16,7 +16,6 @@ func DescribeToken() {
 		return
 	}
 	describeTokenRequest := &rapidfs.DescribeTokenRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		TokenId:    util.PtrString(""),
 	}

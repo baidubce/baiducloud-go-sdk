@@ -15,7 +15,6 @@ func ModifyAuthGroup() {
 		return
 	}
 	modifyAuthGroupRequest := &rapidfs.ModifyAuthGroupRequest{
-		Action:            util.PtrString(""),
 		ClientToken:       util.PtrString(""),
 		AuthGroupId:       util.PtrString(""),
 		InstanceId:        util.PtrString(""),

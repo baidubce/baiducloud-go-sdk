@@ -16,7 +16,6 @@ func DescribeAuthGroup() {
 		return
 	}
 	describeAuthGroupRequest := &rapidfs.DescribeAuthGroupRequest{
-		Action:      util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		AuthGroupId: util.PtrString(""),
 	}

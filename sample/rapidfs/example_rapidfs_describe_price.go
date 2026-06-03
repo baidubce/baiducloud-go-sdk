@@ -16,7 +16,6 @@ func DescribePrice() {
 		return
 	}
 	describePriceRequest := &rapidfs.DescribePriceRequest{
-		Action:      util.PtrString(""),
 		Currency:    util.PtrString(""),
 		ManagedMode: util.PtrString(""),
 		MetaSpec:    util.PtrString(""),

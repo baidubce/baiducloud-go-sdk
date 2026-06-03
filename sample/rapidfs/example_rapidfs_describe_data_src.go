@@ -16,7 +16,6 @@ func DescribeDataSrc() {
 		return
 	}
 	describeDataSrcRequest := &rapidfs.DescribeDataSrcRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		DataSrcId:  util.PtrString(""),
 	}

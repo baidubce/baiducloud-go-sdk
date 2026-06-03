@@ -16,7 +16,6 @@ func CreateMetaSyncRule() {
 		return
 	}
 	createMetaSyncRuleRequest := &rapidfs.CreateMetaSyncRuleRequest{
-		Action:           util.PtrString(""),
 		ClientToken:      util.PtrString(""),
 		InstanceId:       util.PtrString(""),
 		DataSrcId:        util.PtrString(""),

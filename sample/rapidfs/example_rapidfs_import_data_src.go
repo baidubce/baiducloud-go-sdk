@@ -16,7 +16,6 @@ func ImportDataSrc() {
 		return
 	}
 	importDataSrcRequest := &rapidfs.ImportDataSrcRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcName:    util.PtrString(""),

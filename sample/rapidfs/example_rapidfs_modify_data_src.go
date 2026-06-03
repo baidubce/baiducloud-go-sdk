@@ -15,7 +15,6 @@ func ModifyDataSrc() {
 		return
 	}
 	modifyDataSrcRequest := &rapidfs.ModifyDataSrcRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		DataSrcId:   util.PtrString(""),
 		InstanceId:  util.PtrString(""),

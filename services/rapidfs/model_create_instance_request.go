@@ -1,7 +1,6 @@
 package rapidfs
 
 type CreateInstanceRequest struct {
-	Action                      *string `json:"-"`
 	ClientToken                 *string `json:"-"`
 	InstanceName                *string `json:"instanceName,omitempty"`
 	Description                 *string `json:"description,omitempty"`

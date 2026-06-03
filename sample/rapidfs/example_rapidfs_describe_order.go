@@ -16,7 +16,6 @@ func DescribeOrder() {
 		return
 	}
 	describeOrderRequest := &rapidfs.DescribeOrderRequest{
-		Action:  util.PtrString(""),
 		OrderId: util.PtrString(""),
 	}
 	result, err := client.DescribeOrder(describeOrderRequest)

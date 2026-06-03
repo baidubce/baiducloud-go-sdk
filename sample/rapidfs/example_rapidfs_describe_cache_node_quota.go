@@ -16,7 +16,6 @@ func DescribeCacheNodeQuota() {
 		return
 	}
 	describeCacheNodeQuotaRequest := &rapidfs.DescribeCacheNodeQuotaRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 	}
 	result, err := client.DescribeCacheNodeQuota(describeCacheNodeQuotaRequest)

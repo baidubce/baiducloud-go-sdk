@@ -3,7 +3,6 @@ package rapidfssample
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/baidubce/baiducloud-go-sdk/core/util"
 	"github.com/baidubce/baiducloud-go-sdk/services/rapidfs"
 )
 
@@ -15,10 +14,7 @@ func DescribeZones() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	describeZonesRequest := &rapidfs.DescribeZonesRequest{
-		Action: util.PtrString(""),
-	}
-	result, err := client.DescribeZones(describeZonesRequest)
+	result, err := client.DescribeZones()
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

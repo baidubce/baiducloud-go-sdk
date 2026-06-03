@@ -15,7 +15,6 @@ func DeleteCacheRule() {
 		return
 	}
 	deleteCacheRuleRequest := &rapidfs.DeleteCacheRuleRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		DataSrcId:   util.PtrString(""),

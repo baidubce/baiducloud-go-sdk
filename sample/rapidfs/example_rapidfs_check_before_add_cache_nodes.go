@@ -16,7 +16,6 @@ func CheckBeforeAddCacheNodes() {
 		return
 	}
 	checkBeforeAddCacheNodesRequest := &rapidfs.CheckBeforeAddCacheNodesRequest{
-		Action:      util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		RapidfsType: util.PtrString(""),
 		CacheNodes:  []*rapidfs.AddCacheNodeInfo{},

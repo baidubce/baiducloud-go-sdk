@@ -1,7 +1,6 @@
 package rapidfs
 
 type CheckBeforeCreateInstanceRequest struct {
-	Action             *string `json:"-"`
 	Zone               *string `json:"zone,omitempty"`
 	VpcId              *string `json:"vpcId,omitempty"`
 	SubnetId           *string `json:"subnetId,omitempty"`

@@ -1,7 +1,6 @@
 package rapidfs
 
 type DescribeCacheNodeBccCandidatesRequest struct {
-	Action     *string   `json:"-"`
 	InstanceId *string   `json:"instanceId,omitempty"`
 	VpcId      *string   `json:"vpcId,omitempty"`
 	Filters    []*Filter `json:"filters,omitempty"`

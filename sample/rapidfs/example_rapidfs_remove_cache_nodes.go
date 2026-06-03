@@ -15,7 +15,6 @@ func RemoveCacheNodes() {
 		return
 	}
 	removeCacheNodesRequest := &rapidfs.RemoveCacheNodesRequest{
-		Action:               util.PtrString(""),
 		ClientToken:          util.PtrString(""),
 		InstanceId:           util.PtrString(""),
 		CacheNodeIds:         []*string{},

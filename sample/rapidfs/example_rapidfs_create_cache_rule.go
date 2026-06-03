@@ -16,7 +16,6 @@ func CreateCacheRule() {
 		return
 	}
 	createCacheRuleRequest := &rapidfs.CreateCacheRuleRequest{
-		Action:          util.PtrString(""),
 		ClientToken:     util.PtrString(""),
 		InstanceId:      util.PtrString(""),
 		DataSrcId:       util.PtrString(""),

@@ -16,7 +16,6 @@ func DescribeInstance() {
 		return
 	}
 	describeInstanceRequest := &rapidfs.DescribeInstanceRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 	}
 	result, err := client.DescribeInstance(describeInstanceRequest)

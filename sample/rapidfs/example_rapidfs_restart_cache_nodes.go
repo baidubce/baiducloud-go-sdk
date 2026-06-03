@@ -15,7 +15,6 @@ func RestartCacheNodes() {
 		return
 	}
 	restartCacheNodesRequest := &rapidfs.RestartCacheNodesRequest{
-		Action:       util.PtrString(""),
 		ClientToken:  util.PtrString(""),
 		InstanceId:   util.PtrString(""),
 		CacheNodeIds: []*string{},

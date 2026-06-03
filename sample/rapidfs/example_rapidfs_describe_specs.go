@@ -3,7 +3,6 @@ package rapidfssample
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/baidubce/baiducloud-go-sdk/core/util"
 	"github.com/baidubce/baiducloud-go-sdk/services/rapidfs"
 )
 
@@ -16,7 +15,6 @@ func DescribeSpecs() {
 		return
 	}
 	describeSpecsRequest := &rapidfs.DescribeSpecsRequest{
-		Action:  util.PtrString(""),
 		Filters: []*rapidfs.Filter{},
 	}
 	result, err := client.DescribeSpecs(describeSpecsRequest)

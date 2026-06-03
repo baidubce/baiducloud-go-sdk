@@ -1,7 +1,6 @@
 package rapidfs
 
 type ModifyAuthGroupRequest struct {
-	Action            *string     `json:"-"`
 	ClientToken       *string     `json:"-"`
 	AuthGroupId       *string     `json:"authGroupId,omitempty"`
 	InstanceId        *string     `json:"instanceId,omitempty"`

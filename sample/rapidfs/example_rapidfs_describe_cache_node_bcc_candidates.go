@@ -16,7 +16,6 @@ func DescribeCacheNodeBccCandidates() {
 		return
 	}
 	describeCacheNodeBccCandidatesRequest := &rapidfs.DescribeCacheNodeBccCandidatesRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		VpcId:      util.PtrString(""),
 		Filters:    []*rapidfs.Filter{},

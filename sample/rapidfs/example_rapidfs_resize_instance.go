@@ -16,7 +16,6 @@ func ResizeInstance() {
 		return
 	}
 	resizeInstanceRequest := &rapidfs.ResizeInstanceRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		CapacityTiB: util.PtrInt32(int32(0)),

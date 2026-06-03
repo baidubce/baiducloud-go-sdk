@@ -1,7 +1,6 @@
 package rapidfs
 
 type DescribePriceRequest struct {
-	Action      *string `json:"-"`
 	Currency    *string `json:"currency,omitempty"`
 	ManagedMode *string `json:"managedMode,omitempty"`
 	MetaSpec    *string `json:"metaSpec,omitempty"`

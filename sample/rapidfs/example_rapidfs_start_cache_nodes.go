@@ -15,7 +15,6 @@ func StartCacheNodes() {
 		return
 	}
 	startCacheNodesRequest := &rapidfs.StartCacheNodesRequest{
-		Action:       util.PtrString(""),
 		ClientToken:  util.PtrString(""),
 		InstanceId:   util.PtrString(""),
 		CacheNodeIds: []*string{},

@@ -16,7 +16,6 @@ func CreateAuthGroup() {
 		return
 	}
 	createAuthGroupRequest := &rapidfs.CreateAuthGroupRequest{
-		Action:        util.PtrString(""),
 		ClientToken:   util.PtrString(""),
 		AuthGroupName: util.PtrString(""),
 		InstanceId:    util.PtrString(""),

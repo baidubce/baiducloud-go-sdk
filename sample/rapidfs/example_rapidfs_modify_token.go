@@ -15,7 +15,6 @@ func ModifyToken() {
 		return
 	}
 	modifyTokenRequest := &rapidfs.ModifyTokenRequest{
-		Action:                      util.PtrString(""),
 		ClientToken:                 util.PtrString(""),
 		InstanceId:                  util.PtrString(""),
 		TokenId:                     util.PtrString(""),

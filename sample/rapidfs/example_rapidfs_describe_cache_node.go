@@ -16,7 +16,6 @@ func DescribeCacheNode() {
 		return
 	}
 	describeCacheNodeRequest := &rapidfs.DescribeCacheNodeRequest{
-		Action:      util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		CacheNodeId: util.PtrString(""),
 	}

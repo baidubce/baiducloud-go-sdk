@@ -15,7 +15,6 @@ func CreateAndAssignTag() {
 		return
 	}
 	createAndAssignTagRequest := &rapidfs.CreateAndAssignTagRequest{
-		Action:       util.PtrString(""),
 		ClientToken:  util.PtrString(""),
 		TagResources: []*rapidfs.TagResource{},
 	}

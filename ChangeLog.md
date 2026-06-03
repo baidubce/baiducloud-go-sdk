@@ -1,3 +1,6 @@
+2026-06-03 Version: v0.0.64
+- 涉及产品: RAPIDFS，元数据同步、缓存规则、实例管理等接口统一移除query.action参数
+
 2026-06-03 Version: v0.0.63
 - 涉及产品: CCR，SDK版本更新
 

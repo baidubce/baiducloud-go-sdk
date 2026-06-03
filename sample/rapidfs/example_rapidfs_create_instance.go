@@ -16,7 +16,6 @@ func CreateInstance() {
 		return
 	}
 	createInstanceRequest := &rapidfs.CreateInstanceRequest{
-		Action:                      util.PtrString(""),
 		ClientToken:                 util.PtrString(""),
 		InstanceName:                util.PtrString(""),
 		Description:                 util.PtrString(""),

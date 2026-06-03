@@ -16,7 +16,6 @@ func RemoveDataSrc() {
 		return
 	}
 	removeDataSrcRequest := &rapidfs.RemoveDataSrcRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		DataSrcId:   util.PtrString(""),
 		InstanceId:  util.PtrString(""),

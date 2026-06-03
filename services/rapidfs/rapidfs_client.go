@@ -24,7 +24,6 @@ func (c *Client) AddCacheNodes(request *AddCacheNodesRequest) (*AddCacheNodesRes
 		WithMethod(http.POST).
 		WithURL(getAddCacheNodesUri(VERSION_V2)).
 		WithQueryParamFilter("action", "AddCacheNodes").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -48,7 +47,6 @@ func (c *Client) CancelCacheRuleJob(request *CancelCacheRuleJobRequest) error {
 		WithMethod(http.POST).
 		WithURL(getCancelCacheRuleJobUri(VERSION_V2)).
 		WithQueryParamFilter("action", "CancelCacheRuleJob").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -67,7 +65,6 @@ func (c *Client) CancelMetaSyncJob(request *CancelMetaSyncJobRequest) error {
 		WithMethod(http.POST).
 		WithURL(getCancelMetaSyncJobUri(VERSION_V2)).
 		WithQueryParamFilter("action", "CancelMetaSyncJob").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -87,7 +84,6 @@ func (c *Client) CheckBeforeAddCacheNodes(request *CheckBeforeAddCacheNodesReque
 		WithMethod(http.POST).
 		WithURL(getCheckBeforeAddCacheNodesUri(VERSION_V2)).
 		WithQueryParamFilter("action", "CheckBeforeAddCacheNodes").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -111,7 +107,6 @@ func (c *Client) CheckBeforeCreateInstance(request *CheckBeforeCreateInstanceReq
 		WithMethod(http.POST).
 		WithURL(getCheckBeforeCreateInstanceUri(VERSION_V2)).
 		WithQueryParamFilter("action", "CheckBeforeCreateInstance").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -134,7 +129,6 @@ func (c *Client) CreateAndAssignTag(request *CreateAndAssignTagRequest) error {
 		WithMethod(http.POST).
 		WithURL(getCreateAndAssignTagUri(VERSION_V2)).
 		WithQueryParamFilter("action", "CreateAndAssignTag").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -154,7 +148,6 @@ func (c *Client) CreateAuthGroup(request *CreateAuthGroupRequest) (*CreateAuthGr
 		WithMethod(http.POST).
 		WithURL(getCreateAuthGroupUri(VERSION_V2)).
 		WithQueryParamFilter("action", "CreateAuthGroup").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -179,7 +172,6 @@ func (c *Client) CreateCacheRule(request *CreateCacheRuleRequest) (*CreateCacheR
 		WithMethod(http.POST).
 		WithURL(getCreateCacheRuleUri(VERSION_V2)).
 		WithQueryParamFilter("action", "CreateCacheRule").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -204,7 +196,6 @@ func (c *Client) CreateInstance(request *CreateInstanceRequest) (*CreateInstance
 		WithMethod(http.POST).
 		WithURL(getCreateInstanceUri(VERSION_V2)).
 		WithQueryParamFilter("action", "CreateInstance").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -229,7 +220,6 @@ func (c *Client) CreateMetaSyncRule(request *CreateMetaSyncRuleRequest) (*Create
 		WithMethod(http.POST).
 		WithURL(getCreateMetaSyncRuleUri(VERSION_V2)).
 		WithQueryParamFilter("action", "CreateMetaSyncRule").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -253,7 +243,6 @@ func (c *Client) DeleteAuthGroup(request *DeleteAuthGroupRequest) error {
 		WithMethod(http.POST).
 		WithURL(getDeleteAuthGroupUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DeleteAuthGroup").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -272,7 +261,6 @@ func (c *Client) DeleteCacheRule(request *DeleteCacheRuleRequest) error {
 		WithMethod(http.POST).
 		WithURL(getDeleteCacheRuleUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DeleteCacheRule").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -292,7 +280,6 @@ func (c *Client) DeleteInstance(request *DeleteInstanceRequest) (*DeleteInstance
 		WithMethod(http.POST).
 		WithURL(getDeleteInstanceUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DeleteInstance").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -316,7 +303,6 @@ func (c *Client) DeleteMetaSyncRule(request *DeleteMetaSyncRuleRequest) error {
 		WithMethod(http.POST).
 		WithURL(getDeleteMetaSyncRuleUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DeleteMetaSyncRule").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -336,7 +322,6 @@ func (c *Client) DescribeAihcResourcePools(request *DescribeAihcResourcePoolsReq
 		WithMethod(http.POST).
 		WithURL(getDescribeAihcResourcePoolsUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeAihcResourcePools").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -360,7 +345,6 @@ func (c *Client) DescribeAllocatableDataSrcQuota(request *DescribeAllocatableDat
 		WithMethod(http.POST).
 		WithURL(getDescribeAllocatableDataSrcQuotaUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeAllocatableDataSrcQuota").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -384,7 +368,6 @@ func (c *Client) DescribeAuthGroup(request *DescribeAuthGroupRequest) (*Describe
 		WithMethod(http.POST).
 		WithURL(getDescribeAuthGroupUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeAuthGroup").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -408,7 +391,6 @@ func (c *Client) DescribeAuthGroups(request *DescribeAuthGroupsRequest) (*Descri
 		WithMethod(http.POST).
 		WithURL(getDescribeAuthGroupsUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeAuthGroups").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -432,7 +414,6 @@ func (c *Client) DescribeCacheDeployGroup(request *DescribeCacheDeployGroupReque
 		WithMethod(http.POST).
 		WithURL(getDescribeCacheDeployGroupUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeCacheDeployGroup").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -456,7 +437,6 @@ func (c *Client) DescribeCacheDeployGroups(request *DescribeCacheDeployGroupsReq
 		WithMethod(http.POST).
 		WithURL(getDescribeCacheDeployGroupsUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeCacheDeployGroups").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -480,7 +460,6 @@ func (c *Client) DescribeCacheNode(request *DescribeCacheNodeRequest) (*Describe
 		WithMethod(http.POST).
 		WithURL(getDescribeCacheNodeUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeCacheNode").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -504,7 +483,6 @@ func (c *Client) DescribeCacheNodeBccCandidates(request *DescribeCacheNodeBccCan
 		WithMethod(http.POST).
 		WithURL(getDescribeCacheNodeBccCandidatesUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeCacheNodeBccCandidates").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -528,7 +506,6 @@ func (c *Client) DescribeCacheNodeQuota(request *DescribeCacheNodeQuotaRequest) 
 		WithMethod(http.POST).
 		WithURL(getDescribeCacheNodeQuotaUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeCacheNodeQuota").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -552,7 +529,6 @@ func (c *Client) DescribeCacheNodes(request *DescribeCacheNodesRequest) (*Descri
 		WithMethod(http.POST).
 		WithURL(getDescribeCacheNodesUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeCacheNodes").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -576,7 +552,6 @@ func (c *Client) DescribeCacheRule(request *DescribeCacheRuleRequest) (*Describe
 		WithMethod(http.POST).
 		WithURL(getDescribeCacheRuleUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeCacheRule").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -600,7 +575,6 @@ func (c *Client) DescribeCacheRuleJobs(request *DescribeCacheRuleJobsRequest) (*
 		WithMethod(http.POST).
 		WithURL(getDescribeCacheRuleJobsUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeCacheRuleJobs").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -624,7 +598,6 @@ func (c *Client) DescribeCacheRules(request *DescribeCacheRulesRequest) (*Descri
 		WithMethod(http.POST).
 		WithURL(getDescribeCacheRulesUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeCacheRules").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -648,7 +621,6 @@ func (c *Client) DescribeCceClusters(request *DescribeCceClustersRequest) (*Desc
 		WithMethod(http.POST).
 		WithURL(getDescribeCceClustersUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeCceClusters").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -672,7 +644,6 @@ func (c *Client) DescribeDataSrc(request *DescribeDataSrcRequest) (*DescribeData
 		WithMethod(http.POST).
 		WithURL(getDescribeDataSrcUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeDataSrc").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -696,7 +667,6 @@ func (c *Client) DescribeDataSrcs(request *DescribeDataSrcsRequest) (*DescribeDa
 		WithMethod(http.POST).
 		WithURL(getDescribeDataSrcsUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeDataSrcs").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -720,7 +690,6 @@ func (c *Client) DescribeInstance(request *DescribeInstanceRequest) (*DescribeIn
 		WithMethod(http.POST).
 		WithURL(getDescribeInstanceUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeInstance").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -744,7 +713,6 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (*Describe
 		WithMethod(http.POST).
 		WithURL(getDescribeInstancesUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeInstances").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -768,7 +736,6 @@ func (c *Client) DescribeMetaSyncJobs(request *DescribeMetaSyncJobsRequest) (*De
 		WithMethod(http.POST).
 		WithURL(getDescribeMetaSyncJobsUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeMetaSyncJobs").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -792,7 +759,6 @@ func (c *Client) DescribeMetaSyncRule(request *DescribeMetaSyncRuleRequest) (*De
 		WithMethod(http.POST).
 		WithURL(getDescribeMetaSyncRuleUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeMetaSyncRule").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -816,7 +782,6 @@ func (c *Client) DescribeMetaSyncRules(request *DescribeMetaSyncRulesRequest) (*
 		WithMethod(http.POST).
 		WithURL(getDescribeMetaSyncRulesUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeMetaSyncRules").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -840,7 +805,6 @@ func (c *Client) DescribeOrder(request *DescribeOrderRequest) (*DescribeOrderRes
 		WithMethod(http.POST).
 		WithURL(getDescribeOrderUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeOrder").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -864,7 +828,6 @@ func (c *Client) DescribePrice(request *DescribePriceRequest) (*DescribePriceRes
 		WithMethod(http.POST).
 		WithURL(getDescribePriceUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribePrice").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -888,7 +851,6 @@ func (c *Client) DescribeSpecs(request *DescribeSpecsRequest) (*DescribeSpecsRes
 		WithMethod(http.POST).
 		WithURL(getDescribeSpecsUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeSpecs").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -912,7 +874,6 @@ func (c *Client) DescribeToken(request *DescribeTokenRequest) (*DescribeTokenRes
 		WithMethod(http.POST).
 		WithURL(getDescribeTokenUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeToken").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -930,13 +891,12 @@ func (c *Client) DescribeToken(request *DescribeTokenRequest) (*DescribeTokenRes
 // RETURNS:
 //   - DescribeZonesResponse: The return type of the DescribeZones interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) DescribeZones(request *DescribeZonesRequest) (*DescribeZonesResponse, error) {
+func (c *Client) DescribeZones() (*DescribeZonesResponse, error) {
 	result := &DescribeZonesResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getDescribeZonesUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DescribeZones").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -958,7 +918,6 @@ func (c *Client) DisableMetaSyncRule(request *DisableMetaSyncRuleRequest) error 
 		WithMethod(http.POST).
 		WithURL(getDisableMetaSyncRuleUri(VERSION_V2)).
 		WithQueryParamFilter("action", "DisableMetaSyncRule").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -977,7 +936,6 @@ func (c *Client) EnableMetaSyncRule(request *EnableMetaSyncRuleRequest) error {
 		WithMethod(http.POST).
 		WithURL(getEnableMetaSyncRuleUri(VERSION_V2)).
 		WithQueryParamFilter("action", "EnableMetaSyncRule").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -996,7 +954,6 @@ func (c *Client) ExecuteCacheRuleJob(request *ExecuteCacheRuleJobRequest) error 
 		WithMethod(http.POST).
 		WithURL(getExecuteCacheRuleJobUri(VERSION_V2)).
 		WithQueryParamFilter("action", "ExecuteCacheRuleJob").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -1015,7 +972,6 @@ func (c *Client) ExecuteMetaSyncJob(request *ExecuteMetaSyncJobRequest) error {
 		WithMethod(http.POST).
 		WithURL(getExecuteMetaSyncJobUri(VERSION_V2)).
 		WithQueryParamFilter("action", "ExecuteMetaSyncJob").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -1035,7 +991,6 @@ func (c *Client) ImportDataSrc(request *ImportDataSrcRequest) (*ImportDataSrcRes
 		WithMethod(http.POST).
 		WithURL(getImportDataSrcUri(VERSION_V2)).
 		WithQueryParamFilter("action", "ImportDataSrc").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -1059,7 +1014,6 @@ func (c *Client) ModifyAuthGroup(request *ModifyAuthGroupRequest) error {
 		WithMethod(http.POST).
 		WithURL(getModifyAuthGroupUri(VERSION_V2)).
 		WithQueryParamFilter("action", "ModifyAuthGroup").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -1078,7 +1032,6 @@ func (c *Client) ModifyDataSrc(request *ModifyDataSrcRequest) error {
 		WithMethod(http.POST).
 		WithURL(getModifyDataSrcUri(VERSION_V2)).
 		WithQueryParamFilter("action", "ModifyDataSrc").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -1097,7 +1050,6 @@ func (c *Client) ModifyMetaSyncRule(request *ModifyMetaSyncRuleRequest) error {
 		WithMethod(http.POST).
 		WithURL(getModifyMetaSyncRuleUri(VERSION_V2)).
 		WithQueryParamFilter("action", "ModifyMetaSyncRule").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -1116,7 +1068,6 @@ func (c *Client) ModifyToken(request *ModifyTokenRequest) error {
 		WithMethod(http.POST).
 		WithURL(getModifyTokenUri(VERSION_V2)).
 		WithQueryParamFilter("action", "ModifyToken").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -1135,7 +1086,6 @@ func (c *Client) RemoveCacheNodes(request *RemoveCacheNodesRequest) error {
 		WithMethod(http.POST).
 		WithURL(getRemoveCacheNodesUri(VERSION_V2)).
 		WithQueryParamFilter("action", "RemoveCacheNodes").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -1155,7 +1105,6 @@ func (c *Client) RemoveDataSrc(request *RemoveDataSrcRequest) (*RemoveDataSrcRes
 		WithMethod(http.POST).
 		WithURL(getRemoveDataSrcUri(VERSION_V2)).
 		WithQueryParamFilter("action", "RemoveDataSrc").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -1180,7 +1129,6 @@ func (c *Client) ResizeInstance(request *ResizeInstanceRequest) (*ResizeInstance
 		WithMethod(http.POST).
 		WithURL(getResizeInstanceUri(VERSION_V2)).
 		WithQueryParamFilter("action", "ResizeInstance").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -1204,7 +1152,6 @@ func (c *Client) RestartCacheNodes(request *RestartCacheNodesRequest) error {
 		WithMethod(http.POST).
 		WithURL(getRestartCacheNodesUri(VERSION_V2)).
 		WithQueryParamFilter("action", "RestartCacheNodes").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -1223,7 +1170,6 @@ func (c *Client) StartCacheNodes(request *StartCacheNodesRequest) error {
 		WithMethod(http.POST).
 		WithURL(getStartCacheNodesUri(VERSION_V2)).
 		WithQueryParamFilter("action", "StartCacheNodes").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -1242,7 +1188,6 @@ func (c *Client) StopCacheNodes(request *StopCacheNodesRequest) error {
 		WithMethod(http.POST).
 		WithURL(getStopCacheNodesUri(VERSION_V2)).
 		WithQueryParamFilter("action", "StopCacheNodes").
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()

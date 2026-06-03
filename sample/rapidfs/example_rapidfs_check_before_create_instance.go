@@ -16,7 +16,6 @@ func CheckBeforeCreateInstance() {
 		return
 	}
 	checkBeforeCreateInstanceRequest := &rapidfs.CheckBeforeCreateInstanceRequest{
-		Action:             util.PtrString(""),
 		Zone:               util.PtrString(""),
 		VpcId:              util.PtrString(""),
 		SubnetId:           util.PtrString(""),

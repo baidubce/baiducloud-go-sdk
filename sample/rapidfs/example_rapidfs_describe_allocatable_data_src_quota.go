@@ -16,7 +16,6 @@ func DescribeAllocatableDataSrcQuota() {
 		return
 	}
 	describeAllocatableDataSrcQuotaRequest := &rapidfs.DescribeAllocatableDataSrcQuotaRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		DataSrcId:  util.PtrString(""),
 	}

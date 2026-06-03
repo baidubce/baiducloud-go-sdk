@@ -16,7 +16,6 @@ func DescribeMetaSyncJobs() {
 		return
 	}
 	describeMetaSyncJobsRequest := &rapidfs.DescribeMetaSyncJobsRequest{
-		Action:         util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcId:      util.PtrString(""),
 		MetaSyncRuleId: util.PtrString(""),

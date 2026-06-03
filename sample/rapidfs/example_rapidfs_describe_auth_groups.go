@@ -16,7 +16,6 @@ func DescribeAuthGroups() {
 		return
 	}
 	describeAuthGroupsRequest := &rapidfs.DescribeAuthGroupsRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		Filters:    []*rapidfs.Filter{},
 		MaxKeys:    util.PtrInt32(int32(0)),

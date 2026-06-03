@@ -16,7 +16,6 @@ func DescribeCacheDeployGroups() {
 		return
 	}
 	describeCacheDeployGroupsRequest := &rapidfs.DescribeCacheDeployGroupsRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		MaxKeys:    util.PtrInt32(int32(0)),
 		Marker:     util.PtrString(""),

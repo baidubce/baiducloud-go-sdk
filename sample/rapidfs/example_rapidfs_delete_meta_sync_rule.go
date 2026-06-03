@@ -15,7 +15,6 @@ func DeleteMetaSyncRule() {
 		return
 	}
 	deleteMetaSyncRuleRequest := &rapidfs.DeleteMetaSyncRuleRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcId:      util.PtrString(""),

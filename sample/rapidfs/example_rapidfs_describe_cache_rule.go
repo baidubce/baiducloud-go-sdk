@@ -16,7 +16,6 @@ func DescribeCacheRule() {
 		return
 	}
 	describeCacheRuleRequest := &rapidfs.DescribeCacheRuleRequest{
-		Action:      util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		DataSrcId:   util.PtrString(""),
 		CacheRuleId: util.PtrString(""),

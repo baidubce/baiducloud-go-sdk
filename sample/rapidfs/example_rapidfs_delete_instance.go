@@ -16,7 +16,6 @@ func DeleteInstance() {
 		return
 	}
 	deleteInstanceRequest := &rapidfs.DeleteInstanceRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		Token:       util.PtrString(""),

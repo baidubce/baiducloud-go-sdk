@@ -15,7 +15,6 @@ func CancelMetaSyncJob() {
 		return
 	}
 	cancelMetaSyncJobRequest := &rapidfs.CancelMetaSyncJobRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcId:      util.PtrString(""),

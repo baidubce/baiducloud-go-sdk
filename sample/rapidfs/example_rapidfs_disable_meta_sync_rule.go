@@ -15,7 +15,6 @@ func DisableMetaSyncRule() {
 		return
 	}
 	disableMetaSyncRuleRequest := &rapidfs.DisableMetaSyncRuleRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcId:      util.PtrString(""),

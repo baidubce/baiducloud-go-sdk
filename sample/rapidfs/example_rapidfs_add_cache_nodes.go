@@ -16,7 +16,6 @@ func AddCacheNodes() {
 		return
 	}
 	addCacheNodesRequest := &rapidfs.AddCacheNodesRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		RapidfsType: util.PtrString(""),

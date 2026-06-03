@@ -15,7 +15,6 @@ func DeleteAuthGroup() {
 		return
 	}
 	deleteAuthGroupRequest := &rapidfs.DeleteAuthGroupRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		AuthGroupId: util.PtrString(""),

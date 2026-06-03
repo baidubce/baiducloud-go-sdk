@@ -16,7 +16,6 @@ func DescribeInstances() {
 		return
 	}
 	describeInstancesRequest := &rapidfs.DescribeInstancesRequest{
-		Action:  util.PtrString(""),
 		Filters: []*rapidfs.Filter{},
 		MaxKeys: util.PtrInt32(int32(0)),
 		Marker:  util.PtrString(""),

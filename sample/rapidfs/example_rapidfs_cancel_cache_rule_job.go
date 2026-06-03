@@ -15,7 +15,6 @@ func CancelCacheRuleJob() {
 		return
 	}
 	cancelCacheRuleJobRequest := &rapidfs.CancelCacheRuleJobRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		DataSrcId:   util.PtrString(""),

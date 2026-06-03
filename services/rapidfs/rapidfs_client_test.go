@@ -69,7 +69,6 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 
 func TestClient_AddCacheNodes(t *testing.T) {
 	addCacheNodesRequest := &AddCacheNodesRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		RapidfsType: util.PtrString(""),
@@ -91,7 +90,6 @@ func TestClient_AddCacheNodes(t *testing.T) {
 }
 func TestClient_CancelCacheRuleJob(t *testing.T) {
 	cancelCacheRuleJobRequest := &CancelCacheRuleJobRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		DataSrcId:   util.PtrString(""),
@@ -102,7 +100,6 @@ func TestClient_CancelCacheRuleJob(t *testing.T) {
 }
 func TestClient_CancelMetaSyncJob(t *testing.T) {
 	cancelMetaSyncJobRequest := &CancelMetaSyncJobRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcId:      util.PtrString(""),
@@ -113,7 +110,6 @@ func TestClient_CancelMetaSyncJob(t *testing.T) {
 }
 func TestClient_CheckBeforeAddCacheNodes(t *testing.T) {
 	checkBeforeAddCacheNodesRequest := &CheckBeforeAddCacheNodesRequest{
-		Action:      util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		RapidfsType: util.PtrString(""),
 		CacheNodes:  []*AddCacheNodeInfo{},
@@ -134,7 +130,6 @@ func TestClient_CheckBeforeAddCacheNodes(t *testing.T) {
 }
 func TestClient_CheckBeforeCreateInstance(t *testing.T) {
 	checkBeforeCreateInstanceRequest := &CheckBeforeCreateInstanceRequest{
-		Action:             util.PtrString(""),
 		Zone:               util.PtrString(""),
 		VpcId:              util.PtrString(""),
 		SubnetId:           util.PtrString(""),
@@ -164,7 +159,6 @@ func TestClient_CheckBeforeCreateInstance(t *testing.T) {
 }
 func TestClient_CreateAndAssignTag(t *testing.T) {
 	createAndAssignTagRequest := &CreateAndAssignTagRequest{
-		Action:       util.PtrString(""),
 		ClientToken:  util.PtrString(""),
 		TagResources: []*TagResource{},
 	}
@@ -173,7 +167,6 @@ func TestClient_CreateAndAssignTag(t *testing.T) {
 }
 func TestClient_CreateAuthGroup(t *testing.T) {
 	createAuthGroupRequest := &CreateAuthGroupRequest{
-		Action:        util.PtrString(""),
 		ClientToken:   util.PtrString(""),
 		AuthGroupName: util.PtrString(""),
 		InstanceId:    util.PtrString(""),
@@ -196,7 +189,6 @@ func TestClient_CreateAuthGroup(t *testing.T) {
 }
 func TestClient_CreateCacheRule(t *testing.T) {
 	createCacheRuleRequest := &CreateCacheRuleRequest{
-		Action:          util.PtrString(""),
 		ClientToken:     util.PtrString(""),
 		InstanceId:      util.PtrString(""),
 		DataSrcId:       util.PtrString(""),
@@ -222,7 +214,6 @@ func TestClient_CreateCacheRule(t *testing.T) {
 }
 func TestClient_CreateInstance(t *testing.T) {
 	createInstanceRequest := &CreateInstanceRequest{
-		Action:                      util.PtrString(""),
 		ClientToken:                 util.PtrString(""),
 		InstanceName:                util.PtrString(""),
 		Description:                 util.PtrString(""),
@@ -257,7 +248,6 @@ func TestClient_CreateInstance(t *testing.T) {
 }
 func TestClient_CreateMetaSyncRule(t *testing.T) {
 	createMetaSyncRuleRequest := &CreateMetaSyncRuleRequest{
-		Action:           util.PtrString(""),
 		ClientToken:      util.PtrString(""),
 		InstanceId:       util.PtrString(""),
 		DataSrcId:        util.PtrString(""),
@@ -285,7 +275,6 @@ func TestClient_CreateMetaSyncRule(t *testing.T) {
 }
 func TestClient_DeleteAuthGroup(t *testing.T) {
 	deleteAuthGroupRequest := &DeleteAuthGroupRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		AuthGroupId: util.PtrString(""),
@@ -295,7 +284,6 @@ func TestClient_DeleteAuthGroup(t *testing.T) {
 }
 func TestClient_DeleteCacheRule(t *testing.T) {
 	deleteCacheRuleRequest := &DeleteCacheRuleRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		DataSrcId:   util.PtrString(""),
@@ -306,7 +294,6 @@ func TestClient_DeleteCacheRule(t *testing.T) {
 }
 func TestClient_DeleteInstance(t *testing.T) {
 	deleteInstanceRequest := &DeleteInstanceRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		Token:       util.PtrString(""),
@@ -327,7 +314,6 @@ func TestClient_DeleteInstance(t *testing.T) {
 }
 func TestClient_DeleteMetaSyncRule(t *testing.T) {
 	deleteMetaSyncRuleRequest := &DeleteMetaSyncRuleRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcId:      util.PtrString(""),
@@ -338,7 +324,6 @@ func TestClient_DeleteMetaSyncRule(t *testing.T) {
 }
 func TestClient_DescribeAihcResourcePools(t *testing.T) {
 	describeAihcResourcePoolsRequest := &DescribeAihcResourcePoolsRequest{
-		Action:  util.PtrString(""),
 		VpcId:   util.PtrString(""),
 		MaxKeys: util.PtrInt32(int32(0)),
 		Marker:  util.PtrString(""),
@@ -359,7 +344,6 @@ func TestClient_DescribeAihcResourcePools(t *testing.T) {
 }
 func TestClient_DescribeAllocatableDataSrcQuota(t *testing.T) {
 	describeAllocatableDataSrcQuotaRequest := &DescribeAllocatableDataSrcQuotaRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		DataSrcId:  util.PtrString(""),
 	}
@@ -379,7 +363,6 @@ func TestClient_DescribeAllocatableDataSrcQuota(t *testing.T) {
 }
 func TestClient_DescribeAuthGroup(t *testing.T) {
 	describeAuthGroupRequest := &DescribeAuthGroupRequest{
-		Action:      util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		AuthGroupId: util.PtrString(""),
 	}
@@ -399,7 +382,6 @@ func TestClient_DescribeAuthGroup(t *testing.T) {
 }
 func TestClient_DescribeAuthGroups(t *testing.T) {
 	describeAuthGroupsRequest := &DescribeAuthGroupsRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		Filters:    []*Filter{},
 		MaxKeys:    util.PtrInt32(int32(0)),
@@ -421,7 +403,6 @@ func TestClient_DescribeAuthGroups(t *testing.T) {
 }
 func TestClient_DescribeCacheDeployGroup(t *testing.T) {
 	describeCacheDeployGroupRequest := &DescribeCacheDeployGroupRequest{
-		Action:               util.PtrString(""),
 		InstanceId:           util.PtrString(""),
 		CacheDeployGroupName: util.PtrString(""),
 		CacheDeployGroupNS:   util.PtrString(""),
@@ -442,7 +423,6 @@ func TestClient_DescribeCacheDeployGroup(t *testing.T) {
 }
 func TestClient_DescribeCacheDeployGroups(t *testing.T) {
 	describeCacheDeployGroupsRequest := &DescribeCacheDeployGroupsRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		MaxKeys:    util.PtrInt32(int32(0)),
 		Marker:     util.PtrString(""),
@@ -463,7 +443,6 @@ func TestClient_DescribeCacheDeployGroups(t *testing.T) {
 }
 func TestClient_DescribeCacheNode(t *testing.T) {
 	describeCacheNodeRequest := &DescribeCacheNodeRequest{
-		Action:      util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		CacheNodeId: util.PtrString(""),
 	}
@@ -483,7 +462,6 @@ func TestClient_DescribeCacheNode(t *testing.T) {
 }
 func TestClient_DescribeCacheNodeBccCandidates(t *testing.T) {
 	describeCacheNodeBccCandidatesRequest := &DescribeCacheNodeBccCandidatesRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		VpcId:      util.PtrString(""),
 		Filters:    []*Filter{},
@@ -506,7 +484,6 @@ func TestClient_DescribeCacheNodeBccCandidates(t *testing.T) {
 }
 func TestClient_DescribeCacheNodeQuota(t *testing.T) {
 	describeCacheNodeQuotaRequest := &DescribeCacheNodeQuotaRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 	}
 	result := &DescribeCacheNodeQuotaResponse{}
@@ -525,7 +502,6 @@ func TestClient_DescribeCacheNodeQuota(t *testing.T) {
 }
 func TestClient_DescribeCacheNodes(t *testing.T) {
 	describeCacheNodesRequest := &DescribeCacheNodesRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		Filters:    []*Filter{},
 		MaxKeys:    util.PtrInt32(int32(0)),
@@ -547,7 +523,6 @@ func TestClient_DescribeCacheNodes(t *testing.T) {
 }
 func TestClient_DescribeCacheRule(t *testing.T) {
 	describeCacheRuleRequest := &DescribeCacheRuleRequest{
-		Action:      util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		DataSrcId:   util.PtrString(""),
 		CacheRuleId: util.PtrString(""),
@@ -568,7 +543,6 @@ func TestClient_DescribeCacheRule(t *testing.T) {
 }
 func TestClient_DescribeCacheRuleJobs(t *testing.T) {
 	describeCacheRuleJobsRequest := &DescribeCacheRuleJobsRequest{
-		Action:      util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		DataSrcId:   util.PtrString(""),
 		CacheRuleId: util.PtrString(""),
@@ -591,7 +565,6 @@ func TestClient_DescribeCacheRuleJobs(t *testing.T) {
 }
 func TestClient_DescribeCacheRules(t *testing.T) {
 	describeCacheRulesRequest := &DescribeCacheRulesRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		Filters:    []*Filter{},
 		MaxKeys:    util.PtrInt32(int32(0)),
@@ -613,7 +586,6 @@ func TestClient_DescribeCacheRules(t *testing.T) {
 }
 func TestClient_DescribeCceClusters(t *testing.T) {
 	describeCceClustersRequest := &DescribeCceClustersRequest{
-		Action:  util.PtrString(""),
 		VpcId:   util.PtrString(""),
 		MaxKeys: util.PtrInt32(int32(0)),
 		Marker:  util.PtrString(""),
@@ -634,7 +606,6 @@ func TestClient_DescribeCceClusters(t *testing.T) {
 }
 func TestClient_DescribeDataSrc(t *testing.T) {
 	describeDataSrcRequest := &DescribeDataSrcRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		DataSrcId:  util.PtrString(""),
 	}
@@ -654,7 +625,6 @@ func TestClient_DescribeDataSrc(t *testing.T) {
 }
 func TestClient_DescribeDataSrcs(t *testing.T) {
 	describeDataSrcsRequest := &DescribeDataSrcsRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		Filters:    []*Filter{},
 		MaxKeys:    util.PtrInt32(int32(0)),
@@ -676,7 +646,6 @@ func TestClient_DescribeDataSrcs(t *testing.T) {
 }
 func TestClient_DescribeInstance(t *testing.T) {
 	describeInstanceRequest := &DescribeInstanceRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 	}
 	result := &DescribeInstanceResponse{}
@@ -695,7 +664,6 @@ func TestClient_DescribeInstance(t *testing.T) {
 }
 func TestClient_DescribeInstances(t *testing.T) {
 	describeInstancesRequest := &DescribeInstancesRequest{
-		Action:  util.PtrString(""),
 		Filters: []*Filter{},
 		MaxKeys: util.PtrInt32(int32(0)),
 		Marker:  util.PtrString(""),
@@ -716,7 +684,6 @@ func TestClient_DescribeInstances(t *testing.T) {
 }
 func TestClient_DescribeMetaSyncJobs(t *testing.T) {
 	describeMetaSyncJobsRequest := &DescribeMetaSyncJobsRequest{
-		Action:         util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcId:      util.PtrString(""),
 		MetaSyncRuleId: util.PtrString(""),
@@ -739,7 +706,6 @@ func TestClient_DescribeMetaSyncJobs(t *testing.T) {
 }
 func TestClient_DescribeMetaSyncRule(t *testing.T) {
 	describeMetaSyncRuleRequest := &DescribeMetaSyncRuleRequest{
-		Action:         util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcId:      util.PtrString(""),
 		MetaSyncRuleId: util.PtrString(""),
@@ -760,7 +726,6 @@ func TestClient_DescribeMetaSyncRule(t *testing.T) {
 }
 func TestClient_DescribeMetaSyncRules(t *testing.T) {
 	describeMetaSyncRulesRequest := &DescribeMetaSyncRulesRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		Filters:    []*Filter{},
 		MaxKeys:    util.PtrInt32(int32(0)),
@@ -782,7 +747,6 @@ func TestClient_DescribeMetaSyncRules(t *testing.T) {
 }
 func TestClient_DescribeOrder(t *testing.T) {
 	describeOrderRequest := &DescribeOrderRequest{
-		Action:  util.PtrString(""),
 		OrderId: util.PtrString(""),
 	}
 	result := &DescribeOrderResponse{}
@@ -801,7 +765,6 @@ func TestClient_DescribeOrder(t *testing.T) {
 }
 func TestClient_DescribePrice(t *testing.T) {
 	describePriceRequest := &DescribePriceRequest{
-		Action:      util.PtrString(""),
 		Currency:    util.PtrString(""),
 		ManagedMode: util.PtrString(""),
 		MetaSpec:    util.PtrString(""),
@@ -824,7 +787,6 @@ func TestClient_DescribePrice(t *testing.T) {
 }
 func TestClient_DescribeSpecs(t *testing.T) {
 	describeSpecsRequest := &DescribeSpecsRequest{
-		Action:  util.PtrString(""),
 		Filters: []*Filter{},
 	}
 	result := &DescribeSpecsResponse{}
@@ -843,7 +805,6 @@ func TestClient_DescribeSpecs(t *testing.T) {
 }
 func TestClient_DescribeToken(t *testing.T) {
 	describeTokenRequest := &DescribeTokenRequest{
-		Action:     util.PtrString(""),
 		InstanceId: util.PtrString(""),
 		TokenId:    util.PtrString(""),
 	}
@@ -862,11 +823,8 @@ func TestClient_DescribeToken(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DescribeZones(t *testing.T) {
-	describeZonesRequest := &DescribeZonesRequest{
-		Action: util.PtrString(""),
-	}
 	result := &DescribeZonesResponse{}
-	result, err := RAPIDFS_CLIENT.DescribeZones(describeZonesRequest)
+	result, err := RAPIDFS_CLIENT.DescribeZones()
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -881,7 +839,6 @@ func TestClient_DescribeZones(t *testing.T) {
 }
 func TestClient_DisableMetaSyncRule(t *testing.T) {
 	disableMetaSyncRuleRequest := &DisableMetaSyncRuleRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcId:      util.PtrString(""),
@@ -892,7 +849,6 @@ func TestClient_DisableMetaSyncRule(t *testing.T) {
 }
 func TestClient_EnableMetaSyncRule(t *testing.T) {
 	enableMetaSyncRuleRequest := &EnableMetaSyncRuleRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcId:      util.PtrString(""),
@@ -903,7 +859,6 @@ func TestClient_EnableMetaSyncRule(t *testing.T) {
 }
 func TestClient_ExecuteCacheRuleJob(t *testing.T) {
 	executeCacheRuleJobRequest := &ExecuteCacheRuleJobRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		DataSrcId:   util.PtrString(""),
@@ -914,7 +869,6 @@ func TestClient_ExecuteCacheRuleJob(t *testing.T) {
 }
 func TestClient_ExecuteMetaSyncJob(t *testing.T) {
 	executeMetaSyncJobRequest := &ExecuteMetaSyncJobRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcId:      util.PtrString(""),
@@ -925,7 +879,6 @@ func TestClient_ExecuteMetaSyncJob(t *testing.T) {
 }
 func TestClient_ImportDataSrc(t *testing.T) {
 	importDataSrcRequest := &ImportDataSrcRequest{
-		Action:         util.PtrString(""),
 		ClientToken:    util.PtrString(""),
 		InstanceId:     util.PtrString(""),
 		DataSrcName:    util.PtrString(""),
@@ -956,7 +909,6 @@ func TestClient_ImportDataSrc(t *testing.T) {
 }
 func TestClient_ModifyAuthGroup(t *testing.T) {
 	modifyAuthGroupRequest := &ModifyAuthGroupRequest{
-		Action:            util.PtrString(""),
 		ClientToken:       util.PtrString(""),
 		AuthGroupId:       util.PtrString(""),
 		InstanceId:        util.PtrString(""),
@@ -970,7 +922,6 @@ func TestClient_ModifyAuthGroup(t *testing.T) {
 }
 func TestClient_ModifyDataSrc(t *testing.T) {
 	modifyDataSrcRequest := &ModifyDataSrcRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		DataSrcId:   util.PtrString(""),
 		InstanceId:  util.PtrString(""),
@@ -984,7 +935,6 @@ func TestClient_ModifyDataSrc(t *testing.T) {
 }
 func TestClient_ModifyMetaSyncRule(t *testing.T) {
 	modifyMetaSyncRuleRequest := &ModifyMetaSyncRuleRequest{
-		Action:           util.PtrString(""),
 		ClientToken:      util.PtrString(""),
 		InstanceId:       util.PtrString(""),
 		DataSrcId:        util.PtrString(""),
@@ -998,7 +948,6 @@ func TestClient_ModifyMetaSyncRule(t *testing.T) {
 }
 func TestClient_ModifyToken(t *testing.T) {
 	modifyTokenRequest := &ModifyTokenRequest{
-		Action:                      util.PtrString(""),
 		ClientToken:                 util.PtrString(""),
 		InstanceId:                  util.PtrString(""),
 		TokenId:                     util.PtrString(""),
@@ -1009,7 +958,6 @@ func TestClient_ModifyToken(t *testing.T) {
 }
 func TestClient_RemoveCacheNodes(t *testing.T) {
 	removeCacheNodesRequest := &RemoveCacheNodesRequest{
-		Action:               util.PtrString(""),
 		ClientToken:          util.PtrString(""),
 		InstanceId:           util.PtrString(""),
 		CacheNodeIds:         []*string{},
@@ -1020,7 +968,6 @@ func TestClient_RemoveCacheNodes(t *testing.T) {
 }
 func TestClient_RemoveDataSrc(t *testing.T) {
 	removeDataSrcRequest := &RemoveDataSrcRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		DataSrcId:   util.PtrString(""),
 		InstanceId:  util.PtrString(""),
@@ -1042,7 +989,6 @@ func TestClient_RemoveDataSrc(t *testing.T) {
 }
 func TestClient_ResizeInstance(t *testing.T) {
 	resizeInstanceRequest := &ResizeInstanceRequest{
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		InstanceId:  util.PtrString(""),
 		CapacityTiB: util.PtrInt32(int32(0)),
@@ -1063,7 +1009,6 @@ func TestClient_ResizeInstance(t *testing.T) {
 }
 func TestClient_RestartCacheNodes(t *testing.T) {
 	restartCacheNodesRequest := &RestartCacheNodesRequest{
-		Action:       util.PtrString(""),
 		ClientToken:  util.PtrString(""),
 		InstanceId:   util.PtrString(""),
 		CacheNodeIds: []*string{},
@@ -1073,7 +1018,6 @@ func TestClient_RestartCacheNodes(t *testing.T) {
 }
 func TestClient_StartCacheNodes(t *testing.T) {
 	startCacheNodesRequest := &StartCacheNodesRequest{
-		Action:       util.PtrString(""),
 		ClientToken:  util.PtrString(""),
 		InstanceId:   util.PtrString(""),
 		CacheNodeIds: []*string{},
@@ -1083,7 +1027,6 @@ func TestClient_StartCacheNodes(t *testing.T) {
 }
 func TestClient_StopCacheNodes(t *testing.T) {
 	stopCacheNodesRequest := &StopCacheNodesRequest{
-		Action:                util.PtrString(""),
 		ClientToken:           util.PtrString(""),
 		InstanceId:            util.PtrString(""),
 		CacheNodeIds:          []*string{},

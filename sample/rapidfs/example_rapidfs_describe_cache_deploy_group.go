@@ -16,7 +16,6 @@ func DescribeCacheDeployGroup() {
 		return
 	}
 	describeCacheDeployGroupRequest := &rapidfs.DescribeCacheDeployGroupRequest{
-		Action:               util.PtrString(""),
 		InstanceId:           util.PtrString(""),
 		CacheDeployGroupName: util.PtrString(""),
 		CacheDeployGroupNS:   util.PtrString(""),

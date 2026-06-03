@@ -1,7 +1,6 @@
 package rapidfs
 
 type ImportDataSrcRequest struct {
-	Action         *string `json:"-"`
 	ClientToken    *string `json:"-"`
 	InstanceId     *string `json:"instanceId,omitempty"`
 	DataSrcName    *string `json:"dataSrcName,omitempty"`
