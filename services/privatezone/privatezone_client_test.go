@@ -102,6 +102,15 @@ func TestClient_BindVpc(t *testing.T) {
 	err := PRIVATEZONE_CLIENT.BindVpc(bindVpcRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_BindVpcToRule(t *testing.T) {
+	bindVpcToRuleRequest := &BindVpcToRuleRequest{
+		RuleId:     util.PtrString(""),
+		ClienToken: util.PtrString(""),
+		VpcRegions: []*VpcRegion{},
+	}
+	err := PRIVATEZONE_CLIENT.BindVpcToRule(bindVpcToRuleRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreatePrivateZone(t *testing.T) {
 	createPrivateZoneRequest := &CreatePrivateZoneRequest{
 		ClientToken: util.PtrString(""),
@@ -109,6 +118,53 @@ func TestClient_CreatePrivateZone(t *testing.T) {
 	}
 	result := &CreatePrivateZoneResponse{}
 	result, err := PRIVATEZONE_CLIENT.CreatePrivateZone(createPrivateZoneRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateResolver(t *testing.T) {
+	createResolverRequest := &CreateResolverRequest{
+		ClientToken:     util.PtrString(""),
+		Name:            util.PtrString(""),
+		Description:     util.PtrString(""),
+		VpcId:           util.PtrString(""),
+		VpcRegion:       util.PtrString(""),
+		IpModels:        []*IpModel{},
+		PrivatezoneType: util.PtrString(""),
+	}
+	result := &CreateResolverResponse{}
+	result, err := PRIVATEZONE_CLIENT.CreateResolver(createResolverRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateResolverRule(t *testing.T) {
+	createResolverRuleRequest := &CreateResolverRuleRequest{
+		ClientToken:      util.PtrString(""),
+		Name:             util.PtrString(""),
+		Description:      util.PtrString(""),
+		Zone:             util.PtrString(""),
+		ResolverId:       util.PtrString(""),
+		DnsServerConfigs: []*DnsServerConfig{},
+	}
+	result := &CreateResolverRuleResponse{}
+	result, err := PRIVATEZONE_CLIENT.CreateResolverRule(createResolverRuleRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -137,6 +193,22 @@ func TestClient_DeleteRecord(t *testing.T) {
 	err := PRIVATEZONE_CLIENT.DeleteRecord(deleteRecordRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteResolver(t *testing.T) {
+	deleteResolverRequest := &DeleteResolverRequest{
+		ResolverId:  util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := PRIVATEZONE_CLIENT.DeleteResolver(deleteResolverRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteResolverRule(t *testing.T) {
+	deleteResolverRuleRequest := &DeleteResolverRuleRequest{
+		RuleId:      util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := PRIVATEZONE_CLIENT.DeleteResolverRule(deleteResolverRuleRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DisableRecord(t *testing.T) {
 	disableRecordRequest := &DisableRecordRequest{
 		RecordId:    util.PtrString(""),
@@ -148,10 +220,85 @@ func TestClient_DisableRecord(t *testing.T) {
 func TestClient_EnableRecord(t *testing.T) {
 	enableRecordRequest := &EnableRecordRequest{
 		RecordId:    util.PtrString(""),
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
 	err := PRIVATEZONE_CLIENT.EnableRecord(enableRecordRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetDnsResolverDetail(t *testing.T) {
+	getDnsResolverDetailRequest := &GetDnsResolverDetailRequest{
+		ResolverId: util.PtrString(""),
+	}
+	result := &GetDnsResolverDetailResponse{}
+	result, err := PRIVATEZONE_CLIENT.GetDnsResolverDetail(getDnsResolverDetailRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetDnsResolverList(t *testing.T) {
+	getDnsResolverListRequest := &GetDnsResolverListRequest{
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrString(""),
+		Status:  util.PtrString(""),
+	}
+	result := &GetDnsResolverListResponse{}
+	result, err := PRIVATEZONE_CLIENT.GetDnsResolverList(getDnsResolverListRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetDnsResolverRuleDetail(t *testing.T) {
+	getDnsResolverRuleDetailRequest := &GetDnsResolverRuleDetailRequest{
+		RuleId: util.PtrString(""),
+	}
+	result := &GetDnsResolverRuleDetailResponse{}
+	result, err := PRIVATEZONE_CLIENT.GetDnsResolverRuleDetail(getDnsResolverRuleDetailRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetDnsResolverRuleList(t *testing.T) {
+	getDnsResolverRuleListRequest := &GetDnsResolverRuleListRequest{
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrString(""),
+		Status:  util.PtrString(""),
+	}
+	result := &GetDnsResolverRuleListResponse{}
+	result, err := PRIVATEZONE_CLIENT.GetDnsResolverRuleList(getDnsResolverRuleListRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetPrivateZone(t *testing.T) {
@@ -218,12 +365,30 @@ func TestClient_ListRecord(t *testing.T) {
 func TestClient_UnbindVpc(t *testing.T) {
 	unbindVpcRequest := &UnbindVpcRequest{
 		ZoneId:      util.PtrString(""),
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Region:      util.PtrString(""),
 		VpcIds:      []*string{},
 	}
 	err := PRIVATEZONE_CLIENT.UnbindVpc(unbindVpcRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UnbindVpcToRule(t *testing.T) {
+	unbindVpcToRuleRequest := &UnbindVpcToRuleRequest{
+		RuleId:     util.PtrString(""),
+		ClienToken: util.PtrString(""),
+		VpcRegions: []*VpcRegion{},
+	}
+	err := PRIVATEZONE_CLIENT.UnbindVpcToRule(unbindVpcToRuleRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateDnsParser(t *testing.T) {
+	updateDnsParserRequest := &UpdateDnsParserRequest{
+		ResolverId:  util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
+	}
+	err := PRIVATEZONE_CLIENT.UpdateDnsParser(updateDnsParserRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateRecord(t *testing.T) {
@@ -238,5 +403,16 @@ func TestClient_UpdateRecord(t *testing.T) {
 		Description:     util.PtrString(""),
 	}
 	err := PRIVATEZONE_CLIENT.UpdateRecord(updateRecordRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateResolverRule(t *testing.T) {
+	updateResolverRuleRequest := &UpdateResolverRuleRequest{
+		ReluId:           util.PtrString(""),
+		ClientToken:      util.PtrString(""),
+		Name:             util.PtrString(""),
+		Description:      util.PtrString(""),
+		DnsServerConfigs: []*DnsServerConfig{},
+	}
+	err := PRIVATEZONE_CLIENT.UpdateResolverRule(updateResolverRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }

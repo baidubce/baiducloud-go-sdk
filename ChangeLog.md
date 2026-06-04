@@ -1,3 +1,8 @@
+2026-06-04 Version: v0.0.65
+- 涉及产品: PRIVATEZONE，新增DNS解析器增删改查及转发规则管理接口
+- 涉及产品: PRIVATEZONE，新增VPC与转发规则关联/解关联接口
+- 涉及产品: PRIVATEZONE，unbindVpc和enableRecord接口删除query.action字段
+
 2026-06-03 Version: v0.0.64
 - 涉及产品: RAPIDFS，元数据同步、缓存规则、实例管理等接口统一移除query.action参数
 

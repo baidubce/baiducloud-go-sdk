@@ -16,7 +16,6 @@ func EnableRecord() {
 	}
 	enableRecordRequest := &privatezone.EnableRecordRequest{
 		RecordId:    util.PtrString(""),
-		Action:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 	}
 	err = client.EnableRecord(enableRecordRequest)

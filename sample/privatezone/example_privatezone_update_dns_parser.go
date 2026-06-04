@@ -6,7 +6,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/services/privatezone"
 )
 
-func UnbindVpc() {
+func UpdateDnsParser() {
 	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
 	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
 	client, err := privatezone.NewClient(ak, sk, endpoint)
@@ -14,13 +14,13 @@ func UnbindVpc() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	unbindVpcRequest := &privatezone.UnbindVpcRequest{
-		ZoneId:      util.PtrString(""),
+	updateDnsParserRequest := &privatezone.UpdateDnsParserRequest{
+		ResolverId:  util.PtrString(""),
 		ClientToken: util.PtrString(""),
-		Region:      util.PtrString(""),
-		VpcIds:      []*string{},
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
 	}
-	err = client.UnbindVpc(unbindVpcRequest)
+	err = client.UpdateDnsParser(updateDnsParserRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

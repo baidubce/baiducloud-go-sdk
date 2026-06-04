@@ -51,6 +51,23 @@ func (c *Client) BindVpc(request *BindVpcRequest) error {
 		Do()
 }
 
+// BindVpcToRule
+//
+// PARAMS:
+//   - request: the arguments to BindVpcToRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BindVpcToRule(request *BindVpcToRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindVpcToRuleUri(VERSION_V1, util.StringValue(request.RuleId))).
+		WithQueryParamFilter("clienToken", util.StringValue(request.ClienToken)).
+		WithBody(request).
+		Do()
+}
+
 // CreatePrivateZone
 //
 // PARAMS:
@@ -64,6 +81,52 @@ func (c *Client) CreatePrivateZone(request *CreatePrivateZoneRequest) (*CreatePr
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreatePrivateZoneUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateResolver
+//
+// PARAMS:
+//   - request: the arguments to CreateResolver
+//
+// RETURNS:
+//   - CreateResolverResponse: The return type of the CreateResolver interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateResolver(request *CreateResolverRequest) (*CreateResolverResponse, error) {
+	result := &CreateResolverResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateResolverUri(VERSION_V1)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateResolverRule
+//
+// PARAMS:
+//   - request: the arguments to CreateResolverRule
+//
+// RETURNS:
+//   - CreateResolverRuleResponse: The return type of the CreateResolverRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateResolverRule(request *CreateResolverRuleRequest) (*CreateResolverRuleResponse, error) {
+	result := &CreateResolverRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateResolverRuleUri(VERSION_V1)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -106,6 +169,38 @@ func (c *Client) DeleteRecord(request *DeleteRecordRequest) error {
 		Do()
 }
 
+// DeleteResolver
+//
+// PARAMS:
+//   - request: the arguments to DeleteResolver
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteResolver(request *DeleteResolverRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteResolverUri(VERSION_V1, util.StringValue(request.ResolverId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
+// DeleteResolverRule
+//
+// PARAMS:
+//   - request: the arguments to DeleteResolverRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteResolverRule(request *DeleteResolverRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteResolverRuleUri(VERSION_V1, util.StringValue(request.RuleId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
 // DisableRecord
 //
 // PARAMS:
@@ -137,8 +232,97 @@ func (c *Client) EnableRecord(request *EnableRecordRequest) error {
 		WithURL(getEnableRecordUri(VERSION_V1, util.StringValue(request.RecordId))).
 		WithQueryParam("enable", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		Do()
+}
+
+// GetDnsResolverDetail
+//
+// PARAMS:
+//   - request: the arguments to GetDnsResolverDetail
+//
+// RETURNS:
+//   - GetDnsResolverDetailResponse: The return type of the GetDnsResolverDetail interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetDnsResolverDetail(request *GetDnsResolverDetailRequest) (*GetDnsResolverDetailResponse, error) {
+	result := &GetDnsResolverDetailResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetDnsResolverDetailUri(VERSION_V1, util.StringValue(request.ResolverId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetDnsResolverList
+//
+// PARAMS:
+//   - request: the arguments to GetDnsResolverList
+//
+// RETURNS:
+//   - GetDnsResolverListResponse: The return type of the GetDnsResolverList interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetDnsResolverList(request *GetDnsResolverListRequest) (*GetDnsResolverListResponse, error) {
+	result := &GetDnsResolverListResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetDnsResolverListUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.StringValue(request.MaxKeys)).
+		WithQueryParamFilter("status", util.StringValue(request.Status)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetDnsResolverRuleDetail
+//
+// PARAMS:
+//   - request: the arguments to GetDnsResolverRuleDetail
+//
+// RETURNS:
+//   - GetDnsResolverRuleDetailResponse: The return type of the GetDnsResolverRuleDetail interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetDnsResolverRuleDetail(request *GetDnsResolverRuleDetailRequest) (*GetDnsResolverRuleDetailResponse, error) {
+	result := &GetDnsResolverRuleDetailResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetDnsResolverRuleDetailUri(VERSION_V1, util.StringValue(request.RuleId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetDnsResolverRuleList
+//
+// PARAMS:
+//   - request: the arguments to GetDnsResolverRuleList
+//
+// RETURNS:
+//   - GetDnsResolverRuleListResponse: The return type of the GetDnsResolverRuleList interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetDnsResolverRuleList(request *GetDnsResolverRuleListRequest) (*GetDnsResolverRuleListResponse, error) {
+	result := &GetDnsResolverRuleListResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetDnsResolverRuleListUri(VERSION_V1)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.StringValue(request.MaxKeys)).
+		WithQueryParamFilter("status", util.StringValue(request.Status)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetPrivateZone
@@ -224,7 +408,41 @@ func (c *Client) UnbindVpc(request *UnbindVpcRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUnbindVpcUri(VERSION_V1, util.StringValue(request.ZoneId))).
-		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithQueryParam("unbind", "").
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UnbindVpcToRule
+//
+// PARAMS:
+//   - request: the arguments to UnbindVpcToRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindVpcToRule(request *UnbindVpcToRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindVpcToRuleUri(VERSION_V1, util.StringValue(request.RuleId))).
+		WithQueryParamFilter("clienToken", util.StringValue(request.ClienToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateDnsParser
+//
+// PARAMS:
+//   - request: the arguments to UpdateDnsParser
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateDnsParser(request *UpdateDnsParserRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateDnsParserUri(VERSION_V1, util.StringValue(request.ResolverId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -242,6 +460,23 @@ func (c *Client) UpdateRecord(request *UpdateRecordRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateRecordUri(VERSION_V1, util.StringValue(request.RecordId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateResolverRule
+//
+// PARAMS:
+//   - request: the arguments to UpdateResolverRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateResolverRule(request *UpdateResolverRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateResolverRuleUri(VERSION_V1, util.StringValue(request.ReluId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
