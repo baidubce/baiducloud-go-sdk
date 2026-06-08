@@ -8,4 +8,5 @@ type DescribeAppBlbsRequest struct {
 	ExactlyMatch *bool   `json:"-"`
 	Marker       *string `json:"-"`
 	MaxKeys      *int32  `json:"-"`
+	Type         *string `json:"-"`
 }

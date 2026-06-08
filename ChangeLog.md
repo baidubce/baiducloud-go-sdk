@@ -1,3 +1,7 @@
+2026-06-08 Version: v0.0.66
+- 涉及产品: BLB，createAppBlb创建实例接口变更
+- 涉及产品: BLB，describeAppBlbs查询实例新增query.type字段
+
 2026-06-04 Version: v0.0.65
 - 涉及产品: PRIVATEZONE，新增DNS解析器增删改查及转发规则管理接口
 - 涉及产品: PRIVATEZONE，新增VPC与转发规则关联/解关联接口

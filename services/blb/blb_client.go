@@ -1149,6 +1149,7 @@ func (c *Client) DescribeAppBlbs(request *DescribeAppBlbsRequest) (*DescribeAppB
 		WithQueryParamFilter("exactlyMatch", util.BoolValue(request.ExactlyMatch)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("type", util.StringValue(request.Type)).
 		WithResult(result).
 		Do()
 	if err != nil {

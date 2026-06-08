@@ -1097,6 +1097,7 @@ func TestClient_DescribeAppBlbs(t *testing.T) {
 		ExactlyMatch: util.PtrBool(false),
 		Marker:       util.PtrString(""),
 		MaxKeys:      util.PtrInt32(int32(0)),
+		Type:         util.PtrString(""),
 	}
 	result := &DescribeAppBlbsResponse{}
 	result, err := BLB_CLIENT.DescribeAppBlbs(describeAppBlbsRequest)

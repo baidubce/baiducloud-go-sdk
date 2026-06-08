@@ -23,6 +23,7 @@ func DescribeAppBlbs() {
 		ExactlyMatch: util.PtrBool(false),
 		Marker:       util.PtrString(""),
 		MaxKeys:      util.PtrInt32(int32(0)),
+		Type:         util.PtrString(""),
 	}
 	result, err := client.DescribeAppBlbs(describeAppBlbsRequest)
 	if err != nil {
