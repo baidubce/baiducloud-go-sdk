@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
 	"github.com/baidubce/baiducloud-go-sdk/services/privatezone"
+	"github.com/google/uuid"
 )
 
 func CreateResolver() {
@@ -15,13 +16,25 @@ func CreateResolver() {
 		fmt.Println("create client err:", err)
 		return
 	}
+	// ClientToken 用作幂等标识：同一次逻辑创建必须使用同一个 token。
+	// SDK 默认在网络抖动/5xx 等情况会自动重试，相同 ClientToken 可让服务端识别为同一请求，
+	// 避免重复创建解析器。
 	createResolverRequest := &privatezone.CreateResolverRequest{
 		ClientToken:     util.PtrString(""),
 		Name:            util.PtrString(""),
 		Description:     util.PtrString(""),
 		VpcId:           util.PtrString(""),
 		VpcRegion:       util.PtrString(""),
-		IpModels:        []*privatezone.IpModel{},
+		IpModels: []*privatezone.IpModel{
+        		{
+        			SubnetId:  util.PtrString(""),
+        			IpAddress: util.PtrString(""),
+        		},
+        		{
+        			SubnetId:  util.PtrString(""),
+        			IpAddress: util.PtrString(""),
+        		},
+        	},
 		PrivatezoneType: util.PtrString(""),
 	}
 	result, err := client.CreateResolver(createResolverRequest)

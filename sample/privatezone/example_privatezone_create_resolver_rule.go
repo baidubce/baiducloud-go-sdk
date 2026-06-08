@@ -21,7 +21,12 @@ func CreateResolverRule() {
 		Description:      util.PtrString(""),
 		Zone:             util.PtrString(""),
 		ResolverId:       util.PtrString(""),
-		DnsServerConfigs: []*privatezone.DnsServerConfig{},
+		DnsServerConfigs: []*privatezone.DnsServerConfig{
+        			{
+        				Ip:   util.PtrString("12.29.2.4"),
+        				Port: util.PtrInt32(53),
+        			},
+        		},
 	}
 	result, err := client.CreateResolverRule(createResolverRuleRequest)
 	if err != nil {

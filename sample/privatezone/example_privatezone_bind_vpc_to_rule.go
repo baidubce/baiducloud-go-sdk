@@ -17,7 +17,14 @@ func BindVpcToRule() {
 	bindVpcToRuleRequest := &privatezone.BindVpcToRuleRequest{
 		RuleId:     util.PtrString(""),
 		ClienToken: util.PtrString(""),
-		VpcRegions: []*privatezone.VpcRegion{},
+		VpcRegions: []*privatezone.VpcRegion{
+        		{
+        			Region: util.PtrString(""),
+        			VpcIds: []*string{
+        				util.PtrString(""),
+        			},
+        		},
+        	},
 	}
 	err = client.BindVpcToRule(bindVpcToRuleRequest)
 	if err != nil {
