@@ -15,6 +15,7 @@ func TestTriggerTargetAddress() {
         fmt.Println("create client err:", err)
         return
     }
+    Headers := make(map[string]string)
     testTriggerTargetAddressRequest := &ccr.TestTriggerTargetAddressRequest{
         InstanceId : util.PtrString(""),
         Address : util.PtrString(""),

@@ -13,6 +13,8 @@ const (
 
 	CONSTANT_CREDENTIAL = "credential"
 
+	CONSTANT_PROJECTS = "projects"
+
 	CONSTANT_ACCELERATORS = "accelerators"
 
 	CONSTANT_POLICIES = "policies"
@@ -20,8 +22,6 @@ const (
 	CONSTANT_FILTERS = "filters"
 
 	CONSTANT_SYNCS = "syncs"
-
-	CONSTANT_PROJECTS = "projects"
 
 	CONSTANT_REPOSITORIES = "repositories"
 
@@ -102,6 +102,9 @@ func getCreateImageMigrationRuleUri(InstanceId string) string {
 }
 func getCreateInstanceSyncUri(InstanceId string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCES + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_SYNCS
+}
+func getCreateProjectUri(InstanceId string) string {
+	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCES + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_PROJECTS
 }
 func getCreateRobotAccountUri(InstanceId string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCES + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_ROBOTS
@@ -201,6 +204,9 @@ func getGetInstanceSyncExecutionDetailUri(InstanceId string, ExecutionId string)
 }
 func getGetInstanceSyncTaskLogsUri(InstanceId string, ExecutionId string, TaskId string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCES + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_EXECUTIONS + bce.URI_PREFIX + ExecutionId + bce.URI_PREFIX + CONSTANT_TASKS + bce.URI_PREFIX + TaskId + bce.URI_PREFIX + CONSTANT_LOG
+}
+func getGetProjectDetailUri(InstanceId string, ProjectName string) string {
+	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCES + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_PROJECTS + bce.URI_PREFIX + ProjectName
 }
 func getGetPublicNetworkConfigUri(InstanceId string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCES + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_PUBLICLINKS
@@ -318,6 +324,9 @@ func getUpdateInstanceSyncUri(InstanceId string, PolicyId string) string {
 }
 func getUpdateInstanceTagsUri(InstanceId string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCES + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_TAGS
+}
+func getUpdateProjectUri(InstanceId string, ProjectName string) string {
+	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCES + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_PROJECTS + bce.URI_PREFIX + ProjectName
 }
 func getUpdatePublicNetworkUri(InstanceId string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCES + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_PUBLICLINKS

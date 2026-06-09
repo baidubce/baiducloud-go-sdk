@@ -88,6 +88,28 @@ func (c *Client) CreateInstanceSync(request *CreateInstanceSyncRequest) error {
 		Do()
 }
 
+// CreateProject
+//
+// PARAMS:
+//   - request: the arguments to CreateProject
+//
+// RETURNS:
+//   - CreateProjectResponse: The return type of the CreateProject interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateProject(request *CreateProjectRequest) (*CreateProjectResponse, error) {
+	result := &CreateProjectResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateProjectUri(util.StringValue(request.InstanceId))).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateRobotAccount
 //
 // PARAMS:
@@ -643,6 +665,27 @@ func (c *Client) GetInstanceSyncTaskLogs(request *GetInstanceSyncTaskLogsRequest
 		WithMethod(http.GET).
 		WithURL(getGetInstanceSyncTaskLogsUri(util.StringValue(request.InstanceId), util.StringValue(request.ExecutionId), util.StringValue(request.TaskId))).
 		Do()
+}
+
+// GetProjectDetail
+//
+// PARAMS:
+//   - request: the arguments to GetProjectDetail
+//
+// RETURNS:
+//   - GetProjectDetailResponse: The return type of the GetProjectDetail interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetProjectDetail(request *GetProjectDetailRequest) (*GetProjectDetailResponse, error) {
+	result := &GetProjectDetailResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetProjectDetailUri(util.StringValue(request.InstanceId), util.StringValue(request.ProjectName))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetPublicNetworkConfig
@@ -1451,6 +1494,28 @@ func (c *Client) UpdateInstanceTags(request *UpdateInstanceTagsRequest) error {
 		WithURL(getUpdateInstanceTagsUri(util.StringValue(request.InstanceId))).
 		WithBody(request).
 		Do()
+}
+
+// UpdateProject
+//
+// PARAMS:
+//   - request: the arguments to UpdateProject
+//
+// RETURNS:
+//   - UpdateProjectResponse: The return type of the UpdateProject interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateProject(request *UpdateProjectRequest) (*UpdateProjectResponse, error) {
+	result := &UpdateProjectResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateProjectUri(util.StringValue(request.InstanceId), util.StringValue(request.ProjectName))).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UpdatePublicNetwork

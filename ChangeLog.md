@@ -1,3 +1,6 @@
+2026-06-09 Version: v0.0.67
+- 涉及产品: CCR，新增创建、查询、更新命名空间接口
+
 2026-06-08 Version: v0.0.66
 - 涉及产品: BLB，createAppBlb创建实例接口变更
 - 涉及产品: BLB，describeAppBlbs查询实例新增query.type字段

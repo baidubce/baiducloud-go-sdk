@@ -141,6 +141,26 @@ func TestClient_CreateInstanceSync(t *testing.T) {
     err := CCR_CLIENT.CreateInstanceSync(createInstanceSyncRequest)
     ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateProject(t *testing.T) {
+    createProjectRequest := &CreateProjectRequest{
+        InstanceId : util.PtrString(""),
+        ProjectName : util.PtrString(""),
+        Public : util.PtrString(""),
+    }
+    result := &CreateProjectResponse{}
+    result, err := CCR_CLIENT.CreateProject(createProjectRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateRobotAccount(t *testing.T) {
     createRobotAccountRequest := &CreateRobotAccountRequest{
         InstanceId : util.PtrString(""),
@@ -515,6 +535,25 @@ func TestClient_GetInstanceSyncTaskLogs(t *testing.T) {
         TaskId : util.PtrString(""),
     }
     err := CCR_CLIENT.GetInstanceSyncTaskLogs(getInstanceSyncTaskLogsRequest)
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetProjectDetail(t *testing.T) {
+    getProjectDetailRequest := &GetProjectDetailRequest{
+        InstanceId : util.PtrString(""),
+        ProjectName : util.PtrString(""),
+    }
+    result := &GetProjectDetailResponse{}
+    result, err := CCR_CLIENT.GetProjectDetail(getProjectDetailRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
     ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetPublicNetworkConfig(t *testing.T) {
@@ -1091,6 +1130,7 @@ func TestClient_TestAcceleratorFilter(t *testing.T) {
     ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_TestTriggerTargetAddress(t *testing.T) {
+    Headers := make(map[string]string)
     testTriggerTargetAddressRequest := &TestTriggerTargetAddressRequest{
         InstanceId : util.PtrString(""),
         Address : util.PtrString(""),
@@ -1208,6 +1248,27 @@ func TestClient_UpdateInstanceTags(t *testing.T) {
         Tags : []*LogicalTag{},
     }
     err := CCR_CLIENT.UpdateInstanceTags(updateInstanceTagsRequest)
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateProject(t *testing.T) {
+    updateProjectRequest := &UpdateProjectRequest{
+        InstanceId : util.PtrString(""),
+        ProjectName : util.PtrString(""),
+        AutoScan : util.PtrString(""),
+        Public : util.PtrString(""),
+    }
+    result := &UpdateProjectResponse{}
+    result, err := CCR_CLIENT.UpdateProject(updateProjectRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
     ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdatePublicNetwork(t *testing.T) {
