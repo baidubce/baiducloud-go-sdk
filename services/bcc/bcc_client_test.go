@@ -88,12 +88,50 @@ func TestClient_AttachVolume(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_BindTagImage(t *testing.T) {
+	bindTagImageRequest := &BindTagImageRequest{
+		ImageId:    util.PtrString(""),
+		ChangeTags: []*TagModel{},
+	}
+	err := BCC_CLIENT.BindTagImage(bindTagImageRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_BindTagVolume(t *testing.T) {
 	bindTagVolumeRequest := &BindTagVolumeRequest{
 		VolumeId:   util.PtrString(""),
 		ChangeTags: []*TagModel{},
 	}
 	err := BCC_CLIENT.BindTagVolume(bindTagVolumeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CancelRemoteCopyImage(t *testing.T) {
+	cancelRemoteCopyImageRequest := &CancelRemoteCopyImageRequest{
+		ImageId: util.PtrString(""),
+	}
+	err := BCC_CLIENT.CancelRemoteCopyImage(cancelRemoteCopyImageRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateImage(t *testing.T) {
+	createImageRequest := &CreateImageRequest{
+		ImageName:  util.PtrString(""),
+		InstanceId: util.PtrString(""),
+		SnapshotId: util.PtrString(""),
+		EncryptKey: util.PtrString(""),
+		RelateCds:  util.PtrBool(false),
+		Detection:  util.PtrBool(false),
+	}
+	result := &CreateImageResponse{}
+	result, err := BCC_CLIENT.CreateImage(createImageRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateVolume(t *testing.T) {
@@ -156,12 +194,40 @@ func TestClient_CreateVolume(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteImage(t *testing.T) {
+	deleteImageRequest := &DeleteImageRequest{
+		ImageId: util.PtrString(""),
+	}
+	err := BCC_CLIENT.DeleteImage(deleteImageRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DetachVolume(t *testing.T) {
 	detachVolumeRequest := &DetachVolumeRequest{
 		VolumeId:   util.PtrString(""),
 		InstanceId: util.PtrString(""),
 	}
 	err := BCC_CLIENT.DetachVolume(detachVolumeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetAvailableImagesBySpec(t *testing.T) {
+	getAvailableImagesBySpecRequest := &GetAvailableImagesBySpecRequest{
+		Spec:    util.PtrString(""),
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+		OsName:  util.PtrString(""),
+	}
+	result := &GetAvailableImagesBySpecResponse{}
+	result, err := BCC_CLIENT.GetAvailableImagesBySpec(getAvailableImagesBySpecRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetCdsPrice(t *testing.T) {
@@ -206,6 +272,24 @@ func TestClient_GetDiskQuota(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_GetImage(t *testing.T) {
+	getImageRequest := &GetImageRequest{
+		ImageId: util.PtrString(""),
+	}
+	result := &GetImageResponse{}
+	result, err := BCC_CLIENT.GetImage(getImageRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_GetVolume(t *testing.T) {
 	getVolumeRequest := &GetVolumeRequest{
 		VolumeId: util.PtrString(""),
@@ -230,6 +314,88 @@ func TestClient_GetVolumeResizeProgress(t *testing.T) {
 	}
 	result := &GetVolumeResizeProgressResponse{}
 	result, err := BCC_CLIENT.GetVolumeResizeProgress(getVolumeResizeProgressRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ImportImage(t *testing.T) {
+	importImageRequest := &ImportImageRequest{
+		OsName:         util.PtrString(""),
+		OsArch:         util.PtrString(""),
+		OsType:         util.PtrString(""),
+		OsVersion:      util.PtrString(""),
+		Name:           util.PtrString(""),
+		BosUrl:         util.PtrString(""),
+		Detection:      util.PtrBool(false),
+		GenerationType: util.PtrString(""),
+	}
+	result := &ImportImageResponse{}
+	result, err := BCC_CLIENT.ImportImage(importImageRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListImages(t *testing.T) {
+	listImagesRequest := &ListImagesRequest{
+		Marker:    util.PtrString(""),
+		MaxKeys:   util.PtrInt32(int32(0)),
+		ImageType: util.PtrString(""),
+		ImageName: util.PtrString(""),
+	}
+	result := &ListImagesResponse{}
+	result, err := BCC_CLIENT.ListImages(listImagesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListOs(t *testing.T) {
+	listOsRequest := &ListOsRequest{
+		InstanceIds: []*string{},
+	}
+	result := &ListOsResponse{}
+	result, err := BCC_CLIENT.ListOs(listOsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListSharedUser(t *testing.T) {
+	listSharedUserRequest := &ListSharedUserRequest{
+		ImageId: util.PtrString(""),
+	}
+	result := &ListSharedUserResponse{}
+	result, err := BCC_CLIENT.ListSharedUser(listSharedUserRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -333,6 +499,34 @@ func TestClient_ReleaseVolume(t *testing.T) {
 	err := BCC_CLIENT.ReleaseVolume(releaseVolumeRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_RemoteCopyImage(t *testing.T) {
+	remoteCopyImageRequest := &RemoteCopyImageRequest{
+		ImageId:    util.PtrString(""),
+		Name:       util.PtrString(""),
+		DestRegion: []*string{},
+	}
+	result := &RemoteCopyImageResponse{}
+	result, err := BCC_CLIENT.RemoteCopyImage(remoteCopyImageRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_RenameImage(t *testing.T) {
+	renameImageRequest := &RenameImageRequest{
+		ImageIds: []*string{},
+		Name:     util.PtrString(""),
+	}
+	err := BCC_CLIENT.RenameImage(renameImageRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_RenameVolume(t *testing.T) {
 	renameVolumeRequest := &RenameVolumeRequest{
 		VolumeId: util.PtrString(""),
@@ -368,6 +562,34 @@ func TestClient_RollbackVolume(t *testing.T) {
 		SnapshotId: util.PtrString(""),
 	}
 	err := BCC_CLIENT.RollbackVolume(rollbackVolumeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ShareImage(t *testing.T) {
+	shareImageRequest := &ShareImageRequest{
+		ImageId:   util.PtrString(""),
+		Account:   util.PtrString(""),
+		AccountId: util.PtrString(""),
+		UcAccount: util.PtrString(""),
+	}
+	err := BCC_CLIENT.ShareImage(shareImageRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UnShareImage(t *testing.T) {
+	unShareImageRequest := &UnShareImageRequest{
+		ImageId:   util.PtrString(""),
+		Account:   util.PtrString(""),
+		AccountId: util.PtrString(""),
+		UcAccount: util.PtrString(""),
+	}
+	err := BCC_CLIENT.UnShareImage(unShareImageRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UnbindTagImage(t *testing.T) {
+	unbindTagImageRequest := &UnbindTagImageRequest{
+		ImageId:    util.PtrString(""),
+		ChangeTags: []*TagModel{},
+	}
+	err := BCC_CLIENT.UnbindTagImage(unbindTagImageRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UnbindTagVolume(t *testing.T) {

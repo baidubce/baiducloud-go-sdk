@@ -33,6 +33,23 @@ func (c *Client) AttachVolume(request *AttachVolumeRequest) (*AttachVolumeRespon
 	return result, nil
 }
 
+// BindTagImage
+//
+// PARAMS:
+//   - request: the arguments to BindTagImage
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BindTagImage(request *BindTagImageRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindTagImageUri(VERSION_V2, util.StringValue(request.ImageId))).
+		WithQueryParam("bind", "").
+		WithBody(request).
+		Do()
+}
+
 // BindTagVolume
 //
 // PARAMS:
@@ -48,6 +65,44 @@ func (c *Client) BindTagVolume(request *BindTagVolumeRequest) error {
 		WithQueryParam("bind", "").
 		WithBody(request).
 		Do()
+}
+
+// CancelRemoteCopyImage
+//
+// PARAMS:
+//   - request: the arguments to CancelRemoteCopyImage
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CancelRemoteCopyImage(request *CancelRemoteCopyImageRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCancelRemoteCopyImageUri(VERSION_V2, util.StringValue(request.ImageId))).
+		WithQueryParam("cancelRemoteCopy", "").
+		Do()
+}
+
+// CreateImage
+//
+// PARAMS:
+//   - request: the arguments to CreateImage
+//
+// RETURNS:
+//   - CreateImageResponse: The return type of the CreateImage interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateImage(request *CreateImageRequest) (*CreateImageResponse, error) {
+	result := &CreateImageResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateImageUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateVolume
@@ -72,6 +127,21 @@ func (c *Client) CreateVolume(request *CreateVolumeRequest) (*CreateVolumeRespon
 	return result, nil
 }
 
+// DeleteImage
+//
+// PARAMS:
+//   - request: the arguments to DeleteImage
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteImage(request *DeleteImageRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteImageUri(VERSION_V2, util.StringValue(request.ImageId))).
+		Do()
+}
+
 // DetachVolume
 //
 // PARAMS:
@@ -87,6 +157,31 @@ func (c *Client) DetachVolume(request *DetachVolumeRequest) error {
 		WithQueryParam("detach", "").
 		WithBody(request).
 		Do()
+}
+
+// GetAvailableImagesBySpec
+//
+// PARAMS:
+//   - request: the arguments to GetAvailableImagesBySpec
+//
+// RETURNS:
+//   - GetAvailableImagesBySpecResponse: The return type of the GetAvailableImagesBySpec interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetAvailableImagesBySpec(request *GetAvailableImagesBySpecRequest) (*GetAvailableImagesBySpecResponse, error) {
+	result := &GetAvailableImagesBySpecResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetAvailableImagesBySpecUri(VERSION_V2)).
+		WithQueryParamFilter("spec", util.StringValue(request.Spec)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("osName", util.StringValue(request.OsName)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetCdsPrice
@@ -133,6 +228,27 @@ func (c *Client) GetDiskQuota(request *GetDiskQuotaRequest) (*GetDiskQuotaRespon
 	return result, nil
 }
 
+// GetImage
+//
+// PARAMS:
+//   - request: the arguments to GetImage
+//
+// RETURNS:
+//   - GetImageResponse: The return type of the GetImage interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetImage(request *GetImageRequest) (*GetImageResponse, error) {
+	result := &GetImageResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetImageUri(VERSION_V2, util.StringValue(request.ImageId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // GetVolume
 //
 // PARAMS:
@@ -167,6 +283,96 @@ func (c *Client) GetVolumeResizeProgress(request *GetVolumeResizeProgressRequest
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getGetVolumeResizeProgressUri(VERSION_V2, util.StringValue(request.VolumeId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ImportImage
+//
+// PARAMS:
+//   - request: the arguments to ImportImage
+//
+// RETURNS:
+//   - ImportImageResponse: The return type of the ImportImage interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ImportImage(request *ImportImageRequest) (*ImportImageResponse, error) {
+	result := &ImportImageResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getImportImageUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListImages
+//
+// PARAMS:
+//   - request: the arguments to ListImages
+//
+// RETURNS:
+//   - ListImagesResponse: The return type of the ListImages interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListImages(request *ListImagesRequest) (*ListImagesResponse, error) {
+	result := &ListImagesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListImagesUri(VERSION_V2)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("imageType", util.StringValue(request.ImageType)).
+		WithQueryParamFilter("imageName", util.StringValue(request.ImageName)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListOs
+//
+// PARAMS:
+//   - request: the arguments to ListOs
+//
+// RETURNS:
+//   - ListOsResponse: The return type of the ListOs interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListOs(request *ListOsRequest) (*ListOsResponse, error) {
+	result := &ListOsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getListOsUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListSharedUser
+//
+// PARAMS:
+//   - request: the arguments to ListSharedUser
+//
+// RETURNS:
+//   - ListSharedUserResponse: The return type of the ListSharedUser interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListSharedUser(request *ListSharedUserRequest) (*ListSharedUserResponse, error) {
+	result := &ListSharedUserResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListSharedUserUri(VERSION_V2, util.StringValue(request.ImageId))).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -278,6 +484,45 @@ func (c *Client) ReleaseVolume(request *ReleaseVolumeRequest) error {
 		Do()
 }
 
+// RemoteCopyImage
+//
+// PARAMS:
+//   - request: the arguments to RemoteCopyImage
+//
+// RETURNS:
+//   - RemoteCopyImageResponse: The return type of the RemoteCopyImage interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) RemoteCopyImage(request *RemoteCopyImageRequest) (*RemoteCopyImageResponse, error) {
+	result := &RemoteCopyImageResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getRemoteCopyImageUri(VERSION_V2, util.StringValue(request.ImageId))).
+		WithQueryParam("remoteCopy", "").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// RenameImage
+//
+// PARAMS:
+//   - request: the arguments to RenameImage
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RenameImage(request *RenameImageRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getRenameImageUri(VERSION_V2)).
+		WithBody(request).
+		Do()
+}
+
 // RenameVolume
 //
 // PARAMS:
@@ -331,6 +576,57 @@ func (c *Client) RollbackVolume(request *RollbackVolumeRequest) error {
 		WithMethod(http.PUT).
 		WithURL(getRollbackVolumeUri(VERSION_V2, util.StringValue(request.VolumeId))).
 		WithQueryParam("rollback", "").
+		WithBody(request).
+		Do()
+}
+
+// ShareImage
+//
+// PARAMS:
+//   - request: the arguments to ShareImage
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ShareImage(request *ShareImageRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getShareImageUri(VERSION_V2, util.StringValue(request.ImageId))).
+		WithQueryParam("share", "").
+		WithBody(request).
+		Do()
+}
+
+// UnShareImage
+//
+// PARAMS:
+//   - request: the arguments to UnShareImage
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnShareImage(request *UnShareImageRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUnShareImageUri(VERSION_V2, util.StringValue(request.ImageId))).
+		WithQueryParam("unshare", "").
+		WithBody(request).
+		Do()
+}
+
+// UnbindTagImage
+//
+// PARAMS:
+//   - request: the arguments to UnbindTagImage
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindTagImage(request *UnbindTagImageRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindTagImageUri(VERSION_V2, util.StringValue(request.ImageId))).
+		WithQueryParam("unbind", "").
 		WithBody(request).
 		Do()
 }
