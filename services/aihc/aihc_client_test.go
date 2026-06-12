@@ -67,7 +67,7 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
-func TestClient_CreateADatasetV2(t *testing.T) {
+func TestClient_CreateDataset(t *testing.T) {
 	InitVersionEntry := &DatasetVersionEntry{
 		Id:          util.PtrString(""),
 		Version:     util.PtrString(""),
@@ -76,7 +76,7 @@ func TestClient_CreateADatasetV2(t *testing.T) {
 		MountPath:   util.PtrString(""),
 		CreateUser:  util.PtrString(""),
 	}
-	createADatasetV2Request := &CreateADatasetV2Request{
+	createDatasetRequest := &CreateDatasetRequest{
 		Name:             util.PtrString(""),
 		StorageType:      util.PtrString(""),
 		StorageInstance:  util.PtrString(""),
@@ -88,8 +88,8 @@ func TestClient_CreateADatasetV2(t *testing.T) {
 		VisibilityGroup:  []*PermissionEntry{},
 		InitVersionEntry: InitVersionEntry,
 	}
-	result := &CreateADatasetV2Response{}
-	result, err := AIHC_CLIENT.CreateADatasetV2(createADatasetV2Request)
+	result := &CreateDatasetResponse{}
+	result, err := AIHC_CLIENT.CreateDataset(createDatasetRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -102,7 +102,28 @@ func TestClient_CreateADatasetV2(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_CreateAModelV2(t *testing.T) {
+func TestClient_CreateDatasetVersion(t *testing.T) {
+	createDatasetVersionRequest := &CreateDatasetVersionRequest{
+		DatasetId:   util.PtrString(""),
+		Description: util.PtrString(""),
+		StoragePath: util.PtrString(""),
+		MountPath:   util.PtrString(""),
+	}
+	result := &CreateDatasetVersionResponse{}
+	result, err := AIHC_CLIENT.CreateDatasetVersion(createDatasetVersionRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateModel(t *testing.T) {
 	InitVersionEntry := &ModelVersionEntry{
 		Id:            util.PtrString(""),
 		Version:       util.PtrString(""),
@@ -112,7 +133,7 @@ func TestClient_CreateAModelV2(t *testing.T) {
 		ModelMetrics:  util.PtrString(""),
 		Description:   util.PtrString(""),
 	}
-	createAModelV2Request := &CreateAModelV2Request{
+	createModelRequest := &CreateModelRequest{
 		Name:             util.PtrString(""),
 		Description:      util.PtrString(""),
 		ModelFormat:      util.PtrString(""),
@@ -120,8 +141,8 @@ func TestClient_CreateAModelV2(t *testing.T) {
 		VisibilityScope:  util.PtrString(""),
 		InitVersionEntry: InitVersionEntry,
 	}
-	result := &CreateAModelV2Response{}
-	result, err := AIHC_CLIENT.CreateAModelV2(createAModelV2Request)
+	result := &CreateModelResponse{}
+	result, err := AIHC_CLIENT.CreateModel(createModelRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -134,194 +155,8 @@ func TestClient_CreateAModelV2(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_CreateDatasetVersionV2(t *testing.T) {
-	createDatasetVersionV2Request := &CreateDatasetVersionV2Request{
-		DatasetId:   util.PtrString(""),
-		Description: util.PtrString(""),
-		StoragePath: util.PtrString(""),
-		MountPath:   util.PtrString(""),
-	}
-	result := &CreateDatasetVersionV2Response{}
-	result, err := AIHC_CLIENT.CreateDatasetVersionV2(createDatasetVersionV2Request)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_DeleteDatasetV2(t *testing.T) {
-	deleteDatasetV2Request := &DeleteDatasetV2Request{
-		DatasetId: util.PtrString(""),
-	}
-	err := AIHC_CLIENT.DeleteDatasetV2(deleteDatasetV2Request)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_DeleteDatasetVersionV2(t *testing.T) {
-	deleteDatasetVersionV2Request := &DeleteDatasetVersionV2Request{
-		DatasetId: util.PtrString(""),
-		VersionId: util.PtrString(""),
-	}
-	err := AIHC_CLIENT.DeleteDatasetVersionV2(deleteDatasetVersionV2Request)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_DeleteModelV2(t *testing.T) {
-	deleteModelV2Request := &DeleteModelV2Request{
-		ModelId: util.PtrString(""),
-	}
-	err := AIHC_CLIENT.DeleteModelV2(deleteModelV2Request)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_DeleteModelVersionV2(t *testing.T) {
-	deleteModelVersionV2Request := &DeleteModelVersionV2Request{
-		ModelId:   util.PtrString(""),
-		VersionId: util.PtrString(""),
-	}
-	err := AIHC_CLIENT.DeleteModelVersionV2(deleteModelVersionV2Request)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_GetAListOfModelVersionsV2(t *testing.T) {
-	getAListOfModelVersionsV2Request := &GetAListOfModelVersionsV2Request{
-		ModelId:    util.PtrString(""),
-		PageNumber: util.PtrInt32(int32(0)),
-		PageSize:   util.PtrInt32(int32(0)),
-	}
-	result := &GetAListOfModelVersionsV2Response{}
-	result, err := AIHC_CLIENT.GetAListOfModelVersionsV2(getAListOfModelVersionsV2Request)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_GetDatasetDetailsV2(t *testing.T) {
-	getDatasetDetailsV2Request := &GetDatasetDetailsV2Request{
-		DatasetId: util.PtrString(""),
-	}
-	result := &GetDatasetDetailsV2Response{}
-	result, err := AIHC_CLIENT.GetDatasetDetailsV2(getDatasetDetailsV2Request)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_GetDatasetVersionDetailsV2(t *testing.T) {
-	getDatasetVersionDetailsV2Request := &GetDatasetVersionDetailsV2Request{
-		DatasetId: util.PtrString(""),
-		VersionId: util.PtrString(""),
-	}
-	result := &GetDatasetVersionDetailsV2Response{}
-	result, err := AIHC_CLIENT.GetDatasetVersionDetailsV2(getDatasetVersionDetailsV2Request)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_GetModelDetailsV2(t *testing.T) {
-	getModelDetailsV2Request := &GetModelDetailsV2Request{
-		ModelId: util.PtrString(""),
-	}
-	result := &GetModelDetailsV2Response{}
-	result, err := AIHC_CLIENT.GetModelDetailsV2(getModelDetailsV2Request)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_GetModelListV2(t *testing.T) {
-	getModelListV2Request := &GetModelListV2Request{
-		Keyword:    util.PtrString(""),
-		PageNumber: util.PtrInt32(int32(0)),
-		PageSize:   util.PtrInt32(int32(0)),
-	}
-	result := &GetModelListV2Response{}
-	result, err := AIHC_CLIENT.GetModelListV2(getModelListV2Request)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_GetModelVersionDetailsV2(t *testing.T) {
-	getModelVersionDetailsV2Request := &GetModelVersionDetailsV2Request{
-		ModelId:   util.PtrString(""),
-		VersionId: util.PtrString(""),
-	}
-	result := &GetModelVersionDetailsV2Response{}
-	result, err := AIHC_CLIENT.GetModelVersionDetailsV2(getModelVersionDetailsV2Request)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_ModifyDatasetV2(t *testing.T) {
-	modifyDatasetV2Request := &ModifyDatasetV2Request{
-		DatasetId:       util.PtrString(""),
-		Name:            util.PtrString(""),
-		Description:     util.PtrString(""),
-		VisibilityScope: util.PtrString(""),
-		VisibilityUser:  []*PermissionEntry{},
-		VisibilityGroup: []*PermissionEntry{},
-	}
-	err := AIHC_CLIENT.ModifyDatasetV2(modifyDatasetV2Request)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_ModifyTheModelV2(t *testing.T) {
-	modifyTheModelV2Request := &ModifyTheModelV2Request{
-		ModelId:     util.PtrString(""),
-		Name:        util.PtrString(""),
-		Description: util.PtrString(""),
-	}
-	err := AIHC_CLIENT.ModifyTheModelV2(modifyTheModelV2Request)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_NewModelVersionV2(t *testing.T) {
-	newModelVersionV2Request := &NewModelVersionV2Request{
+func TestClient_CreateModelVersion(t *testing.T) {
+	createModelVersionRequest := &CreateModelVersionRequest{
 		ModelId:       util.PtrString(""),
 		StorageBucket: util.PtrString(""),
 		StoragePath:   util.PtrString(""),
@@ -329,8 +164,8 @@ func TestClient_NewModelVersionV2(t *testing.T) {
 		Source:        util.PtrString(""),
 		ModelMetrics:  util.PtrString(""),
 	}
-	result := &NewModelVersionV2Response{}
-	result, err := AIHC_CLIENT.NewModelVersionV2(newModelVersionV2Request)
+	result := &CreateModelVersionResponse{}
+	result, err := AIHC_CLIENT.CreateModelVersion(createModelVersionRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -343,8 +178,95 @@ func TestClient_NewModelVersionV2(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_RetrieveTheDatasetListV2(t *testing.T) {
-	retrieveTheDatasetListV2Request := &RetrieveTheDatasetListV2Request{
+func TestClient_DeleteDataset(t *testing.T) {
+	deleteDatasetRequest := &DeleteDatasetRequest{
+		DatasetId: util.PtrString(""),
+	}
+	err := AIHC_CLIENT.DeleteDataset(deleteDatasetRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteDatasetVersion(t *testing.T) {
+	deleteDatasetVersionRequest := &DeleteDatasetVersionRequest{
+		DatasetId: util.PtrString(""),
+		VersionId: util.PtrString(""),
+	}
+	err := AIHC_CLIENT.DeleteDatasetVersion(deleteDatasetVersionRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteModel(t *testing.T) {
+	deleteModelRequest := &DeleteModelRequest{
+		ModelId: util.PtrString(""),
+	}
+	err := AIHC_CLIENT.DeleteModel(deleteModelRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteModelVersion(t *testing.T) {
+	deleteModelVersionRequest := &DeleteModelVersionRequest{
+		ModelId:   util.PtrString(""),
+		VersionId: util.PtrString(""),
+	}
+	err := AIHC_CLIENT.DeleteModelVersion(deleteModelVersionRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeDataset(t *testing.T) {
+	describeDatasetRequest := &DescribeDatasetRequest{
+		DatasetId: util.PtrString(""),
+	}
+	result := &DescribeDatasetResponse{}
+	result, err := AIHC_CLIENT.DescribeDataset(describeDatasetRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeDatasetVersion(t *testing.T) {
+	describeDatasetVersionRequest := &DescribeDatasetVersionRequest{
+		DatasetId: util.PtrString(""),
+		VersionId: util.PtrString(""),
+	}
+	result := &DescribeDatasetVersionResponse{}
+	result, err := AIHC_CLIENT.DescribeDatasetVersion(describeDatasetVersionRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeDatasetVersions(t *testing.T) {
+	describeDatasetVersionsRequest := &DescribeDatasetVersionsRequest{
+		DatasetId:  util.PtrString(""),
+		PageNumber: util.PtrInt32(int32(0)),
+		PageSize:   util.PtrInt32(int32(0)),
+	}
+	result := &DescribeDatasetVersionsResponse{}
+	result, err := AIHC_CLIENT.DescribeDatasetVersions(describeDatasetVersionsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeDatasets(t *testing.T) {
+	describeDatasetsRequest := &DescribeDatasetsRequest{
 		Keyword:          util.PtrString(""),
 		StorageType:      util.PtrString(""),
 		StorageInstances: util.PtrString(""),
@@ -352,8 +274,8 @@ func TestClient_RetrieveTheDatasetListV2(t *testing.T) {
 		PageNumber:       util.PtrInt32(int32(0)),
 		PageSize:         util.PtrInt32(int32(0)),
 	}
-	result := &RetrieveTheDatasetListV2Response{}
-	result, err := AIHC_CLIENT.RetrieveTheDatasetListV2(retrieveTheDatasetListV2Request)
+	result := &DescribeDatasetsResponse{}
+	result, err := AIHC_CLIENT.DescribeDatasets(describeDatasetsRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -366,14 +288,12 @@ func TestClient_RetrieveTheDatasetListV2(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_RetrieveTheDatasetVersionListV2(t *testing.T) {
-	retrieveTheDatasetVersionListV2Request := &RetrieveTheDatasetVersionListV2Request{
-		DatasetId:  util.PtrString(""),
-		PageNumber: util.PtrInt32(int32(0)),
-		PageSize:   util.PtrInt32(int32(0)),
+func TestClient_DescribeModel(t *testing.T) {
+	describeModelRequest := &DescribeModelRequest{
+		ModelId: util.PtrString(""),
 	}
-	result := &RetrieveTheDatasetVersionListV2Response{}
-	result, err := AIHC_CLIENT.RetrieveTheDatasetVersionListV2(retrieveTheDatasetVersionListV2Request)
+	result := &DescribeModelResponse{}
+	result, err := AIHC_CLIENT.DescribeModel(describeModelRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -384,5 +304,85 @@ func TestClient_RetrieveTheDatasetVersionListV2(t *testing.T) {
 		return
 	}
 	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeModelVersion(t *testing.T) {
+	describeModelVersionRequest := &DescribeModelVersionRequest{
+		ModelId:   util.PtrString(""),
+		VersionId: util.PtrString(""),
+	}
+	result := &DescribeModelVersionResponse{}
+	result, err := AIHC_CLIENT.DescribeModelVersion(describeModelVersionRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeModelVersions(t *testing.T) {
+	describeModelVersionsRequest := &DescribeModelVersionsRequest{
+		ModelId:    util.PtrString(""),
+		PageNumber: util.PtrInt32(int32(0)),
+		PageSize:   util.PtrInt32(int32(0)),
+	}
+	result := &DescribeModelVersionsResponse{}
+	result, err := AIHC_CLIENT.DescribeModelVersions(describeModelVersionsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeModels(t *testing.T) {
+	describeModelsRequest := &DescribeModelsRequest{
+		Keyword:    util.PtrString(""),
+		PageNumber: util.PtrInt32(int32(0)),
+		PageSize:   util.PtrInt32(int32(0)),
+	}
+	result := &DescribeModelsResponse{}
+	result, err := AIHC_CLIENT.DescribeModels(describeModelsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ModifyDataset(t *testing.T) {
+	modifyDatasetRequest := &ModifyDatasetRequest{
+		DatasetId:       util.PtrString(""),
+		Name:            util.PtrString(""),
+		Description:     util.PtrString(""),
+		VisibilityScope: util.PtrString(""),
+		VisibilityUser:  []*PermissionEntry{},
+		VisibilityGroup: []*PermissionEntry{},
+	}
+	err := AIHC_CLIENT.ModifyDataset(modifyDatasetRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ModifyModel(t *testing.T) {
+	modifyModelRequest := &ModifyModelRequest{
+		ModelId:     util.PtrString(""),
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
+	}
+	err := AIHC_CLIENT.ModifyModel(modifyModelRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }

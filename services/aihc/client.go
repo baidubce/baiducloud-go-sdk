@@ -24,57 +24,57 @@ func NewClient(ak, sk, endPoint string) (*Client, error) {
 	return &Client{client}, nil
 }
 
-func getCreateADatasetV2Uri() string {
+func getCreateDatasetUri() string {
 	return bce.URI_PREFIX
 }
-func getCreateAModelV2Uri() string {
+func getCreateDatasetVersionUri() string {
 	return bce.URI_PREFIX
 }
-func getCreateDatasetVersionV2Uri() string {
+func getCreateModelUri() string {
 	return bce.URI_PREFIX
 }
-func getDeleteDatasetV2Uri() string {
+func getCreateModelVersionUri() string {
 	return bce.URI_PREFIX
 }
-func getDeleteDatasetVersionV2Uri() string {
+func getDeleteDatasetUri() string {
 	return bce.URI_PREFIX
 }
-func getDeleteModelV2Uri() string {
+func getDeleteDatasetVersionUri() string {
 	return bce.URI_PREFIX
 }
-func getDeleteModelVersionV2Uri() string {
+func getDeleteModelUri() string {
 	return bce.URI_PREFIX
 }
-func getGetAListOfModelVersionsV2Uri() string {
+func getDeleteModelVersionUri() string {
 	return bce.URI_PREFIX
 }
-func getGetDatasetDetailsV2Uri() string {
+func getDescribeDatasetUri() string {
 	return bce.URI_PREFIX
 }
-func getGetDatasetVersionDetailsV2Uri() string {
+func getDescribeDatasetVersionUri() string {
 	return bce.URI_PREFIX
 }
-func getGetModelDetailsV2Uri() string {
+func getDescribeDatasetVersionsUri() string {
 	return bce.URI_PREFIX
 }
-func getGetModelListV2Uri() string {
+func getDescribeDatasetsUri() string {
 	return bce.URI_PREFIX
 }
-func getGetModelVersionDetailsV2Uri() string {
+func getDescribeModelUri() string {
 	return bce.URI_PREFIX
 }
-func getModifyDatasetV2Uri() string {
+func getDescribeModelVersionUri() string {
 	return bce.URI_PREFIX
 }
-func getModifyTheModelV2Uri() string {
+func getDescribeModelVersionsUri() string {
 	return bce.URI_PREFIX
 }
-func getNewModelVersionV2Uri() string {
+func getDescribeModelsUri() string {
 	return bce.URI_PREFIX
 }
-func getRetrieveTheDatasetListV2Uri() string {
+func getModifyDatasetUri() string {
 	return bce.URI_PREFIX
 }
-func getRetrieveTheDatasetVersionListV2Uri() string {
+func getModifyModelUri() string {
 	return bce.URI_PREFIX
 }

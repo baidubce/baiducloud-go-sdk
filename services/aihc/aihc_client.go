@@ -8,20 +8,21 @@ import (
 
 const ()
 
-// CreateADatasetV2
+// CreateDataset
 //
 // PARAMS:
-//   - request: the arguments to CreateADatasetV2
+//   - request: the arguments to CreateDataset
 //
 // RETURNS:
-//   - CreateADatasetV2Response: The return type of the CreateADatasetV2 interface.
+//   - CreateDatasetResponse: The return type of the CreateDataset interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateADatasetV2(request *CreateADatasetV2Request) (*CreateADatasetV2Response, error) {
-	result := &CreateADatasetV2Response{}
+func (c *Client) CreateDataset(request *CreateDatasetRequest) (*CreateDatasetResponse, error) {
+	result := &CreateDatasetResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getCreateADatasetV2Uri()).
+		WithURL(getCreateDatasetUri()).
 		WithQueryParamFilter("action", "CreateDataset").
+		WithHeader("Version", "v2").
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -31,45 +32,23 @@ func (c *Client) CreateADatasetV2(request *CreateADatasetV2Request) (*CreateADat
 	return result, nil
 }
 
-// CreateAModelV2
+// CreateDatasetVersion
 //
 // PARAMS:
-//   - request: the arguments to CreateAModelV2
+//   - request: the arguments to CreateDatasetVersion
 //
 // RETURNS:
-//   - CreateAModelV2Response: The return type of the CreateAModelV2 interface.
+//   - CreateDatasetVersionResponse: The return type of the CreateDatasetVersion interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) CreateAModelV2(request *CreateAModelV2Request) (*CreateAModelV2Response, error) {
-	result := &CreateAModelV2Response{}
+func (c *Client) CreateDatasetVersion(request *CreateDatasetVersionRequest) (*CreateDatasetVersionResponse, error) {
+	result := &CreateDatasetVersionResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getCreateAModelV2Uri()).
-		WithQueryParamFilter("action", "CreateModel").
-		WithBody(request).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// CreateDatasetVersionV2
-//
-// PARAMS:
-//   - request: the arguments to CreateDatasetVersionV2
-//
-// RETURNS:
-//   - CreateDatasetVersionV2Response: The return type of the CreateDatasetVersionV2 interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) CreateDatasetVersionV2(request *CreateDatasetVersionV2Request) (*CreateDatasetVersionV2Response, error) {
-	result := &CreateDatasetVersionV2Response{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getCreateDatasetVersionV2Uri()).
+		WithURL(getCreateDatasetVersionUri()).
 		WithQueryParamFilter("action", "CreateDatasetVersion").
 		WithQueryParamFilter("datasetId", "xxx").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
+		WithHeader("Version", "v2").
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -79,126 +58,153 @@ func (c *Client) CreateDatasetVersionV2(request *CreateDatasetVersionV2Request) 
 	return result, nil
 }
 
-// DeleteDatasetV2
+// CreateModel
 //
 // PARAMS:
-//   - request: the arguments to DeleteDatasetV2
+//   - request: the arguments to CreateModel
+//
+// RETURNS:
+//   - CreateModelResponse: The return type of the CreateModel interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateModel(request *CreateModelRequest) (*CreateModelResponse, error) {
+	result := &CreateModelResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateModelUri()).
+		WithQueryParamFilter("action", "CreateModel").
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateModelVersion
+//
+// PARAMS:
+//   - request: the arguments to CreateModelVersion
+//
+// RETURNS:
+//   - CreateModelVersionResponse: The return type of the CreateModelVersion interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateModelVersion(request *CreateModelVersionRequest) (*CreateModelVersionResponse, error) {
+	result := &CreateModelVersionResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateModelVersionUri()).
+		WithQueryParamFilter("action", "CreateModelVersion").
+		WithQueryParamFilter("modelId", "xxx").
+		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DeleteDataset
+//
+// PARAMS:
+//   - request: the arguments to DeleteDataset
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DeleteDatasetV2(request *DeleteDatasetV2Request) error {
+func (c *Client) DeleteDataset(request *DeleteDatasetRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getDeleteDatasetV2Uri()).
+		WithURL(getDeleteDatasetUri()).
 		WithQueryParamFilter("action", "DeleteDataset").
 		WithQueryParamFilter("datasetId", "xxx").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
+		WithHeader("Version", "v2").
 		Do()
 }
 
-// DeleteDatasetVersionV2
+// DeleteDatasetVersion
 //
 // PARAMS:
-//   - request: the arguments to DeleteDatasetVersionV2
+//   - request: the arguments to DeleteDatasetVersion
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DeleteDatasetVersionV2(request *DeleteDatasetVersionV2Request) error {
+func (c *Client) DeleteDatasetVersion(request *DeleteDatasetVersionRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getDeleteDatasetVersionV2Uri()).
+		WithURL(getDeleteDatasetVersionUri()).
 		WithQueryParamFilter("action", "DeleteDatasetVersion").
 		WithQueryParamFilter("datasetId", "xxx").
 		WithQueryParamFilter("versionId", "xxx").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
 		WithQueryParamFilter("versionId", util.StringValue(request.VersionId)).
+		WithHeader("Version", "v2").
 		Do()
 }
 
-// DeleteModelV2
+// DeleteModel
 //
 // PARAMS:
-//   - request: the arguments to DeleteModelV2
+//   - request: the arguments to DeleteModel
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DeleteModelV2(request *DeleteModelV2Request) error {
+func (c *Client) DeleteModel(request *DeleteModelRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getDeleteModelV2Uri()).
+		WithURL(getDeleteModelUri()).
 		WithQueryParamFilter("action", "DeleteModel").
 		WithQueryParamFilter("modelId", "xxx").
 		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
+		WithHeader("Version", "v2").
 		Do()
 }
 
-// DeleteModelVersionV2
+// DeleteModelVersion
 //
 // PARAMS:
-//   - request: the arguments to DeleteModelVersionV2
+//   - request: the arguments to DeleteModelVersion
 //
 // RETURNS:
 
 // - error: nil if success otherwise the specific error
-func (c *Client) DeleteModelVersionV2(request *DeleteModelVersionV2Request) error {
+func (c *Client) DeleteModelVersion(request *DeleteModelVersionRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getDeleteModelVersionV2Uri()).
+		WithURL(getDeleteModelVersionUri()).
 		WithQueryParamFilter("action", "DeleteModelVersion").
 		WithQueryParamFilter("modelId", "xxx").
 		WithQueryParamFilter("versionId", "xxx").
 		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
 		WithQueryParamFilter("versionId", util.StringValue(request.VersionId)).
+		WithHeader("Version", "v2").
 		Do()
 }
 
-// GetAListOfModelVersionsV2
+// DescribeDataset
 //
 // PARAMS:
-//   - request: the arguments to GetAListOfModelVersionsV2
+//   - request: the arguments to DescribeDataset
 //
 // RETURNS:
-//   - GetAListOfModelVersionsV2Response: The return type of the GetAListOfModelVersionsV2 interface.
+//   - DescribeDatasetResponse: The return type of the DescribeDataset interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) GetAListOfModelVersionsV2(request *GetAListOfModelVersionsV2Request) (*GetAListOfModelVersionsV2Response, error) {
-	result := &GetAListOfModelVersionsV2Response{}
+func (c *Client) DescribeDataset(request *DescribeDatasetRequest) (*DescribeDatasetResponse, error) {
+	result := &DescribeDatasetResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getGetAListOfModelVersionsV2Uri()).
-		WithQueryParamFilter("action", "DescribeModelVersions").
-		WithQueryParamFilter("modelId", "xxx").
-		WithQueryParamFilter("pageNumber", "xxx").
-		WithQueryParamFilter("pageSize", "xxx").
-		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
-		WithQueryParamFilter("pageNumber", util.Int32Value(request.PageNumber)).
-		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// GetDatasetDetailsV2
-//
-// PARAMS:
-//   - request: the arguments to GetDatasetDetailsV2
-//
-// RETURNS:
-//   - GetDatasetDetailsV2Response: The return type of the GetDatasetDetailsV2 interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) GetDatasetDetailsV2(request *GetDatasetDetailsV2Request) (*GetDatasetDetailsV2Response, error) {
-	result := &GetDatasetDetailsV2Response{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getGetDatasetDetailsV2Uri()).
+		WithURL(getDescribeDatasetUri()).
 		WithQueryParamFilter("action", "DescribeDataset").
 		WithQueryParamFilter("datasetId", "xxx").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
+		WithHeader("Version", "v2").
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -207,24 +213,25 @@ func (c *Client) GetDatasetDetailsV2(request *GetDatasetDetailsV2Request) (*GetD
 	return result, nil
 }
 
-// GetDatasetVersionDetailsV2
+// DescribeDatasetVersion
 //
 // PARAMS:
-//   - request: the arguments to GetDatasetVersionDetailsV2
+//   - request: the arguments to DescribeDatasetVersion
 //
 // RETURNS:
-//   - GetDatasetVersionDetailsV2Response: The return type of the GetDatasetVersionDetailsV2 interface.
+//   - DescribeDatasetVersionResponse: The return type of the DescribeDatasetVersion interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) GetDatasetVersionDetailsV2(request *GetDatasetVersionDetailsV2Request) (*GetDatasetVersionDetailsV2Response, error) {
-	result := &GetDatasetVersionDetailsV2Response{}
+func (c *Client) DescribeDatasetVersion(request *DescribeDatasetVersionRequest) (*DescribeDatasetVersionResponse, error) {
+	result := &DescribeDatasetVersionResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getGetDatasetVersionDetailsV2Uri()).
+		WithURL(getDescribeDatasetVersionUri()).
 		WithQueryParamFilter("action", "DescribeDatasetVersion").
 		WithQueryParamFilter("datasetId", "xxx").
 		WithQueryParamFilter("versionId", "xxx").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
 		WithQueryParamFilter("versionId", util.StringValue(request.VersionId)).
+		WithHeader("Version", "v2").
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -233,50 +240,27 @@ func (c *Client) GetDatasetVersionDetailsV2(request *GetDatasetVersionDetailsV2R
 	return result, nil
 }
 
-// GetModelDetailsV2
+// DescribeDatasetVersions
 //
 // PARAMS:
-//   - request: the arguments to GetModelDetailsV2
+//   - request: the arguments to DescribeDatasetVersions
 //
 // RETURNS:
-//   - GetModelDetailsV2Response: The return type of the GetModelDetailsV2 interface.
+//   - DescribeDatasetVersionsResponse: The return type of the DescribeDatasetVersions interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) GetModelDetailsV2(request *GetModelDetailsV2Request) (*GetModelDetailsV2Response, error) {
-	result := &GetModelDetailsV2Response{}
+func (c *Client) DescribeDatasetVersions(request *DescribeDatasetVersionsRequest) (*DescribeDatasetVersionsResponse, error) {
+	result := &DescribeDatasetVersionsResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getGetModelDetailsV2Uri()).
-		WithQueryParamFilter("action", "DescribeModel").
-		WithQueryParamFilter("modelId", "xxx").
-		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// GetModelListV2
-//
-// PARAMS:
-//   - request: the arguments to GetModelListV2
-//
-// RETURNS:
-//   - GetModelListV2Response: The return type of the GetModelListV2 interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) GetModelListV2(request *GetModelListV2Request) (*GetModelListV2Response, error) {
-	result := &GetModelListV2Response{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getGetModelListV2Uri()).
-		WithQueryParamFilter("action", "DescribeModels").
-		WithQueryParamFilter("keyword", "xxx").
+		WithURL(getDescribeDatasetVersionsUri()).
+		WithQueryParamFilter("action", "DescribeDatasetVersions").
+		WithQueryParamFilter("datasetId", "xxx").
 		WithQueryParamFilter("pageNumber", "xxx").
 		WithQueryParamFilter("pageSize", "xxx").
-		WithQueryParamFilter("keyword", util.StringValue(request.Keyword)).
+		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
 		WithQueryParamFilter("pageNumber", util.Int32Value(request.PageNumber)).
 		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
+		WithHeader("Version", "v2").
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -285,108 +269,19 @@ func (c *Client) GetModelListV2(request *GetModelListV2Request) (*GetModelListV2
 	return result, nil
 }
 
-// GetModelVersionDetailsV2
+// DescribeDatasets
 //
 // PARAMS:
-//   - request: the arguments to GetModelVersionDetailsV2
+//   - request: the arguments to DescribeDatasets
 //
 // RETURNS:
-//   - GetModelVersionDetailsV2Response: The return type of the GetModelVersionDetailsV2 interface.
+//   - DescribeDatasetsResponse: The return type of the DescribeDatasets interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) GetModelVersionDetailsV2(request *GetModelVersionDetailsV2Request) (*GetModelVersionDetailsV2Response, error) {
-	result := &GetModelVersionDetailsV2Response{}
+func (c *Client) DescribeDatasets(request *DescribeDatasetsRequest) (*DescribeDatasetsResponse, error) {
+	result := &DescribeDatasetsResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getGetModelVersionDetailsV2Uri()).
-		WithQueryParamFilter("action", "DescribeModelVersion").
-		WithQueryParamFilter("modelId", "xxx").
-		WithQueryParamFilter("versionId", "xxx").
-		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
-		WithQueryParamFilter("versionId", util.StringValue(request.VersionId)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// ModifyDatasetV2
-//
-// PARAMS:
-//   - request: the arguments to ModifyDatasetV2
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ModifyDatasetV2(request *ModifyDatasetV2Request) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getModifyDatasetV2Uri()).
-		WithQueryParamFilter("action", "ModifyDataset").
-		WithQueryParamFilter("datasetId", "xxx").
-		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
-		WithBody(request).
-		Do()
-}
-
-// ModifyTheModelV2
-//
-// PARAMS:
-//   - request: the arguments to ModifyTheModelV2
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ModifyTheModelV2(request *ModifyTheModelV2Request) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getModifyTheModelV2Uri()).
-		WithQueryParamFilter("action", "ModifyModel").
-		WithQueryParamFilter("modelId", "xxx").
-		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
-		WithBody(request).
-		Do()
-}
-
-// NewModelVersionV2
-//
-// PARAMS:
-//   - request: the arguments to NewModelVersionV2
-//
-// RETURNS:
-//   - NewModelVersionV2Response: The return type of the NewModelVersionV2 interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) NewModelVersionV2(request *NewModelVersionV2Request) (*NewModelVersionV2Response, error) {
-	result := &NewModelVersionV2Response{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getNewModelVersionV2Uri()).
-		WithQueryParamFilter("action", "CreateModelVersion").
-		WithQueryParamFilter("modelId", "xxx").
-		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
-		WithBody(request).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// RetrieveTheDatasetListV2
-//
-// PARAMS:
-//   - request: the arguments to RetrieveTheDatasetListV2
-//
-// RETURNS:
-//   - RetrieveTheDatasetListV2Response: The return type of the RetrieveTheDatasetListV2 interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) RetrieveTheDatasetListV2(request *RetrieveTheDatasetListV2Request) (*RetrieveTheDatasetListV2Response, error) {
-	result := &RetrieveTheDatasetListV2Response{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getRetrieveTheDatasetListV2Uri()).
+		WithURL(getDescribeDatasetsUri()).
 		WithQueryParamFilter("action", "DescribeDatasets").
 		WithQueryParamFilter("keyword", "xxx").
 		WithQueryParamFilter("storageType", "xxx").
@@ -400,6 +295,7 @@ func (c *Client) RetrieveTheDatasetListV2(request *RetrieveTheDatasetListV2Reque
 		WithQueryParamFilter("importFormat", util.StringValue(request.ImportFormat)).
 		WithQueryParamFilter("pageNumber", util.Int32Value(request.PageNumber)).
 		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
+		WithHeader("Version", "v2").
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -408,30 +304,152 @@ func (c *Client) RetrieveTheDatasetListV2(request *RetrieveTheDatasetListV2Reque
 	return result, nil
 }
 
-// RetrieveTheDatasetVersionListV2
+// DescribeModel
 //
 // PARAMS:
-//   - request: the arguments to RetrieveTheDatasetVersionListV2
+//   - request: the arguments to DescribeModel
 //
 // RETURNS:
-//   - RetrieveTheDatasetVersionListV2Response: The return type of the RetrieveTheDatasetVersionListV2 interface.
+//   - DescribeModelResponse: The return type of the DescribeModel interface.
 //   - error: nil if success otherwise the specific error
-func (c *Client) RetrieveTheDatasetVersionListV2(request *RetrieveTheDatasetVersionListV2Request) (*RetrieveTheDatasetVersionListV2Response, error) {
-	result := &RetrieveTheDatasetVersionListV2Response{}
+func (c *Client) DescribeModel(request *DescribeModelRequest) (*DescribeModelResponse, error) {
+	result := &DescribeModelResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getRetrieveTheDatasetVersionListV2Uri()).
-		WithQueryParamFilter("action", "DescribeDatasetVersions").
-		WithQueryParamFilter("datasetId", "xxx").
-		WithQueryParamFilter("pageNumber", "xxx").
-		WithQueryParamFilter("pageSize", "xxx").
-		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
-		WithQueryParamFilter("pageNumber", util.Int32Value(request.PageNumber)).
-		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
+		WithURL(getDescribeModelUri()).
+		WithQueryParamFilter("action", "DescribeModel").
+		WithQueryParamFilter("modelId", "xxx").
+		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
+		WithHeader("Version", "v2").
 		WithResult(result).
 		Do()
 	if err != nil {
 		return nil, err
 	}
 	return result, nil
+}
+
+// DescribeModelVersion
+//
+// PARAMS:
+//   - request: the arguments to DescribeModelVersion
+//
+// RETURNS:
+//   - DescribeModelVersionResponse: The return type of the DescribeModelVersion interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeModelVersion(request *DescribeModelVersionRequest) (*DescribeModelVersionResponse, error) {
+	result := &DescribeModelVersionResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeModelVersionUri()).
+		WithQueryParamFilter("action", "DescribeModelVersion").
+		WithQueryParamFilter("modelId", "xxx").
+		WithQueryParamFilter("versionId", "xxx").
+		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
+		WithQueryParamFilter("versionId", util.StringValue(request.VersionId)).
+		WithHeader("Version", "v2").
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeModelVersions
+//
+// PARAMS:
+//   - request: the arguments to DescribeModelVersions
+//
+// RETURNS:
+//   - DescribeModelVersionsResponse: The return type of the DescribeModelVersions interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeModelVersions(request *DescribeModelVersionsRequest) (*DescribeModelVersionsResponse, error) {
+	result := &DescribeModelVersionsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeModelVersionsUri()).
+		WithQueryParamFilter("action", "DescribeModelVersions").
+		WithQueryParamFilter("modelId", "xxx").
+		WithQueryParamFilter("pageNumber", "xxx").
+		WithQueryParamFilter("pageSize", "xxx").
+		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
+		WithQueryParamFilter("pageNumber", util.Int32Value(request.PageNumber)).
+		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
+		WithHeader("Version", "v2").
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeModels
+//
+// PARAMS:
+//   - request: the arguments to DescribeModels
+//
+// RETURNS:
+//   - DescribeModelsResponse: The return type of the DescribeModels interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeModels(request *DescribeModelsRequest) (*DescribeModelsResponse, error) {
+	result := &DescribeModelsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeModelsUri()).
+		WithQueryParamFilter("action", "DescribeModels").
+		WithQueryParamFilter("keyword", "xxx").
+		WithQueryParamFilter("pageNumber", "xxx").
+		WithQueryParamFilter("pageSize", "xxx").
+		WithQueryParamFilter("keyword", util.StringValue(request.Keyword)).
+		WithQueryParamFilter("pageNumber", util.Int32Value(request.PageNumber)).
+		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
+		WithHeader("Version", "v2").
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ModifyDataset
+//
+// PARAMS:
+//   - request: the arguments to ModifyDataset
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ModifyDataset(request *ModifyDatasetRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getModifyDatasetUri()).
+		WithQueryParamFilter("action", "ModifyDataset").
+		WithQueryParamFilter("datasetId", "xxx").
+		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		Do()
+}
+
+// ModifyModel
+//
+// PARAMS:
+//   - request: the arguments to ModifyModel
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ModifyModel(request *ModifyModelRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getModifyModelUri()).
+		WithQueryParamFilter("action", "ModifyModel").
+		WithQueryParamFilter("modelId", "xxx").
+		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		Do()
 }
