@@ -46,7 +46,6 @@ func (c *Client) CreateDatasetVersion(request *CreateDatasetVersionRequest) (*Cr
 		WithMethod(http.POST).
 		WithURL(getCreateDatasetVersionUri()).
 		WithQueryParamFilter("action", "CreateDatasetVersion").
-		WithQueryParamFilter("datasetId", "xxx").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
 		WithHeader("Version", "v2").
 		WithBody(request).
@@ -96,7 +95,6 @@ func (c *Client) CreateModelVersion(request *CreateModelVersionRequest) (*Create
 		WithMethod(http.POST).
 		WithURL(getCreateModelVersionUri()).
 		WithQueryParamFilter("action", "CreateModelVersion").
-		WithQueryParamFilter("modelId", "xxx").
 		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
 		WithHeader("Version", "v2").
 		WithBody(request).
@@ -121,7 +119,6 @@ func (c *Client) DeleteDataset(request *DeleteDatasetRequest) error {
 		WithMethod(http.POST).
 		WithURL(getDeleteDatasetUri()).
 		WithQueryParamFilter("action", "DeleteDataset").
-		WithQueryParamFilter("datasetId", "xxx").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
 		WithHeader("Version", "v2").
 		Do()
@@ -140,8 +137,6 @@ func (c *Client) DeleteDatasetVersion(request *DeleteDatasetVersionRequest) erro
 		WithMethod(http.POST).
 		WithURL(getDeleteDatasetVersionUri()).
 		WithQueryParamFilter("action", "DeleteDatasetVersion").
-		WithQueryParamFilter("datasetId", "xxx").
-		WithQueryParamFilter("versionId", "xxx").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
 		WithQueryParamFilter("versionId", util.StringValue(request.VersionId)).
 		WithHeader("Version", "v2").
@@ -161,7 +156,6 @@ func (c *Client) DeleteModel(request *DeleteModelRequest) error {
 		WithMethod(http.POST).
 		WithURL(getDeleteModelUri()).
 		WithQueryParamFilter("action", "DeleteModel").
-		WithQueryParamFilter("modelId", "xxx").
 		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
 		WithHeader("Version", "v2").
 		Do()
@@ -180,8 +174,6 @@ func (c *Client) DeleteModelVersion(request *DeleteModelVersionRequest) error {
 		WithMethod(http.POST).
 		WithURL(getDeleteModelVersionUri()).
 		WithQueryParamFilter("action", "DeleteModelVersion").
-		WithQueryParamFilter("modelId", "xxx").
-		WithQueryParamFilter("versionId", "xxx").
 		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
 		WithQueryParamFilter("versionId", util.StringValue(request.VersionId)).
 		WithHeader("Version", "v2").
@@ -202,7 +194,6 @@ func (c *Client) DescribeDataset(request *DescribeDatasetRequest) (*DescribeData
 		WithMethod(http.GET).
 		WithURL(getDescribeDatasetUri()).
 		WithQueryParamFilter("action", "DescribeDataset").
-		WithQueryParamFilter("datasetId", "xxx").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
 		WithHeader("Version", "v2").
 		WithResult(result).
@@ -227,8 +218,6 @@ func (c *Client) DescribeDatasetVersion(request *DescribeDatasetVersionRequest) 
 		WithMethod(http.GET).
 		WithURL(getDescribeDatasetVersionUri()).
 		WithQueryParamFilter("action", "DescribeDatasetVersion").
-		WithQueryParamFilter("datasetId", "xxx").
-		WithQueryParamFilter("versionId", "xxx").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
 		WithQueryParamFilter("versionId", util.StringValue(request.VersionId)).
 		WithHeader("Version", "v2").
@@ -254,9 +243,6 @@ func (c *Client) DescribeDatasetVersions(request *DescribeDatasetVersionsRequest
 		WithMethod(http.GET).
 		WithURL(getDescribeDatasetVersionsUri()).
 		WithQueryParamFilter("action", "DescribeDatasetVersions").
-		WithQueryParamFilter("datasetId", "xxx").
-		WithQueryParamFilter("pageNumber", "xxx").
-		WithQueryParamFilter("pageSize", "xxx").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
 		WithQueryParamFilter("pageNumber", util.Int32Value(request.PageNumber)).
 		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
@@ -283,12 +269,6 @@ func (c *Client) DescribeDatasets(request *DescribeDatasetsRequest) (*DescribeDa
 		WithMethod(http.GET).
 		WithURL(getDescribeDatasetsUri()).
 		WithQueryParamFilter("action", "DescribeDatasets").
-		WithQueryParamFilter("keyword", "xxx").
-		WithQueryParamFilter("storageType", "xxx").
-		WithQueryParamFilter("storageInstances", "xxx").
-		WithQueryParamFilter("importFormat", "xxx").
-		WithQueryParamFilter("pageNumber", "xxx").
-		WithQueryParamFilter("pageSize", "xxx").
 		WithQueryParamFilter("keyword", util.StringValue(request.Keyword)).
 		WithQueryParamFilter("storageType", util.StringValue(request.StorageType)).
 		WithQueryParamFilter("storageInstances", util.StringValue(request.StorageInstances)).
@@ -318,7 +298,6 @@ func (c *Client) DescribeModel(request *DescribeModelRequest) (*DescribeModelRes
 		WithMethod(http.GET).
 		WithURL(getDescribeModelUri()).
 		WithQueryParamFilter("action", "DescribeModel").
-		WithQueryParamFilter("modelId", "xxx").
 		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
 		WithHeader("Version", "v2").
 		WithResult(result).
@@ -343,8 +322,6 @@ func (c *Client) DescribeModelVersion(request *DescribeModelVersionRequest) (*De
 		WithMethod(http.GET).
 		WithURL(getDescribeModelVersionUri()).
 		WithQueryParamFilter("action", "DescribeModelVersion").
-		WithQueryParamFilter("modelId", "xxx").
-		WithQueryParamFilter("versionId", "xxx").
 		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
 		WithQueryParamFilter("versionId", util.StringValue(request.VersionId)).
 		WithHeader("Version", "v2").
@@ -370,9 +347,6 @@ func (c *Client) DescribeModelVersions(request *DescribeModelVersionsRequest) (*
 		WithMethod(http.GET).
 		WithURL(getDescribeModelVersionsUri()).
 		WithQueryParamFilter("action", "DescribeModelVersions").
-		WithQueryParamFilter("modelId", "xxx").
-		WithQueryParamFilter("pageNumber", "xxx").
-		WithQueryParamFilter("pageSize", "xxx").
 		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
 		WithQueryParamFilter("pageNumber", util.Int32Value(request.PageNumber)).
 		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
@@ -399,9 +373,6 @@ func (c *Client) DescribeModels(request *DescribeModelsRequest) (*DescribeModels
 		WithMethod(http.GET).
 		WithURL(getDescribeModelsUri()).
 		WithQueryParamFilter("action", "DescribeModels").
-		WithQueryParamFilter("keyword", "xxx").
-		WithQueryParamFilter("pageNumber", "xxx").
-		WithQueryParamFilter("pageSize", "xxx").
 		WithQueryParamFilter("keyword", util.StringValue(request.Keyword)).
 		WithQueryParamFilter("pageNumber", util.Int32Value(request.PageNumber)).
 		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
@@ -427,7 +398,6 @@ func (c *Client) ModifyDataset(request *ModifyDatasetRequest) error {
 		WithMethod(http.POST).
 		WithURL(getModifyDatasetUri()).
 		WithQueryParamFilter("action", "ModifyDataset").
-		WithQueryParamFilter("datasetId", "xxx").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
 		WithHeader("Version", "v2").
 		WithBody(request).
@@ -447,7 +417,6 @@ func (c *Client) ModifyModel(request *ModifyModelRequest) error {
 		WithMethod(http.POST).
 		WithURL(getModifyModelUri()).
 		WithQueryParamFilter("action", "ModifyModel").
-		WithQueryParamFilter("modelId", "xxx").
 		WithQueryParamFilter("modelId", util.StringValue(request.ModelId)).
 		WithHeader("Version", "v2").
 		WithBody(request).
