@@ -1,4 +1,8 @@
 2026-06-15 Version: v0.0.72
+- 涉及产品: BCC，新增实例生命周期管理（创建、启停、重启、重装、释放）
+- 涉及产品: BCC，新增实例计费变更（续费、转包年包月、转按量、自动续费）
+- 涉及产品: BCC，新增实例网络管理（变更VPC/子网、IPv6增删、网卡查询）
+- 涉及产品: BCC，新增实例属性管理（安全组、标签、角色、密码、描述绑定）
 - 涉及产品: RAPIDFS，元数据同步规则列表及详情接口字段IntervalMinutes更正为intervalMinutes
 - 涉及产品: RAPIDFS，缓存管理规则任务列表字段cacheRuleJobInfos和cacheRuleJobId更正为cacheJobInfos和cacheJobId
 

@@ -21,23 +21,23 @@ type VolumeModel struct {
 	StorageType             *string                   `json:"storageType,omitempty"`
 	IsSystemVolume          *bool                     `json:"isSystemVolume,omitempty"`
 	Description             *string                   `json:"description,omitempty"`
+	Desc                    *string                   `json:"desc,omitempty"`
 	PaymentTiming           *string                   `json:"paymentTiming,omitempty"`
 	ZoneName                *string                   `json:"zoneName,omitempty"`
-	ClusterId               *string                   `json:"clusterId,omitempty"`
-	Encrypted               *bool                     `json:"encrypted,omitempty"`
-	DeleteWithInstance      *bool                     `json:"deleteWithInstance,omitempty"`
-	DeleteAutoSnapshot      *bool                     `json:"deleteAutoSnapshot,omitempty"`
-	Attachments             []*VolumeAttachmentModel  `json:"attachments,omitempty"`
-	MultiAttachInfos        []*VolumeMultiAttachInfo  `json:"multiAttachInfos,omitempty"`
-	Desc                    *string                   `json:"desc,omitempty"`
 	RegionId                *string                   `json:"regionId,omitempty"`
 	SourceSnapshotId        *string                   `json:"sourceSnapshotId,omitempty"`
 	SnapshotNum             *string                   `json:"snapshotNum,omitempty"`
+	ClusterId               *string                   `json:"clusterId,omitempty"`
 	ResGroupInfos           []*GroupInfo              `json:"resGroupInfos,omitempty"`
 	AutoSnapshotPolicy      *AutoSnapshotPolicyModel  `json:"autoSnapshotPolicy,omitempty"`
 	AutoSnapshotPolicyInfos []*AutoSnapshotPolicyInfo `json:"autoSnapshotPolicyInfos,omitempty"`
 	EncryptKey              *string                   `json:"encryptKey,omitempty"`
 	EncryptKeySpec          *string                   `json:"encryptKeySpec,omitempty"`
+	Encrypted               *bool                     `json:"encrypted,omitempty"`
+	DeleteWithInstance      *bool                     `json:"deleteWithInstance,omitempty"`
+	DeleteAutoSnapshot      *bool                     `json:"deleteAutoSnapshot,omitempty"`
+	Attachments             []*VolumeAttachmentModel  `json:"attachments,omitempty"`
+	MultiAttachInfos        []*VolumeMultiAttachInfo  `json:"multiAttachInfos,omitempty"`
 	MultiAttach             *bool                     `json:"multiAttach,omitempty"`
 	VolumeId                *string                   `json:"volumeId,omitempty"`
 }
