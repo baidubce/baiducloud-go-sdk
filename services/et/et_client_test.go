@@ -241,6 +241,14 @@ func TestClient_DeleteDedicatedChannelRouteRules(t *testing.T) {
 	err := ET_CLIENT.DeleteDedicatedChannelRouteRules(deleteDedicatedChannelRouteRulesRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeletePhysicalDedicatedLine(t *testing.T) {
+	deletePhysicalDedicatedLineRequest := &DeletePhysicalDedicatedLineRequest{
+		DcphyId:     util.PtrString(""),
+		ClientToken: util.PtrString(""),
+	}
+	err := ET_CLIENT.DeletePhysicalDedicatedLine(deletePhysicalDedicatedLineRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DisableDedicatedChannelIpv6(t *testing.T) {
 	disableDedicatedChannelIpv6Request := &DisableDedicatedChannelIpv6Request{
 		EtId:        util.PtrString(""),

@@ -66,6 +66,9 @@ func getDeleteDedicatedChannelBfdUri(version string, EtId string, EtChannelId st
 func getDeleteDedicatedChannelRouteRulesUri(version string, EtId string, EtChannelId string, RouteRuleId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET + bce.URI_PREFIX + EtId + bce.URI_PREFIX + CONSTANT_CHANNEL + bce.URI_PREFIX + EtChannelId + bce.URI_PREFIX + CONSTANT_ROUTE + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + RouteRuleId
 }
+func getDeletePhysicalDedicatedLineUri(version string, DcphyId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET + bce.URI_PREFIX + DcphyId
+}
 func getDisableDedicatedChannelIpv6Uri(version string, EtId string, EtChannelId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ET + bce.URI_PREFIX + EtId + bce.URI_PREFIX + CONSTANT_CHANNEL + bce.URI_PREFIX + EtChannelId
 }

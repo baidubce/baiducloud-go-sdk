@@ -198,6 +198,22 @@ func (c *Client) DeleteDedicatedChannelRouteRules(request *DeleteDedicatedChanne
 		Do()
 }
 
+// DeletePhysicalDedicatedLine
+//
+// PARAMS:
+//   - request: the arguments to DeletePhysicalDedicatedLine
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeletePhysicalDedicatedLine(request *DeletePhysicalDedicatedLineRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeletePhysicalDedicatedLineUri(VERSION_V1, util.StringValue(request.DcphyId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
+		Do()
+}
+
 // DisableDedicatedChannelIpv6
 //
 // PARAMS:
