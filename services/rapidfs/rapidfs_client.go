@@ -46,7 +46,7 @@ func (c *Client) CancelCacheRuleJob(request *CancelCacheRuleJobRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCancelCacheRuleJobUri(VERSION_V2)).
-		WithQueryParamFilter("action", "CancelCacheRuleJob").
+		WithQueryParamFilter("action", "CancelCacheJob").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
@@ -574,7 +574,7 @@ func (c *Client) DescribeCacheRuleJobs(request *DescribeCacheRuleJobsRequest) (*
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getDescribeCacheRuleJobsUri(VERSION_V2)).
-		WithQueryParamFilter("action", "DescribeCacheRuleJobs").
+		WithQueryParamFilter("action", "DescribeCacheJobs").
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -953,7 +953,7 @@ func (c *Client) ExecuteCacheRuleJob(request *ExecuteCacheRuleJobRequest) error 
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getExecuteCacheRuleJobUri(VERSION_V2)).
-		WithQueryParamFilter("action", "ExecuteCacheRuleJob").
+		WithQueryParamFilter("action", "ExecuteCacheJob").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()

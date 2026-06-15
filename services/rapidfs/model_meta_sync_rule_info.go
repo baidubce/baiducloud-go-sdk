@@ -9,7 +9,7 @@ type MetaSyncRuleInfo struct {
 	DataSrcId        *string `json:"dataSrcId,omitempty"`
 	RapidfsType      *string `json:"type,omitempty"`
 	Directory        *string `json:"directory,omitempty"`
-	IntervalMinutes  *int32  `json:"IntervalMinutes,omitempty"`
+	IntervalMinutes  *int32  `json:"intervalMinutes,omitempty"`
 	Status           *string `json:"status,omitempty"`
 	CreateTime       *string `json:"createTime,omitempty"`
 	Description      *string `json:"description,omitempty"`

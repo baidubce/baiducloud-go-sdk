@@ -1,3 +1,7 @@
+2026-06-15 Version: v0.0.72
+- 涉及产品: RAPIDFS，元数据同步规则列表及详情接口字段IntervalMinutes更正为intervalMinutes
+- 涉及产品: RAPIDFS，缓存管理规则任务列表字段cacheRuleJobInfos和cacheRuleJobId更正为cacheJobInfos和cacheJobId
+
 2026-06-12 Version: v0.0.71
 - 涉及产品: AIHC，SDK版本更新
 
