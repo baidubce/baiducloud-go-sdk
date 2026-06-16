@@ -9,6 +9,8 @@ const (
 
 	CONSTANT_CFW = "cfw"
 
+	CONSTANT_STATELESS = "stateless"
+
 	CONSTANT_RULE = "rule"
 
 	CONSTANT_DELETE = "delete"
@@ -41,6 +43,9 @@ func getCreateCfwUri(version string) string {
 func getCreateCfwRuleUri(version string, CfwId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_CFW + bce.URI_PREFIX + CfwId + bce.URI_PREFIX + CONSTANT_RULE
 }
+func getCreateStatelessCfwUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_CFW + bce.URI_PREFIX + CONSTANT_STATELESS
+}
 func getDeleteCfwUri(version string, CfwId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_CFW + bce.URI_PREFIX + CfwId
 }
@@ -56,11 +61,17 @@ func getEnableCfwProtectUri(version string, CfwId string) string {
 func getGetCfwUri(version string, CfwId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_CFW + bce.URI_PREFIX + CfwId
 }
+func getGetStatelessCfwUri(version string, CfwId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_CFW + bce.URI_PREFIX + CONSTANT_STATELESS + bce.URI_PREFIX + CfwId
+}
 func getListCfwUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_CFW
 }
 func getListProtectInstancesUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_CFW + bce.URI_PREFIX + CONSTANT_INSTANCE
+}
+func getListStatelessCfwUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_CFW + bce.URI_PREFIX + CONSTANT_STATELESS
 }
 func getUnbindCfwUri(version string, CfwId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_CFW + bce.URI_PREFIX + CfwId
@@ -70,4 +81,7 @@ func getUpdateCfwUri(version string, CfwId string) string {
 }
 func getUpdateCfwRuleUri(version string, CfwId string, CfwRuleId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_CFW + bce.URI_PREFIX + CfwId + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + CfwRuleId
+}
+func getUpdateStatelessCfwUri(version string, CfwId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_CFW + bce.URI_PREFIX + CONSTANT_STATELESS + bce.URI_PREFIX + CfwId
 }

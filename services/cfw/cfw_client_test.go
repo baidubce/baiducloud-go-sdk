@@ -106,6 +106,28 @@ func TestClient_CreateCfwRule(t *testing.T) {
 	err := CFW_CLIENT.CreateCfwRule(createCfwRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateStatelessCfw(t *testing.T) {
+	createStatelessCfwRequest := &CreateStatelessCfwRequest{
+		Name:          util.PtrString(""),
+		Description:   util.PtrString(""),
+		DefaultAction: util.PtrString(""),
+		Protocol:      util.PtrString(""),
+		IpList:        []*string{},
+	}
+	result := &CreateStatelessCfwResponse{}
+	result, err := CFW_CLIENT.CreateStatelessCfw(createStatelessCfwRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteCfw(t *testing.T) {
 	deleteCfwRequest := &DeleteCfwRequest{
 		CfwId: util.PtrString(""),
@@ -159,6 +181,24 @@ func TestClient_GetCfw(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_GetStatelessCfw(t *testing.T) {
+	getStatelessCfwRequest := &GetStatelessCfwRequest{
+		CfwId: util.PtrString(""),
+	}
+	result := &GetStatelessCfwResponse{}
+	result, err := CFW_CLIENT.GetStatelessCfw(getStatelessCfwRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ListCfw(t *testing.T) {
 	listCfwRequest := &ListCfwRequest{
 		Marker:  util.PtrString(""),
@@ -188,6 +228,25 @@ func TestClient_ListProtectInstances(t *testing.T) {
 	}
 	result := &ListProtectInstancesResponse{}
 	result, err := CFW_CLIENT.ListProtectInstances(listProtectInstancesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListStatelessCfw(t *testing.T) {
+	listStatelessCfwRequest := &ListStatelessCfwRequest{
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &ListStatelessCfwResponse{}
+	result, err := CFW_CLIENT.ListStatelessCfw(listStatelessCfwRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -234,5 +293,16 @@ func TestClient_UpdateCfwRule(t *testing.T) {
 		Description:   util.PtrString(""),
 	}
 	err := CFW_CLIENT.UpdateCfwRule(updateCfwRuleRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateStatelessCfw(t *testing.T) {
+	updateStatelessCfwRequest := &UpdateStatelessCfwRequest{
+		CfwId:       util.PtrString(""),
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
+		Protocol:    util.PtrString(""),
+		IpList:      []*string{},
+	}
+	err := CFW_CLIENT.UpdateStatelessCfw(updateStatelessCfwRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }

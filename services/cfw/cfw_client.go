@@ -65,6 +65,28 @@ func (c *Client) CreateCfwRule(request *CreateCfwRuleRequest) error {
 		Do()
 }
 
+// CreateStatelessCfw
+//
+// PARAMS:
+//   - request: the arguments to CreateStatelessCfw
+//
+// RETURNS:
+//   - CreateStatelessCfwResponse: The return type of the CreateStatelessCfw interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateStatelessCfw(request *CreateStatelessCfwRequest) (*CreateStatelessCfwResponse, error) {
+	result := &CreateStatelessCfwResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateStatelessCfwUri(VERSION_V1)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DeleteCfw
 //
 // PARAMS:
@@ -151,6 +173,27 @@ func (c *Client) GetCfw(request *GetCfwRequest) (*GetCfwResponse, error) {
 	return result, nil
 }
 
+// GetStatelessCfw
+//
+// PARAMS:
+//   - request: the arguments to GetStatelessCfw
+//
+// RETURNS:
+//   - GetStatelessCfwResponse: The return type of the GetStatelessCfw interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetStatelessCfw(request *GetStatelessCfwRequest) (*GetStatelessCfwResponse, error) {
+	result := &GetStatelessCfwResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetStatelessCfwUri(VERSION_V1, util.StringValue(request.CfwId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ListCfw
 //
 // PARAMS:
@@ -192,6 +235,31 @@ func (c *Client) ListProtectInstances(request *ListProtectInstancesRequest) (*Li
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithQueryParamFilter("status", util.StringValue(request.Status)).
 		WithQueryParamFilter("region", util.StringValue(request.Region)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListStatelessCfw
+//
+// PARAMS:
+//   - request: the arguments to ListStatelessCfw
+//
+// RETURNS:
+//   - ListStatelessCfwResponse: The return type of the ListStatelessCfw interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListStatelessCfw(request *ListStatelessCfwRequest) (*ListStatelessCfwResponse, error) {
+	result := &ListStatelessCfwResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListStatelessCfwUri(VERSION_V1)).
+		WithQueryParamFilter("marker", "cfw-egx34bzjj43k").
+		WithQueryParamFilter("maxKeys", "1").
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -245,6 +313,22 @@ func (c *Client) UpdateCfwRule(request *UpdateCfwRuleRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateCfwRuleUri(VERSION_V1, util.StringValue(request.CfwId), util.StringValue(request.CfwRuleId))).
+		WithBody(request).
+		Do()
+}
+
+// UpdateStatelessCfw
+//
+// PARAMS:
+//   - request: the arguments to UpdateStatelessCfw
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateStatelessCfw(request *UpdateStatelessCfwRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateStatelessCfwUri(VERSION_V1, util.StringValue(request.CfwId))).
 		WithBody(request).
 		Do()
 }
