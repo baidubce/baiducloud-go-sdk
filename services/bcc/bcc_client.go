@@ -32,6 +32,40 @@ func (c *Client) AddIpv6(request *AddIpv6Request) (*AddIpv6Response, error) {
 	return result, nil
 }
 
+// AttachAsp
+//
+// PARAMS:
+//   - request: the arguments to AttachAsp
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AttachAsp(request *AttachAspRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getAttachAspUri(VERSION_V2, util.StringValue(request.AspId))).
+		WithQueryParam("attach", "").
+		WithBody(request).
+		Do()
+}
+
+// AttachKeypair
+//
+// PARAMS:
+//   - request: the arguments to AttachKeypair
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AttachKeypair(request *AttachKeypairRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getAttachKeypairUri(VERSION_V2, util.StringValue(request.KeypairId))).
+		WithQueryParam("attach", "").
+		WithBody(request).
+		Do()
+}
+
 // AttachVolume
 //
 // PARAMS:
@@ -53,6 +87,24 @@ func (c *Client) AttachVolume(request *AttachVolumeRequest) (*AttachVolumeRespon
 		return nil, err
 	}
 	return result, nil
+}
+
+// AuthorizeSecurityGroupRule
+//
+// PARAMS:
+//   - request: the arguments to AuthorizeSecurityGroupRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AuthorizeSecurityGroupRule(request *AuthorizeSecurityGroupRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getAuthorizeSecurityGroupRuleUri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
+		WithQueryParam("authorizeRule", "").
+		WithQueryParamFilter("sgVersion", util.Int32Value(request.SgVersion)).
+		WithBody(request).
+		Do()
 }
 
 // AutoReleaseInstance
@@ -206,6 +258,28 @@ func (c *Client) BatchStopInstance(request *BatchStopInstanceRequest) error {
 		Do()
 }
 
+// BindInstanceSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to BindInstanceSecurityGroup
+//
+// RETURNS:
+//   - BindInstanceSecurityGroupResponse: The return type of the BindInstanceSecurityGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) BindInstanceSecurityGroup(request *BindInstanceSecurityGroupRequest) (*BindInstanceSecurityGroupResponse, error) {
+	result := &BindInstanceSecurityGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindInstanceSecurityGroupUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // BindInstanceToSecurityGroup
 //
 // PARAMS:
@@ -280,6 +354,23 @@ func (c *Client) BindTagImage(request *BindTagImageRequest) error {
 		Do()
 }
 
+// BindTagSnapchain
+//
+// PARAMS:
+//   - request: the arguments to BindTagSnapchain
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BindTagSnapchain(request *BindTagSnapchainRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindTagSnapchainUri(VERSION_V2, util.StringValue(request.ChainId))).
+		WithQueryParam("bind", "").
+		WithBody(request).
+		Do()
+}
+
 // BindTagVolume
 //
 // PARAMS:
@@ -297,6 +388,28 @@ func (c *Client) BindTagVolume(request *BindTagVolumeRequest) error {
 		Do()
 }
 
+// CancelBidOrder
+//
+// PARAMS:
+//   - request: the arguments to CancelBidOrder
+//
+// RETURNS:
+//   - CancelBidOrderResponse: The return type of the CancelBidOrder interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CancelBidOrder(request *CancelBidOrderRequest) (*CancelBidOrderResponse, error) {
+	result := &CancelBidOrderResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCancelBidOrderUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CancelRemoteCopyImage
 //
 // PARAMS:
@@ -311,6 +424,28 @@ func (c *Client) CancelRemoteCopyImage(request *CancelRemoteCopyImageRequest) er
 		WithURL(getCancelRemoteCopyImageUri(VERSION_V2, util.StringValue(request.ImageId))).
 		WithQueryParam("cancelRemoteCopy", "").
 		Do()
+}
+
+// CancelSnapshotShare
+//
+// PARAMS:
+//   - request: the arguments to CancelSnapshotShare
+//
+// RETURNS:
+//   - CancelSnapshotShareResponse: The return type of the CancelSnapshotShare interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CancelSnapshotShare(request *CancelSnapshotShareRequest) (*CancelSnapshotShareResponse, error) {
+	result := &CancelSnapshotShareResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCancelSnapshotShareUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ChangeToPrepaid
@@ -352,6 +487,28 @@ func (c *Client) ChangeVpc(request *ChangeVpcRequest) error {
 		Do()
 }
 
+// CreateAsp
+//
+// PARAMS:
+//   - request: the arguments to CreateAsp
+//
+// RETURNS:
+//   - CreateAspResponse: The return type of the CreateAsp interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateAsp(request *CreateAspRequest) (*CreateAspResponse, error) {
+	result := &CreateAspResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateAspUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateAutoRenewRule
 //
 // PARAMS:
@@ -366,6 +523,50 @@ func (c *Client) CreateAutoRenewRule(request *CreateAutoRenewRuleRequest) error 
 		WithURL(getCreateAutoRenewRuleUri(VERSION_V2)).
 		WithBody(request).
 		Do()
+}
+
+// CreateBidInstance
+//
+// PARAMS:
+//   - request: the arguments to CreateBidInstance
+//
+// RETURNS:
+//   - CreateBidInstanceResponse: The return type of the CreateBidInstance interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateBidInstance(request *CreateBidInstanceRequest) (*CreateBidInstanceResponse, error) {
+	result := &CreateBidInstanceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateBidInstanceUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateDeploySet
+//
+// PARAMS:
+//   - request: the arguments to CreateDeploySet
+//
+// RETURNS:
+//   - CreateDeploySetResponse: The return type of the CreateDeploySet interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateDeploySet(request *CreateDeploySetRequest) (*CreateDeploySetResponse, error) {
+	result := &CreateDeploySetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateDeploySetUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateImage
@@ -403,6 +604,94 @@ func (c *Client) CreateInstanceBySpec(request *CreateInstanceBySpecRequest) (*Cr
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateInstanceBySpecUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateKeypair
+//
+// PARAMS:
+//   - request: the arguments to CreateKeypair
+//
+// RETURNS:
+//   - CreateKeypairResponse: The return type of the CreateKeypair interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateKeypair(request *CreateKeypairRequest) (*CreateKeypairResponse, error) {
+	result := &CreateKeypairResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateKeypairUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to CreateSecurityGroup
+//
+// RETURNS:
+//   - CreateSecurityGroupResponse: The return type of the CreateSecurityGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateSecurityGroup(request *CreateSecurityGroupRequest) (*CreateSecurityGroupResponse, error) {
+	result := &CreateSecurityGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateSecurityGroupUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateSnapshot
+//
+// PARAMS:
+//   - request: the arguments to CreateSnapshot
+//
+// RETURNS:
+//   - CreateSnapshotResponse: The return type of the CreateSnapshot interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateSnapshot(request *CreateSnapshotRequest) (*CreateSnapshotResponse, error) {
+	result := &CreateSnapshotResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateSnapshotUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateSnapshotShare
+//
+// PARAMS:
+//   - request: the arguments to CreateSnapshotShare
+//
+// RETURNS:
+//   - CreateSnapshotShareResponse: The return type of the CreateSnapshotShare interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateSnapshotShare(request *CreateSnapshotShareRequest) (*CreateSnapshotShareResponse, error) {
+	result := &CreateSnapshotShareResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateSnapshotShareUri(VERSION_V2)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -450,6 +739,21 @@ func (c *Client) DelIpv6(request *DelIpv6Request) error {
 		Do()
 }
 
+// DeleteAsp
+//
+// PARAMS:
+//   - request: the arguments to DeleteAsp
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteAsp(request *DeleteAspRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteAspUri(VERSION_V2, util.StringValue(request.AspId))).
+		Do()
+}
+
 // DeleteAutoRenewRule
 //
 // PARAMS:
@@ -463,6 +767,21 @@ func (c *Client) DeleteAutoRenewRule(request *DeleteAutoRenewRuleRequest) error 
 		WithMethod(http.POST).
 		WithURL(getDeleteAutoRenewRuleUri(VERSION_V2)).
 		WithBody(request).
+		Do()
+}
+
+// DeleteDeploySet
+//
+// PARAMS:
+//   - request: the arguments to DeleteDeploySet
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteDeploySet(request *DeleteDeploySetRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteDeploySetUri(VERSION_V2, util.StringValue(request.DeployId))).
 		Do()
 }
 
@@ -494,6 +813,21 @@ func (c *Client) DeleteInstanceDeploySet(request *DeleteInstanceDeploySetRequest
 		WithMethod(http.POST).
 		WithURL(getDeleteInstanceDeploySetUri(VERSION_V2)).
 		WithBody(request).
+		Do()
+}
+
+// DeleteKeypair
+//
+// PARAMS:
+//   - request: the arguments to DeleteKeypair
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteKeypair(request *DeleteKeypairRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteKeypairUri(VERSION_V2, util.StringValue(request.KeypairId))).
 		Do()
 }
 
@@ -532,6 +866,102 @@ func (c *Client) DeleteRecycledInstance(request *DeleteRecycledInstanceRequest) 
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getDeleteRecycledInstanceUri(VERSION_V2, util.StringValue(request.InstanceId))).
+		Do()
+}
+
+// DeleteSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to DeleteSecurityGroup
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteSecurityGroup(request *DeleteSecurityGroupRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteSecurityGroupUri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
+		Do()
+}
+
+// DeleteSecurityGroupRule
+//
+// PARAMS:
+//   - request: the arguments to DeleteSecurityGroupRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteSecurityGroupRule(request *DeleteSecurityGroupRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteSecurityGroupRuleUri(VERSION_V2, util.StringValue(request.SecurityGroupRuleId))).
+		WithQueryParamFilter("sgVersion", util.Int32Value(request.SgVersion)).
+		Do()
+}
+
+// DeleteSnapshot
+//
+// PARAMS:
+//   - request: the arguments to DeleteSnapshot
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteSnapshot(request *DeleteSnapshotRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteSnapshotUri(VERSION_V2, util.StringValue(request.SnapshotId))).
+		Do()
+}
+
+// DeletesInstanceDeploySet
+//
+// PARAMS:
+//   - request: the arguments to DeletesInstanceDeploySet
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeletesInstanceDeploySet(request *DeletesInstanceDeploySetRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDeletesInstanceDeploySetUri(VERSION_V2)).
+		WithBody(request).
+		Do()
+}
+
+// DetachAsp
+//
+// PARAMS:
+//   - request: the arguments to DetachAsp
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DetachAsp(request *DetachAspRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDetachAspUri(VERSION_V2, util.StringValue(request.AspId))).
+		WithQueryParam("detach", "").
+		WithBody(request).
+		Do()
+}
+
+// DetachKeypair
+//
+// PARAMS:
+//   - request: the arguments to DetachKeypair
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DetachKeypair(request *DetachKeypairRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getDetachKeypairUri(VERSION_V2, util.StringValue(request.KeypairId))).
+		WithQueryParam("detach", "").
+		WithBody(request).
 		Do()
 }
 
@@ -596,6 +1026,27 @@ func (c *Client) ExitRescueMode(request *ExitRescueModeRequest) (*ExitRescueMode
 	return result, nil
 }
 
+// GetAsp
+//
+// PARAMS:
+//   - request: the arguments to GetAsp
+//
+// RETURNS:
+//   - GetAspResponse: The return type of the GetAsp interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetAsp(request *GetAspRequest) (*GetAspResponse, error) {
+	result := &GetAspResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetAspUri(VERSION_V2, util.StringValue(request.AspId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // GetAvailableImagesBySpec
 //
 // PARAMS:
@@ -621,6 +1072,28 @@ func (c *Client) GetAvailableImagesBySpec(request *GetAvailableImagesBySpecReque
 	return result, nil
 }
 
+// GetBidInstancePrice
+//
+// PARAMS:
+//   - request: the arguments to GetBidInstancePrice
+//
+// RETURNS:
+//   - GetBidInstancePriceResponse: The return type of the GetBidInstancePrice interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetBidInstancePrice(request *GetBidInstancePriceRequest) (*GetBidInstancePriceResponse, error) {
+	result := &GetBidInstancePriceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getGetBidInstancePriceUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // GetCdsPrice
 //
 // PARAMS:
@@ -635,6 +1108,27 @@ func (c *Client) GetCdsPrice(request *GetCdsPriceRequest) (*GetCdsPriceResponse,
 		WithMethod(http.POST).
 		WithURL(getGetCdsPriceUri(VERSION_V2)).
 		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetDeploySet
+//
+// PARAMS:
+//   - request: the arguments to GetDeploySet
+//
+// RETURNS:
+//   - GetDeploySetResponse: The return type of the GetDeploySet interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetDeploySet(request *GetDeploySetRequest) (*GetDeploySetResponse, error) {
+	result := &GetDeploySetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetDeploySetUri(VERSION_V2, util.StringValue(request.Id))).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -798,6 +1292,27 @@ func (c *Client) GetRoleList() (*GetRoleListResponse, error) {
 	return result, nil
 }
 
+// GetSnapshot
+//
+// PARAMS:
+//   - request: the arguments to GetSnapshot
+//
+// RETURNS:
+//   - GetSnapshotResponse: The return type of the GetSnapshot interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetSnapshot(request *GetSnapshotRequest) (*GetSnapshotResponse, error) {
+	result := &GetSnapshotResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetSnapshotUri(VERSION_V2, util.StringValue(request.SnapshotId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // GetVolume
 //
 // PARAMS:
@@ -862,6 +1377,29 @@ func (c *Client) ImportImage(request *ImportImageRequest) (*ImportImageResponse,
 	return result, nil
 }
 
+// ImportKeypair
+//
+// PARAMS:
+//   - request: the arguments to ImportKeypair
+//
+// RETURNS:
+//   - ImportKeypairResponse: The return type of the ImportKeypair interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ImportKeypair(request *ImportKeypairRequest) (*ImportKeypairResponse, error) {
+	result := &ImportKeypairResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getImportKeypairUri(VERSION_V2)).
+		WithQueryParam("import", "").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // InstanceBatchResizeBySpec
 //
 // PARAMS:
@@ -917,6 +1455,52 @@ func (c *Client) InstanceRecovery(request *InstanceRecoveryRequest) error {
 		Do()
 }
 
+// KeypairDetail
+//
+// PARAMS:
+//   - request: the arguments to KeypairDetail
+//
+// RETURNS:
+//   - KeypairDetailResponse: The return type of the KeypairDetail interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) KeypairDetail(request *KeypairDetailRequest) (*KeypairDetailResponse, error) {
+	result := &KeypairDetailResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getKeypairDetailUri(VERSION_V2, util.StringValue(request.KeypairId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListAsps
+//
+// PARAMS:
+//   - request: the arguments to ListAsps
+//
+// RETURNS:
+//   - ListAspsResponse: The return type of the ListAsps interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListAsps(request *ListAspsRequest) (*ListAspsResponse, error) {
+	result := &ListAspsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListAspsUri(VERSION_V2)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("aspName", util.StringValue(request.AspName)).
+		WithQueryParamFilter("volumeName", util.StringValue(request.VolumeName)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ListAvailableResizeSpec
 //
 // PARAMS:
@@ -932,6 +1516,48 @@ func (c *Client) ListAvailableResizeSpec(request *ListAvailableResizeSpecRequest
 		WithURL(getListAvailableResizeSpecUri(VERSION_V2)).
 		WithQueryParam("resizeList", "").
 		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListBidFlavor
+//
+// PARAMS:
+//   - request: the arguments to ListBidFlavor
+//
+// RETURNS:
+//   - ListBidFlavorResponse: The return type of the ListBidFlavor interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListBidFlavor() (*ListBidFlavorResponse, error) {
+	result := &ListBidFlavorResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getListBidFlavorUri(VERSION_V2)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListDeploySet
+//
+// PARAMS:
+//   - request: the arguments to ListDeploySet
+//
+// RETURNS:
+//   - ListDeploySetResponse: The return type of the ListDeploySet interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListDeploySet() (*ListDeploySetResponse, error) {
+	result := &ListDeploySetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListDeploySetUri(VERSION_V2)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -1049,6 +1675,29 @@ func (c *Client) ListInstances(request *ListInstancesRequest) (*ListInstancesRes
 	return result, nil
 }
 
+// ListKeypair
+//
+// PARAMS:
+//   - request: the arguments to ListKeypair
+//
+// RETURNS:
+//   - ListKeypairResponse: The return type of the ListKeypair interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListKeypair(request *ListKeypairRequest) (*ListKeypairResponse, error) {
+	result := &ListKeypairResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListKeypairUri(VERSION_V2)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ListOs
 //
 // PARAMS:
@@ -1093,6 +1742,33 @@ func (c *Client) ListRecycleInstance(request *ListRecycleInstanceRequest) (*List
 	return result, nil
 }
 
+// ListSecurityGroups
+//
+// PARAMS:
+//   - request: the arguments to ListSecurityGroups
+//
+// RETURNS:
+//   - ListSecurityGroupsResponse: The return type of the ListSecurityGroups interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListSecurityGroups(request *ListSecurityGroupsRequest) (*ListSecurityGroupsResponse, error) {
+	result := &ListSecurityGroupsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListSecurityGroupsUri(VERSION_V2)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
+		WithQueryParamFilter("vpcId", util.StringValue(request.VpcId)).
+		WithQueryParamFilter("securityGroupId", util.StringValue(request.SecurityGroupId)).
+		WithQueryParamFilter("securityGroupIds", util.StringValue(request.SecurityGroupIds)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ListSharedUser
 //
 // PARAMS:
@@ -1106,6 +1782,78 @@ func (c *Client) ListSharedUser(request *ListSharedUserRequest) (*ListSharedUser
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getListSharedUserUri(VERSION_V2, util.StringValue(request.ImageId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListSnapchain
+//
+// PARAMS:
+//   - request: the arguments to ListSnapchain
+//
+// RETURNS:
+//   - ListSnapchainResponse: The return type of the ListSnapchain interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListSnapchain(request *ListSnapchainRequest) (*ListSnapchainResponse, error) {
+	result := &ListSnapchainResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListSnapchainUri(VERSION_V2)).
+		WithQueryParamFilter("orderBy", util.StringValue(request.OrderBy)).
+		WithQueryParamFilter("order", util.StringValue(request.Order)).
+		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
+		WithQueryParamFilter("pageNo", util.Int32Value(request.PageNo)).
+		WithQueryParamFilter("volumeId", util.StringValue(request.VolumeId)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListSnapshotShare
+//
+// PARAMS:
+//   - request: the arguments to ListSnapshotShare
+//
+// RETURNS:
+//   - ListSnapshotShareResponse: The return type of the ListSnapshotShare interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListSnapshotShare(request *ListSnapshotShareRequest) (*ListSnapshotShareResponse, error) {
+	result := &ListSnapshotShareResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getListSnapshotShareUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListSnapshots
+//
+// PARAMS:
+//   - request: the arguments to ListSnapshots
+//
+// RETURNS:
+//   - ListSnapshotsResponse: The return type of the ListSnapshots interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListSnapshots(request *ListSnapshotsRequest) (*ListSnapshotsResponse, error) {
+	result := &ListSnapshotsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListSnapshotsUri(VERSION_V2)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("volumeId", util.StringValue(request.VolumeId)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -1430,6 +2178,28 @@ func (c *Client) RemoteCopyImage(request *RemoteCopyImageRequest) (*RemoteCopyIm
 	return result, nil
 }
 
+// RemoteCopySnapshot
+//
+// PARAMS:
+//   - request: the arguments to RemoteCopySnapshot
+//
+// RETURNS:
+//   - RemoteCopySnapshotResponse: The return type of the RemoteCopySnapshot interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) RemoteCopySnapshot(request *RemoteCopySnapshotRequest) (*RemoteCopySnapshotResponse, error) {
+	result := &RemoteCopySnapshotResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getRemoteCopySnapshotUri(VERSION_V2, util.StringValue(request.SnapshotId))).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // RenameImage
 //
 // PARAMS:
@@ -1442,6 +2212,23 @@ func (c *Client) RenameImage(request *RenameImageRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getRenameImageUri(VERSION_V2)).
+		WithBody(request).
+		Do()
+}
+
+// RenameKeypair
+//
+// PARAMS:
+//   - request: the arguments to RenameKeypair
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RenameKeypair(request *RenameKeypairRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getRenameKeypairUri(VERSION_V2, util.StringValue(request.KeypairId))).
+		WithQueryParam("rename", "").
 		WithBody(request).
 		Do()
 }
@@ -1461,6 +2248,28 @@ func (c *Client) RenameVolume(request *RenameVolumeRequest) error {
 		WithQueryParam("rename", "").
 		WithBody(request).
 		Do()
+}
+
+// ReplaceInstanceSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to ReplaceInstanceSecurityGroup
+//
+// RETURNS:
+//   - ReplaceInstanceSecurityGroupResponse: The return type of the ReplaceInstanceSecurityGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ReplaceInstanceSecurityGroup(request *ReplaceInstanceSecurityGroupRequest) (*ReplaceInstanceSecurityGroupResponse, error) {
+	result := &ReplaceInstanceSecurityGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getReplaceInstanceSecurityGroupUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ResizeInstanceBySpec
@@ -1502,6 +2311,24 @@ func (c *Client) ResizeVolume(request *ResizeVolumeRequest) (*ResizeVolumeRespon
 		return nil, err
 	}
 	return result, nil
+}
+
+// RevokeSecurityGroupRule
+//
+// PARAMS:
+//   - request: the arguments to RevokeSecurityGroupRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RevokeSecurityGroupRule(request *RevokeSecurityGroupRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getRevokeSecurityGroupRuleUri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
+		WithQueryParam("revokeRule", "").
+		WithQueryParamFilter("sgVersion", util.Int32Value(request.SgVersion)).
+		WithBody(request).
+		Do()
 }
 
 // RollbackVolume
@@ -1622,6 +2449,28 @@ func (c *Client) UnbindInstanceFromTags(request *UnbindInstanceFromTagsRequest) 
 		Do()
 }
 
+// UnbindInstanceSecurityGroup
+//
+// PARAMS:
+//   - request: the arguments to UnbindInstanceSecurityGroup
+//
+// RETURNS:
+//   - UnbindInstanceSecurityGroupResponse: The return type of the UnbindInstanceSecurityGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UnbindInstanceSecurityGroup(request *UnbindInstanceSecurityGroupRequest) (*UnbindInstanceSecurityGroupResponse, error) {
+	result := &UnbindInstanceSecurityGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindInstanceSecurityGroupUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // UnbindRole
 //
 // PARAMS:
@@ -1662,6 +2511,23 @@ func (c *Client) UnbindTagImage(request *UnbindTagImageRequest) error {
 		Do()
 }
 
+// UnbindTagSnapchain
+//
+// PARAMS:
+//   - request: the arguments to UnbindTagSnapchain
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindTagSnapchain(request *UnbindTagSnapchainRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindTagSnapchainUri(VERSION_V2, util.StringValue(request.ChainId))).
+		WithQueryParam("unbind", "").
+		WithBody(request).
+		Do()
+}
+
 // UnbindTagVolume
 //
 // PARAMS:
@@ -1679,6 +2545,61 @@ func (c *Client) UnbindTagVolume(request *UnbindTagVolumeRequest) error {
 		Do()
 }
 
+// UpdateAsp
+//
+// PARAMS:
+//   - request: the arguments to UpdateAsp
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateAsp(request *UpdateAspRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateAspUri(VERSION_V2)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateDeploySet
+//
+// PARAMS:
+//   - request: the arguments to UpdateDeploySet
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateDeploySet(request *UpdateDeploySetRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateDeploySetUri(VERSION_V2, util.StringValue(request.DeployId))).
+		WithQueryParam("modifyAttribute", "").
+		WithBody(request).
+		Do()
+}
+
+// UpdateDeploySetRelation
+//
+// PARAMS:
+//   - request: the arguments to UpdateDeploySetRelation
+//
+// RETURNS:
+//   - UpdateDeploySetRelationResponse: The return type of the UpdateDeploySetRelation interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateDeploySetRelation(request *UpdateDeploySetRelationRequest) (*UpdateDeploySetRelationResponse, error) {
+	result := &UpdateDeploySetRelationResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUpdateDeploySetRelationUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // UpdateInstanceSubnet
 //
 // PARAMS:
@@ -1691,6 +2612,40 @@ func (c *Client) UpdateInstanceSubnet(request *UpdateInstanceSubnetRequest) erro
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateInstanceSubnetUri(VERSION_V2)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateKeypairDescription
+//
+// PARAMS:
+//   - request: the arguments to UpdateKeypairDescription
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateKeypairDescription(request *UpdateKeypairDescriptionRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateKeypairDescriptionUri(VERSION_V2, util.StringValue(request.KeypairId))).
+		WithQueryParam("updateDesc", "").
+		WithBody(request).
+		Do()
+}
+
+// UpdateSecurityGroupRule
+//
+// PARAMS:
+//   - request: the arguments to UpdateSecurityGroupRule
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateSecurityGroupRule(request *UpdateSecurityGroupRuleRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateSecurityGroupRuleUri(VERSION_V2)).
+		WithQueryParamFilter("sgVersion", util.Int32Value(request.SgVersion)).
 		WithBody(request).
 		Do()
 }

@@ -7,61 +7,47 @@ import (
 const (
 	DEFAULT_ENDPOINT = "bcc." + bce.DEFAULT_REGION + ".baidubce.com"
 
-	CONSTANT_INSTANCE = "instance"
-
-	CONSTANT_ATTRIBUTE = "attribute"
-
-	CONSTANT_GET_USERDATA = "getUserdata"
-
 	CONSTANT_IMAGE = "image"
 
 	CONSTANT_TAG = "tag"
 
 	CONSTANT_VOLUME = "volume"
 
-	CONSTANT_BATCH_DEL_IP = "batchDelIp"
-
-	CONSTANT_PROGRESS = "progress"
+	CONSTANT_SNAPSHOT = "snapshot"
 
 	CONSTANT_DISK = "disk"
 
 	CONSTANT_QUOTA = "quota"
 
-	CONSTANT_BATCH = "batch"
-
-	CONSTANT_CHARGING = "charging"
-
 	CONSTANT_GET_PRICE = "getPrice"
 
+	CONSTANT_INSTANCE = "instance"
+
 	CONSTANT_RECOVERY = "recovery"
+
+	CONSTANT_DEPLOYSET = "deployset"
 
 	CONSTANT_GET_AVAILABLE_IMAGES_BY_SPEC = "getAvailableImagesBySpec"
 
 	CONSTANT_ROLE = "role"
 
-	CONSTANT_RENAME = "rename"
-
-	CONSTANT_SUBNET = "subnet"
-
-	CONSTANT_CHANGE_SUBNET = "changeSubnet"
+	CONSTANT_SECURITY_GROUP = "securityGroup"
 
 	CONSTANT_BATCH_CREATE_AUTO_RENEW_RULES = "batchCreateAutoRenewRules"
 
-	CONSTANT_VPC = "vpc"
+	CONSTANT_ASP = "asp"
 
-	CONSTANT_CHANGE_VPC = "changeVpc"
+	CONSTANT_UPDATE = "update"
 
-	CONSTANT_BATCH_DELETE_AUTO_RENEW_RULES = "batchDeleteAutoRenewRules"
+	CONSTANT_CHAIN = "chain"
+
+	CONSTANT_KEYPAIR = "keypair"
 
 	CONSTANT_VNC = "vnc"
 
-	CONSTANT_ADD_IPV6 = "addIpv6"
-
-	CONSTANT_DELETION_PROTECTION = "deletionProtection"
+	CONSTANT_UN_SHARE = "unShare"
 
 	CONSTANT_RECYCLE = "recycle"
-
-	CONSTANT_BATCH_ACTION = "batchAction"
 
 	CONSTANT_SHARED_USERS = "sharedUsers"
 
@@ -73,17 +59,13 @@ const (
 
 	CONSTANT_MODIFY_RELATED_DELETE_POLICY = "modifyRelatedDeletePolicy"
 
-	CONSTANT_DEPLOYSET = "deployset"
-
 	CONSTANT_DEL_RELATION = "delRelation"
 
-	CONSTANT_DEL_IPV6 = "delIpv6"
+	CONSTANT_CANCEL_BID_ORDER = "cancelBidOrder"
 
-	CONSTANT_ENI = "eni"
+	CONSTANT_BID_FLAVOR = "bidFlavor"
 
 	CONSTANT_LIST = "list"
-
-	CONSTANT_BATCH_ADD_IP = "batchAddIp"
 
 	CONSTANT_INSTANCE_BY_SPEC = "instanceBySpec"
 
@@ -93,9 +75,67 @@ const (
 
 	CONSTANT_LIST_BY_INSTANCE_ID = "listByInstanceId"
 
-	CONSTANT_IMPORT = "import"
-
 	CONSTANT_OS = "os"
+
+	CONSTANT_SECURITYGROUP = "securitygroup"
+
+	CONSTANT_UNBIND = "unbind"
+
+	CONSTANT_BATCH_ACTION = "batchAction"
+
+	CONSTANT_BIND = "bind"
+
+	CONSTANT_RULE = "rule"
+
+	CONSTANT_ATTRIBUTE = "attribute"
+
+	CONSTANT_GET_USERDATA = "getUserdata"
+
+	CONSTANT_BATCH_DEL_IP = "batchDelIp"
+
+	CONSTANT_PROGRESS = "progress"
+
+	CONSTANT_BATCH = "batch"
+
+	CONSTANT_CHARGING = "charging"
+
+	CONSTANT_BID_PRICE = "bidPrice"
+
+	CONSTANT_SNAPSHOT_SHARE = "snapshotShare"
+
+	CONSTANT_RENAME = "rename"
+
+	CONSTANT_SUBNET = "subnet"
+
+	CONSTANT_CHANGE_SUBNET = "changeSubnet"
+
+	CONSTANT_REPLACE = "replace"
+
+	CONSTANT_VPC = "vpc"
+
+	CONSTANT_CHANGE_VPC = "changeVpc"
+
+	CONSTANT_BATCH_DELETE_AUTO_RENEW_RULES = "batchDeleteAutoRenewRules"
+
+	CONSTANT_ADD_IPV6 = "addIpv6"
+
+	CONSTANT_DELETION_PROTECTION = "deletionProtection"
+
+	CONSTANT_SHARE = "share"
+
+	CONSTANT_UPDATE_RELATION = "updateRelation"
+
+	CONSTANT_CREATE = "create"
+
+	CONSTANT_DEL_IPV6 = "delIpv6"
+
+	CONSTANT_ENI = "eni"
+
+	CONSTANT_BATCH_ADD_IP = "batchAddIp"
+
+	CONSTANT_REMOTE_COPY = "remote_copy"
+
+	CONSTANT_IMPORT = "import"
 
 	CONSTANT_RESCUE = "rescue"
 
@@ -127,8 +167,17 @@ func NewClient(ak, sk, endPoint string) (*Client, error) {
 func getAddIpv6Uri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_ADD_IPV6
 }
+func getAttachAspUri(version string, AspId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ASP + bce.URI_PREFIX + AspId
+}
+func getAttachKeypairUri(version string, KeypairId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_KEYPAIR + bce.URI_PREFIX + KeypairId
+}
 func getAttachVolumeUri(version string, VolumeId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + VolumeId
+}
+func getAuthorizeSecurityGroupRuleUri(version string, SecurityGroupId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP + bce.URI_PREFIX + SecurityGroupId
 }
 func getAutoReleaseInstanceUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId
@@ -154,6 +203,9 @@ func getBatchStartInstanceUri(version string) string {
 func getBatchStopInstanceUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_BATCH_ACTION
 }
+func getBindInstanceSecurityGroupUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITYGROUP + bce.URI_PREFIX + CONSTANT_BIND
+}
 func getBindInstanceToSecurityGroupUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId
 }
@@ -166,11 +218,20 @@ func getBindRoleUri(version string) string {
 func getBindTagImageUri(version string, ImageId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE + bce.URI_PREFIX + ImageId + bce.URI_PREFIX + CONSTANT_TAG
 }
+func getBindTagSnapchainUri(version string, ChainId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT + bce.URI_PREFIX + CONSTANT_CHAIN + bce.URI_PREFIX + ChainId + bce.URI_PREFIX + CONSTANT_TAG
+}
 func getBindTagVolumeUri(version string, VolumeId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + VolumeId + bce.URI_PREFIX + CONSTANT_TAG
 }
+func getCancelBidOrderUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_CANCEL_BID_ORDER
+}
 func getCancelRemoteCopyImageUri(version string, ImageId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE + bce.URI_PREFIX + ImageId
+}
+func getCancelSnapshotShareUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT + bce.URI_PREFIX + CONSTANT_UN_SHARE
 }
 func getChangeToPrepaidUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId
@@ -178,8 +239,17 @@ func getChangeToPrepaidUri(version string, InstanceId string) string {
 func getChangeVpcUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_CHANGE_VPC
 }
+func getCreateAspUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ASP
+}
 func getCreateAutoRenewRuleUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_BATCH_CREATE_AUTO_RENEW_RULES
+}
+func getCreateBidInstanceUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE_BY_SPEC
+}
+func getCreateDeploySetUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DEPLOYSET + bce.URI_PREFIX + CONSTANT_CREATE
 }
 func getCreateImageUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE
@@ -187,14 +257,32 @@ func getCreateImageUri(version string) string {
 func getCreateInstanceBySpecUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE_BY_SPEC
 }
+func getCreateKeypairUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_KEYPAIR
+}
+func getCreateSecurityGroupUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP
+}
+func getCreateSnapshotUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT
+}
+func getCreateSnapshotShareUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT + bce.URI_PREFIX + CONSTANT_SHARE
+}
 func getCreateVolumeUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME
 }
 func getDelIpv6Uri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DEL_IPV6
 }
+func getDeleteAspUri(version string, AspId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ASP + bce.URI_PREFIX + AspId
+}
 func getDeleteAutoRenewRuleUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_BATCH_DELETE_AUTO_RENEW_RULES
+}
+func getDeleteDeploySetUri(version string, DeployId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DEPLOYSET + bce.URI_PREFIX + DeployId
 }
 func getDeleteImageUri(version string, ImageId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE + bce.URI_PREFIX + ImageId
@@ -202,11 +290,32 @@ func getDeleteImageUri(version string, ImageId string) string {
 func getDeleteInstanceDeploySetUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DEPLOYSET + bce.URI_PREFIX + CONSTANT_DEL_RELATION
 }
+func getDeleteKeypairUri(version string, KeypairId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_KEYPAIR + bce.URI_PREFIX + KeypairId
+}
 func getDeletePrepayInstanceUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DELETE
 }
 func getDeleteRecycledInstanceUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_RECYCLE + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId
+}
+func getDeleteSecurityGroupUri(version string, SecurityGroupId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP + bce.URI_PREFIX + SecurityGroupId
+}
+func getDeleteSecurityGroupRuleUri(version string, SecurityGroupRuleId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + SecurityGroupRuleId
+}
+func getDeleteSnapshotUri(version string, SnapshotId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT + bce.URI_PREFIX + SnapshotId
+}
+func getDeletesInstanceDeploySetUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DEPLOYSET + bce.URI_PREFIX + CONSTANT_DEL_RELATION
+}
+func getDetachAspUri(version string, AspId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ASP + bce.URI_PREFIX + AspId
+}
+func getDetachKeypairUri(version string, KeypairId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_KEYPAIR + bce.URI_PREFIX + KeypairId
 }
 func getDetachVolumeUri(version string, VolumeId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + VolumeId
@@ -217,11 +326,20 @@ func getEnterRescueModeUri(version string) string {
 func getExitRescueModeUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_RESCUE + bce.URI_PREFIX + CONSTANT_MODE + bce.URI_PREFIX + CONSTANT_EXIT
 }
+func getGetAspUri(version string, AspId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ASP + bce.URI_PREFIX + AspId
+}
 func getGetAvailableImagesBySpecUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE + bce.URI_PREFIX + CONSTANT_GET_AVAILABLE_IMAGES_BY_SPEC
 }
+func getGetBidInstancePriceUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_BID_PRICE
+}
 func getGetCdsPriceUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + CONSTANT_GET_PRICE
+}
+func getGetDeploySetUri(version string, Id string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_DEPLOYSET + bce.URI_PREFIX + Id
 }
 func getGetDiskQuotaUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + CONSTANT_DISK + bce.URI_PREFIX + CONSTANT_QUOTA
@@ -244,6 +362,9 @@ func getGetInstanceVncUri(version string, InstanceId string) string {
 func getGetRoleListUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_ROLE + bce.URI_PREFIX + CONSTANT_LIST
 }
+func getGetSnapshotUri(version string, SnapshotId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT + bce.URI_PREFIX + SnapshotId
+}
 func getGetVolumeUri(version string, VolumeId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + VolumeId
 }
@@ -252,6 +373,9 @@ func getGetVolumeResizeProgressUri(version string, VolumeId string) string {
 }
 func getImportImageUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE + bce.URI_PREFIX + CONSTANT_IMPORT
+}
+func getImportKeypairUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_KEYPAIR
 }
 func getInstanceBatchResizeBySpecUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE_BATCH_BY_SPEC
@@ -262,8 +386,20 @@ func getInstanceDeletionProtectionUri(version string, InstanceId string) string 
 func getInstanceRecoveryUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_RECOVERY
 }
+func getKeypairDetailUri(version string, KeypairId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_KEYPAIR + bce.URI_PREFIX + KeypairId
+}
+func getListAspsUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ASP
+}
 func getListAvailableResizeSpecUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE
+}
+func getListBidFlavorUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_BID_FLAVOR
+}
+func getListDeploySetUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DEPLOYSET + bce.URI_PREFIX + CONSTANT_LIST
 }
 func getListImagesUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE
@@ -277,14 +413,29 @@ func getListInstanceEnisUri(version string, InstanceId string) string {
 func getListInstancesUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE
 }
+func getListKeypairUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_KEYPAIR
+}
 func getListOsUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE + bce.URI_PREFIX + CONSTANT_OS
 }
 func getListRecycleInstanceUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_RECYCLE + bce.URI_PREFIX + CONSTANT_INSTANCE
 }
+func getListSecurityGroupsUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP
+}
 func getListSharedUserUri(version string, ImageId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE + bce.URI_PREFIX + ImageId + bce.URI_PREFIX + CONSTANT_SHARED_USERS
+}
+func getListSnapchainUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT + bce.URI_PREFIX + CONSTANT_CHAIN
+}
+func getListSnapshotShareUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT + bce.URI_PREFIX + CONSTANT_SNAPSHOT_SHARE + bce.URI_PREFIX + CONSTANT_LIST
+}
+func getListSnapshotsUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT
 }
 func getListVolumesUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME
@@ -337,17 +488,29 @@ func getReleaseVolumeUri(version string, VolumeId string) string {
 func getRemoteCopyImageUri(version string, ImageId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE + bce.URI_PREFIX + ImageId
 }
+func getRemoteCopySnapshotUri(version string, SnapshotId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT + bce.URI_PREFIX + CONSTANT_REMOTE_COPY + bce.URI_PREFIX + SnapshotId
+}
 func getRenameImageUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE + bce.URI_PREFIX + CONSTANT_RENAME
 }
+func getRenameKeypairUri(version string, KeypairId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_KEYPAIR + bce.URI_PREFIX + KeypairId
+}
 func getRenameVolumeUri(version string, VolumeId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + VolumeId
+}
+func getReplaceInstanceSecurityGroupUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITYGROUP + bce.URI_PREFIX + CONSTANT_REPLACE
 }
 func getResizeInstanceBySpecUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE_BY_SPEC + bce.URI_PREFIX + InstanceId
 }
 func getResizeVolumeUri(version string, VolumeId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + VolumeId
+}
+func getRevokeSecurityGroupRuleUri(version string, SecurityGroupId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP + bce.URI_PREFIX + SecurityGroupId
 }
 func getRollbackVolumeUri(version string, VolumeId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + VolumeId
@@ -370,15 +533,36 @@ func getUnbindInstanceFromSecurityGroupUri(version string, InstanceId string) st
 func getUnbindInstanceFromTagsUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_TAG
 }
+func getUnbindInstanceSecurityGroupUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITYGROUP + bce.URI_PREFIX + CONSTANT_UNBIND
+}
 func getUnbindRoleUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_ROLE
 }
 func getUnbindTagImageUri(version string, ImageId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE + bce.URI_PREFIX + ImageId + bce.URI_PREFIX + CONSTANT_TAG
 }
+func getUnbindTagSnapchainUri(version string, ChainId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT + bce.URI_PREFIX + CONSTANT_CHAIN + bce.URI_PREFIX + ChainId + bce.URI_PREFIX + CONSTANT_TAG
+}
 func getUnbindTagVolumeUri(version string, VolumeId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + VolumeId + bce.URI_PREFIX + CONSTANT_TAG
 }
+func getUpdateAspUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ASP + bce.URI_PREFIX + CONSTANT_UPDATE
+}
+func getUpdateDeploySetUri(version string, DeployId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DEPLOYSET + bce.URI_PREFIX + DeployId
+}
+func getUpdateDeploySetRelationUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DEPLOYSET + bce.URI_PREFIX + CONSTANT_UPDATE_RELATION
+}
 func getUpdateInstanceSubnetUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SUBNET + bce.URI_PREFIX + CONSTANT_CHANGE_SUBNET
+}
+func getUpdateKeypairDescriptionUri(version string, KeypairId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_KEYPAIR + bce.URI_PREFIX + KeypairId
+}
+func getUpdateSecurityGroupRuleUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + CONSTANT_UPDATE
 }
