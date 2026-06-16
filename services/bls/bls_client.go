@@ -12,6 +12,28 @@ const (
 	VERSION_V2 = "v2"
 )
 
+// CreateDownloadTask
+//
+// PARAMS:
+//   - request: the arguments to CreateDownloadTask
+//
+// RETURNS:
+//   - CreateDownloadTaskResponse: The return type of the CreateDownloadTask interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateDownloadTask(request *CreateDownloadTaskRequest) (*CreateDownloadTaskResponse, error) {
+	result := &CreateDownloadTaskResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateDownloadTaskUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateProject
 //
 // PARAMS:
@@ -26,6 +48,27 @@ func (c *Client) CreateProject(request *CreateProjectRequest) (*CreateProjectRes
 		WithMethod(http.POST).
 		WithURL(getCreateProjectUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DeleteDownloadTask
+//
+// PARAMS:
+//   - request: the arguments to DeleteDownloadTask
+//
+// RETURNS:
+//   - DeleteDownloadTaskResponse: The return type of the DeleteDownloadTask interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteDownloadTask(request *DeleteDownloadTaskRequest) (*DeleteDownloadTaskResponse, error) {
+	result := &DeleteDownloadTaskResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteDownloadTaskUri(VERSION_V2, util.StringValue(request.Uuid))).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -55,6 +98,27 @@ func (c *Client) DeleteProject(request *DeleteProjectRequest) (*DeleteProjectRes
 	return result, nil
 }
 
+// DescribeDownloadTask
+//
+// PARAMS:
+//   - request: the arguments to DescribeDownloadTask
+//
+// RETURNS:
+//   - DescribeDownloadTaskResponse: The return type of the DescribeDownloadTask interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeDownloadTask(request *DescribeDownloadTaskRequest) (*DescribeDownloadTaskResponse, error) {
+	result := &DescribeDownloadTaskResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeDownloadTaskUri(VERSION_V2, util.StringValue(request.Uuid))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DescribeProject
 //
 // PARAMS:
@@ -68,6 +132,49 @@ func (c *Client) DescribeProject(request *DescribeProjectRequest) (*DescribeProj
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getDescribeProjectUri(VERSION_V1, util.StringValue(request.Uuid))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetDownloadTaskLink
+//
+// PARAMS:
+//   - request: the arguments to GetDownloadTaskLink
+//
+// RETURNS:
+//   - GetDownloadTaskLinkResponse: The return type of the GetDownloadTaskLink interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetDownloadTaskLink(request *GetDownloadTaskLinkRequest) (*GetDownloadTaskLinkResponse, error) {
+	result := &GetDownloadTaskLinkResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetDownloadTaskLinkUri(VERSION_V2, util.StringValue(request.Uuid))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListDownloadTask
+//
+// PARAMS:
+//   - request: the arguments to ListDownloadTask
+//
+// RETURNS:
+//   - ListDownloadTaskResponse: The return type of the ListDownloadTask interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListDownloadTask(request *ListDownloadTaskRequest) (*ListDownloadTaskResponse, error) {
+	result := &ListDownloadTaskResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getListDownloadTaskUri(VERSION_V2)).
+		WithBody(request).
 		WithResult(result).
 		Do()
 	if err != nil {

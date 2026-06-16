@@ -67,6 +67,34 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
+func TestClient_CreateDownloadTask(t *testing.T) {
+	createDownloadTaskRequest := &CreateDownloadTaskRequest{
+		Name:           util.PtrString(""),
+		Project:        util.PtrString(""),
+		LogStoreName:   util.PtrString(""),
+		LogStreamName:  util.PtrString(""),
+		Query:          util.PtrString(""),
+		QueryStartTime: util.PtrString(""),
+		QueryEndTime:   util.PtrString(""),
+		Format:         util.PtrString(""),
+		Limit:          util.PtrInt32(int32(0)),
+		Order:          util.PtrString(""),
+		FileDir:        util.PtrString(""),
+	}
+	result := &CreateDownloadTaskResponse{}
+	result, err := BLS_CLIENT.CreateDownloadTask(createDownloadTaskRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateProject(t *testing.T) {
 	createProjectRequest := &CreateProjectRequest{
 		Name:        util.PtrString(""),
@@ -74,6 +102,24 @@ func TestClient_CreateProject(t *testing.T) {
 	}
 	result := &CreateProjectResponse{}
 	result, err := BLS_CLIENT.CreateProject(createProjectRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteDownloadTask(t *testing.T) {
+	deleteDownloadTaskRequest := &DeleteDownloadTaskRequest{
+		Uuid: util.PtrString(""),
+	}
+	result := &DeleteDownloadTaskResponse{}
+	result, err := BLS_CLIENT.DeleteDownloadTask(deleteDownloadTaskRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -104,12 +150,71 @@ func TestClient_DeleteProject(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeDownloadTask(t *testing.T) {
+	describeDownloadTaskRequest := &DescribeDownloadTaskRequest{
+		Uuid: util.PtrString(""),
+	}
+	result := &DescribeDownloadTaskResponse{}
+	result, err := BLS_CLIENT.DescribeDownloadTask(describeDownloadTaskRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DescribeProject(t *testing.T) {
 	describeProjectRequest := &DescribeProjectRequest{
 		Uuid: util.PtrString(""),
 	}
 	result := &DescribeProjectResponse{}
 	result, err := BLS_CLIENT.DescribeProject(describeProjectRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetDownloadTaskLink(t *testing.T) {
+	getDownloadTaskLinkRequest := &GetDownloadTaskLinkRequest{
+		Uuid: util.PtrString(""),
+	}
+	result := &GetDownloadTaskLinkResponse{}
+	result, err := BLS_CLIENT.GetDownloadTaskLink(getDownloadTaskLinkRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListDownloadTask(t *testing.T) {
+	listDownloadTaskRequest := &ListDownloadTaskRequest{
+		Project:      util.PtrString(""),
+		LogStoreName: util.PtrString(""),
+		OrderBy:      util.PtrString(""),
+		Order:        util.PtrString(""),
+		PageNo:       util.PtrInt32(int32(0)),
+		PageSize:     util.PtrInt32(int32(0)),
+	}
+	result := &ListDownloadTaskResponse{}
+	result, err := BLS_CLIENT.ListDownloadTask(listDownloadTaskRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -246,7 +351,8 @@ func TestClient_QueryLogRecord(t *testing.T) {
 func TestClient_UpdateProject(t *testing.T) {
 	updateProjectRequest := &UpdateProjectRequest{
 		Uuid:        util.PtrString(""),
-		Description: util.PtrBool(false),
+		Description: util.PtrString(""),
+		Top:         util.PtrBool(false),
 	}
 	result := &UpdateProjectResponse{}
 	result, err := BLS_CLIENT.UpdateProject(updateProjectRequest)

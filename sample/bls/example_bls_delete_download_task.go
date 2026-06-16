@@ -7,7 +7,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/services/bls"
 )
 
-func UpdateProject() {
+func DeleteDownloadTask() {
 	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
 	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
 	client, err := bls.NewClient(ak, sk, endpoint)
@@ -15,12 +15,10 @@ func UpdateProject() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	updateProjectRequest := &bls.UpdateProjectRequest{
-		Uuid:        util.PtrString(""),
-		Description: util.PtrString(""),
-		Top:         util.PtrBool(false),
+	deleteDownloadTaskRequest := &bls.DeleteDownloadTaskRequest{
+		Uuid: util.PtrString(""),
 	}
-	result, err := client.UpdateProject(updateProjectRequest)
+	result, err := client.DeleteDownloadTask(deleteDownloadTaskRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)
