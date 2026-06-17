@@ -228,6 +228,9 @@ func getAttachVolumeUri(version string, VolumeId string) string {
 func getAuthorizeSecurityGroupRuleUri(version string, SecurityGroupId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SECURITY_GROUP + bce.URI_PREFIX + SecurityGroupId
 }
+func getAuthorizeServerEventUri() string {
+	return bce.URI_PREFIX
+}
 func getAutoReleaseInstanceUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId
 }
@@ -306,8 +309,14 @@ func getChangeToPrepaidUri(version string, InstanceId string) string {
 func getChangeVpcUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VPC + bce.URI_PREFIX + CONSTANT_CHANGE_VPC
 }
+func getCheckServerEventUri() string {
+	return bce.URI_PREFIX
+}
 func getCreateAspUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ASP
+}
+func getCreateAuthorizationRuleUri() string {
+	return bce.URI_PREFIX
 }
 func getCreateAutoRenewRuleUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_BATCH_CREATE_AUTO_RENEW_RULES
@@ -369,6 +378,9 @@ func getDeleteEhcClusterUri(version string) string {
 func getDeleteImageUri(version string, ImageId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE + bce.URI_PREFIX + ImageId
 }
+func getDeleteInstUserOpAuthorizeRuleUri() string {
+	return bce.URI_PREFIX
+}
 func getDeleteInstanceDeploySetUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DEPLOYSET + bce.URI_PREFIX + CONSTANT_DEL_RELATION
 }
@@ -393,8 +405,23 @@ func getDeleteSnapshotUri(version string, SnapshotId string) string {
 func getDeletesInstanceDeploySetUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DEPLOYSET + bce.URI_PREFIX + CONSTANT_DEL_RELATION
 }
+func getDescribeAuthorizeRulesUri() string {
+	return bce.URI_PREFIX
+}
+func getDescribePlannedEventRecordsUri() string {
+	return bce.URI_PREFIX
+}
+func getDescribePlannedEventsUri() string {
+	return bce.URI_PREFIX
+}
 func getDescribeRegionsUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_REGION + bce.URI_PREFIX + CONSTANT_DESCRIBE_REGIONS
+}
+func getDescribeUnplannedEventRecordsUri() string {
+	return bce.URI_PREFIX
+}
+func getDescribeUnplannedEventsUri() string {
+	return bce.URI_PREFIX
 }
 func getDetachAspUri(version string, AspId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ASP + bce.URI_PREFIX + AspId
@@ -569,6 +596,9 @@ func getModifyCdsAttributeUri(version string, VolumeId string) string {
 }
 func getModifyEhcClusterUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_EHC + bce.URI_PREFIX + CONSTANT_CLUSTER + bce.URI_PREFIX + CONSTANT_MODIFY
+}
+func getModifyInstUserOpAuthorizeRuleAttributeUri() string {
+	return bce.URI_PREFIX
 }
 func getModifyInstanceAttributesUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId

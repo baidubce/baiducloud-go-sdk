@@ -125,6 +125,29 @@ func (c *Client) AuthorizeSecurityGroupRule(request *AuthorizeSecurityGroupRuleR
 		Do()
 }
 
+// AuthorizeServerEvent
+//
+// PARAMS:
+//   - request: the arguments to AuthorizeServerEvent
+//
+// RETURNS:
+//   - AuthorizeServerEventResponse: The return type of the AuthorizeServerEvent interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) AuthorizeServerEvent(request *AuthorizeServerEventRequest) (*AuthorizeServerEventResponse, error) {
+	result := &AuthorizeServerEventResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getAuthorizeServerEventUri()).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // AutoReleaseInstance
 //
 // PARAMS:
@@ -615,6 +638,29 @@ func (c *Client) ChangeVpc(request *ChangeVpcRequest) error {
 		Do()
 }
 
+// CheckServerEvent
+//
+// PARAMS:
+//   - request: the arguments to CheckServerEvent
+//
+// RETURNS:
+//   - CheckServerEventResponse: The return type of the CheckServerEvent interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CheckServerEvent(request *CheckServerEventRequest) (*CheckServerEventResponse, error) {
+	result := &CheckServerEventResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCheckServerEventUri()).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateAsp
 //
 // PARAMS:
@@ -628,6 +674,29 @@ func (c *Client) CreateAsp(request *CreateAspRequest) (*CreateAspResponse, error
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateAspUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateAuthorizationRule
+//
+// PARAMS:
+//   - request: the arguments to CreateAuthorizationRule
+//
+// RETURNS:
+//   - CreateAuthorizationRuleResponse: The return type of the CreateAuthorizationRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateAuthorizationRule(request *CreateAuthorizationRuleRequest) (*CreateAuthorizationRuleResponse, error) {
+	result := &CreateAuthorizationRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateAuthorizationRuleUri()).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -1026,6 +1095,29 @@ func (c *Client) DeleteImage(request *DeleteImageRequest) error {
 		Do()
 }
 
+// DeleteInstUserOpAuthorizeRule
+//
+// PARAMS:
+//   - request: the arguments to DeleteInstUserOpAuthorizeRule
+//
+// RETURNS:
+//   - DeleteInstUserOpAuthorizeRuleResponse: The return type of the DeleteInstUserOpAuthorizeRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteInstUserOpAuthorizeRule(request *DeleteInstUserOpAuthorizeRuleRequest) (*DeleteInstUserOpAuthorizeRuleResponse, error) {
+	result := &DeleteInstUserOpAuthorizeRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDeleteInstUserOpAuthorizeRuleUri()).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DeleteInstanceDeploySet
 //
 // PARAMS:
@@ -1157,6 +1249,75 @@ func (c *Client) DeletesInstanceDeploySet(request *DeletesInstanceDeploySetReque
 		Do()
 }
 
+// DescribeAuthorizeRules
+//
+// PARAMS:
+//   - request: the arguments to DescribeAuthorizeRules
+//
+// RETURNS:
+//   - DescribeAuthorizeRulesResponse: The return type of the DescribeAuthorizeRules interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAuthorizeRules(request *DescribeAuthorizeRulesRequest) (*DescribeAuthorizeRulesResponse, error) {
+	result := &DescribeAuthorizeRulesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeAuthorizeRulesUri()).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribePlannedEventRecords
+//
+// PARAMS:
+//   - request: the arguments to DescribePlannedEventRecords
+//
+// RETURNS:
+//   - DescribePlannedEventRecordsResponse: The return type of the DescribePlannedEventRecords interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribePlannedEventRecords(request *DescribePlannedEventRecordsRequest) (*DescribePlannedEventRecordsResponse, error) {
+	result := &DescribePlannedEventRecordsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribePlannedEventRecordsUri()).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribePlannedEvents
+//
+// PARAMS:
+//   - request: the arguments to DescribePlannedEvents
+//
+// RETURNS:
+//   - DescribePlannedEventsResponse: The return type of the DescribePlannedEvents interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribePlannedEvents(request *DescribePlannedEventsRequest) (*DescribePlannedEventsResponse, error) {
+	result := &DescribePlannedEventsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribePlannedEventsUri()).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DescribeRegions
 //
 // PARAMS:
@@ -1170,6 +1331,52 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (*DescribeRegi
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getDescribeRegionsUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeUnplannedEventRecords
+//
+// PARAMS:
+//   - request: the arguments to DescribeUnplannedEventRecords
+//
+// RETURNS:
+//   - DescribeUnplannedEventRecordsResponse: The return type of the DescribeUnplannedEventRecords interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeUnplannedEventRecords(request *DescribeUnplannedEventRecordsRequest) (*DescribeUnplannedEventRecordsResponse, error) {
+	result := &DescribeUnplannedEventRecordsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeUnplannedEventRecordsUri()).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeUnplannedEvents
+//
+// PARAMS:
+//   - request: the arguments to DescribeUnplannedEvents
+//
+// RETURNS:
+//   - DescribeUnplannedEventsResponse: The return type of the DescribeUnplannedEvents interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeUnplannedEvents(request *DescribeUnplannedEventsRequest) (*DescribeUnplannedEventsResponse, error) {
+	result := &DescribeUnplannedEventsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeUnplannedEventsUri()).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -2469,6 +2676,29 @@ func (c *Client) ModifyEhcCluster(request *ModifyEhcClusterRequest) error {
 		WithURL(getModifyEhcClusterUri(VERSION_V2)).
 		WithBody(request).
 		Do()
+}
+
+// ModifyInstUserOpAuthorizeRuleAttribute
+//
+// PARAMS:
+//   - request: the arguments to ModifyInstUserOpAuthorizeRuleAttribute
+//
+// RETURNS:
+//   - ModifyInstUserOpAuthorizeRuleAttributeResponse: The return type of the ModifyInstUserOpAuthorizeRuleAttribute interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ModifyInstUserOpAuthorizeRuleAttribute(request *ModifyInstUserOpAuthorizeRuleAttributeRequest) (*ModifyInstUserOpAuthorizeRuleAttributeResponse, error) {
+	result := &ModifyInstUserOpAuthorizeRuleAttributeResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getModifyInstUserOpAuthorizeRuleAttributeUri()).
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ModifyInstanceAttributes

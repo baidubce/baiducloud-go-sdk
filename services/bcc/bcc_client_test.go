@@ -157,6 +157,28 @@ func TestClient_AuthorizeSecurityGroupRule(t *testing.T) {
 	err := BCC_CLIENT.AuthorizeSecurityGroupRule(authorizeSecurityGroupRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_AuthorizeServerEvent(t *testing.T) {
+	authorizeServerEventRequest := &AuthorizeServerEventRequest{
+		Action:                        util.PtrString(""),
+		ServerEventId:                 util.PtrString(""),
+		InstanceId:                    util.PtrString(""),
+		AuthorizeMaintenanceOperation: util.PtrString(""),
+		ExecuteTime:                   util.PtrString(""),
+	}
+	result := &AuthorizeServerEventResponse{}
+	result, err := BCC_CLIENT.AuthorizeServerEvent(authorizeServerEventRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_AutoReleaseInstance(t *testing.T) {
 	autoReleaseInstanceRequest := &AutoReleaseInstanceRequest{
 		InstanceId:             util.PtrString(""),
@@ -486,6 +508,30 @@ func TestClient_ChangeVpc(t *testing.T) {
 	err := BCC_CLIENT.ChangeVpc(changeVpcRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CheckServerEvent(t *testing.T) {
+	checkServerEventRequest := &CheckServerEventRequest{
+		Action:                        util.PtrString(""),
+		ServerEventId:                 util.PtrString(""),
+		InstanceId:                    util.PtrString(""),
+		CheckResult:                   util.PtrString(""),
+		IssueEffect:                   util.PtrString(""),
+		IssueDescription:              util.PtrString(""),
+		AuthorizeMaintenanceOperation: util.PtrString(""),
+	}
+	result := &CheckServerEventResponse{}
+	result, err := BCC_CLIENT.CheckServerEvent(checkServerEventRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateAsp(t *testing.T) {
 	createAspRequest := &CreateAspRequest{
 		Name:           util.PtrString(""),
@@ -495,6 +541,28 @@ func TestClient_CreateAsp(t *testing.T) {
 	}
 	result := &CreateAspResponse{}
 	result, err := BCC_CLIENT.CreateAsp(createAspRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateAuthorizationRule(t *testing.T) {
+	createAuthorizationRuleRequest := &CreateAuthorizationRuleRequest{
+		Action:                         util.PtrString(""),
+		EnableRule:                     util.PtrInt32(int32(0)),
+		AuthorizeMaintenanceOperations: []*string{},
+		RuleName:                       util.PtrString(""),
+		ServerEventCategory:            util.PtrString(""),
+	}
+	result := &CreateAuthorizationRuleResponse{}
+	result, err := BCC_CLIENT.CreateAuthorizationRule(createAuthorizationRuleRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -985,6 +1053,25 @@ func TestClient_DeleteImage(t *testing.T) {
 	err := BCC_CLIENT.DeleteImage(deleteImageRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteInstUserOpAuthorizeRule(t *testing.T) {
+	deleteInstUserOpAuthorizeRuleRequest := &DeleteInstUserOpAuthorizeRuleRequest{
+		Action: util.PtrString(""),
+		RuleId: util.PtrString(""),
+	}
+	result := &DeleteInstUserOpAuthorizeRuleResponse{}
+	result, err := BCC_CLIENT.DeleteInstUserOpAuthorizeRule(deleteInstUserOpAuthorizeRuleRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteInstanceDeploySet(t *testing.T) {
 	deleteInstanceDeploySetRequest := &DeleteInstanceDeploySetRequest{
 		DeployId:       util.PtrString(""),
@@ -1058,12 +1145,144 @@ func TestClient_DeletesInstanceDeploySet(t *testing.T) {
 	err := BCC_CLIENT.DeletesInstanceDeploySet(deletesInstanceDeploySetRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeAuthorizeRules(t *testing.T) {
+	describeAuthorizeRulesRequest := &DescribeAuthorizeRulesRequest{
+		Action:    util.PtrString(""),
+		Marker:    util.PtrString(""),
+		MaxKeys:   util.PtrInt32(int32(0)),
+		RuleIds:   []*string{},
+		RuleNames: []*string{},
+	}
+	result := &DescribeAuthorizeRulesResponse{}
+	result, err := BCC_CLIENT.DescribeAuthorizeRules(describeAuthorizeRulesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribePlannedEventRecords(t *testing.T) {
+	describePlannedEventRecordsRequest := &DescribePlannedEventRecordsRequest{
+		Action:                   util.PtrString(""),
+		ServerEventIds:           []*string{},
+		InstanceIds:              []*string{},
+		ProductCategory:          util.PtrString(""),
+		ServerEventType:          util.PtrString(""),
+		ServerEventLogTimeFilter: util.PtrString(""),
+		PeriodStartTime:          util.PtrString(""),
+		PeriodEndTime:            util.PtrString(""),
+		MaxKeys:                  util.PtrInt32(int32(0)),
+		Marker:                   util.PtrString(""),
+	}
+	result := &DescribePlannedEventRecordsResponse{}
+	result, err := BCC_CLIENT.DescribePlannedEventRecords(describePlannedEventRecordsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribePlannedEvents(t *testing.T) {
+	describePlannedEventsRequest := &DescribePlannedEventsRequest{
+		Action:                   util.PtrString(""),
+		ServerEventStatus:        util.PtrString(""),
+		ServerEventIds:           []*string{},
+		InstanceIds:              []*string{},
+		ProductCategory:          util.PtrString(""),
+		ServerEventType:          util.PtrString(""),
+		ServerEventLogTimeFilter: util.PtrString(""),
+		PeriodStartTime:          util.PtrString(""),
+		PeriodEndTime:            util.PtrString(""),
+		MaxKeys:                  util.PtrInt32(int32(0)),
+		Marker:                   util.PtrString(""),
+	}
+	result := &DescribePlannedEventsResponse{}
+	result, err := BCC_CLIENT.DescribePlannedEvents(describePlannedEventsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DescribeRegions(t *testing.T) {
 	describeRegionsRequest := &DescribeRegionsRequest{
 		Region: util.PtrString(""),
 	}
 	result := &DescribeRegionsResponse{}
 	result, err := BCC_CLIENT.DescribeRegions(describeRegionsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeUnplannedEventRecords(t *testing.T) {
+	describeUnplannedEventRecordsRequest := &DescribeUnplannedEventRecordsRequest{
+		Action:                   util.PtrString(""),
+		ServerEventIds:           []*string{},
+		InstanceIds:              []*string{},
+		ProductCategory:          util.PtrString(""),
+		ServerEventType:          util.PtrString(""),
+		ServerEventLogTimeFilter: util.PtrString(""),
+		PeriodStartTime:          util.PtrString(""),
+		PeriodEndTime:            util.PtrString(""),
+		MaxKeys:                  util.PtrInt32(int32(0)),
+		Marker:                   util.PtrString(""),
+	}
+	result := &DescribeUnplannedEventRecordsResponse{}
+	result, err := BCC_CLIENT.DescribeUnplannedEventRecords(describeUnplannedEventRecordsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeUnplannedEvents(t *testing.T) {
+	describeUnplannedEventsRequest := &DescribeUnplannedEventsRequest{
+		Action:                   util.PtrString(""),
+		ServerEventStatus:        util.PtrString(""),
+		ServerEventIds:           []*string{},
+		InstanceIds:              []*string{},
+		ProductCategory:          util.PtrString(""),
+		ServerEventType:          util.PtrString(""),
+		ServerEventLogTimeFilter: util.PtrString(""),
+		PeriodStartTime:          util.PtrString(""),
+		PeriodEndTime:            util.PtrString(""),
+		MaxKeys:                  util.PtrInt32(int32(0)),
+		Marker:                   util.PtrString(""),
+	}
+	result := &DescribeUnplannedEventsResponse{}
+	result, err := BCC_CLIENT.DescribeUnplannedEvents(describeUnplannedEventsRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -2188,6 +2407,28 @@ func TestClient_ModifyEhcCluster(t *testing.T) {
 		Description:  util.PtrString(""),
 	}
 	err := BCC_CLIENT.ModifyEhcCluster(modifyEhcClusterRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ModifyInstUserOpAuthorizeRuleAttribute(t *testing.T) {
+	modifyInstUserOpAuthorizeRuleAttributeRequest := &ModifyInstUserOpAuthorizeRuleAttributeRequest{
+		Action:                         util.PtrString(""),
+		EnableRule:                     util.PtrInt32(int32(0)),
+		AuthorizeMaintenanceOperations: []*string{},
+		RuleName:                       util.PtrString(""),
+		RuleId:                         util.PtrString(""),
+	}
+	result := &ModifyInstUserOpAuthorizeRuleAttributeResponse{}
+	result, err := BCC_CLIENT.ModifyInstUserOpAuthorizeRuleAttribute(modifyInstUserOpAuthorizeRuleAttributeRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ModifyInstanceAttributes(t *testing.T) {
