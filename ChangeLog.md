@@ -1,3 +1,8 @@
+2026-06-17 Version: v0.0.80
+- 涉及产品: BLB，创建服务器组删除privateIp、portList等8个字段
+- 涉及产品: BLB，修改后端服务器删除privateIp、status等9个字段
+- 涉及产品: BLB，添加后端服务器删除privateIp、policyId等9个字段
+
 2026-06-17 Version: v0.0.79
 - 涉及产品: BLS，新增日志集、日志流、索引的创建/查询/更新/删除接口
 - 涉及产品: BLS，新增日志投递任务管理及批量操作接口

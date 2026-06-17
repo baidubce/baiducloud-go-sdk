@@ -18,7 +18,7 @@ func AddAppBlbServerGroupRs() {
 		BlbId:             util.PtrString(""),
 		ClientToken:       util.PtrString(""),
 		SgId:              util.PtrString(""),
-		BackendServerList: []*blb.AppBackendServer{},
+		BackendServerList: []*blb.AppBackendServerForCreate{},
 	}
 	err = client.AddAppBlbServerGroupRs(addAppBlbServerGroupRsRequest)
 	if err != nil {

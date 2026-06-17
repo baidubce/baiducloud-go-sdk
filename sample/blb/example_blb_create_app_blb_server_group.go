@@ -20,7 +20,7 @@ func CreateAppBlbServerGroup() {
 		ClientToken:       util.PtrString(""),
 		Name:              util.PtrString(""),
 		Desc:              util.PtrString(""),
-		BackendServerList: []*blb.AppBackendServer{},
+		BackendServerList: []*blb.AppBackendServerForCreate{},
 	}
 	result, err := client.CreateAppBlbServerGroup(createAppBlbServerGroupRequest)
 	if err != nil {

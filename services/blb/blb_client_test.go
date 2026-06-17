@@ -72,7 +72,7 @@ func TestClient_AddAppBlbServerGroupRs(t *testing.T) {
 		BlbId:             util.PtrString(""),
 		ClientToken:       util.PtrString(""),
 		SgId:              util.PtrString(""),
-		BackendServerList: []*AppBackendServer{},
+		BackendServerList: []*AppBackendServerForCreate{},
 	}
 	err := BLB_CLIENT.AddAppBlbServerGroupRs(addAppBlbServerGroupRsRequest)
 	ExpectEqual(t.Errorf, nil, err)
@@ -365,7 +365,7 @@ func TestClient_CreateAppBlbServerGroup(t *testing.T) {
 		ClientToken:       util.PtrString(""),
 		Name:              util.PtrString(""),
 		Desc:              util.PtrString(""),
-		BackendServerList: []*AppBackendServer{},
+		BackendServerList: []*AppBackendServerForCreate{},
 	}
 	result := &CreateAppBlbServerGroupResponse{}
 	result, err := BLB_CLIENT.CreateAppBlbServerGroup(createAppBlbServerGroupRequest)
@@ -1684,7 +1684,7 @@ func TestClient_UpdateAppBlbServerGroupRs(t *testing.T) {
 		BlbId:             util.PtrString(""),
 		ClientToken:       util.PtrString(""),
 		SgId:              util.PtrString(""),
-		BackendServerList: []*AppBackendServer{},
+		BackendServerList: []*AppBackendServerForCreate{},
 	}
 	err := BLB_CLIENT.UpdateAppBlbServerGroupRs(updateAppBlbServerGroupRsRequest)
 	ExpectEqual(t.Errorf, nil, err)
