@@ -8,7 +8,25 @@ import (
 
 const (
 	VERSION_V2 = "v2"
+
+	VERSION_V1 = "v1"
 )
+
+// AcceptReservedInstanceTransfer
+//
+// PARAMS:
+//   - request: the arguments to AcceptReservedInstanceTransfer
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AcceptReservedInstanceTransfer(request *AcceptReservedInstanceTransferRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getAcceptReservedInstanceTransferUri(VERSION_V2)).
+		WithBody(request).
+		Do()
+}
 
 // AddIpv6
 //
@@ -120,6 +138,44 @@ func (c *Client) AutoReleaseInstance(request *AutoReleaseInstanceRequest) error 
 		WithMethod(http.PUT).
 		WithURL(getAutoReleaseInstanceUri(VERSION_V2, util.StringValue(request.InstanceId))).
 		WithQueryParam("autorelease", "").
+		WithBody(request).
+		Do()
+}
+
+// AutoRenewReservedInstance
+//
+// PARAMS:
+//   - request: the arguments to AutoRenewReservedInstance
+//
+// RETURNS:
+//   - AutoRenewReservedInstanceResponse: The return type of the AutoRenewReservedInstance interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) AutoRenewReservedInstance(request *AutoRenewReservedInstanceRequest) (*AutoRenewReservedInstanceResponse, error) {
+	result := &AutoRenewReservedInstanceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getAutoRenewReservedInstanceUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// AutoRenewVolumeCluster
+//
+// PARAMS:
+//   - request: the arguments to AutoRenewVolumeCluster
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) AutoRenewVolumeCluster(request *AutoRenewVolumeClusterRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getAutoRenewVolumeClusterUri(VERSION_V2)).
 		WithBody(request).
 		Do()
 }
@@ -314,6 +370,23 @@ func (c *Client) BindInstanceToTags(request *BindInstanceToTagsRequest) error {
 		Do()
 }
 
+// BindReservedInstanceToTags
+//
+// PARAMS:
+//   - request: the arguments to BindReservedInstanceToTags
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BindReservedInstanceToTags(request *BindReservedInstanceToTagsRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindReservedInstanceToTagsUri(VERSION_V2)).
+		WithQueryParam("bind", "").
+		WithBody(request).
+		Do()
+}
+
 // BindRole
 //
 // PARAMS:
@@ -384,6 +457,61 @@ func (c *Client) BindTagVolume(request *BindTagVolumeRequest) error {
 		WithMethod(http.PUT).
 		WithURL(getBindTagVolumeUri(VERSION_V2, util.StringValue(request.VolumeId))).
 		WithQueryParam("bind", "").
+		WithBody(request).
+		Do()
+}
+
+// BindTagVolumeCluster
+//
+// PARAMS:
+//   - request: the arguments to BindTagVolumeCluster
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) BindTagVolumeCluster(request *BindTagVolumeClusterRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getBindTagVolumeClusterUri(VERSION_V2, util.StringValue(request.ClusterId))).
+		WithQueryParam("bind", "").
+		WithBody(request).
+		Do()
+}
+
+// CancelAutoRenewReservedInstance
+//
+// PARAMS:
+//   - request: the arguments to CancelAutoRenewReservedInstance
+//
+// RETURNS:
+//   - CancelAutoRenewReservedInstanceResponse: The return type of the CancelAutoRenewReservedInstance interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CancelAutoRenewReservedInstance(request *CancelAutoRenewReservedInstanceRequest) (*CancelAutoRenewReservedInstanceResponse, error) {
+	result := &CancelAutoRenewReservedInstanceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCancelAutoRenewReservedInstanceUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CancelAutoRenewVolumeCluster
+//
+// PARAMS:
+//   - request: the arguments to CancelAutoRenewVolumeCluster
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CancelAutoRenewVolumeCluster(request *CancelAutoRenewVolumeClusterRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCancelAutoRenewVolumeClusterUri(VERSION_V2)).
 		WithBody(request).
 		Do()
 }
@@ -569,6 +697,28 @@ func (c *Client) CreateDeploySet(request *CreateDeploySetRequest) (*CreateDeploy
 	return result, nil
 }
 
+// CreateEhcCluster
+//
+// PARAMS:
+//   - request: the arguments to CreateEhcCluster
+//
+// RETURNS:
+//   - CreateEhcClusterResponse: The return type of the CreateEhcCluster interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateEhcCluster(request *CreateEhcClusterRequest) (*CreateEhcClusterResponse, error) {
+	result := &CreateEhcClusterResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateEhcClusterUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateImage
 //
 // PARAMS:
@@ -626,6 +776,44 @@ func (c *Client) CreateKeypair(request *CreateKeypairRequest) (*CreateKeypairRes
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateKeypairUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateReservedInstanceTransfer
+//
+// PARAMS:
+//   - request: the arguments to CreateReservedInstanceTransfer
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) CreateReservedInstanceTransfer(request *CreateReservedInstanceTransferRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateReservedInstanceTransferUri(VERSION_V2)).
+		WithBody(request).
+		Do()
+}
+
+// CreateReservedInstances
+//
+// PARAMS:
+//   - request: the arguments to CreateReservedInstances
+//
+// RETURNS:
+//   - CreateReservedInstancesResponse: The return type of the CreateReservedInstances interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateReservedInstances(request *CreateReservedInstancesRequest) (*CreateReservedInstancesResponse, error) {
+	result := &CreateReservedInstancesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateReservedInstancesUri(VERSION_V2)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -723,6 +911,28 @@ func (c *Client) CreateVolume(request *CreateVolumeRequest) (*CreateVolumeRespon
 	return result, nil
 }
 
+// CreateVolumeCluster
+//
+// PARAMS:
+//   - request: the arguments to CreateVolumeCluster
+//
+// RETURNS:
+//   - CreateVolumeClusterResponse: The return type of the CreateVolumeCluster interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateVolumeCluster(request *CreateVolumeClusterRequest) (*CreateVolumeClusterResponse, error) {
+	result := &CreateVolumeClusterResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateVolumeClusterUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DelIpv6
 //
 // PARAMS:
@@ -782,6 +992,22 @@ func (c *Client) DeleteDeploySet(request *DeleteDeploySetRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getDeleteDeploySetUri(VERSION_V2, util.StringValue(request.DeployId))).
+		Do()
+}
+
+// DeleteEhcCluster
+//
+// PARAMS:
+//   - request: the arguments to DeleteEhcCluster
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteEhcCluster(request *DeleteEhcClusterRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDeleteEhcClusterUri(VERSION_V2)).
+		WithBody(request).
 		Do()
 }
 
@@ -931,6 +1157,28 @@ func (c *Client) DeletesInstanceDeploySet(request *DeletesInstanceDeploySetReque
 		Do()
 }
 
+// DescribeRegions
+//
+// PARAMS:
+//   - request: the arguments to DescribeRegions
+//
+// RETURNS:
+//   - DescribeRegionsResponse: The return type of the DescribeRegions interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (*DescribeRegionsResponse, error) {
+	result := &DescribeRegionsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeRegionsUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DetachAsp
 //
 // PARAMS:
@@ -980,6 +1228,28 @@ func (c *Client) DetachVolume(request *DetachVolumeRequest) error {
 		WithQueryParam("detach", "").
 		WithBody(request).
 		Do()
+}
+
+// EhcClusterList
+//
+// PARAMS:
+//   - request: the arguments to EhcClusterList
+//
+// RETURNS:
+//   - EhcClusterListResponse: The return type of the EhcClusterList interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) EhcClusterList(request *EhcClusterListRequest) (*EhcClusterListResponse, error) {
+	result := &EhcClusterListResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getEhcClusterListUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // EnterRescueMode
@@ -1271,6 +1541,74 @@ func (c *Client) GetInstanceVnc(request *GetInstanceVncRequest) (*GetInstanceVnc
 	return result, nil
 }
 
+// GetPriceBySpec
+//
+// PARAMS:
+//   - request: the arguments to GetPriceBySpec
+//
+// RETURNS:
+//   - GetPriceBySpecResponse: The return type of the GetPriceBySpec interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetPriceBySpec(request *GetPriceBySpecRequest) (*GetPriceBySpecResponse, error) {
+	result := &GetPriceBySpecResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getGetPriceBySpecUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetReservedInstance
+//
+// PARAMS:
+//   - request: the arguments to GetReservedInstance
+//
+// RETURNS:
+//   - GetReservedInstanceResponse: The return type of the GetReservedInstance interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetReservedInstance(request *GetReservedInstanceRequest) (*GetReservedInstanceResponse, error) {
+	result := &GetReservedInstanceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getGetReservedInstanceUri(VERSION_V2)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetReservedInstancePrice
+//
+// PARAMS:
+//   - request: the arguments to GetReservedInstancePrice
+//
+// RETURNS:
+//   - GetReservedInstancePriceResponse: The return type of the GetReservedInstancePrice interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetReservedInstancePrice(request *GetReservedInstancePriceRequest) (*GetReservedInstancePriceResponse, error) {
+	result := &GetReservedInstancePriceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getGetReservedInstancePriceUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // GetRoleList
 //
 // PARAMS:
@@ -1313,6 +1651,28 @@ func (c *Client) GetSnapshot(request *GetSnapshotRequest) (*GetSnapshotResponse,
 	return result, nil
 }
 
+// GetTask
+//
+// PARAMS:
+//   - request: the arguments to GetTask
+//
+// RETURNS:
+//   - GetTaskResponse: The return type of the GetTask interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetTask(request *GetTaskRequest) (*GetTaskResponse, error) {
+	result := &GetTaskResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getGetTaskUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // GetVolume
 //
 // PARAMS:
@@ -1334,6 +1694,27 @@ func (c *Client) GetVolume(request *GetVolumeRequest) (*GetVolumeResponse, error
 	return result, nil
 }
 
+// GetVolumeCluster
+//
+// PARAMS:
+//   - request: the arguments to GetVolumeCluster
+//
+// RETURNS:
+//   - GetVolumeClusterResponse: The return type of the GetVolumeCluster interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetVolumeCluster(request *GetVolumeClusterRequest) (*GetVolumeClusterResponse, error) {
+	result := &GetVolumeClusterResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetVolumeClusterUri(VERSION_V2, util.StringValue(request.ClusterId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // GetVolumeResizeProgress
 //
 // PARAMS:
@@ -1347,6 +1728,31 @@ func (c *Client) GetVolumeResizeProgress(request *GetVolumeResizeProgressRequest
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getGetVolumeResizeProgressUri(VERSION_V2, util.StringValue(request.VolumeId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetZoneBySpec
+//
+// PARAMS:
+//   - request: the arguments to GetZoneBySpec
+//
+// RETURNS:
+//   - GetZoneBySpecResponse: The return type of the GetZoneBySpec interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetZoneBySpec(request *GetZoneBySpecRequest) (*GetZoneBySpecResponse, error) {
+	result := &GetZoneBySpecResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetZoneBySpecUri(VERSION_V1)).
+		WithQueryParamFilter("instanceType", util.StringValue(request.InstanceType)).
+		WithQueryParamFilter("productType", util.StringValue(request.ProductType)).
+		WithQueryParamFilter("spec", util.StringValue(request.Spec)).
+		WithQueryParamFilter("specId", util.StringValue(request.SpecId)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -1566,6 +1972,30 @@ func (c *Client) ListDeploySet() (*ListDeploySetResponse, error) {
 	return result, nil
 }
 
+// ListFlavorSpec
+//
+// PARAMS:
+//   - request: the arguments to ListFlavorSpec
+//
+// RETURNS:
+//   - ListFlavorSpecResponse: The return type of the ListFlavorSpec interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListFlavorSpec(request *ListFlavorSpecRequest) (*ListFlavorSpecResponse, error) {
+	result := &ListFlavorSpecResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListFlavorSpecUri(VERSION_V2)).
+		WithQueryParamFilter("zoneName", util.StringValue(request.ZoneName)).
+		WithQueryParamFilter("specs", util.StringValue(request.Specs)).
+		WithQueryParamFilter("specIds", util.StringValue(request.SpecIds)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ListImages
 //
 // PARAMS:
@@ -1742,6 +2172,54 @@ func (c *Client) ListRecycleInstance(request *ListRecycleInstanceRequest) (*List
 	return result, nil
 }
 
+// ListReservedInstanceTransferIn
+//
+// PARAMS:
+//   - request: the arguments to ListReservedInstanceTransferIn
+//
+// RETURNS:
+//   - ListReservedInstanceTransferInResponse: The return type of the ListReservedInstanceTransferIn interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListReservedInstanceTransferIn(request *ListReservedInstanceTransferInRequest) (*ListReservedInstanceTransferInResponse, error) {
+	result := &ListReservedInstanceTransferInResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getListReservedInstanceTransferInUri(VERSION_V2)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListReservedInstanceTransferOut
+//
+// PARAMS:
+//   - request: the arguments to ListReservedInstanceTransferOut
+//
+// RETURNS:
+//   - ListReservedInstanceTransferOutResponse: The return type of the ListReservedInstanceTransferOut interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListReservedInstanceTransferOut(request *ListReservedInstanceTransferOutRequest) (*ListReservedInstanceTransferOutResponse, error) {
+	result := &ListReservedInstanceTransferOutResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getListReservedInstanceTransferOutUri(VERSION_V2)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ListSecurityGroups
 //
 // PARAMS:
@@ -1862,6 +2340,53 @@ func (c *Client) ListSnapshots(request *ListSnapshotsRequest) (*ListSnapshotsRes
 	return result, nil
 }
 
+// ListTask
+//
+// PARAMS:
+//   - request: the arguments to ListTask
+//
+// RETURNS:
+//   - ListTaskResponse: The return type of the ListTask interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListTask(request *ListTaskRequest) (*ListTaskResponse, error) {
+	result := &ListTaskResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getListTaskUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListVolumeClusters
+//
+// PARAMS:
+//   - request: the arguments to ListVolumeClusters
+//
+// RETURNS:
+//   - ListVolumeClustersResponse: The return type of the ListVolumeClusters interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListVolumeClusters(request *ListVolumeClustersRequest) (*ListVolumeClustersResponse, error) {
+	result := &ListVolumeClustersResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListVolumeClustersUri(VERSION_V2)).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
+		WithQueryParamFilter("zoneName", util.StringValue(request.ZoneName)).
+		WithQueryParamFilter("clusterName", util.StringValue(request.ClusterName)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ListVolumes
 //
 // PARAMS:
@@ -1892,6 +2417,27 @@ func (c *Client) ListVolumes(request *ListVolumesRequest) (*ListVolumesResponse,
 	return result, nil
 }
 
+// ListZones
+//
+// PARAMS:
+//   - request: the arguments to ListZones
+//
+// RETURNS:
+//   - ListZonesResponse: The return type of the ListZones interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListZones() (*ListZonesResponse, error) {
+	result := &ListZonesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListZonesUri(VERSION_V2)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ModifyCdsAttribute
 //
 // PARAMS:
@@ -1905,6 +2451,22 @@ func (c *Client) ModifyCdsAttribute(request *ModifyCdsAttributeRequest) error {
 		WithMethod(http.PUT).
 		WithURL(getModifyCdsAttributeUri(VERSION_V2, util.StringValue(request.VolumeId))).
 		WithQueryParam("modify", "").
+		WithBody(request).
+		Do()
+}
+
+// ModifyEhcCluster
+//
+// PARAMS:
+//   - request: the arguments to ModifyEhcCluster
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ModifyEhcCluster(request *ModifyEhcClusterRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getModifyEhcClusterUri(VERSION_V2)).
 		WithBody(request).
 		Do()
 }
@@ -1993,6 +2555,28 @@ func (c *Client) ModifyRelatedDeletePolicy(request *ModifyRelatedDeletePolicyReq
 		Do()
 }
 
+// ModifyReservedInstances
+//
+// PARAMS:
+//   - request: the arguments to ModifyReservedInstances
+//
+// RETURNS:
+//   - ModifyReservedInstancesResponse: The return type of the ModifyReservedInstances interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ModifyReservedInstances(request *ModifyReservedInstancesRequest) (*ModifyReservedInstancesResponse, error) {
+	result := &ModifyReservedInstancesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getModifyReservedInstancesUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ModifyVolumeChargeType
 //
 // PARAMS:
@@ -2057,6 +2641,29 @@ func (c *Client) PurchaseReservedVolume(request *PurchaseReservedVolumeRequest) 
 	return result, nil
 }
 
+// PurchaseReservedVolumeCluster
+//
+// PARAMS:
+//   - request: the arguments to PurchaseReservedVolumeCluster
+//
+// RETURNS:
+//   - PurchaseReservedVolumeClusterResponse: The return type of the PurchaseReservedVolumeCluster interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) PurchaseReservedVolumeCluster(request *PurchaseReservedVolumeClusterRequest) (*PurchaseReservedVolumeClusterResponse, error) {
+	result := &PurchaseReservedVolumeClusterResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getPurchaseReservedVolumeClusterUri(VERSION_V2, util.StringValue(request.ClusterId))).
+		WithQueryParam("purchaseReserved", "").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // RebootInstance
 //
 // PARAMS:
@@ -2103,6 +2710,22 @@ func (c *Client) RebuildInstance(request *RebuildInstanceRequest) error {
 		WithMethod(http.PUT).
 		WithURL(getRebuildInstanceUri(VERSION_V2, util.StringValue(request.InstanceId))).
 		WithQueryParam("rebuild", "").
+		WithBody(request).
+		Do()
+}
+
+// RefuseReservedInstanceTransfer
+//
+// PARAMS:
+//   - request: the arguments to RefuseReservedInstanceTransfer
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RefuseReservedInstanceTransfer(request *RefuseReservedInstanceTransferRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getRefuseReservedInstanceTransferUri(VERSION_V2)).
 		WithBody(request).
 		Do()
 }
@@ -2250,6 +2873,28 @@ func (c *Client) RenameVolume(request *RenameVolumeRequest) error {
 		Do()
 }
 
+// RenewReservedInstance
+//
+// PARAMS:
+//   - request: the arguments to RenewReservedInstance
+//
+// RETURNS:
+//   - RenewReservedInstanceResponse: The return type of the RenewReservedInstance interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) RenewReservedInstance(request *RenewReservedInstanceRequest) (*RenewReservedInstanceResponse, error) {
+	result := &RenewReservedInstanceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getRenewReservedInstanceUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ReplaceInstanceSecurityGroup
 //
 // PARAMS:
@@ -2311,6 +2956,45 @@ func (c *Client) ResizeVolume(request *ResizeVolumeRequest) (*ResizeVolumeRespon
 		return nil, err
 	}
 	return result, nil
+}
+
+// ResizeVolumeCluster
+//
+// PARAMS:
+//   - request: the arguments to ResizeVolumeCluster
+//
+// RETURNS:
+//   - ResizeVolumeClusterResponse: The return type of the ResizeVolumeCluster interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ResizeVolumeCluster(request *ResizeVolumeClusterRequest) (*ResizeVolumeClusterResponse, error) {
+	result := &ResizeVolumeClusterResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getResizeVolumeClusterUri(VERSION_V2, util.StringValue(request.ClusterId))).
+		WithQueryParam("resize", "").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// RevokeReservedInstanceTransfer
+//
+// PARAMS:
+//   - request: the arguments to RevokeReservedInstanceTransfer
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) RevokeReservedInstanceTransfer(request *RevokeReservedInstanceTransferRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getRevokeReservedInstanceTransferUri(VERSION_V2)).
+		WithBody(request).
+		Do()
 }
 
 // RevokeSecurityGroupRule
@@ -2471,6 +3155,23 @@ func (c *Client) UnbindInstanceSecurityGroup(request *UnbindInstanceSecurityGrou
 	return result, nil
 }
 
+// UnbindReservedInstanceFromTags
+//
+// PARAMS:
+//   - request: the arguments to UnbindReservedInstanceFromTags
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindReservedInstanceFromTags(request *UnbindReservedInstanceFromTagsRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindReservedInstanceFromTagsUri(VERSION_V2)).
+		WithQueryParam("unbind", "").
+		WithBody(request).
+		Do()
+}
+
 // UnbindRole
 //
 // PARAMS:
@@ -2540,6 +3241,23 @@ func (c *Client) UnbindTagVolume(request *UnbindTagVolumeRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUnbindTagVolumeUri(VERSION_V2, util.StringValue(request.VolumeId))).
+		WithQueryParam("unbind", "").
+		WithBody(request).
+		Do()
+}
+
+// UnbindTagVolumeCluster
+//
+// PARAMS:
+//   - request: the arguments to UnbindTagVolumeCluster
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UnbindTagVolumeCluster(request *UnbindTagVolumeClusterRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUnbindTagVolumeClusterUri(VERSION_V2, util.StringValue(request.ClusterId))).
 		WithQueryParam("unbind", "").
 		WithBody(request).
 		Do()

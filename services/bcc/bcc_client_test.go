@@ -67,6 +67,14 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
+func TestClient_AcceptReservedInstanceTransfer(t *testing.T) {
+	acceptReservedInstanceTransferRequest := &AcceptReservedInstanceTransferRequest{
+		TransferRecordId: util.PtrString(""),
+		EhcClusterId:     util.PtrString(""),
+	}
+	err := BCC_CLIENT.AcceptReservedInstanceTransfer(acceptReservedInstanceTransferRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_AddIpv6(t *testing.T) {
 	addIpv6Request := &AddIpv6Request{
 		InstanceId:  util.PtrString(""),
@@ -156,6 +164,35 @@ func TestClient_AutoReleaseInstance(t *testing.T) {
 		ReleaseTime:            util.PtrString(""),
 	}
 	err := BCC_CLIENT.AutoReleaseInstance(autoReleaseInstanceRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_AutoRenewReservedInstance(t *testing.T) {
+	autoRenewReservedInstanceRequest := &AutoRenewReservedInstanceRequest{
+		ReservedInstanceIds: []*string{},
+		AutoRenewTimeUnit:   util.PtrString(""),
+		AutoRenewTime:       util.PtrInt32(int32(0)),
+	}
+	result := &AutoRenewReservedInstanceResponse{}
+	result, err := BCC_CLIENT.AutoRenewReservedInstance(autoRenewReservedInstanceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_AutoRenewVolumeCluster(t *testing.T) {
+	autoRenewVolumeClusterRequest := &AutoRenewVolumeClusterRequest{
+		ClusterId:     util.PtrString(""),
+		RenewTimeUnit: util.PtrString(""),
+		RenewTime:     util.PtrInt32(int32(0)),
+	}
+	err := BCC_CLIENT.AutoRenewVolumeCluster(autoRenewVolumeClusterRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_BatchAddIp(t *testing.T) {
@@ -286,6 +323,14 @@ func TestClient_BindInstanceToTags(t *testing.T) {
 	err := BCC_CLIENT.BindInstanceToTags(bindInstanceToTagsRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_BindReservedInstanceToTags(t *testing.T) {
+	bindReservedInstanceToTagsRequest := &BindReservedInstanceToTagsRequest{
+		ReservedInstanceIds: []*string{},
+		ChangeTags:          []*TagModel{},
+	}
+	err := BCC_CLIENT.BindReservedInstanceToTags(bindReservedInstanceToTagsRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_BindRole(t *testing.T) {
 	bindRoleRequest := &BindRoleRequest{
 		RoleName:  util.PtrString(""),
@@ -327,6 +372,39 @@ func TestClient_BindTagVolume(t *testing.T) {
 		ChangeTags: []*TagModel{},
 	}
 	err := BCC_CLIENT.BindTagVolume(bindTagVolumeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_BindTagVolumeCluster(t *testing.T) {
+	bindTagVolumeClusterRequest := &BindTagVolumeClusterRequest{
+		ClusterId:  util.PtrString(""),
+		ChangeTags: []*TagModel{},
+	}
+	err := BCC_CLIENT.BindTagVolumeCluster(bindTagVolumeClusterRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CancelAutoRenewReservedInstance(t *testing.T) {
+	cancelAutoRenewReservedInstanceRequest := &CancelAutoRenewReservedInstanceRequest{
+		ReservedInstanceIds: []*string{},
+	}
+	result := &CancelAutoRenewReservedInstanceResponse{}
+	result, err := BCC_CLIENT.CancelAutoRenewReservedInstance(cancelAutoRenewReservedInstanceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CancelAutoRenewVolumeCluster(t *testing.T) {
+	cancelAutoRenewVolumeClusterRequest := &CancelAutoRenewVolumeClusterRequest{
+		ClusterId: util.PtrString(""),
+	}
+	err := BCC_CLIENT.CancelAutoRenewVolumeCluster(cancelAutoRenewVolumeClusterRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CancelBidOrder(t *testing.T) {
@@ -519,6 +597,26 @@ func TestClient_CreateDeploySet(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateEhcCluster(t *testing.T) {
+	createEhcClusterRequest := &CreateEhcClusterRequest{
+		Name:        util.PtrString(""),
+		ZoneName:    util.PtrString(""),
+		Description: util.PtrString(""),
+	}
+	result := &CreateEhcClusterResponse{}
+	result, err := BCC_CLIENT.CreateEhcCluster(createEhcClusterRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateImage(t *testing.T) {
 	createImageRequest := &CreateImageRequest{
 		ImageName:  util.PtrString(""),
@@ -635,6 +733,47 @@ func TestClient_CreateKeypair(t *testing.T) {
 	}
 	result := &CreateKeypairResponse{}
 	result, err := BCC_CLIENT.CreateKeypair(createKeypairRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateReservedInstanceTransfer(t *testing.T) {
+	createReservedInstanceTransferRequest := &CreateReservedInstanceTransferRequest{
+		ReservedInstanceIds: []*string{},
+		RecipientAccountId:  util.PtrString(""),
+	}
+	err := BCC_CLIENT.CreateReservedInstanceTransfer(createReservedInstanceTransferRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateReservedInstances(t *testing.T) {
+	createReservedInstancesRequest := &CreateReservedInstancesRequest{
+		ReservedInstanceName:     util.PtrString(""),
+		Scope:                    util.PtrString(""),
+		ZoneName:                 util.PtrString(""),
+		Spec:                     util.PtrString(""),
+		OfferingType:             util.PtrString(""),
+		InstanceCount:            util.PtrInt32(int32(0)),
+		ReservedInstanceCount:    util.PtrInt32(int32(0)),
+		ReservedInstanceTime:     util.PtrInt32(int32(0)),
+		ReservedInstanceTimeUnit: util.PtrString(""),
+		AutoRenew:                util.PtrBool(false),
+		AutoRenewTimeUnit:        util.PtrString(""),
+		AutoRenewTime:            util.PtrInt32(int32(0)),
+		EffectiveTime:            util.PtrString(""),
+		Tags:                     []*TagModel{},
+		TicketId:                 util.PtrString(""),
+		EhcClusterId:             util.PtrString(""),
+	}
+	result := &CreateReservedInstancesResponse{}
+	result, err := BCC_CLIENT.CreateReservedInstances(createReservedInstancesRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -770,6 +909,37 @@ func TestClient_CreateVolume(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateVolumeCluster(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		Reservation: &Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
+	}
+	createVolumeClusterRequest := &CreateVolumeClusterRequest{
+		ZoneName:        util.PtrString(""),
+		ClusterName:     util.PtrString(""),
+		ClusterSizeInGB: util.PtrInt32(int32(0)),
+		StorageType:     util.PtrString(""),
+		PurchaseCount:   util.PtrInt32(int32(0)),
+		Billing:         Billing,
+		Tags:            []*TagModel{},
+	}
+	result := &CreateVolumeClusterResponse{}
+	result, err := BCC_CLIENT.CreateVolumeCluster(createVolumeClusterRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DelIpv6(t *testing.T) {
 	delIpv6Request := &DelIpv6Request{
 		InstanceId:  util.PtrString(""),
@@ -799,6 +969,13 @@ func TestClient_DeleteDeploySet(t *testing.T) {
 		DeployId: util.PtrString(""),
 	}
 	err := BCC_CLIENT.DeleteDeploySet(deleteDeploySetRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteEhcCluster(t *testing.T) {
+	deleteEhcClusterRequest := &DeleteEhcClusterRequest{
+		EhcClusterIdList: []*string{},
+	}
+	err := BCC_CLIENT.DeleteEhcCluster(deleteEhcClusterRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteImage(t *testing.T) {
@@ -881,6 +1058,24 @@ func TestClient_DeletesInstanceDeploySet(t *testing.T) {
 	err := BCC_CLIENT.DeletesInstanceDeploySet(deletesInstanceDeploySetRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeRegions(t *testing.T) {
+	describeRegionsRequest := &DescribeRegionsRequest{
+		Region: util.PtrString(""),
+	}
+	result := &DescribeRegionsResponse{}
+	result, err := BCC_CLIENT.DescribeRegions(describeRegionsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DetachAsp(t *testing.T) {
 	detachAspRequest := &DetachAspRequest{
 		AspId:              util.PtrString(""),
@@ -904,6 +1099,26 @@ func TestClient_DetachVolume(t *testing.T) {
 		InstanceId: util.PtrString(""),
 	}
 	err := BCC_CLIENT.DetachVolume(detachVolumeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_EhcClusterList(t *testing.T) {
+	ehcClusterListRequest := &EhcClusterListRequest{
+		EhcClusterIdList: []*string{},
+		NameList:         []*string{},
+		ZoneName:         util.PtrString(""),
+	}
+	result := &EhcClusterListResponse{}
+	result, err := BCC_CLIENT.EhcClusterList(ehcClusterListRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_EnterRescueMode(t *testing.T) {
@@ -1163,6 +1378,89 @@ func TestClient_GetInstanceVnc(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_GetPriceBySpec(t *testing.T) {
+	getPriceBySpecRequest := &GetPriceBySpecRequest{
+		SpecId:         util.PtrString(""),
+		Spec:           util.PtrString(""),
+		PaymentTiming:  util.PtrString(""),
+		ZoneName:       util.PtrString(""),
+		PurchaseCount:  util.PtrInt32(int32(0)),
+		PurchaseLength: util.PtrInt32(int32(0)),
+	}
+	result := &GetPriceBySpecResponse{}
+	result, err := BCC_CLIENT.GetPriceBySpec(getPriceBySpecRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetReservedInstance(t *testing.T) {
+	getReservedInstanceRequest := &GetReservedInstanceRequest{
+		Marker:                 util.PtrString(""),
+		MaxKeys:                util.PtrInt32(int32(0)),
+		ReservedInstanceIds:    []*string{},
+		ReservedInstanceName:   util.PtrString(""),
+		ZoneName:               util.PtrString(""),
+		ReservedInstanceStatus: util.PtrString(""),
+		Spec:                   util.PtrString(""),
+		OfferingType:           util.PtrString(""),
+		OsType:                 util.PtrString(""),
+		InstanceId:             util.PtrString(""),
+		InstanceName:           util.PtrString(""),
+		IsDeduct:               util.PtrBool(false),
+		EhcClusterId:           util.PtrString(""),
+		SortKey:                util.PtrString(""),
+		SortDir:                util.PtrString(""),
+		ReservedInstanceSource: util.PtrString(""),
+		Scope:                  util.PtrString(""),
+	}
+	result := &GetReservedInstanceResponse{}
+	result, err := BCC_CLIENT.GetReservedInstance(getReservedInstanceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetReservedInstancePrice(t *testing.T) {
+	getReservedInstancePriceRequest := &GetReservedInstancePriceRequest{
+		SpecId:                util.PtrString(""),
+		Spec:                  util.PtrString(""),
+		OfferingType:          util.PtrString(""),
+		Scope:                 util.PtrString(""),
+		ZoneName:              util.PtrString(""),
+		ReservedInstanceCount: util.PtrInt32(int32(0)),
+		PriceTimeUnit:         util.PtrString(""),
+		ReservedInstanceTime:  util.PtrInt32(int32(0)),
+		PurchaseNum:           util.PtrInt32(int32(0)),
+	}
+	result := &GetReservedInstancePriceResponse{}
+	result, err := BCC_CLIENT.GetReservedInstancePrice(getReservedInstancePriceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_GetRoleList(t *testing.T) {
 	result := &GetRoleListResponse{}
 	result, err := BCC_CLIENT.GetRoleList()
@@ -1196,6 +1494,25 @@ func TestClient_GetSnapshot(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_GetTask(t *testing.T) {
+	getTaskRequest := &GetTaskRequest{
+		TaskIds: []*string{},
+		MaxKeys: util.PtrInt32(int32(0)),
+	}
+	result := &GetTaskResponse{}
+	result, err := BCC_CLIENT.GetTask(getTaskRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_GetVolume(t *testing.T) {
 	getVolumeRequest := &GetVolumeRequest{
 		VolumeId: util.PtrString(""),
@@ -1214,12 +1531,51 @@ func TestClient_GetVolume(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_GetVolumeCluster(t *testing.T) {
+	getVolumeClusterRequest := &GetVolumeClusterRequest{
+		ClusterId: util.PtrString(""),
+	}
+	result := &GetVolumeClusterResponse{}
+	result, err := BCC_CLIENT.GetVolumeCluster(getVolumeClusterRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_GetVolumeResizeProgress(t *testing.T) {
 	getVolumeResizeProgressRequest := &GetVolumeResizeProgressRequest{
 		VolumeId: util.PtrString(""),
 	}
 	result := &GetVolumeResizeProgressResponse{}
 	result, err := BCC_CLIENT.GetVolumeResizeProgress(getVolumeResizeProgressRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetZoneBySpec(t *testing.T) {
+	getZoneBySpecRequest := &GetZoneBySpecRequest{
+		InstanceType: util.PtrString(""),
+		ProductType:  util.PtrString(""),
+		Spec:         util.PtrString(""),
+		SpecId:       util.PtrString(""),
+	}
+	result := &GetZoneBySpecResponse{}
+	result, err := BCC_CLIENT.GetZoneBySpec(getZoneBySpecRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -1404,6 +1760,26 @@ func TestClient_ListDeploySet(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ListFlavorSpec(t *testing.T) {
+	listFlavorSpecRequest := &ListFlavorSpecRequest{
+		ZoneName: util.PtrString(""),
+		Specs:    util.PtrString(""),
+		SpecIds:  util.PtrString(""),
+	}
+	result := &ListFlavorSpecResponse{}
+	result, err := BCC_CLIENT.ListFlavorSpec(listFlavorSpecRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ListImages(t *testing.T) {
 	listImagesRequest := &ListImagesRequest{
 		Marker:    util.PtrString(""),
@@ -1559,6 +1935,52 @@ func TestClient_ListRecycleInstance(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ListReservedInstanceTransferIn(t *testing.T) {
+	listReservedInstanceTransferInRequest := &ListReservedInstanceTransferInRequest{
+		Marker:              util.PtrString(""),
+		MaxKeys:             util.PtrInt32(int32(0)),
+		ReservedInstanceIds: []*string{},
+		TransferRecordIds:   []*string{},
+		Spec:                util.PtrString(""),
+		Status:              util.PtrString(""),
+	}
+	result := &ListReservedInstanceTransferInResponse{}
+	result, err := BCC_CLIENT.ListReservedInstanceTransferIn(listReservedInstanceTransferInRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListReservedInstanceTransferOut(t *testing.T) {
+	listReservedInstanceTransferOutRequest := &ListReservedInstanceTransferOutRequest{
+		Marker:              util.PtrString(""),
+		MaxKeys:             util.PtrInt32(int32(0)),
+		ReservedInstanceIds: []*string{},
+		TransferRecordIds:   []*string{},
+		Spec:                util.PtrString(""),
+		Status:              util.PtrString(""),
+	}
+	result := &ListReservedInstanceTransferOutResponse{}
+	result, err := BCC_CLIENT.ListReservedInstanceTransferOut(listReservedInstanceTransferOutRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ListSecurityGroups(t *testing.T) {
 	listSecurityGroupsRequest := &ListSecurityGroupsRequest{
 		Marker:           util.PtrString(""),
@@ -1661,6 +2083,52 @@ func TestClient_ListSnapshots(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ListTask(t *testing.T) {
+	listTaskRequest := &ListTaskRequest{
+		TaskIds:     []*string{},
+		Marker:      util.PtrString(""),
+		MaxKeys:     util.PtrInt32(int32(0)),
+		TaskAction:  util.PtrString(""),
+		TaskStatus:  util.PtrString(""),
+		StartTime:   util.PtrString(""),
+		EndTime:     util.PtrString(""),
+		ResourceIds: []*string{},
+	}
+	result := &ListTaskResponse{}
+	result, err := BCC_CLIENT.ListTask(listTaskRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListVolumeClusters(t *testing.T) {
+	listVolumeClustersRequest := &ListVolumeClustersRequest{
+		Marker:      util.PtrString(""),
+		MaxKeys:     util.PtrInt32(int32(0)),
+		ZoneName:    util.PtrString(""),
+		ClusterName: util.PtrString(""),
+	}
+	result := &ListVolumeClustersResponse{}
+	result, err := BCC_CLIENT.ListVolumeClusters(listVolumeClustersRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ListVolumes(t *testing.T) {
 	listVolumesRequest := &ListVolumesRequest{
 		Marker:          util.PtrString(""),
@@ -1687,6 +2155,21 @@ func TestClient_ListVolumes(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ListZones(t *testing.T) {
+	result := &ListZonesResponse{}
+	result, err := BCC_CLIENT.ListZones()
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ModifyCdsAttribute(t *testing.T) {
 	modifyCdsAttributeRequest := &ModifyCdsAttributeRequest{
 		VolumeId:           util.PtrString(""),
@@ -1696,6 +2179,15 @@ func TestClient_ModifyCdsAttribute(t *testing.T) {
 		DeleteAutoSnapshot: util.PtrBool(false),
 	}
 	err := BCC_CLIENT.ModifyCdsAttribute(modifyCdsAttributeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ModifyEhcCluster(t *testing.T) {
+	modifyEhcClusterRequest := &ModifyEhcClusterRequest{
+		EhcClusterId: util.PtrString(""),
+		Name:         util.PtrString(""),
+		Description:  util.PtrString(""),
+	}
+	err := BCC_CLIENT.ModifyEhcCluster(modifyEhcClusterRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ModifyInstanceAttributes(t *testing.T) {
@@ -1741,6 +2233,24 @@ func TestClient_ModifyRelatedDeletePolicy(t *testing.T) {
 		IsEipAutoRelatedDelete: util.PtrBool(false),
 	}
 	err := BCC_CLIENT.ModifyRelatedDeletePolicy(modifyRelatedDeletePolicyRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ModifyReservedInstances(t *testing.T) {
+	modifyReservedInstancesRequest := &ModifyReservedInstancesRequest{
+		ReservedInstances: []*ReservedInstance{},
+	}
+	result := &ModifyReservedInstancesResponse{}
+	result, err := BCC_CLIENT.ModifyReservedInstances(modifyReservedInstancesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ModifyVolumeChargeType(t *testing.T) {
@@ -1814,6 +2324,32 @@ func TestClient_PurchaseReservedVolume(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_PurchaseReservedVolumeCluster(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		Reservation: &Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
+	}
+	purchaseReservedVolumeClusterRequest := &PurchaseReservedVolumeClusterRequest{
+		ClusterId: util.PtrString(""),
+		Billing:   Billing,
+	}
+	result := &PurchaseReservedVolumeClusterResponse{}
+	result, err := BCC_CLIENT.PurchaseReservedVolumeCluster(purchaseReservedVolumeClusterRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_RebootInstance(t *testing.T) {
 	rebootInstanceRequest := &RebootInstanceRequest{
 		InstanceId: util.PtrString(""),
@@ -1860,6 +2396,13 @@ func TestClient_RebuildInstance(t *testing.T) {
 		CleanLastUserData: util.PtrBool(false),
 	}
 	err := BCC_CLIENT.RebuildInstance(rebuildInstanceRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_RefuseReservedInstanceTransfer(t *testing.T) {
+	refuseReservedInstanceTransferRequest := &RefuseReservedInstanceTransferRequest{
+		TransferRecordIds: []*string{},
+	}
+	err := BCC_CLIENT.RefuseReservedInstanceTransfer(refuseReservedInstanceTransferRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ReleaseInstanceByPost(t *testing.T) {
@@ -1961,6 +2504,29 @@ func TestClient_RenameVolume(t *testing.T) {
 	err := BCC_CLIENT.RenameVolume(renameVolumeRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_RenewReservedInstance(t *testing.T) {
+	renewReservedInstanceRequest := &RenewReservedInstanceRequest{
+		ReservedInstanceIds:      []*string{},
+		ReservedInstanceTime:     util.PtrString(""),
+		ReservedInstanceTimeUnit: util.PtrString(""),
+		AutoRenew:                util.PtrBool(false),
+		AutoRenewTimeUnit:        util.PtrString(""),
+		AutoRenewTime:            util.PtrInt32(int32(0)),
+	}
+	result := &RenewReservedInstanceResponse{}
+	result, err := BCC_CLIENT.RenewReservedInstance(renewReservedInstanceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ReplaceInstanceSecurityGroup(t *testing.T) {
 	replaceInstanceSecurityGroupRequest := &ReplaceInstanceSecurityGroupRequest{
 		InstanceIds:       []*string{},
@@ -2010,6 +2576,32 @@ func TestClient_ResizeVolume(t *testing.T) {
 		return
 	}
 	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ResizeVolumeCluster(t *testing.T) {
+	resizeVolumeClusterRequest := &ResizeVolumeClusterRequest{
+		ClusterId:          util.PtrString(""),
+		NewClusterSizeInGB: util.PtrInt32(int32(0)),
+	}
+	result := &ResizeVolumeClusterResponse{}
+	result, err := BCC_CLIENT.ResizeVolumeCluster(resizeVolumeClusterRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_RevokeReservedInstanceTransfer(t *testing.T) {
+	revokeReservedInstanceTransferRequest := &RevokeReservedInstanceTransferRequest{
+		TransferRecordIds: []*string{},
+	}
+	err := BCC_CLIENT.RevokeReservedInstanceTransfer(revokeReservedInstanceTransferRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_RevokeSecurityGroupRule(t *testing.T) {
@@ -2117,6 +2709,14 @@ func TestClient_UnbindInstanceSecurityGroup(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_UnbindReservedInstanceFromTags(t *testing.T) {
+	unbindReservedInstanceFromTagsRequest := &UnbindReservedInstanceFromTagsRequest{
+		ReservedInstanceIds: []*string{},
+		ChangeTags:          []*TagModel{},
+	}
+	err := BCC_CLIENT.UnbindReservedInstanceFromTags(unbindReservedInstanceFromTagsRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_UnbindRole(t *testing.T) {
 	unbindRoleRequest := &UnbindRoleRequest{
 		RoleName:  util.PtrString(""),
@@ -2158,6 +2758,14 @@ func TestClient_UnbindTagVolume(t *testing.T) {
 		ChangeTags: []*TagModel{},
 	}
 	err := BCC_CLIENT.UnbindTagVolume(unbindTagVolumeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UnbindTagVolumeCluster(t *testing.T) {
+	unbindTagVolumeClusterRequest := &UnbindTagVolumeClusterRequest{
+		ClusterId:  util.PtrString(""),
+		ChangeTags: []*TagModel{},
+	}
+	err := BCC_CLIENT.UnbindTagVolumeCluster(unbindTagVolumeClusterRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateAsp(t *testing.T) {

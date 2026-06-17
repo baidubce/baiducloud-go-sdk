@@ -1,0 +1,11 @@
+package bcc
+
+import "github.com/baidubce/baiducloud-go-sdk/bce"
+
+type GetReservedInstancePriceResponse struct {
+	bce.BaseResponse
+	RequestId     *string      `json:"requestId,omitempty"`
+	Spec          *string      `json:"spec,omitempty"`
+	CategoryPrice *interface{} `json:"categoryPrice,omitempty"`
+	TradePrice    *interface{} `json:"tradePrice,omitempty"`
+}
