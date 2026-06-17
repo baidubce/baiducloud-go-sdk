@@ -1,3 +1,6 @@
+2026-06-17 Version: v0.0.80
+- 涉及产品: BCM，修复describeMetricDataLatest等3个接口中timestmap字段拼写错误，更正为timestamp
+
 2026-06-17 Version: v0.0.79
 - 涉及产品: BCC，新增专属集群创建、查询、变配、续费及标签管理接口
 - 涉及产品: BCC，新增预留实例券创建、调整、续费、转移及自动续费管理接口

@@ -3,9 +3,79 @@ package bcm
 import (
 	"github.com/baidubce/baiducloud-go-sdk/bce"
 	"github.com/baidubce/baiducloud-go-sdk/core/http"
+	"github.com/baidubce/baiducloud-go-sdk/core/util"
 )
 
 const ()
+
+// AddAlarmPolicyActions
+//
+// PARAMS:
+//   - request: the arguments to AddAlarmPolicyActions
+//
+// RETURNS:
+//   - AddAlarmPolicyActionsResponse: The return type of the AddAlarmPolicyActions interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) AddAlarmPolicyActions(request *AddAlarmPolicyActionsRequest) (*AddAlarmPolicyActionsResponse, error) {
+	result := &AddAlarmPolicyActionsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getAddAlarmPolicyActionsUri()).
+		WithQueryParamFilter("action", "AddAlarmPolicyActions").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateAlarmMasking
+//
+// PARAMS:
+//   - request: the arguments to CreateAlarmMasking
+//
+// RETURNS:
+//   - CreateAlarmMaskingResponse: The return type of the CreateAlarmMasking interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateAlarmMasking(request *CreateAlarmMaskingRequest) (*CreateAlarmMaskingResponse, error) {
+	result := &CreateAlarmMaskingResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateAlarmMaskingUri()).
+		WithQueryParamFilter("action", "CreateAlarmMasking").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateAlarmPolicy
+//
+// PARAMS:
+//   - request: the arguments to CreateAlarmPolicy
+//
+// RETURNS:
+//   - CreateAlarmPolicyResponse: The return type of the CreateAlarmPolicy interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateAlarmPolicy(request *CreateAlarmPolicyRequest) (*CreateAlarmPolicyResponse, error) {
+	result := &CreateAlarmPolicyResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateAlarmPolicyUri()).
+		WithQueryParamFilter("action", "CreateAlarmPolicy").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
 
 // CreateAlarmTemplate
 //
@@ -67,6 +137,75 @@ func (c *Client) CreateNotifyTemplate(request *CreateNotifyTemplateRequest) (*Cr
 		WithMethod(http.POST).
 		WithURL(getCreateNotifyTemplateUri()).
 		WithQueryParamFilter("action", "CreateNotifyTemplate").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DeleteAlarmMaskings
+//
+// PARAMS:
+//   - request: the arguments to DeleteAlarmMaskings
+//
+// RETURNS:
+//   - DeleteAlarmMaskingsResponse: The return type of the DeleteAlarmMaskings interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteAlarmMaskings(request *DeleteAlarmMaskingsRequest) (*DeleteAlarmMaskingsResponse, error) {
+	result := &DeleteAlarmMaskingsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDeleteAlarmMaskingsUri()).
+		WithQueryParamFilter("action", "DeleteAlarmMaskings").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DeleteAlarmPolicies
+//
+// PARAMS:
+//   - request: the arguments to DeleteAlarmPolicies
+//
+// RETURNS:
+//   - DeleteAlarmPoliciesResponse: The return type of the DeleteAlarmPolicies interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteAlarmPolicies(request *DeleteAlarmPoliciesRequest) (*DeleteAlarmPoliciesResponse, error) {
+	result := &DeleteAlarmPoliciesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDeleteAlarmPoliciesUri()).
+		WithQueryParamFilter("action", "DeleteAlarmPolicies").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DeleteAlarmPolicyActions
+//
+// PARAMS:
+//   - request: the arguments to DeleteAlarmPolicyActions
+//
+// RETURNS:
+//   - DeleteAlarmPolicyActionsResponse: The return type of the DeleteAlarmPolicyActions interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteAlarmPolicyActions(request *DeleteAlarmPolicyActionsRequest) (*DeleteAlarmPolicyActionsResponse, error) {
+	result := &DeleteAlarmPolicyActionsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDeleteAlarmPolicyActionsUri()).
+		WithQueryParamFilter("action", "DeleteAlarmPolicyActions").
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -168,6 +307,121 @@ func (c *Client) DeleteNotifyTemplate(request *DeleteNotifyTemplateRequest) (*De
 	return result, nil
 }
 
+// DescribeAlarm
+//
+// PARAMS:
+//   - request: the arguments to DescribeAlarm
+//
+// RETURNS:
+//   - DescribeAlarmResponse: The return type of the DescribeAlarm interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAlarm(request *DescribeAlarmRequest) (*DescribeAlarmResponse, error) {
+	result := &DescribeAlarmResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeAlarmUri()).
+		WithQueryParamFilter("action", "DescribeAlarm").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeAlarmMasking
+//
+// PARAMS:
+//   - request: the arguments to DescribeAlarmMasking
+//
+// RETURNS:
+//   - DescribeAlarmMaskingResponse: The return type of the DescribeAlarmMasking interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAlarmMasking(request *DescribeAlarmMaskingRequest) (*DescribeAlarmMaskingResponse, error) {
+	result := &DescribeAlarmMaskingResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeAlarmMaskingUri()).
+		WithQueryParamFilter("action", "DescribeAlarmMasking").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeAlarmMaskings
+//
+// PARAMS:
+//   - request: the arguments to DescribeAlarmMaskings
+//
+// RETURNS:
+//   - DescribeAlarmMaskingsResponse: The return type of the DescribeAlarmMaskings interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAlarmMaskings(request *DescribeAlarmMaskingsRequest) (*DescribeAlarmMaskingsResponse, error) {
+	result := &DescribeAlarmMaskingsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeAlarmMaskingsUri()).
+		WithQueryParamFilter("action", "DescribeAlarmMaskings").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeAlarmPolicies
+//
+// PARAMS:
+//   - request: the arguments to DescribeAlarmPolicies
+//
+// RETURNS:
+//   - DescribeAlarmPoliciesResponse: The return type of the DescribeAlarmPolicies interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAlarmPolicies(request *DescribeAlarmPoliciesRequest) (*DescribeAlarmPoliciesResponse, error) {
+	result := &DescribeAlarmPoliciesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeAlarmPoliciesUri()).
+		WithQueryParamFilter("action", "DescribeAlarmPolicies").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeAlarmPolicy
+//
+// PARAMS:
+//   - request: the arguments to DescribeAlarmPolicy
+//
+// RETURNS:
+//   - DescribeAlarmPolicyResponse: The return type of the DescribeAlarmPolicy interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAlarmPolicy(request *DescribeAlarmPolicyRequest) (*DescribeAlarmPolicyResponse, error) {
+	result := &DescribeAlarmPolicyResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeAlarmPolicyUri()).
+		WithQueryParamFilter("action", "DescribeAlarmPolicy").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DescribeAlarmTemplate
 //
 // PARAMS:
@@ -214,6 +468,52 @@ func (c *Client) DescribeAlarmTemplates(request *DescribeAlarmTemplatesRequest) 
 	return result, nil
 }
 
+// DescribeAlarms
+//
+// PARAMS:
+//   - request: the arguments to DescribeAlarms
+//
+// RETURNS:
+//   - DescribeAlarmsResponse: The return type of the DescribeAlarms interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeAlarms(request *DescribeAlarmsRequest) (*DescribeAlarmsResponse, error) {
+	result := &DescribeAlarmsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeAlarmsUri()).
+		WithQueryParamFilter("action", "DescribeAlarms").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeDimensionValues
+//
+// PARAMS:
+//   - request: the arguments to DescribeDimensionValues
+//
+// RETURNS:
+//   - DescribeDimensionValuesResponse: The return type of the DescribeDimensionValues interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeDimensionValues(request *DescribeDimensionValuesRequest) (*DescribeDimensionValuesResponse, error) {
+	result := &DescribeDimensionValuesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeDimensionValuesUri(util.StringValue(request.Action))).
+		WithQueryParamFilter("action", "DescribeDimensionValues").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DescribeInstanceGroup
 //
 // PARAMS:
@@ -251,6 +551,75 @@ func (c *Client) DescribeInstanceGroups(request *DescribeInstanceGroupsRequest) 
 		WithMethod(http.POST).
 		WithURL(getDescribeInstanceGroupsUri()).
 		WithQueryParamFilter("action", "DescribeInstanceGroups").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeMetricData
+//
+// PARAMS:
+//   - request: the arguments to DescribeMetricData
+//
+// RETURNS:
+//   - DescribeMetricDataResponse: The return type of the DescribeMetricData interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeMetricData(request *DescribeMetricDataRequest) (*DescribeMetricDataResponse, error) {
+	result := &DescribeMetricDataResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeMetricDataUri(util.StringValue(request.Action))).
+		WithQueryParamFilter("action", "DescribeMetricData").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeMetricDataLatest
+//
+// PARAMS:
+//   - request: the arguments to DescribeMetricDataLatest
+//
+// RETURNS:
+//   - DescribeMetricDataLatestResponse: The return type of the DescribeMetricDataLatest interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeMetricDataLatest(request *DescribeMetricDataLatestRequest) (*DescribeMetricDataLatestResponse, error) {
+	result := &DescribeMetricDataLatestResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeMetricDataLatestUri(util.StringValue(request.Action))).
+		WithQueryParamFilter("action", "DescribeMetricDataLatest").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeMetricDataLatestTop
+//
+// PARAMS:
+//   - request: the arguments to DescribeMetricDataLatestTop
+//
+// RETURNS:
+//   - DescribeMetricDataLatestTopResponse: The return type of the DescribeMetricDataLatestTop interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeMetricDataLatestTop(request *DescribeMetricDataLatestTopRequest) (*DescribeMetricDataLatestTopResponse, error) {
+	result := &DescribeMetricDataLatestTopResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeMetricDataLatestTopUri(util.StringValue(request.Action))).
+		WithQueryParamFilter("action", "DescribeMetricDataLatestTop").
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -389,6 +758,121 @@ func (c *Client) ImportAlarmTemplates(request *ImportAlarmTemplatesRequest) (*Im
 		WithMethod(http.POST).
 		WithURL(getImportAlarmTemplatesUri()).
 		WithQueryParamFilter("action", "ImportAlarmTemplates").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// UpdateAlarmMasking
+//
+// PARAMS:
+//   - request: the arguments to UpdateAlarmMasking
+//
+// RETURNS:
+//   - UpdateAlarmMaskingResponse: The return type of the UpdateAlarmMasking interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateAlarmMasking(request *UpdateAlarmMaskingRequest) (*UpdateAlarmMaskingResponse, error) {
+	result := &UpdateAlarmMaskingResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUpdateAlarmMaskingUri()).
+		WithQueryParamFilter("action", "UpdateAlarmMasking").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// UpdateAlarmMaskingStates
+//
+// PARAMS:
+//   - request: the arguments to UpdateAlarmMaskingStates
+//
+// RETURNS:
+//   - UpdateAlarmMaskingStatesResponse: The return type of the UpdateAlarmMaskingStates interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateAlarmMaskingStates(request *UpdateAlarmMaskingStatesRequest) (*UpdateAlarmMaskingStatesResponse, error) {
+	result := &UpdateAlarmMaskingStatesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUpdateAlarmMaskingStatesUri()).
+		WithQueryParamFilter("action", "UpdateAlarmMaskingStates").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// UpdateAlarmPolicy
+//
+// PARAMS:
+//   - request: the arguments to UpdateAlarmPolicy
+//
+// RETURNS:
+//   - UpdateAlarmPolicyResponse: The return type of the UpdateAlarmPolicy interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateAlarmPolicy(request *UpdateAlarmPolicyRequest) (*UpdateAlarmPolicyResponse, error) {
+	result := &UpdateAlarmPolicyResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUpdateAlarmPolicyUri()).
+		WithQueryParamFilter("action", "UpdateAlarmPolicy").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// UpdateAlarmPolicyNotifyEnabled
+//
+// PARAMS:
+//   - request: the arguments to UpdateAlarmPolicyNotifyEnabled
+//
+// RETURNS:
+//   - UpdateAlarmPolicyNotifyEnabledResponse: The return type of the UpdateAlarmPolicyNotifyEnabled interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateAlarmPolicyNotifyEnabled(request *UpdateAlarmPolicyNotifyEnabledRequest) (*UpdateAlarmPolicyNotifyEnabledResponse, error) {
+	result := &UpdateAlarmPolicyNotifyEnabledResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUpdateAlarmPolicyNotifyEnabledUri()).
+		WithQueryParamFilter("action", "UpdateAlarmPolicyNotifyEnabled").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// UpdateAlarmPolicyState
+//
+// PARAMS:
+//   - request: the arguments to UpdateAlarmPolicyState
+//
+// RETURNS:
+//   - UpdateAlarmPolicyStateResponse: The return type of the UpdateAlarmPolicyState interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateAlarmPolicyState(request *UpdateAlarmPolicyStateRequest) (*UpdateAlarmPolicyStateResponse, error) {
+	result := &UpdateAlarmPolicyStateResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUpdateAlarmPolicyStateUri()).
+		WithQueryParamFilter("action", "UpdateAlarmPolicyState").
 		WithBody(request).
 		WithResult(result).
 		Do()
