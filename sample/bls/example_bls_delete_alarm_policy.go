@@ -15,7 +15,7 @@ func DeleteAlarmPolicy() {
 		return
 	}
 	deleteAlarmPolicyRequest := &bls.DeleteAlarmPolicyRequest{
-		Name: []*string{},
+		Names: []*string{},
 	}
 	result, err := client.DeleteAlarmPolicy(deleteAlarmPolicyRequest)
 	if err != nil {

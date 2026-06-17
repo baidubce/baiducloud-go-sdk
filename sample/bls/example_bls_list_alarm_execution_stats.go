@@ -20,7 +20,6 @@ func ListAlarmExecutionStats() {
 		PolicyName:    util.PtrString(""),
 		LogStoreName:  util.PtrString(""),
 		States:        []*string{},
-		NoticeStates:  []*string{},
 		StartDateTime: util.PtrString(""),
 		EndDateTime:   util.PtrString(""),
 		OrderBy:       util.PtrString(""),

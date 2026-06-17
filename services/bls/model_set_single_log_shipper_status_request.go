@@ -1,6 +1,6 @@
 package bls
 
 type SetSingleLogShipperStatusRequest struct {
-	LogShipperID  *string `json:"-"`
-	DesiredStatus *string `json:"desiredStatus,omitempty"`
+	LogShipperID *string `json:"-"`
+	Status       *string `json:"status,omitempty"`
 }

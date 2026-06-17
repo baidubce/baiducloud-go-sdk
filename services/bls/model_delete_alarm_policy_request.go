@@ -1,5 +1,5 @@
 package bls
 
 type DeleteAlarmPolicyRequest struct {
-	Name []*string `json:"name,omitempty"`
+	Names []*string `json:"names,omitempty"`
 }

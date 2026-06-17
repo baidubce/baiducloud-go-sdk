@@ -15,7 +15,7 @@ func DisableAlarmPolicy() {
 		return
 	}
 	disableAlarmPolicyRequest := &bls.DisableAlarmPolicyRequest{
-		Name: []*string{},
+		Names: []*string{},
 	}
 	result, err := client.DisableAlarmPolicy(disableAlarmPolicyRequest)
 	if err != nil {

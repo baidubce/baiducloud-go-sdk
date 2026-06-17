@@ -45,6 +45,8 @@ const (
 
 	CONSTANT_LOGRECORD = "logrecord"
 
+	CONSTANT_STATS = "stats"
+
 	CONSTANT_ENABLE = "enable"
 
 	CONSTANT_LINK = "link"
@@ -147,10 +149,10 @@ func getDeleteProjectUri(version string, Uuid string) string {
 func getDeleteSingleLogShipperUri(version string, LogShipperID string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_LOGSHIPPER + bce.URI_PREFIX + LogShipperID
 }
-func getDescribeAlarmPolicyUri(version string, PolicyName string) string {
+func getDescribeAlarmPolicyUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ALARM + bce.URI_PREFIX + CONSTANT_POLICY
 }
-func getDescribeAlarmRecordUri(version string, AlarmId string) string {
+func getDescribeAlarmRecordUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ALARM + bce.URI_PREFIX + CONSTANT_RECORD
 }
 func getDescribeDownloadTaskUri(version string, Uuid string) string {
@@ -193,7 +195,7 @@ func getGetLogShipperUri(version string, LogShipperID string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_LOGSHIPPER + bce.URI_PREFIX + LogShipperID
 }
 func getListAlarmExecutionStatsUri(version string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ALARM + bce.URI_PREFIX + CONSTANT_EXECUTION + bce.URI_PREFIX + CONSTANT_LIST
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ALARM + bce.URI_PREFIX + CONSTANT_EXECUTION + bce.URI_PREFIX + CONSTANT_STATS
 }
 func getListAlarmExecutionsUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ALARM + bce.URI_PREFIX + CONSTANT_EXECUTION + bce.URI_PREFIX + CONSTANT_LIST

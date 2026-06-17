@@ -1,3 +1,9 @@
+2026-06-17 Version: v0.0.81
+- 涉及产品: BLS，日志投递任务状态字段由desiredStatus改为status
+- 涉及产品: BLS，报警策略/历史详情接口参数从path移至query
+- 涉及产品: BLS，启用/禁用/删除报警策略支持批量操作，字段name改为names
+- 涉及产品: BLS，日志集模版接口移除createdTimestamp和updatedTimestamp字段
+
 2026-06-17 Version: v0.0.80
 - 涉及产品: BLB，创建服务器组删除privateIp、portList等8个字段
 - 涉及产品: BLB，修改后端服务器删除privateIp、status等9个字段

@@ -499,7 +499,7 @@ func TestClient_CreateTask(t *testing.T) {
 }
 func TestClient_DeleteAlarmPolicy(t *testing.T) {
 	deleteAlarmPolicyRequest := &DeleteAlarmPolicyRequest{
-		Name: []*string{},
+		Names: []*string{},
 	}
 	result := &DeleteAlarmPolicyResponse{}
 	result, err := BLS_CLIENT.DeleteAlarmPolicy(deleteAlarmPolicyRequest)
@@ -851,7 +851,7 @@ func TestClient_DescribeProject(t *testing.T) {
 }
 func TestClient_DisableAlarmPolicy(t *testing.T) {
 	disableAlarmPolicyRequest := &DisableAlarmPolicyRequest{
-		Name: []*string{},
+		Names: []*string{},
 	}
 	result := &DisableAlarmPolicyResponse{}
 	result, err := BLS_CLIENT.DisableAlarmPolicy(disableAlarmPolicyRequest)
@@ -869,7 +869,7 @@ func TestClient_DisableAlarmPolicy(t *testing.T) {
 }
 func TestClient_EnableAlarmPolicy(t *testing.T) {
 	enableAlarmPolicyRequest := &EnableAlarmPolicyRequest{
-		Name: []*string{},
+		Names: []*string{},
 	}
 	result := &EnableAlarmPolicyResponse{}
 	result, err := BLS_CLIENT.EnableAlarmPolicy(enableAlarmPolicyRequest)
@@ -946,7 +946,6 @@ func TestClient_ListAlarmExecutionStats(t *testing.T) {
 		PolicyName:    util.PtrString(""),
 		LogStoreName:  util.PtrString(""),
 		States:        []*string{},
-		NoticeStates:  []*string{},
 		StartDateTime: util.PtrString(""),
 		EndDateTime:   util.PtrString(""),
 		OrderBy:       util.PtrString(""),
@@ -1355,8 +1354,8 @@ func TestClient_ResolveIndex(t *testing.T) {
 }
 func TestClient_SetSingleLogShipperStatus(t *testing.T) {
 	setSingleLogShipperStatusRequest := &SetSingleLogShipperStatusRequest{
-		LogShipperID:  util.PtrString(""),
-		DesiredStatus: util.PtrString(""),
+		LogShipperID: util.PtrString(""),
+		Status:       util.PtrString(""),
 	}
 	result := &SetSingleLogShipperStatusResponse{}
 	result, err := BLS_CLIENT.SetSingleLogShipperStatus(setSingleLogShipperStatusRequest)

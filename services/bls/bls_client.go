@@ -527,7 +527,8 @@ func (c *Client) DescribeAlarmPolicy(request *DescribeAlarmPolicyRequest) (*Desc
 	result := &DescribeAlarmPolicyResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getDescribeAlarmPolicyUri(VERSION_V1, util.StringValue(request.PolicyName))).
+		WithURL(getDescribeAlarmPolicyUri(VERSION_V1)).
+		WithQueryParamFilter("PolicyName", util.StringValue(request.PolicyName)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -548,7 +549,8 @@ func (c *Client) DescribeAlarmRecord(request *DescribeAlarmRecordRequest) (*Desc
 	result := &DescribeAlarmRecordResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getDescribeAlarmRecordUri(VERSION_V1, util.StringValue(request.AlarmId))).
+		WithURL(getDescribeAlarmRecordUri(VERSION_V1)).
+		WithQueryParamFilter("alarmId", util.StringValue(request.AlarmId)).
 		WithResult(result).
 		Do()
 	if err != nil {

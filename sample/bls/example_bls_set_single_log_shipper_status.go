@@ -16,8 +16,8 @@ func SetSingleLogShipperStatus() {
 		return
 	}
 	setSingleLogShipperStatusRequest := &bls.SetSingleLogShipperStatusRequest{
-		LogShipperID:  util.PtrString(""),
-		DesiredStatus: util.PtrString(""),
+		LogShipperID: util.PtrString(""),
+		Status:       util.PtrString(""),
 	}
 	result, err := client.SetSingleLogShipperStatus(setSingleLogShipperStatusRequest)
 	if err != nil {

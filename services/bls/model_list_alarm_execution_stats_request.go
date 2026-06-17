@@ -5,7 +5,6 @@ type ListAlarmExecutionStatsRequest struct {
 	PolicyName    *string   `json:"policyName,omitempty"`
 	LogStoreName  *string   `json:"logStoreName,omitempty"`
 	States        []*string `json:"states,omitempty"`
-	NoticeStates  []*string `json:"noticeStates,omitempty"`
 	StartDateTime *string   `json:"startDateTime,omitempty"`
 	EndDateTime   *string   `json:"endDateTime,omitempty"`
 	OrderBy       *string   `json:"orderBy,omitempty"`
