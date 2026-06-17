@@ -1,3 +1,7 @@
+2026-06-17 Version: v0.0.81
+- 涉及产品: STS，新增AssumeRole角色扮演接口
+- 涉及产品: STS，新增GetSessionToken获取临时Token接口
+
 2026-06-17 Version: v0.0.80
 - 涉及产品: BCM，修复describeMetricDataLatest等3个接口中timestmap字段拼写错误，更正为timestamp
 
