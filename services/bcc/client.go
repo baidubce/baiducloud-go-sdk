@@ -43,6 +43,10 @@ const (
 
 	CONSTANT_ROLE = "role"
 
+	CONSTANT_MODIFY = "modify"
+
+	CONSTANT_DELETE_PROTECTION = "deleteProtection"
+
 	CONSTANT_BCC = "bcc"
 
 	CONSTANT_SECURITY_GROUP = "securityGroup"
@@ -84,8 +88,6 @@ const (
 	CONSTANT_INSTANCE_BATCH_BY_SPEC = "instanceBatchBySpec"
 
 	CONSTANT_MODIFY_RELATED_DELETE_POLICY = "modifyRelatedDeletePolicy"
-
-	CONSTANT_MODIFY = "modify"
 
 	CONSTANT_DEL_RELATION = "delRelation"
 
@@ -620,6 +622,9 @@ func getModifyReservedInstancesUri(version string) string {
 }
 func getModifyVolumeChargeTypeUri(version string, VolumeId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + VolumeId
+}
+func getModifyVolumeDeleteProtectionV2Uri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + CONSTANT_MODIFY + bce.URI_PREFIX + CONSTANT_DELETE_PROTECTION
 }
 func getPurchaseReservedInstanceUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId

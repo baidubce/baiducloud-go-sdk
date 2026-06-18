@@ -2510,6 +2510,14 @@ func TestClient_ModifyVolumeChargeType(t *testing.T) {
 	err := BCC_CLIENT.ModifyVolumeChargeType(modifyVolumeChargeTypeRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ModifyVolumeDeleteProtectionV2(t *testing.T) {
+	modifyVolumeDeleteProtectionV2Request := &ModifyVolumeDeleteProtectionV2Request{
+		VolumeIds:              []*string{},
+		EnableDeleteProtection: util.PtrBool(false),
+	}
+	err := BCC_CLIENT.ModifyVolumeDeleteProtectionV2(modifyVolumeDeleteProtectionV2Request)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_PurchaseReservedInstance(t *testing.T) {
 	Billing := &Billing{
 		PaymentTiming: util.PtrString(""),

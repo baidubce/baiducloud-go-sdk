@@ -2824,6 +2824,22 @@ func (c *Client) ModifyVolumeChargeType(request *ModifyVolumeChargeTypeRequest) 
 		Do()
 }
 
+// ModifyVolumeDeleteProtectionV2
+//
+// PARAMS:
+//   - request: the arguments to ModifyVolumeDeleteProtectionV2
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ModifyVolumeDeleteProtectionV2(request *ModifyVolumeDeleteProtectionV2Request) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getModifyVolumeDeleteProtectionV2Uri(VERSION_V2)).
+		WithBody(request).
+		Do()
+}
+
 // PurchaseReservedInstance
 //
 // PARAMS:
