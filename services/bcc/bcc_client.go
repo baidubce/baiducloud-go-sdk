@@ -1340,6 +1340,27 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (*DescribeRegi
 	return result, nil
 }
 
+// DescribeSnapshotsUsage
+//
+// PARAMS:
+//   - request: the arguments to DescribeSnapshotsUsage
+//
+// RETURNS:
+//   - DescribeSnapshotsUsageResponse: The return type of the DescribeSnapshotsUsage interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeSnapshotsUsage(request *DescribeSnapshotsUsageRequest) (*DescribeSnapshotsUsageResponse, error) {
+	result := &DescribeSnapshotsUsageResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeSnapshotsUsageUri(VERSION_V2, util.StringValue(request.Action))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DescribeUnplannedEventRecords
 //
 // PARAMS:
@@ -2805,6 +2826,23 @@ func (c *Client) ModifyReservedInstances(request *ModifyReservedInstancesRequest
 		return nil, err
 	}
 	return result, nil
+}
+
+// ModifySnapshotAttribute
+//
+// PARAMS:
+//   - request: the arguments to ModifySnapshotAttribute
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ModifySnapshotAttribute(request *ModifySnapshotAttributeRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getModifySnapshotAttributeUri(VERSION_V2, util.StringValue(request.SnapshotId))).
+		WithQueryParam("modifyAttribute", "").
+		WithBody(request).
+		Do()
 }
 
 // ModifyVolumeChargeType

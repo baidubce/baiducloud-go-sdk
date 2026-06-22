@@ -419,6 +419,9 @@ func getDescribePlannedEventsUri() string {
 func getDescribeRegionsUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_REGION + bce.URI_PREFIX + CONSTANT_DESCRIBE_REGIONS
 }
+func getDescribeSnapshotsUsageUri(version string, Action string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT + bce.URI_PREFIX + Action
+}
 func getDescribeUnplannedEventRecordsUri() string {
 	return bce.URI_PREFIX
 }
@@ -619,6 +622,9 @@ func getModifyRelatedDeletePolicyUri(version string, InstanceId string) string {
 }
 func getModifyReservedInstancesUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_RESERVED + bce.URI_PREFIX + CONSTANT_MODIFY
+}
+func getModifySnapshotAttributeUri(version string, SnapshotId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SNAPSHOT + bce.URI_PREFIX + SnapshotId
 }
 func getModifyVolumeChargeTypeUri(version string, VolumeId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + VolumeId

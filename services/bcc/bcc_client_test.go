@@ -1240,6 +1240,24 @@ func TestClient_DescribeRegions(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeSnapshotsUsage(t *testing.T) {
+	describeSnapshotsUsageRequest := &DescribeSnapshotsUsageRequest{
+		Action: util.PtrString(""),
+	}
+	result := &DescribeSnapshotsUsageResponse{}
+	result, err := BCC_CLIENT.DescribeSnapshotsUsage(describeSnapshotsUsageRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DescribeUnplannedEventRecords(t *testing.T) {
 	describeUnplannedEventRecordsRequest := &DescribeUnplannedEventRecordsRequest{
 		Action:                   util.PtrString(""),
@@ -2492,6 +2510,16 @@ func TestClient_ModifyReservedInstances(t *testing.T) {
 		return
 	}
 	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ModifySnapshotAttribute(t *testing.T) {
+	modifySnapshotAttributeRequest := &ModifySnapshotAttributeRequest{
+		SnapshotId:      util.PtrString(""),
+		SnapshotName:    util.PtrString(""),
+		RetentionInDays: util.PtrInt32(int32(0)),
+		Desc:            util.PtrString(""),
+	}
+	err := BCC_CLIENT.ModifySnapshotAttribute(modifySnapshotAttributeRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ModifyVolumeChargeType(t *testing.T) {
