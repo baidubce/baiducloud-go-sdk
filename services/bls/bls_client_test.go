@@ -223,6 +223,7 @@ func TestClient_CreateFastQuery(t *testing.T) {
 		Project:       util.PtrString(""),
 		LogStoreName:  util.PtrString(""),
 		LogStreamName: util.PtrString(""),
+		LogStoreType:  util.PtrString(""),
 	}
 	result := &CreateFastQueryResponse{}
 	result, err := BLS_CLIENT.CreateFastQuery(createFastQueryRequest)
@@ -1076,6 +1077,7 @@ func TestClient_ListFastQuery(t *testing.T) {
 		Project:      util.PtrString(""),
 		LogStoreName: util.PtrString(""),
 		NamePattern:  util.PtrString(""),
+		LogStoreType: util.PtrString(""),
 		Order:        util.PtrString(""),
 		OrderBy:      util.PtrString(""),
 		PageNo:       util.PtrInt32(int32(0)),

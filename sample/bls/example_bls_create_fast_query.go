@@ -22,6 +22,7 @@ func CreateFastQuery() {
 		Project:       util.PtrString(""),
 		LogStoreName:  util.PtrString(""),
 		LogStreamName: util.PtrString(""),
+		LogStoreType:  util.PtrString(""),
 	}
 	result, err := client.CreateFastQuery(createFastQueryRequest)
 	if err != nil {

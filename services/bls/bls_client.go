@@ -969,6 +969,7 @@ func (c *Client) ListFastQuery(request *ListFastQueryRequest) (*ListFastQueryRes
 		WithQueryParamFilter("project", util.StringValue(request.Project)).
 		WithQueryParamFilter("logStoreName", util.StringValue(request.LogStoreName)).
 		WithQueryParamFilter("namePattern", util.StringValue(request.NamePattern)).
+		WithQueryParamFilter("logStoreType", util.StringValue(request.LogStoreType)).
 		WithQueryParamFilter("order", util.StringValue(request.Order)).
 		WithQueryParamFilter("orderBy", util.StringValue(request.OrderBy)).
 		WithQueryParamFilter("pageNo", util.Int32Value(request.PageNo)).

@@ -12,4 +12,5 @@ type DescribeFastQueryResponse struct {
 	Project          *string `json:"project,omitempty"`
 	LogStoreName     *string `json:"logStoreName,omitempty"`
 	LogStreamName    *string `json:"logStreamName,omitempty"`
+	LogStoreType     *string `json:"logStoreType,omitempty"`
 }

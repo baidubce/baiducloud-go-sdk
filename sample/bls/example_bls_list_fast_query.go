@@ -19,6 +19,7 @@ func ListFastQuery() {
 		Project:      util.PtrString(""),
 		LogStoreName: util.PtrString(""),
 		NamePattern:  util.PtrString(""),
+		LogStoreType: util.PtrString(""),
 		Order:        util.PtrString(""),
 		OrderBy:      util.PtrString(""),
 		PageNo:       util.PtrInt32(int32(0)),

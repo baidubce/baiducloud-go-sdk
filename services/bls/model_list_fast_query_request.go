@@ -4,6 +4,7 @@ type ListFastQueryRequest struct {
 	Project      *string `json:"-"`
 	LogStoreName *string `json:"-"`
 	NamePattern  *string `json:"-"`
+	LogStoreType *string `json:"-"`
 	Order        *string `json:"-"`
 	OrderBy      *string `json:"-"`
 	PageNo       *int32  `json:"-"`
