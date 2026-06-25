@@ -1,3 +1,9 @@
+2026-06-25 Version: v0.0.85
+- 涉及产品: CPROM，新增告警增删改查及事件认领接口
+- 涉及产品: CPROM，新增监控实例创建、释放、Token生成及列表查询接口
+- 涉及产品: CPROM，新增Pod/Service Monitor及自定义采集任务管理接口
+- 涉及产品: CPROM，新增通知策略增删改查及CCE集群关联接口
+
 2026-06-22 Version: v0.0.84
 - 涉及产品: BLS，快速查询创建/详情/列表接口新增logStoreType字段
 
