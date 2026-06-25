@@ -364,7 +364,6 @@ func TestClient_CreateDedicatedGatewayHealthCheck(t *testing.T) {
 		ClientToken:           util.PtrString(""),
 		HealthCheckSourceIp:   util.PtrString(""),
 		HealthCheckType:       util.PtrString(""),
-		HealthCheckPort:       util.PtrInt32(int32(0)),
 		HealthCheckInterval:   util.PtrInt32(int32(0)),
 		HealthThreshold:       util.PtrInt32(int32(0)),
 		UnhealthThreshold:     util.PtrInt32(int32(0)),
