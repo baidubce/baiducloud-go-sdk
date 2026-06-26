@@ -1,3 +1,6 @@
+2026-06-26 Version: v0.0.87
+- 涉及产品: BLS，pullLogRecord/queryLogRecord/queryLogHistogram新增logStoreType字段
+
 2026-06-25 Version: v0.0.86
 - 涉及产品: VPC，创建专线网关健康检查删除healthCheckPort字段
 

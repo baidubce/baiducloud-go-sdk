@@ -22,6 +22,7 @@ func QueryLogRecord() {
 		EndDateTime:   util.PtrString(""),
 		Project:       util.PtrString(""),
 		LogStreamName: util.PtrString(""),
+		LogStoreType:  util.PtrString(""),
 		Marker:        util.PtrString(""),
 		Limit:         util.PtrInt32(int32(0)),
 		Sort:          util.PtrString(""),

@@ -1147,6 +1147,7 @@ func (c *Client) PullLogRecord(request *PullLogRecordRequest) (*PullLogRecordRes
 		WithURL(getPullLogRecordUri(VERSION_V1, util.StringValue(request.LogStoreName))).
 		WithQueryParamFilter("project", util.StringValue(request.Project)).
 		WithQueryParamFilter("logStreamName", util.StringValue(request.LogStreamName)).
+		WithQueryParamFilter("logStoreType", util.StringValue(request.LogStoreType)).
 		WithQueryParamFilter("startDateTime", util.StringValue(request.StartDateTime)).
 		WithQueryParamFilter("endDateTime", util.StringValue(request.EndDateTime)).
 		WithQueryParamFilter("limit", util.Int32Value(request.Limit)).
@@ -1197,6 +1198,7 @@ func (c *Client) QueryLogHistogram(request *QueryLogHistogramRequest) (*QueryLog
 		WithURL(getQueryLogHistogramUri(VERSION_V2, util.StringValue(request.LogStoreName))).
 		WithQueryParamFilter("project", util.StringValue(request.Project)).
 		WithQueryParamFilter("logStreamName", util.StringValue(request.LogStreamName)).
+		WithQueryParamFilter("logStoreType", util.StringValue(request.LogStoreType)).
 		WithQueryParamFilter("query", util.StringValue(request.Query)).
 		WithQueryParamFilter("startDateTime", util.StringValue(request.StartDateTime)).
 		WithQueryParamFilter("endDateTime", util.StringValue(request.EndDateTime)).
@@ -1223,6 +1225,7 @@ func (c *Client) QueryLogRecord(request *QueryLogRecordRequest) (*QueryLogRecord
 		WithURL(getQueryLogRecordUri(VERSION_V1, util.StringValue(request.LogStoreName))).
 		WithQueryParamFilter("project", util.StringValue(request.Project)).
 		WithQueryParamFilter("logStreamName", util.StringValue(request.LogStreamName)).
+		WithQueryParamFilter("logStoreType", util.StringValue(request.LogStoreType)).
 		WithQueryParamFilter("query", util.StringValue(request.Query)).
 		WithQueryParamFilter("startDateTime", util.StringValue(request.StartDateTime)).
 		WithQueryParamFilter("endDateTime", util.StringValue(request.EndDateTime)).

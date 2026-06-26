@@ -21,6 +21,7 @@ func PullLogRecord() {
 		StartDateTime: util.PtrString(""),
 		EndDateTime:   util.PtrString(""),
 		Project:       util.PtrString(""),
+		LogStoreType:  util.PtrString(""),
 		Limit:         util.PtrInt32(int32(0)),
 		Marker:        util.PtrString(""),
 	}

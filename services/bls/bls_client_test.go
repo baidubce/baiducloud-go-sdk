@@ -1245,6 +1245,7 @@ func TestClient_PullLogRecord(t *testing.T) {
 		StartDateTime: util.PtrString(""),
 		EndDateTime:   util.PtrString(""),
 		Project:       util.PtrString(""),
+		LogStoreType:  util.PtrString(""),
 		Limit:         util.PtrInt32(int32(0)),
 		Marker:        util.PtrString(""),
 	}
@@ -1293,6 +1294,7 @@ func TestClient_QueryLogHistogram(t *testing.T) {
 		EndDateTime:   util.PtrString(""),
 		Project:       util.PtrString(""),
 		LogStreamName: util.PtrString(""),
+		LogStoreType:  util.PtrString(""),
 	}
 	result := &QueryLogHistogramResponse{}
 	result, err := BLS_CLIENT.QueryLogHistogram(queryLogHistogramRequest)
@@ -1316,6 +1318,7 @@ func TestClient_QueryLogRecord(t *testing.T) {
 		EndDateTime:   util.PtrString(""),
 		Project:       util.PtrString(""),
 		LogStreamName: util.PtrString(""),
+		LogStoreType:  util.PtrString(""),
 		Marker:        util.PtrString(""),
 		Limit:         util.PtrInt32(int32(0)),
 		Sort:          util.PtrString(""),

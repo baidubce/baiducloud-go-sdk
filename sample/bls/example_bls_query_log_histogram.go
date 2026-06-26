@@ -22,6 +22,7 @@ func QueryLogHistogram() {
 		EndDateTime:   util.PtrString(""),
 		Project:       util.PtrString(""),
 		LogStreamName: util.PtrString(""),
+		LogStoreType:  util.PtrString(""),
 	}
 	result, err := client.QueryLogHistogram(queryLogHistogramRequest)
 	if err != nil {
