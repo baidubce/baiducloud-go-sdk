@@ -14,8 +14,8 @@ func UpdateAlert() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	Labels := make(map[string]string)
-	Annotations := make(map[string]string)
+	labels := make(map[string]string)
+	annotations := make(map[string]string)
 	updateAlertRequest := &cprom.UpdateAlertRequest{
 		AlertingRuleId: util.PtrString(""),
 		InstanceId:     util.PtrString(""),
@@ -26,8 +26,8 @@ func UpdateAlert() {
 		NotifyRuleId:   util.PtrString(""),
 		Severity:       util.PtrString(""),
 		Enable:         util.PtrBool(false),
-		Labels:         nil,
-		Annotations:    nil,
+		Labels:         &labels,
+		Annotations:    &annotations,
 	}
 	err = client.UpdateAlert(updateAlertRequest)
 	if err != nil {
