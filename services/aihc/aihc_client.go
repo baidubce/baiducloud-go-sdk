@@ -8,6 +8,33 @@ import (
 
 const ()
 
+// BatchStopTrainingTasksV2
+//
+// PARAMS:
+//   - request: the arguments to BatchStopTrainingTasksV2
+//
+// RETURNS:
+//   - BatchStopTrainingTasksV2Response: The return type of the BatchStopTrainingTasksV2 interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) BatchStopTrainingTasksV2(request *BatchStopTrainingTasksV2Request) (*BatchStopTrainingTasksV2Response, error) {
+	result := &BatchStopTrainingTasksV2Response{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getBatchStopTrainingTasksV2Uri()).
+		WithQueryParamFilter("action", "BatchStopJobs").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("queueID", "xxxx").
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateDataset
 //
 // PARAMS:
@@ -48,6 +75,33 @@ func (c *Client) CreateDatasetVersion(request *CreateDatasetVersionRequest) (*Cr
 		WithQueryParamFilter("action", "CreateDatasetVersion").
 		WithQueryParamFilter("datasetId", util.StringValue(request.DatasetId)).
 		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateJob
+//
+// PARAMS:
+//   - request: the arguments to CreateJob
+//
+// RETURNS:
+//   - CreateJobResponse: The return type of the CreateJob interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateJob(request *CreateJobRequest) (*CreateJobResponse, error) {
+	result := &CreateJobResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateJobUri()).
+		WithQueryParamFilter("action", "CreateJob").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("queueID", "xxxx").
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -141,6 +195,33 @@ func (c *Client) DeleteDatasetVersion(request *DeleteDatasetVersionRequest) erro
 		WithQueryParamFilter("versionId", util.StringValue(request.VersionId)).
 		WithHeader("Version", "v2").
 		Do()
+}
+
+// DeleteJob
+//
+// PARAMS:
+//   - request: the arguments to DeleteJob
+//
+// RETURNS:
+//   - DeleteJobResponse: The return type of the DeleteJob interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteJob(request *DeleteJobRequest) (*DeleteJobResponse, error) {
+	result := &DeleteJobResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDeleteJobUri()).
+		WithQueryParamFilter("action", "DeleteJob").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("queueID", "xxxx").
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // DeleteModel
@@ -284,6 +365,194 @@ func (c *Client) DescribeDatasets(request *DescribeDatasetsRequest) (*DescribeDa
 	return result, nil
 }
 
+// DescribeJob
+//
+// PARAMS:
+//   - request: the arguments to DescribeJob
+//
+// RETURNS:
+//   - DescribeJobResponse: The return type of the DescribeJob interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeJob(request *DescribeJobRequest) (*DescribeJobResponse, error) {
+	result := &DescribeJobResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeJobUri()).
+		WithQueryParamFilter("action", "DescribeJob").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("queueID", "xxx").
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeJobEvents
+//
+// PARAMS:
+//   - request: the arguments to DescribeJobEvents
+//
+// RETURNS:
+//   - DescribeJobEventsResponse: The return type of the DescribeJobEvents interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeJobEvents(request *DescribeJobEventsRequest) (*DescribeJobEventsResponse, error) {
+	result := &DescribeJobEventsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeJobEventsUri()).
+		WithQueryParamFilter("action", "DescribeJobEvents").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("queueID", "xxxx").
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeJobLogs
+//
+// PARAMS:
+//   - request: the arguments to DescribeJobLogs
+//
+// RETURNS:
+//   - DescribeJobLogsResponse: The return type of the DescribeJobLogs interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeJobLogs(request *DescribeJobLogsRequest) (*DescribeJobLogsResponse, error) {
+	result := &DescribeJobLogsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeJobLogsUri()).
+		WithQueryParamFilter("action", "DescribeJobLogs").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("queueID", "xxxx").
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeJobMetrics
+//
+// PARAMS:
+//   - request: the arguments to DescribeJobMetrics
+//
+// RETURNS:
+//   - DescribeJobMetricsResponse: The return type of the DescribeJobMetrics interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeJobMetrics(request *DescribeJobMetricsRequest) (*DescribeJobMetricsResponse, error) {
+	result := &DescribeJobMetricsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeJobMetricsUri()).
+		WithQueryParamFilter("action", "DescribeJobMetrics").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("queueID", "xxxx").
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeJobNodes
+//
+// PARAMS:
+//   - request: the arguments to DescribeJobNodes
+//
+// RETURNS:
+//   - DescribeJobNodesResponse: The return type of the DescribeJobNodes interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeJobNodes(request *DescribeJobNodesRequest) (*DescribeJobNodesResponse, error) {
+	result := &DescribeJobNodesResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeJobNodesUri()).
+		WithQueryParamFilter("action", "DescribeJobNodes").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("queueID", "xxxx").
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeJobWebterminal
+//
+// PARAMS:
+//   - request: the arguments to DescribeJobWebterminal
+//
+// RETURNS:
+//   - DescribeJobWebterminalResponse: The return type of the DescribeJobWebterminal interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeJobWebterminal(request *DescribeJobWebterminalRequest) (*DescribeJobWebterminalResponse, error) {
+	result := &DescribeJobWebterminalResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeJobWebterminalUri()).
+		WithQueryParamFilter("action", "DescribeJobWebterminal").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("queueID", "xxxx").
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeJobs
+//
+// PARAMS:
+//   - request: the arguments to DescribeJobs
+//
+// RETURNS:
+//   - DescribeJobsResponse: The return type of the DescribeJobs interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeJobs(request *DescribeJobsRequest) (*DescribeJobsResponse, error) {
+	result := &DescribeJobsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeJobsUri()).
+		WithQueryParamFilter("action", "DescribeJobs").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DescribeModel
 //
 // PARAMS:
@@ -385,6 +654,33 @@ func (c *Client) DescribeModels(request *DescribeModelsRequest) (*DescribeModels
 	return result, nil
 }
 
+// DescribePodEvents
+//
+// PARAMS:
+//   - request: the arguments to DescribePodEvents
+//
+// RETURNS:
+//   - DescribePodEventsResponse: The return type of the DescribePodEvents interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribePodEvents(request *DescribePodEventsRequest) (*DescribePodEventsResponse, error) {
+	result := &DescribePodEventsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribePodEventsUri()).
+		WithQueryParamFilter("action", "DescribePodEvents").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("queueID", "xxxx").
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ModifyDataset
 //
 // PARAMS:
@@ -404,6 +700,33 @@ func (c *Client) ModifyDataset(request *ModifyDatasetRequest) error {
 		Do()
 }
 
+// ModifyJob
+//
+// PARAMS:
+//   - request: the arguments to ModifyJob
+//
+// RETURNS:
+//   - ModifyJobResponse: The return type of the ModifyJob interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ModifyJob(request *ModifyJobRequest) (*ModifyJobResponse, error) {
+	result := &ModifyJobResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getModifyJobUri()).
+		WithQueryParamFilter("action", "ModifyJob").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("queueID", "xxxx").
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ModifyModel
 //
 // PARAMS:
@@ -421,4 +744,31 @@ func (c *Client) ModifyModel(request *ModifyModelRequest) error {
 		WithHeader("Version", "v2").
 		WithBody(request).
 		Do()
+}
+
+// StopJob
+//
+// PARAMS:
+//   - request: the arguments to StopJob
+//
+// RETURNS:
+//   - StopJobResponse: The return type of the StopJob interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) StopJob(request *StopJobRequest) (*StopJobResponse, error) {
+	result := &StopJobResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getStopJobUri()).
+		WithQueryParamFilter("action", "StopJob").
+		WithQueryParamFilter("resourcePoolId", "xxxx").
+		WithQueryParamFilter("queueID", "xxxx").
+		WithQueryParamFilter("resourcePoolId", util.StringValue(request.ResourcePoolId)).
+		WithQueryParamFilter("queueID", util.StringValue(request.QueueID)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }

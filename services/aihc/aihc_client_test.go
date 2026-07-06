@@ -67,6 +67,27 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
+func TestClient_BatchStopTrainingTasksV2(t *testing.T) {
+	batchStopTrainingTasksV2Request := &BatchStopTrainingTasksV2Request{
+		QueueID:        util.PtrString(""),
+		ResourcePoolId: util.PtrString(""),
+		JobList:        []*map[string]interface{}{},
+		JobListJobId:   util.PtrString(""),
+	}
+	result := &BatchStopTrainingTasksV2Response{}
+	result, err := AIHC_CLIENT.BatchStopTrainingTasksV2(batchStopTrainingTasksV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateDataset(t *testing.T) {
 	InitVersionEntry := &DatasetVersionEntry{
 		Id:          util.PtrString(""),
@@ -111,6 +132,66 @@ func TestClient_CreateDatasetVersion(t *testing.T) {
 	}
 	result := &CreateDatasetVersionResponse{}
 	result, err := AIHC_CLIENT.CreateDatasetVersion(createDatasetVersionRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateJob(t *testing.T) {
+	JobSpec := &JobSpec{
+		Image: util.PtrString(""),
+		ImageConfig: &ImageConfig{
+			Username: util.PtrString(""),
+			Password: util.PtrString(""),
+		},
+		Replicas:    util.PtrInt32(int32(0)),
+		Resources:   []*Resource{},
+		Envs:        []*Env{},
+		EnableRDMA:  util.PtrBool(false),
+		HostNetwork: util.PtrBool(false),
+	}
+	TensorboardConfig := &TensorboardConfig{
+		Enable:  util.PtrBool(false),
+		LogPath: util.PtrString(""),
+	}
+	AlertConfig := &AlertConfig{
+		InstanceId:   util.PtrString(""),
+		AlertItems:   []*string{},
+		AihcFor:      util.PtrString(""),
+		NotifyRuleId: util.PtrString(""),
+	}
+	AdvancedSettings := &AdvancedSettings{
+		RuntimeEnv:            util.PtrString(""),
+		SubmitterBackoffLimit: util.PtrInt32(int32(0)),
+	}
+	createJobRequest := &CreateJobRequest{
+		ResourcePoolId:     util.PtrString(""),
+		QueueID:            util.PtrString(""),
+		Name:               util.PtrString(""),
+		Queue:              util.PtrString(""),
+		JobType:            util.PtrString(""),
+		JobSpec:            JobSpec,
+		Command:            util.PtrString(""),
+		Labels:             []*Label{},
+		Priority:           util.PtrString(""),
+		Datasources:        []*DataSource{},
+		EnableBccl:         util.PtrBool(false),
+		FaultTolerance:     util.PtrBool(false),
+		FaultToleranceArgs: util.PtrString(""),
+		TensorboardConfig:  TensorboardConfig,
+		AlertConfig:        AlertConfig,
+		RetentionPeriod:    util.PtrString(""),
+		AdvancedSettings:   AdvancedSettings,
+	}
+	result := &CreateJobResponse{}
+	result, err := AIHC_CLIENT.CreateJob(createJobRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -191,6 +272,26 @@ func TestClient_DeleteDatasetVersion(t *testing.T) {
 		VersionId: util.PtrString(""),
 	}
 	err := AIHC_CLIENT.DeleteDatasetVersion(deleteDatasetVersionRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteJob(t *testing.T) {
+	deleteJobRequest := &DeleteJobRequest{
+		ResourcePoolId: util.PtrString(""),
+		QueueID:        util.PtrString(""),
+		JobId:          util.PtrString(""),
+	}
+	result := &DeleteJobResponse{}
+	result, err := AIHC_CLIENT.DeleteJob(deleteJobRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteModel(t *testing.T) {
@@ -288,6 +389,171 @@ func TestClient_DescribeDatasets(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeJob(t *testing.T) {
+	describeJobRequest := &DescribeJobRequest{
+		ResourcePoolId: util.PtrString(""),
+		QueueID:        util.PtrString(""),
+		JobId:          util.PtrString(""),
+		NeedDetail:     util.PtrBool(false),
+	}
+	result := &DescribeJobResponse{}
+	result, err := AIHC_CLIENT.DescribeJob(describeJobRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeJobEvents(t *testing.T) {
+	describeJobEventsRequest := &DescribeJobEventsRequest{
+		ResourcePoolId: util.PtrString(""),
+		QueueID:        util.PtrString(""),
+		JobId:          util.PtrString(""),
+		StartTime:      util.PtrString(""),
+		EndTime:        util.PtrString(""),
+	}
+	result := &DescribeJobEventsResponse{}
+	result, err := AIHC_CLIENT.DescribeJobEvents(describeJobEventsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeJobLogs(t *testing.T) {
+	describeJobLogsRequest := &DescribeJobLogsRequest{
+		ResourcePoolId: util.PtrString(""),
+		QueueID:        util.PtrString(""),
+		JobId:          util.PtrString(""),
+		PodName:        util.PtrString(""),
+		Keywords:       util.PtrString(""),
+		StartTime:      util.PtrString(""),
+		EndTime:        util.PtrString(""),
+		MaxLines:       util.PtrString(""),
+		ChunkSize:      util.PtrString(""),
+		Marker:         util.PtrString(""),
+	}
+	result := &DescribeJobLogsResponse{}
+	result, err := AIHC_CLIENT.DescribeJobLogs(describeJobLogsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeJobMetrics(t *testing.T) {
+	describeJobMetricsRequest := &DescribeJobMetricsRequest{
+		ResourcePoolId: util.PtrString(""),
+		QueueID:        util.PtrString(""),
+		JobId:          util.PtrString(""),
+		StartTime:      util.PtrString(""),
+		EndTime:        util.PtrString(""),
+		TimeStep:       util.PtrString(""),
+		MetricType:     util.PtrString(""),
+		RateInterval:   util.PtrString(""),
+	}
+	result := &DescribeJobMetricsResponse{}
+	result, err := AIHC_CLIENT.DescribeJobMetrics(describeJobMetricsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeJobNodes(t *testing.T) {
+	describeJobNodesRequest := &DescribeJobNodesRequest{
+		ResourcePoolId: util.PtrString(""),
+		QueueID:        util.PtrString(""),
+		JobId:          util.PtrString(""),
+	}
+	result := &DescribeJobNodesResponse{}
+	result, err := AIHC_CLIENT.DescribeJobNodes(describeJobNodesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeJobWebterminal(t *testing.T) {
+	describeJobWebterminalRequest := &DescribeJobWebterminalRequest{
+		ResourcePoolId:         util.PtrString(""),
+		QueueID:                util.PtrString(""),
+		JobId:                  util.PtrString(""),
+		PodName:                util.PtrString(""),
+		HandshakeTimeoutSecond: util.PtrString(""),
+		PingTimeoutSecond:      util.PtrString(""),
+	}
+	result := &DescribeJobWebterminalResponse{}
+	result, err := AIHC_CLIENT.DescribeJobWebterminal(describeJobWebterminalRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeJobs(t *testing.T) {
+	describeJobsRequest := &DescribeJobsRequest{
+		ResourcePoolId: util.PtrString(""),
+		QueueID:        util.PtrString(""),
+		Queue:          util.PtrString(""),
+		Status:         util.PtrString(""),
+		KeywordType:    util.PtrString(""),
+		Keyword:        util.PtrString(""),
+		OrderBy:        util.PtrString(""),
+		Order:          util.PtrString(""),
+		PageNumber:     util.PtrInt32(int32(0)),
+		PageSize:       util.PtrInt32(int32(0)),
+	}
+	result := &DescribeJobsResponse{}
+	result, err := AIHC_CLIENT.DescribeJobs(describeJobsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DescribeModel(t *testing.T) {
 	describeModelRequest := &DescribeModelRequest{
 		ModelId: util.PtrString(""),
@@ -365,6 +631,29 @@ func TestClient_DescribeModels(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribePodEvents(t *testing.T) {
+	describePodEventsRequest := &DescribePodEventsRequest{
+		ResourcePoolId: util.PtrString(""),
+		QueueID:        util.PtrString(""),
+		JobId:          util.PtrString(""),
+		PodName:        util.PtrString(""),
+		StartTime:      util.PtrString(""),
+		EndTime:        util.PtrString(""),
+	}
+	result := &DescribePodEventsResponse{}
+	result, err := AIHC_CLIENT.DescribePodEvents(describePodEventsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ModifyDataset(t *testing.T) {
 	modifyDatasetRequest := &ModifyDatasetRequest{
 		DatasetId:       util.PtrString(""),
@@ -377,6 +666,27 @@ func TestClient_ModifyDataset(t *testing.T) {
 	err := AIHC_CLIENT.ModifyDataset(modifyDatasetRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ModifyJob(t *testing.T) {
+	modifyJobRequest := &ModifyJobRequest{
+		ResourcePoolId: util.PtrString(""),
+		QueueID:        util.PtrString(""),
+		JobId:          util.PtrString(""),
+		Priority:       util.PtrString(""),
+	}
+	result := &ModifyJobResponse{}
+	result, err := AIHC_CLIENT.ModifyJob(modifyJobRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ModifyModel(t *testing.T) {
 	modifyModelRequest := &ModifyModelRequest{
 		ModelId:     util.PtrString(""),
@@ -384,5 +694,25 @@ func TestClient_ModifyModel(t *testing.T) {
 		Description: util.PtrString(""),
 	}
 	err := AIHC_CLIENT.ModifyModel(modifyModelRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_StopJob(t *testing.T) {
+	stopJobRequest := &StopJobRequest{
+		ResourcePoolId: util.PtrString(""),
+		QueueID:        util.PtrString(""),
+		JobId:          util.PtrString(""),
+	}
+	result := &StopJobResponse{}
+	result, err := AIHC_CLIENT.StopJob(stopJobRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }

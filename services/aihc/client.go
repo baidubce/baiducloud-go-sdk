@@ -24,10 +24,16 @@ func NewClient(ak, sk, endPoint string) (*Client, error) {
 	return &Client{client}, nil
 }
 
+func getBatchStopTrainingTasksV2Uri() string {
+	return bce.URI_PREFIX
+}
 func getCreateDatasetUri() string {
 	return bce.URI_PREFIX
 }
 func getCreateDatasetVersionUri() string {
+	return bce.URI_PREFIX
+}
+func getCreateJobUri() string {
 	return bce.URI_PREFIX
 }
 func getCreateModelUri() string {
@@ -40,6 +46,9 @@ func getDeleteDatasetUri() string {
 	return bce.URI_PREFIX
 }
 func getDeleteDatasetVersionUri() string {
+	return bce.URI_PREFIX
+}
+func getDeleteJobUri() string {
 	return bce.URI_PREFIX
 }
 func getDeleteModelUri() string {
@@ -60,6 +69,27 @@ func getDescribeDatasetVersionsUri() string {
 func getDescribeDatasetsUri() string {
 	return bce.URI_PREFIX
 }
+func getDescribeJobUri() string {
+	return bce.URI_PREFIX
+}
+func getDescribeJobEventsUri() string {
+	return bce.URI_PREFIX
+}
+func getDescribeJobLogsUri() string {
+	return bce.URI_PREFIX
+}
+func getDescribeJobMetricsUri() string {
+	return bce.URI_PREFIX
+}
+func getDescribeJobNodesUri() string {
+	return bce.URI_PREFIX
+}
+func getDescribeJobWebterminalUri() string {
+	return bce.URI_PREFIX
+}
+func getDescribeJobsUri() string {
+	return bce.URI_PREFIX
+}
 func getDescribeModelUri() string {
 	return bce.URI_PREFIX
 }
@@ -72,9 +102,18 @@ func getDescribeModelVersionsUri() string {
 func getDescribeModelsUri() string {
 	return bce.URI_PREFIX
 }
+func getDescribePodEventsUri() string {
+	return bce.URI_PREFIX
+}
 func getModifyDatasetUri() string {
 	return bce.URI_PREFIX
 }
+func getModifyJobUri() string {
+	return bce.URI_PREFIX
+}
 func getModifyModelUri() string {
+	return bce.URI_PREFIX
+}
+func getStopJobUri() string {
 	return bce.URI_PREFIX
 }
