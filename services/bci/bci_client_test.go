@@ -68,22 +68,22 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 }
 
 func TestClient_BatchDeleteImageCaches(t *testing.T) {
-	batch - delete - image - cachesRequest := &BatchDeleteImageCachesRequest{
+	batchDeleteImageCachesRequest := &BatchDeleteImageCachesRequest{
 		ImageCacheIds: []*string{},
 	}
-	err := BCI_CLIENT.BatchDeleteImageCaches(batch - delete - image - cachesRequest)
+	err := BCI_CLIENT.BatchDeleteImageCaches(batchDeleteImageCachesRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_BatchDeleteInstances(t *testing.T) {
-	batch - delete - instancesRequest := &BatchDeleteInstancesRequest{
+	batchDeleteInstancesRequest := &BatchDeleteInstancesRequest{
 		InstanceIds:        []*string{},
 		RelatedReleaseFlag: util.PtrBool(false),
 	}
-	err := BCI_CLIENT.BatchDeleteInstances(batch - delete - instancesRequest)
+	err := BCI_CLIENT.BatchDeleteInstances(batchDeleteInstancesRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateImageCache(t *testing.T) {
-	create - image - cacheRequest := &CreateImageCacheRequest{
+	createImageCacheRequest := &CreateImageCacheRequest{
 		ImageCacheName:       util.PtrString(""),
 		OriginImages:         []*OriginImage{},
 		SubnetId:             util.PtrString(""),
@@ -96,7 +96,7 @@ func TestClient_CreateImageCache(t *testing.T) {
 		ImageRegistrySecrets: []*ImageRegistryCredential{},
 	}
 	result := &CreateImageCacheResponse{}
-	result, err := BCI_CLIENT.CreateImageCache(create - image - cacheRequest)
+	result, err := BCI_CLIENT.CreateImageCache(createImageCacheRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -115,7 +115,7 @@ func TestClient_CreateInstance(t *testing.T) {
 		EmptyDir:   []*EmptyDirVolume{},
 		ConfigFile: []*ConfigFileVolume{},
 	}
-	create - instanceRequest := &CreateInstanceRequest{
+	createInstanceRequest := &CreateInstanceRequest{
 		ClientToken:                   util.PtrString(""),
 		Name:                          util.PtrString(""),
 		ZoneName:                      util.PtrString(""),
@@ -138,7 +138,7 @@ func TestClient_CreateInstance(t *testing.T) {
 		Volume:                        Volume,
 	}
 	result := &CreateInstanceResponse{}
-	result, err := BCI_CLIENT.CreateInstance(create - instanceRequest)
+	result, err := BCI_CLIENT.CreateInstance(createInstanceRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -152,19 +152,19 @@ func TestClient_CreateInstance(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteInstance(t *testing.T) {
-	delete - instanceRequest := &DeleteInstanceRequest{
+	deleteInstanceRequest := &DeleteInstanceRequest{
 		InstanceId:         util.PtrString(""),
 		RelatedReleaseFlag: util.PtrBool(false),
 	}
-	err := BCI_CLIENT.DeleteInstance(delete - instanceRequest)
+	err := BCI_CLIENT.DeleteInstance(deleteInstanceRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetInstance(t *testing.T) {
-	get - instanceRequest := &GetInstanceRequest{
+	getInstanceRequest := &GetInstanceRequest{
 		InstanceId: util.PtrString(""),
 	}
 	result := &GetInstanceResponse{}
-	result, err := BCI_CLIENT.GetInstance(get - instanceRequest)
+	result, err := BCI_CLIENT.GetInstance(getInstanceRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -178,12 +178,12 @@ func TestClient_GetInstance(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ListImageCaches(t *testing.T) {
-	list - image - cachesRequest := &ListImageCachesRequest{
+	listImageCachesRequest := &ListImageCachesRequest{
 		PageSize: util.PtrInt32(int32(0)),
 		PageNo:   util.PtrInt32(int32(0)),
 	}
 	result := &ListImageCachesResponse{}
-	result, err := BCI_CLIENT.ListImageCaches(list - image - cachesRequest)
+	result, err := BCI_CLIENT.ListImageCaches(listImageCachesRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -197,14 +197,14 @@ func TestClient_ListImageCaches(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ListInstances(t *testing.T) {
-	list - instancesRequest := &ListInstancesRequest{
+	listInstancesRequest := &ListInstancesRequest{
 		KeywordType: util.PtrString(""),
 		Keyword:     util.PtrString(""),
 		Marker:      util.PtrString(""),
 		MaxKeys:     util.PtrInt32(int32(0)),
 	}
 	result := &ListInstancesResponse{}
-	result, err := BCI_CLIENT.ListInstances(list - instancesRequest)
+	result, err := BCI_CLIENT.ListInstances(listInstancesRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return

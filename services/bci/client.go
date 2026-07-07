@@ -9,9 +9,9 @@ const (
 
 	CONSTANT_INSTANCE = "instance"
 
-	CONSTANT_IMAGE_CACHE = "imageCache"
-
 	CONSTANT_BATCH_DEL = "batchDel"
+
+	CONSTANT_IMAGE_CACHE = "imageCache"
 )
 
 // Client of bci service is a kind of BceClient, so derived from BceClient

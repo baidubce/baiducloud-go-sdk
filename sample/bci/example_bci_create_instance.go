@@ -15,7 +15,7 @@ func CreateInstance() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	volume := &bci.Volume{
+	Volume := &bci.Volume{
 		Nfs:        []*bci.NfsVolume{},
 		EmptyDir:   []*bci.EmptyDirVolume{},
 		ConfigFile: []*bci.ConfigFileVolume{},
@@ -40,7 +40,7 @@ func CreateInstance() {
 		ImageRegistryCredentials:      []*bci.ImageRegistryCredential{},
 		Containers:                    []*bci.Container{},
 		InitContainers:                []*bci.Container{},
-		Volume:                        volume,
+		Volume:                        Volume,
 	}
 	result, err := client.CreateInstance(createInstanceRequest)
 	if err != nil {
