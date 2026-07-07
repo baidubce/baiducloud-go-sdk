@@ -1,0 +1,13 @@
+package agentidentity
+
+type AgentDTO struct {
+	Id                              *string   `json:"id,omitempty"`
+	BceDomainId                     *string   `json:"bceDomainId,omitempty"`
+	BceUserId                       *string   `json:"bceUserId,omitempty"`
+	Name                            *string   `json:"name,omitempty"`
+	Description                     *string   `json:"description,omitempty"`
+	Extra                           *string   `json:"extra,omitempty"`
+	AllowedResourceOauth2ReturnUrls []*string `json:"allowedResourceOauth2ReturnUrls,omitempty"`
+	CreatedAt                       *string   `json:"createdAt,omitempty"`
+	UpdatedAt                       *string   `json:"updatedAt,omitempty"`
+}
