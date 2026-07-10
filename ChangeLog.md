@@ -1,3 +1,6 @@
+2026-07-10 Version: v0.0.96
+- 涉及产品: BLB，后端服务器增删改查接口新增desc字段
+
 2026-07-10 Version: v0.0.95
 - 涉及产品: PFS，createPfs接口新增zone（可用区）字段
 
