@@ -174,6 +174,7 @@ func TestClient_CreatePfs(t *testing.T) {
 		Name:         util.PtrString(""),
 		InstanceType: util.PtrString(""),
 		Capacity:     util.PtrInt32(int32(0)),
+		Zone:         util.PtrString(""),
 		SubnetId:     util.PtrString(""),
 		Description:  util.PtrString(""),
 		Tags:         []*Tag{},

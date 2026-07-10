@@ -1,3 +1,6 @@
+2026-07-10 Version: v0.0.95
+- 涉及产品: PFS，createPfs接口新增zone（可用区）字段
+
 2026-07-07 Version: v0.0.94
 - 涉及产品: AGENTIDENTITY，新增Agent创建、查询、更新、删除接口
 - 涉及产品: AGENTIDENTITY，新增用户池及用户的增删改查与批量获取接口
