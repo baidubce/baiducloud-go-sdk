@@ -37,14 +37,20 @@ func (c *Client) AuthorizeEndpoint(request *AuthorizeEndpointRequest) error {
 //   - request: the arguments to BatchAcquisitionOfUsers
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) BatchAcquisitionOfUsers(request *BatchAcquisitionOfUsersRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - BatchAcquisitionOfUsersResponse: The return type of the BatchAcquisitionOfUsers interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) BatchAcquisitionOfUsers(request *BatchAcquisitionOfUsersRequest) (*BatchAcquisitionOfUsersResponse, error) {
+	result := &BatchAcquisitionOfUsersResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getBatchAcquisitionOfUsersUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // BatchGetResourceApiKey
@@ -93,14 +99,20 @@ func (c *Client) CompleteOauth2session(request *CompleteOauth2sessionRequest) er
 //   - request: the arguments to CreateAgent
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) CreateAgent(request *CreateAgentRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - CreateAgentResponse: The return type of the CreateAgent interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateAgent(request *CreateAgentRequest) (*CreateAgentResponse, error) {
+	result := &CreateAgentResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateAgentUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateCredentialProvider
@@ -109,14 +121,20 @@ func (c *Client) CreateAgent(request *CreateAgentRequest) error {
 //   - request: the arguments to CreateCredentialProvider
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) CreateCredentialProvider(request *CreateCredentialProviderRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - CreateCredentialProviderResponse: The return type of the CreateCredentialProvider interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateCredentialProvider(request *CreateCredentialProviderRequest) (*CreateCredentialProviderResponse, error) {
+	result := &CreateCredentialProviderResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateCredentialProviderUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateIdpConfiguration
@@ -125,14 +143,20 @@ func (c *Client) CreateCredentialProvider(request *CreateCredentialProviderReque
 //   - request: the arguments to CreateIdpConfiguration
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) CreateIdpConfiguration(request *CreateIdpConfigurationRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - CreateIdpConfigurationResponse: The return type of the CreateIdpConfiguration interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateIdpConfiguration(request *CreateIdpConfigurationRequest) (*CreateIdpConfigurationResponse, error) {
+	result := &CreateIdpConfigurationResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateIdpConfigurationUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateOauth2Client
@@ -141,14 +165,20 @@ func (c *Client) CreateIdpConfiguration(request *CreateIdpConfigurationRequest) 
 //   - request: the arguments to CreateOauth2Client
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) CreateOauth2Client(request *CreateOauth2ClientRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - CreateOauth2ClientResponse: The return type of the CreateOauth2Client interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateOauth2Client(request *CreateOauth2ClientRequest) (*CreateOauth2ClientResponse, error) {
+	result := &CreateOauth2ClientResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateOauth2ClientUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateUser
@@ -157,14 +187,20 @@ func (c *Client) CreateOauth2Client(request *CreateOauth2ClientRequest) error {
 //   - request: the arguments to CreateUser
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) CreateUser(request *CreateUserRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - CreateUserResponse: The return type of the CreateUser interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateUser(request *CreateUserRequest) (*CreateUserResponse, error) {
+	result := &CreateUserResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateUserUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateUserPool
@@ -173,14 +209,20 @@ func (c *Client) CreateUser(request *CreateUserRequest) error {
 //   - request: the arguments to CreateUserPool
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) CreateUserPool(request *CreateUserPoolRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - CreateUserPoolResponse: The return type of the CreateUserPool interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateUserPool(request *CreateUserPoolRequest) (*CreateUserPoolResponse, error) {
+	result := &CreateUserPoolResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateUserPoolUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // DeleteAgent
@@ -285,14 +327,20 @@ func (c *Client) DeleteUserPool(request *DeleteUserPoolRequest) error {
 //   - request: the arguments to DisableIdpConfiguration
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) DisableIdpConfiguration(request *DisableIdpConfigurationRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - DisableIdpConfigurationResponse: The return type of the DisableIdpConfiguration interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DisableIdpConfiguration(request *DisableIdpConfigurationRequest) (*DisableIdpConfigurationResponse, error) {
+	result := &DisableIdpConfigurationResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getDisableIdpConfigurationUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // EnableIdpConfiguration
@@ -301,14 +349,20 @@ func (c *Client) DisableIdpConfiguration(request *DisableIdpConfigurationRequest
 //   - request: the arguments to EnableIdpConfiguration
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) EnableIdpConfiguration(request *EnableIdpConfigurationRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - EnableIdpConfigurationResponse: The return type of the EnableIdpConfiguration interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) EnableIdpConfiguration(request *EnableIdpConfigurationRequest) (*EnableIdpConfigurationResponse, error) {
+	result := &EnableIdpConfigurationResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getEnableIdpConfigurationUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetAgent
@@ -317,14 +371,20 @@ func (c *Client) EnableIdpConfiguration(request *EnableIdpConfigurationRequest) 
 //   - request: the arguments to GetAgent
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) GetAgent(request *GetAgentRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - GetAgentResponse: The return type of the GetAgent interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetAgent(request *GetAgentRequest) (*GetAgentResponse, error) {
+	result := &GetAgentResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getGetAgentUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetCredentialProvider
@@ -333,14 +393,20 @@ func (c *Client) GetAgent(request *GetAgentRequest) error {
 //   - request: the arguments to GetCredentialProvider
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) GetCredentialProvider(request *GetCredentialProviderRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - GetCredentialProviderResponse: The return type of the GetCredentialProvider interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetCredentialProvider(request *GetCredentialProviderRequest) (*GetCredentialProviderResponse, error) {
+	result := &GetCredentialProviderResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getGetCredentialProviderUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetIdpConfiguration
@@ -349,14 +415,20 @@ func (c *Client) GetCredentialProvider(request *GetCredentialProviderRequest) er
 //   - request: the arguments to GetIdpConfiguration
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) GetIdpConfiguration(request *GetIdpConfigurationRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - GetIdpConfigurationResponse: The return type of the GetIdpConfiguration interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetIdpConfiguration(request *GetIdpConfigurationRequest) (*GetIdpConfigurationResponse, error) {
+	result := &GetIdpConfigurationResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getGetIdpConfigurationUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetOauth2Client
@@ -365,14 +437,20 @@ func (c *Client) GetIdpConfiguration(request *GetIdpConfigurationRequest) error 
 //   - request: the arguments to GetOauth2Client
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) GetOauth2Client(request *GetOauth2ClientRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - GetOauth2ClientResponse: The return type of the GetOauth2Client interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetOauth2Client(request *GetOauth2ClientRequest) (*GetOauth2ClientResponse, error) {
+	result := &GetOauth2ClientResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getGetOauth2ClientUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetResourceApikey
@@ -398,15 +476,21 @@ func (c *Client) GetResourceApikey(request *GetResourceApikeyRequest) error {
 //   - request: the arguments to GetResourceOauth2token
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) GetResourceOauth2token(request *GetResourceOauth2tokenRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - GetResourceOauth2tokenResponse: The return type of the GetResourceOauth2token interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetResourceOauth2token(request *GetResourceOauth2tokenRequest) (*GetResourceOauth2tokenResponse, error) {
+	result := &GetResourceOauth2tokenResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithHost(util.StringValue(request.XBceWorkloadAccessToken)).
 		WithURL(getGetResourceOauth2tokenUri(VERSION_V1, util.StringValue(request.XBceWorkloadAccessToken))).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetUser
@@ -415,14 +499,20 @@ func (c *Client) GetResourceOauth2token(request *GetResourceOauth2tokenRequest) 
 //   - request: the arguments to GetUser
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) GetUser(request *GetUserRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - GetUserResponse: The return type of the GetUser interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetUser(request *GetUserRequest) (*GetUserResponse, error) {
+	result := &GetUserResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getGetUserUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetUserPool
@@ -431,14 +521,20 @@ func (c *Client) GetUser(request *GetUserRequest) error {
 //   - request: the arguments to GetUserPool
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) GetUserPool(request *GetUserPoolRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - GetUserPoolResponse: The return type of the GetUserPool interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetUserPool(request *GetUserPoolRequest) (*GetUserPoolResponse, error) {
+	result := &GetUserPoolResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getGetUserPoolUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetWATForUser
@@ -447,14 +543,20 @@ func (c *Client) GetUserPool(request *GetUserPoolRequest) error {
 //   - request: the arguments to GetWATForUser
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) GetWATForUser(request *GetWATForUserRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - GetWATForUserResponse: The return type of the GetWATForUser interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetWATForUser(request *GetWATForUserRequest) (*GetWATForUserResponse, error) {
+	result := &GetWATForUserResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getGetWATForUserUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetWorkloadAccessToken
@@ -463,14 +565,20 @@ func (c *Client) GetWATForUser(request *GetWATForUserRequest) error {
 //   - request: the arguments to GetWorkloadAccessToken
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) GetWorkloadAccessToken(request *GetWorkloadAccessTokenRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - GetWorkloadAccessTokenResponse: The return type of the GetWorkloadAccessToken interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetWorkloadAccessToken(request *GetWorkloadAccessTokenRequest) (*GetWorkloadAccessTokenResponse, error) {
+	result := &GetWorkloadAccessTokenResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getGetWorkloadAccessTokenUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // ListAgents
@@ -659,14 +767,20 @@ func (c *Client) ResetPassword(request *ResetPasswordRequest) error {
 //   - request: the arguments to TokenEndpoint
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) TokenEndpoint(request *TokenEndpointRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - TokenEndpointResponse: The return type of the TokenEndpoint interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) TokenEndpoint(request *TokenEndpointRequest) (*TokenEndpointResponse, error) {
+	result := &TokenEndpointResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getTokenEndpointUri(VERSION_V1, util.StringValue(request.UserPoolId))).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UpdateAgent
@@ -675,14 +789,20 @@ func (c *Client) TokenEndpoint(request *TokenEndpointRequest) error {
 //   - request: the arguments to UpdateAgent
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateAgent(request *UpdateAgentRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - UpdateAgentResponse: The return type of the UpdateAgent interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateAgent(request *UpdateAgentRequest) (*UpdateAgentResponse, error) {
+	result := &UpdateAgentResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getUpdateAgentUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UpdateCredentialProvider
@@ -691,14 +811,20 @@ func (c *Client) UpdateAgent(request *UpdateAgentRequest) error {
 //   - request: the arguments to UpdateCredentialProvider
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateCredentialProvider(request *UpdateCredentialProviderRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - UpdateCredentialProviderResponse: The return type of the UpdateCredentialProvider interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateCredentialProvider(request *UpdateCredentialProviderRequest) (*UpdateCredentialProviderResponse, error) {
+	result := &UpdateCredentialProviderResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getUpdateCredentialProviderUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UpdateIdpConfiguration
@@ -707,14 +833,20 @@ func (c *Client) UpdateCredentialProvider(request *UpdateCredentialProviderReque
 //   - request: the arguments to UpdateIdpConfiguration
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateIdpConfiguration(request *UpdateIdpConfigurationRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - UpdateIdpConfigurationResponse: The return type of the UpdateIdpConfiguration interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateIdpConfiguration(request *UpdateIdpConfigurationRequest) (*UpdateIdpConfigurationResponse, error) {
+	result := &UpdateIdpConfigurationResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getUpdateIdpConfigurationUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UpdateOauth2Client
@@ -723,14 +855,20 @@ func (c *Client) UpdateIdpConfiguration(request *UpdateIdpConfigurationRequest) 
 //   - request: the arguments to UpdateOauth2Client
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateOauth2Client(request *UpdateOauth2ClientRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - UpdateOauth2ClientResponse: The return type of the UpdateOauth2Client interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateOauth2Client(request *UpdateOauth2ClientRequest) (*UpdateOauth2ClientResponse, error) {
+	result := &UpdateOauth2ClientResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getUpdateOauth2ClientUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UpdateUser
@@ -739,14 +877,20 @@ func (c *Client) UpdateOauth2Client(request *UpdateOauth2ClientRequest) error {
 //   - request: the arguments to UpdateUser
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateUser(request *UpdateUserRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - UpdateUserResponse: The return type of the UpdateUser interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateUser(request *UpdateUserRequest) (*UpdateUserResponse, error) {
+	result := &UpdateUserResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getUpdateUserUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UpdateUserPool
@@ -755,14 +899,20 @@ func (c *Client) UpdateUser(request *UpdateUserRequest) error {
 //   - request: the arguments to UpdateUserPool
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateUserPool(request *UpdateUserPoolRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - UpdateUserPoolResponse: The return type of the UpdateUserPool interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateUserPool(request *UpdateUserPoolRequest) (*UpdateUserPoolResponse, error) {
+	result := &UpdateUserPoolResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getUpdateUserPoolUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UserinfoEndpoint

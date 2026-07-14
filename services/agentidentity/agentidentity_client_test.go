@@ -85,7 +85,18 @@ func TestClient_BatchAcquisitionOfUsers(t *testing.T) {
 		UserPoolId: util.PtrString(""),
 		Ids:        []*string{},
 	}
-	err := AGENTIDENTITY_CLIENT.BatchAcquisitionOfUsers(batchAcquisitionOfUsersRequest)
+	result := &BatchAcquisitionOfUsersResponse{}
+	result, err := AGENTIDENTITY_CLIENT.BatchAcquisitionOfUsers(batchAcquisitionOfUsersRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_BatchGetResourceApiKey(t *testing.T) {
@@ -125,7 +136,18 @@ func TestClient_CreateAgent(t *testing.T) {
 		Description:                     util.PtrString(""),
 		AllowedResourceOauth2ReturnUrls: []*string{},
 	}
-	err := AGENTIDENTITY_CLIENT.CreateAgent(createAgentRequest)
+	result := &CreateAgentResponse{}
+	result, err := AGENTIDENTITY_CLIENT.CreateAgent(createAgentRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateCredentialProvider(t *testing.T) {
@@ -135,7 +157,18 @@ func TestClient_CreateCredentialProvider(t *testing.T) {
 		Desc:              util.PtrString(""),
 		Credential:        nil,
 	}
-	err := AGENTIDENTITY_CLIENT.CreateCredentialProvider(createCredentialProviderRequest)
+	result := &CreateCredentialProviderResponse{}
+	result, err := AGENTIDENTITY_CLIENT.CreateCredentialProvider(createCredentialProviderRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateIdpConfiguration(t *testing.T) {
@@ -155,7 +188,18 @@ func TestClient_CreateIdpConfiguration(t *testing.T) {
 		DisplayNameClaim:      util.PtrString(""),
 		AutoCreateUser:        util.PtrBool(false),
 	}
-	err := AGENTIDENTITY_CLIENT.CreateIdpConfiguration(createIdpConfigurationRequest)
+	result := &CreateIdpConfigurationResponse{}
+	result, err := AGENTIDENTITY_CLIENT.CreateIdpConfiguration(createIdpConfigurationRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateOauth2Client(t *testing.T) {
@@ -170,7 +214,18 @@ func TestClient_CreateOauth2Client(t *testing.T) {
 		AccessTokenTtl:  util.PtrInt32(int32(0)),
 		RefreshTokenTtl: util.PtrInt32(int32(0)),
 	}
-	err := AGENTIDENTITY_CLIENT.CreateOauth2Client(createOauth2ClientRequest)
+	result := &CreateOauth2ClientResponse{}
+	result, err := AGENTIDENTITY_CLIENT.CreateOauth2Client(createOauth2ClientRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateUser(t *testing.T) {
@@ -182,7 +237,18 @@ func TestClient_CreateUser(t *testing.T) {
 		Password:           util.PtrString(""),
 		ForceResetPassword: util.PtrBool(false),
 	}
-	err := AGENTIDENTITY_CLIENT.CreateUser(createUserRequest)
+	result := &CreateUserResponse{}
+	result, err := AGENTIDENTITY_CLIENT.CreateUser(createUserRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateUserPool(t *testing.T) {
@@ -190,7 +256,18 @@ func TestClient_CreateUserPool(t *testing.T) {
 		Name:        util.PtrString(""),
 		Description: util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.CreateUserPool(createUserPoolRequest)
+	result := &CreateUserPoolResponse{}
+	result, err := AGENTIDENTITY_CLIENT.CreateUserPool(createUserPoolRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteAgent(t *testing.T) {
@@ -243,7 +320,18 @@ func TestClient_DisableIdpConfiguration(t *testing.T) {
 		UserPoolId: util.PtrString(""),
 		Id:         util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.DisableIdpConfiguration(disableIdpConfigurationRequest)
+	result := &DisableIdpConfigurationResponse{}
+	result, err := AGENTIDENTITY_CLIENT.DisableIdpConfiguration(disableIdpConfigurationRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_EnableIdpConfiguration(t *testing.T) {
@@ -251,21 +339,54 @@ func TestClient_EnableIdpConfiguration(t *testing.T) {
 		UserPoolId: util.PtrString(""),
 		Id:         util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.EnableIdpConfiguration(enableIdpConfigurationRequest)
+	result := &EnableIdpConfigurationResponse{}
+	result, err := AGENTIDENTITY_CLIENT.EnableIdpConfiguration(enableIdpConfigurationRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetAgent(t *testing.T) {
 	getAgentRequest := &GetAgentRequest{
 		AgentId: util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.GetAgent(getAgentRequest)
+	result := &GetAgentResponse{}
+	result, err := AGENTIDENTITY_CLIENT.GetAgent(getAgentRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetCredentialProvider(t *testing.T) {
 	getCredentialProviderRequest := &GetCredentialProviderRequest{
 		CredentialProviderId: util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.GetCredentialProvider(getCredentialProviderRequest)
+	result := &GetCredentialProviderResponse{}
+	result, err := AGENTIDENTITY_CLIENT.GetCredentialProvider(getCredentialProviderRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetIdpConfiguration(t *testing.T) {
@@ -273,7 +394,18 @@ func TestClient_GetIdpConfiguration(t *testing.T) {
 		UserPoolId: util.PtrString(""),
 		Id:         util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.GetIdpConfiguration(getIdpConfigurationRequest)
+	result := &GetIdpConfigurationResponse{}
+	result, err := AGENTIDENTITY_CLIENT.GetIdpConfiguration(getIdpConfigurationRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetOauth2Client(t *testing.T) {
@@ -281,7 +413,18 @@ func TestClient_GetOauth2Client(t *testing.T) {
 		UserPoolId: util.PtrString(""),
 		Id:         util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.GetOauth2Client(getOauth2ClientRequest)
+	result := &GetOauth2ClientResponse{}
+	result, err := AGENTIDENTITY_CLIENT.GetOauth2Client(getOauth2ClientRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetResourceApikey(t *testing.T) {
@@ -304,7 +447,18 @@ func TestClient_GetResourceOauth2token(t *testing.T) {
 		ForceAuthentication:            util.PtrBool(false),
 		WorkloadAccessToken:            util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.GetResourceOauth2token(getResourceOauth2tokenRequest)
+	result := &GetResourceOauth2tokenResponse{}
+	result, err := AGENTIDENTITY_CLIENT.GetResourceOauth2token(getResourceOauth2tokenRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetUser(t *testing.T) {
@@ -313,14 +467,36 @@ func TestClient_GetUser(t *testing.T) {
 		Id:         util.PtrString(""),
 		Username:   util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.GetUser(getUserRequest)
+	result := &GetUserResponse{}
+	result, err := AGENTIDENTITY_CLIENT.GetUser(getUserRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetUserPool(t *testing.T) {
 	getUserPoolRequest := &GetUserPoolRequest{
 		Id: util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.GetUserPool(getUserPoolRequest)
+	result := &GetUserPoolResponse{}
+	result, err := AGENTIDENTITY_CLIENT.GetUserPool(getUserPoolRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetWATForUser(t *testing.T) {
@@ -332,7 +508,18 @@ func TestClient_GetWATForUser(t *testing.T) {
 		SessionId:       util.PtrString(""),
 		DurationSeconds: util.PtrInt32(int32(0)),
 	}
-	err := AGENTIDENTITY_CLIENT.GetWATForUser(getWATForUserRequest)
+	result := &GetWATForUserResponse{}
+	result, err := AGENTIDENTITY_CLIENT.GetWATForUser(getWATForUserRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetWorkloadAccessToken(t *testing.T) {
@@ -342,7 +529,18 @@ func TestClient_GetWorkloadAccessToken(t *testing.T) {
 		AgentName:       util.PtrString(""),
 		DurationSeconds: util.PtrInt32(int32(0)),
 	}
-	err := AGENTIDENTITY_CLIENT.GetWorkloadAccessToken(getWorkloadAccessTokenRequest)
+	result := &GetWorkloadAccessTokenResponse{}
+	result, err := AGENTIDENTITY_CLIENT.GetWorkloadAccessToken(getWorkloadAccessTokenRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ListAgents(t *testing.T) {
@@ -506,7 +704,18 @@ func TestClient_TokenEndpoint(t *testing.T) {
 		ClientSecret: util.PtrString(""),
 		RedirectUri:  util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.TokenEndpoint(tokenEndpointRequest)
+	result := &TokenEndpointResponse{}
+	result, err := AGENTIDENTITY_CLIENT.TokenEndpoint(tokenEndpointRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateAgent(t *testing.T) {
@@ -515,7 +724,18 @@ func TestClient_UpdateAgent(t *testing.T) {
 		Description:                     util.PtrString(""),
 		AllowedResourceOauth2ReturnUrls: []*string{},
 	}
-	err := AGENTIDENTITY_CLIENT.UpdateAgent(updateAgentRequest)
+	result := &UpdateAgentResponse{}
+	result, err := AGENTIDENTITY_CLIENT.UpdateAgent(updateAgentRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateCredentialProvider(t *testing.T) {
@@ -524,7 +744,18 @@ func TestClient_UpdateCredentialProvider(t *testing.T) {
 		Desc:                 util.PtrString(""),
 		Credential:           nil,
 	}
-	err := AGENTIDENTITY_CLIENT.UpdateCredentialProvider(updateCredentialProviderRequest)
+	result := &UpdateCredentialProviderResponse{}
+	result, err := AGENTIDENTITY_CLIENT.UpdateCredentialProvider(updateCredentialProviderRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateIdpConfiguration(t *testing.T) {
@@ -542,7 +773,18 @@ func TestClient_UpdateIdpConfiguration(t *testing.T) {
 		DisplayNameClaim:      util.PtrString(""),
 		AutoCreateUser:        util.PtrBool(false),
 	}
-	err := AGENTIDENTITY_CLIENT.UpdateIdpConfiguration(updateIdpConfigurationRequest)
+	result := &UpdateIdpConfigurationResponse{}
+	result, err := AGENTIDENTITY_CLIENT.UpdateIdpConfiguration(updateIdpConfigurationRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateOauth2Client(t *testing.T) {
@@ -557,7 +799,18 @@ func TestClient_UpdateOauth2Client(t *testing.T) {
 		AccessTokenTtl:  util.PtrInt32(int32(0)),
 		RefreshTokenTtl: util.PtrInt32(int32(0)),
 	}
-	err := AGENTIDENTITY_CLIENT.UpdateOauth2Client(updateOauth2ClientRequest)
+	result := &UpdateOauth2ClientResponse{}
+	result, err := AGENTIDENTITY_CLIENT.UpdateOauth2Client(updateOauth2ClientRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateUser(t *testing.T) {
@@ -567,7 +820,18 @@ func TestClient_UpdateUser(t *testing.T) {
 		DisplayName: util.PtrString(""),
 		Description: util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.UpdateUser(updateUserRequest)
+	result := &UpdateUserResponse{}
+	result, err := AGENTIDENTITY_CLIENT.UpdateUser(updateUserRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateUserPool(t *testing.T) {
@@ -576,7 +840,18 @@ func TestClient_UpdateUserPool(t *testing.T) {
 		Name:        util.PtrString(""),
 		Description: util.PtrString(""),
 	}
-	err := AGENTIDENTITY_CLIENT.UpdateUserPool(updateUserPoolRequest)
+	result := &UpdateUserPoolResponse{}
+	result, err := AGENTIDENTITY_CLIENT.UpdateUserPool(updateUserPoolRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UserinfoEndpoint(t *testing.T) {
