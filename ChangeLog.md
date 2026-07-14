@@ -1,3 +1,7 @@
+2026-07-14 Version: v0.0.99
+VPC专线网关健康检查接口新增三个字段
+- 涉及产品: VPC，创建专线网关健康检查新增dcphyId、channelId、subnetId字段
+
 2026-07-14 Version: v0.0.98
 新增OAuth2客户端、IdP配置及Agent身份管理接口响应字段
 - 涉及产品: AGENTIDENTITY，createOauth2Client/updateOauth2Client/getOauth2Client新增clientId、clientSecret等字段

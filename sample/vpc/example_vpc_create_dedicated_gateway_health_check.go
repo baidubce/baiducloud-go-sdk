@@ -17,6 +17,9 @@ func CreateDedicatedGatewayHealthCheck() {
 	createDedicatedGatewayHealthCheckRequest := &vpc.CreateDedicatedGatewayHealthCheckRequest{
 		EtGatewayId:           util.PtrString(""),
 		ClientToken:           util.PtrString(""),
+		DcphyId:               util.PtrString(""),
+		ChannelId:             util.PtrString(""),
+		SubnetId:              util.PtrString(""),
 		HealthCheckSourceIp:   util.PtrString(""),
 		HealthCheckType:       util.PtrString(""),
 		HealthCheckInterval:   util.PtrInt32(int32(0)),
