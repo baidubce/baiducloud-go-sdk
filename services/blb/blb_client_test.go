@@ -302,7 +302,7 @@ func TestClient_CreateAppBlbIpGroup(t *testing.T) {
 		ClientToken: util.PtrString(""),
 		Name:        util.PtrString(""),
 		Desc:        util.PtrString(""),
-		MemberList:  []*AppIpGroupMember{},
+		MemberList:  []*AppIpGroupMemberForCreate{},
 	}
 	result := &CreateAppBlbIpGroupResponse{}
 	result, err := BLB_CLIENT.CreateAppBlbIpGroup(createAppBlbIpGroupRequest)
@@ -323,7 +323,7 @@ func TestClient_CreateAppBlbIpGroupMember(t *testing.T) {
 		BlbId:       util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		IpGroupId:   util.PtrString(""),
-		MemberList:  []*AppIpGroupMember{},
+		MemberList:  []*AppIpGroupMemberForCreate{},
 	}
 	err := BLB_CLIENT.CreateAppBlbIpGroupMember(createAppBlbIpGroupMemberRequest)
 	ExpectEqual(t.Errorf, nil, err)
@@ -1611,7 +1611,7 @@ func TestClient_UpdateAppBlbIpGroupMember(t *testing.T) {
 		BlbId:       util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		IpGroupId:   util.PtrString(""),
-		MemberList:  []*AppIpGroupMember{},
+		MemberList:  []*AppIpGroupMemberForUpdate{},
 	}
 	err := BLB_CLIENT.UpdateAppBlbIpGroupMember(updateAppBlbIpGroupMemberRequest)
 	ExpectEqual(t.Errorf, nil, err)

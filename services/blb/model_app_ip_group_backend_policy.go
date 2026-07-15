@@ -5,7 +5,6 @@ type AppIpGroupBackendPolicy struct {
 	BlbType                     *string `json:"type,omitempty"`
 	HealthCheck                 *string `json:"healthCheck,omitempty"`
 	HealthCheckPort             *int32  `json:"healthCheckPort,omitempty"`
-	HealthCheckHost             *string `json:"healthCheckHost,omitempty"`
 	HealthCheckUrlPath          *string `json:"healthCheckUrlPath,omitempty"`
 	HealthCheckTimeoutInSecond  *int32  `json:"healthCheckTimeoutInSecond,omitempty"`
 	HealthCheckIntervalInSecond *int32  `json:"healthCheckIntervalInSecond,omitempty"`

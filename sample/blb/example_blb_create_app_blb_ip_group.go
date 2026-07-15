@@ -20,7 +20,7 @@ func CreateAppBlbIpGroup() {
 		ClientToken: util.PtrString(""),
 		Name:        util.PtrString(""),
 		Desc:        util.PtrString(""),
-		MemberList:  []*blb.AppIpGroupMember{},
+		MemberList:  []*blb.AppIpGroupMemberForCreate{},
 	}
 	result, err := client.CreateAppBlbIpGroup(createAppBlbIpGroupRequest)
 	if err != nil {

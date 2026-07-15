@@ -18,7 +18,7 @@ func UpdateAppBlbIpGroupMember() {
 		BlbId:       util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		IpGroupId:   util.PtrString(""),
-		MemberList:  []*blb.AppIpGroupMember{},
+		MemberList:  []*blb.AppIpGroupMemberForUpdate{},
 	}
 	err = client.UpdateAppBlbIpGroupMember(updateAppBlbIpGroupMemberRequest)
 	if err != nil {

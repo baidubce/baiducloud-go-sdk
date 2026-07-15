@@ -1,3 +1,9 @@
+2026-07-15 Version: v0.0.103
+- 涉及产品: BLB，创建IP组删除memberId、portList、healthCheckPortType、status字段
+- 涉及产品: BLB，查询IP组删除healthCheckHost字段
+- 涉及产品: BLB，创建/更新IP组成员删除ip、portList等冗余字段
+- 涉及产品: BLB，新增计费变更及变配接口支持
+
 2026-07-15 Version: v0.0.102
 - 涉及产品: CLOUDASSISTANT，新增命令的创建、查询、修改、删除接口
 - 涉及产品: CLOUDASSISTANT，新增命令执行及执行记录查询接口
