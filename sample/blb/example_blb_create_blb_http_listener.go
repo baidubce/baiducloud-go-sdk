@@ -19,6 +19,7 @@ func CreateBlbHttpListener() {
 	}
 	createBlbHttpListenerRequest := &blb.CreateBlbHttpListenerRequest{
 		BlbId:                      util.PtrString(""),
+		ClientToken:                util.PtrString(""),
 		ListenerPort:               util.PtrInt32(int32(0)),
 		BackendPort:                util.PtrInt32(int32(0)),
 		Scheduler:                  util.PtrString(""),

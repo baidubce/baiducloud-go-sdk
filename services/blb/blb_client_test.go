@@ -503,6 +503,7 @@ func TestClient_CreateBlbHttpListener(t *testing.T) {
 	}
 	createBlbHttpListenerRequest := &CreateBlbHttpListenerRequest{
 		BlbId:                      util.PtrString(""),
+		ClientToken:                util.PtrString(""),
 		ListenerPort:               util.PtrInt32(int32(0)),
 		BackendPort:                util.PtrInt32(int32(0)),
 		Scheduler:                  util.PtrString(""),
@@ -592,6 +593,7 @@ func TestClient_CreateBlbSslListener(t *testing.T) {
 func TestClient_CreateBlbTcpListener(t *testing.T) {
 	createBlbTcpListenerRequest := &CreateBlbTcpListenerRequest{
 		BlbId:                      util.PtrString(""),
+		ClientToken:                util.PtrString(""),
 		ListenerPort:               util.PtrInt32(int32(0)),
 		BackendPort:                util.PtrInt32(int32(0)),
 		Scheduler:                  util.PtrString(""),
@@ -1758,6 +1760,7 @@ func TestClient_UpdateBlbHttpListener(t *testing.T) {
 	updateBlbHttpListenerRequest := &UpdateBlbHttpListenerRequest{
 		BlbId:                      util.PtrString(""),
 		ListenerPort:               util.PtrInt32(int32(0)),
+		ClientToken:                util.PtrString(""),
 		BackendPort:                util.PtrInt32(int32(0)),
 		Scheduler:                  util.PtrString(""),
 		KeepSession:                util.PtrBool(false),
@@ -1789,6 +1792,7 @@ func TestClient_UpdateBlbHttpsListener(t *testing.T) {
 	updateBlbHttpsListenerRequest := &UpdateBlbHttpsListenerRequest{
 		BlbId:                      util.PtrString(""),
 		ListenerPort:               util.PtrInt32(int32(0)),
+		ClientToken:                util.PtrString(""),
 		BackendPort:                util.PtrInt32(int32(0)),
 		Scheduler:                  util.PtrString(""),
 		KeepSession:                util.PtrBool(false),
@@ -1840,6 +1844,7 @@ func TestClient_UpdateBlbSslListener(t *testing.T) {
 	updateBlbSslListenerRequest := &UpdateBlbSslListenerRequest{
 		BlbId:                      util.PtrString(""),
 		ListenerPort:               util.PtrInt32(int32(0)),
+		ClientToken:                util.PtrString(""),
 		BackendPort:                util.PtrInt32(int32(0)),
 		Scheduler:                  util.PtrString(""),
 		HealthCheckType:            util.PtrString(""),
@@ -1861,6 +1866,7 @@ func TestClient_UpdateBlbTcpListener(t *testing.T) {
 	updateBlbTcpListenerRequest := &UpdateBlbTcpListenerRequest{
 		BlbId:                      util.PtrString(""),
 		ListenerPort:               util.PtrInt32(int32(0)),
+		ClientToken:                util.PtrString(""),
 		BackendPort:                util.PtrInt32(int32(0)),
 		Scheduler:                  util.PtrString(""),
 		HealthCheckType:            util.PtrString(""),
@@ -1876,6 +1882,7 @@ func TestClient_UpdateBlbUdpListener(t *testing.T) {
 	updateBlbUdpListenerRequest := &UpdateBlbUdpListenerRequest{
 		BlbId:                      util.PtrString(""),
 		ListenerPort:               util.PtrInt32(int32(0)),
+		ClientToken:                util.PtrString(""),
 		BackendPort:                util.PtrInt32(int32(0)),
 		Scheduler:                  util.PtrString(""),
 		HealthCheckType:            util.PtrString(""),

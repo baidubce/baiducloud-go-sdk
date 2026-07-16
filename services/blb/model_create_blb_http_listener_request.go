@@ -2,6 +2,7 @@ package blb
 
 type CreateBlbHttpListenerRequest struct {
 	BlbId                      *string                    `json:"-"`
+	ClientToken                *string                    `json:"-"`
 	ListenerPort               *int32                     `json:"listenerPort,omitempty"`
 	BackendPort                *int32                     `json:"backendPort,omitempty"`
 	Scheduler                  *string                    `json:"scheduler,omitempty"`

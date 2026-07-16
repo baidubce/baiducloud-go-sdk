@@ -20,6 +20,7 @@ func UpdateBlbHttpsListener() {
 	updateBlbHttpsListenerRequest := &blb.UpdateBlbHttpsListenerRequest{
 		BlbId:                      util.PtrString(""),
 		ListenerPort:               util.PtrInt32(int32(0)),
+		ClientToken:                util.PtrString(""),
 		BackendPort:                util.PtrInt32(int32(0)),
 		Scheduler:                  util.PtrString(""),
 		KeepSession:                util.PtrBool(false),

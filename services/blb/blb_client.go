@@ -466,6 +466,7 @@ func (c *Client) CreateBlbHttpListener(request *CreateBlbHttpListenerRequest) er
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateBlbHttpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
@@ -516,6 +517,7 @@ func (c *Client) CreateBlbTcpListener(request *CreateBlbTcpListenerRequest) erro
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateBlbTcpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
@@ -1967,6 +1969,7 @@ func (c *Client) UpdateBlbHttpListener(request *UpdateBlbHttpListenerRequest) er
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateBlbHttpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
 		WithBody(request).
 		Do()
@@ -1984,6 +1987,7 @@ func (c *Client) UpdateBlbHttpsListener(request *UpdateBlbHttpsListenerRequest) 
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateBlbHttpsListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
 		WithBody(request).
 		Do()
@@ -2036,6 +2040,7 @@ func (c *Client) UpdateBlbSslListener(request *UpdateBlbSslListenerRequest) erro
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateBlbSslListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
 		WithBody(request).
 		Do()
@@ -2053,6 +2058,7 @@ func (c *Client) UpdateBlbTcpListener(request *UpdateBlbTcpListenerRequest) erro
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateBlbTcpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
 		WithBody(request).
 		Do()
@@ -2070,6 +2076,7 @@ func (c *Client) UpdateBlbUdpListener(request *UpdateBlbUdpListenerRequest) erro
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateBlbUdpListenerUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("listenerPort", util.Int32Value(request.ListenerPort)).
 		WithBody(request).
 		Do()

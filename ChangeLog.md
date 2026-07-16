@@ -1,3 +1,7 @@
+2026-07-16 Version: v0.0.105
+- 涉及产品: BLB，TCP/HTTP/UDP/SSL/HTTPS监听器创建与更新接口新增clientToken参数
+- 涉及产品: BLB，添加、更新、释放后端服务器及释放监听器接口同步变更
+
 2026-07-16 Version: v0.0.104
 - 涉及产品: CLOUDASSISTANT，SDK版本更新
 
