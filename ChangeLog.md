@@ -1,3 +1,6 @@
+2026-07-16 Version: v0.0.104
+- 涉及产品: CLOUDASSISTANT，SDK版本更新
+
 2026-07-15 Version: v0.0.103
 - 涉及产品: BLB，创建IP组删除memberId、portList、healthCheckPortType、status字段
 - 涉及产品: BLB，查询IP组删除healthCheckHost字段

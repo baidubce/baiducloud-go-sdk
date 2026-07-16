@@ -29,23 +29,15 @@ func init() {
 	conf := filepath.Join(filepath.Dir(f), "config.json")
 	fp, err := os.Open(conf)
 	if err != nil {
-		log.Warn("config json file of ak/sk not given:", conf)
-		return
+		log.Fatal("config json file of ak/sk not given:", conf)
+		os.Exit(1)
 	}
-	defer fp.Close()
 	decoder := json.NewDecoder(fp)
 	confObj := &Conf{}
 	decoder.Decode(confObj)
 
 	CLOUDASSISTANT_CLIENT, _ = NewClient(confObj.AK, confObj.SK, confObj.Endpoint)
 	log.SetLogLevel(log.WARN)
-}
-
-func skipCloudassistantIntegrationTest(t *testing.T) {
-	t.Helper()
-	if CLOUDASSISTANT_CLIENT == nil {
-		t.Skip("config.json not provided; skip cloudassistant integration test")
-	}
 }
 
 // ExpectEqual is the helper function for test each case
@@ -76,7 +68,6 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 }
 
 func TestClient_ActionList(t *testing.T) {
-	skipCloudassistantIntegrationTest(t)
 	Action := &ActionFilter{
 		CloudassistantType: util.PtrString(""),
 		Command: &CommandFilter{
@@ -112,7 +103,6 @@ func TestClient_ActionList(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ActionLog(t *testing.T) {
-	skipCloudassistantIntegrationTest(t)
 	actionLogRequest := &ActionLogRequest{
 		RunId:   util.PtrString(""),
 		ChildId: util.PtrString(""),
@@ -133,7 +123,6 @@ func TestClient_ActionLog(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ActionRun(t *testing.T) {
-	skipCloudassistantIntegrationTest(t)
 	TargetSelector := &TargetSelector{
 		InstanceType: util.PtrString(""),
 		Tags:         []*Tag{},
@@ -165,7 +154,6 @@ func TestClient_ActionRun(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ActionRunList(t *testing.T) {
-	skipCloudassistantIntegrationTest(t)
 	Action := &ActionFilter{
 		CloudassistantType: util.PtrString(""),
 		Command: &CommandFilter{
@@ -205,7 +193,6 @@ func TestClient_ActionRunList(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_BatchGetAgent(t *testing.T) {
-	skipCloudassistantIntegrationTest(t)
 	batchGetAgentRequest := &BatchGetAgentRequest{
 		Hosts: []*Host{},
 	}
@@ -224,7 +211,6 @@ func TestClient_BatchGetAgent(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateAction(t *testing.T) {
-	skipCloudassistantIntegrationTest(t)
 	Action := &Action{
 		Id:                 util.PtrString(""),
 		Ref:                util.PtrString(""),
@@ -292,7 +278,6 @@ func TestClient_CreateAction(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteAction(t *testing.T) {
-	skipCloudassistantIntegrationTest(t)
 	deleteActionRequest := &DeleteActionRequest{
 		Id: util.PtrString(""),
 	}
@@ -311,7 +296,6 @@ func TestClient_DeleteAction(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetAction(t *testing.T) {
-	skipCloudassistantIntegrationTest(t)
 	getActionRequest := &GetActionRequest{
 		Id:     util.PtrString(""),
 		Locale: util.PtrString(""),
@@ -331,7 +315,6 @@ func TestClient_GetAction(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetActionRun(t *testing.T) {
-	skipCloudassistantIntegrationTest(t)
 	getActionRunRequest := &GetActionRunRequest{
 		Id:            util.PtrString(""),
 		WithLog:       util.PtrString(""),
@@ -355,7 +338,6 @@ func TestClient_GetActionRun(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateAction(t *testing.T) {
-	skipCloudassistantIntegrationTest(t)
 	Action := &Action{
 		Id:                 util.PtrString(""),
 		Ref:                util.PtrString(""),
