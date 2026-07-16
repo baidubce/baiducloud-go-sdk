@@ -1582,6 +1582,7 @@ func (c *Client) ReleaseAppBlb(request *ReleaseAppBlbRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getReleaseAppBlbUri(VERSION_V1, util.StringValue(request.BlbId))).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
 

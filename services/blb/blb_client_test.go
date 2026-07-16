@@ -1464,7 +1464,8 @@ func TestClient_RefundBlb(t *testing.T) {
 }
 func TestClient_ReleaseAppBlb(t *testing.T) {
 	releaseAppBlbRequest := &ReleaseAppBlbRequest{
-		BlbId: util.PtrString(""),
+		BlbId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
 	}
 	err := BLB_CLIENT.ReleaseAppBlb(releaseAppBlbRequest)
 	ExpectEqual(t.Errorf, nil, err)
@@ -1555,8 +1556,8 @@ func TestClient_UpdateAppBlbHttpListener(t *testing.T) {
 	}
 	updateAppBlbHttpListenerRequest := &UpdateAppBlbHttpListenerRequest{
 		BlbId:                 util.PtrString(""),
-		ClientToken:           util.PtrString(""),
 		ListenerPort:          util.PtrInt32(int32(0)),
+		ClientToken:           util.PtrString(""),
 		Scheduler:             util.PtrString(""),
 		KeepSession:           util.PtrBool(false),
 		KeepSessionType:       util.PtrString(""),
@@ -1575,8 +1576,8 @@ func TestClient_UpdateAppBlbHttpListener(t *testing.T) {
 func TestClient_UpdateAppBlbHttpsListener(t *testing.T) {
 	updateAppBlbHttpsListenerRequest := &UpdateAppBlbHttpsListenerRequest{
 		BlbId:                 util.PtrString(""),
-		ClientToken:           util.PtrString(""),
 		ListenerPort:          util.PtrInt32(int32(0)),
+		ClientToken:           util.PtrString(""),
 		Scheduler:             util.PtrString(""),
 		KeepSession:           util.PtrBool(false),
 		KeepSessionType:       util.PtrString(""),
@@ -1694,8 +1695,8 @@ func TestClient_UpdateAppBlbServerGroupRs(t *testing.T) {
 func TestClient_UpdateAppBlbSslListener(t *testing.T) {
 	updateAppBlbSslListenerRequest := &UpdateAppBlbSslListenerRequest{
 		BlbId:               util.PtrString(""),
-		ClientToken:         util.PtrString(""),
 		ListenerPort:        util.PtrInt32(int32(0)),
+		ClientToken:         util.PtrString(""),
 		Scheduler:           util.PtrString(""),
 		CertIds:             []*string{},
 		EncryptionType:      util.PtrString(""),
@@ -1711,8 +1712,8 @@ func TestClient_UpdateAppBlbSslListener(t *testing.T) {
 func TestClient_UpdateAppBlbTcpListener(t *testing.T) {
 	updateAppBlbTcpListenerRequest := &UpdateAppBlbTcpListenerRequest{
 		BlbId:             util.PtrString(""),
-		ClientToken:       util.PtrString(""),
 		ListenerPort:      util.PtrInt32(int32(0)),
+		ClientToken:       util.PtrString(""),
 		Scheduler:         util.PtrString(""),
 		TcpSessionTimeout: util.PtrInt32(int32(0)),
 		Description:       util.PtrString(""),
@@ -1723,8 +1724,8 @@ func TestClient_UpdateAppBlbTcpListener(t *testing.T) {
 func TestClient_UpdateAppBlbUdpListener(t *testing.T) {
 	updateAppBlbUdpListenerRequest := &UpdateAppBlbUdpListenerRequest{
 		BlbId:             util.PtrString(""),
-		ClientToken:       util.PtrString(""),
 		ListenerPort:      util.PtrInt32(int32(0)),
+		ClientToken:       util.PtrString(""),
 		Scheduler:         util.PtrString(""),
 		UdpSessionTimeout: util.PtrInt32(int32(0)),
 		Description:       util.PtrString(""),

@@ -1,5 +1,6 @@
 package blb
 
 type ReleaseAppBlbRequest struct {
-	BlbId *string `json:"-"`
+	BlbId       *string `json:"-"`
+	ClientToken *string `json:"-"`
 }

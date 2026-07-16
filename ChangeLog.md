@@ -1,3 +1,6 @@
+2026-07-16 Version: v0.0.106
+- 涉及产品: BLB，releaseAppBlb释放实例接口query参数新增clientToken字段
+
 2026-07-16 Version: v0.0.105
 - 涉及产品: BLB，TCP/HTTP/UDP/SSL/HTTPS监听器创建与更新接口新增clientToken参数
 - 涉及产品: BLB，添加、更新、释放后端服务器及释放监听器接口同步变更

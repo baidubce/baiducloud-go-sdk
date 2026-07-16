@@ -15,7 +15,8 @@ func ReleaseAppBlb() {
 		return
 	}
 	releaseAppBlbRequest := &blb.ReleaseAppBlbRequest{
-		BlbId: util.PtrString(""),
+		BlbId:       util.PtrString(""),
+		ClientToken: util.PtrString(""),
 	}
 	err = client.ReleaseAppBlb(releaseAppBlbRequest)
 	if err != nil {

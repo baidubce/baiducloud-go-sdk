@@ -16,8 +16,8 @@ func UpdateAppBlbSslListener() {
 	}
 	updateAppBlbSslListenerRequest := &blb.UpdateAppBlbSslListenerRequest{
 		BlbId:               util.PtrString(""),
-		ClientToken:         util.PtrString(""),
 		ListenerPort:        util.PtrInt32(int32(0)),
+		ClientToken:         util.PtrString(""),
 		Scheduler:           util.PtrString(""),
 		CertIds:             []*string{},
 		EncryptionType:      util.PtrString(""),

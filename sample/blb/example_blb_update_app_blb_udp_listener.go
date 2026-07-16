@@ -16,8 +16,8 @@ func UpdateAppBlbUdpListener() {
 	}
 	updateAppBlbUdpListenerRequest := &blb.UpdateAppBlbUdpListenerRequest{
 		BlbId:             util.PtrString(""),
-		ClientToken:       util.PtrString(""),
 		ListenerPort:      util.PtrInt32(int32(0)),
+		ClientToken:       util.PtrString(""),
 		Scheduler:         util.PtrString(""),
 		UdpSessionTimeout: util.PtrInt32(int32(0)),
 		Description:       util.PtrString(""),
