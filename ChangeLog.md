@@ -1,3 +1,6 @@
+2026-07-17 Version: v0.0.107
+- 涉及产品: CLOUDASSISTANT，SDK版本更新
+
 2026-07-16 Version: v0.0.106
 - 涉及产品: BLB，releaseAppBlb释放实例接口query参数新增clientToken字段
 
