@@ -51,6 +51,7 @@ func CreateAction() {
 		CreatedTimestamp:       util.PtrInt64(int64(0)),
 		UpdatedTimestamp:       util.PtrInt64(int64(0)),
 	}
+	Parameters := make(map[string]string)
 	TargetSelector := &cloudassistant.TargetSelector{
 		InstanceType: util.PtrString(""),
 		Tags:         []*cloudassistant.Tag{},

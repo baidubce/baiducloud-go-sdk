@@ -15,6 +15,10 @@ func ActionRun() {
 		fmt.Println("create client err:", err)
 		return
 	}
+	Action := &cloudassistant.ActionRef{
+		Ref: util.PtrString(""),
+	}
+	Parameters := make(map[string]string)
 	TargetSelector := &cloudassistant.TargetSelector{
 		InstanceType: util.PtrString(""),
 		Tags:         []*cloudassistant.Tag{},
@@ -25,10 +29,10 @@ func ActionRun() {
 	}
 	actionRunRequest := &cloudassistant.ActionRunRequest{
 		Locale:             util.PtrString(""),
-		Action:             nil,
+		Action:             Action,
 		Parameters:         nil,
 		TargetSelectorType: util.PtrString(""),
-		Targets:            []*interface{}{},
+		Targets:            []*cloudassistant.Target{},
 		TargetSelector:     TargetSelector,
 	}
 	result, err := client.ActionRun(actionRunRequest)

@@ -1,3 +1,9 @@
+2026-07-17 Version: v0.0.108
+执行命令接口新增实例与网络相关字段
+- 涉及产品: CLOUDASSISTANT，执行命令新增实例ID、名称、内外网IP及带宽字段
+- 涉及产品: CLOUDASSISTANT，执行命令新增ref字段
+- 涉及产品: CLOUDASSISTANT，命令列表查询删除instanceType字段
+
 2026-07-17 Version: v0.0.107
 - 涉及产品: CLOUDASSISTANT，SDK版本更新
 

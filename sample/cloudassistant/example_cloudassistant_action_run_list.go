@@ -16,16 +16,17 @@ func ActionRunList() {
 		return
 	}
 	Action := &cloudassistant.ActionFilter{
+		Id:                 util.PtrString(""),
+		Name:               util.PtrString(""),
 		CloudassistantType: util.PtrString(""),
 		Command: &cloudassistant.CommandFilter{
 			Scope:              util.PtrString(""),
 			Name:               util.PtrString(""),
 			CloudassistantType: util.PtrString(""),
 		},
-		InstanceType: util.PtrString(""),
-		Id:           util.PtrString(""),
-		Name:         util.PtrString(""),
-		FileUpload:   nil,
+		FileUpload: &cloudassistant.FileUploadFilter{
+			Filename: util.PtrString(""),
+		},
 	}
 	actionRunListRequest := &cloudassistant.ActionRunListRequest{
 		Locale:    util.PtrString(""),

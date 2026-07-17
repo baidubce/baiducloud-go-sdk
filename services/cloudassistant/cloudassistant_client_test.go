@@ -69,16 +69,17 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 
 func TestClient_ActionList(t *testing.T) {
 	Action := &ActionFilter{
+		Id:                 util.PtrString(""),
+		Name:               util.PtrString(""),
 		CloudassistantType: util.PtrString(""),
 		Command: &CommandFilter{
 			Scope:              util.PtrString(""),
 			Name:               util.PtrString(""),
 			CloudassistantType: util.PtrString(""),
 		},
-		InstanceType: util.PtrString(""),
-		Id:           util.PtrString(""),
-		Name:         util.PtrString(""),
-		FileUpload:   nil,
+		FileUpload: &FileUploadFilter{
+			Filename: util.PtrString(""),
+		},
 	}
 	actionListRequest := &ActionListRequest{
 		Locale:    util.PtrString(""),
@@ -123,6 +124,9 @@ func TestClient_ActionLog(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ActionRun(t *testing.T) {
+	Action := &ActionRef{
+		Ref: util.PtrString(""),
+	}
 	TargetSelector := &TargetSelector{
 		InstanceType: util.PtrString(""),
 		Tags:         []*Tag{},
@@ -131,12 +135,13 @@ func TestClient_ActionRun(t *testing.T) {
 			Instances:   []*string{},
 		},
 	}
+	Parameters := make(map[string]string)
 	actionRunRequest := &ActionRunRequest{
 		Locale:             util.PtrString(""),
-		Action:             nil,
+		Action:             Action,
 		Parameters:         nil,
 		TargetSelectorType: util.PtrString(""),
-		Targets:            []*interface{}{},
+		Targets:            []*Target{},
 		TargetSelector:     TargetSelector,
 	}
 	result := &ActionRunResponse{}
@@ -155,16 +160,17 @@ func TestClient_ActionRun(t *testing.T) {
 }
 func TestClient_ActionRunList(t *testing.T) {
 	Action := &ActionFilter{
+		Id:                 util.PtrString(""),
+		Name:               util.PtrString(""),
 		CloudassistantType: util.PtrString(""),
 		Command: &CommandFilter{
 			Scope:              util.PtrString(""),
 			Name:               util.PtrString(""),
 			CloudassistantType: util.PtrString(""),
 		},
-		InstanceType: util.PtrString(""),
-		Id:           util.PtrString(""),
-		Name:         util.PtrString(""),
-		FileUpload:   nil,
+		FileUpload: &FileUploadFilter{
+			Filename: util.PtrString(""),
+		},
 	}
 	actionRunListRequest := &ActionRunListRequest{
 		Locale:    util.PtrString(""),
@@ -255,6 +261,7 @@ func TestClient_CreateAction(t *testing.T) {
 			Instances:   []*string{},
 		},
 	}
+	Parameters := make(map[string]string)
 	createActionRequest := &CreateActionRequest{
 		Execution:          util.PtrString(""),
 		Action:             Action,
@@ -382,6 +389,7 @@ func TestClient_UpdateAction(t *testing.T) {
 			Instances:   []*string{},
 		},
 	}
+	Parameters := make(map[string]string)
 	updateActionRequest := &UpdateActionRequest{
 		Execution:          util.PtrString(""),
 		Action:             Action,
