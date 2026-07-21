@@ -118,12 +118,28 @@ func TestClient_CreateAccessKey(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateApikeyPermanentlyValid(t *testing.T) {
+	Acl := &ACL{
+		Id:                util.PtrString(""),
+		Version:           util.PtrString(""),
+		AccessControlList: []*ACLEntry{},
+	}
 	createApikeyPermanentlyValidRequest := &CreateApikeyPermanentlyValidRequest{
 		UserId: util.PtrString(""),
-		Acl:    util.PtrString(""),
+		Acl:    Acl,
 		Name:   util.PtrString(""),
 	}
-	err := IAM_CLIENT.CreateApikeyPermanentlyValid(createApikeyPermanentlyValidRequest)
+	result := &CreateApikeyPermanentlyValidResponse{}
+	result, err := IAM_CLIENT.CreateApikeyPermanentlyValid(createApikeyPermanentlyValidRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateGroup(t *testing.T) {
@@ -165,7 +181,18 @@ func TestClient_DecodingApikeyPermanentlyValid(t *testing.T) {
 		UserId: util.PtrString(""),
 		Id:     util.PtrString(""),
 	}
-	err := IAM_CLIENT.DecodingApikeyPermanentlyValid(decodingApikeyPermanentlyValidRequest)
+	result := &DecodingApikeyPermanentlyValidResponse{}
+	result, err := IAM_CLIENT.DecodingApikeyPermanentlyValid(decodingApikeyPermanentlyValidRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteAccessKey(t *testing.T) {
@@ -181,7 +208,18 @@ func TestClient_DeleteApikeyPermanentlyValid(t *testing.T) {
 		UserId: util.PtrString(""),
 		Id:     util.PtrString(""),
 	}
-	err := IAM_CLIENT.DeleteApikeyPermanentlyValid(deleteApikeyPermanentlyValidRequest)
+	result := &DeleteApikeyPermanentlyValidResponse{}
+	result, err := IAM_CLIENT.DeleteApikeyPermanentlyValid(deleteApikeyPermanentlyValidRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteGroup(t *testing.T) {
@@ -251,7 +289,18 @@ func TestClient_GetSessionApiKey(t *testing.T) {
 		ExpireInSeconds: util.PtrInt32(int32(0)),
 		Acl:             util.PtrString(""),
 	}
-	err := IAM_CLIENT.GetSessionApiKey(getSessionApiKeyRequest)
+	result := &GetSessionApiKeyResponse{}
+	result, err := IAM_CLIENT.GetSessionApiKey(getSessionApiKeyRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetUser(t *testing.T) {
@@ -486,7 +535,18 @@ func TestClient_ObtainAListOfPermanentlyValidApikeys(t *testing.T) {
 		PageNo:   util.PtrInt32(int32(0)),
 		PageSize: util.PtrInt32(int32(0)),
 	}
-	err := IAM_CLIENT.ObtainAListOfPermanentlyValidApikeys(obtainAListOfPermanentlyValidApikeysRequest)
+	result := &ObtainAListOfPermanentlyValidApikeysResponse{}
+	result, err := IAM_CLIENT.ObtainAListOfPermanentlyValidApikeys(obtainAListOfPermanentlyValidApikeysRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QueryApikeyDetailsPermanentlyValid(t *testing.T) {
@@ -494,7 +554,18 @@ func TestClient_QueryApikeyDetailsPermanentlyValid(t *testing.T) {
 		UserId: util.PtrString(""),
 		Id:     util.PtrString(""),
 	}
-	err := IAM_CLIENT.QueryApikeyDetailsPermanentlyValid(queryApikeyDetailsPermanentlyValidRequest)
+	result := &QueryApikeyDetailsPermanentlyValidResponse{}
+	result, err := IAM_CLIENT.QueryApikeyDetailsPermanentlyValid(queryApikeyDetailsPermanentlyValidRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_QueryGroup(t *testing.T) {
@@ -611,12 +682,28 @@ func TestClient_UnbindSubUserVirtualMfa(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateApikeyPermanentlyValid(t *testing.T) {
+	Acl := &ACL{
+		Id:                util.PtrString(""),
+		Version:           util.PtrString(""),
+		AccessControlList: []*ACLEntry{},
+	}
 	updateApikeyPermanentlyValidRequest := &UpdateApikeyPermanentlyValidRequest{
 		UserId: util.PtrString(""),
 		Id:     util.PtrString(""),
-		Acl:    util.PtrString(""),
+		Acl:    Acl,
 	}
-	err := IAM_CLIENT.UpdateApikeyPermanentlyValid(updateApikeyPermanentlyValidRequest)
+	result := &UpdateApikeyPermanentlyValidResponse{}
+	result, err := IAM_CLIENT.UpdateApikeyPermanentlyValid(updateApikeyPermanentlyValidRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateGroup(t *testing.T) {

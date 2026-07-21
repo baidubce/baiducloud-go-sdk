@@ -110,14 +110,20 @@ func (c *Client) CreateAccessKey(request *CreateAccessKeyRequest) error {
 //   - request: the arguments to CreateApikeyPermanentlyValid
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) CreateApikeyPermanentlyValid(request *CreateApikeyPermanentlyValidRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - CreateApikeyPermanentlyValidResponse: The return type of the CreateApikeyPermanentlyValid interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateApikeyPermanentlyValid(request *CreateApikeyPermanentlyValidRequest) (*CreateApikeyPermanentlyValidResponse, error) {
+	result := &CreateApikeyPermanentlyValidResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateApikeyPermanentlyValidUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // CreateGroup
@@ -190,14 +196,20 @@ func (c *Client) CreateUser(request *CreateUserRequest) error {
 //   - request: the arguments to DecodingApikeyPermanentlyValid
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) DecodingApikeyPermanentlyValid(request *DecodingApikeyPermanentlyValidRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - DecodingApikeyPermanentlyValidResponse: The return type of the DecodingApikeyPermanentlyValid interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DecodingApikeyPermanentlyValid(request *DecodingApikeyPermanentlyValidRequest) (*DecodingApikeyPermanentlyValidResponse, error) {
+	result := &DecodingApikeyPermanentlyValidResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getDecodingApikeyPermanentlyValidUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // DeleteAccessKey
@@ -221,14 +233,20 @@ func (c *Client) DeleteAccessKey(request *DeleteAccessKeyRequest) error {
 //   - request: the arguments to DeleteApikeyPermanentlyValid
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) DeleteApikeyPermanentlyValid(request *DeleteApikeyPermanentlyValidRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - DeleteApikeyPermanentlyValidResponse: The return type of the DeleteApikeyPermanentlyValid interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteApikeyPermanentlyValid(request *DeleteApikeyPermanentlyValidRequest) (*DeleteApikeyPermanentlyValidResponse, error) {
+	result := &DeleteApikeyPermanentlyValidResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getDeleteApikeyPermanentlyValidUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // DeleteGroup
@@ -374,15 +392,21 @@ func (c *Client) GetLoginProfile(request *GetLoginProfileRequest) error {
 //   - request: the arguments to GetSessionApiKey
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) GetSessionApiKey(request *GetSessionApiKeyRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - GetSessionApiKeyResponse: The return type of the GetSessionApiKey interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetSessionApiKey(request *GetSessionApiKeyRequest) (*GetSessionApiKeyResponse, error) {
+	result := &GetSessionApiKeyResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getGetSessionApiKeyUri(VERSION_V1)).
 		WithQueryParamFilter("expireInSeconds", util.Int32Value(request.ExpireInSeconds)).
 		WithQueryParamFilter("acl", util.StringValue(request.Acl)).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // GetUser
@@ -676,14 +700,20 @@ func (c *Client) ModifySubUserOperationProtection(request *ModifySubUserOperatio
 //   - request: the arguments to ObtainAListOfPermanentlyValidApikeys
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ObtainAListOfPermanentlyValidApikeys(request *ObtainAListOfPermanentlyValidApikeysRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - ObtainAListOfPermanentlyValidApikeysResponse: The return type of the ObtainAListOfPermanentlyValidApikeys interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ObtainAListOfPermanentlyValidApikeys(request *ObtainAListOfPermanentlyValidApikeysRequest) (*ObtainAListOfPermanentlyValidApikeysResponse, error) {
+	result := &ObtainAListOfPermanentlyValidApikeysResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getObtainAListOfPermanentlyValidApikeysUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // QueryApikeyDetailsPermanentlyValid
@@ -692,14 +722,20 @@ func (c *Client) ObtainAListOfPermanentlyValidApikeys(request *ObtainAListOfPerm
 //   - request: the arguments to QueryApikeyDetailsPermanentlyValid
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) QueryApikeyDetailsPermanentlyValid(request *QueryApikeyDetailsPermanentlyValidRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - QueryApikeyDetailsPermanentlyValidResponse: The return type of the QueryApikeyDetailsPermanentlyValid interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryApikeyDetailsPermanentlyValid(request *QueryApikeyDetailsPermanentlyValidRequest) (*QueryApikeyDetailsPermanentlyValidResponse, error) {
+	result := &QueryApikeyDetailsPermanentlyValidResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getQueryApikeyDetailsPermanentlyValidUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // QueryGroup
@@ -895,14 +931,20 @@ func (c *Client) UnbindSubUserVirtualMfa(request *UnbindSubUserVirtualMfaRequest
 //   - request: the arguments to UpdateApikeyPermanentlyValid
 //
 // RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateApikeyPermanentlyValid(request *UpdateApikeyPermanentlyValidRequest) error {
-	return bce.NewRequestBuilder(c).
+//   - UpdateApikeyPermanentlyValidResponse: The return type of the UpdateApikeyPermanentlyValid interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateApikeyPermanentlyValid(request *UpdateApikeyPermanentlyValidRequest) (*UpdateApikeyPermanentlyValidResponse, error) {
+	result := &UpdateApikeyPermanentlyValidResponse{}
+	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getUpdateApikeyPermanentlyValidUri(VERSION_V1)).
 		WithBody(request).
+		WithResult(result).
 		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // UpdateGroup

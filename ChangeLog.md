@@ -1,3 +1,9 @@
+2026-07-21 Version: v0.0.109
+- 涉及产品: IAM，创建永久API Key响应新增id、tokenId、services等字段
+- 涉及产品: IAM，更新/查询/解码永久API Key响应新增访问控制及时间字段
+- 涉及产品: IAM，获取永久API Key列表及删除接口新增状态与分页字段
+- 涉及产品: IAM，创建短期API Key响应新增userId、token及有效期字段
+
 2026-07-17 Version: v0.0.108
 执行命令接口新增实例与网络相关字段
 - 涉及产品: CLOUDASSISTANT，执行命令新增实例ID、名称、内外网IP及带宽字段
