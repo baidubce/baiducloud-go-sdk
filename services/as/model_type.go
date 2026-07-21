@@ -6,15 +6,15 @@ type Type string
 // List of Type
 const (
 	TypeCrontab Type = "CRONTAB"
-	TypeAlarm   Type = "ALARM"
 	TypePeriod  Type = "PERIOD"
+	TypeAlarm   Type = "ALARM"
 )
 
 // All allowed values of Type enum
 var AllowedTypeEnumValues = []Type{
 	"CRONTAB",
-	"ALARM",
 	"PERIOD",
+	"ALARM",
 }
 
 // IsValid return true if the value is valid for the enum, false otherwise
