@@ -9,5 +9,5 @@ type AlarmRule struct {
 	Threshold             *string      `json:"threshold,omitempty"`
 	ComparisonOperator    *string      `json:"comparisonOperator,omitempty"`
 	EvaluationPeriodCount *int32       `json:"evaluationPeriodCount,omitempty"`
-	MetricDimensions      []*Dimension `json:"metricDimensions,omitempty"`
+	MetricDimensions      []*Dimension `json:"metricDimensions"`
 }
