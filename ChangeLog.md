@@ -1,3 +1,6 @@
+2026-07-22 Version: v0.0.111
+- 涉及产品: CLOUDASSISTANT，SDK版本更新
+
 2026-07-21 Version: v0.0.110
 - 涉及产品: AS，SDK版本更新
 
