@@ -1315,9 +1315,8 @@ func TestClient_DescribeUnplannedEvents(t *testing.T) {
 }
 func TestClient_DetachAsp(t *testing.T) {
 	detachAspRequest := &DetachAspRequest{
-		AspId:              util.PtrString(""),
-		VolumeIds:          []*string{},
-		DeleteAutoSnapshot: util.PtrBool(false),
+		AspId:     util.PtrString(""),
+		VolumeIds: []*string{},
 	}
 	err := BCC_CLIENT.DetachAsp(detachAspRequest)
 	ExpectEqual(t.Errorf, nil, err)
@@ -2740,7 +2739,6 @@ func TestClient_RemoteCopyImage(t *testing.T) {
 func TestClient_RemoteCopySnapshot(t *testing.T) {
 	remoteCopySnapshotRequest := &RemoteCopySnapshotRequest{
 		SnapshotId:      util.PtrString(""),
-		Uuid:            util.PtrString(""),
 		DestRegionInfos: []*RemoteCopyRequest{},
 	}
 	result := &RemoteCopySnapshotResponse{}
@@ -2759,6 +2757,7 @@ func TestClient_RemoteCopySnapshot(t *testing.T) {
 }
 func TestClient_RenameImage(t *testing.T) {
 	renameImageRequest := &RenameImageRequest{
+		ImageId:  util.PtrString(""),
 		ImageIds: []*string{},
 		Name:     util.PtrString(""),
 	}

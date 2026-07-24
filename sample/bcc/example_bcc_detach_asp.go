@@ -15,9 +15,8 @@ func DetachAsp() {
 		return
 	}
 	detachAspRequest := &bcc.DetachAspRequest{
-		AspId:              util.PtrString(""),
-		VolumeIds:          []*string{},
-		DeleteAutoSnapshot: util.PtrBool(false),
+		AspId:     util.PtrString(""),
+		VolumeIds: []*string{},
 	}
 	err = client.DetachAsp(detachAspRequest)
 	if err != nil {

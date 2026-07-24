@@ -15,6 +15,7 @@ func RenameImage() {
 		return
 	}
 	renameImageRequest := &bcc.RenameImageRequest{
+		ImageId:  util.PtrString(""),
 		ImageIds: []*string{},
 		Name:     util.PtrString(""),
 	}

@@ -17,7 +17,6 @@ func RemoteCopySnapshot() {
 	}
 	remoteCopySnapshotRequest := &bcc.RemoteCopySnapshotRequest{
 		SnapshotId:      util.PtrString(""),
-		Uuid:            util.PtrString(""),
 		DestRegionInfos: []*bcc.RemoteCopyRequest{},
 	}
 	result, err := client.RemoteCopySnapshot(remoteCopySnapshotRequest)

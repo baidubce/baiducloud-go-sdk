@@ -1,3 +1,8 @@
+2026-07-24 Version: v0.0.112
+- 涉及产品: BCC，解绑自动快照策略删除deleteAutoSnapshot字段
+- 涉及产品: BCC，跨地域复制快照删除uuid字段
+- 涉及产品: BCC，修改自定义镜像名称新增imageId字段
+
 2026-07-22 Version: v0.0.111
 - 涉及产品: CLOUDASSISTANT，SDK版本更新
 
