@@ -18,7 +18,6 @@ func GetTaskDetailV2() {
 	getTaskDetailV2Request := &oos.GetTaskDetailV2Request{
 		DagId:          util.PtrString(""),
 		TaskId:         util.PtrString(""),
-		Namespace:      util.PtrString(""),
 		IgnoreChildren: util.PtrString(""),
 		Locale:         util.PtrString(""),
 	}

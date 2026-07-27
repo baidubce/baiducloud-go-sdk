@@ -90,7 +90,6 @@ func (c *Client) DeleteTemplateV2(request *DeleteTemplateV2Request) (*DeleteTemp
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getDeleteTemplateV2Uri(VERSION_V2)).
-		WithQueryParamFilter("namespace", util.StringValue(request.Namespace)).
 		WithQueryParamFilter("id", util.StringValue(request.Id)).
 		WithResult(result).
 		Do()
@@ -113,7 +112,6 @@ func (c *Client) GetExecutionDetailV2(request *GetExecutionDetailV2Request) (*Ge
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getGetExecutionDetailV2Uri(VERSION_V2)).
-		WithQueryParamFilter("namespace", util.StringValue(request.Namespace)).
 		WithQueryParamFilter("id", util.StringValue(request.Id)).
 		WithQueryParamFilter("withLog", util.StringValue(request.WithLog)).
 		WithQueryParamFilter("locale", util.StringValue(request.Locale)).
@@ -207,7 +205,6 @@ func (c *Client) GetTaskDetailV2(request *GetTaskDetailV2Request) (*GetTaskDetai
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getGetTaskDetailV2Uri(VERSION_V2)).
-		WithQueryParamFilter("namespace", util.StringValue(request.Namespace)).
 		WithQueryParamFilter("dagId", util.StringValue(request.DagId)).
 		WithQueryParamFilter("taskId", util.StringValue(request.TaskId)).
 		WithQueryParamFilter("ignoreChildren", util.StringValue(request.IgnoreChildren)).
@@ -233,7 +230,6 @@ func (c *Client) GetTemplateDetailV2(request *GetTemplateDetailV2Request) (*GetT
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getGetTemplateDetailV2Uri(VERSION_V2)).
-		WithQueryParamFilter("namespace", util.StringValue(request.Namespace)).
 		WithQueryParamFilter("id", util.StringValue(request.Id)).
 		WithQueryParamFilter("name", util.StringValue(request.Name)).
 		WithQueryParamFilter("type", util.StringValue(request.Type)).

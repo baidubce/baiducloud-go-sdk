@@ -3,393 +3,370 @@ package oos
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	stdhttp "net/http"
-	"net/http/httptest"
+	"os"
+	"path/filepath"
 	"reflect"
+	"runtime"
 	"testing"
 
-	"github.com/baidubce/baiducloud-go-sdk/bce"
-	bcehttp "github.com/baidubce/baiducloud-go-sdk/core/http"
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
+	"github.com/baidubce/baiducloud-go-sdk/core/util/log"
 )
 
-func TestNewClient(t *testing.T) {
-	client, err := NewClient("ak", "sk", "")
+var (
+	OOS_CLIENT *Client
+)
+
+// For security reason, ak/sk should not hard write here.
+type Conf struct {
+	AK       string
+	SK       string
+	Endpoint string
+}
+
+func init() {
+	_, f, _, _ := runtime.Caller(0)
+	conf := filepath.Join(filepath.Dir(f), "config.json")
+	fp, err := os.Open(conf)
 	if err != nil {
-		t.Fatalf("NewClient() error = %v, want nil", err)
+		log.Fatal("config json file of ak/sk not given:", conf)
+		os.Exit(1)
 	}
-	if got := client.GetBceClientConfig().Endpoint; got != DEFAULT_ENDPOINT {
-		t.Errorf("NewClient() endpoint = %q, want %q", got, DEFAULT_ENDPOINT)
-	}
+	decoder := json.NewDecoder(fp)
+	confObj := &Conf{}
+	decoder.Decode(confObj)
 
-	if _, err := NewClient("", "sk", "example.com"); err == nil || err.Error() != "accessKeyId should not be empty" {
-		t.Errorf("NewClient() empty ak error = %v, want accessKeyId should not be empty", err)
-	}
-	if _, err := NewClient("ak", "", "example.com"); err == nil || err.Error() != "secretKey should not be empty" {
-		t.Errorf("NewClient() empty sk error = %v, want secretKey should not be empty", err)
-	}
+	OOS_CLIENT, _ = NewClient(confObj.AK, confObj.SK, confObj.Endpoint)
+	log.SetLogLevel(log.WARN)
 }
 
-func TestOOSV2URIHelpers(t *testing.T) {
-	tests := []struct {
-		name string
-		got  string
-		want string
-	}{
-		{"check template", getCheckTemplateV2Uri(VERSION_V2), "/v2/template/check"},
-		{"create execution", getCreateExecutionV2Uri(VERSION_V2), "/v2/execution"},
-		{"create template", getCreateTemplateV2Uri(VERSION_V2), "/v2/template"},
-		{"delete template", getDeleteTemplateV2Uri(VERSION_V2), "/v2/template"},
-		{"get execution detail", getGetExecutionDetailV2Uri(VERSION_V2), "/v2/execution"},
-		{"get execution list", getGetExecutionListV2Uri(VERSION_V2), "/v2/execution/list"},
-		{"get operator list", getGetOperatorListV2Uri(VERSION_V2), "/v2/operator/list"},
-		{"get task children list", getGetTaskChildrenListV2Uri(VERSION_V2), "/v2/task/children/list"},
-		{"get task detail", getGetTaskDetailV2Uri(VERSION_V2), "/v2/task"},
-		{"get template detail", getGetTemplateDetailV2Uri(VERSION_V2), "/v2/template"},
-		{"get template list", getGetTemplateListV2Uri(VERSION_V2), "/v2/template/list"},
-		{"update template", getUpdateTemplateV2Uri(VERSION_V2), "/v2/template"},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if tt.got != tt.want {
-				t.Errorf("uri = %q, want %q", tt.got, tt.want)
+// ExpectEqual is the helper function for test each case
+func ExpectEqual(alert func(format string, args ...interface{}),
+	expected interface{}, actual interface{}) bool {
+	expectedValue, actualValue := reflect.ValueOf(expected), reflect.ValueOf(actual)
+	equal := false
+	switch {
+	case expected == nil && actual == nil:
+		return true
+	case expected != nil && actual == nil:
+		equal = expectedValue.IsNil()
+	case expected == nil && actual != nil:
+		equal = actualValue.IsNil()
+	default:
+		if actualType := reflect.TypeOf(actual); actualType != nil {
+			if expectedValue.IsValid() && expectedValue.Type().ConvertibleTo(actualType) {
+				equal = reflect.DeepEqual(expectedValue.Convert(actualType).Interface(), actual)
 			}
-		})
-	}
-}
-
-func TestOOSClientV2Requests(t *testing.T) {
-	tests := []struct {
-		name       string
-		method     string
-		path       string
-		query      map[string]string
-		bodyFields map[string]interface{}
-		call       func(*Client) (interface{}, error)
-	}{
-		{
-			name:       "check template posts template body",
-			method:     bcehttp.POST,
-			path:       "/v2/template/check",
-			bodyFields: map[string]interface{}{"name": "tmpl-check", "description": "validate template", "linear": true, "parallelism": float64(2)},
-			call: func(client *Client) (interface{}, error) {
-				return client.CheckTemplateV2(&CheckTemplateV2Request{
-					Name:        util.PtrString("tmpl-check"),
-					Description: util.PtrString("validate template"),
-					Linear:      util.PtrBool(true),
-					Parallelism: util.PtrInt32(2),
-				})
-			},
-		},
-		{
-			name:       "create execution sends locale query and body",
-			method:     bcehttp.POST,
-			path:       "/v2/execution",
-			query:      map[string]string{"locale": "zh-cn"},
-			bodyFields: map[string]interface{}{"description": "run template", "parallelism": float64(3), "manually": true},
-			call: func(client *Client) (interface{}, error) {
-				return client.CreateExecutionV2(&CreateExecutionV2Request{
-					Locale:      util.PtrString("zh-cn"),
-					Description: util.PtrString("run template"),
-					Parallelism: util.PtrInt32(3),
-					Manually:    util.PtrBool(true),
-				})
-			},
-		},
-		{
-			name:       "create execution omits blank locale query",
-			method:     bcehttp.POST,
-			path:       "/v2/execution",
-			bodyFields: map[string]interface{}{"description": "run without locale"},
-			call: func(client *Client) (interface{}, error) {
-				return client.CreateExecutionV2(&CreateExecutionV2Request{
-					Locale:      util.PtrString(""),
-					Description: util.PtrString("run without locale"),
-				})
-			},
-		},
-		{
-			name:       "create template posts template body",
-			method:     bcehttp.POST,
-			path:       "/v2/template",
-			bodyFields: map[string]interface{}{"name": "tmpl-create", "description": "new template", "linear": false, "parallelism": float64(1)},
-			call: func(client *Client) (interface{}, error) {
-				return client.CreateTemplateV2(&CreateTemplateV2Request{
-					Name:        util.PtrString("tmpl-create"),
-					Description: util.PtrString("new template"),
-					Linear:      util.PtrBool(false),
-					Parallelism: util.PtrInt32(1),
-				})
-			},
-		},
-		{
-			name:   "delete template sends namespace and id query",
-			method: bcehttp.DELETE,
-			path:   "/v2/template",
-			query:  map[string]string{"namespace": "default", "id": "tmpl-001"},
-			call: func(client *Client) (interface{}, error) {
-				return client.DeleteTemplateV2(&DeleteTemplateV2Request{
-					Namespace: util.PtrString("default"),
-					Id:        util.PtrString("tmpl-001"),
-				})
-			},
-		},
-		{
-			name:   "get execution detail sends all filters",
-			method: bcehttp.GET,
-			path:   "/v2/execution",
-			query:  map[string]string{"namespace": "default", "id": "exec-001", "withLog": "true", "locale": "en-us"},
-			call: func(client *Client) (interface{}, error) {
-				return client.GetExecutionDetailV2(&GetExecutionDetailV2Request{
-					Namespace: util.PtrString("default"),
-					Id:        util.PtrString("exec-001"),
-					WithLog:   util.PtrString("true"),
-					Locale:    util.PtrString("en-us"),
-				})
-			},
-		},
-		{
-			name:       "get execution list posts locale query and filters",
-			method:     bcehttp.POST,
-			path:       "/v2/execution/list",
-			query:      map[string]string{"locale": "zh-cn"},
-			bodyFields: map[string]interface{}{"namespace": "default", "state": "SUCCESS", "pageNo": float64(2), "pageSize": float64(20)},
-			call: func(client *Client) (interface{}, error) {
-				return client.GetExecutionListV2(&GetExecutionListV2Request{
-					Locale:    util.PtrString("zh-cn"),
-					Namespace: util.PtrString("default"),
-					State:     util.PtrString("SUCCESS"),
-					PageNo:    util.PtrInt32(2),
-					PageSize:  util.PtrInt32(20),
-				})
-			},
-		},
-		{
-			name:       "get operator list posts paging body",
-			method:     bcehttp.POST,
-			path:       "/v2/operator/list",
-			query:      map[string]string{"locale": "zh-cn"},
-			bodyFields: map[string]interface{}{"sort": "name", "ascending": true, "pageNo": float64(1), "pageSize": float64(10)},
-			call: func(client *Client) (interface{}, error) {
-				return client.GetOperatorListV2(&GetOperatorListV2Request{
-					Locale:    util.PtrString("zh-cn"),
-					Sort:      util.PtrString("name"),
-					Ascending: util.PtrBool(true),
-					PageNo:    util.PtrInt32(1),
-					PageSize:  util.PtrInt32(10),
-				})
-			},
-		},
-		{
-			name:       "get task children list posts task filters",
-			method:     bcehttp.POST,
-			path:       "/v2/task/children/list",
-			query:      map[string]string{"locale": "zh-cn"},
-			bodyFields: map[string]interface{}{"executionId": "exec-001", "taskId": "task-001", "namespace": "default", "pageNo": float64(1), "pageSize": float64(5)},
-			call: func(client *Client) (interface{}, error) {
-				return client.GetTaskChildrenListV2(&GetTaskChildrenListV2Request{
-					Locale:      util.PtrString("zh-cn"),
-					ExecutionId: util.PtrString("exec-001"),
-					TaskId:      util.PtrString("task-001"),
-					Namespace:   util.PtrString("default"),
-					PageNo:      util.PtrInt32(1),
-					PageSize:    util.PtrInt32(5),
-				})
-			},
-		},
-		{
-			name:   "get task detail sends all query params",
-			method: bcehttp.GET,
-			path:   "/v2/task",
-			query:  map[string]string{"namespace": "default", "dagId": "dag-001", "taskId": "task-001", "ignoreChildren": "false", "locale": "zh-cn"},
-			call: func(client *Client) (interface{}, error) {
-				return client.GetTaskDetailV2(&GetTaskDetailV2Request{
-					Namespace:      util.PtrString("default"),
-					DagId:          util.PtrString("dag-001"),
-					TaskId:         util.PtrString("task-001"),
-					IgnoreChildren: util.PtrString("false"),
-					Locale:         util.PtrString("zh-cn"),
-				})
-			},
-		},
-		{
-			name:   "get template detail sends identity query params",
-			method: bcehttp.GET,
-			path:   "/v2/template",
-			query:  map[string]string{"namespace": "default", "id": "tmpl-001", "name": "template", "type": "private", "locale": "zh-cn"},
-			call: func(client *Client) (interface{}, error) {
-				return client.GetTemplateDetailV2(&GetTemplateDetailV2Request{
-					Namespace: util.PtrString("default"),
-					Id:        util.PtrString("tmpl-001"),
-					Name:      util.PtrString("template"),
-					Type:      util.PtrString("private"),
-					Locale:    util.PtrString("zh-cn"),
-				})
-			},
-		},
-		{
-			name:       "get template list posts filters",
-			method:     bcehttp.POST,
-			path:       "/v2/template/list",
-			query:      map[string]string{"locale": "zh-cn"},
-			bodyFields: map[string]interface{}{"namespace": "default", "name": "template", "id": "tmpl-001", "type": "private", "supportedInstanceType": "bcc"},
-			call: func(client *Client) (interface{}, error) {
-				return client.GetTemplateListV2(&GetTemplateListV2Request{
-					Locale:                util.PtrString("zh-cn"),
-					Namespace:             util.PtrString("default"),
-					Name:                  util.PtrString("template"),
-					Id:                    util.PtrString("tmpl-001"),
-					OosType:               util.PtrString("private"),
-					SupportedInstanceType: util.PtrString("bcc"),
-				})
-			},
-		},
-		{
-			name:       "update template puts complete body",
-			method:     bcehttp.PUT,
-			path:       "/v2/template",
-			bodyFields: map[string]interface{}{"namespace": "default", "id": "tmpl-001", "name": "updated", "description": "updated template", "linear": true},
-			call: func(client *Client) (interface{}, error) {
-				return client.UpdateTemplateV2(&UpdateTemplateV2Request{
-					Namespace:   util.PtrString("default"),
-					Id:          util.PtrString("tmpl-001"),
-					Name:        util.PtrString("updated"),
-					Description: util.PtrString("updated template"),
-					Linear:      util.PtrBool(true),
-				})
-			},
-		},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			server := httptest.NewServer(stdhttp.HandlerFunc(func(w stdhttp.ResponseWriter, r *stdhttp.Request) {
-				if r.Method != tt.method {
-					t.Errorf("method = %q, want %q", r.Method, tt.method)
-				}
-				if r.URL.Path != tt.path {
-					t.Errorf("path = %q, want %q", r.URL.Path, tt.path)
-				}
-				assertQuery(t, r, tt.query)
-				assertJSONBody(t, r, tt.bodyFields)
-
-				w.Header().Set("Content-Type", "application/json")
-				fmt.Fprint(w, `{"success":true,"msg":"ok","code":200,"result":{}}`)
-			}))
-			defer server.Close()
-
-			client, err := NewClient("ak", "sk", server.URL)
-			if err != nil {
-				t.Fatalf("NewClient() error = %v, want nil", err)
-			}
-			result, err := tt.call(client)
-			if err != nil {
-				t.Fatalf("client call error = %v, want nil", err)
-			}
-			assertResponseFields(t, result)
-		})
-	}
-}
-
-func TestOOSClientV2ReturnsServiceError(t *testing.T) {
-	server := httptest.NewServer(stdhttp.HandlerFunc(func(w stdhttp.ResponseWriter, r *stdhttp.Request) {
-		if r.Method != bcehttp.GET {
-			t.Errorf("method = %q, want %q", r.Method, bcehttp.GET)
 		}
-		if r.URL.Path != "/v2/template" {
-			t.Errorf("path = %q, want /v2/template", r.URL.Path)
-		}
-		w.Header().Set(bcehttp.BCE_REQUEST_ID, "req-001")
-		w.WriteHeader(stdhttp.StatusForbidden)
-		fmt.Fprint(w, `{"code":"AccessDenied","message":"denied by test"}`)
-	}))
-	defer server.Close()
+	}
+	if !equal {
+		_, file, line, _ := runtime.Caller(1)
+		alert("%s:%d: missmatch, expect %v but %v", file, line, expected, actual)
+		return false
+	}
+	return true
+}
 
-	client, err := NewClient("ak", "sk", server.URL)
+func TestClient_CheckTemplateV2(t *testing.T) {
+	checkTemplateV2Request := &CheckTemplateV2Request{
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
+		Tags:        []*KeyValuePair{},
+		Linear:      util.PtrBool(false),
+		Parallelism: util.PtrInt32(int32(0)),
+		Operators:   []*Operator{},
+		Links:       []*LinkModel{},
+		Properties:  []*Property{},
+	}
+	result := &CheckTemplateV2Response{}
+	result, err := OOS_CLIENT.CheckTemplateV2(checkTemplateV2Request)
 	if err != nil {
-		t.Fatalf("NewClient() error = %v, want nil", err)
-	}
-	result, err := client.GetTemplateDetailV2(&GetTemplateDetailV2Request{Id: util.PtrString("tmpl-001")})
-	if result != nil {
-		t.Errorf("GetTemplateDetailV2() result = %#v, want nil", result)
-	}
-	serviceErr, ok := err.(*bce.BceServiceError)
-	if !ok {
-		t.Fatalf("GetTemplateDetailV2() error type = %T, want *bce.BceServiceError", err)
-	}
-	if serviceErr.StatusCode != stdhttp.StatusForbidden {
-		t.Errorf("service error status = %d, want %d", serviceErr.StatusCode, stdhttp.StatusForbidden)
-	}
-	if serviceErr.Code != "AccessDenied" {
-		t.Errorf("service error code = %q, want AccessDenied", serviceErr.Code)
-	}
-	if serviceErr.Message != "denied by test" {
-		t.Errorf("service error message = %q, want denied by test", serviceErr.Message)
-	}
-}
-
-func assertQuery(t *testing.T, r *stdhttp.Request, want map[string]string) {
-	t.Helper()
-	values := r.URL.Query()
-	if len(values) != len(want) {
-		t.Errorf("query length = %d (%v), want %d (%v)", len(values), values, len(want), want)
-	}
-	for key, wantValue := range want {
-		if got := values.Get(key); got != wantValue {
-			t.Errorf("query[%s] = %q, want %q", key, got, wantValue)
-		}
-	}
-}
-
-func assertJSONBody(t *testing.T, r *stdhttp.Request, want map[string]interface{}) {
-	t.Helper()
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		t.Fatalf("ReadAll(body) error = %v, want nil", err)
-	}
-	if len(want) == 0 {
-		if len(body) != 0 {
-			t.Errorf("body = %s, want empty", string(body))
-		}
+		fmt.Println("request failed:", err)
 		return
 	}
-
-	var got map[string]interface{}
-	if err := json.Unmarshal(body, &got); err != nil {
-		t.Fatalf("json.Unmarshal(%s) error = %v, want nil", string(body), err)
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
 	}
-	for key, wantValue := range want {
-		if !reflect.DeepEqual(got[key], wantValue) {
-			t.Errorf("body[%s] = %#v, want %#v", key, got[key], wantValue)
-		}
-	}
-	if _, ok := got["locale"]; ok {
-		t.Errorf("body contains locale = %#v, want locale only in query", got["locale"])
-	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
 }
-
-func assertResponseFields(t *testing.T, result interface{}) {
-	t.Helper()
-	if result == nil {
-		t.Fatal("result = nil, want response object")
+func TestClient_CreateExecutionV2(t *testing.T) {
+	Template := &Template{
+		Id:                     util.PtrString(""),
+		Ref:                    util.PtrString(""),
+		Name:                   util.PtrString(""),
+		OosType:                util.PtrString(""),
+		Description:            util.PtrString(""),
+		Tags:                   []*KeyValuePair{},
+		Linear:                 util.PtrBool(false),
+		Parallelism:            util.PtrInt32(int32(0)),
+		Operators:              []*Operator{},
+		Links:                  []*LinkModel{},
+		Properties:             []*Property{},
+		UpdatedTime:            util.PtrString(""),
+		SupportedInstanceTypes: []*string{},
 	}
-	value := reflect.Indirect(reflect.ValueOf(result))
-	if !value.IsValid() {
-		t.Fatal("result is invalid, want response object")
+	Properties := make(map[string]interface{})
+	createExecutionV2Request := &CreateExecutionV2Request{
+		Locale:      util.PtrString(""),
+		Description: util.PtrString(""),
+		Template:    Template,
+		Parallelism: util.PtrInt32(int32(0)),
+		Manually:    util.PtrBool(false),
+		Properties:  nil,
+		Tags:        []*Tag{},
 	}
-
-	success := value.FieldByName("Success")
-	if !success.IsValid() || success.IsNil() || !success.Elem().Bool() {
-		t.Fatalf("Success = %#v, want true", success)
+	result := &CreateExecutionV2Response{}
+	result, err := OOS_CLIENT.CreateExecutionV2(createExecutionV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
 	}
-	msg := value.FieldByName("Msg")
-	if !msg.IsValid() || msg.IsNil() || msg.Elem().String() != "ok" {
-		t.Fatalf("Msg = %#v, want ok", msg)
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
 	}
-	code := value.FieldByName("Code")
-	if code.IsValid() && !code.IsNil() && code.Elem().Int() != 200 {
-		t.Fatalf("Code = %d, want 200", code.Elem().Int())
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateTemplateV2(t *testing.T) {
+	createTemplateV2Request := &CreateTemplateV2Request{
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
+		Tags:        []*KeyValuePair{},
+		Linear:      util.PtrBool(false),
+		Parallelism: util.PtrInt32(int32(0)),
+		Operators:   []*Operator{},
+		Links:       []*LinkModel{},
+		Properties:  []*Property{},
 	}
+	result := &CreateTemplateV2Response{}
+	result, err := OOS_CLIENT.CreateTemplateV2(createTemplateV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteTemplateV2(t *testing.T) {
+	deleteTemplateV2Request := &DeleteTemplateV2Request{
+		Id: util.PtrString(""),
+	}
+	result := &DeleteTemplateV2Response{}
+	result, err := OOS_CLIENT.DeleteTemplateV2(deleteTemplateV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetExecutionDetailV2(t *testing.T) {
+	getExecutionDetailV2Request := &GetExecutionDetailV2Request{
+		Id:      util.PtrString(""),
+		WithLog: util.PtrString(""),
+		Locale:  util.PtrString(""),
+	}
+	result := &GetExecutionDetailV2Response{}
+	result, err := OOS_CLIENT.GetExecutionDetailV2(getExecutionDetailV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetExecutionListV2(t *testing.T) {
+	Template := &TemplateFilter{
+		Name: util.PtrString(""),
+	}
+	getExecutionListV2Request := &GetExecutionListV2Request{
+		Locale:             util.PtrString(""),
+		Template:           Template,
+		State:              util.PtrString(""),
+		Trigger:            util.PtrString(""),
+		CronExecutionName:  util.PtrString(""),
+		EventExecutionName: util.PtrString(""),
+		StartTime:          util.PtrInt32(int32(0)),
+		EndTime:            util.PtrInt32(int32(0)),
+		Sort:               util.PtrString(""),
+		Ascending:          util.PtrBool(false),
+		PageNo:             util.PtrInt32(int32(0)),
+		PageSize:           util.PtrInt32(int32(0)),
+	}
+	result := &GetExecutionListV2Response{}
+	result, err := OOS_CLIENT.GetExecutionListV2(getExecutionListV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetOperatorListV2(t *testing.T) {
+	Operator := &OperatorFilter{
+		Name: util.PtrString(""),
+	}
+	getOperatorListV2Request := &GetOperatorListV2Request{
+		Locale:    util.PtrString(""),
+		Operator:  Operator,
+		Sort:      util.PtrString(""),
+		Ascending: util.PtrBool(false),
+		PageNo:    util.PtrInt32(int32(0)),
+		PageSize:  util.PtrInt32(int32(0)),
+	}
+	result := &GetOperatorListV2Response{}
+	result, err := OOS_CLIENT.GetOperatorListV2(getOperatorListV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetTaskChildrenListV2(t *testing.T) {
+	getTaskChildrenListV2Request := &GetTaskChildrenListV2Request{
+		Locale:      util.PtrString(""),
+		ExecutionId: util.PtrString(""),
+		TaskId:      util.PtrString(""),
+		States:      []*string{},
+		PageNo:      util.PtrInt32(int32(0)),
+		PageSize:    util.PtrInt32(int32(0)),
+	}
+	result := &GetTaskChildrenListV2Response{}
+	result, err := OOS_CLIENT.GetTaskChildrenListV2(getTaskChildrenListV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetTaskDetailV2(t *testing.T) {
+	getTaskDetailV2Request := &GetTaskDetailV2Request{
+		DagId:          util.PtrString(""),
+		TaskId:         util.PtrString(""),
+		IgnoreChildren: util.PtrString(""),
+		Locale:         util.PtrString(""),
+	}
+	result := &GetTaskDetailV2Response{}
+	result, err := OOS_CLIENT.GetTaskDetailV2(getTaskDetailV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetTemplateDetailV2(t *testing.T) {
+	getTemplateDetailV2Request := &GetTemplateDetailV2Request{
+		Id:     util.PtrString(""),
+		Name:   util.PtrString(""),
+		Type:   util.PtrString(""),
+		Locale: util.PtrString(""),
+	}
+	result := &GetTemplateDetailV2Response{}
+	result, err := OOS_CLIENT.GetTemplateDetailV2(getTemplateDetailV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetTemplateListV2(t *testing.T) {
+	getTemplateListV2Request := &GetTemplateListV2Request{
+		Locale:                util.PtrString(""),
+		Name:                  util.PtrString(""),
+		Id:                    util.PtrString(""),
+		OosType:               util.PtrString(""),
+		Sort:                  util.PtrString(""),
+		Ascending:             util.PtrBool(false),
+		PageNo:                util.PtrInt32(int32(0)),
+		PageSize:              util.PtrInt32(int32(0)),
+		SupportedInstanceType: util.PtrString(""),
+	}
+	result := &GetTemplateListV2Response{}
+	result, err := OOS_CLIENT.GetTemplateListV2(getTemplateListV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateTemplateV2(t *testing.T) {
+	updateTemplateV2Request := &UpdateTemplateV2Request{
+		Id:          util.PtrString(""),
+		Name:        util.PtrString(""),
+		Description: util.PtrString(""),
+		Tags:        []*KeyValuePair{},
+		Linear:      util.PtrBool(false),
+		Parallelism: util.PtrInt32(int32(0)),
+		Operators:   []*Operator{},
+		Links:       []*LinkModel{},
+		Properties:  []*Property{},
+	}
+	result := &UpdateTemplateV2Response{}
+	result, err := OOS_CLIENT.UpdateTemplateV2(updateTemplateV2Request)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
 }

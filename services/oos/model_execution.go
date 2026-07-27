@@ -11,7 +11,7 @@ type Execution struct {
 	UpdatedTimestamp  *int64                  `json:"updatedTimestamp,omitempty"`
 	FinishedTimestamp *int64                  `json:"finishedTimestamp,omitempty"`
 	State             *string                 `json:"state,omitempty"`
-	Properties        *interface{}            `json:"properties,omitempty"`
+	Properties        *map[string]interface{} `json:"properties,omitempty"`
 	Tasks             []*ExecutionTaskSummary `json:"tasks,omitempty"`
 	Tags              []*Tag                  `json:"tags,omitempty"`
 	Trigger           *string                 `json:"trigger,omitempty"`

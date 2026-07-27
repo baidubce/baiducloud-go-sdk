@@ -2,7 +2,6 @@ package oos
 
 type GetTemplateListV2Request struct {
 	Locale                *string `json:"-"`
-	Namespace             *string `json:"namespace,omitempty"`
 	Name                  *string `json:"name,omitempty"`
 	Id                    *string `json:"id,omitempty"`
 	OosType               *string `json:"type,omitempty"`

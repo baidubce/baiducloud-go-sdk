@@ -16,7 +16,6 @@ func UpdateTemplateV2() {
 		return
 	}
 	updateTemplateV2Request := &oos.UpdateTemplateV2Request{
-		Namespace:   util.PtrString(""),
 		Id:          util.PtrString(""),
 		Name:        util.PtrString(""),
 		Description: util.PtrString(""),

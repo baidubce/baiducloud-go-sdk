@@ -16,11 +16,10 @@ func GetTemplateDetailV2() {
 		return
 	}
 	getTemplateDetailV2Request := &oos.GetTemplateDetailV2Request{
-		Namespace: util.PtrString(""),
-		Id:        util.PtrString(""),
-		Name:      util.PtrString(""),
-		Type:      util.PtrString(""),
-		Locale:    util.PtrString(""),
+		Id:     util.PtrString(""),
+		Name:   util.PtrString(""),
+		Type:   util.PtrString(""),
+		Locale: util.PtrString(""),
 	}
 	result, err := client.GetTemplateDetailV2(getTemplateDetailV2Request)
 	if err != nil {

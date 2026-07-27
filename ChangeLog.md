@@ -1,3 +1,8 @@
+2026-07-27 Version: v0.0.113
+- 涉及产品: OOS，查询/详情执行接口新增updatedTime、label、parallelismControl等字段
+- 涉及产品: OOS，创建执行接口新增key字段
+- 涉及产品: OOS，删除/更新/查询模板及任务详情接口移除namespace字段
+
 2026-07-24 Version: v0.0.112
 - 涉及产品: BCC，解绑自动快照策略删除deleteAutoSnapshot字段
 - 涉及产品: BCC，跨地域复制快照删除uuid字段

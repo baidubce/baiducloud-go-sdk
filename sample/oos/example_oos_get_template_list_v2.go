@@ -17,7 +17,6 @@ func GetTemplateListV2() {
 	}
 	getTemplateListV2Request := &oos.GetTemplateListV2Request{
 		Locale:                util.PtrString(""),
-		Namespace:             util.PtrString(""),
 		Name:                  util.PtrString(""),
 		Id:                    util.PtrString(""),
 		OosType:               util.PtrString(""),

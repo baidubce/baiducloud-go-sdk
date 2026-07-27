@@ -16,10 +16,9 @@ func GetExecutionDetailV2() {
 		return
 	}
 	getExecutionDetailV2Request := &oos.GetExecutionDetailV2Request{
-		Id:        util.PtrString(""),
-		Namespace: util.PtrString(""),
-		WithLog:   util.PtrString(""),
-		Locale:    util.PtrString(""),
+		Id:      util.PtrString(""),
+		WithLog: util.PtrString(""),
+		Locale:  util.PtrString(""),
 	}
 	result, err := client.GetExecutionDetailV2(getExecutionDetailV2Request)
 	if err != nil {

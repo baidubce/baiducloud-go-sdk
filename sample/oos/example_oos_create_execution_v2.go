@@ -30,6 +30,7 @@ func CreateExecutionV2() {
 		UpdatedTime:            util.PtrString(""),
 		SupportedInstanceTypes: []*string{},
 	}
+	Properties := make(map[string]interface{})
 	createExecutionV2Request := &oos.CreateExecutionV2Request{
 		Locale:      util.PtrString(""),
 		Description: util.PtrString(""),

@@ -15,10 +15,12 @@ func GetExecutionListV2() {
 		fmt.Println("create client err:", err)
 		return
 	}
+	Template := &oos.TemplateFilter{
+		Name: util.PtrString(""),
+	}
 	getExecutionListV2Request := &oos.GetExecutionListV2Request{
 		Locale:             util.PtrString(""),
-		Namespace:          util.PtrString(""),
-		Template:           nil,
+		Template:           Template,
 		State:              util.PtrString(""),
 		Trigger:            util.PtrString(""),
 		CronExecutionName:  util.PtrString(""),

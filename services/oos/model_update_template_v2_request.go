@@ -1,7 +1,6 @@
 package oos
 
 type UpdateTemplateV2Request struct {
-	Namespace   *string         `json:"namespace,omitempty"`
 	Id          *string         `json:"id,omitempty"`
 	Name        *string         `json:"name,omitempty"`
 	Description *string         `json:"description,omitempty"`

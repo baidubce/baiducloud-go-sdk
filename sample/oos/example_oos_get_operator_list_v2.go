@@ -15,9 +15,12 @@ func GetOperatorListV2() {
 		fmt.Println("create client err:", err)
 		return
 	}
+	Operator := &oos.OperatorFilter{
+		Name: util.PtrString(""),
+	}
 	getOperatorListV2Request := &oos.GetOperatorListV2Request{
 		Locale:    util.PtrString(""),
-		Operator:  nil,
+		Operator:  Operator,
 		Sort:      util.PtrString(""),
 		Ascending: util.PtrBool(false),
 		PageNo:    util.PtrInt32(int32(0)),

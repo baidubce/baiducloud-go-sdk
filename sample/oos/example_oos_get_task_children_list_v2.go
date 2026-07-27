@@ -19,7 +19,6 @@ func GetTaskChildrenListV2() {
 		Locale:      util.PtrString(""),
 		ExecutionId: util.PtrString(""),
 		TaskId:      util.PtrString(""),
-		Namespace:   util.PtrString(""),
 		States:      []*string{},
 		PageNo:      util.PtrInt32(int32(0)),
 		PageSize:    util.PtrInt32(int32(0)),

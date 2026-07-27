@@ -16,8 +16,7 @@ func DeleteTemplateV2() {
 		return
 	}
 	deleteTemplateV2Request := &oos.DeleteTemplateV2Request{
-		Id:        util.PtrString(""),
-		Namespace: util.PtrString(""),
+		Id: util.PtrString(""),
 	}
 	result, err := client.DeleteTemplateV2(deleteTemplateV2Request)
 	if err != nil {
