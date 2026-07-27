@@ -5,14 +5,16 @@ type InstanceType string
 
 // List of InstanceType
 const (
-	InstanceTypeBcc InstanceType = "BCC"
-	InstanceTypeBbc InstanceType = "BBC"
+	InstanceTypeBcc  InstanceType = "BCC"
+	InstanceTypeBbc  InstanceType = "BBC"
+	InstanceTypeHpas InstanceType = "HPAS"
 )
 
 // All allowed values of InstanceType enum
 var AllowedInstanceTypeEnumValues = []InstanceType{
 	"BCC",
 	"BBC",
+	"HPAS",
 }
 
 // IsValid return true if the value is valid for the enum, false otherwise

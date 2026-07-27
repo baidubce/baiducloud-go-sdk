@@ -1,3 +1,6 @@
+2026-07-27 Version: v0.0.114
+- 涉及产品: CLOUDASSISTANT，SDK版本更新
+
 2026-07-27 Version: v0.0.113
 - 涉及产品: OOS，查询/详情执行接口新增updatedTime、label、parallelismControl等字段
 - 涉及产品: OOS，创建执行接口新增key字段
