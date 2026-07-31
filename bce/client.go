@@ -42,6 +42,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"strings"
 	"time"
 
 	"github.com/baidubce/baiducloud-go-sdk/core/auth"
@@ -68,7 +69,7 @@ type BceClient struct {
 //
 // PARAMS:
 //   - request: the input request object to be built
-func (c *BceClient) buildHttpRequest(request *BceRequest) {
+func (c *BceClient) buildHttpRequest(request *BceRequest) error {
 	// Construct the http request instance for the special fields
 	request.BuildHttpRequest()
 
@@ -96,8 +97,28 @@ func (c *BceClient) buildHttpRequest(request *BceRequest) {
 
 	// Generate the auth string if needed
 	if c.Config.Credentials != nil {
-		c.Signer.Sign(&request.Request, c.Config.Credentials, c.Config.SignOption)
+		switch cred := c.Config.Credentials.(type) {
+		case *auth.BceCredentials:
+			if c.Signer != nil {
+				c.Signer.Sign(&request.Request, cred, c.Config.SignOption)
+			}
+		case *auth.AccessTokenCredentials:
+			token, err := cred.GetAccessToken()
+			if err != nil {
+				return fmt.Errorf("failed to get access token: %v", err)
+			}
+			request.SetParam("access_token", token)
+			if !strings.HasPrefix(request.Endpoint(), "http") {
+				request.SetProtocol(HTTPS_PROTOCAL)
+			}
+		case *auth.ApiKeyCredentials:
+			request.SetHeader(http.AUTHORIZATION, "Bearer "+cred.ApiKey)
+			if !strings.HasPrefix(request.Endpoint(), "http") {
+				request.SetProtocol(HTTPS_PROTOCAL)
+			}
+		}
 	}
+	return nil
 }
 
 // SendRequest - the client performs sending the http request with retry policy and receive the
@@ -116,7 +137,9 @@ func (c *BceClient) SendRequest(req *BceRequest, resp *BceResponse) error {
 	}
 
 	// Build the http request and prepare to send
-	c.buildHttpRequest(req)
+	if err := c.buildHttpRequest(req); err != nil {
+		return &BceClientError{err.Error()}
+	}
 	log.Infof("send http request: %v", req)
 
 	// Send request with the given retry policy
@@ -200,7 +223,9 @@ func (c *BceClient) SendRequestFromBytes(req *BceRequest, resp *BceResponse, con
 		return req.ClientError()
 	}
 	// Build the http request and prepare to send
-	c.buildHttpRequest(req)
+	if err := c.buildHttpRequest(req); err != nil {
+		return &BceClientError{err.Error()}
+	}
 	log.Infof("send http request: %v", req)
 	// Send request with the given retry policy
 	retries := 0
@@ -276,4 +301,46 @@ func NewBceClientWithAkSk(ak, sk, endPoint string) (*BceClient, error) {
 	v1Signer := &auth.BceV1Signer{}
 
 	return NewBceClient(defaultConf, v1Signer), nil
+}
+
+// NewBceClientWithTokenAKSK creates a BceClient that automatically fetches and refreshes
+// a Baidu AI Platform access token using the given AK/SK.
+func NewBceClientWithTokenAKSK(tokenAK, tokenSK, endPoint string) (*BceClient, error) {
+	credentials, err := auth.NewAccessTokenCredentials(tokenAK, tokenSK)
+	if err != nil {
+		return nil, err
+	}
+	if !strings.HasPrefix(endPoint, "http://") && !strings.HasPrefix(endPoint, "https://") {
+		endPoint = "https://" + endPoint
+	}
+	conf := &BceClientConfiguration{
+		Endpoint:                  endPoint,
+		UserAgent:                 DEFAULT_USER_AGENT,
+		Credentials:               credentials,
+		Retry:                     DEFAULT_RETRY_POLICY,
+		ConnectionTimeoutInMillis: DEFAULT_CONNECTION_TIMEOUT_IN_MILLIS,
+		RedirectDisabled:          false,
+	}
+	return NewBceClient(conf, nil), nil
+}
+
+// NewBceClientWithApiKey creates a BceClient that authenticates using an API Key
+// (injected as an Authorization: Bearer header).
+func NewBceClientWithApiKey(apiKey, endPoint string) (*BceClient, error) {
+	credentials, err := auth.NewApiKeyCredentials(apiKey)
+	if err != nil {
+		return nil, err
+	}
+	if !strings.HasPrefix(endPoint, "http://") && !strings.HasPrefix(endPoint, "https://") {
+		endPoint = "https://" + endPoint
+	}
+	defaultConf := &BceClientConfiguration{
+		Endpoint:                  endPoint,
+		Region:                    DEFAULT_REGION,
+		UserAgent:                 DEFAULT_USER_AGENT,
+		Credentials:               credentials,
+		Retry:                     DEFAULT_RETRY_POLICY,
+		ConnectionTimeoutInMillis: DEFAULT_CONNECTION_TIMEOUT_IN_MILLIS,
+		RedirectDisabled:          false}
+	return NewBceClient(defaultConf, nil), nil
 }

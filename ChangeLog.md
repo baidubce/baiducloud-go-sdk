@@ -1,12 +1,5 @@
-2026-08-11 Version: v0.0.117
-- 涉及产品: AX，SDK版本更新
-
-2026-08-11 Version: v0.0.116
-- 涉及产品: AX，支持批量查询沙箱实例信息
-
-2026-08-05 Version: v0.0.115
-- 涉及产品: BLB，查询/创建/更新IP组新增preserveClientIpEnabled和groupTargetType字段
-- 涉及产品: BLB，创建/查询/更新服务器组新增preserveClientIpEnabled字段
+2026-07-30 Version: v0.0.115
+- SDK Core 新增 API Key、AccessToken 鉴权方式支持
 
 2026-07-27 Version: v0.0.114
 - 涉及产品: CLOUDASSISTANT，SDK版本更新
