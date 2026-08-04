@@ -62,7 +62,6 @@ type Client interface {
 // BceClient defines the general client to access the BCE services.
 type BceClient struct {
 	Config *BceClientConfiguration
-	Signer auth.Signer // the sign algorithm
 }
 
 // BuildHttpRequest - the helper method for the client to build http request
@@ -97,25 +96,14 @@ func (c *BceClient) buildHttpRequest(request *BceRequest) error {
 
 	// Generate the auth string if needed
 	if c.Config.Credentials != nil {
-		switch cred := c.Config.Credentials.(type) {
-		case *auth.BceCredentials:
-			if c.Signer != nil {
-				c.Signer.Sign(&request.Request, cred, c.Config.SignOption)
+		cred := c.Config.Credentials
+		if signer := cred.GetSigner(); signer != nil {
+			if err := signer.Sign(&request.Request, cred, c.Config.SignOption); err != nil {
+				return err
 			}
-		case *auth.AccessTokenCredentials:
-			token, err := cred.GetAccessToken()
-			if err != nil {
-				return fmt.Errorf("failed to get access token: %v", err)
-			}
-			request.SetParam("access_token", token)
-			if !strings.HasPrefix(request.Endpoint(), "http") {
-				request.SetProtocol(HTTPS_PROTOCAL)
-			}
-		case *auth.ApiKeyCredentials:
-			request.SetHeader(http.AUTHORIZATION, "Bearer "+cred.ApiKey)
-			if !strings.HasPrefix(request.Endpoint(), "http") {
-				request.SetProtocol(HTTPS_PROTOCAL)
-			}
+		}
+		if cred.GetAuthType() != auth.AuthTypeAKSK && !strings.HasPrefix(request.Endpoint(), "http") {
+			request.SetProtocol(HTTPS_PROTOCAL)
 		}
 	}
 	return nil
@@ -275,10 +263,10 @@ func (c *BceClient) GetBceClientConfig() *BceClientConfiguration {
 	return c.Config
 }
 
-func NewBceClient(conf *BceClientConfiguration, sign auth.Signer) *BceClient {
+func NewBceClient(conf *BceClientConfiguration) *BceClient {
 	clientConfig := http.ClientConfig{RedirectDisabled: conf.RedirectDisabled}
 	http.InitClient(clientConfig)
-	return &BceClient{conf, sign}
+	return &BceClient{Config: conf}
 }
 
 func NewBceClientWithAkSk(ak, sk, endPoint string) (*BceClient, error) {
@@ -298,15 +286,14 @@ func NewBceClientWithAkSk(ak, sk, endPoint string) (*BceClient, error) {
 		Retry:                     DEFAULT_RETRY_POLICY,
 		ConnectionTimeoutInMillis: DEFAULT_CONNECTION_TIMEOUT_IN_MILLIS,
 		RedirectDisabled:          false}
-	v1Signer := &auth.BceV1Signer{}
 
-	return NewBceClient(defaultConf, v1Signer), nil
+	return NewBceClient(defaultConf), nil
 }
 
-// NewBceClientWithTokenAKSK creates a BceClient that automatically fetches and refreshes
-// a Baidu AI Platform access token using the given AK/SK.
-func NewBceClientWithTokenAKSK(tokenAK, tokenSK, endPoint string) (*BceClient, error) {
-	credentials, err := auth.NewAccessTokenCredentials(tokenAK, tokenSK)
+// NewBceClientWithAccessToken creates a BceClient that automatically fetches and refreshes
+// a Baidu AI Platform access token using the given API Key / Secret Key.
+func NewBceClientWithAccessToken(apiKey, secretKey, endPoint string) (*BceClient, error) {
+	credentials, err := auth.NewAccessTokenCredentials(apiKey, secretKey)
 	if err != nil {
 		return nil, err
 	}
@@ -321,7 +308,7 @@ func NewBceClientWithTokenAKSK(tokenAK, tokenSK, endPoint string) (*BceClient, e
 		ConnectionTimeoutInMillis: DEFAULT_CONNECTION_TIMEOUT_IN_MILLIS,
 		RedirectDisabled:          false,
 	}
-	return NewBceClient(conf, nil), nil
+	return NewBceClient(conf), nil
 }
 
 // NewBceClientWithApiKey creates a BceClient that authenticates using an API Key
@@ -342,5 +329,5 @@ func NewBceClientWithApiKey(apiKey, endPoint string) (*BceClient, error) {
 		Retry:                     DEFAULT_RETRY_POLICY,
 		ConnectionTimeoutInMillis: DEFAULT_CONNECTION_TIMEOUT_IN_MILLIS,
 		RedirectDisabled:          false}
-	return NewBceClient(defaultConf, nil), nil
+	return NewBceClient(defaultConf), nil
 }

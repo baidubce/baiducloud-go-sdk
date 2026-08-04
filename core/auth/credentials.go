@@ -42,6 +42,8 @@ const (
 // Credentials is the common interface implemented by all credential types.
 type Credentials interface {
 	GetAuthType() AuthType
+	// GetSigner returns the signer used to authenticate requests for this credential.
+	GetSigner() Signer
 }
 
 // BceCredentials define the data structure for authorization
@@ -53,6 +55,10 @@ type BceCredentials struct {
 
 func (b *BceCredentials) GetAuthType() AuthType {
 	return AuthTypeAKSK
+}
+
+func (b *BceCredentials) GetSigner() Signer {
+	return &BceV1Signer{}
 }
 
 func (b *BceCredentials) String() string {
@@ -104,6 +110,10 @@ type AccessTokenCredentials struct {
 
 func (a *AccessTokenCredentials) GetAuthType() AuthType {
 	return AuthTypeAccessToken
+}
+
+func (a *AccessTokenCredentials) GetSigner() Signer {
+	return &BceAccessTokenSigner{}
 }
 
 func NewAccessTokenCredentials(ak, sk string) (*AccessTokenCredentials, error) {
@@ -183,6 +193,10 @@ type ApiKeyCredentials struct {
 
 func (a *ApiKeyCredentials) GetAuthType() AuthType {
 	return AuthTypeApiKey
+}
+
+func (a *ApiKeyCredentials) GetSigner() Signer {
+	return &BceApiKeySigner{}
 }
 
 func NewApiKeyCredentials(apiKey string) (*ApiKeyCredentials, error) {
