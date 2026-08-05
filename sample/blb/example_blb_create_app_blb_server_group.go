@@ -16,11 +16,12 @@ func CreateAppBlbServerGroup() {
 		return
 	}
 	createAppBlbServerGroupRequest := &blb.CreateAppBlbServerGroupRequest{
-		BlbId:             util.PtrString(""),
-		ClientToken:       util.PtrString(""),
-		Name:              util.PtrString(""),
-		Desc:              util.PtrString(""),
-		BackendServerList: []*blb.AppBackendServerForCreate{},
+		BlbId:                   util.PtrString(""),
+		ClientToken:             util.PtrString(""),
+		Name:                    util.PtrString(""),
+		Desc:                    util.PtrString(""),
+		PreserveClientIpEnabled: util.PtrBool(false),
+		BackendServerList:       []*blb.AppBackendServerForCreate{},
 	}
 	result, err := client.CreateAppBlbServerGroup(createAppBlbServerGroupRequest)
 	if err != nil {

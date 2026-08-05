@@ -298,11 +298,13 @@ func TestClient_CreateAppBlbHttpsListener(t *testing.T) {
 }
 func TestClient_CreateAppBlbIpGroup(t *testing.T) {
 	createAppBlbIpGroupRequest := &CreateAppBlbIpGroupRequest{
-		BlbId:       util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		Name:        util.PtrString(""),
-		Desc:        util.PtrString(""),
-		MemberList:  []*AppIpGroupMemberForCreate{},
+		BlbId:                   util.PtrString(""),
+		ClientToken:             util.PtrString(""),
+		Name:                    util.PtrString(""),
+		Desc:                    util.PtrString(""),
+		PreserveClientIpEnabled: util.PtrBool(false),
+		GroupTargetType:         util.PtrString(""),
+		MemberList:              []*AppIpGroupMemberForCreate{},
 	}
 	result := &CreateAppBlbIpGroupResponse{}
 	result, err := BLB_CLIENT.CreateAppBlbIpGroup(createAppBlbIpGroupRequest)
@@ -361,11 +363,12 @@ func TestClient_CreateAppBlbPolicy(t *testing.T) {
 }
 func TestClient_CreateAppBlbServerGroup(t *testing.T) {
 	createAppBlbServerGroupRequest := &CreateAppBlbServerGroupRequest{
-		BlbId:             util.PtrString(""),
-		ClientToken:       util.PtrString(""),
-		Name:              util.PtrString(""),
-		Desc:              util.PtrString(""),
-		BackendServerList: []*AppBackendServerForCreate{},
+		BlbId:                   util.PtrString(""),
+		ClientToken:             util.PtrString(""),
+		Name:                    util.PtrString(""),
+		Desc:                    util.PtrString(""),
+		PreserveClientIpEnabled: util.PtrBool(false),
+		BackendServerList:       []*AppBackendServerForCreate{},
 	}
 	result := &CreateAppBlbServerGroupResponse{}
 	result, err := BLB_CLIENT.CreateAppBlbServerGroup(createAppBlbServerGroupRequest)
@@ -1600,11 +1603,12 @@ func TestClient_UpdateAppBlbHttpsListener(t *testing.T) {
 }
 func TestClient_UpdateAppBlbIpGroup(t *testing.T) {
 	updateAppBlbIpGroupRequest := &UpdateAppBlbIpGroupRequest{
-		BlbId:       util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		IpGroupId:   util.PtrString(""),
-		Name:        util.PtrString(""),
-		Desc:        util.PtrString(""),
+		BlbId:                   util.PtrString(""),
+		ClientToken:             util.PtrString(""),
+		IpGroupId:               util.PtrString(""),
+		Name:                    util.PtrString(""),
+		Desc:                    util.PtrString(""),
+		PreserveClientIpEnabled: util.PtrBool(false),
 	}
 	err := BLB_CLIENT.UpdateAppBlbIpGroup(updateAppBlbIpGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)
@@ -1652,11 +1656,12 @@ func TestClient_UpdateAppBlbPolicy(t *testing.T) {
 }
 func TestClient_UpdateAppBlbServerGroup(t *testing.T) {
 	updateAppBlbServerGroupRequest := &UpdateAppBlbServerGroupRequest{
-		BlbId:       util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		SgId:        util.PtrString(""),
-		Name:        util.PtrString(""),
-		Desc:        util.PtrString(""),
+		BlbId:                   util.PtrString(""),
+		ClientToken:             util.PtrString(""),
+		SgId:                    util.PtrString(""),
+		Name:                    util.PtrString(""),
+		Desc:                    util.PtrString(""),
+		PreserveClientIpEnabled: util.PtrBool(false),
 	}
 	err := BLB_CLIENT.UpdateAppBlbServerGroup(updateAppBlbServerGroupRequest)
 	ExpectEqual(t.Errorf, nil, err)

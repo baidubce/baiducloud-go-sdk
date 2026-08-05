@@ -15,11 +15,12 @@ func UpdateAppBlbIpGroup() {
 		return
 	}
 	updateAppBlbIpGroupRequest := &blb.UpdateAppBlbIpGroupRequest{
-		BlbId:       util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		IpGroupId:   util.PtrString(""),
-		Name:        util.PtrString(""),
-		Desc:        util.PtrString(""),
+		BlbId:                   util.PtrString(""),
+		ClientToken:             util.PtrString(""),
+		IpGroupId:               util.PtrString(""),
+		Name:                    util.PtrString(""),
+		Desc:                    util.PtrString(""),
+		PreserveClientIpEnabled: util.PtrBool(false),
 	}
 	err = client.UpdateAppBlbIpGroup(updateAppBlbIpGroupRequest)
 	if err != nil {

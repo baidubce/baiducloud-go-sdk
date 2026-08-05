@@ -15,11 +15,12 @@ func UpdateAppBlbServerGroup() {
 		return
 	}
 	updateAppBlbServerGroupRequest := &blb.UpdateAppBlbServerGroupRequest{
-		BlbId:       util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		SgId:        util.PtrString(""),
-		Name:        util.PtrString(""),
-		Desc:        util.PtrString(""),
+		BlbId:                   util.PtrString(""),
+		ClientToken:             util.PtrString(""),
+		SgId:                    util.PtrString(""),
+		Name:                    util.PtrString(""),
+		Desc:                    util.PtrString(""),
+		PreserveClientIpEnabled: util.PtrBool(false),
 	}
 	err = client.UpdateAppBlbServerGroup(updateAppBlbServerGroupRequest)
 	if err != nil {
