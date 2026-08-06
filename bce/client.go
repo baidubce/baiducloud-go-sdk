@@ -102,9 +102,6 @@ func (c *BceClient) buildHttpRequest(request *BceRequest) error {
 				return err
 			}
 		}
-		if cred.GetAuthType() != auth.AuthTypeAKSK && !strings.HasPrefix(request.Endpoint(), "http") {
-			request.SetProtocol(HTTPS_PROTOCAL)
-		}
 	}
 	return nil
 }

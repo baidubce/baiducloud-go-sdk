@@ -74,7 +74,7 @@ func NewBceCredentials(ak, sk string) (*BceCredentials, error) {
 		return nil, errors.New("accessKeyId should not be empty")
 	}
 	if len(sk) == 0 {
-		return nil, errors.New("secretKey should not be empty")
+		return nil, errors.New("secretAccessKey should not be empty")
 	}
 
 	return &BceCredentials{ak, sk, ""}, nil
@@ -103,9 +103,9 @@ type tokenCache struct {
 // AccessTokenCredentials uses AK/SK to fetch and cache an access token from the
 // Baidu AI Platform, refreshing it automatically before expiry.
 type AccessTokenCredentials struct {
-	ak    string
-	sk    string
-	cache *tokenCache
+	apiKey    string
+	secretKey string
+	cache     *tokenCache
 }
 
 func (a *AccessTokenCredentials) GetAuthType() AuthType {
@@ -116,15 +116,15 @@ func (a *AccessTokenCredentials) GetSigner() Signer {
 	return &BceAccessTokenSigner{}
 }
 
-func NewAccessTokenCredentials(ak, sk string) (*AccessTokenCredentials, error) {
-	if len(ak) == 0 {
-		return nil, errors.New("accessKeyId should not be empty")
+func NewAccessTokenCredentials(apiKey, secretKey string) (*AccessTokenCredentials, error) {
+	if len(apiKey) == 0 {
+		return nil, errors.New("apiKey should not be empty")
 	}
-	if len(sk) == 0 {
+	if len(secretKey) == 0 {
 		return nil, errors.New("secretKey should not be empty")
 	}
 
-	return &AccessTokenCredentials{ak, sk, &tokenCache{}}, nil
+	return &AccessTokenCredentials{apiKey, secretKey, &tokenCache{}}, nil
 }
 
 func (a *AccessTokenCredentials) GetAccessToken() (string, error) {
@@ -134,7 +134,7 @@ func (a *AccessTokenCredentials) GetAccessToken() (string, error) {
 	if a.cache.token != "" && time.Now().Before(a.cache.expireTime) {
 		return a.cache.token, nil
 	}
-	token, expireIn, err := fetchAccessToken(a.ak, a.sk)
+	token, expireIn, err := fetchAccessToken(a.apiKey, a.secretKey)
 	if err != nil {
 		return "", err
 	}
