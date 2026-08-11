@@ -16,11 +16,13 @@ func CreateAppBlbIpGroup() {
 		return
 	}
 	createAppBlbIpGroupRequest := &blb.CreateAppBlbIpGroupRequest{
-		BlbId:       util.PtrString(""),
-		ClientToken: util.PtrString(""),
-		Name:        util.PtrString(""),
-		Desc:        util.PtrString(""),
-		MemberList:  []*blb.AppIpGroupMemberForCreate{},
+		BlbId:                   util.PtrString(""),
+		ClientToken:             util.PtrString(""),
+		Name:                    util.PtrString(""),
+		Desc:                    util.PtrString(""),
+		PreserveClientIpEnabled: util.PtrBool(false),
+		GroupTargetType:         util.PtrString(""),
+		MemberList:              []*blb.AppIpGroupMemberForCreate{},
 	}
 	result, err := client.CreateAppBlbIpGroup(createAppBlbIpGroupRequest)
 	if err != nil {
