@@ -1,5 +1,8 @@
-2026-08-11 Version: v0.0.117
+2026-08-11 Version: v0.0.118
 - SDK Core 新增 API Key、AccessToken 鉴权方式支持
+
+2026-08-11 Version: v0.0.117
+- 涉及产品: AX，SDK版本更新
 
 2026-08-11 Version: v0.0.116
 - 涉及产品: AX，支持批量查询沙箱实例信息
