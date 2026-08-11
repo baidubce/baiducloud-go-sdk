@@ -42,7 +42,7 @@ var (
 // Signer abstracts the entity that implements the `Sign` method
 type Signer interface {
 	// Sign the given Request with the Credentials and SignOptions
-	Sign(*http.Request, Credentials, *SignOptions) error
+	Sign(*http.Request, *BceCredentials, *SignOptions)
 }
 
 // SignOptions defines the data structure used by Signer
@@ -67,25 +67,21 @@ type BceV1Signer struct{}
 //
 // PARAMS:
 //   - req: *http.Request for this sign
-//   - cred: Credentials to access the serice (must be *BceCredentials)
+//   - cred: *BceCredentials to access the serice
 //   - opt: *SignOptions for this sign algorithm
-func (b *BceV1Signer) Sign(req *http.Request, cred Credentials, opt *SignOptions) error {
+func (b *BceV1Signer) Sign(req *http.Request, cred *BceCredentials, opt *SignOptions) {
 	if req == nil {
 		log.Fatal("request should not be null for sign")
-		return nil
+		return
 	}
 	if cred == nil {
 		log.Fatal("credentials should not be null for sign")
-		return nil
-	}
-	bceCred, ok := cred.(*BceCredentials)
-	if !ok {
-		return fmt.Errorf("BceV1Signer requires *BceCredentials but got %T", cred)
+		return
 	}
 
 	// Prepare parameters
-	accessKeyId := bceCred.AccessKeyId
-	secretAccessKey := bceCred.SecretAccessKey
+	accessKeyId := cred.AccessKeyId
+	secretAccessKey := cred.SecretAccessKey
 	signDate := util.FormatISO8601Date(util.NowUTCSeconds())
 	// Modify the sign time if it is not the default value but specified by client
 	if opt.Timestamp != 0 {
@@ -93,8 +89,8 @@ func (b *BceV1Signer) Sign(req *http.Request, cred Credentials, opt *SignOptions
 	}
 
 	// Set security token if using session credentials and session token not in param
-	if len(bceCred.SessionToken) != 0 && req.Param(http.BCE_SECURITY_TOKEN) == "" {
-		req.SetHeader(http.BCE_SECURITY_TOKEN, bceCred.SessionToken)
+	if len(cred.SessionToken) != 0 && req.Param(http.BCE_SECURITY_TOKEN) == "" {
+		req.SetHeader(http.BCE_SECURITY_TOKEN, cred.SessionToken)
 	}
 
 	// Prepare the canonical request components
@@ -126,43 +122,6 @@ func (b *BceV1Signer) Sign(req *http.Request, cred Credentials, opt *SignOptions
 	log.Info("Authorization=" + authStr)
 
 	req.SetHeader(http.AUTHORIZATION, authStr)
-	return nil
-}
-
-// BceApiKeySigner injects the API Key as a Bearer token in the Authorization header.
-type BceApiKeySigner struct{}
-
-// Sign - inject the API Key as an `Authorization: Bearer <api_key>` header.
-func (s *BceApiKeySigner) Sign(req *http.Request, cred Credentials, opt *SignOptions) error {
-	if req == nil || cred == nil {
-		return nil
-	}
-	apiKeyCred, ok := cred.(*ApiKeyCredentials)
-	if !ok {
-		return fmt.Errorf("BceApiKeySigner requires *ApiKeyCredentials but got %T", cred)
-	}
-	req.SetHeader(http.AUTHORIZATION, "Bearer "+apiKeyCred.ApiKey)
-	return nil
-}
-
-// BceAccessTokenSigner appends the access_token to the request query parameters.
-type BceAccessTokenSigner struct{}
-
-// Sign - fetch the access token and append it as the `access_token` query parameter.
-func (s *BceAccessTokenSigner) Sign(req *http.Request, cred Credentials, opt *SignOptions) error {
-	if req == nil || cred == nil {
-		return nil
-	}
-	tokenCred, ok := cred.(*AccessTokenCredentials)
-	if !ok {
-		return fmt.Errorf("BceAccessTokenSigner requires *AccessTokenCredentials but got %T", cred)
-	}
-	token, err := tokenCred.GetAccessToken()
-	if err != nil {
-		return fmt.Errorf("failed to get access token: %v", err)
-	}
-	req.SetParam("access_token", token)
-	return nil
 }
 
 func getCanonicalURIPath(path string) string {
