@@ -169,6 +169,27 @@ func TestClient_CreateL2Policy(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateL3MountTarget(t *testing.T) {
+	createL3MountTargetRequest := &CreateL3MountTargetRequest{
+		Action:     util.PtrString(""),
+		InstanceId: util.PtrString(""),
+		VpcId:      util.PtrString(""),
+		SubnetId:   util.PtrString(""),
+	}
+	result := &CreateL3MountTargetResponse{}
+	result, err := PFS_CLIENT.CreateL3MountTarget(createL3MountTargetRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreatePfs(t *testing.T) {
 	createPfsRequest := &CreatePfsRequest{
 		Name:         util.PtrString(""),
@@ -240,6 +261,26 @@ func TestClient_DeleteL2Policy(t *testing.T) {
 	}
 	result := &DeleteL2PolicyResponse{}
 	result, err := PFS_CLIENT.DeleteL2Policy(deleteL2PolicyRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteL3MountTarget(t *testing.T) {
+	deleteL3MountTargetRequest := &DeleteL3MountTargetRequest{
+		Action:        util.PtrString(""),
+		InstanceId:    util.PtrString(""),
+		MountTargetId: util.PtrString(""),
+	}
+	result := &DeleteL3MountTargetResponse{}
+	result, err := PFS_CLIENT.DeleteL3MountTarget(deleteL3MountTargetRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -337,6 +378,26 @@ func TestClient_DescPfs(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeL3MountTarget(t *testing.T) {
+	describeL3MountTargetRequest := &DescribeL3MountTargetRequest{
+		Action:        util.PtrString(""),
+		InstanceId:    util.PtrString(""),
+		MountTargetId: util.PtrString(""),
+	}
+	result := &DescribeL3MountTargetResponse{}
+	result, err := PFS_CLIENT.DescribeL3MountTarget(describeL3MountTargetRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_InstanceListClients(t *testing.T) {
 	instanceListClientsRequest := &InstanceListClientsRequest{
 		Action:     util.PtrString(""),
@@ -416,6 +477,27 @@ func TestClient_ListL2Policy(t *testing.T) {
 	}
 	result := &ListL2PolicyResponse{}
 	result, err := PFS_CLIENT.ListL2Policy(listL2PolicyRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListL3MountTarget(t *testing.T) {
+	listL3MountTargetRequest := &ListL3MountTargetRequest{
+		Action:     util.PtrString(""),
+		InstanceId: util.PtrString(""),
+		MaxKeys:    util.PtrInt32(int32(0)),
+		Marker:     util.PtrString(""),
+	}
+	result := &ListL3MountTargetResponse{}
+	result, err := PFS_CLIENT.ListL3MountTarget(listL3MountTargetRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return

@@ -108,6 +108,31 @@ func (c *Client) CreateL2Policy(request *CreateL2PolicyRequest) (*CreateL2Policy
 	return result, nil
 }
 
+// CreateL3MountTarget
+//
+// PARAMS:
+//   - request: the arguments to CreateL3MountTarget
+//
+// RETURNS:
+//   - CreateL3MountTargetResponse: The return type of the CreateL3MountTarget interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateL3MountTarget(request *CreateL3MountTargetRequest) (*CreateL3MountTargetResponse, error) {
+	result := &CreateL3MountTargetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateL3MountTargetUri()).
+		WithQueryParamFilter("action", "CreateL3MountTarget").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreatePfs
 //
 // PARAMS:
@@ -193,6 +218,31 @@ func (c *Client) DeleteL2Policy(request *DeleteL2PolicyRequest) (*DeleteL2Policy
 		WithMethod(http.POST).
 		WithURL(getDeleteL2PolicyUri()).
 		WithQueryParamFilter("action", "DeleteL2Policy").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DeleteL3MountTarget
+//
+// PARAMS:
+//   - request: the arguments to DeleteL3MountTarget
+//
+// RETURNS:
+//   - DeleteL3MountTargetResponse: The return type of the DeleteL3MountTarget interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteL3MountTarget(request *DeleteL3MountTargetRequest) (*DeleteL3MountTargetResponse, error) {
+	result := &DeleteL3MountTargetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDeleteL3MountTargetUri()).
+		WithQueryParamFilter("action", "DeleteL3MountTarget").
 		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithHeader("Version", "v2").
 		WithBody(request).
@@ -317,6 +367,31 @@ func (c *Client) DescPfs(request *DescPfsRequest) (*DescPfsResponse, error) {
 	return result, nil
 }
 
+// DescribeL3MountTarget
+//
+// PARAMS:
+//   - request: the arguments to DescribeL3MountTarget
+//
+// RETURNS:
+//   - DescribeL3MountTargetResponse: The return type of the DescribeL3MountTarget interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeL3MountTarget(request *DescribeL3MountTargetRequest) (*DescribeL3MountTargetResponse, error) {
+	result := &DescribeL3MountTargetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeL3MountTargetUri()).
+		WithQueryParamFilter("action", "DescribeL3MountTarget").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // InstanceListClients
 //
 // PARAMS:
@@ -406,6 +481,31 @@ func (c *Client) ListL2Policy(request *ListL2PolicyRequest) (*ListL2PolicyRespon
 		WithMethod(http.POST).
 		WithURL(getListL2PolicyUri()).
 		WithQueryParamFilter("action", "ListL2Policy").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListL3MountTarget
+//
+// PARAMS:
+//   - request: the arguments to ListL3MountTarget
+//
+// RETURNS:
+//   - ListL3MountTargetResponse: The return type of the ListL3MountTarget interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListL3MountTarget(request *ListL3MountTargetRequest) (*ListL3MountTargetResponse, error) {
+	result := &ListL3MountTargetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getListL3MountTargetUri()).
+		WithQueryParamFilter("action", "ListL3MountTarget").
 		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithHeader("Version", "v2").
 		WithBody(request).

@@ -44,6 +44,9 @@ func getCreateL2BucketLinkUri() string {
 func getCreateL2PolicyUri() string {
 	return bce.URI_PREFIX
 }
+func getCreateL3MountTargetUri() string {
+	return bce.URI_PREFIX
+}
 func getCreatePfsUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_PFS + bce.URI_PREFIX + CONSTANT_INSTANCE
 }
@@ -54,6 +57,9 @@ func getDeleteL2BucketLinkUri() string {
 	return bce.URI_PREFIX
 }
 func getDeleteL2PolicyUri() string {
+	return bce.URI_PREFIX
+}
+func getDeleteL3MountTargetUri() string {
 	return bce.URI_PREFIX
 }
 func getDeletePfsUri() string {
@@ -71,6 +77,9 @@ func getDescL2PolicyUri() string {
 func getDescPfsUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_PFS + bce.URI_PREFIX + CONSTANT_INSTANCE
 }
+func getDescribeL3MountTargetUri() string {
+	return bce.URI_PREFIX
+}
 func getInstanceListClientsUri() string {
 	return bce.URI_PREFIX
 }
@@ -81,6 +90,9 @@ func getListL2BucketLinkUri() string {
 	return bce.URI_PREFIX
 }
 func getListL2PolicyUri() string {
+	return bce.URI_PREFIX
+}
+func getListL3MountTargetUri() string {
 	return bce.URI_PREFIX
 }
 func getListPfsUri() string {
