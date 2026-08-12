@@ -26,7 +26,7 @@ import (
 
 // Constants and default values for the package bce
 const (
-	SDK_VERSION                          = "0.0.120"
+	SDK_VERSION                          = "0.0.121"
 	URI_PREFIX                           = "/" // now support uri without prefix "v1" so just set root path
 	DEFAULT_DOMAIN                       = "baidubce.com"
 	DEFAULT_PROTOCOL                     = "http"
@@ -56,7 +56,7 @@ type BceClientConfiguration struct {
 	ProxyUrl                  string
 	Region                    string
 	UserAgent                 string
-	Credentials               *auth.BceCredentials
+	Credentials               auth.Credentials
 	SignOption                *auth.SignOptions
 	Retry                     RetryPolicy
 	ConnectionTimeoutInMillis int

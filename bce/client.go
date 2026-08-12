@@ -42,6 +42,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"strings"
 	"time"
 
 	"github.com/baidubce/baiducloud-go-sdk/core/auth"
@@ -61,14 +62,13 @@ type Client interface {
 // BceClient defines the general client to access the BCE services.
 type BceClient struct {
 	Config *BceClientConfiguration
-	Signer auth.Signer // the sign algorithm
 }
 
 // BuildHttpRequest - the helper method for the client to build http request
 //
 // PARAMS:
 //   - request: the input request object to be built
-func (c *BceClient) buildHttpRequest(request *BceRequest) {
+func (c *BceClient) buildHttpRequest(request *BceRequest) error {
 	// Construct the http request instance for the special fields
 	request.BuildHttpRequest()
 
@@ -96,8 +96,14 @@ func (c *BceClient) buildHttpRequest(request *BceRequest) {
 
 	// Generate the auth string if needed
 	if c.Config.Credentials != nil {
-		c.Signer.Sign(&request.Request, c.Config.Credentials, c.Config.SignOption)
+		cred := c.Config.Credentials
+		if signer := cred.GetSigner(); signer != nil {
+			if err := signer.Sign(&request.Request, cred, c.Config.SignOption); err != nil {
+				return err
+			}
+		}
 	}
+	return nil
 }
 
 // SendRequest - the client performs sending the http request with retry policy and receive the
@@ -116,7 +122,9 @@ func (c *BceClient) SendRequest(req *BceRequest, resp *BceResponse) error {
 	}
 
 	// Build the http request and prepare to send
-	c.buildHttpRequest(req)
+	if err := c.buildHttpRequest(req); err != nil {
+		return &BceClientError{err.Error()}
+	}
 	log.Infof("send http request: %v", req)
 
 	// Send request with the given retry policy
@@ -200,7 +208,9 @@ func (c *BceClient) SendRequestFromBytes(req *BceRequest, resp *BceResponse, con
 		return req.ClientError()
 	}
 	// Build the http request and prepare to send
-	c.buildHttpRequest(req)
+	if err := c.buildHttpRequest(req); err != nil {
+		return &BceClientError{err.Error()}
+	}
 	log.Infof("send http request: %v", req)
 	// Send request with the given retry policy
 	retries := 0
@@ -250,10 +260,10 @@ func (c *BceClient) GetBceClientConfig() *BceClientConfiguration {
 	return c.Config
 }
 
-func NewBceClient(conf *BceClientConfiguration, sign auth.Signer) *BceClient {
+func NewBceClient(conf *BceClientConfiguration) *BceClient {
 	clientConfig := http.ClientConfig{RedirectDisabled: conf.RedirectDisabled}
 	http.InitClient(clientConfig)
-	return &BceClient{conf, sign}
+	return &BceClient{Config: conf}
 }
 
 func NewBceClientWithAkSk(ak, sk, endPoint string) (*BceClient, error) {
@@ -273,7 +283,48 @@ func NewBceClientWithAkSk(ak, sk, endPoint string) (*BceClient, error) {
 		Retry:                     DEFAULT_RETRY_POLICY,
 		ConnectionTimeoutInMillis: DEFAULT_CONNECTION_TIMEOUT_IN_MILLIS,
 		RedirectDisabled:          false}
-	v1Signer := &auth.BceV1Signer{}
 
-	return NewBceClient(defaultConf, v1Signer), nil
+	return NewBceClient(defaultConf), nil
+}
+
+// NewBceClientWithAccessToken creates a BceClient that automatically fetches and refreshes
+// a Baidu AI Platform access token using the given API Key / Secret Key.
+func NewBceClientWithAccessToken(apiKey, secretKey, endPoint string) (*BceClient, error) {
+	credentials, err := auth.NewAccessTokenCredentials(apiKey, secretKey)
+	if err != nil {
+		return nil, err
+	}
+	if !strings.HasPrefix(endPoint, "http://") && !strings.HasPrefix(endPoint, "https://") {
+		endPoint = "https://" + endPoint
+	}
+	conf := &BceClientConfiguration{
+		Endpoint:                  endPoint,
+		UserAgent:                 DEFAULT_USER_AGENT,
+		Credentials:               credentials,
+		Retry:                     DEFAULT_RETRY_POLICY,
+		ConnectionTimeoutInMillis: DEFAULT_CONNECTION_TIMEOUT_IN_MILLIS,
+		RedirectDisabled:          false,
+	}
+	return NewBceClient(conf), nil
+}
+
+// NewBceClientWithApiKey creates a BceClient that authenticates using an API Key
+// (injected as an Authorization: Bearer header).
+func NewBceClientWithApiKey(apiKey, endPoint string) (*BceClient, error) {
+	credentials, err := auth.NewApiKeyCredentials(apiKey)
+	if err != nil {
+		return nil, err
+	}
+	if !strings.HasPrefix(endPoint, "http://") && !strings.HasPrefix(endPoint, "https://") {
+		endPoint = "https://" + endPoint
+	}
+	defaultConf := &BceClientConfiguration{
+		Endpoint:                  endPoint,
+		Region:                    DEFAULT_REGION,
+		UserAgent:                 DEFAULT_USER_AGENT,
+		Credentials:               credentials,
+		Retry:                     DEFAULT_RETRY_POLICY,
+		ConnectionTimeoutInMillis: DEFAULT_CONNECTION_TIMEOUT_IN_MILLIS,
+		RedirectDisabled:          false}
+	return NewBceClient(defaultConf), nil
 }

@@ -7,7 +7,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/services/ax"
 )
 
-func QuerySandboxes() {
+func ConnectSandbox() {
 	endpoint := "Your Endpoint"
 
 	// ==== AK/SK 鉴权 ====
@@ -22,16 +22,12 @@ func QuerySandboxes() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	Metadata := make(map[string]string)
-	querySandboxesRequest := &ax.QuerySandboxesRequest{
-		Limit:      util.PtrInt32(int32(0)),
-		NextToken:  util.PtrString(""),
-		SandboxIds: []*string{},
-		ImagePaths: []*string{},
-		Metadata:   nil,
-		State:      []*string{},
+	connectSandboxRequest := &ax.ConnectSandboxRequest{
+		SandboxID:  util.PtrString(""),
+		Timeout:    util.PtrInt32(int32(0)),
+		SnapshotID: util.PtrString(""),
 	}
-	result, err := client.QuerySandboxes(querySandboxesRequest)
+	result, err := client.ConnectSandbox(connectSandboxRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

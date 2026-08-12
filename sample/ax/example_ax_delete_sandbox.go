@@ -1,13 +1,12 @@
 package axsample
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
 	"github.com/baidubce/baiducloud-go-sdk/services/ax"
 )
 
-func QuerySandboxes() {
+func DeleteSandbox() {
 	endpoint := "Your Endpoint"
 
 	// ==== AK/SK 鉴权 ====
@@ -22,25 +21,12 @@ func QuerySandboxes() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	Metadata := make(map[string]string)
-	querySandboxesRequest := &ax.QuerySandboxesRequest{
-		Limit:      util.PtrInt32(int32(0)),
-		NextToken:  util.PtrString(""),
-		SandboxIds: []*string{},
-		ImagePaths: []*string{},
-		Metadata:   nil,
-		State:      []*string{},
+	deleteSandboxRequest := &ax.DeleteSandboxRequest{
+		SandboxID: util.PtrString(""),
 	}
-	result, err := client.QuerySandboxes(querySandboxesRequest)
+	err = client.DeleteSandbox(deleteSandboxRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)
-		return
 	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
 }

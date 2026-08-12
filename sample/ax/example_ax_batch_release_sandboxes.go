@@ -3,11 +3,10 @@ package axsample
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/baidubce/baiducloud-go-sdk/core/util"
 	"github.com/baidubce/baiducloud-go-sdk/services/ax"
 )
 
-func QuerySandboxes() {
+func BatchReleaseSandboxes() {
 	endpoint := "Your Endpoint"
 
 	// ==== AK/SK 鉴权 ====
@@ -22,16 +21,10 @@ func QuerySandboxes() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	Metadata := make(map[string]string)
-	querySandboxesRequest := &ax.QuerySandboxesRequest{
-		Limit:      util.PtrInt32(int32(0)),
-		NextToken:  util.PtrString(""),
+	batchReleaseSandboxesRequest := &ax.BatchReleaseSandboxesRequest{
 		SandboxIds: []*string{},
-		ImagePaths: []*string{},
-		Metadata:   nil,
-		State:      []*string{},
 	}
-	result, err := client.QuerySandboxes(querySandboxesRequest)
+	result, err := client.BatchReleaseSandboxes(batchReleaseSandboxesRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)
