@@ -1,3 +1,6 @@
+2026-08-13 Version: v0.0.123
+- 涉及产品: PFS，SDK版本更新
+
 2026-08-13 Version: v0.0.122
 - 涉及产品: CFW，getCfw新增domainDetectMode和applications字段
 - 涉及产品: CFW，listCfw新增domainDetectMode和applications字段
