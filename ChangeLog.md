@@ -1,3 +1,8 @@
+2026-08-13 Version: v0.0.122
+- 涉及产品: CFW，getCfw新增domainDetectMode和applications字段
+- 涉及产品: CFW，listCfw新增domainDetectMode和applications字段
+- 涉及产品: CFW，createCfwRule新增domainDetectMode和applications字段
+
 2026-08-12 Version: v0.0.121
 - 涉及产品: AX，支持创建、暂停、恢复、删除沙箱实例
 - 涉及产品: AX，支持连接、派生、设置超时及查询沙箱详情

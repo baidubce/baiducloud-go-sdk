@@ -36,7 +36,9 @@ func init() {
 	confObj := &Conf{}
 	decoder.Decode(confObj)
 
+	// ==== AK/SK 鉴权 ====
 	CFW_CLIENT, _ = NewClient(confObj.AK, confObj.SK, confObj.Endpoint)
+
 	log.SetLogLevel(log.WARN)
 }
 
