@@ -9,6 +9,8 @@ import (
 
 const (
 	VERSION_V1 = "v1"
+
+	VERSION_V2 = "v2"
 )
 
 // AcceptPeerConn
@@ -166,7 +168,7 @@ func (c *Client) AuthorizeEnterpriseSecurityGroupRules(request *AuthorizeEnterpr
 func (c *Client) AuthorizeSecurityGroupRules(request *AuthorizeSecurityGroupRulesRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getAuthorizeSecurityGroupRulesUri(VERSION_V1, util.StringValue(request.SecurityGroupId))).
+		WithURL(getAuthorizeSecurityGroupRulesUri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
 		WithQueryParam("authorizeRule", "").
 		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
@@ -804,7 +806,7 @@ func (c *Client) CreateSecurityGroup(request *CreateSecurityGroupRequest) (*Crea
 	result := &CreateSecurityGroupResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
-		WithURL(getCreateSecurityGroupUri(VERSION_V1)).
+		WithURL(getCreateSecurityGroupUri(VERSION_V2)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		WithResult(result).
@@ -1227,7 +1229,7 @@ func (c *Client) DeleteRoutingRules(request *DeleteRoutingRulesRequest) error {
 func (c *Client) DeleteSecurityGroup(request *DeleteSecurityGroupRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getDeleteSecurityGroupUri(VERSION_V1, util.StringValue(request.SecurityGroupId))).
+		WithURL(getDeleteSecurityGroupUri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		Do()
 }
@@ -1243,7 +1245,7 @@ func (c *Client) DeleteSecurityGroup(request *DeleteSecurityGroupRequest) error 
 func (c *Client) DeleteSecurityGroupRules(request *DeleteSecurityGroupRulesRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getDeleteSecurityGroupRulesUri(VERSION_V1, util.StringValue(request.SecurityGroupRuleId))).
+		WithURL(getDeleteSecurityGroupRulesUri(VERSION_V2, util.StringValue(request.SecurityGroupRuleId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
 		Do()
@@ -1517,7 +1519,7 @@ func (c *Client) GetSecurityGroupDetails(request *GetSecurityGroupDetailsRequest
 	result := &GetSecurityGroupDetailsResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getGetSecurityGroupDetailsUri(VERSION_V1, util.StringValue(request.SecurityGroupId))).
+		WithURL(getGetSecurityGroupDetailsUri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -2157,7 +2159,7 @@ func (c *Client) QuerySecurityGroupsList(request *QuerySecurityGroupsListRequest
 	result := &QuerySecurityGroupsListResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getQuerySecurityGroupsListUri(VERSION_V1)).
+		WithURL(getQuerySecurityGroupsListUri(VERSION_V2)).
 		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
 		WithQueryParamFilter("maxKeys", util.Int32Value(request.MaxKeys)).
 		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
@@ -2640,7 +2642,7 @@ func (c *Client) ResizeNat(request *ResizeNatRequest) error {
 func (c *Client) RevokeSecurityGroupRules(request *RevokeSecurityGroupRulesRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getRevokeSecurityGroupRulesUri(VERSION_V1, util.StringValue(request.SecurityGroupId))).
+		WithURL(getRevokeSecurityGroupRulesUri(VERSION_V2, util.StringValue(request.SecurityGroupId))).
 		WithQueryParam("revokeRule", "").
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
@@ -3102,7 +3104,7 @@ func (c *Client) UpdateRoutingRules(request *UpdateRoutingRulesRequest) error {
 func (c *Client) UpdateSecurityGroupRules(request *UpdateSecurityGroupRulesRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getUpdateSecurityGroupRulesUri(VERSION_V1)).
+		WithURL(getUpdateSecurityGroupRulesUri(VERSION_V2)).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithQueryParamFilter("sgVersion", util.Int64Value(request.SgVersion)).
 		WithBody(request).

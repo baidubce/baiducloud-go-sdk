@@ -8,9 +8,12 @@ import (
 )
 
 func CreateIpSet() {
-	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
-	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
+	endpoint := "Your Endpoint"
+
+	// ==== AK/SK 鉴权 ====
+	ak, sk := "Your Ak", "Your Sk"
 	client, err := vpc.NewClient(ak, sk, endpoint)
+
 	if err != nil {
 		fmt.Println("create client err:", err)
 		return
