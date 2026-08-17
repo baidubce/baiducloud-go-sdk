@@ -8,6 +8,28 @@ import (
 
 const ()
 
+// CreateConsumer
+//
+// PARAMS:
+//   - request: the arguments to CreateConsumer
+//
+// RETURNS:
+//   - CreateConsumerResponse: The return type of the CreateConsumer interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateConsumer(request *CreateConsumerRequest) (*CreateConsumerResponse, error) {
+	result := &CreateConsumerResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateConsumerUri(util.StringValue(request.InstanceId))).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateRoute
 //
 // PARAMS:
@@ -30,6 +52,28 @@ func (c *Client) CreateRoute(request *CreateRouteRequest) (*CreateRouteResponse,
 	return result, nil
 }
 
+// DeleteConsumer
+//
+// PARAMS:
+//   - request: the arguments to DeleteConsumer
+//
+// RETURNS:
+//   - DeleteConsumerResponse: The return type of the DeleteConsumer interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteConsumer(request *DeleteConsumerRequest) (*DeleteConsumerResponse, error) {
+	result := &DeleteConsumerResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteConsumerUri(util.StringValue(request.InstanceId), util.StringValue(request.ConsumerId))).
+		WithQueryParamFilter("keyType", util.StringValue(request.KeyType)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DeleteRoute
 //
 // PARAMS:
@@ -43,6 +87,53 @@ func (c *Client) DeleteRoute(request *DeleteRouteRequest) (*DeleteRouteResponse,
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getDeleteRouteUri(util.StringValue(request.InstanceId), util.StringValue(request.RouteName))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetConsumer
+//
+// PARAMS:
+//   - request: the arguments to GetConsumer
+//
+// RETURNS:
+//   - GetConsumerResponse: The return type of the GetConsumer interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetConsumer(request *GetConsumerRequest) (*GetConsumerResponse, error) {
+	result := &GetConsumerResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetConsumerUri(util.StringValue(request.InstanceId), util.StringValue(request.ConsumerId))).
+		WithQueryParamFilter("keyType", util.StringValue(request.KeyType)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetConsumerList
+//
+// PARAMS:
+//   - request: the arguments to GetConsumerList
+//
+// RETURNS:
+//   - GetConsumerListResponse: The return type of the GetConsumerList interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetConsumerList(request *GetConsumerListRequest) (*GetConsumerListResponse, error) {
+	result := &GetConsumerListResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetConsumerListUri(util.StringValue(request.InstanceId))).
+		WithQueryParamFilter("pageNo", util.Int32Value(request.PageNo)).
+		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
+		WithQueryParamFilter("tagKey", util.StringValue(request.TagKey)).
+		WithQueryParamFilter("tagValue", util.StringValue(request.TagValue)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -90,6 +181,29 @@ func (c *Client) QueryRoutingList(request *QueryRoutingListRequest) (*QueryRouti
 		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
 		WithQueryParamFilter("orderBy", util.StringValue(request.OrderBy)).
 		WithQueryParamFilter("order", util.StringValue(request.Order)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// UpdateConsumer
+//
+// PARAMS:
+//   - request: the arguments to UpdateConsumer
+//
+// RETURNS:
+//   - UpdateConsumerResponse: The return type of the UpdateConsumer interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateConsumer(request *UpdateConsumerRequest) (*UpdateConsumerResponse, error) {
+	result := &UpdateConsumerResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateConsumerUri(util.StringValue(request.InstanceId), util.StringValue(request.ConsumerId))).
+		WithQueryParamFilter("keyType", util.StringValue(request.KeyType)).
+		WithBody(request).
 		WithResult(result).
 		Do()
 	if err != nil {

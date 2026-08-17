@@ -69,6 +69,55 @@ func ExpectEqual(alert func(format string, args ...interface{}),
     return true
 }
 
+func TestClient_CreateConsumer(t *testing.T) {
+    Credential := &ConsumerCredentialSpec{
+        Name : util.PtrString(""),
+    GenerateMode : util.PtrString(""),
+    Value : util.PtrString(""),
+    InHeader : util.PtrBool(false),
+    InQuery : util.PtrBool(false),
+    KeyNames : []*string{},
+    Description : util.PtrString(""),
+
+    }
+    IamCredential := &IAMCredentialSpec{
+        Name : util.PtrString(""),
+    IamApiKeyId : util.PtrString(""),
+    IamTokenIdMasked : util.PtrString(""),
+    IamUserId : util.PtrString(""),
+    IamDomainId : util.PtrString(""),
+    ResourceIds : []*string{},
+    InHeader : util.PtrBool(false),
+    InQuery : util.PtrBool(false),
+    KeyNames : []*string{},
+    Status : util.PtrString(""),
+
+    }
+    createConsumerRequest := &CreateConsumerRequest{
+        InstanceId : util.PtrString(""),
+        ConsumerName : util.PtrString(""),
+        Description : util.PtrString(""),
+        AuthType : util.PtrString(""),
+        CredentialType : util.PtrString(""),
+        RouteNames : []*string{},
+        Tags : []*Tag{},
+        Credential : Credential,
+        IamCredential : IamCredential,
+    }
+    result := &CreateConsumerResponse{}
+    result, err := AIGW_CLIENT.CreateConsumer(createConsumerRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateRoute(t *testing.T) {
     MatchRules := &MatchRule{
         PathRule : &PathRule{
@@ -203,6 +252,26 @@ func TestClient_CreateRoute(t *testing.T) {
     fmt.Println(string(data))
     ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DeleteConsumer(t *testing.T) {
+    deleteConsumerRequest := &DeleteConsumerRequest{
+        InstanceId : util.PtrString(""),
+        ConsumerId : util.PtrString(""),
+        KeyType : util.PtrString(""),
+    }
+    result := &DeleteConsumerResponse{}
+    result, err := AIGW_CLIENT.DeleteConsumer(deleteConsumerRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteRoute(t *testing.T) {
     deleteRouteRequest := &DeleteRouteRequest{
         InstanceId : util.PtrString(""),
@@ -210,6 +279,48 @@ func TestClient_DeleteRoute(t *testing.T) {
     }
     result := &DeleteRouteResponse{}
     result, err := AIGW_CLIENT.DeleteRoute(deleteRouteRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetConsumer(t *testing.T) {
+    getConsumerRequest := &GetConsumerRequest{
+        InstanceId : util.PtrString(""),
+        ConsumerId : util.PtrString(""),
+        KeyType : util.PtrString(""),
+    }
+    result := &GetConsumerResponse{}
+    result, err := AIGW_CLIENT.GetConsumer(getConsumerRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetConsumerList(t *testing.T) {
+    getConsumerListRequest := &GetConsumerListRequest{
+        InstanceId : util.PtrString(""),
+        PageNo : util.PtrInt32(int32(0)),
+        PageSize : util.PtrInt32(int32(0)),
+        TagKey : util.PtrString(""),
+        TagValue : util.PtrString(""),
+    }
+    result := &GetConsumerListResponse{}
+    result, err := AIGW_CLIENT.GetConsumerList(getConsumerListRequest)
     if err != nil {
         fmt.Println("request failed:", err)
         return
@@ -252,6 +363,57 @@ func TestClient_QueryRoutingList(t *testing.T) {
     }
     result := &QueryRoutingListResponse{}
     result, err := AIGW_CLIENT.QueryRoutingList(queryRoutingListRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateConsumer(t *testing.T) {
+    CredentialOp := &CredentialOp{
+        Operation : util.PtrString(""),
+    CredentialName : util.PtrString(""),
+    Value : util.PtrString(""),
+
+    }
+    CredentialLocation := &ConsumerCredentialLocation{
+        InHeader : util.PtrBool(false),
+    InQuery : util.PtrBool(false),
+    KeyNames : []*string{},
+
+    }
+    IamCredential := &IAMCredentialSpec{
+        Name : util.PtrString(""),
+    IamApiKeyId : util.PtrString(""),
+    IamTokenIdMasked : util.PtrString(""),
+    IamUserId : util.PtrString(""),
+    IamDomainId : util.PtrString(""),
+    ResourceIds : []*string{},
+    InHeader : util.PtrBool(false),
+    InQuery : util.PtrBool(false),
+    KeyNames : []*string{},
+    Status : util.PtrString(""),
+
+    }
+    updateConsumerRequest := &UpdateConsumerRequest{
+        InstanceId : util.PtrString(""),
+        ConsumerId : util.PtrString(""),
+        KeyType : util.PtrString(""),
+        Description : util.PtrString(""),
+        RouteNames : []*string{},
+        Tags : []*Tag{},
+        CredentialOp : CredentialOp,
+        CredentialLocation : CredentialLocation,
+        IamCredential : IamCredential,
+    }
+    result := &UpdateConsumerResponse{}
+    result, err := AIGW_CLIENT.UpdateConsumer(updateConsumerRequest)
     if err != nil {
         fmt.Println("request failed:", err)
         return
