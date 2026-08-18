@@ -1,0 +1,33 @@
+package financesample
+
+import (
+	"fmt"
+	"github.com/baidubce/baiducloud-go-sdk/core/util"
+	"github.com/baidubce/baiducloud-go-sdk/services/finance"
+)
+
+func CreateRenewResourceRule() {
+	endpoint := "Your Endpoint"
+
+	// ==== AK/SK 鉴权 ====
+	ak, sk := "Your Ak", "Your Sk"
+	client, err := finance.NewClient(ak, sk, endpoint)
+
+	if err != nil {
+		fmt.Println("create client err:", err)
+		return
+	}
+	createRenewResourceRuleRequest := &finance.CreateRenewResourceRuleRequest{
+		AccountId:     util.PtrString(""),
+		ServiceType:   util.PtrString(""),
+		Region:        util.PtrString(""),
+		InstanceId:    util.PtrString(""),
+		RenewTimeUnit: util.PtrString(""),
+		RenewTime:     util.PtrString(""),
+	}
+	err = client.CreateRenewResourceRule(createRenewResourceRuleRequest)
+	if err != nil {
+		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
+		fmt.Println("request failed:", err)
+	}
+}
