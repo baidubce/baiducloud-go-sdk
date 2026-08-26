@@ -560,6 +560,30 @@ func (c *Client) DescribeInstanceGroups(request *DescribeInstanceGroupsRequest) 
 	return result, nil
 }
 
+// DescribeMetricCatalogs
+//
+// PARAMS:
+//   - request: the arguments to DescribeMetricCatalogs
+//
+// RETURNS:
+//   - DescribeMetricCatalogsResponse: The return type of the DescribeMetricCatalogs interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeMetricCatalogs(request *DescribeMetricCatalogsRequest) (*DescribeMetricCatalogsResponse, error) {
+	result := &DescribeMetricCatalogsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeMetricCatalogsUri(util.StringValue(request.Locale))).
+		WithQueryParamFilter("action", "DescribeMetricCatalogs").
+		WithQueryParamFilter("locale", "zh-cn").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DescribeMetricData
 //
 // PARAMS:
@@ -690,6 +714,29 @@ func (c *Client) DescribeReceivers(request *DescribeReceiversRequest) (*Describe
 		WithURL(getDescribeReceiversUri()).
 		WithQueryParamFilter("action", "DescribeReceivers").
 		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DescribeResourceCatalogs
+//
+// PARAMS:
+//   - request: the arguments to DescribeResourceCatalogs
+//
+// RETURNS:
+//   - DescribeResourceCatalogsResponse: The return type of the DescribeResourceCatalogs interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeResourceCatalogs(request *DescribeResourceCatalogsRequest) (*DescribeResourceCatalogsResponse, error) {
+	result := &DescribeResourceCatalogsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeResourceCatalogsUri(util.StringValue(request.Locale))).
+		WithQueryParamFilter("action", "DescribeResourceCatalogs").
+		WithQueryParamFilter("locale", "zh-cn").
 		WithResult(result).
 		Do()
 	if err != nil {

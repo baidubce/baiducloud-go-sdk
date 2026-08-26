@@ -36,7 +36,9 @@ func init() {
 	confObj := &Conf{}
 	decoder.Decode(confObj)
 
+	// ==== AK/SK 鉴权 ====
 	BCM_CLIENT, _ = NewClient(confObj.AK, confObj.SK, confObj.Endpoint)
+
 	log.SetLogLevel(log.WARN)
 }
 
@@ -597,6 +599,34 @@ func TestClient_DescribeInstanceGroups(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeMetricCatalogs(t *testing.T) {
+	describeMetricCatalogsRequest := &DescribeMetricCatalogsRequest{
+		Locale:              util.PtrString(""),
+		Scope:               util.PtrString(""),
+		ResourceType:        util.PtrString(""),
+		Catalog:             util.PtrString(""),
+		Filters:             []*MetricFilter{},
+		FiltersKey:          util.PtrString(""),
+		FiltersOp:           util.PtrString(""),
+		FiltersValue:        util.PtrString(""),
+		FiltersValues:       []*string{},
+		IncludingDimensions: []*string{},
+		ExcludingDimensions: []*string{},
+	}
+	result := &DescribeMetricCatalogsResponse{}
+	result, err := BCM_CLIENT.DescribeMetricCatalogs(describeMetricCatalogsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DescribeMetricData(t *testing.T) {
 	describeMetricDataRequest := &DescribeMetricDataRequest{
 		Action:              util.PtrString(""),
@@ -731,6 +761,24 @@ func TestClient_DescribeReceivers(t *testing.T) {
 	}
 	result := &DescribeReceiversResponse{}
 	result, err := BCM_CLIENT.DescribeReceivers(describeReceiversRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeResourceCatalogs(t *testing.T) {
+	describeResourceCatalogsRequest := &DescribeResourceCatalogsRequest{
+		Locale: util.PtrString(""),
+	}
+	result := &DescribeResourceCatalogsResponse{}
+	result, err := BCM_CLIENT.DescribeResourceCatalogs(describeResourceCatalogsRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return

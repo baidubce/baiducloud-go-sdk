@@ -7,7 +7,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/services/bcm"
 )
 
-func UpdateInstanceGroup() {
+func DescribeMetricCatalogs() {
 	endpoint := "Your Endpoint"
 
 	// ==== AK/SK 鉴权 ====
@@ -18,14 +18,20 @@ func UpdateInstanceGroup() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	updateInstanceGroupRequest := &bcm.UpdateInstanceGroupRequest{
-		Id:           util.PtrString(""),
-		Scope:        util.PtrString(""),
-		ResourceType: util.PtrString(""),
-		Name:         util.PtrString(""),
-		Instances:    []*bcm.InstanceGroupInstance{},
+	describeMetricCatalogsRequest := &bcm.DescribeMetricCatalogsRequest{
+		Locale:              util.PtrString(""),
+		Scope:               util.PtrString(""),
+		ResourceType:        util.PtrString(""),
+		Catalog:             util.PtrString(""),
+		Filters:             []*bcm.MetricFilter{},
+		FiltersKey:          util.PtrString(""),
+		FiltersOp:           util.PtrString(""),
+		FiltersValue:        util.PtrString(""),
+		FiltersValues:       []*string{},
+		IncludingDimensions: []*string{},
+		ExcludingDimensions: []*string{},
 	}
-	result, err := client.UpdateInstanceGroup(updateInstanceGroupRequest)
+	result, err := client.DescribeMetricCatalogs(describeMetricCatalogsRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

@@ -7,7 +7,7 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/services/bcm"
 )
 
-func UpdateInstanceGroup() {
+func DescribeResourceCatalogs() {
 	endpoint := "Your Endpoint"
 
 	// ==== AK/SK 鉴权 ====
@@ -18,14 +18,10 @@ func UpdateInstanceGroup() {
 		fmt.Println("create client err:", err)
 		return
 	}
-	updateInstanceGroupRequest := &bcm.UpdateInstanceGroupRequest{
-		Id:           util.PtrString(""),
-		Scope:        util.PtrString(""),
-		ResourceType: util.PtrString(""),
-		Name:         util.PtrString(""),
-		Instances:    []*bcm.InstanceGroupInstance{},
+	describeResourceCatalogsRequest := &bcm.DescribeResourceCatalogsRequest{
+		Locale: util.PtrString(""),
 	}
-	result, err := client.UpdateInstanceGroup(updateInstanceGroupRequest)
+	result, err := client.DescribeResourceCatalogs(describeResourceCatalogsRequest)
 	if err != nil {
 		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
 		fmt.Println("request failed:", err)

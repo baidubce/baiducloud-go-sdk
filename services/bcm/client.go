@@ -104,6 +104,9 @@ func getDescribeInstanceGroupUri() string {
 func getDescribeInstanceGroupsUri() string {
 	return bce.URI_PREFIX + CONSTANT_V3 + bce.URI_PREFIX + CONSTANT_BCM
 }
+func getDescribeMetricCatalogsUri(Locale string) string {
+	return bce.URI_PREFIX + CONSTANT_V3 + bce.URI_PREFIX + CONSTANT_BCM
+}
 func getDescribeMetricDataUri(Action string) string {
 	return bce.URI_PREFIX + CONSTANT_V3 + bce.URI_PREFIX + CONSTANT_BCM + bce.URI_PREFIX + CONSTANT_QUERY
 }
@@ -120,6 +123,9 @@ func getDescribeNotifyTemplatesUri() string {
 	return bce.URI_PREFIX + CONSTANT_V3 + bce.URI_PREFIX + CONSTANT_BCM
 }
 func getDescribeReceiversUri() string {
+	return bce.URI_PREFIX + CONSTANT_V3 + bce.URI_PREFIX + CONSTANT_BCM
+}
+func getDescribeResourceCatalogsUri(Locale string) string {
 	return bce.URI_PREFIX + CONSTANT_V3 + bce.URI_PREFIX + CONSTANT_BCM
 }
 func getDescribeSystemTemplateRulesUri() string {
