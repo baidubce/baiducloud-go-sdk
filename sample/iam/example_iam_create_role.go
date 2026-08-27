@@ -7,9 +7,12 @@ import (
 )
 
 func CreateRole() {
-	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
-	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
+	endpoint := "Your Endpoint"
+
+	// ==== AK/SK 鉴权 ====
+	ak, sk := "Your Ak", "Your Sk"
 	client, err := iam.NewClient(ak, sk, endpoint)
+
 	if err != nil {
 		fmt.Println("create client err:", err)
 		return
@@ -17,6 +20,7 @@ func CreateRole() {
 	createRoleRequest := &iam.CreateRoleRequest{
 		Name:                     util.PtrString(""),
 		Description:              util.PtrString(""),
+		GrantType:                util.PtrString(""),
 		AssumeRolePolicyDocument: util.PtrString(""),
 	}
 	err = client.CreateRole(createRoleRequest)

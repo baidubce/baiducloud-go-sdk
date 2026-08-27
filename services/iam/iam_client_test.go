@@ -36,7 +36,9 @@ func init() {
 	confObj := &Conf{}
 	decoder.Decode(confObj)
 
+	// ==== AK/SK 鉴权 ====
 	IAM_CLIENT, _ = NewClient(confObj.AK, confObj.SK, confObj.Endpoint)
+
 	log.SetLogLevel(log.WARN)
 }
 
@@ -154,6 +156,7 @@ func TestClient_CreateRole(t *testing.T) {
 	createRoleRequest := &CreateRoleRequest{
 		Name:                     util.PtrString(""),
 		Description:              util.PtrString(""),
+		GrantType:                util.PtrString(""),
 		AssumeRolePolicyDocument: util.PtrString(""),
 	}
 	err := IAM_CLIENT.CreateRole(createRoleRequest)
