@@ -1,0 +1,6 @@
+package ocr
+
+type VinCodeRequest struct {
+	Image *string `json:"image,omitempty"`
+	Url   *string `json:"url,omitempty"`
+}

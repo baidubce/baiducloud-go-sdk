@@ -1,6 +1,6 @@
 package ocr
 
-type WordResult struct {
+type HealthReportWordResult struct {
 	WordName    *string                  `json:"word_name,omitempty"`
 	Word        *string                  `json:"word,omitempty"`
 	Location    *HealthReportLocation    `json:"location,omitempty"`
