@@ -10,7 +10,7 @@ type RouteResult struct {
 	ServicePath                 *string           `json:"servicePath,omitempty"`
 	CreateTime                  *string           `json:"createTime,omitempty"`
 	UpdateTime                  *string           `json:"updateTime,omitempty"`
-	MatchRules                  *MatchRules       `json:"matchRules,omitempty"`
+	MatchRules                  *MatchRule        `json:"matchRules,omitempty"`
 	MultiService                *bool             `json:"multiService,omitempty"`
 	TrafficDistributionStrategy *string           `json:"trafficDistributionStrategy,omitempty"`
 	EnableWeightAdjust          *bool             `json:"enableWeightAdjust,omitempty"`

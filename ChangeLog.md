@@ -1,3 +1,9 @@
+2026-09-03 Version: v0.0.134
+- 涉及产品: AIGW，createRoute 删除限流配置、匹配规则、预留等21个字段
+- 涉及产品: AIGW，涉及 deleteService、updateService、createService 等服务管理接口变更
+- 涉及产品: AIGW，涉及 createRoute、updateRoute、deleteRoute 等路由管理接口变更
+- 涉及产品: AIGW，涉及 createConsumer、updateConsumer、deleteConsumer 等消费者管理接口变更
+
 2026-09-03 Version: v0.0.133
 - 涉及产品: AIGW，新增网关实例、服务的增删改查接口
 - 涉及产品: AIGW，新增路由及消费者接口并支持X-Region字段
