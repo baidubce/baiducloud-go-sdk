@@ -3,6 +3,7 @@ package aigw
 type CreateRouteRequest struct {
 	InstanceId                  *string           `json:"-"`
 	ClusterId                   *string           `json:"-"`
+	XRegion                     *string           `json:"-"`
 	RouteName                   *string           `json:"routeName,omitempty"`
 	SrcProduct                  *string           `json:"srcProduct,omitempty"`
 	AccessMode                  *string           `json:"accessMode,omitempty"`

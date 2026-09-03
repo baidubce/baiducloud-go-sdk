@@ -20,6 +20,7 @@ func QueryRoutingList() {
 	}
 	queryRoutingListRequest := &aigw.QueryRoutingListRequest{
 		InstanceId: util.PtrString(""),
+		XRegion:    util.PtrString(""),
 		RouteName:  util.PtrString(""),
 		PageNo:     util.PtrInt32(int32(0)),
 		PageSize:   util.PtrInt32(int32(0)),

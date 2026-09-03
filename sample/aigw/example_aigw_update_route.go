@@ -40,8 +40,8 @@ func UpdateRoute() {
         HashType : util.PtrString(""),
         HashKey : util.PtrString(""),
         RequestRatio : util.PtrInt32(int32(0)),
-        WeightFactor : util.PtrInt32(int32(0)),
         ModelName : util.PtrString(""),
+        WeightFactor : util.PtrInt32(int32(0)),
         ModelNameMode : util.PtrString(""),
         SpecifiedModelName : util.PtrString(""),
 
@@ -113,6 +113,7 @@ func UpdateRoute() {
     updateRouteRequest := &aigw.UpdateRouteRequest{
         InstanceId : util.PtrString(""),
         RouteName : util.PtrString(""),
+        XRegion : util.PtrString(""),
         SrcProduct : util.PtrString(""),
         AccessMode : util.PtrString(""),
         WebSubdomain : util.PtrString(""),

@@ -6,4 +6,5 @@ type GetConsumerListRequest struct {
 	PageSize   *int32  `json:"-"`
 	TagKey     *string `json:"-"`
 	TagValue   *string `json:"-"`
+	XRegion    *string `json:"-"`
 }

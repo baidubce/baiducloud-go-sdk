@@ -21,6 +21,7 @@ func GetConsumer() {
 	getConsumerRequest := &aigw.GetConsumerRequest{
 		InstanceId: util.PtrString(""),
 		ConsumerId: util.PtrString(""),
+		XRegion:    util.PtrString(""),
 		KeyType:    util.PtrString(""),
 	}
 	result, err := client.GetConsumer(getConsumerRequest)

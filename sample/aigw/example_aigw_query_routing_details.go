@@ -21,6 +21,7 @@ func QueryRoutingDetails() {
 	queryRoutingDetailsRequest := &aigw.QueryRoutingDetailsRequest{
 		InstanceId: util.PtrString(""),
 		RouteName:  util.PtrString(""),
+		XRegion:    util.PtrString(""),
 	}
 	result, err := client.QueryRoutingDetails(queryRoutingDetailsRequest)
 	if err != nil {

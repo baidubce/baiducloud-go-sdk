@@ -9,8 +9,8 @@ type TargetService struct {
 	HashType             *string `json:"hashType,omitempty"`
 	HashKey              *string `json:"hashKey,omitempty"`
 	RequestRatio         *int32  `json:"requestRatio,omitempty"`
-	WeightFactor         *int32  `json:"weightFactor,omitempty"`
 	ModelName            *string `json:"modelName,omitempty"`
+	WeightFactor         *int32  `json:"weightFactor,omitempty"`
 	ModelNameMode        *string `json:"modelNameMode,omitempty"`
 	SpecifiedModelName   *string `json:"specifiedModelName,omitempty"`
 }

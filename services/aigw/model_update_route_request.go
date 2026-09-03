@@ -3,6 +3,7 @@ package aigw
 type UpdateRouteRequest struct {
 	InstanceId                  *string           `json:"-"`
 	RouteName                   *string           `json:"-"`
+	XRegion                     *string           `json:"-"`
 	SrcProduct                  *string           `json:"srcProduct,omitempty"`
 	AccessMode                  *string           `json:"accessMode,omitempty"`
 	WebSubdomain                *string           `json:"webSubdomain,omitempty"`

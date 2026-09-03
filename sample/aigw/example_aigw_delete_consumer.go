@@ -21,6 +21,7 @@ func DeleteConsumer() {
 	deleteConsumerRequest := &aigw.DeleteConsumerRequest{
 		InstanceId: util.PtrString(""),
 		ConsumerId: util.PtrString(""),
+		XRegion:    util.PtrString(""),
 		KeyType:    util.PtrString(""),
 	}
 	result, err := client.DeleteConsumer(deleteConsumerRequest)

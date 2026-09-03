@@ -2,6 +2,7 @@ package aigw
 
 type CreateConsumerRequest struct {
 	InstanceId     *string                 `json:"-"`
+	XRegion        *string                 `json:"-"`
 	ConsumerName   *string                 `json:"consumerName,omitempty"`
 	Description    *string                 `json:"description,omitempty"`
 	AuthType       *string                 `json:"authType,omitempty"`

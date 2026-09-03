@@ -43,6 +43,7 @@ func UpdateConsumer() {
 	updateConsumerRequest := &aigw.UpdateConsumerRequest{
 		InstanceId:         util.PtrString(""),
 		ConsumerId:         util.PtrString(""),
+		XRegion:            util.PtrString(""),
 		KeyType:            util.PtrString(""),
 		Description:        util.PtrString(""),
 		RouteNames:         []*string{},

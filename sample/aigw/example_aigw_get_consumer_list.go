@@ -20,6 +20,7 @@ func GetConsumerList() {
 	}
 	getConsumerListRequest := &aigw.GetConsumerListRequest{
 		InstanceId: util.PtrString(""),
+		XRegion:    util.PtrString(""),
 		PageNo:     util.PtrInt32(int32(0)),
 		PageSize:   util.PtrInt32(int32(0)),
 		TagKey:     util.PtrString(""),

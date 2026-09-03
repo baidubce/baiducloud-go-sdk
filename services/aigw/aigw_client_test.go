@@ -69,6 +69,58 @@ func ExpectEqual(alert func(format string, args ...interface{}),
     return true
 }
 
+func TestClient_CreateAIGateway(t *testing.T) {
+    AihcArgs := &AihcArgs{
+        AccountId : util.PtrString(""),
+    SubnetId : util.PtrString(""),
+    SecurityGroupIds : util.PtrString(""),
+    VpcCidr : util.PtrString(""),
+    DomainPrefix : util.PtrString(""),
+
+    }
+    createAIGatewayRequest := &CreateAIGatewayRequest{
+        XRegion : util.PtrString(""),
+        Name : util.PtrString(""),
+        VpcId : util.PtrString(""),
+        VpcCidr : util.PtrString(""),
+        SubnetId : util.PtrString(""),
+        GatewayType : util.PtrString(""),
+        IsInternal : util.PtrString(""),
+        NetworkTypes : []*string{},
+        Replicas : util.PtrInt32(int32(0)),
+        InstallMode : util.PtrString(""),
+        Description : util.PtrString(""),
+        DeleteProtection : util.PtrBool(false),
+        SrcProduct : util.PtrString(""),
+        AccountId : util.PtrString(""),
+        WorkspaceId : util.PtrString(""),
+        WorkspaceName : util.PtrString(""),
+        BlbId : util.PtrString(""),
+        BlbIp : util.PtrString(""),
+        Clusters : []*ClusterInfo{},
+        CpromInstanceId : util.PtrString(""),
+        CpromBearerToken : util.PtrString(""),
+        BlsEnabled : util.PtrBool(false),
+        LogStoreName : util.PtrString(""),
+        Version : util.PtrString(""),
+        Tags : []*Tag{},
+        ResourceGroupId : util.PtrString(""),
+        AihcArgs : AihcArgs,
+    }
+    result := &CreateAIGatewayResponse{}
+    result, err := AIGW_CLIENT.CreateAIGateway(createAIGatewayRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateConsumer(t *testing.T) {
     Credential := &ConsumerCredentialSpec{
         Name : util.PtrString(""),
@@ -95,6 +147,7 @@ func TestClient_CreateConsumer(t *testing.T) {
     }
     createConsumerRequest := &CreateConsumerRequest{
         InstanceId : util.PtrString(""),
+        XRegion : util.PtrString(""),
         ConsumerName : util.PtrString(""),
         Description : util.PtrString(""),
         AuthType : util.PtrString(""),
@@ -140,8 +193,8 @@ func TestClient_CreateRoute(t *testing.T) {
     HashType : util.PtrString(""),
     HashKey : util.PtrString(""),
     RequestRatio : util.PtrInt32(int32(0)),
-    WeightFactor : util.PtrInt32(int32(0)),
     ModelName : util.PtrString(""),
+    WeightFactor : util.PtrInt32(int32(0)),
     ModelNameMode : util.PtrString(""),
     SpecifiedModelName : util.PtrString(""),
 
@@ -213,6 +266,7 @@ func TestClient_CreateRoute(t *testing.T) {
     createRouteRequest := &CreateRouteRequest{
         InstanceId : util.PtrString(""),
         ClusterId : util.PtrString(""),
+        XRegion : util.PtrString(""),
         RouteName : util.PtrString(""),
         SrcProduct : util.PtrString(""),
         AccessMode : util.PtrString(""),
@@ -252,10 +306,66 @@ func TestClient_CreateRoute(t *testing.T) {
     fmt.Println(string(data))
     ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateService(t *testing.T) {
+    createServiceRequest := &CreateServiceRequest{
+        InstanceId : util.PtrString(""),
+        XRegion : util.PtrString(""),
+        ServiceSource : util.PtrString(""),
+        Namespace : util.PtrString(""),
+        ServiceName : util.PtrString(""),
+        ClusterId : util.PtrString(""),
+        ClusterIds : []*string{},
+        ServiceList : []*ServiceItem{},
+        RegistryId : util.PtrString(""),
+        ServiceAddresses : []*string{},
+        ServiceProtocol : util.PtrString(""),
+        Provider : util.PtrString(""),
+        Endpoint : util.PtrString(""),
+        ApiKeys : []*string{},
+        CredentialSource : util.PtrString(""),
+        CredentialNames : []*string{},
+        FailoverEnabled : util.PtrBool(false),
+        FailoverModel : util.PtrString(""),
+    }
+    result := &CreateServiceResponse{}
+    result, err := AIGW_CLIENT.CreateService(createServiceRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteAIGateway(t *testing.T) {
+    deleteAIGatewayRequest := &DeleteAIGatewayRequest{
+        InstanceId : util.PtrString(""),
+        XRegion : util.PtrString(""),
+        Force : util.PtrBool(false),
+    }
+    result := &DeleteAIGatewayResponse{}
+    result, err := AIGW_CLIENT.DeleteAIGateway(deleteAIGatewayRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DeleteConsumer(t *testing.T) {
     deleteConsumerRequest := &DeleteConsumerRequest{
         InstanceId : util.PtrString(""),
         ConsumerId : util.PtrString(""),
+        XRegion : util.PtrString(""),
         KeyType : util.PtrString(""),
     }
     result := &DeleteConsumerResponse{}
@@ -276,9 +386,51 @@ func TestClient_DeleteRoute(t *testing.T) {
     deleteRouteRequest := &DeleteRouteRequest{
         InstanceId : util.PtrString(""),
         RouteName : util.PtrString(""),
+        XRegion : util.PtrString(""),
     }
     result := &DeleteRouteResponse{}
     result, err := AIGW_CLIENT.DeleteRoute(deleteRouteRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteService(t *testing.T) {
+    deleteServiceRequest := &DeleteServiceRequest{
+        InstanceId : util.PtrString(""),
+        ServiceName : util.PtrString(""),
+        Namespace : util.PtrString(""),
+        XRegion : util.PtrString(""),
+    }
+    result := &DeleteServiceResponse{}
+    result, err := AIGW_CLIENT.DeleteService(deleteServiceRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetAIGatewayDetail(t *testing.T) {
+    getAIGatewayDetailRequest := &GetAIGatewayDetailRequest{
+        InstanceId : util.PtrString(""),
+        XRegion : util.PtrString(""),
+        SrcProduct : util.PtrString(""),
+    }
+    result := &GetAIGatewayDetailResponse{}
+    result, err := AIGW_CLIENT.GetAIGatewayDetail(getAIGatewayDetailRequest)
     if err != nil {
         fmt.Println("request failed:", err)
         return
@@ -295,6 +447,7 @@ func TestClient_GetConsumer(t *testing.T) {
     getConsumerRequest := &GetConsumerRequest{
         InstanceId : util.PtrString(""),
         ConsumerId : util.PtrString(""),
+        XRegion : util.PtrString(""),
         KeyType : util.PtrString(""),
     }
     result := &GetConsumerResponse{}
@@ -314,6 +467,7 @@ func TestClient_GetConsumer(t *testing.T) {
 func TestClient_GetConsumerList(t *testing.T) {
     getConsumerListRequest := &GetConsumerListRequest{
         InstanceId : util.PtrString(""),
+        XRegion : util.PtrString(""),
         PageNo : util.PtrInt32(int32(0)),
         PageSize : util.PtrInt32(int32(0)),
         TagKey : util.PtrString(""),
@@ -333,10 +487,100 @@ func TestClient_GetConsumerList(t *testing.T) {
     fmt.Println(string(data))
     ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_GetServiceDetail(t *testing.T) {
+    getServiceDetailRequest := &GetServiceDetailRequest{
+        InstanceId : util.PtrString(""),
+        ServiceName : util.PtrString(""),
+        XRegion : util.PtrString(""),
+    }
+    result := &GetServiceDetailResponse{}
+    result, err := AIGW_CLIENT.GetServiceDetail(getServiceDetailRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetServiceList(t *testing.T) {
+    getServiceListRequest := &GetServiceListRequest{
+        InstanceId : util.PtrString(""),
+        XRegion : util.PtrString(""),
+        ServiceSource : util.PtrString(""),
+    }
+    result := &GetServiceListResponse{}
+    result, err := AIGW_CLIENT.GetServiceList(getServiceListRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListAIGateways(t *testing.T) {
+    listAIGatewaysRequest := &ListAIGatewaysRequest{
+        XRegion : util.PtrString(""),
+        Keyword : util.PtrString(""),
+        KeywordType : util.PtrString(""),
+        Status : util.PtrString(""),
+        SrcProduct : util.PtrString(""),
+        TagKey : util.PtrString(""),
+        TagValue : util.PtrString(""),
+        ResourceGroupId : util.PtrString(""),
+        PageNo : util.PtrInt32(int32(0)),
+        PageSize : util.PtrInt32(int32(0)),
+        OrderBy : util.PtrString(""),
+        Order : util.PtrString(""),
+    }
+    result := &ListAIGatewaysResponse{}
+    result, err := AIGW_CLIENT.ListAIGateways(listAIGatewaysRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListServicesBySource(t *testing.T) {
+    listServicesBySourceRequest := &ListServicesBySourceRequest{
+        InstanceId : util.PtrString(""),
+        XRegion : util.PtrString(""),
+        ServiceSource : util.PtrString(""),
+    }
+    result := &ListServicesBySourceResponse{}
+    result, err := AIGW_CLIENT.ListServicesBySource(listServicesBySourceRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_QueryRoutingDetails(t *testing.T) {
     queryRoutingDetailsRequest := &QueryRoutingDetailsRequest{
         InstanceId : util.PtrString(""),
         RouteName : util.PtrString(""),
+        XRegion : util.PtrString(""),
     }
     result := &QueryRoutingDetailsResponse{}
     result, err := AIGW_CLIENT.QueryRoutingDetails(queryRoutingDetailsRequest)
@@ -355,6 +599,7 @@ func TestClient_QueryRoutingDetails(t *testing.T) {
 func TestClient_QueryRoutingList(t *testing.T) {
     queryRoutingListRequest := &QueryRoutingListRequest{
         InstanceId : util.PtrString(""),
+        XRegion : util.PtrString(""),
         RouteName : util.PtrString(""),
         PageNo : util.PtrInt32(int32(0)),
         PageSize : util.PtrInt32(int32(0)),
@@ -363,6 +608,32 @@ func TestClient_QueryRoutingList(t *testing.T) {
     }
     result := &QueryRoutingListResponse{}
     result, err := AIGW_CLIENT.QueryRoutingList(queryRoutingListRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateAIGateway(t *testing.T) {
+    updateAIGatewayRequest := &UpdateAIGatewayRequest{
+        InstanceId : util.PtrString(""),
+        XRegion : util.PtrString(""),
+        Name : util.PtrString(""),
+        Description : util.PtrString(""),
+        DeleteProtection : util.PtrBool(false),
+        PublicAccessible : util.PtrBool(false),
+        Replicas : util.PtrInt32(int32(0)),
+        NetworkTypes : []*string{},
+        Tags : []*Tag{},
+    }
+    result := &UpdateAIGatewayResponse{}
+    result, err := AIGW_CLIENT.UpdateAIGateway(updateAIGatewayRequest)
     if err != nil {
         fmt.Println("request failed:", err)
         return
@@ -404,6 +675,7 @@ func TestClient_UpdateConsumer(t *testing.T) {
     updateConsumerRequest := &UpdateConsumerRequest{
         InstanceId : util.PtrString(""),
         ConsumerId : util.PtrString(""),
+        XRegion : util.PtrString(""),
         KeyType : util.PtrString(""),
         Description : util.PtrString(""),
         RouteNames : []*string{},
@@ -448,8 +720,8 @@ func TestClient_UpdateRoute(t *testing.T) {
     HashType : util.PtrString(""),
     HashKey : util.PtrString(""),
     RequestRatio : util.PtrInt32(int32(0)),
-    WeightFactor : util.PtrInt32(int32(0)),
     ModelName : util.PtrString(""),
+    WeightFactor : util.PtrInt32(int32(0)),
     ModelNameMode : util.PtrString(""),
     SpecifiedModelName : util.PtrString(""),
 
@@ -521,6 +793,7 @@ func TestClient_UpdateRoute(t *testing.T) {
     updateRouteRequest := &UpdateRouteRequest{
         InstanceId : util.PtrString(""),
         RouteName : util.PtrString(""),
+        XRegion : util.PtrString(""),
         SrcProduct : util.PtrString(""),
         AccessMode : util.PtrString(""),
         WebSubdomain : util.PtrString(""),
@@ -547,6 +820,36 @@ func TestClient_UpdateRoute(t *testing.T) {
     }
     result := &UpdateRouteResponse{}
     result, err := AIGW_CLIENT.UpdateRoute(updateRouteRequest)
+    if err != nil {
+        fmt.Println("request failed:", err)
+        return
+    }
+    data, err := json.MarshalIndent(result, "", "    ")
+    if err != nil {
+        fmt.Println("json marshalIndent failed:", err)
+        return
+    }
+    fmt.Println(string(data))
+    ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateService(t *testing.T) {
+    updateServiceRequest := &UpdateServiceRequest{
+        InstanceId : util.PtrString(""),
+        ServiceNamePath : util.PtrString(""),
+        XRegion : util.PtrString(""),
+        ServiceName : util.PtrString(""),
+        ServiceAddresses : []*string{},
+        ServiceProtocol : util.PtrString(""),
+        Provider : util.PtrString(""),
+        Endpoint : util.PtrString(""),
+        ApiKeys : []*string{},
+        FailoverEnabled : util.PtrBool(false),
+        FailoverModel : util.PtrString(""),
+        CredentialSource : util.PtrString(""),
+        CredentialNames : []*string{},
+    }
+    result := &UpdateServiceResponse{}
+    result, err := AIGW_CLIENT.UpdateService(updateServiceRequest)
     if err != nil {
         fmt.Println("request failed:", err)
         return

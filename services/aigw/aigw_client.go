@@ -8,6 +8,29 @@ import (
 
 const ()
 
+// CreateAIGateway
+//
+// PARAMS:
+//   - request: the arguments to CreateAIGateway
+//
+// RETURNS:
+//   - CreateAIGatewayResponse: The return type of the CreateAIGateway interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateAIGateway(request *CreateAIGatewayRequest) (*CreateAIGatewayResponse, error) {
+	result := &CreateAIGatewayResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateAIGatewayUri()).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateConsumer
 //
 // PARAMS:
@@ -21,6 +44,7 @@ func (c *Client) CreateConsumer(request *CreateConsumerRequest) (*CreateConsumer
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateConsumerUri(util.StringValue(request.InstanceId))).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -43,7 +67,54 @@ func (c *Client) CreateRoute(request *CreateRouteRequest) (*CreateRouteResponse,
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getCreateRouteUri(util.StringValue(request.InstanceId), util.StringValue(request.ClusterId))).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
 		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateService
+//
+// PARAMS:
+//   - request: the arguments to CreateService
+//
+// RETURNS:
+//   - CreateServiceResponse: The return type of the CreateService interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateService(request *CreateServiceRequest) (*CreateServiceResponse, error) {
+	result := &CreateServiceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateServiceUri(util.StringValue(request.InstanceId))).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DeleteAIGateway
+//
+// PARAMS:
+//   - request: the arguments to DeleteAIGateway
+//
+// RETURNS:
+//   - DeleteAIGatewayResponse: The return type of the DeleteAIGateway interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteAIGateway(request *DeleteAIGatewayRequest) (*DeleteAIGatewayResponse, error) {
+	result := &DeleteAIGatewayResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteAIGatewayUri(util.StringValue(request.InstanceId))).
+		WithQueryParamFilter("force", util.BoolValue(request.Force)).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -66,6 +137,7 @@ func (c *Client) DeleteConsumer(request *DeleteConsumerRequest) (*DeleteConsumer
 		WithMethod(http.DELETE).
 		WithURL(getDeleteConsumerUri(util.StringValue(request.InstanceId), util.StringValue(request.ConsumerId))).
 		WithQueryParamFilter("keyType", util.StringValue(request.KeyType)).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -87,6 +159,52 @@ func (c *Client) DeleteRoute(request *DeleteRouteRequest) (*DeleteRouteResponse,
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getDeleteRouteUri(util.StringValue(request.InstanceId), util.StringValue(request.RouteName))).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DeleteService
+//
+// PARAMS:
+//   - request: the arguments to DeleteService
+//
+// RETURNS:
+//   - DeleteServiceResponse: The return type of the DeleteService interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteService(request *DeleteServiceRequest) (*DeleteServiceResponse, error) {
+	result := &DeleteServiceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteServiceUri(util.StringValue(request.InstanceId), util.StringValue(request.ServiceName), util.StringValue(request.Namespace))).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetAIGatewayDetail
+//
+// PARAMS:
+//   - request: the arguments to GetAIGatewayDetail
+//
+// RETURNS:
+//   - GetAIGatewayDetailResponse: The return type of the GetAIGatewayDetail interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetAIGatewayDetail(request *GetAIGatewayDetailRequest) (*GetAIGatewayDetailResponse, error) {
+	result := &GetAIGatewayDetailResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetAIGatewayDetailUri(util.StringValue(request.InstanceId))).
+		WithQueryParamFilter("srcProduct", util.StringValue(request.SrcProduct)).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -109,6 +227,7 @@ func (c *Client) GetConsumer(request *GetConsumerRequest) (*GetConsumerResponse,
 		WithMethod(http.GET).
 		WithURL(getGetConsumerUri(util.StringValue(request.InstanceId), util.StringValue(request.ConsumerId))).
 		WithQueryParamFilter("keyType", util.StringValue(request.KeyType)).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -134,6 +253,108 @@ func (c *Client) GetConsumerList(request *GetConsumerListRequest) (*GetConsumerL
 		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
 		WithQueryParamFilter("tagKey", util.StringValue(request.TagKey)).
 		WithQueryParamFilter("tagValue", util.StringValue(request.TagValue)).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetServiceDetail
+//
+// PARAMS:
+//   - request: the arguments to GetServiceDetail
+//
+// RETURNS:
+//   - GetServiceDetailResponse: The return type of the GetServiceDetail interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetServiceDetail(request *GetServiceDetailRequest) (*GetServiceDetailResponse, error) {
+	result := &GetServiceDetailResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetServiceDetailUri(util.StringValue(request.InstanceId), util.StringValue(request.ServiceName))).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetServiceList
+//
+// PARAMS:
+//   - request: the arguments to GetServiceList
+//
+// RETURNS:
+//   - GetServiceListResponse: The return type of the GetServiceList interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetServiceList(request *GetServiceListRequest) (*GetServiceListResponse, error) {
+	result := &GetServiceListResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetServiceListUri(util.StringValue(request.InstanceId))).
+		WithQueryParamFilter("serviceSource", util.StringValue(request.ServiceSource)).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListAIGateways
+//
+// PARAMS:
+//   - request: the arguments to ListAIGateways
+//
+// RETURNS:
+//   - ListAIGatewaysResponse: The return type of the ListAIGateways interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListAIGateways(request *ListAIGatewaysRequest) (*ListAIGatewaysResponse, error) {
+	result := &ListAIGatewaysResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListAIGatewaysUri()).
+		WithQueryParamFilter("keyword", util.StringValue(request.Keyword)).
+		WithQueryParamFilter("keywordType", util.StringValue(request.KeywordType)).
+		WithQueryParamFilter("status", util.StringValue(request.Status)).
+		WithQueryParamFilter("srcProduct", util.StringValue(request.SrcProduct)).
+		WithQueryParamFilter("tagKey", util.StringValue(request.TagKey)).
+		WithQueryParamFilter("tagValue", util.StringValue(request.TagValue)).
+		WithQueryParamFilter("resourceGroupId", util.StringValue(request.ResourceGroupId)).
+		WithQueryParamFilter("pageNo", util.Int32Value(request.PageNo)).
+		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
+		WithQueryParamFilter("orderBy", util.StringValue(request.OrderBy)).
+		WithQueryParamFilter("order", util.StringValue(request.Order)).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListServicesBySource
+//
+// PARAMS:
+//   - request: the arguments to ListServicesBySource
+//
+// RETURNS:
+//   - ListServicesBySourceResponse: The return type of the ListServicesBySource interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListServicesBySource(request *ListServicesBySourceRequest) (*ListServicesBySourceResponse, error) {
+	result := &ListServicesBySourceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getListServicesBySourceUri(util.StringValue(request.InstanceId))).
+		WithQueryParamFilter("serviceSource", util.StringValue(request.ServiceSource)).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -155,6 +376,7 @@ func (c *Client) QueryRoutingDetails(request *QueryRoutingDetailsRequest) (*Quer
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getQueryRoutingDetailsUri(util.StringValue(request.InstanceId), util.StringValue(request.RouteName))).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -181,6 +403,30 @@ func (c *Client) QueryRoutingList(request *QueryRoutingListRequest) (*QueryRouti
 		WithQueryParamFilter("pageSize", util.Int32Value(request.PageSize)).
 		WithQueryParamFilter("orderBy", util.StringValue(request.OrderBy)).
 		WithQueryParamFilter("order", util.StringValue(request.Order)).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// UpdateAIGateway
+//
+// PARAMS:
+//   - request: the arguments to UpdateAIGateway
+//
+// RETURNS:
+//   - UpdateAIGatewayResponse: The return type of the UpdateAIGateway interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateAIGateway(request *UpdateAIGatewayRequest) (*UpdateAIGatewayResponse, error) {
+	result := &UpdateAIGatewayResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateAIGatewayUri(util.StringValue(request.InstanceId))).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
+		WithBody(request).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -203,6 +449,7 @@ func (c *Client) UpdateConsumer(request *UpdateConsumerRequest) (*UpdateConsumer
 		WithMethod(http.PUT).
 		WithURL(getUpdateConsumerUri(util.StringValue(request.InstanceId), util.StringValue(request.ConsumerId))).
 		WithQueryParamFilter("keyType", util.StringValue(request.KeyType)).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
 		WithBody(request).
 		WithResult(result).
 		Do()
@@ -225,6 +472,30 @@ func (c *Client) UpdateRoute(request *UpdateRouteRequest) (*UpdateRouteResponse,
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateRouteUri(util.StringValue(request.InstanceId), util.StringValue(request.RouteName))).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// UpdateService
+//
+// PARAMS:
+//   - request: the arguments to UpdateService
+//
+// RETURNS:
+//   - UpdateServiceResponse: The return type of the UpdateService interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateService(request *UpdateServiceRequest) (*UpdateServiceResponse, error) {
+	result := &UpdateServiceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getUpdateServiceUri(util.StringValue(request.InstanceId), util.StringValue(request.ServiceNamePath))).
+		WithHeaderFilter("X-Region", util.StringValue(request.XRegion)).
 		WithBody(request).
 		WithResult(result).
 		Do()

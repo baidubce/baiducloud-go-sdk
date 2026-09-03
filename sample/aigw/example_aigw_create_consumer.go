@@ -41,6 +41,7 @@ func CreateConsumer() {
 	}
 	createConsumerRequest := &aigw.CreateConsumerRequest{
 		InstanceId:     util.PtrString(""),
+		XRegion:        util.PtrString(""),
 		ConsumerName:   util.PtrString(""),
 		Description:    util.PtrString(""),
 		AuthType:       util.PtrString(""),

@@ -7,4 +7,5 @@ type QueryRoutingListRequest struct {
 	PageSize   *int32  `json:"-"`
 	OrderBy    *string `json:"-"`
 	Order      *string `json:"-"`
+	XRegion    *string `json:"-"`
 }

@@ -4,6 +4,7 @@ type UpdateConsumerRequest struct {
 	InstanceId         *string                     `json:"-"`
 	ConsumerId         *string                     `json:"-"`
 	KeyType            *string                     `json:"-"`
+	XRegion            *string                     `json:"-"`
 	Description        *string                     `json:"description,omitempty"`
 	RouteNames         []*string                   `json:"routeNames,omitempty"`
 	Tags               []*Tag                      `json:"tags,omitempty"`

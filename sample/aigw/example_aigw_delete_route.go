@@ -21,6 +21,7 @@ func DeleteRoute() {
 	deleteRouteRequest := &aigw.DeleteRouteRequest{
 		InstanceId: util.PtrString(""),
 		RouteName:  util.PtrString(""),
+		XRegion:    util.PtrString(""),
 	}
 	result, err := client.DeleteRoute(deleteRouteRequest)
 	if err != nil {
