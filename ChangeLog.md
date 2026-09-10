@@ -1,3 +1,10 @@
+2026-09-10 Version: v0.0.135
+新增CCE节点组与节点管理V2系列接口
+- 涉及产品: CCE，新增节点组创建、删除、扩缩容任务接口
+- 涉及产品: CCE，新增节点详情、属性更新、元信息同步接口
+- 涉及产品: CCE，新增Autoscaler创建、查询、更新配置接口
+- 涉及产品: CCE，新增集群节点列表、任务列表、事件查询接口
+
 2026-09-03 Version: v0.0.134
 - 涉及产品: AIGW，createRoute 删除限流配置、匹配规则、预留等21个字段
 - 涉及产品: AIGW，涉及 deleteService、updateService、createService 等服务管理接口变更
