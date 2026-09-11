@@ -82,9 +82,6 @@ func getCreateExpansionNodeGroupTaskV2Uri(ClusterID string, InstanceGroupID stri
 func getCreateNodeGroupV2Uri(ClusterID string) string {
 	return bce.URI_PREFIX + CONSTANT_V2 + bce.URI_PREFIX + CONSTANT_CLUSTER + bce.URI_PREFIX + ClusterID + bce.URI_PREFIX + CONSTANT_INSTANCEGROUP
 }
-func getCreateNodesClusterExpansionV2Uri(ClusterID string) string {
-	return bce.URI_PREFIX + CONSTANT_V2 + bce.URI_PREFIX + CONSTANT_CLUSTER + bce.URI_PREFIX + ClusterID + bce.URI_PREFIX + CONSTANT_INSTANCES
-}
 func getDeleteNodeGroupV2Uri(ClusterID string, InstanceGroupID string) string {
 	return bce.URI_PREFIX + CONSTANT_V2 + bce.URI_PREFIX + CONSTANT_CLUSTER + bce.URI_PREFIX + ClusterID + bce.URI_PREFIX + CONSTANT_INSTANCEGROUP + bce.URI_PREFIX + InstanceGroupID
 }

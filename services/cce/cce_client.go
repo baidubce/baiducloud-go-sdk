@@ -96,28 +96,6 @@ func (c *Client) CreateNodeGroupV2(request *CreateNodeGroupV2Request) (*CreateNo
 	return result, nil
 }
 
-// CreateNodesClusterExpansionV2
-//
-// PARAMS:
-//   - request: the arguments to CreateNodesClusterExpansionV2
-//
-// RETURNS:
-//   - CreateNodesClusterExpansionV2Response: The return type of the CreateNodesClusterExpansionV2 interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) CreateNodesClusterExpansionV2(request *CreateNodesClusterExpansionV2Request) (*CreateNodesClusterExpansionV2Response, error) {
-	result := &CreateNodesClusterExpansionV2Response{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getCreateNodesClusterExpansionV2Uri(util.StringValue(request.ClusterID))).
-		WithBody(request).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
 // DeleteNodeGroupV2
 //
 // PARAMS:

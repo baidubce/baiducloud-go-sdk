@@ -194,25 +194,6 @@ func TestClient_CreateNodeGroupV2(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_CreateNodesClusterExpansionV2(t *testing.T) {
-	createNodesClusterExpansionV2Request := &CreateNodesClusterExpansionV2Request{
-		ClusterID:   util.PtrString(""),
-		RequestBody: []*InstanceSet{},
-	}
-	result := &CreateNodesClusterExpansionV2Response{}
-	result, err := CCE_CLIENT.CreateNodesClusterExpansionV2(createNodesClusterExpansionV2Request)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_DeleteNodeGroupV2(t *testing.T) {
 	deleteNodeGroupV2Request := &DeleteNodeGroupV2Request{
 		ClusterID:          util.PtrString(""),
