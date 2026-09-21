@@ -8,5 +8,4 @@ type SCSSlowLogInfo struct {
 	LogTime     *string `json:"logTime,omitempty"`
 	SlowLogId   *int64  `json:"slowLogId,omitempty"`
 	ClientIp    *string `json:"clientIp,omitempty"`
-	ClientIP    *string `json:"ClientIP,omitempty"`
 }

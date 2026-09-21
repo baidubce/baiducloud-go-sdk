@@ -383,9 +383,10 @@ func (c *Client) GetMysqlActiveSessions(request *GetMysqlActiveSessionsRequest) 
 	result := &GetMysqlActiveSessionsResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getGetMysqlActiveSessionsUri(VERSION_V1, util.StringValue(request.AppId))).
+		WithURL(getGetMysqlActiveSessionsUri(VERSION_V1)).
 		WithQueryParamFilter("appId", "appId").
-		WithQueryParamFilter("nodeId", "appId").
+		WithQueryParamFilter("nodeId", "nodeId").
+		WithQueryParamFilter("appId", util.StringValue(request.AppId)).
 		WithQueryParamFilter("nodeId", util.StringValue(request.NodeId)).
 		WithResult(result).
 		Do()

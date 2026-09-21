@@ -132,7 +132,7 @@ func getGetMongodbSlowQueryTemplateUri(version string) string {
 func getGetMongodbSpaceSummaryUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_API + bce.URI_PREFIX + CONSTANT_DIAGNOSIS + bce.URI_PREFIX + CONSTANT_MONGODB + bce.URI_PREFIX + CONSTANT_SPACE + bce.URI_PREFIX + CONSTANT_SUMMARY
 }
-func getGetMysqlActiveSessionsUri(version string, AppId string) string {
+func getGetMysqlActiveSessionsUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_DIAGNOSIS + bce.URI_PREFIX + CONSTANT_MYSQL + bce.URI_PREFIX + CONSTANT_SESSION + bce.URI_PREFIX + CONSTANT_LIST
 }
 func getGetMysqlDatabaseSpaceUri(version string) string {
