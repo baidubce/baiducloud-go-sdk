@@ -1,3 +1,9 @@
+2026-09-21 Version: v0.0.142
+- 涉及产品: DBSC，新增MySQL慢日志会话限流表空间诊断
+- 涉及产品: DBSC，新增MongoDB慢日志与空间分析
+- 涉及产品: DBSC，新增Redis大Key分析与慢日志
+- 涉及产品: DBSC，新增PostgreSQL与PegaDB慢日志分析
+
 2026-09-21 Version: v0.0.141
 - 涉及产品: VDB，新增实例域名、名称修改接口
 - 涉及产品: VDB，新增公网访问状态更新接口
