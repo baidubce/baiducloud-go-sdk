@@ -98,8 +98,47 @@ func TestClient_BindEipUsingPOST(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_CreateInstanceUsingPOST(t *testing.T) {
+	InstanceParam := &InstanceParam{
+		AvailabilityZone:     util.PtrString(""),
+		AzInfos:              []*AzInfo{},
+		CloneDataAppBackupId: util.PtrString(""),
+		CloneDataAppId:       util.PtrString(""),
+		Components:           []*MilvusComponent{},
+		DataNodeNum:          util.PtrInt32(int32(0)),
+		DiskFlavor:           util.PtrInt32(int32(0)),
+		DiskType:             util.PtrString(""),
+		EnableEmbedding:      util.PtrBool(false),
+		EnableEncryption:     util.PtrBool(false),
+		EngineVersion:        util.PtrString(""),
+		From:                 util.PtrString(""),
+		InstanceName:         util.PtrString(""),
+		InstanceNum:          util.PtrInt32(int32(0)),
+		InstanceType:         util.PtrString(""),
+		MasterNodeSpec:       util.PtrString(""),
+		MasterNum:            util.PtrInt32(int32(0)),
+		NodeSpec:             util.PtrString(""),
+		NodeType:             util.PtrString(""),
+		OrderId:              util.PtrString(""),
+		Password:             util.PtrString(""),
+		Port:                 util.PtrInt32(int32(0)),
+		ProxyNodeSpec:        util.PtrString(""),
+		ProxyNum:             util.PtrInt32(int32(0)),
+		ReqSource:            util.PtrString(""),
+		SubnetId:             util.PtrString(""),
+		SwitchEntrance:       util.PtrString(""),
+		VpcId:                util.PtrString(""),
+	}
 	createInstanceUsingPOSTRequest := &CreateInstanceUsingPOSTRequest{
-		EngineType: util.PtrString(""),
+		EngineType:        util.PtrString(""),
+		AutoRenew:         util.PtrBool(false),
+		AutoRenewTime:     util.PtrInt32(int32(0)),
+		AutoRenewTimeUnit: util.PtrString(""),
+		Components:        []*MilvusComponent{},
+		Duration:          util.PtrInt32(int32(0)),
+		Env:               util.PtrString(""),
+		InstanceParam:     InstanceParam,
+		ProductType:       util.PtrString(""),
+		TimeUnit:          util.PtrString(""),
 	}
 	result := &CreateInstanceUsingPOSTResponse{}
 	result, err := VDB_CLIENT.CreateInstanceUsingPOST(createInstanceUsingPOSTRequest)
@@ -141,11 +180,26 @@ func TestClient_DeleteRecyclerInstance(t *testing.T) {
 	err := VDB_CLIENT.DeleteRecyclerInstance(deleteRecyclerInstanceRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_Deleteinstanceusingdelete1(t *testing.T) {
+	deleteinstanceusingdelete1Request := &Deleteinstanceusingdelete1Request{
+		InstanceId: util.PtrString(""),
+		EngineType: util.PtrString(""),
+	}
+	err := VDB_CLIENT.Deleteinstanceusingdelete1(deleteinstanceusingdelete1Request)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DescribeInstanceConfigs(t *testing.T) {
 	describeInstanceConfigsRequest := &DescribeInstanceConfigsRequest{
 		InstanceId: util.PtrString(""),
 	}
 	err := VDB_CLIENT.DescribeInstanceConfigs(describeInstanceConfigsRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DescribeInstanceConfigsUsingGET(t *testing.T) {
+	describeInstanceConfigsUsingGETRequest := &DescribeInstanceConfigsUsingGETRequest{
+		InstanceId: util.PtrString(""),
+	}
+	err := VDB_CLIENT.DescribeInstanceConfigsUsingGET(describeInstanceConfigsUsingGETRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetConfigUsingGET(t *testing.T) {
@@ -170,6 +224,21 @@ func TestClient_GetConfigUsingGET(t *testing.T) {
 func TestClient_GetFreeInstanceQuota(t *testing.T) {
 	result := &GetFreeInstanceQuotaResponse{}
 	result, err := VDB_CLIENT.GetFreeInstanceQuota()
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetFreeInstanceQuotaUsingGET(t *testing.T) {
+	result := &GetFreeInstanceQuotaUsingGETResponse{}
+	result, err := VDB_CLIENT.GetFreeInstanceQuotaUsingGET()
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -209,8 +278,47 @@ func TestClient_GetNodeSpecListUsingGET(t *testing.T) {
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_GetPriceUsingPOST(t *testing.T) {
+	InstanceParam := &InstanceParam{
+		AvailabilityZone:     util.PtrString(""),
+		AzInfos:              []*AzInfo{},
+		CloneDataAppBackupId: util.PtrString(""),
+		CloneDataAppId:       util.PtrString(""),
+		Components:           []*MilvusComponent{},
+		DataNodeNum:          util.PtrInt32(int32(0)),
+		DiskFlavor:           util.PtrInt32(int32(0)),
+		DiskType:             util.PtrString(""),
+		EnableEmbedding:      util.PtrBool(false),
+		EnableEncryption:     util.PtrBool(false),
+		EngineVersion:        util.PtrString(""),
+		From:                 util.PtrString(""),
+		InstanceName:         util.PtrString(""),
+		InstanceNum:          util.PtrInt32(int32(0)),
+		InstanceType:         util.PtrString(""),
+		MasterNodeSpec:       util.PtrString(""),
+		MasterNum:            util.PtrInt32(int32(0)),
+		NodeSpec:             util.PtrString(""),
+		NodeType:             util.PtrString(""),
+		OrderId:              util.PtrString(""),
+		Password:             util.PtrString(""),
+		Port:                 util.PtrInt32(int32(0)),
+		ProxyNodeSpec:        util.PtrString(""),
+		ProxyNum:             util.PtrInt32(int32(0)),
+		ReqSource:            util.PtrString(""),
+		SubnetId:             util.PtrString(""),
+		SwitchEntrance:       util.PtrString(""),
+		VpcId:                util.PtrString(""),
+	}
 	getPriceUsingPOSTRequest := &GetPriceUsingPOSTRequest{
-		EngineType: util.PtrString(""),
+		EngineType:        util.PtrString(""),
+		AutoRenew:         util.PtrBool(false),
+		AutoRenewTime:     util.PtrInt32(int32(0)),
+		AutoRenewTimeUnit: util.PtrString(""),
+		Components:        []*MilvusComponent{},
+		Duration:          util.PtrInt32(int32(0)),
+		Env:               util.PtrString(""),
+		InstanceParam:     InstanceParam,
+		ProductType:       util.PtrString(""),
+		TimeUnit:          util.PtrString(""),
 	}
 	result := &GetPriceUsingPOSTResponse{}
 	result, err := VDB_CLIENT.GetPriceUsingPOST(getPriceUsingPOSTRequest)
@@ -360,6 +468,15 @@ func TestClient_ModifyInstanceConfig(t *testing.T) {
 	err := VDB_CLIENT.ModifyInstanceConfig(modifyInstanceConfigRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ModifyInstanceConfigUsingPOST(t *testing.T) {
+	modifyInstanceConfigUsingPOSTRequest := &ModifyInstanceConfigUsingPOSTRequest{
+		InstanceId:  util.PtrString(""),
+		Reason:      util.PtrString(""),
+		UserConfigs: []*InstanceConfigUserConfig{},
+	}
+	err := VDB_CLIENT.ModifyInstanceConfigUsingPOST(modifyInstanceConfigUsingPOSTRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ModifyPasswordUsingPOST(t *testing.T) {
 	modifyPasswordUsingPOSTRequest := &ModifyPasswordUsingPOSTRequest{
 		InstanceId: util.PtrString(""),
@@ -377,6 +494,14 @@ func TestClient_ModifyPublicAccess(t *testing.T) {
 		PublicAccess: util.PtrBool(false),
 	}
 	err := VDB_CLIENT.ModifyPublicAccess(modifyPublicAccessRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ModifyPublicAccessUsingPUT(t *testing.T) {
+	modifyPublicAccessUsingPUTRequest := &ModifyPublicAccessUsingPUTRequest{
+		InstanceId:   util.PtrString(""),
+		PublicAccess: util.PtrBool(false),
+	}
+	err := VDB_CLIENT.ModifyPublicAccessUsingPUT(modifyPublicAccessUsingPUTRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ModifyTLSUsingPUT(t *testing.T) {
@@ -497,6 +622,15 @@ func TestClient_UpdateInstanceDomain(t *testing.T) {
 	err := VDB_CLIENT.UpdateInstanceDomain(updateInstanceDomainRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_UpdateInstanceDomainUsingPOST(t *testing.T) {
+	updateInstanceDomainUsingPOSTRequest := &UpdateInstanceDomainUsingPOSTRequest{
+		InstanceId: util.PtrString(""),
+		EngineType: util.PtrString(""),
+		Domain:     util.PtrString(""),
+	}
+	err := VDB_CLIENT.UpdateInstanceDomainUsingPOST(updateInstanceDomainUsingPOSTRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_UpdateInstanceName(t *testing.T) {
 	updateInstanceNameRequest := &UpdateInstanceNameRequest{
 		InstanceId:   util.PtrString(""),
@@ -504,6 +638,15 @@ func TestClient_UpdateInstanceName(t *testing.T) {
 		InstanceName: util.PtrString(""),
 	}
 	err := VDB_CLIENT.UpdateInstanceName(updateInstanceNameRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateInstanceNameUsingPOST(t *testing.T) {
+	updateInstanceNameUsingPOSTRequest := &UpdateInstanceNameUsingPOSTRequest{
+		InstanceId:   util.PtrString(""),
+		EngineType:   util.PtrString(""),
+		InstanceName: util.PtrString(""),
+	}
+	err := VDB_CLIENT.UpdateInstanceNameUsingPOST(updateInstanceNameUsingPOSTRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ZoneListUsingGET(t *testing.T) {

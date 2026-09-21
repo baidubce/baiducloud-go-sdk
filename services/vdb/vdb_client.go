@@ -64,6 +64,7 @@ func (c *Client) CreateInstanceUsingPOST(request *CreateInstanceUsingPOSTRequest
 		WithMethod(http.POST).
 		WithURL(getCreateInstanceUsingPOSTUri(VERSION_V1)).
 		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
+		WithBody(request).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -125,6 +126,23 @@ func (c *Client) DeleteRecyclerInstance(request *DeleteRecyclerInstanceRequest) 
 		Do()
 }
 
+// Deleteinstanceusingdelete1
+//
+// PARAMS:
+//   - request: the arguments to Deleteinstanceusingdelete1
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) Deleteinstanceusingdelete1(request *Deleteinstanceusingdelete1Request) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.DELETE).
+		WithURL(getDeleteinstanceusingdelete1Uri(VERSION_V1)).
+		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
+		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
+		Do()
+}
+
 // DescribeInstanceConfigs
 //
 // PARAMS:
@@ -137,6 +155,22 @@ func (c *Client) DescribeInstanceConfigs(request *DescribeInstanceConfigsRequest
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getDescribeInstanceConfigsUri(VERSION_V1)).
+		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
+		Do()
+}
+
+// DescribeInstanceConfigsUsingGET
+//
+// PARAMS:
+//   - request: the arguments to DescribeInstanceConfigsUsingGET
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DescribeInstanceConfigsUsingGET(request *DescribeInstanceConfigsUsingGETRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getDescribeInstanceConfigsUsingGETUri(VERSION_V1)).
 		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
 		Do()
 }
@@ -177,6 +211,27 @@ func (c *Client) GetFreeInstanceQuota() (*GetFreeInstanceQuotaResponse, error) {
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
 		WithURL(getGetFreeInstanceQuotaUri(VERSION_V1)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// GetFreeInstanceQuotaUsingGET
+//
+// PARAMS:
+//   - request: the arguments to GetFreeInstanceQuotaUsingGET
+//
+// RETURNS:
+//   - GetFreeInstanceQuotaUsingGETResponse: The return type of the GetFreeInstanceQuotaUsingGET interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetFreeInstanceQuotaUsingGET() (*GetFreeInstanceQuotaUsingGETResponse, error) {
+	result := &GetFreeInstanceQuotaUsingGETResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetFreeInstanceQuotaUsingGETUri(VERSION_V1)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -238,6 +293,7 @@ func (c *Client) GetPriceUsingPOST(request *GetPriceUsingPOSTRequest) (*GetPrice
 		WithMethod(http.POST).
 		WithURL(getGetPriceUsingPOSTUri(VERSION_V1)).
 		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
+		WithBody(request).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -420,6 +476,22 @@ func (c *Client) ModifyInstanceConfig(request *ModifyInstanceConfigRequest) erro
 		Do()
 }
 
+// ModifyInstanceConfigUsingPOST
+//
+// PARAMS:
+//   - request: the arguments to ModifyInstanceConfigUsingPOST
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ModifyInstanceConfigUsingPOST(request *ModifyInstanceConfigUsingPOSTRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getModifyInstanceConfigUsingPOSTUri(VERSION_V1)).
+		WithBody(request).
+		Do()
+}
+
 // ModifyPasswordUsingPOST
 //
 // PARAMS:
@@ -450,6 +522,22 @@ func (c *Client) ModifyPublicAccess(request *ModifyPublicAccessRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getModifyPublicAccessUri(VERSION_V1, util.StringValue(request.InstanceId))).
+		WithBody(request).
+		Do()
+}
+
+// ModifyPublicAccessUsingPUT
+//
+// PARAMS:
+//   - request: the arguments to ModifyPublicAccessUsingPUT
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ModifyPublicAccessUsingPUT(request *ModifyPublicAccessUsingPUTRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getModifyPublicAccessUsingPUTUri(VERSION_V1, util.StringValue(request.InstanceId))).
 		WithBody(request).
 		Do()
 }
@@ -622,6 +710,23 @@ func (c *Client) UpdateInstanceDomain(request *UpdateInstanceDomainRequest) erro
 		Do()
 }
 
+// UpdateInstanceDomainUsingPOST
+//
+// PARAMS:
+//   - request: the arguments to UpdateInstanceDomainUsingPOST
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateInstanceDomainUsingPOST(request *UpdateInstanceDomainUsingPOSTRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUpdateInstanceDomainUsingPOSTUri(VERSION_V1, util.StringValue(request.InstanceId))).
+		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
+		WithBody(request).
+		Do()
+}
+
 // UpdateInstanceName
 //
 // PARAMS:
@@ -634,6 +739,23 @@ func (c *Client) UpdateInstanceName(request *UpdateInstanceNameRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getUpdateInstanceNameUri(VERSION_V1, util.StringValue(request.InstanceId))).
+		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
+		WithBody(request).
+		Do()
+}
+
+// UpdateInstanceNameUsingPOST
+//
+// PARAMS:
+//   - request: the arguments to UpdateInstanceNameUsingPOST
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) UpdateInstanceNameUsingPOST(request *UpdateInstanceNameUsingPOSTRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUpdateInstanceNameUsingPOSTUri(VERSION_V1, util.StringValue(request.InstanceId))).
 		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
 		WithBody(request).
 		Do()
