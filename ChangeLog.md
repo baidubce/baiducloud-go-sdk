@@ -1,3 +1,6 @@
+2026-09-22 Version: v0.0.144
+- 涉及产品: VDB，SDK版本更新
+
 2026-09-21 Version: v0.0.143
 - 涉及产品: DBSC，MySQL会话新增appId查询字段
 - 涉及产品: DBSC，Redis慢日志新增clientIp字段

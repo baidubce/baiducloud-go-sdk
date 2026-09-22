@@ -17,19 +17,13 @@ const (
 
 	CONSTANT_RESET_PASSWORD = "resetPassword"
 
-	CONSTANT_MODIFY_PUBLIC_ACCESS = "modifyPublicAccess"
-
 	CONSTANT_DETAIL = "detail"
-
-	CONSTANT_DESCRIBE_INSTANCE_CONFIGS = "describeInstanceConfigs"
 
 	CONSTANT_RECYCLER = "recycler"
 
 	CONSTANT_DELETE = "delete"
 
 	CONSTANT_MODIFY_NAME = "modifyName"
-
-	CONSTANT_MODIFY_INSTANCE_CONFIG = "modifyInstanceConfig"
 
 	CONSTANT_LIST = "list"
 
@@ -38,8 +32,6 @@ const (
 	CONSTANT_BACKUP = "backup"
 
 	CONSTANT_SET_COMMENT = "setComment"
-
-	CONSTANT_MODIFY_DOMAIN = "modifyDomain"
 
 	CONSTANT_RECOVER = "recover"
 
@@ -71,7 +63,15 @@ const (
 
 	CONSTANT_QUOTA = "quota"
 
+	CONSTANT_MODIFY_PUBLIC_ACCESS = "modifyPublicAccess"
+
 	CONSTANT_ZONE = "zone"
+
+	CONSTANT_MODIFY_INSTANCE_CONFIG = "modifyInstanceConfig"
+
+	CONSTANT_MODIFY_DOMAIN = "modifyDomain"
+
+	CONSTANT_DESCRIBE_INSTANCE_CONFIGS = "describeInstanceConfigs"
 
 	CONSTANT_GET_T_L_S_INFO = "getTLSInfo"
 
@@ -109,23 +109,14 @@ func getDeleteInstanceUsingDELETEUri(version string) string {
 func getDeleteRecordUsingDELETEUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_BACKUP + bce.URI_PREFIX + CONSTANT_DELETE_RECORD
 }
-func getDeleteRecyclerInstanceUri(version string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_RECYCLER + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DELETE
-}
 func getDeleteinstanceusingdelete1Uri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_RECYCLER + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DELETE
-}
-func getDescribeInstanceConfigsUri(version string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DESCRIBE_INSTANCE_CONFIGS
 }
 func getDescribeInstanceConfigsUsingGETUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_DESCRIBE_INSTANCE_CONFIGS
 }
 func getGetConfigUsingGETUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_BACKUP + bce.URI_PREFIX + CONSTANT_GET_CONFIG
-}
-func getGetFreeInstanceQuotaUri(version string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_FREE_QUOTA
 }
 func getGetFreeInstanceQuotaUsingGETUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_FREE_QUOTA
@@ -160,17 +151,11 @@ func getListRecordsUsingGETUri(version string) string {
 func getManualBackupUsingPOSTUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_BACKUP + bce.URI_PREFIX + CONSTANT_MANUAL_BACKUP
 }
-func getModifyInstanceConfigUri(version string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_MODIFY_INSTANCE_CONFIG
-}
 func getModifyInstanceConfigUsingPOSTUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_MODIFY_INSTANCE_CONFIG
 }
 func getModifyPasswordUsingPOSTUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_ACCOUNT + bce.URI_PREFIX + CONSTANT_RESET_PASSWORD
-}
-func getModifyPublicAccessUri(version string, InstanceId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_MODIFY_PUBLIC_ACCESS
 }
 func getModifyPublicAccessUsingPUTUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_MODIFY_PUBLIC_ACCESS
@@ -199,14 +184,8 @@ func getSetConfigUsingPOSTUri(version string) string {
 func getUnbindEipUsingPOSTUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_UNBIND_EIP
 }
-func getUpdateInstanceDomainUri(version string, InstanceId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_MODIFY_DOMAIN
-}
 func getUpdateInstanceDomainUsingPOSTUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_MODIFY_DOMAIN
-}
-func getUpdateInstanceNameUri(version string, InstanceId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_MODIFY_NAME
 }
 func getUpdateInstanceNameUsingPOSTUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VDB + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_MODIFY_NAME

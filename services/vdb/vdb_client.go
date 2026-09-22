@@ -109,23 +109,6 @@ func (c *Client) DeleteRecordUsingDELETE(request *DeleteRecordUsingDELETERequest
 		Do()
 }
 
-// DeleteRecyclerInstance
-//
-// PARAMS:
-//   - request: the arguments to DeleteRecyclerInstance
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) DeleteRecyclerInstance(request *DeleteRecyclerInstanceRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.DELETE).
-		WithURL(getDeleteRecyclerInstanceUri(VERSION_V1)).
-		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
-		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
-		Do()
-}
-
 // Deleteinstanceusingdelete1
 //
 // PARAMS:
@@ -140,22 +123,6 @@ func (c *Client) Deleteinstanceusingdelete1(request *Deleteinstanceusingdelete1R
 		WithURL(getDeleteinstanceusingdelete1Uri(VERSION_V1)).
 		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
 		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
-		Do()
-}
-
-// DescribeInstanceConfigs
-//
-// PARAMS:
-//   - request: the arguments to DescribeInstanceConfigs
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) DescribeInstanceConfigs(request *DescribeInstanceConfigsRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getDescribeInstanceConfigsUri(VERSION_V1)).
-		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
 		Do()
 }
 
@@ -190,27 +157,6 @@ func (c *Client) GetConfigUsingGET(request *GetConfigUsingGETRequest) (*GetConfi
 		WithURL(getGetConfigUsingGETUri(VERSION_V1)).
 		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
 		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
-// GetFreeInstanceQuota
-//
-// PARAMS:
-//   - request: the arguments to GetFreeInstanceQuota
-//
-// RETURNS:
-//   - GetFreeInstanceQuotaResponse: The return type of the GetFreeInstanceQuota interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) GetFreeInstanceQuota() (*GetFreeInstanceQuotaResponse, error) {
-	result := &GetFreeInstanceQuotaResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getGetFreeInstanceQuotaUri(VERSION_V1)).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -460,22 +406,6 @@ func (c *Client) ManualBackupUsingPOST(request *ManualBackupUsingPOSTRequest) er
 		Do()
 }
 
-// ModifyInstanceConfig
-//
-// PARAMS:
-//   - request: the arguments to ModifyInstanceConfig
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ModifyInstanceConfig(request *ModifyInstanceConfigRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getModifyInstanceConfigUri(VERSION_V1)).
-		WithBody(request).
-		Do()
-}
-
 // ModifyInstanceConfigUsingPOST
 //
 // PARAMS:
@@ -506,22 +436,6 @@ func (c *Client) ModifyPasswordUsingPOST(request *ModifyPasswordUsingPOSTRequest
 		WithURL(getModifyPasswordUsingPOSTUri(VERSION_V1)).
 		WithQueryParamFilter("instanceId", util.StringValue(request.InstanceId)).
 		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
-		WithBody(request).
-		Do()
-}
-
-// ModifyPublicAccess
-//
-// PARAMS:
-//   - request: the arguments to ModifyPublicAccess
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ModifyPublicAccess(request *ModifyPublicAccessRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getModifyPublicAccessUri(VERSION_V1, util.StringValue(request.InstanceId))).
 		WithBody(request).
 		Do()
 }
@@ -693,23 +607,6 @@ func (c *Client) UnbindEipUsingPOST(request *UnbindEipUsingPOSTRequest) error {
 		Do()
 }
 
-// UpdateInstanceDomain
-//
-// PARAMS:
-//   - request: the arguments to UpdateInstanceDomain
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateInstanceDomain(request *UpdateInstanceDomainRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getUpdateInstanceDomainUri(VERSION_V1, util.StringValue(request.InstanceId))).
-		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
-		WithBody(request).
-		Do()
-}
-
 // UpdateInstanceDomainUsingPOST
 //
 // PARAMS:
@@ -722,23 +619,6 @@ func (c *Client) UpdateInstanceDomainUsingPOST(request *UpdateInstanceDomainUsin
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getUpdateInstanceDomainUsingPOSTUri(VERSION_V1, util.StringValue(request.InstanceId))).
-		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
-		WithBody(request).
-		Do()
-}
-
-// UpdateInstanceName
-//
-// PARAMS:
-//   - request: the arguments to UpdateInstanceName
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) UpdateInstanceName(request *UpdateInstanceNameRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getUpdateInstanceNameUri(VERSION_V1, util.StringValue(request.InstanceId))).
 		WithQueryParamFilter("engineType", util.StringValue(request.EngineType)).
 		WithBody(request).
 		Do()

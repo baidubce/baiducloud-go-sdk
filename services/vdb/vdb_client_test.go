@@ -172,27 +172,12 @@ func TestClient_DeleteRecordUsingDELETE(t *testing.T) {
 	err := VDB_CLIENT.DeleteRecordUsingDELETE(deleteRecordUsingDELETERequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_DeleteRecyclerInstance(t *testing.T) {
-	deleteRecyclerInstanceRequest := &DeleteRecyclerInstanceRequest{
-		InstanceId: util.PtrString(""),
-		EngineType: util.PtrString(""),
-	}
-	err := VDB_CLIENT.DeleteRecyclerInstance(deleteRecyclerInstanceRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_Deleteinstanceusingdelete1(t *testing.T) {
 	deleteinstanceusingdelete1Request := &Deleteinstanceusingdelete1Request{
 		InstanceId: util.PtrString(""),
 		EngineType: util.PtrString(""),
 	}
 	err := VDB_CLIENT.Deleteinstanceusingdelete1(deleteinstanceusingdelete1Request)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_DescribeInstanceConfigs(t *testing.T) {
-	describeInstanceConfigsRequest := &DescribeInstanceConfigsRequest{
-		InstanceId: util.PtrString(""),
-	}
-	err := VDB_CLIENT.DescribeInstanceConfigs(describeInstanceConfigsRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DescribeInstanceConfigsUsingGET(t *testing.T) {
@@ -209,21 +194,6 @@ func TestClient_GetConfigUsingGET(t *testing.T) {
 	}
 	result := &GetConfigUsingGETResponse{}
 	result, err := VDB_CLIENT.GetConfigUsingGET(getConfigUsingGETRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_GetFreeInstanceQuota(t *testing.T) {
-	result := &GetFreeInstanceQuotaResponse{}
-	result, err := VDB_CLIENT.GetFreeInstanceQuota()
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -459,15 +429,6 @@ func TestClient_ManualBackupUsingPOST(t *testing.T) {
 	err := VDB_CLIENT.ManualBackupUsingPOST(manualBackupUsingPOSTRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_ModifyInstanceConfig(t *testing.T) {
-	modifyInstanceConfigRequest := &ModifyInstanceConfigRequest{
-		InstanceId:  util.PtrString(""),
-		Reason:      util.PtrString(""),
-		UserConfigs: []*InstanceConfigUserConfig{},
-	}
-	err := VDB_CLIENT.ModifyInstanceConfig(modifyInstanceConfigRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_ModifyInstanceConfigUsingPOST(t *testing.T) {
 	modifyInstanceConfigUsingPOSTRequest := &ModifyInstanceConfigUsingPOSTRequest{
 		InstanceId:  util.PtrString(""),
@@ -486,14 +447,6 @@ func TestClient_ModifyPasswordUsingPOST(t *testing.T) {
 		Username:   util.PtrString(""),
 	}
 	err := VDB_CLIENT.ModifyPasswordUsingPOST(modifyPasswordUsingPOSTRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_ModifyPublicAccess(t *testing.T) {
-	modifyPublicAccessRequest := &ModifyPublicAccessRequest{
-		InstanceId:   util.PtrString(""),
-		PublicAccess: util.PtrBool(false),
-	}
-	err := VDB_CLIENT.ModifyPublicAccess(modifyPublicAccessRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_ModifyPublicAccessUsingPUT(t *testing.T) {
@@ -613,15 +566,6 @@ func TestClient_UnbindEipUsingPOST(t *testing.T) {
 	err := VDB_CLIENT.UnbindEipUsingPOST(unbindEipUsingPOSTRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_UpdateInstanceDomain(t *testing.T) {
-	updateInstanceDomainRequest := &UpdateInstanceDomainRequest{
-		InstanceId: util.PtrString(""),
-		EngineType: util.PtrString(""),
-		Domain:     util.PtrString(""),
-	}
-	err := VDB_CLIENT.UpdateInstanceDomain(updateInstanceDomainRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_UpdateInstanceDomainUsingPOST(t *testing.T) {
 	updateInstanceDomainUsingPOSTRequest := &UpdateInstanceDomainUsingPOSTRequest{
 		InstanceId: util.PtrString(""),
@@ -629,15 +573,6 @@ func TestClient_UpdateInstanceDomainUsingPOST(t *testing.T) {
 		Domain:     util.PtrString(""),
 	}
 	err := VDB_CLIENT.UpdateInstanceDomainUsingPOST(updateInstanceDomainUsingPOSTRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_UpdateInstanceName(t *testing.T) {
-	updateInstanceNameRequest := &UpdateInstanceNameRequest{
-		InstanceId:   util.PtrString(""),
-		EngineType:   util.PtrString(""),
-		InstanceName: util.PtrString(""),
-	}
-	err := VDB_CLIENT.UpdateInstanceName(updateInstanceNameRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_UpdateInstanceNameUsingPOST(t *testing.T) {
