@@ -1,6 +1,6 @@
 package scs
 
-type InstanceListRequest struct {
+type GetInstanceListRequest struct {
 	Marker      *string `json:"-"`
 	MaxKeys     *string `json:"-"`
 	InstanceIds *string `json:"-"`
