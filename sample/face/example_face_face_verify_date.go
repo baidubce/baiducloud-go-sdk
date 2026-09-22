@@ -1,0 +1,52 @@
+package facesample
+
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/baidubce/baiducloud-go-sdk/core/util"
+	"github.com/baidubce/baiducloud-go-sdk/services/face"
+)
+
+func FaceVerifyDate() {
+	endpoint := "Your Endpoint"
+
+	// ==== AK/SK 鉴权 ====
+	// ak, sk := "Your Ak", "Your Sk"
+	// client, err := face.NewClient(ak, sk, endpoint)
+
+	// ==== AccessToken 鉴权（API Key / Secret Key 换取 AccessToken）====
+	// apiKey, secretKey := "Your ApiKey", "Your SecretKey"
+	// client, err := face.NewClientWithAccessToken(apiKey, secretKey, endpoint)
+
+	// ==== API Key 鉴权 ====
+	apiKey := "Your ApiKey"
+	client, err := face.NewClientWithApiKey(apiKey, endpoint)
+
+	if err != nil {
+		fmt.Println("create client err:", err)
+		return
+	}
+	faceVerifyDateRequest := &face.FaceVerifyDateRequest{
+		Name:            util.PtrString(""),
+		IdCardNumber:    util.PtrString(""),
+		StartDate:       util.PtrString(""),
+		EndDate:         util.PtrString(""),
+		Image:           util.PtrString(""),
+		ImageType:       util.PtrString(""),
+		LivenessControl: util.PtrString(""),
+		SpoofingControl: util.PtrString(""),
+		QualityControl:  util.PtrString(""),
+	}
+	result, err := client.FaceVerifyDate(faceVerifyDateRequest)
+	if err != nil {
+		// 此处仅做打印展示，请谨慎对待异常处理，在工程项目中切勿直接忽略异常。
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+}
