@@ -1,3 +1,7 @@
+2026-09-24 Version: v0.0.148
+修改备份URL接口backupId类型为字符串
+- 涉及产品: SCS，getBackUpUrl的backupId由整型改为字符串
+
 2026-09-23 Version: v0.0.147
 新增NLP自然语言处理系列接口
 - 涉及产品: NLP，支持文本纠错与词法分析

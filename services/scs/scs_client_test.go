@@ -608,7 +608,7 @@ func TestClient_GetAvailableZones(t *testing.T) {
 func TestClient_GetBackUpUrl(t *testing.T) {
 	getBackUpUrlRequest := &GetBackUpUrlRequest{
 		InstanceId: util.PtrString(""),
-		BackupId:   util.PtrInt32(int32(0)),
+		BackupId:   util.PtrString(""),
 	}
 	result := &GetBackUpUrlResponse{}
 	result, err := SCS_CLIENT.GetBackUpUrl(getBackUpUrlRequest)

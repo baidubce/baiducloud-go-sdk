@@ -20,7 +20,7 @@ func GetBackUpUrl() {
 	}
 	getBackUpUrlRequest := &scs.GetBackUpUrlRequest{
 		InstanceId: util.PtrString(""),
-		BackupId:   util.PtrInt32(int32(0)),
+		BackupId:   util.PtrString(""),
 	}
 	result, err := client.GetBackUpUrl(getBackUpUrlRequest)
 	if err != nil {

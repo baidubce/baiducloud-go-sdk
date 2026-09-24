@@ -311,7 +311,7 @@ func getGetApplicationParameterTemplateRecordsUri(TemplateShowId string) string 
 func getGetAvailableZonesUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_ZONE
 }
-func getGetBackUpUrlUri(InstanceId string, BackupId int32) string {
+func getGetBackUpUrlUri(InstanceId string, BackupId string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_BACKUP + bce.URI_PREFIX + BackupId + bce.URI_PREFIX + CONSTANT_URL
 }
 func getGetBackUpUsageUri(version string, InstanceId string) string {

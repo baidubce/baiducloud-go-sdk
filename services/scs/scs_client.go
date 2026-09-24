@@ -696,7 +696,7 @@ func (c *Client) GetBackUpUrl(request *GetBackUpUrlRequest) (*GetBackUpUrlRespon
 	result := &GetBackUpUrlResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getGetBackUpUrlUri(util.StringValue(request.InstanceId), util.Int32Value(request.BackupId))).
+		WithURL(getGetBackUpUrlUri(util.StringValue(request.InstanceId), util.StringValue(request.BackupId))).
 		WithResult(result).
 		Do()
 	if err != nil {
