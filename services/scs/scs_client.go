@@ -890,7 +890,11 @@ func (c *Client) GetInstanceList(request *GetInstanceListRequest) (*GetInstanceL
 	result := &GetInstanceListResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.GET).
-		WithURL(getGetInstanceListUri(util.StringValue(request.Marker), util.StringValue(request.MaxKeys), util.StringValue(request.InstanceIds), util.StringValue(request.VnetIp))).
+		WithURL(getGetInstanceListUri()).
+		WithQueryParamFilter("marker", util.StringValue(request.Marker)).
+		WithQueryParamFilter("maxKeys", util.StringValue(request.MaxKeys)).
+		WithQueryParamFilter("instanceIds", util.StringValue(request.InstanceIds)).
+		WithQueryParamFilter("vnetIp", util.StringValue(request.VnetIp)).
 		WithResult(result).
 		Do()
 	if err != nil {

@@ -338,7 +338,7 @@ func getGetHotGroupListUri() string {
 func getGetInstanceDetailUri(InstanceId string) string {
 	return bce.URI_PREFIX + CONSTANT_V2 + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId
 }
-func getGetInstanceListUri(Marker string, MaxKeys string, InstanceIds string, VnetIp string) string {
+func getGetInstanceListUri() string {
 	return bce.URI_PREFIX + CONSTANT_V2 + bce.URI_PREFIX + CONSTANT_INSTANCE
 }
 func getGetInstanceSpecListUri() string {
