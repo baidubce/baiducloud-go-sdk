@@ -2,6 +2,7 @@ package rds
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -80,6 +81,17 @@ func TestClient_QueryTaskList(t *testing.T) {
 		StartTime:    util.PtrString(""),
 		EndTime:      util.PtrString(""),
 	}
-	err := RDS_CLIENT.QueryTaskList(queryTaskListRequest)
+	result := &QueryTaskListResponse{}
+	result, err := RDS_CLIENT.QueryTaskList(queryTaskListRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
