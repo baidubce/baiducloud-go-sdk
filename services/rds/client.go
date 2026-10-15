@@ -7,9 +7,9 @@ import (
 const (
 	DEFAULT_ENDPOINT = "rds." + bce.DEFAULT_REGION + ".baidubce.com"
 
-	CONSTANT_V1 = "v1"
-
 	CONSTANT_INSTANCE = "instance"
+
+	CONSTANT_V1 = "v1"
 
 	CONSTANT_TASK = "task"
 )
@@ -30,6 +30,15 @@ func NewClient(ak, sk, endPoint string) (*Client, error) {
 	return &Client{client}, nil
 }
 
+func getCreateAPrimaryInstanceUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE
+}
+func getCreateAProxyInstanceUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE
+}
+func getCreateReadOnlyInstanceUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE
+}
 func getQueryTaskListUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_TASK
 }

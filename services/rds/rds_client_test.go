@@ -69,6 +69,141 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
+func TestClient_CreateAPrimaryInstance(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		Reservation:   nil,
+	}
+	InitialDataReference := &InitialDataReference{
+		InstanceId:    util.PtrString(""),
+		ReferenceType: util.PtrString(""),
+		Datetime:      util.PtrString(""),
+		SnapshotId:    util.PtrString(""),
+	}
+	createAPrimaryInstanceRequest := &CreateAPrimaryInstanceRequest{
+		ClientToken:          util.PtrString(""),
+		Billing:              Billing,
+		PurchaseCount:        util.PtrInt32(int32(0)),
+		InstanceName:         util.PtrString(""),
+		Engine:               util.PtrString(""),
+		EngineVersion:        util.PtrString(""),
+		Category:             util.PtrString(""),
+		CpuCount:             util.PtrInt32(int32(0)),
+		MemoryCapacity:       util.PtrInt32(int32(0)),
+		VolumeCapacity:       util.PtrInt32(int32(0)),
+		DiskIoType:           util.PtrString(""),
+		ZoneNames:            []*string{},
+		BcmGroupName:         util.PtrString(""),
+		VpcId:                util.PtrString(""),
+		IsDirectPay:          util.PtrBool(false),
+		Subnets:              []*SubnetMap{},
+		Tags:                 []*Tag{},
+		BgwGroupId:           util.PtrString(""),
+		BgwGroupExclusive:    util.PtrBool(false),
+		CharacterSetName:     util.PtrString(""),
+		AutoRenewTimeUnit:    util.PtrString(""),
+		AutoRenewTime:        util.PtrInt32(int32(0)),
+		LowerCaseTableNames:  util.PtrInt32(int32(0)),
+		ParameterTemplateId:  util.PtrString(""),
+		Ovip:                 util.PtrString(""),
+		EntryPort:            util.PtrInt32(int32(0)),
+		ReplicationType:      util.PtrString(""),
+		ResourceGroupId:      util.PtrString(""),
+		InitialDataReference: InitialDataReference,
+		Data:                 []*RecoveryToSourceInstanceModel{},
+		LeaderInstanceId:     util.PtrString(""),
+		ResourceType:         util.PtrString(""),
+	}
+	result := &CreateAPrimaryInstanceResponse{}
+	result, err := RDS_CLIENT.CreateAPrimaryInstance(createAPrimaryInstanceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateAProxyInstance(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		Reservation:   nil,
+	}
+	createAProxyInstanceRequest := &CreateAProxyInstanceRequest{
+		ClientToken:      util.PtrString(""),
+		Billing:          Billing,
+		SourceInstanceId: util.PtrString(""),
+		InstanceName:     util.PtrString(""),
+		NodeAmount:       util.PtrInt32(int32(0)),
+		ZoneNames:        []*string{},
+		VpcId:            util.PtrString(""),
+		IsDirectPay:      util.PtrBool(false),
+		Subnets:          []*SubnetMap{},
+		Ovip:             util.PtrString(""),
+		EntryPort:        util.PtrInt32(int32(0)),
+		ResourceGroupId:  util.PtrString(""),
+	}
+	result := &CreateAProxyInstanceResponse{}
+	result, err := RDS_CLIENT.CreateAProxyInstance(createAProxyInstanceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateReadOnlyInstance(t *testing.T) {
+	Billing := &Billing{
+		PaymentTiming: util.PtrString(""),
+		Reservation:   nil,
+	}
+	createReadOnlyInstanceRequest := &CreateReadOnlyInstanceRequest{
+		ClientToken:           util.PtrString(""),
+		Billing:               Billing,
+		SourceInstanceId:      util.PtrString(""),
+		InstanceName:          util.PtrString(""),
+		CpuCount:              util.PtrInt32(int32(0)),
+		MemoryCapacity:        util.PtrInt32(int32(0)),
+		VolumeCapacity:        util.PtrInt32(int32(0)),
+		DiskIoType:            util.PtrString(""),
+		ZoneNames:             []*string{},
+		VpcId:                 util.PtrString(""),
+		BcmGroupName:          util.PtrString(""),
+		IsDirectPay:           util.PtrBool(false),
+		Subnets:               []*SubnetMap{},
+		Ovip:                  util.PtrString(""),
+		EntryPort:             util.PtrInt32(int32(0)),
+		ResourceGroupId:       util.PtrString(""),
+		ReplicaType:           util.PtrString(""),
+		IsInheritMasterAuthip: util.PtrBool(false),
+		PurchaseCount:         util.PtrInt32(int32(0)),
+		ResourceType:          util.PtrString(""),
+		AutoRenewTimeUnit:     util.PtrString(""),
+		AutoRenewTime:         util.PtrInt32(int32(0)),
+	}
+	result := &CreateReadOnlyInstanceResponse{}
+	result, err := RDS_CLIENT.CreateReadOnlyInstance(createReadOnlyInstanceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_QueryTaskList(t *testing.T) {
 	queryTaskListRequest := &QueryTaskListRequest{
 		PageSize:     util.PtrString(""),
