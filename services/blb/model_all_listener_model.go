@@ -19,6 +19,8 @@ type AllListenerModel struct {
 	KeepSessionCookieName      *string   `json:"keepSessionCookieName,omitempty"`
 	XForwardFor                *bool     `json:"xForwardFor,omitempty"`
 	HealthCheckType            *string   `json:"healthCheckType,omitempty"`
+	HealthCheckHttpVersion     *string   `json:"healthCheckHttpVersion,omitempty"`
+	HealthCheckMethod          *string   `json:"healthCheckMethod,omitempty"`
 	HealthCheckPort            *int32    `json:"healthCheckPort,omitempty"`
 	HealthCheckURI             *string   `json:"healthCheckURI,omitempty"`
 	HealthCheckNormalStatus    *string   `json:"healthCheckNormalStatus,omitempty"`

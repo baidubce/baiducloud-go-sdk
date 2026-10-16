@@ -6,6 +6,8 @@ type CreateAppBlbIpGroupProtocolRequest struct {
 	IpGroupId                   *string `json:"ipGroupId,omitempty"`
 	BlbType                     *string `json:"type,omitempty"`
 	HealthCheck                 *string `json:"healthCheck,omitempty"`
+	HealthCheckHttpVersion      *string `json:"healthCheckHttpVersion,omitempty"`
+	HealthCheckMethod           *string `json:"healthCheckMethod,omitempty"`
 	HealthCheckPort             *int32  `json:"healthCheckPort,omitempty"`
 	HealthCheckUrlPath          *string `json:"healthCheckUrlPath,omitempty"`
 	HealthCheckTimeoutInSecond  *int32  `json:"healthCheckTimeoutInSecond,omitempty"`

@@ -14,6 +14,8 @@ type CreateBlbHttpsListenerRequest struct {
 	XForwardedProto            *bool                      `json:"xForwardedProto,omitempty"`
 	AdditionalAttributes       *AdditionalAttributesModel `json:"additionalAttributes,omitempty"`
 	HealthCheckType            *string                    `json:"healthCheckType,omitempty"`
+	HealthCheckHttpVersion     *string                    `json:"healthCheckHttpVersion,omitempty"`
+	HealthCheckMethod          *string                    `json:"healthCheckMethod,omitempty"`
 	HealthCheckPort            *int32                     `json:"healthCheckPort,omitempty"`
 	HealthCheckURI             *string                    `json:"healthCheckURI,omitempty"`
 	HealthCheckTimeoutInSecond *int32                     `json:"healthCheckTimeoutInSecond,omitempty"`

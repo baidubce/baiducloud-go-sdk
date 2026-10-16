@@ -36,7 +36,9 @@ func init() {
 	confObj := &Conf{}
 	decoder.Decode(confObj)
 
+	// ==== AK/SK 鉴权 ====
 	BLB_CLIENT, _ = NewClient(confObj.AK, confObj.SK, confObj.Endpoint)
+
 	log.SetLogLevel(log.WARN)
 }
 
@@ -337,6 +339,8 @@ func TestClient_CreateAppBlbIpGroupProtocol(t *testing.T) {
 		IpGroupId:                   util.PtrString(""),
 		BlbType:                     util.PtrString(""),
 		HealthCheck:                 util.PtrString(""),
+		HealthCheckHttpVersion:      util.PtrString(""),
+		HealthCheckMethod:           util.PtrString(""),
 		HealthCheckPort:             util.PtrInt32(int32(0)),
 		HealthCheckUrlPath:          util.PtrString(""),
 		HealthCheckTimeoutInSecond:  util.PtrInt32(int32(0)),
@@ -393,6 +397,8 @@ func TestClient_CreateAppBlbServerGroupPort(t *testing.T) {
 		BlbType:                     util.PtrString(""),
 		EnableHealthCheck:           util.PtrBool(false),
 		HealthCheck:                 util.PtrString(""),
+		HealthCheckHttpVersion:      util.PtrString(""),
+		HealthCheckMethod:           util.PtrString(""),
 		HealthCheckPort:             util.PtrInt32(int32(0)),
 		HealthCheckUrlPath:          util.PtrString(""),
 		HealthCheckTimeoutInSecond:  util.PtrInt32(int32(0)),
@@ -518,6 +524,8 @@ func TestClient_CreateBlbHttpListener(t *testing.T) {
 		XForwardedProto:            util.PtrBool(false),
 		AdditionalAttributes:       AdditionalAttributes,
 		HealthCheckType:            util.PtrString(""),
+		HealthCheckHttpVersion:     util.PtrString(""),
+		HealthCheckMethod:          util.PtrString(""),
 		HealthCheckPort:            util.PtrInt32(int32(0)),
 		HealthCheckURI:             util.PtrString(""),
 		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
@@ -550,6 +558,8 @@ func TestClient_CreateBlbHttpsListener(t *testing.T) {
 		XForwardedProto:            util.PtrBool(false),
 		AdditionalAttributes:       AdditionalAttributes,
 		HealthCheckType:            util.PtrString(""),
+		HealthCheckHttpVersion:     util.PtrString(""),
+		HealthCheckMethod:          util.PtrString(""),
 		HealthCheckPort:            util.PtrInt32(int32(0)),
 		HealthCheckURI:             util.PtrString(""),
 		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
@@ -1630,6 +1640,8 @@ func TestClient_UpdateAppBlbIpGroupProtocol(t *testing.T) {
 		IpGroupId:                   util.PtrString(""),
 		Id:                          util.PtrString(""),
 		HealthCheck:                 util.PtrString(""),
+		HealthCheckHttpVersion:      util.PtrString(""),
+		HealthCheckMethod:           util.PtrString(""),
 		HealthCheckPort:             util.PtrInt32(int32(0)),
 		HealthCheckUrlPath:          util.PtrString(""),
 		HealthCheckTimeoutInSecond:  util.PtrInt32(int32(0)),
@@ -1674,6 +1686,8 @@ func TestClient_UpdateAppBlbServerGroupPort(t *testing.T) {
 		PortId:                      util.PtrString(""),
 		EnableHealthCheck:           util.PtrBool(false),
 		HealthCheck:                 util.PtrString(""),
+		HealthCheckHttpVersion:      util.PtrString(""),
+		HealthCheckMethod:           util.PtrString(""),
 		HealthCheckPort:             util.PtrInt32(int32(0)),
 		HealthCheckUrlPath:          util.PtrString(""),
 		HealthCheckTimeoutInSecond:  util.PtrInt32(int32(0)),
@@ -1777,6 +1791,8 @@ func TestClient_UpdateBlbHttpListener(t *testing.T) {
 		XForwardedProto:            util.PtrBool(false),
 		AdditionalAttributes:       AdditionalAttributes,
 		HealthCheckType:            util.PtrString(""),
+		HealthCheckHttpVersion:     util.PtrString(""),
+		HealthCheckMethod:          util.PtrString(""),
 		HealthCheckPort:            util.PtrInt32(int32(0)),
 		HealthCheckURI:             util.PtrString(""),
 		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),
@@ -1809,6 +1825,8 @@ func TestClient_UpdateBlbHttpsListener(t *testing.T) {
 		XForwardedProto:            util.PtrBool(false),
 		AdditionalAttributes:       AdditionalAttributes,
 		HealthCheckType:            util.PtrString(""),
+		HealthCheckHttpVersion:     util.PtrString(""),
+		HealthCheckMethod:          util.PtrString(""),
 		HealthCheckPort:            util.PtrInt32(int32(0)),
 		HealthCheckURI:             util.PtrString(""),
 		HealthCheckTimeoutInSecond: util.PtrInt32(int32(0)),

@@ -6,6 +6,8 @@ type AppServerGroupPort struct {
 	BlbType                     *string `json:"type,omitempty"`
 	Status                      *string `json:"status,omitempty"`
 	HealthCheck                 *string `json:"healthCheck,omitempty"`
+	HealthCheckHttpVersion      *string `json:"healthCheckHttpVersion,omitempty"`
+	HealthCheckMethod           *string `json:"healthCheckMethod,omitempty"`
 	HealthCheckPort             *int32  `json:"healthCheckPort,omitempty"`
 	HealthCheckTimeoutInSecond  *int32  `json:"healthCheckTimeoutInSecond,omitempty"`
 	HealthCheckIntervalInSecond *int32  `json:"healthCheckIntervalInSecond,omitempty"`

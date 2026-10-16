@@ -7,9 +7,12 @@ import (
 )
 
 func UpdateAppBlbIpGroupProtocol() {
-	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
-	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
+	endpoint := "Your Endpoint"
+
+	// ==== AK/SK 鉴权 ====
+	ak, sk := "Your Ak", "Your Sk"
 	client, err := blb.NewClient(ak, sk, endpoint)
+
 	if err != nil {
 		fmt.Println("create client err:", err)
 		return
@@ -20,6 +23,8 @@ func UpdateAppBlbIpGroupProtocol() {
 		IpGroupId:                   util.PtrString(""),
 		Id:                          util.PtrString(""),
 		HealthCheck:                 util.PtrString(""),
+		HealthCheckHttpVersion:      util.PtrString(""),
+		HealthCheckMethod:           util.PtrString(""),
 		HealthCheckPort:             util.PtrInt32(int32(0)),
 		HealthCheckUrlPath:          util.PtrString(""),
 		HealthCheckTimeoutInSecond:  util.PtrInt32(int32(0)),

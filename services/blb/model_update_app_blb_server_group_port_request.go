@@ -7,6 +7,8 @@ type UpdateAppBlbServerGroupPortRequest struct {
 	PortId                      *string `json:"portId,omitempty"`
 	EnableHealthCheck           *bool   `json:"enableHealthCheck,omitempty"`
 	HealthCheck                 *string `json:"healthCheck,omitempty"`
+	HealthCheckHttpVersion      *string `json:"healthCheckHttpVersion,omitempty"`
+	HealthCheckMethod           *string `json:"healthCheckMethod,omitempty"`
 	HealthCheckPort             *int32  `json:"healthCheckPort,omitempty"`
 	HealthCheckUrlPath          *string `json:"healthCheckUrlPath,omitempty"`
 	HealthCheckTimeoutInSecond  *int32  `json:"healthCheckTimeoutInSecond,omitempty"`
