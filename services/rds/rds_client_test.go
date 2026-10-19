@@ -69,6 +69,64 @@ func ExpectEqual(alert func(format string, args ...interface{}),
 	return true
 }
 
+func TestClient_BatchConfigurationOfInstances(t *testing.T) {
+	batchConfigurationOfInstancesRequest := &BatchConfigurationOfInstancesRequest{
+		InstanceId:     util.PtrString(""),
+		CpuCount:       util.PtrInt32(int32(0)),
+		MemoryCapacity: util.PtrInt32(int32(0)),
+		VolumeCapacity: util.PtrInt32(int32(0)),
+		ReadReplicas:   []*ReplicaRequest{},
+		IsBatchResize:  util.PtrBool(false),
+		IsDirectPay:    util.PtrBool(false),
+		IsEnhanced:     util.PtrBool(false),
+		EffectiveTime:  util.PtrString(""),
+		MasterAzone:    util.PtrString(""),
+		BackupAzone:    util.PtrString(""),
+		DiskIoType:     util.PtrString(""),
+		SubnetId:       util.PtrString(""),
+		EdgeSubnetId:   util.PtrString(""),
+		Subnets:        []*SubnetMap{},
+		CouponId:       []*int64{},
+	}
+	result := &BatchConfigurationOfInstancesResponse{}
+	result, err := RDS_CLIENT.BatchConfigurationOfInstances(batchConfigurationOfInstancesRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_BindingTags(t *testing.T) {
+	bindingTagsRequest := &BindingTagsRequest{
+		Resources: []*Resource{},
+	}
+	err := RDS_CLIENT.BindingTags(bindingTagsRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ClusterStatusCheck(t *testing.T) {
+	clusterStatusCheckRequest := &ClusterStatusCheckRequest{
+		InstanceId: util.PtrString(""),
+	}
+	result := &ClusterStatusCheckResponse{}
+	result, err := RDS_CLIENT.ClusterStatusCheck(clusterStatusCheckRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateAPrimaryInstance(t *testing.T) {
 	Billing := &Billing{
 		PaymentTiming: util.PtrString(""),
@@ -204,6 +262,360 @@ func TestClient_CreateReadOnlyInstance(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DialTestInterface(t *testing.T) {
+	dialTestInterfaceRequest := &DialTestInterfaceRequest{
+		InstanceId: util.PtrString(""),
+	}
+	result := &DialTestInterfaceResponse{}
+	result, err := RDS_CLIENT.DialTestInterface(dialTestInterfaceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DoesTheInstanceSupportEnablingAutomaticExpansion(t *testing.T) {
+	doesTheInstanceSupportEnablingAutomaticExpansionRequest := &DoesTheInstanceSupportEnablingAutomaticExpansionRequest{
+		InstanceId: util.PtrString(""),
+	}
+	result := &DoesTheInstanceSupportEnablingAutomaticExpansionResponse{}
+	result, err := RDS_CLIENT.DoesTheInstanceSupportEnablingAutomaticExpansion(doesTheInstanceSupportEnablingAutomaticExpansionRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_GetNewPurchasePrice(t *testing.T) {
+	Instance := &Instance{
+		InstanceId:       util.PtrString(""),
+		InstanceShortId:  util.PtrString(""),
+		InstanceName:     util.PtrString(""),
+		Engine:           util.PtrString(""),
+		EngineVersion:    util.PtrString(""),
+		RdsMinorVersion:  util.PtrString(""),
+		CharacterSetName: util.PtrString(""),
+		Endpoint: &Endpoint{
+			Port:     util.PtrInt32(int32(0)),
+			VnetIp:   util.PtrString(""),
+			InetIp:   util.PtrString(""),
+			Address:  util.PtrString(""),
+			InetIpV6: util.PtrString(""),
+			VnetIpV6: util.PtrString(""),
+		},
+		InstanceClass:        util.PtrString(""),
+		AllocatedMemoryInMB:  util.PtrInt32(int32(0)),
+		AllocatedMemoryInGB:  util.PtrInt32(int32(0)),
+		MemoryCapacity:       util.PtrFloat64(float64(0)),
+		AllocatedStorageInGB: util.PtrInt32(int32(0)),
+		VolumeCapacity:       util.PtrInt32(int32(0)),
+		TotalStorageInGB:     util.PtrInt32(int32(0)),
+		UsedStorageInMB:      util.PtrInt32(int32(0)),
+		UsedStorageInGB:      util.PtrFloat64(float64(0)),
+		UsedStorage:          util.PtrFloat64(float64(0)),
+		CpuCount:             util.PtrInt32(int32(0)),
+		InstanceType:         util.PtrString(""),
+		SourceInstanceId:     util.PtrString(""),
+		ReadReplicaNum:       util.PtrInt32(int32(0)),
+		ReadReplica:          []*string{},
+		InstanceStatus:       util.PtrString(""),
+		LockMode:             util.PtrString(""),
+		EipStatus:            util.PtrString(""),
+		PublicAccessStatus:   util.PtrString(""),
+		SuperUserFlag:        util.PtrString(""),
+		ReplicationType:      util.PtrString(""),
+		SyncMode:             util.PtrString(""),
+		SqlserverBrType:      util.PtrString(""),
+		BackupPolicy: &SnapshotPolicy{
+			BackupTime:                    util.PtrString(""),
+			BackupDays:                    util.PtrString(""),
+			Persistent:                    util.PtrBool(false),
+			ExpireInDays:                  util.PtrInt32(int32(0)),
+			LogBackupRetainDays:           util.PtrInt32(int32(0)),
+			FreeSpaceInGB:                 util.PtrInt32(int32(0)),
+			DataBackupType:                util.PtrString(""),
+			FreeSpace:                     util.PtrInt32(int32(0)),
+			IncrementalDataBackupEnable:   util.PtrBool(false),
+			TimeUnit:                      util.PtrString(""),
+			DataBackupCopyEnable:          util.PtrBool(false),
+			IncrementalDataBackupInterval: util.PtrInt32(int32(0)),
+			LatestDataBackupRetainDays:    util.PtrInt32(int32(0)),
+			RetentionPeriod:               util.PtrInt32(int32(0)),
+			DataBackupRetainStrategys:     []*DataBackupRetainStrategy{},
+			EncryptStrategy: &EncryptStrategy{
+				EncryptEnable:            util.PtrBool(false),
+				KeyManagementServiceName: util.PtrString(""),
+				KeyManagementType:        util.PtrString(""),
+				SecretKeyID:              util.PtrString(""),
+			},
+		},
+		BlbService: &BlbService{
+			Status:  util.PtrString(""),
+			Service: util.PtrString(""),
+		},
+		PubliclyAccessible: util.PtrBool(false),
+		InstanceCreateTime: util.PtrString(""),
+		InstanceExpireTime: util.PtrString(""),
+		ProductType:        util.PtrString(""),
+		PaymentTiming:      util.PtrString(""),
+		Topology: &Topology{
+			Master:               []*string{},
+			ReadReplica:          []*string{},
+			Rdsproxy:             []*string{},
+			ReadReplicaIdMapping: []*ReadReplicaIdMapping{},
+			MasterIdMapping: &MasterIdMapping{
+				AppId:                util.PtrString(""),
+				AppIdShort:           util.PtrString(""),
+				Status:               util.PtrString(""),
+				AllocatedMemoryInMB:  util.PtrInt32(int32(0)),
+				CpuCount:             util.PtrInt32(int32(0)),
+				AllocatedStorageInGB: util.PtrInt32(int32(0)),
+				UsedStorageInGB:      util.PtrFloat64(float64(0)),
+			},
+			RdsproxyIdMapping: &ReadReplicaIdMapping{
+				AppId:                util.PtrString(""),
+				AppIdShort:           util.PtrString(""),
+				Status:               util.PtrString(""),
+				AllocatedMemoryInMB:  util.PtrInt32(int32(0)),
+				CpuCount:             util.PtrInt32(int32(0)),
+				AllocatedStorageInGB: util.PtrInt32(int32(0)),
+				UsedStorageInGB:      util.PtrFloat64(float64(0)),
+			},
+			RdsproxyIdMappings: []*ReadReplicaIdMapping{},
+		},
+		Azone:           util.PtrString(""),
+		VpcId:           util.PtrString(""),
+		SubnetId:        nil,
+		PhysicalZone:    nil,
+		Region:          util.PtrString(""),
+		SourceRegion:    util.PtrString(""),
+		BillingStatus:   util.PtrString(""),
+		ApplicationType: util.PtrString(""),
+		NodeAmount:      util.PtrInt32(int32(0)),
+		OldInstance:     util.PtrInt32(int32(0)),
+		OnlineStatus:    util.PtrInt32(int32(0)),
+		IsSingle:        util.PtrBool(false),
+		DccHostIds: &DccHostInfo{
+			Master: &DccHostId{
+				HostId: util.PtrString(""),
+				Azone:  util.PtrString(""),
+			},
+			Backup: &DccHostId{
+				HostId: util.PtrString(""),
+				Azone:  util.PtrString(""),
+			},
+		},
+		MachineType:     util.PtrInt32(int32(0)),
+		Weight:          util.PtrInt32(int32(0)),
+		NodeType:        util.PtrString(""),
+		RepairStartTime: util.PtrString(""),
+		RepairEndTime:   util.PtrString(""),
+		QuotStatus:      util.PtrString(""),
+		NodeReadReplica: &RoleInfo{
+			Id:       util.PtrString(""),
+			Azone:    util.PtrString(""),
+			SubnetId: util.PtrString(""),
+			Name:     util.PtrString(""),
+			VpcCidr:  util.PtrString(""),
+			ShortId:  util.PtrString(""),
+		},
+		NodeMaster: &RoleInfo{
+			Id:       util.PtrString(""),
+			Azone:    util.PtrString(""),
+			SubnetId: util.PtrString(""),
+			Name:     util.PtrString(""),
+			VpcCidr:  util.PtrString(""),
+			ShortId:  util.PtrString(""),
+		},
+		NodeSlave: &RoleInfo{
+			Id:       util.PtrString(""),
+			Azone:    util.PtrString(""),
+			SubnetId: util.PtrString(""),
+			Name:     util.PtrString(""),
+			VpcCidr:  util.PtrString(""),
+			ShortId:  util.PtrString(""),
+		},
+		NodeProxy: &RoleInfo{
+			Id:       util.PtrString(""),
+			Azone:    util.PtrString(""),
+			SubnetId: util.PtrString(""),
+			Name:     util.PtrString(""),
+			VpcCidr:  util.PtrString(""),
+			ShortId:  util.PtrString(""),
+		},
+		DiskIoType:        util.PtrString(""),
+		GroupId:           util.PtrString(""),
+		GroupName:         util.PtrString(""),
+		TdeStatus:         util.PtrString(""),
+		UserId:            util.PtrString(""),
+		BgwGroupId:        util.PtrString(""),
+		BgwGroupExclusive: util.PtrBool(false),
+		RoGroupList:       []*RoGroup{},
+		RoGroupAbnormal:   util.PtrBool(false),
+		DiskType:          util.PtrString(""),
+		CdsType:           util.PtrString(""),
+		MaintainStartTime: util.PtrString(""),
+		MaintainDuration:  util.PtrInt32(int32(0)),
+		MaintainPeriod:    util.PtrString(""),
+		InstanceSubStatus: util.PtrString(""),
+		BcmSendCycle:      util.PtrString(""),
+		AutoResizeDisk:    util.PtrInt32(int32(0)),
+		AutoResizeCpu:     util.PtrInt32(int32(0)),
+		EdgeRegion:        util.PtrString(""),
+		EdgeRegionName:    util.PtrString(""),
+		EdgeVpcId:         util.PtrString(""),
+		EdgeSubnetId:      util.PtrString(""),
+		GtidType:          util.PtrInt32(int32(0)),
+		NodeMasterReadReplica: &RoleInfo{
+			Id:       util.PtrString(""),
+			Azone:    util.PtrString(""),
+			SubnetId: util.PtrString(""),
+			Name:     util.PtrString(""),
+			VpcCidr:  util.PtrString(""),
+			ShortId:  util.PtrString(""),
+		},
+		NodeBackupReadReplica: &RoleInfo{
+			Id:       util.PtrString(""),
+			Azone:    util.PtrString(""),
+			SubnetId: util.PtrString(""),
+			Name:     util.PtrString(""),
+			VpcCidr:  util.PtrString(""),
+			ShortId:  util.PtrString(""),
+		},
+		HaStrategy:       util.PtrInt32(int32(0)),
+		IsDBRSEnable:     util.PtrBool(false),
+		ReplicaType:      util.PtrString(""),
+		ResourceType:     util.PtrString(""),
+		CdsEncrypt:       util.PtrInt32(int32(0)),
+		CdsEncryptKey:    util.PtrString(""),
+		ResourcePlatform: util.PtrString(""),
+		Location:         util.PtrString(""),
+		HasSlave:         util.PtrBool(false),
+		ExpireDate:       util.PtrInt32(int32(0)),
+		HasProxy:         util.PtrBool(false),
+		VpcName:          util.PtrString(""),
+		ResourceUuid:     util.PtrString(""),
+		Tags:             []*Tag{},
+		Task:             util.PtrString(""),
+		OrderStatus:      util.PtrString(""),
+		VpcCidr:          util.PtrString(""),
+		ZoneNames:        []*string{},
+		DccHosts:         []*MachinePO{},
+		Category:         util.PtrString(""),
+		Name:             util.PtrString(""),
+		ResourceGroup: &ResourceGroupsDetailFull{
+			Groups:    []*ResourceInfo{},
+			Name:      util.PtrString(""),
+			RdsType:   util.PtrString(""),
+			Region:    util.PtrString(""),
+			Id:        util.PtrString(""),
+			Uuid:      util.PtrString(""),
+			Summary:   util.PtrString(""),
+			Url:       util.PtrString(""),
+			AccountId: util.PtrString(""),
+			UserId:    util.PtrString(""),
+			Tags:      []*Tag{},
+			ResUuid:   util.PtrString(""),
+		},
+		ResourceGroupId:   util.PtrString(""),
+		ResourceGroupName: util.PtrString(""),
+		IsChargeProxy:     util.PtrBool(false),
+		Single:            util.PtrBool(false),
+	}
+	getNewPurchasePriceRequest := &GetNewPurchasePriceRequest{
+		Instance:    Instance,
+		Duration:    util.PtrInt32(int32(0)),
+		Number:      util.PtrInt32(int32(0)),
+		ProductType: util.PtrString(""),
+	}
+	result := &GetNewPurchasePriceResponse{}
+	result, err := RDS_CLIENT.GetNewPurchasePrice(getNewPurchasePriceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ObtainThePriceDifferenceOfPrepaidTransformer(t *testing.T) {
+	obtainThePriceDifferenceOfPrepaidTransformerRequest := &ObtainThePriceDifferenceOfPrepaidTransformerRequest{
+		InstanceId:           util.PtrString(""),
+		CpuCount:             util.PtrInt32(int32(0)),
+		AllocatedMemoryInGB:  util.PtrInt32(int32(0)),
+		AllocatedStorageInGB: util.PtrInt32(int32(0)),
+		DiskIoType:           util.PtrString(""),
+		Category:             util.PtrString(""),
+	}
+	result := &ObtainThePriceDifferenceOfPrepaidTransformerResponse{}
+	result, err := RDS_CLIENT.ObtainThePriceDifferenceOfPrepaidTransformer(obtainThePriceDifferenceOfPrepaidTransformerRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QueryInstanceList(t *testing.T) {
+	queryInstanceListRequest := &QueryInstanceListRequest{
+		Marker:  util.PtrString(""),
+		MaxKeys: util.PtrInt32(int32(0)),
+		VnetIp:  util.PtrString(""),
+	}
+	result := &QueryInstanceListResponse{}
+	result, err := RDS_CLIENT.QueryInstanceList(queryInstanceListRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QuerySubnetList(t *testing.T) {
+	querySubnetListRequest := &QuerySubnetListRequest{
+		ZoneName: util.PtrString(""),
+		VpcId:    util.PtrString(""),
+	}
+	result := &QuerySubnetListResponse{}
+	result, err := RDS_CLIENT.QuerySubnetList(querySubnetListRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_QueryTaskList(t *testing.T) {
 	queryTaskListRequest := &QueryTaskListRequest{
 		PageSize:     util.PtrString(""),
@@ -228,5 +640,177 @@ func TestClient_QueryTaskList(t *testing.T) {
 		return
 	}
 	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QueryTheDetailsOfTheSpecifiedInstance(t *testing.T) {
+	queryTheDetailsOfTheSpecifiedInstanceRequest := &QueryTheDetailsOfTheSpecifiedInstanceRequest{
+		InstanceId: util.PtrString(""),
+	}
+	result := &QueryTheDetailsOfTheSpecifiedInstanceResponse{}
+	result, err := RDS_CLIENT.QueryTheDetailsOfTheSpecifiedInstance(queryTheDetailsOfTheSpecifiedInstanceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_QueryTheListOfAvailableZones(t *testing.T) {
+	result := &QueryTheListOfAvailableZonesResponse{}
+	result, err := RDS_CLIENT.QueryTheListOfAvailableZones()
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ReleaseInstance(t *testing.T) {
+	releaseInstanceRequest := &ReleaseInstanceRequest{
+		InstanceIds: util.PtrString(""),
+	}
+	result := &ReleaseInstanceResponse{}
+	result, err := RDS_CLIENT.ReleaseInstance(releaseInstanceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_RestartTheInstance(t *testing.T) {
+	restartTheInstanceRequest := &RestartTheInstanceRequest{
+		InstanceId:    util.PtrString(""),
+		EffectiveTime: util.PtrString(""),
+	}
+	err := RDS_CLIENT.RestartTheInstance(restartTheInstanceRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_RetrieveInstanceAutoScalingConfig(t *testing.T) {
+	retrieveInstanceAutoScalingConfigRequest := &RetrieveInstanceAutoScalingConfigRequest{
+		InstanceId: util.PtrString(""),
+	}
+	result := &RetrieveInstanceAutoScalingConfigResponse{}
+	result, err := RDS_CLIENT.RetrieveInstanceAutoScalingConfig(retrieveInstanceAutoScalingConfigRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_TransformationExample(t *testing.T) {
+	transformationExampleRequest := &TransformationExampleRequest{
+		InstanceId:          util.PtrString(""),
+		CpuCount:            util.PtrInt32(int32(0)),
+		MemoryCapacity:      util.PtrInt32(int32(0)),
+		VolumeCapacity:      util.PtrInt32(int32(0)),
+		AllocatedMemoryInMB: util.PtrInt32(int32(0)),
+		NodeAmount:          util.PtrInt32(int32(0)),
+		IsDirectPay:         util.PtrBool(false),
+		IsEnhanced:          util.PtrBool(false),
+		EffectiveTime:       util.PtrString(""),
+		MasterAzone:         util.PtrString(""),
+		BackupAzone:         util.PtrString(""),
+		DiskIoType:          util.PtrString(""),
+		SubnetId:            util.PtrString(""),
+		EdgeSubnetId:        util.PtrString(""),
+		Subnets:             []*SubnetMap{},
+	}
+	result := &TransformationExampleResponse{}
+	result, err := RDS_CLIENT.TransformationExample(transformationExampleRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateAutomaticStorageExpansionConfiguration(t *testing.T) {
+	updateAutomaticStorageExpansionConfigurationRequest := &UpdateAutomaticStorageExpansionConfigurationRequest{
+		InstanceId:         util.PtrString(""),
+		Action:             util.PtrString(""),
+		FreeSpaceThreshold: util.PtrInt32(int32(0)),
+		DiskMaxLimit:       util.PtrInt32(int32(0)),
+	}
+	err := RDS_CLIENT.UpdateAutomaticStorageExpansionConfiguration(updateAutomaticStorageExpansionConfigurationRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateInstanceConnectionInformation(t *testing.T) {
+	updateInstanceConnectionInformationRequest := &UpdateInstanceConnectionInformationRequest{
+		InstanceId: util.PtrString(""),
+		Address:    util.PtrString(""),
+	}
+	err := RDS_CLIENT.UpdateInstanceConnectionInformation(updateInstanceConnectionInformationRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateInstanceName(t *testing.T) {
+	updateInstanceNameRequest := &UpdateInstanceNameRequest{
+		InstanceId:   util.PtrString(""),
+		InstanceName: util.PtrString(""),
+	}
+	err := RDS_CLIENT.UpdateInstanceName(updateInstanceNameRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateInstancePublicNetworkAccessStatus(t *testing.T) {
+	updateInstancePublicNetworkAccessStatusRequest := &UpdateInstancePublicNetworkAccessStatusRequest{
+		InstanceId:   util.PtrString(""),
+		PublicAccess: util.PtrBool(false),
+	}
+	err := RDS_CLIENT.UpdateInstancePublicNetworkAccessStatus(updateInstancePublicNetworkAccessStatusRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateInstanceSynchronizationMode(t *testing.T) {
+	updateInstanceSynchronizationModeRequest := &UpdateInstanceSynchronizationModeRequest{
+		InstanceId: util.PtrString(""),
+		SyncMode:   util.PtrString(""),
+	}
+	err := RDS_CLIENT.UpdateInstanceSynchronizationMode(updateInstanceSynchronizationModeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateTimeWindow(t *testing.T) {
+	updateTimeWindowRequest := &UpdateTimeWindowRequest{
+		InstanceId:        util.PtrString(""),
+		MaintainStartTime: util.PtrString(""),
+		MaintainDuration:  util.PtrInt32(int32(0)),
+	}
+	err := RDS_CLIENT.UpdateTimeWindow(updateTimeWindowRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ZoneMigration(t *testing.T) {
+	zoneMigrationRequest := &ZoneMigrationRequest{
+		InstanceId:    util.PtrString(""),
+		MasterAzone:   util.PtrString(""),
+		BackupAzone:   util.PtrString(""),
+		ZoneNames:     []*string{},
+		Subnets:       []*SubnetMap{},
+		EffectiveTime: util.PtrString(""),
+	}
+	err := RDS_CLIENT.ZoneMigration(zoneMigrationRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
