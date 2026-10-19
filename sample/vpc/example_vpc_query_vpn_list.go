@@ -19,9 +19,9 @@ func QueryVpnList() {
 		return
 	}
 	queryVpnListRequest := &vpc.QueryVpnListRequest{
-		VpcId:   util.PtrString(""),
 		Marker:  util.PtrString(""),
 		MaxKeys: util.PtrInt32(int32(0)),
+		VpcId:   util.PtrString(""),
 		Eip:     util.PtrString(""),
 		Type:    util.PtrString(""),
 	}

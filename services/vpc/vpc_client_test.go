@@ -2021,9 +2021,9 @@ func TestClient_QueryVpcList(t *testing.T) {
 }
 func TestClient_QueryVpnList(t *testing.T) {
 	queryVpnListRequest := &QueryVpnListRequest{
-		VpcId:   util.PtrString(""),
 		Marker:  util.PtrString(""),
 		MaxKeys: util.PtrInt32(int32(0)),
+		VpcId:   util.PtrString(""),
 		Eip:     util.PtrString(""),
 		Type:    util.PtrString(""),
 	}
