@@ -53,7 +53,7 @@ type Instance struct {
 	OnlineStatus          *int32                    `json:"onlineStatus,omitempty"`
 	IsSingle              *bool                     `json:"isSingle,omitempty"`
 	DccHostIds            *DccHostInfo              `json:"dccHostIds,omitempty"`
-	MachineType           *int32                    `json:"machineType,omitempty"`
+	MachineType           *string                   `json:"machineType,omitempty"`
 	Weight                *int32                    `json:"weight,omitempty"`
 	NodeType              *string                   `json:"nodeType,omitempty"`
 	RepairStartTime       *string                   `json:"repairStartTime,omitempty"`

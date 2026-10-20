@@ -183,48 +183,21 @@ func (c *Client) DoesTheInstanceSupportEnablingAutomaticExpansion(request *DoesT
 	return result, nil
 }
 
-// GetNewPurchasePrice
+// InstanceEnablesAutomaticRenewal
 //
 // PARAMS:
-//   - request: the arguments to GetNewPurchasePrice
+//   - request: the arguments to InstanceEnablesAutomaticRenewal
 //
 // RETURNS:
-//   - GetNewPurchasePriceResponse: The return type of the GetNewPurchasePrice interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) GetNewPurchasePrice(request *GetNewPurchasePriceRequest) (*GetNewPurchasePriceResponse, error) {
-	result := &GetNewPurchasePriceResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getGetNewPurchasePriceUri(VERSION_V1)).
-		WithBody(request).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
 
-// ObtainThePriceDifferenceOfPrepaidTransformer
-//
-// PARAMS:
-//   - request: the arguments to ObtainThePriceDifferenceOfPrepaidTransformer
-//
-// RETURNS:
-//   - ObtainThePriceDifferenceOfPrepaidTransformerResponse: The return type of the ObtainThePriceDifferenceOfPrepaidTransformer interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) ObtainThePriceDifferenceOfPrepaidTransformer(request *ObtainThePriceDifferenceOfPrepaidTransformerRequest) (*ObtainThePriceDifferenceOfPrepaidTransformerResponse, error) {
-	result := &ObtainThePriceDifferenceOfPrepaidTransformerResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
-		WithURL(getObtainThePriceDifferenceOfPrepaidTransformerUri(VERSION_V1)).
+// - error: nil if success otherwise the specific error
+func (c *Client) InstanceEnablesAutomaticRenewal(request *InstanceEnablesAutomaticRenewalRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.PUT).
+		WithURL(getInstanceEnablesAutomaticRenewalUri(VERSION_V1)).
+		WithQueryParam("autoRenew", "").
 		WithBody(request).
-		WithResult(result).
 		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
 }
 
 // QueryInstanceList
@@ -296,27 +269,6 @@ func (c *Client) QueryTaskList(request *QueryTaskListRequest) (*QueryTaskListRes
 	return result, nil
 }
 
-// QueryTheDetailsOfTheSpecifiedInstance
-//
-// PARAMS:
-//   - request: the arguments to QueryTheDetailsOfTheSpecifiedInstance
-//
-// RETURNS:
-//   - QueryTheDetailsOfTheSpecifiedInstanceResponse: The return type of the QueryTheDetailsOfTheSpecifiedInstance interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) QueryTheDetailsOfTheSpecifiedInstance(request *QueryTheDetailsOfTheSpecifiedInstanceRequest) (*QueryTheDetailsOfTheSpecifiedInstanceResponse, error) {
-	result := &QueryTheDetailsOfTheSpecifiedInstanceResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getQueryTheDetailsOfTheSpecifiedInstanceUri(VERSION_V1, util.StringValue(request.InstanceId))).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
 // QueryTheListOfAvailableZones
 //
 // PARAMS:
@@ -351,6 +303,28 @@ func (c *Client) ReleaseInstance(request *ReleaseInstanceRequest) (*ReleaseInsta
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
 		WithURL(getReleaseInstanceUri(VERSION_V1, util.StringValue(request.InstanceIds))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// RenewalExample
+//
+// PARAMS:
+//   - request: the arguments to RenewalExample
+//
+// RETURNS:
+//   - RenewalExampleResponse: The return type of the RenewalExample interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) RenewalExample(request *RenewalExampleRequest) (*RenewalExampleResponse, error) {
+	result := &RenewalExampleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getRenewalExampleUri()).
+		WithBody(request).
 		WithResult(result).
 		Do()
 	if err != nil {
@@ -516,22 +490,6 @@ func (c *Client) UpdateTimeWindow(request *UpdateTimeWindowRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUpdateTimeWindowUri(VERSION_V1, util.StringValue(request.InstanceId))).
-		WithBody(request).
-		Do()
-}
-
-// ZoneMigration
-//
-// PARAMS:
-//   - request: the arguments to ZoneMigration
-//
-// RETURNS:
-
-// - error: nil if success otherwise the specific error
-func (c *Client) ZoneMigration(request *ZoneMigrationRequest) error {
-	return bce.NewRequestBuilder(c).
-		WithMethod(http.PUT).
-		WithURL(getZoneMigrationUri(VERSION_V1, util.StringValue(request.InstanceId))).
 		WithBody(request).
 		Do()
 }

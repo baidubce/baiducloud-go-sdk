@@ -23,11 +23,7 @@ const (
 
 	CONSTANT_TASK = "task"
 
-	CONSTANT_AZONE_MIGRATION = "azoneMigration"
-
-	CONSTANT_PRICE = "price"
-
-	CONSTANT_DIFF = "diff"
+	CONSTANT_RENEW = "renew"
 
 	CONSTANT_AUTO_RESIZE_CONFIG = "autoResizeConfig"
 
@@ -80,11 +76,8 @@ func getDialTestInterfaceUri(version string, InstanceId string) string {
 func getDoesTheInstanceSupportEnablingAutomaticExpansionUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_AUTO_EXPANSION
 }
-func getGetNewPurchasePriceUri(version string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_PRICE
-}
-func getObtainThePriceDifferenceOfPrepaidTransformerUri(version string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_PRICE + bce.URI_PREFIX + CONSTANT_DIFF
+func getInstanceEnablesAutomaticRenewalUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE
 }
 func getQueryInstanceListUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE
@@ -95,14 +88,14 @@ func getQuerySubnetListUri(version string) string {
 func getQueryTaskListUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_TASK
 }
-func getQueryTheDetailsOfTheSpecifiedInstanceUri(version string, InstanceId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId
-}
 func getQueryTheListOfAvailableZonesUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ZONE
 }
 func getReleaseInstanceUri(version string, InstanceIds string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE
+}
+func getRenewalExampleUri() string {
+	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_RENEW
 }
 func getRestartTheInstanceUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId
@@ -130,7 +123,4 @@ func getUpdateInstanceSynchronizationModeUri(version string, InstanceId string) 
 }
 func getUpdateTimeWindowUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_MAINTAINTIME
-}
-func getZoneMigrationUri(version string, InstanceId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_AZONE_MIGRATION
 }
