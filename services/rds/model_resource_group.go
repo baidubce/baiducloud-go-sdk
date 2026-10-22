@@ -7,8 +7,8 @@ type ResourceGroup struct {
 	GroupId    *string `json:"groupId,omitempty"`
 	AccountId  *string `json:"accountId,omitempty"`
 	UserId     *string `json:"userId,omitempty"`
-	CreateTime *int64  `json:"createTime,omitempty"`
-	UpdateTime *int64  `json:"updateTime,omitempty"`
-	DeleteTime *int64  `json:"deleteTime,omitempty"`
+	CreateTime *int32  `json:"createTime,omitempty"`
+	UpdateTime *int32  `json:"updateTime,omitempty"`
+	DeleteTime *int32  `json:"deleteTime,omitempty"`
 	BindTime   *string `json:"bindTime,omitempty"`
 }

@@ -269,6 +269,27 @@ func (c *Client) QueryTaskList(request *QueryTaskListRequest) (*QueryTaskListRes
 	return result, nil
 }
 
+// QueryTheDetailsOfTheSpecifiedInstance
+//
+// PARAMS:
+//   - request: the arguments to QueryTheDetailsOfTheSpecifiedInstance
+//
+// RETURNS:
+//   - QueryTheDetailsOfTheSpecifiedInstanceResponse: The return type of the QueryTheDetailsOfTheSpecifiedInstance interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryTheDetailsOfTheSpecifiedInstance(request *QueryTheDetailsOfTheSpecifiedInstanceRequest) (*QueryTheDetailsOfTheSpecifiedInstanceResponse, error) {
+	result := &QueryTheDetailsOfTheSpecifiedInstanceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getQueryTheDetailsOfTheSpecifiedInstanceUri(VERSION_V1, util.StringValue(request.InstanceId))).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // QueryTheListOfAvailableZones
 //
 // PARAMS:
@@ -302,7 +323,8 @@ func (c *Client) ReleaseInstance(request *ReleaseInstanceRequest) (*ReleaseInsta
 	result := &ReleaseInstanceResponse{}
 	err := bce.NewRequestBuilder(c).
 		WithMethod(http.DELETE).
-		WithURL(getReleaseInstanceUri(VERSION_V1, util.StringValue(request.InstanceIds))).
+		WithURL(getReleaseInstanceUri(VERSION_V1)).
+		WithQueryParamFilter("instanceIds", util.StringValue(request.InstanceIds)).
 		WithResult(result).
 		Do()
 	if err != nil {

@@ -88,10 +88,13 @@ func getQuerySubnetListUri(version string) string {
 func getQueryTaskListUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_TASK
 }
+func getQueryTheDetailsOfTheSpecifiedInstanceUri(version string, InstanceId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId
+}
 func getQueryTheListOfAvailableZonesUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_ZONE
 }
-func getReleaseInstanceUri(version string, InstanceIds string) string {
+func getReleaseInstanceUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE
 }
 func getRenewalExampleUri() string {

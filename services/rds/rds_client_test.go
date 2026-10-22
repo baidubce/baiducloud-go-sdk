@@ -372,6 +372,24 @@ func TestClient_QueryTaskList(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_QueryTheDetailsOfTheSpecifiedInstance(t *testing.T) {
+	queryTheDetailsOfTheSpecifiedInstanceRequest := &QueryTheDetailsOfTheSpecifiedInstanceRequest{
+		InstanceId: util.PtrString(""),
+	}
+	result := &QueryTheDetailsOfTheSpecifiedInstanceResponse{}
+	result, err := RDS_CLIENT.QueryTheDetailsOfTheSpecifiedInstance(queryTheDetailsOfTheSpecifiedInstanceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_QueryTheListOfAvailableZones(t *testing.T) {
 	result := &QueryTheListOfAvailableZonesResponse{}
 	result, err := RDS_CLIENT.QueryTheListOfAvailableZones()

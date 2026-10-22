@@ -11,7 +11,7 @@ type Instance struct {
 	Endpoint              *Endpoint                 `json:"endpoint,omitempty"`
 	InstanceClass         *string                   `json:"instanceClass,omitempty"`
 	AllocatedMemoryInMB   *int32                    `json:"allocatedMemoryInMB,omitempty"`
-	AllocatedMemoryInGB   *int32                    `json:"allocatedMemoryInGB,omitempty"`
+	AllocatedMemoryInGB   *float64                  `json:"allocatedMemoryInGB,omitempty"`
 	MemoryCapacity        *float64                  `json:"memoryCapacity,omitempty"`
 	AllocatedStorageInGB  *int32                    `json:"allocatedStorageInGB,omitempty"`
 	VolumeCapacity        *int32                    `json:"volumeCapacity,omitempty"`
