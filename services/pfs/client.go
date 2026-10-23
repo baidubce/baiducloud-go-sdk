@@ -14,6 +14,8 @@ const (
 	CONSTANT_INSTANCE = "instance"
 
 	CONSTANT_TAG = "tag"
+
+	CONSTANT_XXX = "xxx"
 )
 
 // Client of pfs service is a kind of BceClient, so derived from BceClient
@@ -44,6 +46,12 @@ func getCreateL2BucketLinkUri() string {
 func getCreateL2PolicyUri() string {
 	return bce.URI_PREFIX
 }
+func getCreateL3AccessGroupUri() string {
+	return bce.URI_PREFIX
+}
+func getCreateL3AccessRuleUri() string {
+	return bce.URI_PREFIX
+}
 func getCreateL3MountTargetUri() string {
 	return bce.URI_PREFIX
 }
@@ -57,6 +65,12 @@ func getDeleteL2BucketLinkUri() string {
 	return bce.URI_PREFIX
 }
 func getDeleteL2PolicyUri() string {
+	return bce.URI_PREFIX
+}
+func getDeleteL3AccessGroupUri() string {
+	return bce.URI_PREFIX
+}
+func getDeleteL3AccessRuleUri() string {
 	return bce.URI_PREFIX
 }
 func getDeleteL3MountTargetUri() string {
@@ -77,6 +91,9 @@ func getDescL2PolicyUri() string {
 func getDescPfsUri() string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_PFS + bce.URI_PREFIX + CONSTANT_INSTANCE
 }
+func getDescribeL3AccessGroupUri() string {
+	return bce.URI_PREFIX
+}
 func getDescribeL3MountTargetUri() string {
 	return bce.URI_PREFIX
 }
@@ -90,6 +107,12 @@ func getListL2BucketLinkUri() string {
 	return bce.URI_PREFIX
 }
 func getListL2PolicyUri() string {
+	return bce.URI_PREFIX
+}
+func getListL3AccessGroupUri() string {
+	return bce.URI_PREFIX
+}
+func getListL3AccessRuleUri() string {
 	return bce.URI_PREFIX
 }
 func getListL3MountTargetUri() string {
@@ -123,6 +146,12 @@ func getUpdateFilesetUri() string {
 	return bce.URI_PREFIX
 }
 func getUpdateL2PolicyUri() string {
+	return bce.URI_PREFIX
+}
+func getUpdateL3AccessGroupUri() string {
+	return bce.URI_PREFIX
+}
+func getUpdateL3AccessRuleUri() string {
 	return bce.URI_PREFIX
 }
 func getUpdatePFSTagUri() string {

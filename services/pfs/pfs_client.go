@@ -6,7 +6,9 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
 )
 
-const ()
+const (
+	VERSION_V2 = "v2"
+)
 
 // CancelL2BucketLink
 //
@@ -97,6 +99,56 @@ func (c *Client) CreateL2Policy(request *CreateL2PolicyRequest) (*CreateL2Policy
 		WithMethod(http.POST).
 		WithURL(getCreateL2PolicyUri()).
 		WithQueryParamFilter("action", "CreateL2Policy").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateL3AccessGroup
+//
+// PARAMS:
+//   - request: the arguments to CreateL3AccessGroup
+//
+// RETURNS:
+//   - CreateL3AccessGroupResponse: The return type of the CreateL3AccessGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateL3AccessGroup(request *CreateL3AccessGroupRequest) (*CreateL3AccessGroupResponse, error) {
+	result := &CreateL3AccessGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateL3AccessGroupUri()).
+		WithQueryParamFilter("action", "CreateL3AccessGroup").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// CreateL3AccessRule
+//
+// PARAMS:
+//   - request: the arguments to CreateL3AccessRule
+//
+// RETURNS:
+//   - CreateL3AccessRuleResponse: The return type of the CreateL3AccessRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateL3AccessRule(request *CreateL3AccessRuleRequest) (*CreateL3AccessRuleResponse, error) {
+	result := &CreateL3AccessRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateL3AccessRuleUri()).
+		WithQueryParamFilter("action", "CreateL3AccessRule").
 		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithHeader("Version", "v2").
 		WithBody(request).
@@ -218,6 +270,56 @@ func (c *Client) DeleteL2Policy(request *DeleteL2PolicyRequest) (*DeleteL2Policy
 		WithMethod(http.POST).
 		WithURL(getDeleteL2PolicyUri()).
 		WithQueryParamFilter("action", "DeleteL2Policy").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DeleteL3AccessGroup
+//
+// PARAMS:
+//   - request: the arguments to DeleteL3AccessGroup
+//
+// RETURNS:
+//   - DeleteL3AccessGroupResponse: The return type of the DeleteL3AccessGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteL3AccessGroup(request *DeleteL3AccessGroupRequest) (*DeleteL3AccessGroupResponse, error) {
+	result := &DeleteL3AccessGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDeleteL3AccessGroupUri()).
+		WithQueryParamFilter("action", "DeleteL3AccessGroup").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DeleteL3AccessRule
+//
+// PARAMS:
+//   - request: the arguments to DeleteL3AccessRule
+//
+// RETURNS:
+//   - DeleteL3AccessRuleResponse: The return type of the DeleteL3AccessRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DeleteL3AccessRule(request *DeleteL3AccessRuleRequest) (*DeleteL3AccessRuleResponse, error) {
+	result := &DeleteL3AccessRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDeleteL3AccessRuleUri()).
+		WithQueryParamFilter("action", "DeleteL3AccessRule").
 		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithHeader("Version", "v2").
 		WithBody(request).
@@ -367,6 +469,31 @@ func (c *Client) DescPfs(request *DescPfsRequest) (*DescPfsResponse, error) {
 	return result, nil
 }
 
+// DescribeL3AccessGroup
+//
+// PARAMS:
+//   - request: the arguments to DescribeL3AccessGroup
+//
+// RETURNS:
+//   - DescribeL3AccessGroupResponse: The return type of the DescribeL3AccessGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) DescribeL3AccessGroup(request *DescribeL3AccessGroupRequest) (*DescribeL3AccessGroupResponse, error) {
+	result := &DescribeL3AccessGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDescribeL3AccessGroupUri()).
+		WithQueryParamFilter("action", "DescribeL3AccessGroup").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // DescribeL3MountTarget
 //
 // PARAMS:
@@ -481,6 +608,56 @@ func (c *Client) ListL2Policy(request *ListL2PolicyRequest) (*ListL2PolicyRespon
 		WithMethod(http.POST).
 		WithURL(getListL2PolicyUri()).
 		WithQueryParamFilter("action", "ListL2Policy").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListL3AccessGroup
+//
+// PARAMS:
+//   - request: the arguments to ListL3AccessGroup
+//
+// RETURNS:
+//   - ListL3AccessGroupResponse: The return type of the ListL3AccessGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListL3AccessGroup(request *ListL3AccessGroupRequest) (*ListL3AccessGroupResponse, error) {
+	result := &ListL3AccessGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getListL3AccessGroupUri()).
+		WithQueryParamFilter("action", "ListL3AccessGroup").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// ListL3AccessRule
+//
+// PARAMS:
+//   - request: the arguments to ListL3AccessRule
+//
+// RETURNS:
+//   - ListL3AccessRuleResponse: The return type of the ListL3AccessRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListL3AccessRule(request *ListL3AccessRuleRequest) (*ListL3AccessRuleResponse, error) {
+	result := &ListL3AccessRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getListL3AccessRuleUri()).
+		WithQueryParamFilter("action", "ListL3AccessRule").
 		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithHeader("Version", "v2").
 		WithBody(request).
@@ -757,6 +934,56 @@ func (c *Client) UpdateL2Policy(request *UpdateL2PolicyRequest) (*UpdateL2Policy
 		WithMethod(http.POST).
 		WithURL(getUpdateL2PolicyUri()).
 		WithQueryParamFilter("action", "UpdateL2Policy").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// UpdateL3AccessGroup
+//
+// PARAMS:
+//   - request: the arguments to UpdateL3AccessGroup
+//
+// RETURNS:
+//   - UpdateL3AccessGroupResponse: The return type of the UpdateL3AccessGroup interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateL3AccessGroup(request *UpdateL3AccessGroupRequest) (*UpdateL3AccessGroupResponse, error) {
+	result := &UpdateL3AccessGroupResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUpdateL3AccessGroupUri()).
+		WithQueryParamFilter("action", "UpdateL3AccessGroup").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// UpdateL3AccessRule
+//
+// PARAMS:
+//   - request: the arguments to UpdateL3AccessRule
+//
+// RETURNS:
+//   - UpdateL3AccessRuleResponse: The return type of the UpdateL3AccessRule interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateL3AccessRule(request *UpdateL3AccessRuleRequest) (*UpdateL3AccessRuleResponse, error) {
+	result := &UpdateL3AccessRuleResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUpdateL3AccessRuleUri()).
+		WithQueryParamFilter("action", "UpdateL3AccessRule").
 		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithHeader("Version", "v2").
 		WithBody(request).

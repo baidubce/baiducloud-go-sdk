@@ -171,6 +171,58 @@ func TestClient_CreateL2Policy(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateL3AccessGroup(t *testing.T) {
+	createL3AccessGroupRequest := &CreateL3AccessGroupRequest{
+		Action:                util.PtrString(""),
+		AccessGroupName:       util.PtrString(""),
+		ZoneName:              util.PtrString(""),
+		Description:           util.PtrString(""),
+		SourceZoneName:        util.PtrString(""),
+		SourceAccessGroupName: util.PtrString(""),
+	}
+	result := &CreateL3AccessGroupResponse{}
+	result, err := PFS_CLIENT.CreateL3AccessGroup(createL3AccessGroupRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_CreateL3AccessRule(t *testing.T) {
+	createL3AccessRuleRequest := &CreateL3AccessRuleRequest{
+		Action:          util.PtrString(""),
+		AccessGroupName: util.PtrString(""),
+		ZoneName:        util.PtrString(""),
+		AccessRules: []*AccessRuleCreateInfo{
+			{
+				Ip:          util.PtrString(""),
+				Mask:        util.PtrInt32(int32(0)),
+				WriteAccess: util.PtrString(""),
+				UserAccess:  util.PtrString(""),
+				Priority:    util.PtrInt32(int32(0)),
+			},
+		},
+	}
+	result := &CreateL3AccessRuleResponse{}
+	result, err := PFS_CLIENT.CreateL3AccessRule(createL3AccessRuleRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateL3MountTarget(t *testing.T) {
 	createL3MountTargetRequest := &CreateL3MountTargetRequest{
 		Action:     util.PtrString(""),
@@ -263,6 +315,47 @@ func TestClient_DeleteL2Policy(t *testing.T) {
 	}
 	result := &DeleteL2PolicyResponse{}
 	result, err := PFS_CLIENT.DeleteL2Policy(deleteL2PolicyRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteL3AccessGroup(t *testing.T) {
+	deleteL3AccessGroupRequest := &DeleteL3AccessGroupRequest{
+		Action:          util.PtrString(""),
+		AccessGroupName: util.PtrString(""),
+		ZoneName:        util.PtrString(""),
+	}
+	result := &DeleteL3AccessGroupResponse{}
+	result, err := PFS_CLIENT.DeleteL3AccessGroup(deleteL3AccessGroupRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteL3AccessRule(t *testing.T) {
+	deleteL3AccessRuleRequest := &DeleteL3AccessRuleRequest{
+		Action:          util.PtrString(""),
+		AccessGroupName: util.PtrString(""),
+		ZoneName:        util.PtrString(""),
+		AccessRuleId:    util.PtrInt32(int32(0)),
+	}
+	result := &DeleteL3AccessRuleResponse{}
+	result, err := PFS_CLIENT.DeleteL3AccessRule(deleteL3AccessRuleRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -380,6 +473,26 @@ func TestClient_DescPfs(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_DescribeL3AccessGroup(t *testing.T) {
+	describeL3AccessGroupRequest := &DescribeL3AccessGroupRequest{
+		Action:          util.PtrString(""),
+		AccessGroupName: util.PtrString(""),
+		ZoneName:        util.PtrString(""),
+	}
+	result := &DescribeL3AccessGroupResponse{}
+	result, err := PFS_CLIENT.DescribeL3AccessGroup(describeL3AccessGroupRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_DescribeL3MountTarget(t *testing.T) {
 	describeL3MountTargetRequest := &DescribeL3MountTargetRequest{
 		Action:        util.PtrString(""),
@@ -479,6 +592,56 @@ func TestClient_ListL2Policy(t *testing.T) {
 	}
 	result := &ListL2PolicyResponse{}
 	result, err := PFS_CLIENT.ListL2Policy(listL2PolicyRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListL3AccessGroup(t *testing.T) {
+	listL3AccessGroupRequest := &ListL3AccessGroupRequest{
+		Action:      util.PtrString(""),
+		Keyword:     util.PtrString(""),
+		KeywordType: util.PtrString(""),
+		ZoneName:    util.PtrString(""),
+		Order:       util.PtrString(""),
+		OrderBy:     util.PtrString(""),
+		PageNo:      util.PtrInt32(int32(0)),
+		PageSize:    util.PtrInt32(int32(0)),
+	}
+	result := &ListL3AccessGroupResponse{}
+	result, err := PFS_CLIENT.ListL3AccessGroup(listL3AccessGroupRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_ListL3AccessRule(t *testing.T) {
+	listL3AccessRuleRequest := &ListL3AccessRuleRequest{
+		Action:          util.PtrString(""),
+		AccessGroupName: util.PtrString(""),
+		ZoneName:        util.PtrString(""),
+		PageNo:          util.PtrInt32(int32(0)),
+		PageSize:        util.PtrInt32(int32(0)),
+		OrderBy:         util.PtrString(""),
+		Order:           util.PtrString(""),
+		IpFilter:        util.PtrString(""),
+	}
+	result := &ListL3AccessRuleResponse{}
+	result, err := PFS_CLIENT.ListL3AccessRule(listL3AccessRuleRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
@@ -723,6 +886,53 @@ func TestClient_UpdateL2Policy(t *testing.T) {
 	}
 	result := &UpdateL2PolicyResponse{}
 	result, err := PFS_CLIENT.UpdateL2Policy(updateL2PolicyRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateL3AccessGroup(t *testing.T) {
+	updateL3AccessGroupRequest := &UpdateL3AccessGroupRequest{
+		Action:          util.PtrString(""),
+		AccessGroupName: util.PtrString(""),
+		ZoneName:        util.PtrString(""),
+		Description:     util.PtrString(""),
+	}
+	result := &UpdateL3AccessGroupResponse{}
+	result, err := PFS_CLIENT.UpdateL3AccessGroup(updateL3AccessGroupRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateL3AccessRule(t *testing.T) {
+	updateL3AccessRuleRequest := &UpdateL3AccessRuleRequest{
+		Action:          util.PtrString(""),
+		AccessGroupName: util.PtrString(""),
+		ZoneName:        util.PtrString(""),
+		AccessRuleId:    util.PtrInt32(int32(0)),
+		Ip:              util.PtrString(""),
+		Mask:            util.PtrInt32(int32(0)),
+		WriteAccess:     util.PtrString(""),
+		UserAccess:      util.PtrString(""),
+		Priority:        util.PtrInt32(int32(0)),
+	}
+	result := &UpdateL3AccessRuleResponse{}
+	result, err := PFS_CLIENT.UpdateL3AccessRule(updateL3AccessRuleRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return
