@@ -108,7 +108,7 @@ type QueryTheDetailsOfTheSpecifiedInstanceResponse struct {
 	VpcName               *string                   `json:"vpcName,omitempty"`
 	VpcShortId            *string                   `json:"vpcShortId,omitempty"`
 	ResourceUuid          *string                   `json:"resourceUuid,omitempty"`
-	Tags                  []*Tag                    `json:"tags,omitempty"`
+	Tags                  []*string                 `json:"tags,omitempty"`
 	Task                  *string                   `json:"task,omitempty"`
 	OrderStatus           *string                   `json:"orderStatus,omitempty"`
 	VpcCidr               *string                   `json:"vpcCidr,omitempty"`

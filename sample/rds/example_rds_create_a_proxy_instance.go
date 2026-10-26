@@ -20,7 +20,10 @@ func CreateAProxyInstance() {
 	}
 	Billing := &rds.Billing{
 		PaymentTiming: util.PtrString(""),
-		Reservation:   nil,
+		Reservation: &rds.Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
 	}
 	createAProxyInstanceRequest := &rds.CreateAProxyInstanceRequest{
 		ClientToken:      util.PtrString(""),

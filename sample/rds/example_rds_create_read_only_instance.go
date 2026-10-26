@@ -20,7 +20,10 @@ func CreateReadOnlyInstance() {
 	}
 	Billing := &rds.Billing{
 		PaymentTiming: util.PtrString(""),
-		Reservation:   nil,
+		Reservation: &rds.Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
 	}
 	createReadOnlyInstanceRequest := &rds.CreateReadOnlyInstanceRequest{
 		ClientToken:           util.PtrString(""),

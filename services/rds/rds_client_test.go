@@ -130,7 +130,10 @@ func TestClient_ClusterStatusCheck(t *testing.T) {
 func TestClient_CreateAPrimaryInstance(t *testing.T) {
 	Billing := &Billing{
 		PaymentTiming: util.PtrString(""),
-		Reservation:   nil,
+		Reservation: &Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
 	}
 	InitialDataReference := &InitialDataReference{
 		InstanceId:    util.PtrString(""),
@@ -189,7 +192,10 @@ func TestClient_CreateAPrimaryInstance(t *testing.T) {
 func TestClient_CreateAProxyInstance(t *testing.T) {
 	Billing := &Billing{
 		PaymentTiming: util.PtrString(""),
-		Reservation:   nil,
+		Reservation: &Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
 	}
 	createAProxyInstanceRequest := &CreateAProxyInstanceRequest{
 		ClientToken:      util.PtrString(""),
@@ -222,7 +228,10 @@ func TestClient_CreateAProxyInstance(t *testing.T) {
 func TestClient_CreateReadOnlyInstance(t *testing.T) {
 	Billing := &Billing{
 		PaymentTiming: util.PtrString(""),
-		Reservation:   nil,
+		Reservation: &Reservation{
+			ReservationLength:   util.PtrInt32(int32(0)),
+			ReservationTimeUnit: util.PtrString(""),
+		},
 	}
 	createReadOnlyInstanceRequest := &CreateReadOnlyInstanceRequest{
 		ClientToken:           util.PtrString(""),
