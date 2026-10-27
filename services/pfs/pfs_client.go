@@ -6,10 +6,6 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
 )
 
-const (
-	VERSION_V2 = "v2"
-)
-
 // CancelL2BucketLink
 //
 // PARAMS:
@@ -669,6 +665,31 @@ func (c *Client) ListL3AccessRule(request *ListL3AccessRuleRequest) (*ListL3Acce
 	return result, nil
 }
 
+// ListL3Clients
+//
+// PARAMS:
+//   - request: the arguments to ListL3Clients
+//
+// RETURNS:
+//   - ListL3ClientsResponse: The return type of the ListL3Clients interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) ListL3Clients(request *ListL3ClientsRequest) (*ListL3ClientsResponse, error) {
+	result := &ListL3ClientsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getListL3ClientsUri()).
+		WithQueryParamFilter("action", "ListL3Clients").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // ListL3MountTarget
 //
 // PARAMS:
@@ -984,6 +1005,31 @@ func (c *Client) UpdateL3AccessRule(request *UpdateL3AccessRuleRequest) (*Update
 		WithMethod(http.POST).
 		WithURL(getUpdateL3AccessRuleUri()).
 		WithQueryParamFilter("action", "UpdateL3AccessRule").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// UpdateL3MountTarget
+//
+// PARAMS:
+//   - request: the arguments to UpdateL3MountTarget
+//
+// RETURNS:
+//   - UpdateL3MountTargetResponse: The return type of the UpdateL3MountTarget interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) UpdateL3MountTarget(request *UpdateL3MountTargetRequest) (*UpdateL3MountTargetResponse, error) {
+	result := &UpdateL3MountTargetResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getUpdateL3MountTargetUri()).
+		WithQueryParamFilter("action", "UpdateL3MountTarget").
 		WithQueryParamFilter("action", util.StringValue(request.Action)).
 		WithHeader("Version", "v2").
 		WithBody(request).

@@ -654,6 +654,27 @@ func TestClient_ListL3AccessRule(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ListL3Clients(t *testing.T) {
+	listL3ClientsRequest := &ListL3ClientsRequest{
+		Action:     util.PtrString(""),
+		InstanceId: util.PtrString(""),
+		Marker:     util.PtrString(""),
+		MaxKeys:    util.PtrInt32(int32(0)),
+	}
+	result := &ListL3ClientsResponse{}
+	result, err := PFS_CLIENT.ListL3Clients(listL3ClientsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ListL3MountTarget(t *testing.T) {
 	listL3MountTargetRequest := &ListL3MountTargetRequest{
 		Action:     util.PtrString(""),
@@ -933,6 +954,29 @@ func TestClient_UpdateL3AccessRule(t *testing.T) {
 	}
 	result := &UpdateL3AccessRuleResponse{}
 	result, err := PFS_CLIENT.UpdateL3AccessRule(updateL3AccessRuleRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_UpdateL3MountTarget(t *testing.T) {
+	updateL3MountTargetRequest := &UpdateL3MountTargetRequest{
+		Action:          util.PtrString(""),
+		InstanceId:      util.PtrString(""),
+		MountTargetId:   util.PtrString(""),
+		AdmissionStatus: util.PtrInt32(int32(0)),
+		Name:            util.PtrString(""),
+		AccessGroupName: util.PtrString(""),
+	}
+	result := &UpdateL3MountTargetResponse{}
+	result, err := PFS_CLIENT.UpdateL3MountTarget(updateL3MountTargetRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return

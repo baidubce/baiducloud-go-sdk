@@ -14,8 +14,6 @@ const (
 	CONSTANT_INSTANCE = "instance"
 
 	CONSTANT_TAG = "tag"
-
-	CONSTANT_XXX = "xxx"
 )
 
 // Client of pfs service is a kind of BceClient, so derived from BceClient
@@ -115,6 +113,9 @@ func getListL3AccessGroupUri() string {
 func getListL3AccessRuleUri() string {
 	return bce.URI_PREFIX
 }
+func getListL3ClientsUri() string {
+	return bce.URI_PREFIX
+}
 func getListL3MountTargetUri() string {
 	return bce.URI_PREFIX
 }
@@ -152,6 +153,9 @@ func getUpdateL3AccessGroupUri() string {
 	return bce.URI_PREFIX
 }
 func getUpdateL3AccessRuleUri() string {
+	return bce.URI_PREFIX
+}
+func getUpdateL3MountTargetUri() string {
 	return bce.URI_PREFIX
 }
 func getUpdatePFSTagUri() string {
