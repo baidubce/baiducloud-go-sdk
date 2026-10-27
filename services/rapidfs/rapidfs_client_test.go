@@ -36,7 +36,9 @@ func init() {
 	confObj := &Conf{}
 	decoder.Decode(confObj)
 
+	// ==== AK/SK 鉴权 ====
 	RAPIDFS_CLIENT, _ = NewClient(confObj.AK, confObj.SK, confObj.Endpoint)
+
 	log.SetLogLevel(log.WARN)
 }
 
@@ -879,19 +881,23 @@ func TestClient_ExecuteMetaSyncJob(t *testing.T) {
 }
 func TestClient_ImportDataSrc(t *testing.T) {
 	importDataSrcRequest := &ImportDataSrcRequest{
-		ClientToken:    util.PtrString(""),
-		InstanceId:     util.PtrString(""),
-		DataSrcName:    util.PtrString(""),
-		Bucket:         util.PtrString(""),
-		OtherAccount:   util.PtrBool(false),
-		BucketAK:       util.PtrString(""),
-		BucketSK:       util.PtrString(""),
-		BucketStsToken: util.PtrString(""),
-		DirPrefix:      util.PtrString(""),
-		KeepSymlink:    util.PtrBool(false),
-		AuthGroupId:    util.PtrString(""),
-		Description:    util.PtrString(""),
-		QuotaMiB:       util.PtrInt32(int32(0)),
+		ClientToken:          util.PtrString(""),
+		InstanceId:           util.PtrString(""),
+		DataSrcName:          util.PtrString(""),
+		Bucket:               util.PtrString(""),
+		OtherAccount:         util.PtrBool(false),
+		StorageType:          util.PtrString(""),
+		BucketEndpoint:       util.PtrString(""),
+		BucketAK:             util.PtrString(""),
+		BucketSK:             util.PtrString(""),
+		BucketStsToken:       util.PtrString(""),
+		DirPrefix:            util.PtrString(""),
+		SyncMetaOnImport:     util.PtrBool(false),
+		KeepSymlink:          util.PtrBool(false),
+		AuthGroupId:          util.PtrString(""),
+		MountServiceBindings: []*MountServiceBinding{},
+		Description:          util.PtrString(""),
+		QuotaMiB:             util.PtrInt32(int32(0)),
 	}
 	result := &ImportDataSrcResponse{}
 	result, err := RAPIDFS_CLIENT.ImportDataSrc(importDataSrcRequest)
@@ -922,13 +928,16 @@ func TestClient_ModifyAuthGroup(t *testing.T) {
 }
 func TestClient_ModifyDataSrc(t *testing.T) {
 	modifyDataSrcRequest := &ModifyDataSrcRequest{
-		ClientToken: util.PtrString(""),
-		DataSrcId:   util.PtrString(""),
-		InstanceId:  util.PtrString(""),
-		KeepSymlink: util.PtrBool(false),
-		AuthGroupId: util.PtrString(""),
-		Description: util.PtrString(""),
-		QuotaMiB:    util.PtrInt32(int32(0)),
+		ClientToken:          util.PtrString(""),
+		DataSrcId:            util.PtrString(""),
+		InstanceId:           util.PtrString(""),
+		BucketAK:             util.PtrString(""),
+		BucketSK:             util.PtrString(""),
+		KeepSymlink:          util.PtrBool(false),
+		AuthGroupId:          util.PtrString(""),
+		MountServiceBindings: []*MountServiceBinding{},
+		Description:          util.PtrString(""),
+		QuotaMiB:             util.PtrInt32(int32(0)),
 	}
 	err := RAPIDFS_CLIENT.ModifyDataSrc(modifyDataSrcRequest)
 	ExpectEqual(t.Errorf, nil, err)

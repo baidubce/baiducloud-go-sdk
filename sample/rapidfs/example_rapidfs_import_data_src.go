@@ -16,19 +16,28 @@ func ImportDataSrc() {
 		return
 	}
 	importDataSrcRequest := &rapidfs.ImportDataSrcRequest{
-		ClientToken:    util.PtrString(""),
-		InstanceId:     util.PtrString(""),
-		DataSrcName:    util.PtrString(""),
-		Bucket:         util.PtrString(""),
-		OtherAccount:   util.PtrBool(false),
-		BucketAK:       util.PtrString(""),
-		BucketSK:       util.PtrString(""),
-		BucketStsToken: util.PtrString(""),
-		DirPrefix:      util.PtrString(""),
-		KeepSymlink:    util.PtrBool(false),
-		AuthGroupId:    util.PtrString(""),
-		Description:    util.PtrString(""),
-		QuotaMiB:       util.PtrInt32(int32(0)),
+		ClientToken:      util.PtrString(""),
+		InstanceId:       util.PtrString(""),
+		DataSrcName:      util.PtrString(""),
+		Bucket:           util.PtrString(""),
+		OtherAccount:     util.PtrBool(false),
+		StorageType:      util.PtrString("BOS"),
+		BucketEndpoint:   util.PtrString(""),
+		BucketAK:         util.PtrString(""),
+		BucketSK:         util.PtrString(""),
+		BucketStsToken:   util.PtrString(""),
+		DirPrefix:        util.PtrString(""),
+		SyncMetaOnImport: util.PtrBool(true),
+		KeepSymlink:      util.PtrBool(false),
+		AuthGroupId:      util.PtrString(""),
+		MountServiceBindings: []*rapidfs.MountServiceBinding{
+			{
+				MountServiceId:   util.PtrString("MNTSVC-RAPIDFS_DEFAULT_ID"),
+				LogicalMountPath: util.PtrString(""),
+			},
+		},
+		Description: util.PtrString(""),
+		QuotaMiB:    util.PtrInt32(int32(0)),
 	}
 	result, err := client.ImportDataSrc(importDataSrcRequest)
 	if err != nil {
