@@ -103,6 +103,10 @@ const (
 
 	CONSTANT_BATCH_DELETE = "batchDelete"
 
+	CONSTANT_ELASTICITY_ASSURANCE = "elasticityAssurance"
+
+	CONSTANT_RENEW = "renew"
+
 	CONSTANT_BATCH_REFUND_RESOURCE = "batchRefundResource"
 
 	CONSTANT_REFUSE = "refuse"
@@ -177,6 +181,8 @@ const (
 
 	CONSTANT_DEL_IPV6 = "delIpv6"
 
+	CONSTANT_MODIFY_AUTO_RENEW = "modifyAutoRenew"
+
 	CONSTANT_ENI = "eni"
 
 	CONSTANT_BATCH_ADD_IP = "batchAddIp"
@@ -190,8 +196,6 @@ const (
 	CONSTANT_MODE = "mode"
 
 	CONSTANT_EXIT = "exit"
-
-	CONSTANT_RENEW = "renew"
 
 	CONSTANT_ENTER = "enter"
 )
@@ -332,6 +336,9 @@ func getCreateDeploySetUri(version string) string {
 func getCreateEhcClusterUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_EHC + bce.URI_PREFIX + CONSTANT_CLUSTER + bce.URI_PREFIX + CONSTANT_CREATE
 }
+func getCreateElasticityAssuranceUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_ELASTICITY_ASSURANCE + bce.URI_PREFIX + CONSTANT_CREATE
+}
 func getCreateImageUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE
 }
@@ -376,6 +383,9 @@ func getDeleteDeploySetUri(version string, DeployId string) string {
 }
 func getDeleteEhcClusterUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_EHC + bce.URI_PREFIX + CONSTANT_CLUSTER + bce.URI_PREFIX + CONSTANT_DELETE
+}
+func getDeleteElasticityAssuranceUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_ELASTICITY_ASSURANCE + bce.URI_PREFIX + CONSTANT_DELETE
 }
 func getDeleteImageUri(version string, ImageId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_IMAGE + bce.URI_PREFIX + ImageId
@@ -602,6 +612,9 @@ func getModifyCdsAttributeUri(version string, VolumeId string) string {
 func getModifyEhcClusterUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_EHC + bce.URI_PREFIX + CONSTANT_CLUSTER + bce.URI_PREFIX + CONSTANT_MODIFY
 }
+func getModifyElasticityAssuranceUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_ELASTICITY_ASSURANCE + bce.URI_PREFIX + CONSTANT_MODIFY_AUTO_RENEW
+}
 func getModifyInstUserOpAuthorizeRuleAttributeUri() string {
 	return bce.URI_PREFIX
 }
@@ -641,6 +654,9 @@ func getPurchaseReservedVolumeUri(version string, VolumeId string) string {
 func getPurchaseReservedVolumeClusterUri(version string, ClusterId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + CONSTANT_CLUSTER + bce.URI_PREFIX + ClusterId
 }
+func getQueryElasticityAssuranceUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_ELASTICITY_ASSURANCE + bce.URI_PREFIX + CONSTANT_LIST
+}
 func getRebootInstanceUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId
 }
@@ -676,6 +692,9 @@ func getRenameKeypairUri(version string, KeypairId string) string {
 }
 func getRenameVolumeUri(version string, VolumeId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_VOLUME + bce.URI_PREFIX + VolumeId
+}
+func getRenewElasticityAssuranceUri(version string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_ELASTICITY_ASSURANCE + bce.URI_PREFIX + CONSTANT_RENEW
 }
 func getRenewReservedInstanceUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + CONSTANT_RESERVED + bce.URI_PREFIX + CONSTANT_RENEW

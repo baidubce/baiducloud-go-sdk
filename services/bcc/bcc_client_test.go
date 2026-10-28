@@ -36,7 +36,9 @@ func init() {
 	confObj := &Conf{}
 	decoder.Decode(confObj)
 
+	// ==== AK/SK 鉴权 ====
 	BCC_CLIENT, _ = NewClient(confObj.AK, confObj.SK, confObj.Endpoint)
+
 	log.SetLogLevel(log.WARN)
 }
 
@@ -685,6 +687,30 @@ func TestClient_CreateEhcCluster(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_CreateElasticityAssurance(t *testing.T) {
+	createElasticityAssuranceRequest := &CreateElasticityAssuranceRequest{
+		ElasticityAssuranceName: util.PtrString(""),
+		ZoneName:                util.PtrString(""),
+		Spec:                    util.PtrString(""),
+		Capacity:                util.PtrInt32(int32(0)),
+		Period:                  util.PtrInt32(int32(0)),
+		AutoRenew:               util.PtrBool(false),
+		Tags:                    []*TagModel{},
+	}
+	result := &CreateElasticityAssuranceResponse{}
+	result, err := BCC_CLIENT.CreateElasticityAssurance(createElasticityAssuranceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_CreateImage(t *testing.T) {
 	createImageRequest := &CreateImageRequest{
 		ImageName:  util.PtrString(""),
@@ -1044,6 +1070,13 @@ func TestClient_DeleteEhcCluster(t *testing.T) {
 		EhcClusterIdList: []*string{},
 	}
 	err := BCC_CLIENT.DeleteEhcCluster(deleteEhcClusterRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_DeleteElasticityAssurance(t *testing.T) {
+	deleteElasticityAssuranceRequest := &DeleteElasticityAssuranceRequest{
+		ElasticityAssuranceIds: []*string{},
+	}
+	err := BCC_CLIENT.DeleteElasticityAssurance(deleteElasticityAssuranceRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_DeleteImage(t *testing.T) {
@@ -2426,6 +2459,15 @@ func TestClient_ModifyEhcCluster(t *testing.T) {
 	err := BCC_CLIENT.ModifyEhcCluster(modifyEhcClusterRequest)
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_ModifyElasticityAssurance(t *testing.T) {
+	modifyElasticityAssuranceRequest := &ModifyElasticityAssuranceRequest{
+		ElasticityAssuranceIds: []*string{},
+		AutoRenew:              util.PtrBool(false),
+		AutoRenewPeriod:        util.PtrInt32(int32(0)),
+	}
+	err := BCC_CLIENT.ModifyElasticityAssurance(modifyElasticityAssuranceRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_ModifyInstUserOpAuthorizeRuleAttribute(t *testing.T) {
 	modifyInstUserOpAuthorizeRuleAttributeRequest := &ModifyInstUserOpAuthorizeRuleAttributeRequest{
 		Action:                         util.PtrString(""),
@@ -2626,6 +2668,30 @@ func TestClient_PurchaseReservedVolumeCluster(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_QueryElasticityAssurance(t *testing.T) {
+	queryElasticityAssuranceRequest := &QueryElasticityAssuranceRequest{
+		Marker:                  util.PtrString(""),
+		MaxKeys:                 util.PtrInt32(int32(0)),
+		ElasticityAssuranceIds:  []*string{},
+		ElasticityAssuranceName: util.PtrString(""),
+		ZoneName:                util.PtrString(""),
+		Spec:                    util.PtrString(""),
+		Status:                  []*string{},
+	}
+	result := &QueryElasticityAssuranceResponse{}
+	result, err := BCC_CLIENT.QueryElasticityAssurance(queryElasticityAssuranceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_RebootInstance(t *testing.T) {
 	rebootInstanceRequest := &RebootInstanceRequest{
 		InstanceId: util.PtrString(""),
@@ -2778,6 +2844,25 @@ func TestClient_RenameVolume(t *testing.T) {
 		Name:     util.PtrString(""),
 	}
 	err := BCC_CLIENT.RenameVolume(renameVolumeRequest)
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_RenewElasticityAssurance(t *testing.T) {
+	renewElasticityAssuranceRequest := &RenewElasticityAssuranceRequest{
+		ElasticityAssuranceIds: []*string{},
+		Period:                 util.PtrString(""),
+	}
+	result := &RenewElasticityAssuranceResponse{}
+	result, err := BCC_CLIENT.RenewElasticityAssurance(renewElasticityAssuranceRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_RenewReservedInstance(t *testing.T) {

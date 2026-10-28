@@ -75,4 +75,6 @@ type InstanceModel struct {
 	Tags                   []*Tag             `json:"tags,omitempty"`
 	Volumes                []*VolumeModel     `json:"volumes,omitempty"`
 	NetworkCapacityInMbps  *int32             `json:"networkCapacityInMbps,omitempty"`
+	InstanceId             *string            `json:"instanceId,omitempty"`
+	LogicalZone            *string            `json:"logicalZone,omitempty"`
 }

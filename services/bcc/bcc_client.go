@@ -788,6 +788,28 @@ func (c *Client) CreateEhcCluster(request *CreateEhcClusterRequest) (*CreateEhcC
 	return result, nil
 }
 
+// CreateElasticityAssurance
+//
+// PARAMS:
+//   - request: the arguments to CreateElasticityAssurance
+//
+// RETURNS:
+//   - CreateElasticityAssuranceResponse: The return type of the CreateElasticityAssurance interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) CreateElasticityAssurance(request *CreateElasticityAssuranceRequest) (*CreateElasticityAssuranceResponse, error) {
+	result := &CreateElasticityAssuranceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getCreateElasticityAssuranceUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // CreateImage
 //
 // PARAMS:
@@ -1076,6 +1098,22 @@ func (c *Client) DeleteEhcCluster(request *DeleteEhcClusterRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.POST).
 		WithURL(getDeleteEhcClusterUri(VERSION_V2)).
+		WithBody(request).
+		Do()
+}
+
+// DeleteElasticityAssurance
+//
+// PARAMS:
+//   - request: the arguments to DeleteElasticityAssurance
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) DeleteElasticityAssurance(request *DeleteElasticityAssuranceRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getDeleteElasticityAssuranceUri(VERSION_V2)).
 		WithBody(request).
 		Do()
 }
@@ -2699,6 +2737,22 @@ func (c *Client) ModifyEhcCluster(request *ModifyEhcClusterRequest) error {
 		Do()
 }
 
+// ModifyElasticityAssurance
+//
+// PARAMS:
+//   - request: the arguments to ModifyElasticityAssurance
+//
+// RETURNS:
+
+// - error: nil if success otherwise the specific error
+func (c *Client) ModifyElasticityAssurance(request *ModifyElasticityAssuranceRequest) error {
+	return bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getModifyElasticityAssuranceUri(VERSION_V2)).
+		WithBody(request).
+		Do()
+}
+
 // ModifyInstUserOpAuthorizeRuleAttribute
 //
 // PARAMS:
@@ -2948,6 +3002,28 @@ func (c *Client) PurchaseReservedVolumeCluster(request *PurchaseReservedVolumeCl
 	return result, nil
 }
 
+// QueryElasticityAssurance
+//
+// PARAMS:
+//   - request: the arguments to QueryElasticityAssurance
+//
+// RETURNS:
+//   - QueryElasticityAssuranceResponse: The return type of the QueryElasticityAssurance interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) QueryElasticityAssurance(request *QueryElasticityAssuranceRequest) (*QueryElasticityAssuranceResponse, error) {
+	result := &QueryElasticityAssuranceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getQueryElasticityAssuranceUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // RebootInstance
 //
 // PARAMS:
@@ -3155,6 +3231,28 @@ func (c *Client) RenameVolume(request *RenameVolumeRequest) error {
 		WithQueryParam("rename", "").
 		WithBody(request).
 		Do()
+}
+
+// RenewElasticityAssurance
+//
+// PARAMS:
+//   - request: the arguments to RenewElasticityAssurance
+//
+// RETURNS:
+//   - RenewElasticityAssuranceResponse: The return type of the RenewElasticityAssurance interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) RenewElasticityAssurance(request *RenewElasticityAssuranceRequest) (*RenewElasticityAssuranceResponse, error) {
+	result := &RenewElasticityAssuranceResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getRenewElasticityAssuranceUri(VERSION_V2)).
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // RenewReservedInstance
