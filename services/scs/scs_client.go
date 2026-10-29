@@ -21,7 +21,7 @@ const (
 func (c *Client) AccountList(request *AccountListRequest) (*AccountListResponse, error) {
 	result := &AccountListResponse{}
 	err := bce.NewRequestBuilder(c).
-		WithMethod(http.POST).
+		WithMethod(http.GET).
 		WithURL(getAccountListUri(VERSION_V1, util.StringValue(request.InstanceId))).
 		WithResult(result).
 		Do()

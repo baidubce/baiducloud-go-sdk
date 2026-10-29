@@ -231,7 +231,7 @@ func getChangeAccessPasswordUri(InstanceId string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_MODIFY_PASSWORD
 }
 func getChangeAccountPasswordUri(version string, InstanceId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_ACL_USER_ACTIONS + bce.URI_PREFIX + CONSTANT_MODIFY_PASSWD
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_ACL_USER_ACTIONS + bce.URI_PREFIX + CONSTANT_MODIFY_PASSWD
 }
 func getChangeConfigurationUri(InstanceId string, ClientToken string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_CHANGE
@@ -270,7 +270,7 @@ func getCreateSyncGroupUri(version string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_SYNC_GROUP + bce.URI_PREFIX + CONSTANT_CREATE
 }
 func getDeleteAccountUri(version string, InstanceId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_ACL_USER_ACTIONS + bce.URI_PREFIX + CONSTANT_DELETE
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_ACL_USER_ACTIONS + bce.URI_PREFIX + CONSTANT_DELETE
 }
 func getDeleteDeploymentSetUri(DeploySetId string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_DEPLOY_SET + bce.URI_PREFIX + DeploySetId
@@ -501,7 +501,7 @@ func getSetMemoryScalingConfigUri(InstanceId string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_AUTO_SCALING_CONFIG
 }
 func getSetPermissionsUri(version string, InstanceId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_ACL_USER_ACTIONS + bce.URI_PREFIX + CONSTANT_AUTHORITY
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_ACL_USER_ACTIONS + bce.URI_PREFIX + CONSTANT_AUTHORITY
 }
 func getSyncGroupAddInstanceUri(GroupId string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_SYNC_GROUP + bce.URI_PREFIX + GroupId + bce.URI_PREFIX + CONSTANT_ADD_CLUSTER
