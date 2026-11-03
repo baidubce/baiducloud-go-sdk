@@ -8,9 +8,12 @@ import (
 )
 
 func CreateResolverRule() {
-	// 设置Client的Access Key ID和Secret Access Key，获取AKSK详见:https://cloud.baidu.com/doc/Reference/s/9jwvz2egb
-	ak, sk, endpoint := "Your Ak", "Your Sk", "Your endpoint"
+	endpoint := "Your Endpoint"
+
+	// ==== AK/SK 鉴权 ====
+	ak, sk := "Your Ak", "Your Sk"
 	client, err := privatezone.NewClient(ak, sk, endpoint)
+
 	if err != nil {
 		fmt.Println("create client err:", err)
 		return
@@ -21,12 +24,7 @@ func CreateResolverRule() {
 		Description:      util.PtrString(""),
 		Zone:             util.PtrString(""),
 		ResolverId:       util.PtrString(""),
-		DnsServerConfigs: []*privatezone.DnsServerConfig{
-        			{
-        				Ip:   util.PtrString("12.29.2.4"),
-        				Port: util.PtrInt32(53),
-        			},
-        		},
+		DnsServerConfigs: []*privatezone.DnsServerConfig{},
 	}
 	result, err := client.CreateResolverRule(createResolverRuleRequest)
 	if err != nil {

@@ -426,7 +426,7 @@ func (c *Client) UnbindVpcToRule(request *UnbindVpcToRuleRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
 		WithURL(getUnbindVpcToRuleUri(VERSION_V1, util.StringValue(request.RuleId))).
-		WithQueryParamFilter("clienToken", util.StringValue(request.ClienToken)).
+		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()
 }
@@ -476,7 +476,7 @@ func (c *Client) UpdateRecord(request *UpdateRecordRequest) error {
 func (c *Client) UpdateResolverRule(request *UpdateResolverRuleRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getUpdateResolverRuleUri(VERSION_V1, util.StringValue(request.ReluId))).
+		WithURL(getUpdateResolverRuleUri(VERSION_V1, util.StringValue(request.RuleId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()

@@ -36,7 +36,9 @@ func init() {
 	confObj := &Conf{}
 	decoder.Decode(confObj)
 
+	// ==== AK/SK 鉴权 ====
 	PRIVATEZONE_CLIENT, _ = NewClient(confObj.AK, confObj.SK, confObj.Endpoint)
+
 	log.SetLogLevel(log.WARN)
 }
 
@@ -374,9 +376,9 @@ func TestClient_UnbindVpc(t *testing.T) {
 }
 func TestClient_UnbindVpcToRule(t *testing.T) {
 	unbindVpcToRuleRequest := &UnbindVpcToRuleRequest{
-		RuleId:     util.PtrString(""),
-		ClienToken: util.PtrString(""),
-		VpcRegions: []*VpcRegion{},
+		RuleId:      util.PtrString(""),
+		ClientToken: util.PtrString(""),
+		VpcRegions:  []*VpcRegion{},
 	}
 	err := PRIVATEZONE_CLIENT.UnbindVpcToRule(unbindVpcToRuleRequest)
 	ExpectEqual(t.Errorf, nil, err)
@@ -407,7 +409,7 @@ func TestClient_UpdateRecord(t *testing.T) {
 }
 func TestClient_UpdateResolverRule(t *testing.T) {
 	updateResolverRuleRequest := &UpdateResolverRuleRequest{
-		ReluId:           util.PtrString(""),
+		RuleId:           util.PtrString(""),
 		ClientToken:      util.PtrString(""),
 		Name:             util.PtrString(""),
 		Description:      util.PtrString(""),

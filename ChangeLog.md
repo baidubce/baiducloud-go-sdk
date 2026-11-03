@@ -1,3 +1,7 @@
+2026-11-03 Version: v0.0.165
+- 涉及产品: PRIVATEZONE，修正解关联vpc的clientToken字段
+- 涉及产品: PRIVATEZONE，修正更新转发规则的ruleId字段
+
 2026-10-29 Version: v0.0.164
 - 涉及产品: SCS，SDK版本更新
 

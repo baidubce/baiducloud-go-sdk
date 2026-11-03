@@ -105,6 +105,6 @@ func getUpdateDnsParserUri(version string, ResolverId string) string {
 func getUpdateRecordUri(version string, RecordId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + CONSTANT_RECORD + bce.URI_PREFIX + RecordId
 }
-func getUpdateResolverRuleUri(version string, ReluId string) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + CONSTANT_RESOLVER + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + ReluId
+func getUpdateResolverRuleUri(version string, RuleId string) string {
+	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_PRIVATEZONE + bce.URI_PREFIX + CONSTANT_RESOLVER + bce.URI_PREFIX + CONSTANT_RULE + bce.URI_PREFIX + RuleId
 }
