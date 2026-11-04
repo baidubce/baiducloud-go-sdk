@@ -1,3 +1,6 @@
+2026-11-04 Version: v0.0.166
+- 涉及产品: PFS，SDK版本更新
+
 2026-11-03 Version: v0.0.165
 - 涉及产品: PRIVATEZONE，修正解关联vpc的clientToken字段
 - 涉及产品: PRIVATEZONE，修正更新转发规则的ruleId字段
