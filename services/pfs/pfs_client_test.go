@@ -199,15 +199,7 @@ func TestClient_CreateL3AccessRule(t *testing.T) {
 		Action:          util.PtrString(""),
 		AccessGroupName: util.PtrString(""),
 		ZoneName:        util.PtrString(""),
-		AccessRules: []*AccessRuleCreateInfo{
-			{
-				Ip:          util.PtrString(""),
-				Mask:        util.PtrInt32(int32(0)),
-				WriteAccess: util.PtrString(""),
-				UserAccess:  util.PtrString(""),
-				Priority:    util.PtrInt32(int32(0)),
-			},
-		},
+		AccessRules:     []*AccessRuleModel{},
 	}
 	result := &CreateL3AccessRuleResponse{}
 	result, err := PFS_CLIENT.CreateL3AccessRule(createL3AccessRuleRequest)
@@ -225,10 +217,14 @@ func TestClient_CreateL3AccessRule(t *testing.T) {
 }
 func TestClient_CreateL3MountTarget(t *testing.T) {
 	createL3MountTargetRequest := &CreateL3MountTargetRequest{
-		Action:     util.PtrString(""),
-		InstanceId: util.PtrString(""),
-		VpcId:      util.PtrString(""),
-		SubnetId:   util.PtrString(""),
+		Action:          util.PtrString(""),
+		InstanceId:      util.PtrString(""),
+		VpcId:           util.PtrString(""),
+		SubnetId:        util.PtrString(""),
+		Name:            util.PtrString(""),
+		AccessGroupName: util.PtrString(""),
+		Protocol:        util.PtrString(""),
+		IpAddress:       util.PtrString(""),
 	}
 	result := &CreateL3MountTargetResponse{}
 	result, err := PFS_CLIENT.CreateL3MountTarget(createL3MountTargetRequest)

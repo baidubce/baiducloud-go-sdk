@@ -19,10 +19,14 @@ func CreateL3MountTarget() {
 		return
 	}
 	createL3MountTargetRequest := &pfs.CreateL3MountTargetRequest{
-		Action:     util.PtrString(""),
-		InstanceId: util.PtrString(""),
-		VpcId:      util.PtrString(""),
-		SubnetId:   util.PtrString(""),
+		Action:          util.PtrString(""),
+		InstanceId:      util.PtrString(""),
+		VpcId:           util.PtrString(""),
+		SubnetId:        util.PtrString(""),
+		Name:            util.PtrString(""),
+		AccessGroupName: util.PtrString(""),
+		Protocol:        util.PtrString(""),
+		IpAddress:       util.PtrString(""),
 	}
 	result, err := client.CreateL3MountTarget(createL3MountTargetRequest)
 	if err != nil {

@@ -3,7 +3,6 @@ package pfssample
 import (
 	"encoding/json"
 	"fmt"
-
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
 	"github.com/baidubce/baiducloud-go-sdk/services/pfs"
 )
@@ -20,17 +19,10 @@ func CreateL3AccessRule() {
 		return
 	}
 	createL3AccessRuleRequest := &pfs.CreateL3AccessRuleRequest{
+		Action:          util.PtrString(""),
 		AccessGroupName: util.PtrString(""),
 		ZoneName:        util.PtrString(""),
-		AccessRules: []*pfs.AccessRuleCreateInfo{
-			{
-				Ip:          util.PtrString(""),
-				Mask:        util.PtrInt32(int32(0)),
-				WriteAccess: util.PtrString(""),
-				UserAccess:  util.PtrString(""),
-				Priority:    util.PtrInt32(int32(0)),
-			},
-		},
+		AccessRules:     []*pfs.AccessRuleModel{},
 	}
 	result, err := client.CreateL3AccessRule(createL3AccessRuleRequest)
 	if err != nil {

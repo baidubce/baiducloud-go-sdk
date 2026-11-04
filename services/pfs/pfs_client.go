@@ -6,6 +6,8 @@ import (
 	"github.com/baidubce/baiducloud-go-sdk/core/util"
 )
 
+const ()
+
 // CancelL2BucketLink
 //
 // PARAMS:

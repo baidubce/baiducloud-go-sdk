@@ -1,6 +1,6 @@
 package pfs
 
-type AccessRuleCreateResult struct {
+type CreateAccessRuleResult struct {
 	Success      *bool   `json:"success,omitempty"`
 	AccessRuleId *int32  `json:"accessRuleId,omitempty"`
 	ErrorMsg     *string `json:"errorMsg,omitempty"`
