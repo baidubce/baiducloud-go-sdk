@@ -228,7 +228,7 @@ func (c *Client) RenewZone(request *RenewZoneRequest) error {
 func (c *Client) UpdateLineGroup(request *UpdateLineGroupRequest) error {
 	return bce.NewRequestBuilder(c).
 		WithMethod(http.PUT).
-		WithURL(getUpdateLineGroupUri(VERSION_V1, util.Int32Value(request.LineId))).
+		WithURL(getUpdateLineGroupUri(VERSION_V1, util.StringValue(request.LineId))).
 		WithQueryParamFilter("clientToken", util.StringValue(request.ClientToken)).
 		WithBody(request).
 		Do()

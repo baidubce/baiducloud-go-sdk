@@ -18,7 +18,7 @@ func UpdateLineGroup() {
 		return
 	}
 	updateLineGroupRequest := &dns.UpdateLineGroupRequest{
-		LineId:      util.PtrInt32(int32(0)),
+		LineId:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Name:        util.PtrString(""),
 		Lines:       []*string{},

@@ -220,7 +220,7 @@ func TestClient_RenewZone(t *testing.T) {
 }
 func TestClient_UpdateLineGroup(t *testing.T) {
 	updateLineGroupRequest := &UpdateLineGroupRequest{
-		LineId:      util.PtrInt32(int32(0)),
+		LineId:      util.PtrString(""),
 		ClientToken: util.PtrString(""),
 		Name:        util.PtrString(""),
 		Lines:       []*string{},
