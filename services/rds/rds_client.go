@@ -328,27 +328,6 @@ func (c *Client) DoesTheInstanceSupportEnablingAutomaticExpansion(request *DoesT
 	return result, nil
 }
 
-// ErrorLogDownloadDetails
-//
-// PARAMS:
-//   - request: the arguments to ErrorLogDownloadDetails
-//
-// RETURNS:
-//   - ErrorLogDownloadDetailsResponse: The return type of the ErrorLogDownloadDetails interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) ErrorLogDownloadDetails(request *ErrorLogDownloadDetailsRequest) (*ErrorLogDownloadDetailsResponse, error) {
-	result := &ErrorLogDownloadDetailsResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getErrorLogDownloadDetailsUri(VERSION_V1, util.StringValue(request.InstanceId), util.StringValue(request.LogId), util.Int32Value(request.DownloadValidTimeInSec))).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
-}
-
 // ErrorLogList
 //
 // PARAMS:
@@ -1070,27 +1049,6 @@ func (c *Client) SetEncryptionPolicyApi(request *SetEncryptionPolicyApiRequest) 
 		WithQueryParam("updateEncryptPolicy", "").
 		WithBody(request).
 		Do()
-}
-
-// SlowLogDownloadDetails
-//
-// PARAMS:
-//   - request: the arguments to SlowLogDownloadDetails
-//
-// RETURNS:
-//   - SlowLogDownloadDetailsResponse: The return type of the SlowLogDownloadDetails interface.
-//   - error: nil if success otherwise the specific error
-func (c *Client) SlowLogDownloadDetails(request *SlowLogDownloadDetailsRequest) (*SlowLogDownloadDetailsResponse, error) {
-	result := &SlowLogDownloadDetailsResponse{}
-	err := bce.NewRequestBuilder(c).
-		WithMethod(http.GET).
-		WithURL(getSlowLogDownloadDetailsUri(VERSION_V1, util.StringValue(request.InstanceId), util.StringValue(request.LogId), util.Int32Value(request.DownloadValidTimeInSec))).
-		WithResult(result).
-		Do()
-	if err != nil {
-		return nil, err
-	}
-	return result, nil
 }
 
 // SlowLogList

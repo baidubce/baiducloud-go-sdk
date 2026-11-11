@@ -33,8 +33,6 @@ const (
 
 	CONSTANT_SLOWLOGS = "slowlogs"
 
-	CONSTANT_DOWNLOAD_URL = "download_url"
-
 	CONSTANT_V1 = "v1"
 
 	CONSTANT_TASK = "task"
@@ -171,9 +169,6 @@ func getDialTestInterfaceUri(version string, InstanceId string) string {
 func getDoesTheInstanceSupportEnablingAutomaticExpansionUri(version string, InstanceId string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_AUTO_EXPANSION
 }
-func getErrorLogDownloadDetailsUri(version string, InstanceId string, LogId string, DownloadValidTimeInSec int32) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_ERRORLOGS + bce.URI_PREFIX + CONSTANT_DOWNLOAD_URL + bce.URI_PREFIX + LogId + bce.URI_PREFIX + DownloadValidTimeInSec
-}
 func getErrorLogListUri(version string, InstanceId string, Datetime string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_ERRORLOGS + bce.URI_PREFIX + CONSTANT_LOG_LIST + bce.URI_PREFIX + Datetime
 }
@@ -281,9 +276,6 @@ func getRetrieveTheBinlogListUri(version string, InstanceId string, Datetime str
 }
 func getSetEncryptionPolicyApiUri(InstanceId string) string {
 	return bce.URI_PREFIX + CONSTANT_V1 + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId
-}
-func getSlowLogDownloadDetailsUri(version string, InstanceId string, LogId string, DownloadValidTimeInSec int32) string {
-	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_SLOWLOGS + bce.URI_PREFIX + CONSTANT_DOWNLOAD_URL + bce.URI_PREFIX + LogId + bce.URI_PREFIX + DownloadValidTimeInSec
 }
 func getSlowLogListUri(version string, InstanceId string, Datetime string) string {
 	return bce.URI_PREFIX + version + bce.URI_PREFIX + CONSTANT_INSTANCE + bce.URI_PREFIX + InstanceId + bce.URI_PREFIX + CONSTANT_SLOWLOGS + bce.URI_PREFIX + CONSTANT_LOG_LIST + bce.URI_PREFIX + Datetime

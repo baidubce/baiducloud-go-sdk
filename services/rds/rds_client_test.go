@@ -401,26 +401,6 @@ func TestClient_DoesTheInstanceSupportEnablingAutomaticExpansion(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
-func TestClient_ErrorLogDownloadDetails(t *testing.T) {
-	errorLogDownloadDetailsRequest := &ErrorLogDownloadDetailsRequest{
-		InstanceId:             util.PtrString(""),
-		LogId:                  util.PtrString(""),
-		DownloadValidTimeInSec: util.PtrInt32(int32(0)),
-	}
-	result := &ErrorLogDownloadDetailsResponse{}
-	result, err := RDS_CLIENT.ErrorLogDownloadDetails(errorLogDownloadDetailsRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
-	ExpectEqual(t.Errorf, nil, err)
-}
 func TestClient_ErrorLogList(t *testing.T) {
 	errorLogListRequest := &ErrorLogListRequest{
 		InstanceId: util.PtrString(""),
@@ -1006,26 +986,6 @@ func TestClient_SetEncryptionPolicyApi(t *testing.T) {
 		BackupPolicy: []*UpdateEncryptPolicyRequest{},
 	}
 	err := RDS_CLIENT.SetEncryptionPolicyApi(setEncryptionPolicyApiRequest)
-	ExpectEqual(t.Errorf, nil, err)
-}
-func TestClient_SlowLogDownloadDetails(t *testing.T) {
-	slowLogDownloadDetailsRequest := &SlowLogDownloadDetailsRequest{
-		InstanceId:             util.PtrString(""),
-		LogId:                  util.PtrString(""),
-		DownloadValidTimeInSec: util.PtrInt32(int32(0)),
-	}
-	result := &SlowLogDownloadDetailsResponse{}
-	result, err := RDS_CLIENT.SlowLogDownloadDetails(slowLogDownloadDetailsRequest)
-	if err != nil {
-		fmt.Println("request failed:", err)
-		return
-	}
-	data, err := json.MarshalIndent(result, "", "    ")
-	if err != nil {
-		fmt.Println("json marshalIndent failed:", err)
-		return
-	}
-	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
 func TestClient_SlowLogList(t *testing.T) {
