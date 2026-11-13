@@ -244,13 +244,14 @@ func TestClient_CreateL3MountTarget(t *testing.T) {
 }
 func TestClient_CreatePfs(t *testing.T) {
 	createPfsRequest := &CreatePfsRequest{
-		Name:         util.PtrString(""),
-		InstanceType: util.PtrString(""),
-		Capacity:     util.PtrInt32(int32(0)),
-		Zone:         util.PtrString(""),
-		SubnetId:     util.PtrString(""),
-		Description:  util.PtrString(""),
-		Tags:         []*Tag{},
+		Name:            util.PtrString(""),
+		InstanceType:    util.PtrString(""),
+		Capacity:        util.PtrInt32(int32(0)),
+		Zone:            util.PtrString(""),
+		SubnetId:        util.PtrString(""),
+		Description:     util.PtrString(""),
+		Tags:            []*Tag{},
+		ResourceGroupId: util.PtrString(""),
 	}
 	result := &CreatePfsResponse{}
 	result, err := PFS_CLIENT.CreatePfs(createPfsRequest)
