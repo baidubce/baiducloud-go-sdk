@@ -28,6 +28,7 @@ func CreateL2Policy() {
 		ExecuteTime:  util.PtrInt32(int32(0)),
 		BucketName:   util.PtrString(""),
 		BucketPrefix: util.PtrString(""),
+		PathFilters:  []*pfs.PathFilter{},
 	}
 	result, err := client.CreateL2Policy(createL2PolicyRequest)
 	if err != nil {

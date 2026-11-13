@@ -130,6 +130,7 @@ func TestClient_CreateL2BucketLink(t *testing.T) {
 		BucketBelongUserId:   util.PtrString(""),
 		LccId:                util.PtrString(""),
 		Scope:                util.PtrInt32(int32(0)),
+		PathFilters:          []*PathFilter{},
 	}
 	result := &CreateL2BucketLinkResponse{}
 	result, err := PFS_CLIENT.CreateL2BucketLink(createL2BucketLinkRequest)
@@ -156,6 +157,7 @@ func TestClient_CreateL2Policy(t *testing.T) {
 		ExecuteTime:  util.PtrInt32(int32(0)),
 		BucketName:   util.PtrString(""),
 		BucketPrefix: util.PtrString(""),
+		PathFilters:  []*PathFilter{},
 	}
 	result := &CreateL2PolicyResponse{}
 	result, err := PFS_CLIENT.CreateL2Policy(createL2PolicyRequest)

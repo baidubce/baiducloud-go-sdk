@@ -33,6 +33,7 @@ func CreateL2BucketLink() {
 		BucketBelongUserId:   util.PtrString(""),
 		LccId:                util.PtrString(""),
 		Scope:                util.PtrInt32(int32(0)),
+		PathFilters:          []*pfs.PathFilter{},
 	}
 	result, err := client.CreateL2BucketLink(createL2BucketLinkRequest)
 	if err != nil {
