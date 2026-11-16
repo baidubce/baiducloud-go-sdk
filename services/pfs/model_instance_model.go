@@ -11,6 +11,6 @@ type InstanceModel struct {
 	Name           *string       `json:"name,omitempty"`
 	PaymentTiming  *string       `json:"paymentTiming,omitempty"`
 	SubnetModel    *SubnetDetail `json:"subnetModel,omitempty"`
-	Usage          *int32        `json:"usage,omitempty"`
+	Usage          *int64        `json:"usage,omitempty"`
 	VpcId          *string       `json:"vpcId,omitempty"`
 }
