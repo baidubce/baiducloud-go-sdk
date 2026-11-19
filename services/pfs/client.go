@@ -95,6 +95,9 @@ func getDescribeL3AccessGroupUri() string {
 func getDescribeL3MountTargetUri() string {
 	return bce.URI_PREFIX
 }
+func getInstanceAvailableVersionsUri() string {
+	return bce.URI_PREFIX
+}
 func getInstanceListClientsUri() string {
 	return bce.URI_PREFIX
 }

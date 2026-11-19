@@ -19,4 +19,5 @@ type DescPfsResponse struct {
 	Tags              []*Tag        `json:"tags,omitempty"`
 	ResourceGroupId   *string       `json:"resourceGroupId,omitempty"`
 	ResourceGroupName *string       `json:"resourceGroupName,omitempty"`
+	VersionNumber     *string       `json:"versionNumber,omitempty"`
 }

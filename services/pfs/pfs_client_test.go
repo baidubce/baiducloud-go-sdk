@@ -244,14 +244,16 @@ func TestClient_CreateL3MountTarget(t *testing.T) {
 }
 func TestClient_CreatePfs(t *testing.T) {
 	createPfsRequest := &CreatePfsRequest{
-		Name:            util.PtrString(""),
-		InstanceType:    util.PtrString(""),
-		Capacity:        util.PtrInt32(int32(0)),
-		Zone:            util.PtrString(""),
-		SubnetId:        util.PtrString(""),
-		Description:     util.PtrString(""),
-		Tags:            []*Tag{},
-		ResourceGroupId: util.PtrString(""),
+		Name:             util.PtrString(""),
+		InstanceType:     util.PtrString(""),
+		Capacity:         util.PtrInt32(int32(0)),
+		Zone:             util.PtrString(""),
+		SubnetId:         util.PtrString(""),
+		Description:      util.PtrString(""),
+		Tags:             []*Tag{},
+		ResourceGroupId:  util.PtrString(""),
+		VersionNumber:    util.PtrString(""),
+		MountTargetBinds: []*MountTargetBindConfig{},
 	}
 	result := &CreatePfsResponse{}
 	result, err := PFS_CLIENT.CreatePfs(createPfsRequest)
@@ -500,6 +502,26 @@ func TestClient_DescribeL3MountTarget(t *testing.T) {
 	}
 	result := &DescribeL3MountTargetResponse{}
 	result, err := PFS_CLIENT.DescribeL3MountTarget(describeL3MountTargetRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
+func TestClient_InstanceAvailableVersions(t *testing.T) {
+	instanceAvailableVersionsRequest := &InstanceAvailableVersionsRequest{
+		Action:       util.PtrString(""),
+		InstanceType: util.PtrString(""),
+		VpcId:        util.PtrString(""),
+	}
+	result := &InstanceAvailableVersionsResponse{}
+	result, err := PFS_CLIENT.InstanceAvailableVersions(instanceAvailableVersionsRequest)
 	if err != nil {
 		fmt.Println("request failed:", err)
 		return

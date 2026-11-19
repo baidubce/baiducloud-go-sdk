@@ -1,12 +1,14 @@
 package pfs
 
 type CreatePfsRequest struct {
-	Name            *string `json:"name,omitempty"`
-	InstanceType    *string `json:"instanceType,omitempty"`
-	Capacity        *int32  `json:"capacity,omitempty"`
-	Zone            *string `json:"zone,omitempty"`
-	SubnetId        *string `json:"subnetId,omitempty"`
-	Description     *string `json:"description,omitempty"`
-	Tags            []*Tag  `json:"tags,omitempty"`
-	ResourceGroupId *string `json:"resourceGroupId,omitempty"`
+	Name             *string                  `json:"name,omitempty"`
+	InstanceType     *string                  `json:"instanceType,omitempty"`
+	Capacity         *int32                   `json:"capacity,omitempty"`
+	Zone             *string                  `json:"zone,omitempty"`
+	SubnetId         *string                  `json:"subnetId,omitempty"`
+	Description      *string                  `json:"description,omitempty"`
+	Tags             []*Tag                   `json:"tags,omitempty"`
+	ResourceGroupId  *string                  `json:"resourceGroupId,omitempty"`
+	VersionNumber    *string                  `json:"versionNumber,omitempty"`
+	MountTargetBinds []*MountTargetBindConfig `json:"mountTargetBinds,omitempty"`
 }

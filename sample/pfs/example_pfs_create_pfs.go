@@ -19,14 +19,16 @@ func CreatePfs() {
 		return
 	}
 	createPfsRequest := &pfs.CreatePfsRequest{
-		Name:            util.PtrString(""),
-		InstanceType:    util.PtrString(""),
-		Capacity:        util.PtrInt32(int32(0)),
-		Zone:            util.PtrString(""),
-		SubnetId:        util.PtrString(""),
-		Description:     util.PtrString(""),
-		Tags:            []*pfs.Tag{},
-		ResourceGroupId: util.PtrString(""),
+		Name:             util.PtrString(""),
+		InstanceType:     util.PtrString(""),
+		Capacity:         util.PtrInt32(int32(0)),
+		Zone:             util.PtrString(""),
+		SubnetId:         util.PtrString(""),
+		Description:      util.PtrString(""),
+		Tags:             []*pfs.Tag{},
+		ResourceGroupId:  util.PtrString(""),
+		VersionNumber:    util.PtrString(""),
+		MountTargetBinds: []*pfs.MountTargetBindConfig{},
 	}
 	result, err := client.CreatePfs(createPfsRequest)
 	if err != nil {

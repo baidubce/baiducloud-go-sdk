@@ -517,6 +517,31 @@ func (c *Client) DescribeL3MountTarget(request *DescribeL3MountTargetRequest) (*
 	return result, nil
 }
 
+// InstanceAvailableVersions
+//
+// PARAMS:
+//   - request: the arguments to InstanceAvailableVersions
+//
+// RETURNS:
+//   - InstanceAvailableVersionsResponse: The return type of the InstanceAvailableVersions interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) InstanceAvailableVersions(request *InstanceAvailableVersionsRequest) (*InstanceAvailableVersionsResponse, error) {
+	result := &InstanceAvailableVersionsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.POST).
+		WithURL(getInstanceAvailableVersionsUri()).
+		WithQueryParamFilter("action", "InstanceAvailableVersions").
+		WithQueryParamFilter("action", util.StringValue(request.Action)).
+		WithHeader("Version", "v2").
+		WithBody(request).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // InstanceListClients
 //
 // PARAMS:
