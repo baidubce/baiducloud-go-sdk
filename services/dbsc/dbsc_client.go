@@ -619,6 +619,35 @@ func (c *Client) GetMysqlSpaceSummary(request *GetMysqlSpaceSummaryRequest) (*Ge
 	return result, nil
 }
 
+// GetMysqlTableColumns
+//
+// PARAMS:
+//   - request: the arguments to GetMysqlTableColumns
+//
+// RETURNS:
+//   - GetMysqlTableColumnsResponse: The return type of the GetMysqlTableColumns interface.
+//   - error: nil if success otherwise the specific error
+func (c *Client) GetMysqlTableColumns(request *GetMysqlTableColumnsRequest) (*GetMysqlTableColumnsResponse, error) {
+	result := &GetMysqlTableColumnsResponse{}
+	err := bce.NewRequestBuilder(c).
+		WithMethod(http.GET).
+		WithURL(getGetMysqlTableColumnsUri(VERSION_V1)).
+		WithQueryParamFilter("product", "string").
+		WithQueryParamFilter("appId", "string").
+		WithQueryParamFilter("database", "string").
+		WithQueryParamFilter("table", "string").
+		WithQueryParamFilter("product", util.StringValue(request.Product)).
+		WithQueryParamFilter("appId", util.StringValue(request.AppId)).
+		WithQueryParamFilter("database", util.StringValue(request.Database)).
+		WithQueryParamFilter("table", util.StringValue(request.Table)).
+		WithResult(result).
+		Do()
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
 // GetMysqlTableIndexes
 //
 // PARAMS:

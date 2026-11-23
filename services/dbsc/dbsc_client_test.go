@@ -538,6 +538,27 @@ func TestClient_GetMysqlSpaceSummary(t *testing.T) {
 	fmt.Println(string(data))
 	ExpectEqual(t.Errorf, nil, err)
 }
+func TestClient_GetMysqlTableColumns(t *testing.T) {
+	getMysqlTableColumnsRequest := &GetMysqlTableColumnsRequest{
+		Product:  util.PtrString(""),
+		AppId:    util.PtrString(""),
+		Database: util.PtrString(""),
+		Table:    util.PtrString(""),
+	}
+	result := &GetMysqlTableColumnsResponse{}
+	result, err := DBSC_CLIENT.GetMysqlTableColumns(getMysqlTableColumnsRequest)
+	if err != nil {
+		fmt.Println("request failed:", err)
+		return
+	}
+	data, err := json.MarshalIndent(result, "", "    ")
+	if err != nil {
+		fmt.Println("json marshalIndent failed:", err)
+		return
+	}
+	fmt.Println(string(data))
+	ExpectEqual(t.Errorf, nil, err)
+}
 func TestClient_GetMysqlTableIndexes(t *testing.T) {
 	getMysqlTableIndexesRequest := &GetMysqlTableIndexesRequest{
 		Product:  util.PtrString(""),

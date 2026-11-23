@@ -1,3 +1,9 @@
+2026-11-23 Version: v0.0.175
+- 涉及产品: DBSC，新增获取MySQL表字段信息接口
+- 涉及产品: DBSC，更新MySQL死锁与限流任务详情查询
+- 涉及产品: DBSC，更新PostgreSQL、Redis、PegaDB慢日志查询
+- 涉及产品: DBSC，更新MySQL与MongoDB空间及索引信息查询
+
 2026-11-19 Version: v0.0.174
 - 涉及产品: PFS，新增查询实例可用版本接口
 - 涉及产品: PFS，创建实例支持指定版本号
